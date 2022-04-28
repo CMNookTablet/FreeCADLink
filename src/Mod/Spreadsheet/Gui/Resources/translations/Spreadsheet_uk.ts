@@ -446,27 +446,27 @@
     <message>
       <location filename="../../SheetTableView.cpp" line="310"/>
       <source>Remove cell alias</source>
-      <translation type="unfinished">Remove cell alias</translation>
+      <translation>Видалити псевдонім для комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="343"/>
       <source>Cell edit mode</source>
-      <translation type="unfinished">Cell edit mode</translation>
+      <translation>Режим редагування комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="365"/>
       <source>Cell persistent edit</source>
-      <translation type="unfinished">Cell persistent edit</translation>
+      <translation>Постійне редагування комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="384"/>
       <source>Recompute cells</source>
-      <translation type="unfinished">Recompute cells</translation>
+      <translation>Переобчислити комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="399"/>
       <source>Recompute cells only</source>
-      <translation type="unfinished">Recompute cells only</translation>
+      <translation>Переобчислити лише комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="498"/>
@@ -488,7 +488,7 @@
     <message>
       <location filename="../../SheetTableView.cpp" line="668"/>
       <source>Remove columns</source>
-      <translation type="unfinished">Remove columns</translation>
+      <translation>Видалити стовпці</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="872"/>
@@ -616,7 +616,8 @@ by that property.
 властивості, щоб користувач міг динамічно перемикати конфігурації.
 
 Перший рядок діапазону буде прив’язаний до будь-якого рядка (непрямо), 
-обраного за допомогою цієї властивості.</translation>
+обраного за допомогою цієї властивості.
+</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="42"/>
@@ -641,7 +642,8 @@ by that property.
 властивості, щоб користувач міг динамічно перемикати конфігурації.
 
 Перший рядок діапазону буде прив’язаний до будь-якого рядка (непрямо), 
-обраного за допомогою цієї властивості.</translation>
+обраного за допомогою цієї властивості.
+</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="64"/>
@@ -828,44 +830,44 @@ switch the design configuration. The property will be created if not exist.</sou
     <message>
       <location filename="../../SheetTableView.cpp" line="321"/>
       <source>Failed to remove alias</source>
-      <translation type="unfinished">Failed to remove alias</translation>
+      <translation>Не вдалося видалити псевдонім</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="359"/>
       <location filename="../../SheetTableView.cpp" line="378"/>
       <source>Failed to set edit mode</source>
-      <translation type="unfinished">Failed to set edit mode</translation>
+      <translation>Не вдалося встановити режим редагування</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="393"/>
       <location filename="../../SheetTableView.cpp" line="407"/>
       <source>Failed to recompute cells</source>
-      <translation type="unfinished">Failed to recompute cells</translation>
+      <translation>Не вдалося переобчислити комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="523"/>
       <source>Failed to insert rows</source>
-      <translation type="unfinished">Failed to insert rows</translation>
+      <translation>Не вдалося вставити рядки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="574"/>
       <source>Failed to remove rows</source>
-      <translation type="unfinished">Failed to remove rows</translation>
+      <translation>Не вдалося видалити рядки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="627"/>
       <source>Failed to insert columns</source>
-      <translation type="unfinished">Failed to insert columns</translation>
+      <translation>Не вдалося вставити стовпці</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="677"/>
       <source>Failed to remove columns</source>
-      <translation type="unfinished">Failed to remove columns</translation>
+      <translation>Не вдалося видалити стовпці</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="884"/>
       <source>Failed to clear cells</source>
-      <translation type="unfinished">Failed to clear cells</translation>
+      <translation>Не вдалося очистити комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="1022"/>
@@ -1036,7 +1038,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../../App/Cell.h" line="145"/>
       <source>ComboBox</source>
-      <translation type="unfinished">ComboBox</translation>
+      <translation>ComboBox</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="156"/>
@@ -1056,12 +1058,12 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../../App/Cell.h" line="177"/>
       <source>Auto alias</source>
-      <translation type="unfinished">Auto alias</translation>
+      <translation>Автоматичний псевдонім</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="184"/>
       <source>Auto alias vertical</source>
-      <translation type="unfinished">Auto alias vertical</translation>
+      <translation>Автоматичний псевдонім по вертикалі</translation>
     </message>
   </context>
   <context>
@@ -1117,7 +1119,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../DlgSettings.ui" line="80"/>
       <source>\</source>
-      <translation type="unfinished">\</translation>
+      <translation>\</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="99"/>
@@ -1179,12 +1181,12 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="117"/>
       <source>Show all rows</source>
-      <translation type="unfinished">Show all rows</translation>
+      <translation>Показати всі рядки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="120"/>
       <source>Show all columns</source>
-      <translation type="unfinished">Show all columns</translation>
+      <translation>Показати всі стовпці</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="131"/>
@@ -1234,7 +1236,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="159"/>
       <source>Toggle row visibility</source>
-      <translation type="unfinished">Toggle row visibility</translation>
+      <translation>Увімкнути видимість рядка</translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="178"/>
@@ -1279,7 +1281,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="194"/>
       <source>Toggle column visibility</source>
-      <translation type="unfinished">Toggle column visibility</translation>
+      <translation>Перемкнути видимість стовпця</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="206"/>
@@ -1289,12 +1291,12 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="210"/>
       <source>Alias...</source>
-      <translation type="unfinished">Alias...</translation>
+      <translation>Псевдонім...</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="214"/>
       <source>Remove alias(es)</source>
-      <translation type="unfinished">Remove alias(es)</translation>
+      <translation>Видалити псевдонім(и)</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="231"/>
@@ -1304,31 +1306,31 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="238"/>
       <source>Persistent</source>
-      <translation type="unfinished">Persistent</translation>
+      <translation>Постійно</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="245"/>
       <source>Recompute cells</source>
-      <translation type="unfinished">Recompute cells</translation>
+      <translation>Переобчислити комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="248"/>
       <source>Mark selected cells as touched, and recompute the entire spreadsheet</source>
-      <translation type="unfinished">Mark selected cells as touched, and recompute the entire spreadsheet</translation>
+      <translation>Позначити вибрані комірки як редаговані та перерахувати всю таблицю</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="250"/>
       <source>Recompute cells only</source>
-      <translation type="unfinished">Recompute cells only</translation>
+      <translation>Переобчислити лише комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="253"/>
       <source>Recompute only the selected cells without touching other depending cells
 It can be used as a way out of tricky cyclic dependency problem, but may
 may affect cells dependency coherence. Use with care!</source>
-      <translation type="unfinished">Recompute only the selected cells without touching other depending cells
-It can be used as a way out of tricky cyclic dependency problem, but may
-may affect cells dependency coherence. Use with care!</translation>
+      <translation>Повторно обчислює лише вибрані клітинки, не торкаючись інших залежних комірок. 
+Це можна використовувати як вирішення проблеми циклічної залежності, але може 
+вплинути на узгодженість залежностей комірок. Використовуйте з обережністю!</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="261"/>
@@ -1368,27 +1370,27 @@ may affect cells dependency coherence. Use with care!</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="280"/>
       <source>Paste special...</source>
-      <translation type="unfinished">Paste special...</translation>
+      <translation>Спеціальна вставка...</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="282"/>
       <source>Paste value</source>
-      <translation type="unfinished">Paste value</translation>
+      <translation>Вставити значення</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="284"/>
       <source>Paste format</source>
-      <translation type="unfinished">Paste format</translation>
+      <translation>Вставити формат</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="286"/>
       <source>Paste value &amp;&amp; format</source>
-      <translation type="unfinished">Paste value &amp;&amp; format</translation>
+      <translation>Вставити значення &amp;&amp; формат</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="288"/>
       <source>Paste formula</source>
-      <translation type="unfinished">Paste formula</translation>
+      <translation>Вставити формулу</translation>
     </message>
   </context>
   <context>
@@ -1396,22 +1398,22 @@ may affect cells dependency coherence. Use with care!</translation>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="356"/>
       <source>Edit alias</source>
-      <translation type="unfinished">Edit alias</translation>
+      <translation>Редагувати псевдонім</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="356"/>
       <source>Remove alias</source>
-      <translation type="unfinished">Remove alias</translation>
+      <translation>Видалити псевдонім</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="370"/>
       <source>Edit cell alias</source>
-      <translation type="unfinished">Edit cell alias</translation>
+      <translation>Редагувати псевдонім комірки</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="371"/>
       <source>Failed to edit cell alias: %1</source>
-      <translation type="unfinished">Failed to edit cell alias: %1</translation>
+      <translation>Не вдалося відредагувати псевдонім комірки: %1</translation>
     </message>
   </context>
   <context>
