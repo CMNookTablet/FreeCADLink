@@ -1225,6 +1225,33 @@ to a smoother appearance.
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;Defining the normals per vertex is also called &lt;span style=&quot; font-style:italic;&quot;&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;&quot;&gt;&lt;span style=&quot; font-style:normal;&quot;&gt;while defining the normals per face is called &lt;/span&gt;Flat shading&lt;span style=&quot; font-style:normal;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Shape type hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify the default shape type hint of a newly created mesh object.
+You can later on change the view object property of any mesh object.
+Note that the section filling function when using clip plane only works
+for &apos;Solid&apos; shape type.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mod/Mesh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DefaultShapeType</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Solid</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MeshGui::DlgSmoothing</name>
@@ -1825,6 +1852,10 @@ Please visit http://www.openscad.org/index.html to install it.</source>
     </message>
     <message>
         <source>Annotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3D Manufacturing Format</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -107,10 +107,6 @@
         <source>Browser</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>File does not exist!</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>WebGui::BrowserView</name>

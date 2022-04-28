@@ -195,21 +195,26 @@
     </message>
     <message>
         <location filename="TranslationTexts.py" line="80"/>
-        <source>Creation date</source>
+        <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="TranslationTexts.py" line="81"/>
-        <source>Last modification</source>
+        <source>Creation date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="TranslationTexts.py" line="82"/>
-        <source>Notes</source>
+        <source>Last modification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="TranslationTexts.py" line="83"/>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="TranslationTexts.py" line="84"/>
         <source>Open start page preferences</source>
         <translation type="unfinished"></translation>
     </message>

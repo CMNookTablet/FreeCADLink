@@ -291,11 +291,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save Dxf File</source>
+        <source>Dxf (*.dxf)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dxf (*.dxf)</source>
+        <source>Save Dxf File </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -684,7 +684,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Insert symbol from an SVG file</source>
+        <source>Insert symbol from a SVG file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -767,10 +767,6 @@
     </message>
     <message>
         <source>ClipGroupAdd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ClipGroupRemove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1555,6 +1551,10 @@
         <source>Please select two straight lines</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can not make a Dimension from this selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Std_Delete</name>
@@ -2138,6 +2138,10 @@ Each unit is approx. 0.1 mm wide</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt; Items in &lt;span style=&quot; font-style:italic;&quot;&gt;italics&lt;/span&gt; are default values for new objects. They have no effect on existing objects.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2933,6 +2937,10 @@ Do you want to continue?</source>
     </message>
     <message>
         <source>Length of balloon leader line kink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

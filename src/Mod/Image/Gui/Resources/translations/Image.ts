@@ -17,17 +17,17 @@
 <context>
     <name>CmdCreateImagePlane</name>
     <message>
-        <location filename="../../Command.cpp" line="99"/>
+        <location filename="../../Command.cpp" line="100"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="100"/>
+        <location filename="../../Command.cpp" line="101"/>
         <source>Create image plane...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="101"/>
+        <location filename="../../Command.cpp" line="102"/>
         <source>Create a planar image in the 3D space</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35,17 +35,17 @@
 <context>
     <name>CmdImageOpen</name>
     <message>
-        <location filename="../../Command.cpp" line="54"/>
+        <location filename="../../Command.cpp" line="55"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="55"/>
+        <location filename="../../Command.cpp" line="56"/>
         <source>Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="56"/>
+        <location filename="../../Command.cpp" line="57"/>
         <source>Open image view</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53,17 +53,17 @@
 <context>
     <name>CmdImageScaling</name>
     <message>
-        <location filename="../../Command.cpp" line="173"/>
+        <location filename="../../Command.cpp" line="174"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="174"/>
+        <location filename="../../Command.cpp" line="175"/>
         <source>Scale...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="175"/>
+        <location filename="../../Command.cpp" line="176"/>
         <source>Image Scaling</source>
         <translation type="unfinished"></translation>
     </message>
@@ -71,7 +71,7 @@
 <context>
     <name>Command</name>
     <message>
-        <location filename="../../Command.cpp" line="149"/>
+        <location filename="../../Command.cpp" line="150"/>
         <source>Create ImagePlane</source>
         <translation type="unfinished"></translation>
     </message>
@@ -193,30 +193,30 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Command.cpp" line="69"/>
-        <location filename="../../Command.cpp" line="113"/>
+        <location filename="../../Command.cpp" line="70"/>
+        <location filename="../../Command.cpp" line="114"/>
         <source>Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="74"/>
-        <location filename="../../Command.cpp" line="118"/>
+        <location filename="../../Command.cpp" line="75"/>
+        <location filename="../../Command.cpp" line="119"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="76"/>
-        <location filename="../../Command.cpp" line="120"/>
+        <location filename="../../Command.cpp" line="77"/>
+        <location filename="../../Command.cpp" line="121"/>
         <source>Choose an image file to open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="126"/>
+        <location filename="../../Command.cpp" line="127"/>
         <source>Error opening image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="127"/>
+        <location filename="../../Command.cpp" line="128"/>
         <source>Could not load the chosen image</source>
         <translation type="unfinished"></translation>
     </message>
