@@ -6,57 +6,57 @@
     <message>
       <location filename="Spreadsheet_legacy.py" line="739"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Arkusz kalkulacyjny</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="874"/>
       <source>Cell</source>
-      <translation type="unfinished">Cell</translation>
+      <translation>Komórka</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="751"/>
       <source>Apply</source>
-      <translation type="unfinished">Apply</translation>
+      <translation>Zastosuj</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="753"/>
       <source>Apply the changes to the current cell</source>
-      <translation type="unfinished">Apply the changes to the current cell</translation>
+      <translation>Zastosuj zmiany do bieżącej komórki</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="755"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Usuń</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="757"/>
       <source>Deletes the contents of the current cell</source>
-      <translation type="unfinished">Deletes the contents of the current cell</translation>
+      <translation>Usuwa zawartość bieżącej komórki</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="759"/>
       <source>Compute</source>
-      <translation type="unfinished">Compute</translation>
+      <translation>Oblicz</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="761"/>
       <source>Updates the values handled by controllers</source>
-      <translation type="unfinished">Updates the values handled by controllers</translation>
+      <translation>Aktualizuje wartości obsługiwane przez formuły</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="907"/>
       <source>Create Spreadsheet</source>
-      <translation type="unfinished">Create Spreadsheet</translation>
+      <translation>Utwórz Arkusz kalkulacyjny</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="933"/>
       <source>Add controller</source>
-      <translation type="unfinished">Add controller</translation>
+      <translation>Dodaj formułę</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="973"/>
       <source>Add property controller</source>
-      <translation type="unfinished">Add property controller</translation>
+      <translation>Dodaj formułę właściwości</translation>
     </message>
   </context>
   <context>
@@ -64,12 +64,12 @@
     <message>
       <location filename="Spreadsheet_legacy.py" line="919"/>
       <source>Add controller</source>
-      <translation type="unfinished">Add controller</translation>
+      <translation>Dodaj formułę</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="922"/>
       <source>Adds a cell controller to a selected spreadsheet</source>
-      <translation type="unfinished">Adds a cell controller to a selected spreadsheet</translation>
+      <translation>Do wybranego arkusza kalkulacyjnego dodaje formułę komórki</translation>
     </message>
   </context>
   <context>
@@ -77,12 +77,12 @@
     <message>
       <location filename="Spreadsheet_legacy.py" line="902"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Arkusz kalkulacyjny</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="905"/>
       <source>Adds a spreadsheet object to the active document</source>
-      <translation type="unfinished">Adds a spreadsheet object to the active document</translation>
+      <translation>Dodaje do aktywnego dokumentu obiekt arkusza kalkulacyjnego</translation>
     </message>
   </context>
   <context>
@@ -90,12 +90,12 @@
     <message>
       <location filename="Spreadsheet_legacy.py" line="944"/>
       <source>Add property controller</source>
-      <translation type="unfinished">Add property controller</translation>
+      <translation>Dodaj formułę właściwości</translation>
     </message>
     <message>
       <location filename="Spreadsheet_legacy.py" line="947"/>
       <source>Adds a property controller to a selected spreadsheet</source>
-      <translation type="unfinished">Adds a property controller to a selected spreadsheet</translation>
+      <translation>Do wybranego arkusza kalkulacyjnego dodaje formułę własności</translation>
     </message>
   </context>
   <context>
@@ -512,78 +512,78 @@
     <message>
       <location filename="../../DlgBindSheet.ui" line="14"/>
       <source>Bind Spreadsheet Cells</source>
-      <translation type="unfinished">Bind Spreadsheet Cells</translation>
+      <translation>Bind Spreadsheet Cells</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="20"/>
       <source>From cells:</source>
-      <translation type="unfinished">From cells:</translation>
+      <translation>From cells:</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="27"/>
       <source>Binding cell range start</source>
-      <translation type="unfinished">Binding cell range start</translation>
+      <translation>Binding cell range start</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="34"/>
       <source>Binding cell range end
 </source>
-      <translation type="unfinished">Binding cell range end
+      <translation>Binding cell range end
 </translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="42"/>
       <source>To cells:</source>
-      <translation type="unfinished">To cells:</translation>
+      <translation>To cells:</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="49"/>
       <source>Starting cell address to bind to. Type &apos;=&apos; if you want to use expression.
 The expression must evaluates to a string of some cell address.</source>
-      <translation type="unfinished">Starting cell address to bind to. Type &apos;=&apos; if you want to use expression.
+      <translation>Starting cell address to bind to. Type &apos;=&apos; if you want to use expression.
 The expression must evaluates to a string of some cell address.</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="57"/>
       <source>Ending cell address to bind to. Type &apos;=&apos; if you want to use expression.
 The expression must evaluates to a string of some cell address.</source>
-      <translation type="unfinished">Ending cell address to bind to. Type &apos;=&apos; if you want to use expression.
+      <translation>Ending cell address to bind to. Type &apos;=&apos; if you want to use expression.
 The expression must evaluates to a string of some cell address.</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="65"/>
       <source>Sheet:</source>
-      <translation type="unfinished">Sheet:</translation>
+      <translation>Sheet:</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="72"/>
       <source>Use hidden reference not avoid creating a depdenecy with the referenced object. Use with caution!</source>
-      <translation type="unfinished">Use hidden reference not avoid creating a depdenecy with the referenced object. Use with caution!</translation>
+      <translation>Use hidden reference not avoid creating a depdenecy with the referenced object. Use with caution!</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="75"/>
       <source>Use hidden reference</source>
-      <translation type="unfinished">Use hidden reference</translation>
+      <translation>Use hidden reference</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="84"/>
       <source>Unbind</source>
-      <translation type="unfinished">Unbind</translation>
+      <translation>Unbind</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="91"/>
       <source>Cancel</source>
-      <translation type="unfinished">Cancel</translation>
+      <translation>Cancel</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="98"/>
       <source>OK</source>
-      <translation type="unfinished">OK</translation>
+      <translation>OK</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="110"/>
       <source>Select which spread sheet to bind to.</source>
-      <translation type="unfinished">Select which spread sheet to bind to.</translation>
+      <translation>Select which spread sheet to bind to.</translation>
     </message>
   </context>
   <context>
@@ -591,12 +591,12 @@ The expression must evaluates to a string of some cell address.</translation>
     <message>
       <location filename="../../DlgSheetConf.ui" line="14"/>
       <source>Setup Configuration Table</source>
-      <translation type="unfinished">Setup Configuration Table</translation>
+      <translation>Setup Configuration Table</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="20"/>
       <source>Property:</source>
-      <translation type="unfinished">Property:</translation>
+      <translation>Property:</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="27"/>
@@ -609,7 +609,7 @@ property for user to dynamically switch configuration.
 The first row of the range will be bound to whatever row (indirectly) selected
 by that property.
 </source>
-      <translation type="unfinished">Ending cell address.
+      <translation>Ending cell address.
 
 The first column of the range is assumed to contain a list of configuration
 names, which will be used to generate a string list and bind to the given
@@ -622,7 +622,7 @@ by that property.
     <message>
       <location filename="../../DlgSheetConf.ui" line="42"/>
       <source>Cell range:</source>
-      <translation type="unfinished">Cell range:</translation>
+      <translation>Cell range:</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="49"/>
@@ -635,7 +635,7 @@ property for user to dynamically switch configuration.
 The first row of the range will be bound to whatever row (indirectly) selected
 by that property.
 </source>
-      <translation type="unfinished">Starting cell address.
+      <translation>Starting cell address.
 
 The first column of the range is assumed to contain a list of configuration
 names, which will be used to generate a string list and bind to the given
@@ -649,33 +649,33 @@ by that property.
       <location filename="../../DlgSheetConf.ui" line="64"/>
       <source>Type in an expression to specify the object and property name to dynamically
 switch the design configuration. The property will be created if not exist.</source>
-      <translation type="unfinished">Type in an expression to specify the object and property name to dynamically
+      <translation>Type in an expression to specify the object and property name to dynamically
 switch the design configuration. The property will be created if not exist.</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="72"/>
       <source>Optional property group name.</source>
-      <translation type="unfinished">Optional property group name.</translation>
+      <translation>Optional property group name.</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="79"/>
       <source>Group:</source>
-      <translation type="unfinished">Group:</translation>
+      <translation>Group:</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="88"/>
       <source>Unsetup</source>
-      <translation type="unfinished">Unsetup</translation>
+      <translation>Unsetup</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="95"/>
       <source>Cancel</source>
-      <translation type="unfinished">Cancel</translation>
+      <translation>Cancel</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="102"/>
       <source>OK</source>
-      <translation type="unfinished">OK</translation>
+      <translation>OK</translation>
     </message>
   </context>
   <context>
@@ -774,7 +774,7 @@ switch the design configuration. The property will be created if not exist.</tra
     <message>
       <location filename="../../PropertiesDialog.ui" line="264"/>
       <source>A&amp;lias</source>
-      <translation type="unfinished">A&amp;lias</translation>
+      <translation>A&amp;lias</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="273"/>
@@ -1013,7 +1013,7 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../Sheet.ui" line="39"/>
       <source>&amp;Alias:</source>
-      <translation type="unfinished">&amp;Alias:</translation>
+      <translation>&amp;Alias:</translation>
     </message>
     <message>
       <location filename="../../Sheet.ui" line="52"/>
@@ -1028,12 +1028,12 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../../App/Cell.h" line="139"/>
       <source>Normal</source>
-      <translation type="unfinished">Normal</translation>
+      <translation>Normalny</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="140"/>
       <source>Button</source>
-      <translation type="unfinished">Button</translation>
+      <translation>Przycisk</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="145"/>
@@ -1043,17 +1043,17 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../../App/Cell.h" line="156"/>
       <source>Label</source>
-      <translation type="unfinished">Label</translation>
+      <translation>Etykieta</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="163"/>
       <source>Quantity</source>
-      <translation type="unfinished">Quantity</translation>
+      <translation>Ilość</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="172"/>
       <source>CheckBox</source>
-      <translation type="unfinished">CheckBox</translation>
+      <translation>Pole wyboru</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="177"/>
@@ -1071,12 +1071,12 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../DlgBindSheet.cpp" line="180"/>
       <source>Bind cells</source>
-      <translation type="unfinished">Bind cells</translation>
+      <translation>Bind cells</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.cpp" line="197"/>
       <source>Unbind cells</source>
-      <translation type="unfinished">Unbind cells</translation>
+      <translation>Unbind cells</translation>
     </message>
   </context>
   <context>
@@ -1084,37 +1084,37 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../DlgSettings.ui" line="20"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Arkusz kalkulacyjny</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="26"/>
       <source>Import/Export Settings</source>
-      <translation type="unfinished">Import/Export Settings</translation>
+      <translation>Ustawienia importu / eksportu</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="38"/>
       <source>Escape Character: </source>
-      <translation type="unfinished">Escape Character: </translation>
+      <translation>Znak "Escape": </translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="45"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Character used to delimit strings, typically is single quote (&apos;) or double quote (&amp;quot;). Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Character used to delimit strings, typically is single quote (&apos;) or double quote (&amp;quot;). Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Znak używany do określenia ciągów, zazwyczaj jest jednym cudzysłowem (&apos;) lub podwójnym cudzysłowem (&amp;quot;). Musi być pojedynczym znakiem.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="51"/>
       <source>&quot;</source>
-      <translation type="unfinished">&quot;</translation>
+      <translation>&quot;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="70"/>
       <source>Delimiter Character: </source>
-      <translation type="unfinished">Delimiter Character: </translation>
+      <translation>Znak separatora: </translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="77"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Escape character, typically the backslash (\), used to indicate special unprintable characters, e.g. \t = tab. Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Escape character, typically the backslash (\), used to indicate special unprintable characters, e.g. \t = tab. Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Znak "escape", zwykle backslash (\), używany do wskazywania specjalnych niedrukowalnych znaków, np. \t = tabulator. Musi to być pojedynczy znak.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="80"/>
@@ -1124,27 +1124,27 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../DlgSettings.ui" line="99"/>
       <source>Quote Character: </source>
-      <translation type="unfinished">Quote Character: </translation>
+      <translation>Znak cytatu: </translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Character to use as field delimiter.  Default is tab, but also commonly used are commas (,) and semicolons (;). Select from the list or enter your own in the field. Must be a single character or the words &lt;span style=&quot; font-style:italic;&quot;&gt;tab&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;comma&lt;/span&gt;, or &lt;span style=&quot; font-style:italic;&quot;&gt;semicolon&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Character to use as field delimiter.  Default is tab, but also commonly used are commas (,) and semicolons (;). Select from the list or enter your own in the field. Must be a single character or the words &lt;span style=&quot; font-style:italic;&quot;&gt;tab&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;comma&lt;/span&gt;, or &lt;span style=&quot; font-style:italic;&quot;&gt;semicolon&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Znak, który ma służyć jako separator pól.  Domyślnie jest to tabulator, ale często używane są również przecinki (,) i średniki (;). Wybierz znak z listy lub wpisz swój własny w tym polu. Musi być pojedynczym znakiem lub słowami &lt;span style=&quot; font-style:italic;&quot;&gt;tabulator&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;przecinek&lt;/span&gt; lub &lt;span style=&quot; font-style:italic;&quot;&gt;średnik&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="122"/>
       <source>tab</source>
-      <translation type="unfinished">tab</translation>
+      <translation>zakładka</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="127"/>
       <source>;</source>
-      <translation type="unfinished">;</translation>
+      <translation>;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="132"/>
       <source>,</source>
-      <translation type="unfinished">,</translation>
+      <translation>,</translation>
     </message>
   </context>
   <context>
@@ -1152,12 +1152,12 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../DlgSheetConf.cpp" line="246"/>
       <source>Setup configuration table</source>
-      <translation type="unfinished">Setup configuration table</translation>
+      <translation>Setup configuration table</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.cpp" line="293"/>
       <source>Unsetup configuration table</source>
-      <translation type="unfinished">Unsetup configuration table</translation>
+      <translation>Unsetup configuration table</translation>
     </message>
   </context>
   <context>
@@ -1173,7 +1173,7 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../SheetModel.cpp" line="555"/>
       <source>Edit cell</source>
-      <translation type="unfinished">Edit cell</translation>
+      <translation>Edytuj komórkę</translation>
     </message>
   </context>
   <context>
@@ -1191,7 +1191,7 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="131"/>
       <source>Bind...</source>
-      <translation type="unfinished">Bind...</translation>
+      <translation>Bind...</translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="143"/>
@@ -1301,7 +1301,7 @@ Arkusz.mój_alias zamiast Arkusz.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="231"/>
       <source>Edit mode</source>
-      <translation type="unfinished">Edit mode</translation>
+      <translation>Tryb edycji</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="238"/>
@@ -1335,37 +1335,37 @@ may affect cells dependency coherence. Use with care!</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="261"/>
       <source>Configuration table...</source>
-      <translation type="unfinished">Configuration table...</translation>
+      <translation>Configuration table...</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="266"/>
       <source>Merge cells</source>
-      <translation type="unfinished">Merge cells</translation>
+      <translation>Scal komórki</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="268"/>
       <source>Split cells</source>
-      <translation type="unfinished">Split cells</translation>
+      <translation>Split cells</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="271"/>
       <source>Cut</source>
-      <translation type="unfinished">Cut</translation>
+      <translation>Cut</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="273"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Usuń</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="275"/>
       <source>Copy</source>
-      <translation type="unfinished">Copy</translation>
+      <translation>Kopiuj</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="277"/>
       <source>Paste</source>
-      <translation type="unfinished">Paste</translation>
+      <translation>Paste</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="280"/>
@@ -1426,17 +1426,17 @@ may affect cells dependency coherence. Use with care!</translation>
     <message>
       <location filename="../../Workbench.cpp" line="50"/>
       <source>&amp;Spreadsheet</source>
-      <translation type="unfinished">&amp;Spreadsheet</translation>
+      <translation>&amp;Spreadsheet</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="51"/>
       <source>&amp;Alignment</source>
-      <translation type="unfinished">&amp;Alignment</translation>
+      <translation>&amp;Alignment</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="52"/>
       <source>&amp;Styles</source>
-      <translation type="unfinished">&amp;Styles</translation>
+      <translation>&amp;Styles</translation>
     </message>
   </context>
 </TS>
