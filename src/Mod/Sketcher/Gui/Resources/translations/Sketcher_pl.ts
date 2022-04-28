@@ -280,7 +280,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="1123"/>
       <source>Create rectangles</source>
-      <translation>Utwórz prostokąty</translation>
+      <translation>Utwórz prostokąt</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="1124"/>
@@ -961,7 +961,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7460"/>
       <source>Create slot</source>
-      <translation>Utwórz rowek</translation>
+      <translation>Utwórz wpust</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7461"/>
@@ -1070,12 +1070,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2129"/>
       <source>Delete all geometry</source>
-      <translation>Usuń całą geometrię</translation>
+      <translation>Usuń wszystkie geometrie</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2130"/>
       <source>Delete all geometry and constraints in the current sketch, with the exception of external geometry</source>
-      <translation>Usuń całą geometrię i wiązania z bieżącego rysunku, z wyjątkiem geometrii zewnętrznej</translation>
+      <translation>Usuń wszystkie geometrie i wiązania z bieżącego rysunku, z wyjątkiem geometrii zewnętrznej</translation>
     </message>
   </context>
   <context>
@@ -2210,7 +2210,7 @@ nieprawidłowych wiązań, zdegenerowanej geometrii itp.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2155"/>
       <source>Delete all geometry</source>
-      <translation>Usuń całą geometrię</translation>
+      <translation>Usuń wszystkie geometrie</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2217"/>
@@ -2354,7 +2354,7 @@ nieprawidłowych wiązań, zdegenerowanej geometrii itp.</translation>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6207"/>
       <source>The multiplicity cannot be increased beyond the degree of the B-spline.</source>
-      <translation>Wielokrotność nie może być zwiększona poza stopień krzywej złożonej</translation>
+      <translation>Wielokrotność nie może być zwiększona poza stopień krzywej złożonej.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6210"/>
@@ -2597,7 +2597,7 @@ nieprawidłowych wiązań, zdegenerowanej geometrii itp.</translation>
       <location filename="../../CommandAlterGeometry.cpp" line="126"/>
       <location filename="../../CommandAlterGeometry.cpp" line="134"/>
       <source>Select edge(s) from the sketch.</source>
-      <translation>Wybierz krawędź(ie) na szkicu</translation>
+      <translation>Wybierz krawędź(ie) na szkicu.</translation>
     </message>
     <message>
       <location filename="../../EditDatumDialog.cpp" line="80"/>
@@ -3356,7 +3356,7 @@ Akceptowane kombinacje: dwie krzywe; punkt końcowy i krzywa; dwa punkty końcow
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2143"/>
       <source>Delete All Geometry</source>
-      <translation>Usuń całą geometrie</translation>
+      <translation>Usuń wszystkie geometrie</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2144"/>
@@ -4273,7 +4273,7 @@ Wymaga ponownego przejścia do trybu edycji, aby mógł być skuteczny.</transla
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="299"/>
       <source>Construction geometry</source>
-      <translation>Geometria konstrukcji</translation>
+      <translation>Geometria konstrukcyjna</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="312"/>
@@ -4477,12 +4477,12 @@ Wymaga ponownego przejścia do trybu edycji, aby mógł być skuteczny.</transla
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="124"/>
       <source>Line pattern used for grid lines.</source>
-      <translation>Styl linii używany dla linii siatki.</translation>
+      <translation>Styl linii jest już używany dla linii siatki.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="134"/>
       <source>Segments per geometry</source>
-      <translation>Segmenty na geometrię</translation>
+      <translation>Ilość odcinków w geometrii</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="144"/>
@@ -5234,7 +5234,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherMessages.cpp" line="51"/>
       <source>Solver messages</source>
-      <translation>Komunikaty solwera</translation>
+      <translation>Komunikaty solvera</translation>
     </message>
   </context>
   <context>
@@ -5295,7 +5295,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="90"/>
       <source>Delete constraints to external geom.</source>
-      <translation>Usuń wiązania do zewnętrznej geometrii</translation>
+      <translation>Usuń wiązania do zewnętrznej geometrii.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="100"/>
@@ -5320,7 +5320,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="152"/>
       <source>Enable/Update</source>
-      <translation>Włącz/Zaktualizuj</translation>
+      <translation>Włącz / Zaktualizuj</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="159"/>
@@ -5594,7 +5594,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../Command.cpp" line="599"/>
       <source> (incompatible with selection)</source>
-      <translation> (niezgodny z wyborem)</translation>
+      <translation> (niezgodność z zaznaczeniem)</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="601"/>
@@ -5621,12 +5621,12 @@ Wybierz metodę, aby dołączyć ten szkic do wybranych obiektów.</translation>
     <message>
       <location filename="../../Command.cpp" line="620"/>
       <source>Select the method to attach this sketch to selected objects.</source>
-      <translation>Wybierz metodę, aby dołączyć ten rysunek do wybranych obiektów.</translation>
+      <translation>Wybierz metodę, aby dołączyć ten szkic do wybranych obiektów.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="657"/>
       <source>Map sketch</source>
-      <translation>Mapuj rysunek</translation>
+      <translation>Dołącz szkic</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="658"/>
