@@ -1,3 +1,0 @@
-files:
-  - source: src/Mod/Sketcher/Gui/Resources/translations/Sketcher.ts
-    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
