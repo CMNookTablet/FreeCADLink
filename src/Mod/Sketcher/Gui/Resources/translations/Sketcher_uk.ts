@@ -6,12 +6,12 @@
     <message>
       <location filename="Profiles.py" line="56"/>
       <source>Creates a hexagonal profile</source>
-      <translation type="unfinished">Creates a hexagonal profile</translation>
+      <translation>Створює шестикутний профіль</translation>
     </message>
     <message>
       <location filename="Profiles.py" line="61"/>
       <source>Creates a hexagonal profile in the sketch</source>
-      <translation type="unfinished">Creates a hexagonal profile in the sketch</translation>
+      <translation>Створює шестикутний профіль на ескізі</translation>
     </message>
   </context>
   <context>
@@ -19,7 +19,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6837"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6838"/>
@@ -37,12 +37,12 @@
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="163"/>
       <source>Show/hide B-spline curvature comb</source>
-      <translation type="unfinished">Show/hide B-spline curvature comb</translation>
+      <translation>Показати/приховати гребінець кривизни B-сплайнів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="164"/>
       <source>Switches between showing and hiding the curvature comb for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the curvature comb for all B-splines</translation>
+      <translation>Показує/приховує гребінець кривизни всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -50,12 +50,12 @@
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="101"/>
       <source>Show/hide B-spline degree</source>
-      <translation type="unfinished">Show/hide B-spline degree</translation>
+      <translation>Показати/приховати ступінь B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="102"/>
       <source>Switches between showing and hiding the degree for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the degree for all B-splines</translation>
+      <translation>Показує або приховує ступінь для всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -63,12 +63,12 @@
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="194"/>
       <source>Show/hide B-spline knot multiplicity</source>
-      <translation type="unfinished">Show/hide B-spline knot multiplicity</translation>
+      <translation>Показати/приховати кратність вузлів B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="195"/>
       <source>Switches between showing and hiding the knot multiplicity for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the knot multiplicity for all B-splines</translation>
+      <translation>Показує або приховує кратність вузлів для всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -76,12 +76,12 @@
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="225"/>
       <source>Show/hide B-spline control point weight</source>
-      <translation type="unfinished">Show/hide B-spline control point weight</translation>
+      <translation>Показати/приховати контрольну точку ваги B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="226"/>
       <source>Switches between showing and hiding the control point weight for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the control point weight for all B-splines</translation>
+      <translation>Показує або приховує контрольні точки для всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -89,12 +89,12 @@
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="132"/>
       <source>Show/hide B-spline control polygon</source>
-      <translation type="unfinished">Show/hide B-spline control polygon</translation>
+      <translation>Показати/приховати полігон керування B-сплайном</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="133"/>
       <source>Switches between showing and hiding the control polygons for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the control polygons for all B-splines</translation>
+      <translation>Показує або приховує полігони керування всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -102,12 +102,12 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7201"/>
       <source>Carbon copy</source>
-      <translation type="unfinished">Carbon copy</translation>
+      <translation>Копія</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7202"/>
       <source>Copies the geometry of another sketch</source>
-      <translation type="unfinished">Copies the geometry of another sketch</translation>
+      <translation>Копіює геометрію іншого ескізу</translation>
     </message>
   </context>
   <context>
@@ -120,7 +120,7 @@
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1632"/>
       <source>Creates a clone of the geometry taking as reference the last selected point</source>
-      <translation type="unfinished">Creates a clone of the geometry taking as reference the last selected point</translation>
+      <translation>Створює копію геометрії, взявши за основу останню виділену точку</translation>
     </message>
   </context>
   <context>
@@ -133,7 +133,7 @@
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="113"/>
       <source>Produce a closed shape by tying the end point of one element with the next element&apos;s starting point</source>
-      <translation type="unfinished">Produce a closed shape by tying the end point of one element with the next element&apos;s starting point</translation>
+      <translation>Створює замкнену фігуру, поєднавши кінцеву точку одного елемента з початковою точкою наступного елемента</translation>
     </message>
   </context>
   <context>
@@ -141,32 +141,32 @@
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="256"/>
       <source>Show/hide B-spline information layer</source>
-      <translation type="unfinished">Show/hide B-spline information layer</translation>
+      <translation>Показати/приховати інформаційний шар В-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="331"/>
       <source>Show/hide B-spline degree</source>
-      <translation type="unfinished">Show/hide B-spline degree</translation>
+      <translation>Показати/приховати ступінь B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="338"/>
       <source>Show/hide B-spline control polygon</source>
-      <translation type="unfinished">Show/hide B-spline control polygon</translation>
+      <translation>Показати/приховати полігон керування B-сплайном</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="345"/>
       <source>Show/hide B-spline curvature comb</source>
-      <translation type="unfinished">Show/hide B-spline curvature comb</translation>
+      <translation>Показати/приховати гребінець кривизни B-сплайнів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="352"/>
       <source>Show/hide B-spline knot multiplicity</source>
-      <translation type="unfinished">Show/hide B-spline knot multiplicity</translation>
+      <translation>Показати/приховати кратність вузлів B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="360"/>
       <source>Show/hide B-spline control point weight</source>
-      <translation type="unfinished">Show/hide B-spline control point weight</translation>
+      <translation>Показати/приховати вагу контрольних точок B-сплайну</translation>
     </message>
   </context>
   <context>
@@ -179,7 +179,7 @@
     <message>
       <location filename="../../CommandConstraints.cpp" line="5866"/>
       <source>Constrain an arc or a circle</source>
-      <translation type="unfinished">Constrain an arc or a circle</translation>
+      <translation>Створює обмеження для дуги або кола</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="5971"/>
@@ -207,7 +207,7 @@
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1709"/>
       <source>Creates a clone of the geometry taking as reference the last selected point</source>
-      <translation type="unfinished">Creates a clone of the geometry taking as reference the last selected point</translation>
+      <translation>Створює копію геометрії, взявши за основу останню виділену точку</translation>
     </message>
   </context>
   <context>
@@ -280,7 +280,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="1123"/>
       <source>Create rectangles</source>
-      <translation type="unfinished">Create rectangles</translation>
+      <translation>Створити прямокутник</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="1124"/>
@@ -298,7 +298,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7958"/>
       <source>Create a regular polygon in the sketcher</source>
-      <translation type="unfinished">Create a regular polygon in the sketcher</translation>
+      <translation>Створює правильний багатокутник на ескізі</translation>
     </message>
   </context>
   <context>
@@ -306,22 +306,22 @@
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="899"/>
       <source>Modify knot multiplicity</source>
-      <translation type="unfinished">Modify knot multiplicity</translation>
+      <translation>Зміна кратності вузлів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="900"/>
       <source>Modifies the multiplicity of the selected knot of a B-spline</source>
-      <translation type="unfinished">Modifies the multiplicity of the selected knot of a B-spline</translation>
+      <translation>Змінює кратність вибраного вузла B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="961"/>
       <source>Increase knot multiplicity</source>
-      <translation type="unfinished">Increase knot multiplicity</translation>
+      <translation>Збільшення кратності вузлів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="968"/>
       <source>Decrease knot multiplicity</source>
-      <translation type="unfinished">Decrease knot multiplicity</translation>
+      <translation>Зменшення кратності вузлів</translation>
     </message>
   </context>
   <context>
@@ -329,12 +329,12 @@
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="223"/>
       <source>Connect edges</source>
-      <translation type="unfinished">Connect edges</translation>
+      <translation>З’єднати ребра</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="224"/>
       <source>Tie the end point of the element with next element&apos;s starting point</source>
-      <translation type="unfinished">Tie the end point of the element with next element&apos;s starting point</translation>
+      <translation>З'єднує кінцеву точку елемента з початковою точкою наступного</translation>
     </message>
   </context>
   <context>
@@ -355,12 +355,12 @@
     <message>
       <location filename="../../CommandConstraints.cpp" line="1841"/>
       <source>Constrain block</source>
-      <translation type="unfinished">Constrain block</translation>
+      <translation>Обмеження переміщення</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1842"/>
       <source>Block constraint: block the selected edge from moving</source>
-      <translation type="unfinished">Block constraint: block the selected edge from moving</translation>
+      <translation>Блокуюче обмеження: блокує переміщення вибраної лінії</translation>
     </message>
   </context>
   <context>
@@ -386,7 +386,7 @@
     <message>
       <location filename="../../CommandConstraints.cpp" line="5286"/>
       <source>Fix the diameter of a circle or an arc</source>
-      <translation type="unfinished">Fix the diameter of a circle or an arc</translation>
+      <translation>Задає діаметр кола або дуги</translation>
     </message>
   </context>
   <context>
@@ -407,7 +407,7 @@
     <message>
       <location filename="../../CommandConstraints.cpp" line="2987"/>
       <source>Constrain horizontal distance</source>
-      <translation type="unfinished">Constrain horizontal distance</translation>
+      <translation>Обмеження відстані по горизонталі</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2988"/>
@@ -420,7 +420,7 @@
     <message>
       <location filename="../../CommandConstraints.cpp" line="3241"/>
       <source>Constrain vertical distance</source>
-      <translation type="unfinished">Constrain vertical distance</translation>
+      <translation>Обмеження відстані по вертикалі</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3242"/>
@@ -459,7 +459,7 @@
     <message>
       <location filename="../../CommandConstraints.cpp" line="7219"/>
       <source>Constrain internal alignment</source>
-      <translation type="unfinished">Constrain internal alignment</translation>
+      <translation>Обмеження внутрішнього вирівнювання</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7220"/>
@@ -478,8 +478,8 @@
       <location filename="../../CommandConstraints.cpp" line="1616"/>
       <source>Lock constraint: create both a horizontal and a vertical distance constraint
 on the selected vertex</source>
-      <translation type="unfinished">Lock constraint: create both a horizontal and a vertical distance constraint
-on the selected vertex</translation>
+      <translation>Фіксуюче обмеження: створює горизонтальне та вертикальне 
+обмеження відстані для вибраної вершини</translation>
     </message>
   </context>
   <context>
@@ -539,12 +539,12 @@ on the selected vertex</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4983"/>
       <source>Constrain radius or weight</source>
-      <translation type="unfinished">Constrain radius or weight</translation>
+      <translation>Обмежити радіус або вагу</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4984"/>
       <source>Fix the radius of a circle or an arc or fix the weight of a pole of a B-Spline</source>
-      <translation type="unfinished">Fix the radius of a circle or an arc or fix the weight of a pole of a B-Spline</translation>
+      <translation>Задає радіус кола чи дуги або задає вагу полюса В-сплайну</translation>
     </message>
   </context>
   <context>
@@ -552,14 +552,14 @@ on the selected vertex</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7053"/>
       <source>Constrain refraction (Snell&apos;s law&apos;)</source>
-      <translation type="unfinished">Constrain refraction (Snell&apos;s law&apos;)</translation>
+      <translation>Обмеження за законом заломлення (закон Снеліуса)</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7054"/>
       <source>Create a refraction law (Snell&apos;s law) constraint between two endpoints of rays
 and an edge as an interface.</source>
-      <translation type="unfinished">Create a refraction law (Snell&apos;s law) constraint between two endpoints of rays
-and an edge as an interface.</translation>
+      <translation>Створює обмеження за законом заломлення (закон Снеліуса) між 
+двома кінцевими точками променя та ребром як границею розділу середовищ.</translation>
     </message>
   </context>
   <context>
@@ -573,8 +573,8 @@ and an edge as an interface.</translation>
       <location filename="../../CommandConstraints.cpp" line="6754"/>
       <source>Create a symmetry constraint between two points
 with respect to a line or a third point</source>
-      <translation type="unfinished">Create a symmetry constraint between two points
-with respect to a line or a third point</translation>
+      <translation>Створює обмеження симетричності між двома 
+точками відносно лінії або третьої точки</translation>
     </message>
   </context>
   <context>
@@ -626,7 +626,7 @@ with respect to a line or a third point</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1586"/>
       <source>Creates a simple copy of the geometry taking as reference the last selected point</source>
-      <translation type="unfinished">Creates a simple copy of the geometry taking as reference the last selected point</translation>
+      <translation>Створює просту копію геометрії, взявши за основу останню виділену точку</translation>
     </message>
   </context>
   <context>
@@ -639,7 +639,7 @@ with respect to a line or a third point</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="2368"/>
       <source>Create an arc by its end points and a point along the arc</source>
-      <translation type="unfinished">Create an arc by its end points and a point along the arc</translation>
+      <translation>Створює дугу за кінцевими точками та точкою на дузі</translation>
     </message>
   </context>
   <context>
@@ -665,7 +665,7 @@ with respect to a line or a third point</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="2071"/>
       <source>Create an arc by its center and by its end points</source>
-      <translation type="unfinished">Create an arc by its center and by its end points</translation>
+      <translation>Створює дугу за центром та кінцевими точками</translation>
     </message>
   </context>
   <context>
@@ -699,12 +699,12 @@ with respect to a line or a third point</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4503"/>
       <source>Create an arc of parabola</source>
-      <translation type="unfinished">Create an arc of parabola</translation>
+      <translation>Створити дугу параболи</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4504"/>
       <source>Create an arc of parabola in the sketch</source>
-      <translation type="unfinished">Create an arc of parabola in the sketch</translation>
+      <translation>Створює дугу параболи на ескізі</translation>
     </message>
   </context>
   <context>
@@ -712,12 +712,12 @@ with respect to a line or a third point</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4945"/>
       <source>Create B-spline</source>
-      <translation type="unfinished">Create B-spline</translation>
+      <translation>Створити B-сплайн</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4946"/>
       <source>Create a B-spline via control points in the sketch.</source>
-      <translation type="unfinished">Create a B-spline via control points in the sketch.</translation>
+      <translation>Створює B-сплайн на ескізі за допомогою контрольних точок.</translation>
     </message>
   </context>
   <context>
@@ -782,7 +782,7 @@ with respect to a line or a third point</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="5756"/>
       <source>Create a fillet between two lines or at a coincident point</source>
-      <translation type="unfinished">Create a fillet between two lines or at a coincident point</translation>
+      <translation>Створює заокруглення між двома лініями або в точці збігу</translation>
     </message>
   </context>
   <context>
@@ -868,12 +868,12 @@ with respect to a line or a third point</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4992"/>
       <source>Create periodic B-spline</source>
-      <translation type="unfinished">Create periodic B-spline</translation>
+      <translation>Створити періодичний B-сплайн</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4993"/>
       <source>Create a periodic B-spline via control points in the sketch.</source>
-      <translation type="unfinished">Create a periodic B-spline via control points in the sketch.</translation>
+      <translation>Створює періодичний B-сплайн на ескізі за допомогою контрольних точок.</translation>
     </message>
   </context>
   <context>
@@ -894,12 +894,12 @@ with respect to a line or a third point</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="5784"/>
       <source>Create corner-preserving fillet</source>
-      <translation type="unfinished">Create corner-preserving fillet</translation>
+      <translation>Створити заокруглення зі збереженням точки перетину</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="5785"/>
       <source>Fillet that preserves intersection point and most constraints</source>
-      <translation type="unfinished">Fillet that preserves intersection point and most constraints</translation>
+      <translation>Створює заокруглення, яке зберігає точку перетину та більшість обмежень</translation>
     </message>
   </context>
   <context>
@@ -935,12 +935,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="747"/>
       <source>Create centered rectangle</source>
-      <translation type="unfinished">Create centered rectangle</translation>
+      <translation>Створити прямокутник за центром</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="748"/>
       <source>Create a centered rectangle in the sketch</source>
-      <translation type="unfinished">Create a centered rectangle in the sketch</translation>
+      <translation>Створює прямокутник за центром на ескізі</translation>
     </message>
   </context>
   <context>
@@ -953,7 +953,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7908"/>
       <source>Create a regular polygon in the sketch</source>
-      <translation type="unfinished">Create a regular polygon in the sketch</translation>
+      <translation>Створює правильний багатокутник на ескізі</translation>
     </message>
   </context>
   <context>
@@ -1013,12 +1013,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="526"/>
       <source>Decrease B-spline degree</source>
-      <translation type="unfinished">Decrease B-spline degree</translation>
+      <translation>Зменшити ступінь B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="527"/>
       <source>Decreases the degree of the B-spline</source>
-      <translation type="unfinished">Decreases the degree of the B-spline</translation>
+      <translation>Зменшує ступінь B-сплайну</translation>
     </message>
   </context>
   <context>
@@ -1026,12 +1026,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="757"/>
       <source>Decrease knot multiplicity</source>
-      <translation type="unfinished">Decrease knot multiplicity</translation>
+      <translation>Зменшення кратності вузлів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="758"/>
       <source>Decreases the multiplicity of the selected knot of a B-spline</source>
-      <translation type="unfinished">Decreases the multiplicity of the selected knot of a B-spline</translation>
+      <translation>Зменьшує кратність вибраного вузла B-сплайну</translation>
     </message>
   </context>
   <context>
@@ -1039,7 +1039,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6776"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6777"/>
@@ -1057,12 +1057,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2192"/>
       <source>Delete all constraints</source>
-      <translation type="unfinished">Delete all constraints</translation>
+      <translation>Видалити всі обмеження</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2193"/>
       <source>Delete all constraints in the sketch</source>
-      <translation type="unfinished">Delete all constraints in the sketch</translation>
+      <translation>Видаляє всі обмеження на ескізі</translation>
     </message>
   </context>
   <context>
@@ -1070,12 +1070,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2129"/>
       <source>Delete all geometry</source>
-      <translation type="unfinished">Delete all geometry</translation>
+      <translation>Видалити всю геометрію</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2130"/>
       <source>Delete all geometry and constraints in the current sketch, with the exception of external geometry</source>
-      <translation type="unfinished">Delete all geometry and constraints in the current sketch, with the exception of external geometry</translation>
+      <translation>Видаляє всю геометрію та обмеження у поточному ескізі, за винятком зовнішньої геометрії</translation>
     </message>
   </context>
   <context>
@@ -1083,7 +1083,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6868"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6869"/>
@@ -1106,7 +1106,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../Command.cpp" line="268"/>
       <source>Edit the selected sketch.</source>
-      <translation type="unfinished">Edit the selected sketch.</translation>
+      <translation>Редагує виділений ескіз.</translation>
     </message>
   </context>
   <context>
@@ -1114,7 +1114,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2392"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2393"/>
@@ -1132,7 +1132,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2253"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2254"/>
@@ -1150,12 +1150,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6277"/>
       <source>Extend edge</source>
-      <translation type="unfinished">Extend edge</translation>
+      <translation>Продовжити ребро</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6278"/>
       <source>Extend an edge with respect to the picked position</source>
-      <translation type="unfinished">Extend an edge with respect to the picked position</translation>
+      <translation>Продовжує ребро до найближчої точки перетину</translation>
     </message>
   </context>
   <context>
@@ -1176,7 +1176,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7020"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7021"/>
@@ -1195,7 +1195,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6982"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6983"/>
@@ -1213,12 +1213,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="453"/>
       <source>Increase B-spline degree</source>
-      <translation type="unfinished">Increase B-spline degree</translation>
+      <translation>Збільшити ступінь B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="454"/>
       <source>Increases the degree of the B-spline</source>
-      <translation type="unfinished">Increases the degree of the B-spline</translation>
+      <translation>Збільшує ступінь B-сплайну</translation>
     </message>
   </context>
   <context>
@@ -1226,12 +1226,12 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="603"/>
       <source>Increase knot multiplicity</source>
-      <translation type="unfinished">Increase knot multiplicity</translation>
+      <translation>Збільшення кратності вузлів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="604"/>
       <source>Increases the multiplicity of the selected knot of a B-spline</source>
-      <translation type="unfinished">Increases the multiplicity of the selected knot of a B-spline</translation>
+      <translation>Збільшує кратність вибраного вузла B-сплайну</translation>
     </message>
   </context>
   <context>
@@ -1244,7 +1244,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../Command.cpp" line="298"/>
       <source>Finish editing the active sketch.</source>
-      <translation type="unfinished">Finish editing the active sketch.</translation>
+      <translation>Завершує редагування активного ескізу.</translation>
     </message>
   </context>
   <context>
@@ -1259,14 +1259,14 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
       <source>Set the &apos;Support&apos; of a sketch.
 First select the supporting geometry, for example, a face or an edge of a solid object,
 then call this command, then choose the desired sketch.</source>
-      <translation type="unfinished">Set the &apos;Support&apos; of a sketch.
-First select the supporting geometry, for example, a face or an edge of a solid object,
-then call this command, then choose the desired sketch.</translation>
+      <translation>Встановлює «Базу» для ескізу.
+Спочатку виділіть допоміжну геометрію, наприклад, грань або ребро 
+твердого об’єкта, потім викличте цю команду, а потім виберіть потрібний ескіз.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="562"/>
       <source>Some of the selected objects depend on the sketch to be mapped. Circular dependencies are not allowed.</source>
-      <translation type="unfinished">Some of the selected objects depend on the sketch to be mapped. Circular dependencies are not allowed.</translation>
+      <translation>Деякі з вибраних об’єктів залежать від ескізу, який потрібно відобразити. Циклічні залежності не допускаються.</translation>
     </message>
   </context>
   <context>
@@ -1279,7 +1279,7 @@ then call this command, then choose the desired sketch.</translation>
     <message>
       <location filename="../../Command.cpp" line="942"/>
       <source>Create a new sketch from merging two or more selected sketches.</source>
-      <translation type="unfinished">Create a new sketch from merging two or more selected sketches.</translation>
+      <translation>Створює новий ескіз із об&apos;єднання двох або більше вибраних ескізів.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="955"/>
@@ -1289,7 +1289,7 @@ then call this command, then choose the desired sketch.</translation>
     <message>
       <location filename="../../Command.cpp" line="956"/>
       <source>Select at least two sketches.</source>
-      <translation type="unfinished">Select at least two sketches.</translation>
+      <translation>Оберіть принаймні два ескізи.</translation>
     </message>
   </context>
   <context>
@@ -1304,9 +1304,8 @@ then call this command, then choose the desired sketch.</translation>
       <source>Create a new mirrored sketch for each selected sketch
 by using the X or Y axes, or the origin point,
 as mirroring reference.</source>
-      <translation type="unfinished">Create a new mirrored sketch for each selected sketch
-by using the X or Y axes, or the origin point,
-as mirroring reference.</translation>
+      <translation>Створює новий ескіз відзеркалюванням кожного з 
+вибраних ескізів відносно осі X, Y або початку координат.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="850"/>
@@ -1316,7 +1315,7 @@ as mirroring reference.</translation>
     <message>
       <location filename="../../Command.cpp" line="851"/>
       <source>Select one or more sketches.</source>
-      <translation type="unfinished">Select one or more sketches.</translation>
+      <translation>Виділіть один або кілька ескізів.</translation>
     </message>
   </context>
   <context>
@@ -1329,7 +1328,7 @@ as mirroring reference.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1675"/>
       <source>Moves the geometry taking as reference the last selected point</source>
-      <translation type="unfinished">Moves the geometry taking as reference the last selected point</translation>
+      <translation>Переміщує геометрії, приймаючи останню обрану точку в якості орієнтиру</translation>
     </message>
   </context>
   <context>
@@ -1342,7 +1341,7 @@ as mirroring reference.</translation>
     <message>
       <location filename="../../Command.cpp" line="145"/>
       <source>Create a new sketch.</source>
-      <translation type="unfinished">Create a new sketch.</translation>
+      <translation>Створює новий ескіз.</translation>
     </message>
   </context>
   <context>
@@ -1350,12 +1349,12 @@ as mirroring reference.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1990"/>
       <source>Rectangular array</source>
-      <translation type="unfinished">Rectangular array</translation>
+      <translation>Прямокутний масив</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1991"/>
       <source>Creates a rectangular array pattern of the geometry taking as reference the last selected point</source>
-      <translation type="unfinished">Creates a rectangular array pattern of the geometry taking as reference the last selected point</translation>
+      <translation>Створює прямокутний масив із геометрії, обравши останню виділену точку в якості основи</translation>
     </message>
   </context>
   <context>
@@ -1363,12 +1362,12 @@ as mirroring reference.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2499"/>
       <source>Remove axes alignment</source>
-      <translation type="unfinished">Remove axes alignment</translation>
+      <translation>Видалити вирівнювання осей</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2500"/>
       <source>Modifies constraints to remove axes alignment while trying to preserve the constraint relationship of the selection</source>
-      <translation type="unfinished">Modifies constraints to remove axes alignment while trying to preserve the constraint relationship of the selection</translation>
+      <translation>Змінює обмеження у виділеній частині, щоб видалити вирівнювання осей, намагаючись зберегти взаємозв&apos;язок обмежень</translation>
     </message>
   </context>
   <context>
@@ -1382,8 +1381,8 @@ as mirroring reference.</translation>
       <location filename="../../Command.cpp" line="383"/>
       <source>Place the selected sketch on one of the global coordinate planes.
 This will clear the &apos;Support&apos; property, if any.</source>
-      <translation type="unfinished">Place the selected sketch on one of the global coordinate planes.
-This will clear the &apos;Support&apos; property, if any.</translation>
+      <translation>Розміщує виділений ескіз на одній із глобальних координатних площин. 
+Це очищує наявну властивість &apos;База&apos;.</translation>
     </message>
   </context>
   <context>
@@ -1396,7 +1395,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="955"/>
       <source>Show all internal geometry or hide unused internal geometry</source>
-      <translation type="unfinished">Show all internal geometry or hide unused internal geometry</translation>
+      <translation>Показує всю внутрішню геометрію або приховує внутрішню геометрію, що не використовується</translation>
     </message>
   </context>
   <context>
@@ -1405,7 +1404,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
       <location filename="../../CommandSketcherTools.cpp" line="678"/>
       <location filename="../../CommandSketcherTools.cpp" line="679"/>
       <source>Select conflicting constraints</source>
-      <translation type="unfinished">Select conflicting constraints</translation>
+      <translation>Вибрати суперечливі обмеження</translation>
     </message>
   </context>
   <context>
@@ -1413,12 +1412,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="310"/>
       <source>Select associated constraints</source>
-      <translation type="unfinished">Select associated constraints</translation>
+      <translation>Вибрати пов'язані обмеження</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="311"/>
       <source>Select the constraints associated with the selected geometrical elements</source>
-      <translation type="unfinished">Select the constraints associated with the selected geometrical elements</translation>
+      <translation>Вибирає обмеження, які відносяться до виділених геометричних елементів</translation>
     </message>
   </context>
   <context>
@@ -1426,12 +1425,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="733"/>
       <source>Select associated geometry</source>
-      <translation type="unfinished">Select associated geometry</translation>
+      <translation>Вибрати пов'язану геометрію</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="734"/>
       <source>Select the geometrical elements associated with the selected constraints</source>
-      <translation type="unfinished">Select the geometrical elements associated with the selected constraints</translation>
+      <translation>Вибирає геометричні елементи, пов’язані з виділеними обмеженнями</translation>
     </message>
   </context>
   <context>
@@ -1439,12 +1438,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="863"/>
       <source>Select unconstrained DoF</source>
-      <translation type="unfinished">Select unconstrained DoF</translation>
+      <translation>Вибрати геометрію з необмеженим ступенем свободи</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="864"/>
       <source>Select geometrical elements where the solver still detects unconstrained degrees of freedom.</source>
-      <translation type="unfinished">Select geometrical elements where the solver still detects unconstrained degrees of freedom.</translation>
+      <translation>Вибирає геометричні елементи, де вирішувач досі виявляє не обмежені ступені свободи.</translation>
     </message>
   </context>
   <context>
@@ -1452,12 +1451,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="466"/>
       <source>Select horizontal axis</source>
-      <translation type="unfinished">Select horizontal axis</translation>
+      <translation>Вибрати горизонтальну вісь</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="467"/>
       <source>Select the local horizontal axis of the sketch</source>
-      <translation type="unfinished">Select the local horizontal axis of the sketch</translation>
+      <translation>Вибирає локальну горизонтальну вісь ескізу</translation>
     </message>
   </context>
   <context>
@@ -1466,7 +1465,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
       <location filename="../../CommandSketcherTools.cpp" line="566"/>
       <location filename="../../CommandSketcherTools.cpp" line="567"/>
       <source>Select malformed constraints</source>
-      <translation type="unfinished">Select malformed constraints</translation>
+      <translation>Вибрати неправильні обмеження</translation>
     </message>
   </context>
   <context>
@@ -1474,12 +1473,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="376"/>
       <source>Select origin</source>
-      <translation type="unfinished">Select origin</translation>
+      <translation>Вибрати початок координат</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="377"/>
       <source>Select the local origin point of the sketch</source>
-      <translation type="unfinished">Select the local origin point of the sketch</translation>
+      <translation>Вибирає локальний початок координат ескізу</translation>
     </message>
   </context>
   <context>
@@ -1488,7 +1487,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
       <location filename="../../CommandSketcherTools.cpp" line="622"/>
       <location filename="../../CommandSketcherTools.cpp" line="623"/>
       <source>Select partially redundant constraints</source>
-      <translation type="unfinished">Select partially redundant constraints</translation>
+      <translation>Виділіть частково надлишкові обмеження</translation>
     </message>
   </context>
   <context>
@@ -1497,7 +1496,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
       <location filename="../../CommandSketcherTools.cpp" line="509"/>
       <location filename="../../CommandSketcherTools.cpp" line="510"/>
       <source>Select redundant constraints</source>
-      <translation type="unfinished">Select redundant constraints</translation>
+      <translation>Вибрати надлишкові обмеження</translation>
     </message>
   </context>
   <context>
@@ -1505,12 +1504,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="422"/>
       <source>Select vertical axis</source>
-      <translation type="unfinished">Select vertical axis</translation>
+      <translation>Вибрати вертикальну вісь</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="423"/>
       <source>Select the local vertical axis of the sketch</source>
-      <translation type="unfinished">Select the local vertical axis of the sketch</translation>
+      <translation>Вибирає локальну вертикальну вісь ескізу</translation>
     </message>
   </context>
   <context>
@@ -1518,12 +1517,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6395"/>
       <source>Split edge</source>
-      <translation type="unfinished">Split edge</translation>
+      <translation>Розділити ребро</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6396"/>
       <source>Splits an edge into two while preserving constraints</source>
-      <translation type="unfinished">Splits an edge into two while preserving constraints</translation>
+      <translation>Ділить ребро на два зі збереженням обмежень</translation>
     </message>
   </context>
   <context>
@@ -1531,12 +1530,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../Command.cpp" line="341"/>
       <source>Stop operation</source>
-      <translation type="unfinished">Stop operation</translation>
+      <translation>Зупинити операцію</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="342"/>
       <source>When in edit mode, stop the active operation (drawing, constraining, etc.).</source>
-      <translation type="unfinished">When in edit mode, stop the active operation (drawing, constraining, etc.).</translation>
+      <translation>Під час редагування зупиняє активну операцію (креслення, введення обмеження тощо).</translation>
     </message>
   </context>
   <context>
@@ -1544,7 +1543,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2420"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2421"/>
@@ -1562,12 +1561,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherVirtualSpace.cpp" line="93"/>
       <source>Switch virtual space</source>
-      <translation type="unfinished">Switch virtual space</translation>
+      <translation>Перемикання віртуального простору</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherVirtualSpace.cpp" line="94"/>
       <source>Switches the selected constraints or the view to the other virtual space</source>
-      <translation type="unfinished">Switches the selected constraints or the view to the other virtual space</translation>
+      <translation>Перемикає виділені обмеження або вид на інший віртуальний простір</translation>
     </message>
   </context>
   <context>
@@ -1588,7 +1587,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6946"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6947"/>
@@ -1606,12 +1605,12 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7806"/>
       <source>Activate/deactivate constraint</source>
-      <translation type="unfinished">Activate/deactivate constraint</translation>
+      <translation>Активувати/деактивувати обмеження</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7807"/>
       <source>Activates or deactivates the selected constraints</source>
-      <translation type="unfinished">Activates or deactivates the selected constraints</translation>
+      <translation>Активує або деактивує виділені обмеження</translation>
     </message>
   </context>
   <context>
@@ -1632,14 +1631,13 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7679"/>
       <source>Toggle driving/reference constraint</source>
-      <translation type="unfinished">Toggle driving/reference constraint</translation>
+      <translation>Перемкнути обмеження між допоміжними/основними</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7680"/>
       <source>Set the toolbar, or the selected constraints,
 into driving or reference mode</source>
-      <translation type="unfinished">Set the toolbar, or the selected constraints,
-into driving or reference mode</translation>
+      <translation>Перемикає панель інструментів в режим допоміжної/основної геометрії або перетворює виділені обмеження в допоміжні/основні</translation>
     </message>
   </context>
   <context>
@@ -1647,7 +1645,7 @@ into driving or reference mode</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6908"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6909"/>
@@ -1684,8 +1682,8 @@ into driving or reference mode</translation>
       <location filename="../../Command.cpp" line="797"/>
       <source>Validate a sketch by looking at missing coincidences,
 invalid constraints, degenerated geometry, etc.</source>
-      <translation type="unfinished">Validate a sketch by looking at missing coincidences,
-invalid constraints, degenerated geometry, etc.</translation>
+      <translation>Перевіряє ескіз на відсутність збігів,
+неприпустимі обмеження, вироджену геометрію тощо.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="811"/>
@@ -1695,7 +1693,7 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../Command.cpp" line="812"/>
       <source>Select only one sketch.</source>
-      <translation type="unfinished">Select only one sketch.</translation>
+      <translation>Виділіть лише один ескіз.</translation>
     </message>
   </context>
   <context>
@@ -1703,12 +1701,12 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../Command.cpp" line="1025"/>
       <source>View section</source>
-      <translation type="unfinished">View section</translation>
+      <translation>Вид перерізу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="1026"/>
       <source>When in edit mode, switch between section view and full view.</source>
-      <translation type="unfinished">When in edit mode, switch between section view and full view.</translation>
+      <translation>У режимі редагування перемикає між видами переріз/повний.</translation>
     </message>
   </context>
   <context>
@@ -1721,7 +1719,7 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../Command.cpp" line="682"/>
       <source>When in edit mode, set the camera orientation perpendicular to the sketch plane.</source>
-      <translation type="unfinished">When in edit mode, set the camera orientation perpendicular to the sketch plane.</translation>
+      <translation>В режимі редагування, встановлює орієнтацію камери перпендикулярно площині ескізу.</translation>
     </message>
   </context>
   <context>
@@ -1742,7 +1740,7 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../Command.cpp" line="764"/>
       <source>View sketch</source>
-      <translation type="unfinished">View sketch</translation>
+      <translation>Переглянути ескіз</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="765"/>
@@ -1756,50 +1754,50 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="1244"/>
       <location filename="../../CommandConstraints.cpp" line="1319"/>
       <source>Add horizontal constraint</source>
-      <translation type="unfinished">Add horizontal constraint</translation>
+      <translation>Додати горизонтальне обмеження</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1253"/>
       <location filename="../../CommandConstraints.cpp" line="1345"/>
       <location filename="../../CommandConstraints.cpp" line="1580"/>
       <source>Add horizontal alignment</source>
-      <translation type="unfinished">Add horizontal alignment</translation>
+      <translation>Додати горизонтальне вирівнювання</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1481"/>
       <location filename="../../CommandConstraints.cpp" line="1555"/>
       <source>Add vertical constraint</source>
-      <translation type="unfinished">Add vertical constraint</translation>
+      <translation>Додати вертикальне обмеження</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1489"/>
       <source>Add vertical alignment</source>
-      <translation type="unfinished">Add vertical alignment</translation>
+      <translation>Додати вертикальне вирівнювання</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1695"/>
       <source>Add &apos;Lock&apos; constraint</source>
-      <translation type="unfinished">Add &apos;Lock&apos; constraint</translation>
+      <translation>Додати обмеження &apos;Фіксація&apos;</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1736"/>
       <source>Add relative &apos;Lock&apos; constraint</source>
-      <translation type="unfinished">Add relative &apos;Lock&apos; constraint</translation>
+      <translation>Додайте обмеження відносна &apos;Фіксація&apos;</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1781"/>
       <source>Add fixed constraint</source>
-      <translation type="unfinished">Add fixed constraint</translation>
+      <translation>Додати фіксуюче обмеження</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1924"/>
       <source>Add &apos;Block&apos; constraint</source>
-      <translation type="unfinished">Add &apos;Block&apos; constraint</translation>
+      <translation>Додати обмеження &apos;Блокування&apos;</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1968"/>
       <source>Add block constraint</source>
-      <translation type="unfinished">Add block constraint</translation>
+      <translation>Додати обмеження блокування</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2142"/>
@@ -1808,76 +1806,76 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandSketcherTools.cpp" line="154"/>
       <location filename="../../CommandSketcherTools.cpp" line="261"/>
       <source>Add coincident constraint</source>
-      <translation type="unfinished">Add coincident constraint</translation>
+      <translation>Додати обмеження збігу</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2212"/>
       <source>Swap edge tangency with ptp tangency</source>
-      <translation type="unfinished">Swap edge tangency with ptp tangency</translation>
+      <translation>Перетворити дотик ребер у дотик точка-точка</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2459"/>
       <location filename="../../CommandConstraints.cpp" line="2591"/>
       <source>Add distance from horizontal axis constraint</source>
-      <translation type="unfinished">Add distance from horizontal axis constraint</translation>
+      <translation>Додати обмеження відстані від горизонтальної осі</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2467"/>
       <location filename="../../CommandConstraints.cpp" line="2598"/>
       <source>Add distance from vertical axis constraint</source>
-      <translation type="unfinished">Add distance from vertical axis constraint</translation>
+      <translation>Додати обмеження відстані від вертикальної осі</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2475"/>
       <location filename="../../CommandConstraints.cpp" line="2605"/>
       <source>Add point to point distance constraint</source>
-      <translation type="unfinished">Add point to point distance constraint</translation>
+      <translation>Додати обмеження відстані між двома точками</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2510"/>
       <location filename="../../CommandConstraints.cpp" line="2680"/>
       <source>Add point to line Distance constraint</source>
-      <translation type="unfinished">Add point to line Distance constraint</translation>
+      <translation>Додати обмеження відстані між точкою та лінією</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2544"/>
       <location filename="../../CommandConstraints.cpp" line="2637"/>
       <source>Add length constraint</source>
-      <translation type="unfinished">Add length constraint</translation>
+      <translation>Додати обмеження довжини</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2826"/>
       <location filename="../../CommandConstraints.cpp" line="2914"/>
       <source>Add point on object constraint</source>
-      <translation type="unfinished">Add point on object constraint</translation>
+      <translation>Додати обмеження точки на об’єкті</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3088"/>
       <location filename="../../CommandConstraints.cpp" line="3190"/>
       <source>Add point to point horizontal distance constraint</source>
-      <translation type="unfinished">Add point to point horizontal distance constraint</translation>
+      <translation>Додати обмеження відстані за горизонталлю між двома точками</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3119"/>
       <source>Add fixed x-coordinate constraint</source>
-      <translation type="unfinished">Add fixed x-coordinate constraint</translation>
+      <translation>Додати обмеження фіксованої X-координати</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3337"/>
       <location filename="../../CommandConstraints.cpp" line="3439"/>
       <source>Add point to point vertical distance constraint</source>
-      <translation type="unfinished">Add point to point vertical distance constraint</translation>
+      <translation>Додати обмеження відстані за вертикаллю між двома точками</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3367"/>
       <source>Add fixed y-coordinate constraint</source>
-      <translation type="unfinished">Add fixed y-coordinate constraint</translation>
+      <translation>Додати обмеження фіксованої Y-координати</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3568"/>
       <location filename="../../CommandConstraints.cpp" line="3609"/>
       <source>Add parallel constraint</source>
-      <translation type="unfinished">Add parallel constraint</translation>
+      <translation>Додати обмеження паралельності</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3733"/>
@@ -1888,22 +1886,22 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="4170"/>
       <location filename="../../CommandConstraints.cpp" line="4212"/>
       <source>Add perpendicular constraint</source>
-      <translation type="unfinished">Add perpendicular constraint</translation>
+      <translation>Додати обмеження перпендикуляру</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3838"/>
       <source>Add perpendicularity constraint</source>
-      <translation type="unfinished">Add perpendicularity constraint</translation>
+      <translation>Додати обмеження перпендикулярності</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4311"/>
       <source>Swap coincident+tangency with ptp tangency</source>
-      <translation type="unfinished">Swap coincident+tangency with ptp tangency</translation>
+      <translation>Перетворити збіг+дотик у дотик точка-точка</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4330"/>
       <source>Swap PointOnObject+tangency with point to curve tangency</source>
-      <translation type="unfinished">Swap PointOnObject+tangency with point to curve tangency</translation>
+      <translation>Перетворіть обмеження «Точка на об'єкті» + дотик на обмеження «Дотик до кривої»</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4425"/>
@@ -1914,7 +1912,7 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="4901"/>
       <location filename="../../CommandConstraints.cpp" line="4922"/>
       <source>Add tangent constraint</source>
-      <translation type="unfinished">Add tangent constraint</translation>
+      <translation>Додати обмеження дотику</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4566"/>
@@ -1932,7 +1930,7 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="4809"/>
       <location filename="../../CommandConstraints.cpp" line="4835"/>
       <source>Add tangent constraint point</source>
-      <translation type="unfinished">Add tangent constraint point</translation>
+      <translation>Додати обмеження дотику до точки</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="5100"/>
@@ -1940,7 +1938,7 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="5154"/>
       <location filename="../../CommandConstraints.cpp" line="5215"/>
       <source>Add radius constraint</source>
-      <translation type="unfinished">Add radius constraint</translation>
+      <translation>Додати обмеження радіусу</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="5392"/>
@@ -1948,7 +1946,7 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="5433"/>
       <location filename="../../CommandConstraints.cpp" line="5500"/>
       <source>Add diameter constraint</source>
-      <translation type="unfinished">Add diameter constraint</translation>
+      <translation>Додати обмеження діаметру</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="5672"/>
@@ -1956,7 +1954,7 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="5732"/>
       <location filename="../../CommandConstraints.cpp" line="5807"/>
       <source>Add radiam constraint</source>
-      <translation type="unfinished">Add radiam constraint</translation>
+      <translation>Додати обмеження радіусу/діаметру</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="6100"/>
@@ -1966,13 +1964,13 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="6400"/>
       <location filename="../../CommandConstraints.cpp" line="6454"/>
       <source>Add angle constraint</source>
-      <translation type="unfinished">Add angle constraint</translation>
+      <translation>Додати обмеження кута</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="6668"/>
       <location filename="../../CommandConstraints.cpp" line="6720"/>
       <source>Add equality constraint</source>
-      <translation type="unfinished">Add equality constraint</translation>
+      <translation>Додати обмеження рівності</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="6841"/>
@@ -1981,33 +1979,33 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="6995"/>
       <location filename="../../CommandConstraints.cpp" line="7030"/>
       <source>Add symmetric constraint</source>
-      <translation type="unfinished">Add symmetric constraint</translation>
+      <translation>Додати обмеження симетрії</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7169"/>
       <source>Add Snell&apos;s law constraint</source>
-      <translation type="unfinished">Add Snell&apos;s law constraint</translation>
+      <translation>Додати обмеження за законом заломлення Снеліуса</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7379"/>
       <location filename="../../CommandConstraints.cpp" line="7557"/>
       <source>Add internal alignment constraint</source>
-      <translation type="unfinished">Add internal alignment constraint</translation>
+      <translation>Додати внутрішнє обмеження вирівнювання</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7764"/>
       <source>Toggle constraint to driving/reference</source>
-      <translation type="unfinished">Toggle constraint to driving/reference</translation>
+      <translation>Перемкнути обмеження між допоміжними/основними</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7848"/>
       <source>Activate/Deactivate constraint</source>
-      <translation type="unfinished">Activate/Deactivate constraint</translation>
+      <translation>Активувати/деактивувати обмеження</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="208"/>
       <source>Create a new sketch on a face</source>
-      <translation type="unfinished">Create a new sketch on a face</translation>
+      <translation>Створити новий ескіз на грані</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="240"/>
@@ -2017,22 +2015,22 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../Command.cpp" line="490"/>
       <source>Reorient sketch</source>
-      <translation type="unfinished">Reorient sketch</translation>
+      <translation>Переорієнтувати ескіз</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="645"/>
       <source>Attach sketch</source>
-      <translation type="unfinished">Attach sketch</translation>
+      <translation>Приєднати ескіз</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="650"/>
       <source>Detach sketch</source>
-      <translation type="unfinished">Detach sketch</translation>
+      <translation>Від’єднати ескіз</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="866"/>
       <source>Create a mirrored sketch for each selected sketch</source>
-      <translation type="unfinished">Create a mirrored sketch for each selected sketch</translation>
+      <translation>Створити дзеркальний ескіз для кожного вибраного ескізу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="965"/>
@@ -2042,22 +2040,22 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandAlterGeometry.cpp" line="139"/>
       <source>Toggle draft from/to draft</source>
-      <translation type="unfinished">Toggle draft from/to draft</translation>
+      <translation>Перемкнути чернетку з/до чернетки</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="329"/>
       <source>Add sketch line</source>
-      <translation type="unfinished">Add sketch line</translation>
+      <translation>Додати лінію ескізу</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="554"/>
       <source>Add sketch box</source>
-      <translation type="unfinished">Add sketch box</translation>
+      <translation>Додати ескіз коробки</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="591"/>
       <source>Add centered sketch box</source>
-      <translation type="unfinished">Add centered sketch box</translation>
+      <translation>Додати центровану коробку для ескізу</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="921"/>
@@ -2067,54 +2065,54 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="1523"/>
       <source>Add line to sketch wire</source>
-      <translation type="unfinished">Add line to sketch wire</translation>
+      <translation>Додати лінію до ескізу ламаної лінії</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="1543"/>
       <source>Add arc to sketch wire</source>
-      <translation type="unfinished">Add arc to sketch wire</translation>
+      <translation>Додати дугу до ескізу ламаної лінії</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="2000"/>
       <location filename="../../CommandCreateGeo.cpp" line="2297"/>
       <source>Add sketch arc</source>
-      <translation type="unfinished">Add sketch arc</translation>
+      <translation>Додати ескіз дуги</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="2515"/>
       <location filename="../../CommandCreateGeo.cpp" line="5179"/>
       <source>Add sketch circle</source>
-      <translation type="unfinished">Add sketch circle</translation>
+      <translation>Додати ескіз кола</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="3303"/>
       <source>Add sketch ellipse</source>
-      <translation type="unfinished">Add sketch ellipse</translation>
+      <translation>Додати ескіз еліпсу</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="3717"/>
       <source>Add sketch arc of ellipse</source>
-      <translation type="unfinished">Add sketch arc of ellipse</translation>
+      <translation>Додати ескіз дуги еліпса</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4085"/>
       <source>Add sketch arc of hyperbola</source>
-      <translation type="unfinished">Add sketch arc of hyperbola</translation>
+      <translation>Додати ескіз дуги гіперболи</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4416"/>
       <source>Add sketch arc of Parabola</source>
-      <translation type="unfinished">Add sketch arc of Parabola</translation>
+      <translation>Додати ескіз дуги параболи</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4647"/>
       <source>Add Pole circle</source>
-      <translation type="unfinished">Add Pole circle</translation>
+      <translation>Додайте коло полюсу</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="5346"/>
       <source>Add sketch point</source>
-      <translation type="unfinished">Add sketch point</translation>
+      <translation>Додати точку ескізу</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="5618"/>
@@ -2130,12 +2128,12 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6208"/>
       <source>Extend edge</source>
-      <translation type="unfinished">Extend edge</translation>
+      <translation>Продовжити ребро</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6367"/>
       <source>Split edge</source>
-      <translation type="unfinished">Split edge</translation>
+      <translation>Розділити ребро</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6689"/>
@@ -2145,12 +2143,12 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6704"/>
       <source>Add external geometry</source>
-      <translation type="unfinished">Add external geometry</translation>
+      <translation>Додати зовнішню геометрію</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7169"/>
       <source>Add carbon copy</source>
-      <translation type="unfinished">Add carbon copy</translation>
+      <translation>Додати копію</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7370"/>
@@ -2165,37 +2163,37 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="413"/>
       <source>Convert to NURBS</source>
-      <translation type="unfinished">Convert to NURBS</translation>
+      <translation>Перетворити на NURBS</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="479"/>
       <source>Increase spline degree</source>
-      <translation type="unfinished">Increase spline degree</translation>
+      <translation>Збільшити ступінь сплайна</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="554"/>
       <source>Decrease spline degree</source>
-      <translation type="unfinished">Decrease spline degree</translation>
+      <translation>Зменшити ступінь сплайна</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="647"/>
       <source>Increase knot multiplicity</source>
-      <translation type="unfinished">Increase knot multiplicity</translation>
+      <translation>Збільшення кратності вузлів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="801"/>
       <source>Decrease knot multiplicity</source>
-      <translation type="unfinished">Decrease knot multiplicity</translation>
+      <translation>Зменшення кратності вузлів</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1011"/>
       <source>Exposing Internal Geometry</source>
-      <translation type="unfinished">Exposing Internal Geometry</translation>
+      <translation>Розкриття внутрішньої геометрії</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1223"/>
       <source>Create symmetric geometry</source>
-      <translation type="unfinished">Create symmetric geometry</translation>
+      <translation>Створити симетричну геометрію</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1385"/>
@@ -2210,12 +2208,12 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2155"/>
       <source>Delete all geometry</source>
-      <translation type="unfinished">Delete all geometry</translation>
+      <translation>Видалити всю геометрію</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2217"/>
       <source>Delete All Constraints</source>
-      <translation type="unfinished">Delete All Constraints</translation>
+      <translation>Видалити всі обмеження</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2454"/>
@@ -2225,12 +2223,12 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2585"/>
       <source>Remove Axes Alignment</source>
-      <translation type="unfinished">Remove Axes Alignment</translation>
+      <translation>Видалити вирівнювання осей</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherVirtualSpace.cpp" line="155"/>
       <source>Toggle constraints to the other virtual space</source>
-      <translation type="unfinished">Toggle constraints to the other virtual space</translation>
+      <translation>Перемкнути обмеження в інший віртуальний простір</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherVirtualSpace.cpp" line="163"/>
@@ -2238,42 +2236,42 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../TaskSketcherConstraints.cpp" line="1231"/>
       <location filename="../../TaskSketcherConstraints.cpp" line="1274"/>
       <source>Update constraint&apos;s virtual space</source>
-      <translation type="unfinished">Update constraint&apos;s virtual space</translation>
+      <translation>Оновити віртуальний простір обмеження</translation>
     </message>
     <message>
       <location filename="../../DrawSketchHandler.cpp" line="575"/>
       <source>Add auto constraints</source>
-      <translation type="unfinished">Add auto constraints</translation>
+      <translation>Додати автообмеження</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="624"/>
       <source>Swap constraint names</source>
-      <translation type="unfinished">Swap constraint names</translation>
+      <translation>Поміняти назви обмеження</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="1216"/>
       <source>Rename sketch constraint</source>
-      <translation type="unfinished">Rename sketch constraint</translation>
+      <translation>Перейменувати обмеження ескізу</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="999"/>
       <source>Drag Point</source>
-      <translation type="unfinished">Drag Point</translation>
+      <translation>Перетягнути точку</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="1030"/>
       <source>Drag Curve</source>
-      <translation type="unfinished">Drag Curve</translation>
+      <translation>Перетягнути криву</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="1081"/>
       <source>Drag Constraint</source>
-      <translation type="unfinished">Drag Constraint</translation>
+      <translation>Перетягнути обмеження</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="1255"/>
       <source>Modify sketch constraints</source>
-      <translation type="unfinished">Modify sketch constraints</translation>
+      <translation>Змінити обмеження ескізу</translation>
     </message>
   </context>
   <context>
@@ -2281,7 +2279,7 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../Workbench.cpp" line="37"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Редактор Ескізів</translation>
     </message>
   </context>
   <context>
@@ -2289,82 +2287,82 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../../App/SketchAnalysis.cpp" line="373"/>
       <source>Autoconstrain error: Unsolvable sketch while applying coincident constraints.</source>
-      <translation type="unfinished">Autoconstrain error: Unsolvable sketch while applying coincident constraints.</translation>
+      <translation>Помилка автообмеження: Ескіз не вирішується при додаванні обмеження збігу.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchAnalysis.cpp" line="454"/>
       <source>Autoconstrain error: Unsolvable sketch while applying vertical/horizontal constraints.</source>
-      <translation type="unfinished">Autoconstrain error: Unsolvable sketch while applying vertical/horizontal constraints.</translation>
+      <translation>Помилка автообмеження: Ескіз не вирішується при додаванні вертикального/горизонтального обмеження.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchAnalysis.cpp" line="651"/>
       <source>Autoconstrain error: Unsolvable sketch while applying equality constraints.</source>
-      <translation type="unfinished">Autoconstrain error: Unsolvable sketch while applying equality constraints.</translation>
+      <translation>Помилка автообмеження: Ескіз не вирішується при додаванні обмеження рівності.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchAnalysis.cpp" line="705"/>
       <source>Autoconstrain error: Unsolvable sketch without constraints.</source>
-      <translation type="unfinished">Autoconstrain error: Unsolvable sketch without constraints.</translation>
+      <translation>Помилка автообмеження: Ескіз не вирішується без обмежень.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchAnalysis.cpp" line="742"/>
       <source>Autoconstrain error: Unsolvable sketch after applying horizontal and vertical constraints.</source>
-      <translation type="unfinished">Autoconstrain error: Unsolvable sketch after applying horizontal and vertical constraints.</translation>
+      <translation>Помилка автообмеження: Ескіз не вирішується після додавання вертикального та горизонтального обмежень.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchAnalysis.cpp" line="764"/>
       <source>Autoconstrain error: Unsolvable sketch after applying point-on-point constraints.</source>
-      <translation type="unfinished">Autoconstrain error: Unsolvable sketch after applying point-on-point constraints.</translation>
+      <translation>Помилка автообмеження: Ескіз не вирішується при додаванні обмеження збігу точок.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchAnalysis.cpp" line="792"/>
       <source>Autoconstrain error: Unsolvable sketch after applying equality constraints.</source>
-      <translation type="unfinished">Autoconstrain error: Unsolvable sketch after applying equality constraints.</translation>
+      <translation>Помилка автообмеження: Ескіз не вирішується після додавання обмеження рівності.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="2421"/>
       <source>Unable to guess intersection of curves. Try adding a coincident constraint between the vertices of the curves you are intending to fillet.</source>
-      <translation type="unfinished">Unable to guess intersection of curves. Try adding a coincident constraint between the vertices of the curves you are intending to fillet.</translation>
+      <translation>Не вдалося розрахувати перетин кривих. Спробуйте додати обмеження збігу між вершинами кривих, які ви хочете заокруглити.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6181"/>
       <source>This version of OCE/OCC does not support knot operation. You need 6.9.0 or higher.</source>
-      <translation type="unfinished">This version of OCE/OCC does not support knot operation. You need 6.9.0 or higher.</translation>
+      <translation>Ця версія OCE/OCC не підтримує операції з вузлами. Потрібна версія 6.9.0 або старша.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6185"/>
       <source>BSpline Geometry Index (GeoID) is out of bounds.</source>
-      <translation type="unfinished">BSpline Geometry Index (GeoID) is out of bounds.</translation>
+      <translation>BSpline ідентифікатор геометрії (GeoID) знаходиться поза межами.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6188"/>
       <source>You are requesting no change in knot multiplicity.</source>
-      <translation type="unfinished">You are requesting no change in knot multiplicity.</translation>
+      <translation>Ви просите не змінювати кратність вузлів.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6193"/>
       <source>The Geometry Index (GeoId) provided is not a B-spline curve.</source>
-      <translation type="unfinished">The Geometry Index (GeoId) provided is not a B-spline curve.</translation>
+      <translation>Ідентифікатор геометрії (GeoId) не є кривою B-сплайн.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6200"/>
       <source>The knot index is out of bounds. Note that in accordance with OCC notation, the first knot has index 1 and not zero.</source>
-      <translation type="unfinished">The knot index is out of bounds. Note that in accordance with OCC notation, the first knot has index 1 and not zero.</translation>
+      <translation>Індекс вузла виходить за межі. Зверніть увагу, що відповідно до нотації OCC перший вузол має індекс 1, а не нуль.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6207"/>
       <source>The multiplicity cannot be increased beyond the degree of the B-spline.</source>
-      <translation type="unfinished">The multiplicity cannot be increased beyond the degree of the B-spline.</translation>
+      <translation>Кратність не може бути збільшена понад ступінь B-сплайну.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6210"/>
       <source>The multiplicity cannot be decreased beyond zero.</source>
-      <translation type="unfinished">The multiplicity cannot be decreased beyond zero.</translation>
+      <translation>Кратність не може бути зменшена нижче нуля.</translation>
     </message>
     <message>
       <location filename="../../../App/SketchObject.cpp" line="6222"/>
       <source>OCC is unable to decrease the multiplicity within the maximum tolerance.</source>
-      <translation type="unfinished">OCC is unable to decrease the multiplicity within the maximum tolerance.</translation>
+      <translation>OCC нездатний зменшити кратність у межах максимального допуску.</translation>
     </message>
   </context>
   <context>
@@ -2408,23 +2406,23 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../Command.cpp" line="124"/>
       <source>Selected shapes are of wrong form (e.g., a curved edge where a straight one is needed)</source>
-      <translation type="unfinished">Selected shapes are of wrong form (e.g., a curved edge where a straight one is needed)</translation>
+      <translation>Вибрані фігури неправильної форми (наприклад, вигнуте ребро коли потрібне пряме)</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="165"/>
       <source>Sketch mapping</source>
-      <translation type="unfinished">Sketch mapping</translation>
+      <translation>Відображення ескізу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="166"/>
       <source>Can&apos;t map the sketch to selected object. %1.</source>
-      <translation type="unfinished">Can&apos;t map the sketch to selected object. %1.</translation>
+      <translation>Неможливо відобразити ескіз для вибраного об'єкта. %1.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="173"/>
       <location filename="../../Command.cpp" line="591"/>
       <source>Don&apos;t attach</source>
-      <translation type="unfinished">Don&apos;t attach</translation>
+      <translation>Не приєднувати</translation>
     </message>
     <message>
       <location filename="../../CommandAlterGeometry.cpp" line="125"/>
@@ -2607,7 +2605,7 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../EditDatumDialog.cpp" line="81"/>
       <source>Not allowed to edit the datum because the sketch contains conflicting constraints</source>
-      <translation type="unfinished">Not allowed to edit the datum because the sketch contains conflicting constraints</translation>
+      <translation>Не дозволяється редагувати значення через конфлікт обмежень</translation>
     </message>
     <message>
       <location filename="../../EditDatumDialog.cpp" line="215"/>
@@ -2617,22 +2615,22 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="156"/>
       <source>Cannot add a constraint between two external geometries.</source>
-      <translation type="unfinished">Cannot add a constraint between two external geometries.</translation>
+      <translation>Неможливо додати обмеження між двома зовнішніми геометріями.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="162"/>
       <source>Cannot add a constraint between two fixed geometries. Fixed geometries involve external geometry, blocked geometry or special points as B-spline knot points.</source>
-      <translation type="unfinished">Cannot add a constraint between two fixed geometries. Fixed geometries involve external geometry, blocked geometry or special points as B-spline knot points.</translation>
+      <translation>Неможливо додати обмеження між двома фіксованими геометріями. Фіксована геометрія включає зовнішню геометрію, заблоковану геометрію або спеціальні точки в якості точок вузла B-сплайну.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="702"/>
       <source>Sketcher Constraint Substitution</source>
-      <translation type="unfinished">Sketcher Constraint Substitution</translation>
+      <translation>Заміна обмеження ескізу</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="708"/>
       <source>Keep notifying me of constraint substitutions</source>
-      <translation type="unfinished">Keep notifying me of constraint substitutions</translation>
+      <translation>Сповіщайте мене про заміни обмежень</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="749"/>
@@ -2698,7 +2696,7 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="1450"/>
       <location filename="../../CommandConstraints.cpp" line="1538"/>
       <source>The selected edge already has a horizontal constraint!</source>
-      <translation type="unfinished">The selected edge already has a horizontal constraint!</translation>
+      <translation>Виділене ребро вже має обмеження по горизонталі!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1212"/>
@@ -2706,7 +2704,7 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="1445"/>
       <location filename="../../CommandConstraints.cpp" line="1543"/>
       <source>The selected edge already has a vertical constraint!</source>
-      <translation type="unfinished">The selected edge already has a vertical constraint!</translation>
+      <translation>Виділене ребро вже має обмеження по вертикалі!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1218"/>
@@ -2716,33 +2714,33 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="1915"/>
       <location filename="../../CommandConstraints.cpp" line="1963"/>
       <source>The selected edge already has a Block constraint!</source>
-      <translation type="unfinished">The selected edge already has a Block constraint!</translation>
+      <translation>Виділене ребро вже заблоковане!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1237"/>
       <source>The selected item(s) can&apos;t accept a horizontal constraint!</source>
-      <translation type="unfinished">The selected item(s) can&apos;t accept a horizontal constraint!</translation>
+      <translation>Виділений елемент(и) не може прийняти горизонтальне обмеження!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1265"/>
       <source>There are more than one fixed point selected. Select a maximum of one fixed point!</source>
-      <translation type="unfinished">There are more than one fixed point selected. Select a maximum of one fixed point!</translation>
+      <translation>Вибрано кілька фіксованих точок. Виберіть максимум одну фіксовану точку!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1474"/>
       <source>The selected item(s) can&apos;t accept a vertical constraint!</source>
-      <translation type="unfinished">The selected item(s) can&apos;t accept a vertical constraint!</translation>
+      <translation>Виділений елемент(и) не може прийняти вертикальне обмеження!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1500"/>
       <source>There are more than one fixed points selected. Select a maximum of one fixed point!</source>
-      <translation type="unfinished">There are more than one fixed points selected. Select a maximum of one fixed point!</translation>
+      <translation>Виділено декілька фіксованих точок. Оберіть максимум одну фіксовану точку!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1647"/>
       <location filename="../../CommandConstraints.cpp" line="1871"/>
       <source>Select vertices from the sketch.</source>
-      <translation type="unfinished">Select vertices from the sketch.</translation>
+      <translation>Виділіть вершини на ескізі.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1670"/>
@@ -2752,27 +2750,27 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1674"/>
       <source>Select only vertices from the sketch. The last selected vertex may be the origin.</source>
-      <translation type="unfinished">Select only vertices from the sketch. The last selected vertex may be the origin.</translation>
+      <translation>Виділіть тільки вершини на эскізі. Остання виділена вершина може бути початковою.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1882"/>
       <source>Wrong solver status</source>
-      <translation type="unfinished">Wrong solver status</translation>
+      <translation>Неправильний статус вирішувача</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1883"/>
       <source>A Block constraint cannot be added if the sketch is unsolved or there are redundant and conflicting constraints.</source>
-      <translation type="unfinished">A Block constraint cannot be added if the sketch is unsolved or there are redundant and conflicting constraints.</translation>
+      <translation>Блокуюче обмеження не може бути додано, якщо ескіз не можна вирішати або є надлишкові/конфліктуючі обмеження.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1901"/>
       <source>Select one edge from the sketch.</source>
-      <translation type="unfinished">Select one edge from the sketch.</translation>
+      <translation>Виділіть одне ребро на ескізі.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1905"/>
       <source>Select only edges from the sketch.</source>
-      <translation type="unfinished">Select only edges from the sketch.</translation>
+      <translation>Виділіть лише ребра на ескізі.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="1933"/>
@@ -2789,12 +2787,12 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2227"/>
       <source>Endpoint to endpoint tangency was applied instead.</source>
-      <translation type="unfinished">Endpoint to endpoint tangency was applied instead.</translation>
+      <translation>Замість кінцевої точки застосовано дотичну.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2256"/>
       <source>Select two or more points from the sketch.</source>
-      <translation type="unfinished">Select two or more points from the sketch.</translation>
+      <translation>Виділіть на ескізі принаймні дві точки.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2267"/>
@@ -2821,12 +2819,12 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2657"/>
       <source>This constraint does not make sense for non-linear curves</source>
-      <translation type="unfinished">This constraint does not make sense for non-linear curves</translation>
+      <translation>Це обмеження не має сенсу для нелінійних кривих</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2774"/>
       <source>Endpoint to edge tangency was applied instead.</source>
-      <translation type="unfinished">Endpoint to edge tangency was applied instead.</translation>
+      <translation>Замість кінцевої точки застосовано дотичку до ребра.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2802"/>
@@ -2837,13 +2835,13 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="5590"/>
       <location filename="../../CommandConstraints.cpp" line="6051"/>
       <source>Select the right things from the sketch.</source>
-      <translation type="unfinished">Select the right things from the sketch.</translation>
+      <translation>Виділіть потрібні об'єкти на ескізі.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2842"/>
       <location filename="../../CommandConstraints.cpp" line="2929"/>
       <source>Point on B-spline edge currently unsupported.</source>
-      <translation type="unfinished">Point on B-spline edge currently unsupported.</translation>
+      <translation>Точка на ребрі B-сплайна наразі не підтримується.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2848"/>
@@ -2865,12 +2863,12 @@ invalid constraints, degenerated geometry, etc.</translation>
       <location filename="../../CommandConstraints.cpp" line="6448"/>
       <location filename="../../CommandConstraints.cpp" line="7138"/>
       <source>Select an edge that is not a B-spline weight</source>
-      <translation type="unfinished">Select an edge that is not a B-spline weight</translation>
+      <translation>Виділіть ребро, яке не є вагою B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2870"/>
       <source>None of the selected points were constrained onto the respective curves, because they are parts of the same element, because they are both external geometry, or because the edge is not eligible.</source>
-      <translation type="unfinished">None of the selected points were constrained onto the respective curves, because they are parts of the same element, because they are both external geometry, or because the edge is not eligible.</translation>
+      <translation>Жодна з виділених точок не була обмежена відповідними кривими тому, що вони є частинами того ж елементу; вони є зовнішньою геометрією або тому, що ребро не підходить.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2881"/>
@@ -2880,7 +2878,7 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="2959"/>
       <source>None of the selected points were constrained onto the respective curves, either because they are parts of the same element, or because they are both external geometry.</source>
-      <translation type="unfinished">None of the selected points were constrained onto the respective curves, either because they are parts of the same element, or because they are both external geometry.</translation>
+      <translation>Жодна з виділених точок не була обмежена відповідними кривими тому, що вони є частинами того ж елементу або вони є зовнішньою геометрією.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3031"/>
@@ -2898,13 +2896,13 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3110"/>
       <source>Cannot add a fixed x-coordinate constraint on the origin point!</source>
-      <translation type="unfinished">Cannot add a fixed x-coordinate constraint on the origin point!</translation>
+      <translation>Не можна обмежити X-координату точки початку координат!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3168"/>
       <location filename="../../CommandConstraints.cpp" line="3417"/>
       <source>This constraint only makes sense on a line segment or a pair of points</source>
-      <translation type="unfinished">This constraint only makes sense on a line segment or a pair of points</translation>
+      <translation>Це обмеження має сенс тільки для сегмента лінії або пари точок</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3308"/>
@@ -2914,7 +2912,7 @@ invalid constraints, degenerated geometry, etc.</translation>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3358"/>
       <source>Cannot add a fixed y-coordinate constraint on the origin point!</source>
-      <translation type="unfinished">Cannot add a fixed y-coordinate constraint on the origin point!</translation>
+      <translation>Не можна обмежити Y-координату точки початку координат!</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3518"/>
@@ -2978,7 +2976,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandConstraints.cpp" line="3867"/>
       <location filename="../../CommandConstraints.cpp" line="4048"/>
       <source>Perpendicular to B-spline edge currently unsupported.</source>
-      <translation type="unfinished">Perpendicular to B-spline edge currently unsupported.</translation>
+      <translation>Перпендикуляр до ребра B-сплайну не підтримується.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="3858"/>
@@ -2989,12 +2987,12 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
     <message>
       <location filename="../../CommandConstraints.cpp" line="4321"/>
       <source>Endpoint to endpoint tangency was applied. The coincident constraint was deleted.</source>
-      <translation type="unfinished">Endpoint to endpoint tangency was applied. The coincident constraint was deleted.</translation>
+      <translation>Застосовано обмеження дотичності між кінцевими точками. Обмеження збігу видалено.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4342"/>
       <source>Endpoint to edge tangency was applied. The point on object constraint was deleted.</source>
-      <translation type="unfinished">Endpoint to edge tangency was applied. The point on object constraint was deleted.</translation>
+      <translation>Застосовано обмеження дотичності кінцевої точки до ребра. Обмеження точки на об’єкті було видалено.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4356"/>
@@ -3002,9 +3000,9 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
 
 Accepted combinations: two curves; an endpoint and a curve; two endpoints; two curves and a point.</source>
       <comment>tangent constraint</comment>
-      <translation type="unfinished">There are a number of ways this constraint can be applied.
+      <translation>Існує кілька способів застосування цього обмеження.
 
-Accepted combinations: two curves; an endpoint and a curve; two endpoints; two curves and a point.</translation>
+Допустимі комбінації: дві криві; кінцева точка та крива; дві кінцеві точки; дві криві та точка.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="4375"/>
@@ -3030,7 +3028,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandConstraints.cpp" line="4533"/>
       <location filename="../../CommandConstraints.cpp" line="4731"/>
       <source>Tangency to B-spline edge currently unsupported.</source>
-      <translation type="unfinished">Tangency to B-spline edge currently unsupported.</translation>
+      <translation>Дотичність до ребра B-сплайну не підтримується.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="5023"/>
@@ -3046,14 +3044,14 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandConstraints.cpp" line="5090"/>
       <location filename="../../CommandConstraints.cpp" line="5662"/>
       <source>Select either only one or more B-Spline poles or only one or more arcs or circles from the sketch, but not mixed.</source>
-      <translation type="unfinished">Select either only one or more B-Spline poles or only one or more arcs or circles from the sketch, but not mixed.</translation>
+      <translation>Виділіть на ескізі лише один чи декілька полюсів B-сплайну або лише одну чи декілька дуг чи кіл, але не змішуйте сплайни та дуги.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="5210"/>
       <location filename="../../CommandConstraints.cpp" line="5489"/>
       <location filename="../../CommandConstraints.cpp" line="5802"/>
       <source>Constraint only applies to arcs or circles.</source>
-      <translation type="unfinished">Constraint only applies to arcs or circles.</translation>
+      <translation>Обмеження можна застосовувати лише до дуг або кіл.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="6063"/>
@@ -3097,7 +3095,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
     <message>
       <location filename="../../CommandConstraints.cpp" line="6618"/>
       <source>Equality for B-spline edge currently unsupported.</source>
-      <translation type="unfinished">Equality for B-spline edge currently unsupported.</translation>
+      <translation>Обмеження рівності ребра B-сплайну не підтримується.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="6648"/>
@@ -3119,7 +3117,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandConstraints.cpp" line="6835"/>
       <location filename="../../CommandConstraints.cpp" line="6989"/>
       <source>Cannot add a symmetry constraint between a line and its end points.</source>
-      <translation type="unfinished">Cannot add a symmetry constraint between a line and its end points.</translation>
+      <translation>Неможливо додати обмеження симетрії між лінією та її кінцевими точками.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="6887"/>
@@ -3131,7 +3129,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandConstraints.cpp" line="7067"/>
       <source>Select two endpoints of lines to act as rays, and an edge representing a boundary. The first selected point corresponds to index n1, second to n2, and datum value sets the ratio n2/n1.</source>
       <comment>Constraint_SnellsLaw</comment>
-      <translation type="unfinished">Select two endpoints of lines to act as rays, and an edge representing a boundary. The first selected point corresponds to index n1, second to n2, and datum value sets the ratio n2/n1.</translation>
+      <translation>Виділіть два кінці ліній, які будуть виконувати роль променів, і ребро, що представляє межу розподілу середовищ. Перша обрана точка відповідає індексу n1, друга n2, а опорне значення визначається співвідношенням n2 / n1.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7083"/>
@@ -3146,17 +3144,17 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
     <message>
       <location filename="../../CommandConstraints.cpp" line="7115"/>
       <source>Cannot create constraint with external geometry only.</source>
-      <translation type="unfinished">Cannot create constraint with external geometry only.</translation>
+      <translation>Неможливо створити обмеження з використанням тільки зовнішньої геометрії.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7122"/>
       <source>Incompatible geometry is selected.</source>
-      <translation type="unfinished">Incompatible geometry is selected.</translation>
+      <translation>Виділено несумісну геометрію.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7132"/>
       <source>SnellsLaw on B-spline edge is currently unsupported.</source>
-      <translation type="unfinished">SnellsLaw on B-spline edge is currently unsupported.</translation>
+      <translation>Обмеження за законом заломлення на ребрі B-сплайна наразі не підтримується.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7238"/>
@@ -3172,7 +3170,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
     <message>
       <location filename="../../CommandConstraints.cpp" line="7317"/>
       <source>You cannot internally constrain an ellipse on another ellipse. Select only one ellipse.</source>
-      <translation type="unfinished">You cannot internally constrain an ellipse on another ellipse. Select only one ellipse.</translation>
+      <translation>Ви не можете внутрішньо обмежити еліпс іншим еліпсом. Виділіть лише один еліпс.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7325"/>
@@ -3196,7 +3194,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandConstraints.cpp" line="7370"/>
       <location filename="../../CommandConstraints.cpp" line="7548"/>
       <source>Currently all internal geometrical elements of the ellipse are already exposed.</source>
-      <translation type="unfinished">Currently all internal geometrical elements of the ellipse are already exposed.</translation>
+      <translation>Зараз всі внутрішні геометричні елементи еліпса вже відкриті.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7460"/>
@@ -3216,12 +3214,12 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
     <message>
       <location filename="../../CommandConstraints.cpp" line="7487"/>
       <source>You cannot internally constrain an arc of ellipse on another arc of ellipse. Select only one arc of ellipse.</source>
-      <translation type="unfinished">You cannot internally constrain an arc of ellipse on another arc of ellipse. Select only one arc of ellipse.</translation>
+      <translation>Ви не можете внутрішньо обмежити дугу еліпса іншою дугою еліпса. Виділіть лише одну дугу еліпса.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7495"/>
       <source>You cannot internally constrain an ellipse on an arc of ellipse. Select only one ellipse or arc of ellipse.</source>
-      <translation type="unfinished">You cannot internally constrain an ellipse on an arc of ellipse. Select only one ellipse or arc of ellipse.</translation>
+      <translation>Не можна обмежити еліпс дугою еліпса. Виділіть лише один еліпс або одну дугу еліпса.</translation>
     </message>
     <message>
       <location filename="../../CommandConstraints.cpp" line="7650"/>
@@ -3240,7 +3238,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandConstraints.cpp" line="7832"/>
       <location filename="../../CommandConstraints.cpp" line="7843"/>
       <source>Select constraints from the sketch.</source>
-      <translation type="unfinished">Select constraints from the sketch.</translation>
+      <translation>Виділіть обмеження на ескізі.</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherVirtualSpace.cpp" line="117"/>
@@ -3253,47 +3251,47 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandCreateGeo.cpp" line="5707"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="682"/>
       <source>CAD Kernel Error</source>
-      <translation type="unfinished">CAD Kernel Error</translation>
+      <translation>Помилка ядра CAD</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="432"/>
       <source>None of the selected elements is an edge.</source>
-      <translation type="unfinished">None of the selected elements is an edge.</translation>
+      <translation>Жоден з виділених елементів не є ребром.</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="503"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="581"/>
       <source>At least one of the selected objects was not a B-Spline and was ignored.</source>
-      <translation type="unfinished">At least one of the selected objects was not a B-Spline and was ignored.</translation>
+      <translation>Принаймні один з вибраних об&apos;єктів не є B-сплайном і був проігнорований.</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="618"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="772"/>
       <source>Wrong OCE/OCC version</source>
-      <translation type="unfinished">Wrong OCE/OCC version</translation>
+      <translation>Невірна версія OCE/OCC</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="619"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="773"/>
       <source>This version of OCE/OCC does not support knot operation. You need 6.9.0 or higher</source>
-      <translation type="unfinished">This version of OCE/OCC does not support knot operation. You need 6.9.0 or higher</translation>
+      <translation>Ця версія OCE/OCC не підтримує операції з вузлами. Потрібна версія 6.9.0 або старша</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="641"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="795"/>
       <source>The selection comprises more than one item. Please select just one knot.</source>
-      <translation type="unfinished">The selection comprises more than one item. Please select just one knot.</translation>
+      <translation>Виділення містить декілька елементів. Будь ласка, виділіть лише один вузол.</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="691"/>
       <source>Input Error</source>
-      <translation type="unfinished">Input Error</translation>
+      <translation>Помилка введення</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherBSpline.cpp" line="704"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="844"/>
       <source>None of the selected elements is a knot of a B-spline</source>
-      <translation type="unfinished">None of the selected elements is a knot of a B-spline</translation>
+      <translation>Жоден із виділених елементів не є вузлом B-сплайну</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="137"/>
@@ -3340,7 +3338,7 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1187"/>
       <source>A symmetric construction requires at least two geometric elements, the last geometric element being the reference for the symmetry construction.</source>
-      <translation type="unfinished">A symmetric construction requires at least two geometric elements, the last geometric element being the reference for the symmetry construction.</translation>
+      <translation>Симетрична конструкція вимагає принаймні двох геометричних елементів, останній геометричний елемент є еталоном для побудови симетрії.</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="1196"/>
@@ -3356,22 +3354,22 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2143"/>
       <source>Delete All Geometry</source>
-      <translation type="unfinished">Delete All Geometry</translation>
+      <translation>Видалити всю геометрію</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2144"/>
       <source>Are you really sure you want to delete all geometry and constraints?</source>
-      <translation type="unfinished">Are you really sure you want to delete all geometry and constraints?</translation>
+      <translation>Ви дійсно бажаєте видалити всю геометрію та обмеження?</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2205"/>
       <source>Delete All Constraints</source>
-      <translation type="unfinished">Delete All Constraints</translation>
+      <translation>Видалити всі обмеження</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2206"/>
       <source>Are you really sure you want to delete all the constraints?</source>
-      <translation type="unfinished">Are you really sure you want to delete all the constraints?</translation>
+      <translation>Ви дійсно бажаєте видалити всі обмеження?</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2311"/>
@@ -3383,62 +3381,62 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2573"/>
       <source>Removal of axes alignment requires at least one selected non-external geometric element</source>
-      <translation type="unfinished">Removal of axes alignment requires at least one selected non-external geometric element</translation>
+      <translation>Для видалення вирівнювання осей потрібно вибрати принаймні один не зовнішній геометричний елемент</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="105"/>
       <source>Point</source>
-      <translation type="unfinished">Point</translation>
+      <translation>Точка</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="106"/>
       <source>Line</source>
-      <translation type="unfinished">Line</translation>
+      <translation>Лінія</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="107"/>
       <source>Arc</source>
-      <translation type="unfinished">Arc</translation>
+      <translation>Дуга</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="108"/>
       <source>Circle</source>
-      <translation type="unfinished">Circle</translation>
+      <translation>Коло</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="109"/>
       <source>Ellipse</source>
-      <translation type="unfinished">Ellipse</translation>
+      <translation>Еліпс</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="110"/>
       <source>Elliptical Arc</source>
-      <translation type="unfinished">Elliptical Arc</translation>
+      <translation>Еліптична дуга</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="111"/>
       <source>Hyperbolic Arc</source>
-      <translation type="unfinished">Hyperbolic Arc</translation>
+      <translation>Гіперболічна дуга</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="112"/>
       <source>Parabolic Arc</source>
-      <translation type="unfinished">Parabolic Arc</translation>
+      <translation>Параболічна дуга</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="113"/>
       <source>BSpline</source>
-      <translation type="unfinished">BSpline</translation>
+      <translation>B-сплайн</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="117"/>
       <source>Other</source>
-      <translation type="unfinished">Other</translation>
+      <translation>Інші</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="123"/>
       <source>Construction</source>
-      <translation type="unfinished">Construction</translation>
+      <translation>Допоміжна</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="133"/>
@@ -3453,7 +3451,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="6896"/>
       <source>Transform</source>
-      <translation type="unfinished">Transform</translation>
+      <translation>Перетворення</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="6897"/>
@@ -3476,42 +3474,42 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7066"/>
       <source>Carbon copy would cause a circular dependency.</source>
-      <translation type="unfinished">Carbon copy would cause a circular dependency.</translation>
+      <translation>Копіювання призведе до циклічної залежності.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7069"/>
       <source>This object is in another document.</source>
-      <translation type="unfinished">This object is in another document.</translation>
+      <translation>Цей об&apos;єкт знаходиться в іншому документі.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7072"/>
       <source>This object belongs to another body. Hold Ctrl to allow cross-references.</source>
-      <translation type="unfinished">This object belongs to another body. Hold Ctrl to allow cross-references.</translation>
+      <translation>Цей об&apos;єкт належить іншому тілу. Натисніть Ctrl для дозволу перехресних посилань.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7075"/>
       <source>This object belongs to another body and it contains external geometry. Cross-reference not allowed.</source>
-      <translation type="unfinished">This object belongs to another body and it contains external geometry. Cross-reference not allowed.</translation>
+      <translation>Цей об&apos;єкт належить іншому тілу та містить зовнішню геометрію. Перехресне посилання не допускається.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7078"/>
       <source>This object belongs to another part.</source>
-      <translation type="unfinished">This object belongs to another part.</translation>
+      <translation>Цей об&apos;єкт належить іншій частині.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7081"/>
       <source>The selected sketch is not parallel to this sketch. Hold Ctrl+Alt to allow non-parallel sketches.</source>
-      <translation type="unfinished">The selected sketch is not parallel to this sketch. Hold Ctrl+Alt to allow non-parallel sketches.</translation>
+      <translation>Вибраний ескіз не паралельний до цього ескізу. Утримуйте Ctrl+Alt, щоб мати можливість створювати непаралельні ескізи.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7084"/>
       <source>The XY axes of the selected sketch do not have the same direction as this sketch. Hold Ctrl+Alt to disregard it.</source>
-      <translation type="unfinished">The XY axes of the selected sketch do not have the same direction as this sketch. Hold Ctrl+Alt to disregard it.</translation>
+      <translation>Вісі XY виділеного ескізу не збігаються з напрямком на цьому ескізі. Утримуйте Ctrl+Alt, щоб ігнорувати це.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7087"/>
       <source>The origin of the selected sketch is not aligned with the origin of this sketch. Hold Ctrl+Alt to disregard it.</source>
-      <translation type="unfinished">The origin of the selected sketch is not aligned with the origin of this sketch. Hold Ctrl+Alt to disregard it.</translation>
+      <translation>Початкова точка виділеного ескізу не вирівняна з початковою точкою цього ескізу. Утримуйте Ctrl+Alt, щоб ігнорувати це.</translation>
     </message>
   </context>
   <context>
@@ -3519,152 +3517,152 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="23"/>
       <source>Multiple filter selection</source>
-      <translation type="unfinished">Multiple filter selection</translation>
+      <translation>Вибір декількох фільтрів</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="29"/>
       <source>Check the filters to aggregate:</source>
-      <translation type="unfinished">Check the filters to aggregate:</translation>
+      <translation>Виділіть фільтри для поєднання:</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="52"/>
       <source>All</source>
-      <translation type="unfinished">All</translation>
+      <translation>Всі</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="57"/>
       <source>Geometric</source>
-      <translation type="unfinished">Geometric</translation>
+      <translation>Геометричні</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="62"/>
       <source>Datums</source>
-      <translation type="unfinished">Datums</translation>
+      <translation>Величини</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="67"/>
       <source>Named</source>
-      <translation type="unfinished">Named</translation>
+      <translation>З іменами</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="72"/>
       <source>Reference</source>
-      <translation type="unfinished">Reference</translation>
+      <translation>Посилання</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="77"/>
       <source>Coincident</source>
-      <translation type="unfinished">Coincident</translation>
+      <translation>Збіг</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="82"/>
       <source>Point on Object</source>
-      <translation type="unfinished">Point on Object</translation>
+      <translation>Точка на об&apos;єкті</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="87"/>
       <source>Vertical</source>
-      <translation type="unfinished">Vertical</translation>
+      <translation>Вертикальні</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="92"/>
       <source>Horizontal</source>
-      <translation type="unfinished">Horizontal</translation>
+      <translation>Горизонтальні</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="97"/>
       <source>Parallel</source>
-      <translation type="unfinished">Parallel</translation>
+      <translation>Паралельні</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="102"/>
       <source>Perpendicular</source>
-      <translation type="unfinished">Perpendicular</translation>
+      <translation>Перпендикулярні</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="107"/>
       <source>Tangent</source>
-      <translation type="unfinished">Tangent</translation>
+      <translation>Дотичні</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="112"/>
       <source>Equality</source>
-      <translation type="unfinished">Equality</translation>
+      <translation>Рівність</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="117"/>
       <source>Symmetric</source>
-      <translation type="unfinished">Symmetric</translation>
+      <translation>Симетричні</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="122"/>
       <source>Block</source>
-      <translation type="unfinished">Block</translation>
+      <translation>Обмеження переміщення</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="127"/>
       <source>Horizontal Distance</source>
-      <translation type="unfinished">Horizontal Distance</translation>
+      <translation>Відстані по горизонталі</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="132"/>
       <source>Vertical Distance</source>
-      <translation type="unfinished">Vertical Distance</translation>
+      <translation>Відстані по вертикалі</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="137"/>
       <source>Distance</source>
-      <translation type="unfinished">Distance</translation>
+      <translation>Відстані</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="142"/>
       <source>Radius</source>
-      <translation type="unfinished">Radius</translation>
+      <translation>Радіусу</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="147"/>
       <source>Weight</source>
-      <translation type="unfinished">Weight</translation>
+      <translation>Ваги</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="152"/>
       <source>Diameter</source>
-      <translation type="unfinished">Diameter</translation>
+      <translation>Діаметру</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="157"/>
       <source>Angle</source>
-      <translation type="unfinished">Angle</translation>
+      <translation>Кута</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="162"/>
       <source>Snell&apos;s Law</source>
-      <translation type="unfinished">Snell&apos;s Law</translation>
+      <translation>Закону заломлення</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="167"/>
       <source>Internal Alignment</source>
-      <translation type="unfinished">Internal Alignment</translation>
+      <translation>Внутрішнього вирівнювання</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="186"/>
       <source>Shows all the constraints in the list</source>
-      <translation type="unfinished">Shows all the constraints in the list</translation>
+      <translation>Показати всі обмеження у переліку</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="189"/>
       <source>Check All</source>
-      <translation type="unfinished">Check All</translation>
+      <translation>Виділити все</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="202"/>
       <source>Hides all the constraints in the list</source>
-      <translation type="unfinished">Hides all the constraints in the list</translation>
+      <translation>Приховати вся обмеження у переліку</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="205"/>
       <source>Uncheck All</source>
-      <translation type="unfinished">Uncheck All</translation>
+      <translation>Скасувати виділеня</translation>
     </message>
   </context>
   <context>
@@ -3672,47 +3670,47 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="23"/>
       <source>Constraint widget settings</source>
-      <translation type="unfinished">Constraint widget settings</translation>
+      <translation>Віджет налаштування обмежень</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="35"/>
       <source>List control</source>
-      <translation type="unfinished">List control</translation>
+      <translation>Керування Списком</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="47"/>
       <source>Internal alignments will be hidden</source>
-      <translation type="unfinished">Internal alignments will be hidden</translation>
+      <translation>Внутрішні вирівнювання будуть приховані</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="50"/>
       <source>Hide internal alignment</source>
-      <translation type="unfinished">Hide internal alignment</translation>
+      <translation>Приховати внутрішнє вирівнювання</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="72"/>
       <source>Extended information will be added to the list</source>
-      <translation type="unfinished">Extended information will be added to the list</translation>
+      <translation>Розширена інформація буде додана до списку</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="75"/>
       <source>Extended information</source>
-      <translation type="unfinished">Extended information</translation>
+      <translation>Розширена інформація</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="100"/>
       <source>3D view control</source>
-      <translation type="unfinished">3D view control</translation>
+      <translation>Керування 3D видом</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="112"/>
       <source>Constraint visualisation tracks filter selection so that filtered out constraints are hidden</source>
-      <translation type="unfinished">Constraint visualisation tracks filter selection so that filtered out constraints are hidden</translation>
+      <translation>Візуалізація обмежень відстежує вибір фільтра, щоб відфільтровані обмеження були приховані</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="115"/>
       <source>Show only filtered constraints</source>
-      <translation type="unfinished">Show only filtered constraints</translation>
+      <translation>Показати лише відфільтровані обмеження</translation>
     </message>
   </context>
   <context>
@@ -3725,27 +3723,27 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="496"/>
       <source>Toggle to/from reference</source>
-      <translation type="unfinished">Toggle to/from reference</translation>
+      <translation>Посилання на/з</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="499"/>
       <source>Deactivate</source>
-      <translation type="unfinished">Deactivate</translation>
+      <translation>Деактивувати</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="499"/>
       <source>Activate</source>
-      <translation type="unfinished">Activate</translation>
+      <translation>Активувати</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="503"/>
       <source>Show constraints</source>
-      <translation type="unfinished">Show constraints</translation>
+      <translation>Показати обмеження</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="505"/>
       <source>Hide constraints</source>
-      <translation type="unfinished">Hide constraints</translation>
+      <translation>Приховати обмеження</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="511"/>
@@ -3755,7 +3753,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="518"/>
       <source>Center sketch</source>
-      <translation type="unfinished">Center sketch</translation>
+      <translation>По центру ескізу</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="521"/>
@@ -3765,7 +3763,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="525"/>
       <source>Swap constraint names</source>
-      <translation type="unfinished">Swap constraint names</translation>
+      <translation>Поміняти назви обмеження</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="615"/>
@@ -3775,7 +3773,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="616"/>
       <source>Only the names of named constraints can be swapped.</source>
-      <translation type="unfinished">Only the names of named constraints can be swapped.</translation>
+      <translation>Тільки імена іменованих обмежень можуть бути змінені.</translation>
     </message>
   </context>
   <context>
@@ -3803,7 +3801,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../EditDatumDialog.cpp" line="108"/>
       <source>Insert diameter</source>
-      <translation type="unfinished">Insert diameter</translation>
+      <translation>Введіть діаметр</translation>
     </message>
     <message>
       <location filename="../../EditDatumDialog.cpp" line="110"/>
@@ -3876,22 +3874,22 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6445"/>
       <source>Linking this will cause circular dependency. </source>
-      <translation type="unfinished">Linking this will cause circular dependency. </translation>
+      <translation>Зв&apos;язування викличе циклічну залежність. </translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6456"/>
       <source>This object is in another document.</source>
-      <translation type="unfinished">This object is in another document.</translation>
+      <translation>Цей об&apos;єкт знаходиться в іншому документі.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6459"/>
       <source>This object belongs to another body, can&apos;t link.</source>
-      <translation type="unfinished">This object belongs to another body, can&apos;t link.</translation>
+      <translation>Цей об’єкт належить іншому тілу, не можна зв’язати.</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6462"/>
       <source>This object belongs to another part, can&apos;t link.</source>
-      <translation type="unfinished">This object belongs to another part, can&apos;t link.</translation>
+      <translation>Цей об’єкт належить іншій частині, не можна зв’язати.</translation>
     </message>
   </context>
   <context>
@@ -3904,7 +3902,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../InsertDatum.ui" line="31"/>
       <source>datum:</source>
-      <translation type="unfinished">datum:</translation>
+      <translation>величина:</translation>
     </message>
     <message>
       <location filename="../../InsertDatum.ui" line="54"/>
@@ -3914,12 +3912,12 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../InsertDatum.ui" line="67"/>
       <source>Constraint name (available for expressions)</source>
-      <translation type="unfinished">Constraint name (available for expressions)</translation>
+      <translation>Ім&apos;я обмеження (доступне для виразів)</translation>
     </message>
     <message>
       <location filename="../../InsertDatum.ui" line="82"/>
       <source>Reference (or constraint) dimension</source>
-      <translation type="unfinished">Reference (or constraint) dimension</translation>
+      <translation>Розміри посилання (або обмеження)</translation>
     </message>
     <message>
       <location filename="../../InsertDatum.ui" line="85"/>
@@ -3942,7 +3940,7 @@ You can select an existing export to modify.</translation>
       <location filename="../../SketchMirrorDialog.ui" line="14"/>
       <location filename="../../SketchMirrorDialog.ui" line="20"/>
       <source>Select Mirror Axis/Point</source>
-      <translation type="unfinished">Select Mirror Axis/Point</translation>
+      <translation>Виберіть вісь/точку дзеркального відображення</translation>
     </message>
     <message>
       <location filename="../../SketchMirrorDialog.ui" line="26"/>
@@ -3965,12 +3963,12 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../SketchOrientationDialog.ui" line="14"/>
       <source>Choose orientation</source>
-      <translation type="unfinished">Choose orientation</translation>
+      <translation>Оберіть орієнтацію</translation>
     </message>
     <message>
       <location filename="../../SketchOrientationDialog.ui" line="20"/>
       <source>Sketch orientation</source>
-      <translation type="unfinished">Sketch orientation</translation>
+      <translation>Орієнтація ескізу</translation>
     </message>
     <message>
       <location filename="../../SketchOrientationDialog.ui" line="26"/>
@@ -3980,17 +3978,17 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../SketchOrientationDialog.ui" line="36"/>
       <source>XZ-Plane</source>
-      <translation type="unfinished">XZ-Plane</translation>
+      <translation>Площина XZ</translation>
     </message>
     <message>
       <location filename="../../SketchOrientationDialog.ui" line="43"/>
       <source>YZ-Plane</source>
-      <translation type="unfinished">YZ-Plane</translation>
+      <translation>Площина YZ</translation>
     </message>
     <message>
       <location filename="../../SketchOrientationDialog.ui" line="72"/>
       <source>Reverse direction</source>
-      <translation type="unfinished">Reverse direction</translation>
+      <translation>Зворотний напрямок</translation>
     </message>
     <message>
       <location filename="../../SketchOrientationDialog.ui" line="81"/>
@@ -4013,7 +4011,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="32"/>
       <source>Number of columns of the linear array</source>
-      <translation type="unfinished">Number of columns of the linear array</translation>
+      <translation>Кількість стовпців лінійного масиву</translation>
     </message>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="52"/>
@@ -4023,38 +4021,38 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="59"/>
       <source>Number of rows of the linear array</source>
-      <translation type="unfinished">Number of rows of the linear array</translation>
+      <translation>Кількість рядків лінійного масиву</translation>
     </message>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="77"/>
       <source>Makes the inter-row and inter-col spacing the same if clicked</source>
-      <translation type="unfinished">Makes the inter-row and inter-col spacing the same if clicked</translation>
+      <translation>Робить міжрядкові та між стовпчикові інтервали однаковими</translation>
     </message>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="80"/>
       <source>Equal vertical/horizontal spacing</source>
-      <translation type="unfinished">Equal vertical/horizontal spacing</translation>
+      <translation>Однакові горизонтальні/вертикальні інтервали</translation>
     </message>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="93"/>
       <source>If selected, each element in the array is constrained
 with respect to the others using construction lines</source>
-      <translation type="unfinished">If selected, each element in the array is constrained
-with respect to the others using construction lines</translation>
+      <translation>Якщо виділено, кожен елемент в масиві буде обмежений 
+відносно інших за допомогою допоміжних ліній</translation>
     </message>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="100"/>
       <source>Constrain inter-element separation</source>
-      <translation type="unfinished">Constrain inter-element separation</translation>
+      <translation>Обмеження поділу між елементами</translation>
     </message>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="116"/>
       <source>If selected, it substitutes dimensional constraints by geometric constraints
 in the copies, so that a change in the original element is directly
 reflected on copies</source>
-      <translation type="unfinished">If selected, it substitutes dimensional constraints by geometric constraints
-in the copies, so that a change in the original element is directly
-reflected on copies</translation>
+      <translation>Якщо виділено, розмірні обмеження будуть замінені 
+геометричними обмеженнями в копіях, тому зміна базового елемента 
+безпосередньо позначиться на копіях</translation>
     </message>
     <message>
       <location filename="../../SketchRectangularArrayDialog.ui" line="121"/>
@@ -4069,21 +4067,21 @@ reflected on copies</translation>
       <location filename="../../TaskSketcherGeneral.cpp" line="152"/>
       <location filename="../../TaskSketcherGeneral.cpp" line="157"/>
       <source>Normal Geometry</source>
-      <translation type="unfinished">Normal Geometry</translation>
+      <translation>Основна геометрія</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.cpp" line="147"/>
       <location filename="../../TaskSketcherGeneral.cpp" line="152"/>
       <location filename="../../TaskSketcherGeneral.cpp" line="157"/>
       <source>Construction Geometry</source>
-      <translation type="unfinished">Construction Geometry</translation>
+      <translation>Допоміжна геометрія</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.cpp" line="147"/>
       <location filename="../../TaskSketcherGeneral.cpp" line="152"/>
       <location filename="../../TaskSketcherGeneral.cpp" line="157"/>
       <source>External Geometry</source>
-      <translation type="unfinished">External Geometry</translation>
+      <translation>Зовнішня геометрія</translation>
     </message>
   </context>
   <context>
@@ -4096,12 +4094,12 @@ reflected on copies</translation>
     <message>
       <location filename="../../SketcherRegularPolygonDialog.ui" line="25"/>
       <source>Number of Sides:</source>
-      <translation type="unfinished">Number of Sides:</translation>
+      <translation>Кількість стовпців:</translation>
     </message>
     <message>
       <location filename="../../SketcherRegularPolygonDialog.ui" line="32"/>
       <source>Number of columns of the linear array</source>
-      <translation type="unfinished">Number of columns of the linear array</translation>
+      <translation>Кількість стовпців лінійного масиву</translation>
     </message>
   </context>
   <context>
@@ -4120,66 +4118,66 @@ reflected on copies</translation>
     <message>
       <location filename="../../SketcherSettings.ui" line="27"/>
       <source>Sketcher solver</source>
-      <translation type="unfinished">Sketcher solver</translation>
+      <translation>Вирішувач Ескізу</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="33"/>
       <source>Sketcher dialog will have additional section
 &apos;Advanced solver control&apos; to adjust solver settings</source>
-      <translation type="unfinished">Sketcher dialog will have additional section
-&apos;Advanced solver control&apos; to adjust solver settings</translation>
+      <translation>Діалогове вікно Редактора Ескізів матиме додатковий розділ 
+«Розширене керування вирішувачем», щоб налаштувати параметри вирішувача</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="37"/>
       <source>Show section &apos;Advanced solver control&apos; in task dialog</source>
-      <translation type="unfinished">Show section &apos;Advanced solver control&apos; in task dialog</translation>
+      <translation>Показати «Розширене керування вирішувачем» у діалоговому вікні завдання</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="53"/>
       <source>Dragging performance</source>
-      <translation type="unfinished">Dragging performance</translation>
+      <translation>Продуктивність перетягування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="59"/>
       <source>Special solver algorithm will be used while dragging sketch elements.
 Requires to re-enter edit mode to take effect.</source>
-      <translation type="unfinished">Special solver algorithm will be used while dragging sketch elements.
-Requires to re-enter edit mode to take effect.</translation>
+      <translation>При перетягуванні елементів ескізу використовуватиметься спеціальний алгоритм вирішувача.
+Для набуття чинності потрібно повторно ввімкнути режим редагування.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="63"/>
       <source>Improve solving while dragging</source>
-      <translation type="unfinished">Improve solving while dragging</translation>
+      <translation>Покращити рішення під час перетягування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="115"/>
       <source>New constraints that would be redundant will automatically be removed</source>
-      <translation type="unfinished">New constraints that would be redundant will automatically be removed</translation>
+      <translation>Нові обмеження, які визнані надлишковими, будуть автоматично видалені</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="118"/>
       <source>Auto remove redundants</source>
-      <translation type="unfinished">Auto remove redundants</translation>
+      <translation>Автовидалення надлишкових</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="134"/>
       <source>Allow to leave sketch edit mode when pressing Esc button</source>
-      <translation type="unfinished">Allow to leave sketch edit mode when pressing Esc button</translation>
+      <translation>Дозволяє завершувати режим редагування ескізу під час натискання кнопки Esc</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="137"/>
       <source>Esc can leave sketch edit mode</source>
-      <translation type="unfinished">Esc can leave sketch edit mode</translation>
+      <translation>Кнопка Esc завершує режим редагування ескізу</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="153"/>
       <source>Notifies about automatic constraint substitutions</source>
-      <translation type="unfinished">Notifies about automatic constraint substitutions</translation>
+      <translation>Повідомляє про автоматичну заміну обмежень</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.ui" line="156"/>
       <source>Notify automatic constraint substitutions</source>
-      <translation type="unfinished">Notify automatic constraint substitutions</translation>
+      <translation>Повідомляти про автоматичну заміну обмежень</translation>
     </message>
   </context>
   <context>
@@ -4192,44 +4190,44 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="20"/>
       <source>Working colors</source>
-      <translation type="unfinished">Working colors</translation>
+      <translation>Робочі кольори</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="34"/>
       <source>Coordinate text</source>
-      <translation type="unfinished">Coordinate text</translation>
+      <translation>Текст координат</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="41"/>
       <source>Color used while new sketch elements are created</source>
-      <translation type="unfinished">Color used while new sketch elements are created</translation>
+      <translation>Колір, який використовується при створенні нового елементу ескізу</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="61"/>
       <source>Color of crosshair cursor.
 (The one you get when creating a new sketch element.)</source>
-      <translation type="unfinished">Color of crosshair cursor.
-(The one you get when creating a new sketch element.)</translation>
+      <translation>Колір перехрестя курсору.
+(Той, який Ви отримуєте під час створення нового елемента ескізу.)</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="88"/>
       <source>Creating line</source>
-      <translation type="unfinished">Creating line</translation>
+      <translation>Створюваний елемент</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="95"/>
       <source>Text color of the coordinates</source>
-      <translation type="unfinished">Text color of the coordinates</translation>
+      <translation>Колір тексту координат</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="115"/>
       <source>Cursor crosshair</source>
-      <translation type="unfinished">Cursor crosshair</translation>
+      <translation>Перехрестя курсору</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="140"/>
       <source>Geometric element colors</source>
-      <translation type="unfinished">Geometric element colors</translation>
+      <translation>Кольори геометричних елементів</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="148"/>
@@ -4239,7 +4237,7 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="161"/>
       <source>Color of fully constrained vertex color in edit mode</source>
-      <translation type="unfinished">Color of fully constrained vertex color in edit mode</translation>
+      <translation>Колір повністю обмеженої вершини в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="181"/>
@@ -4250,17 +4248,17 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="194"/>
       <source>Color of fully constrained internal alignment edge color in edit mode</source>
-      <translation type="unfinished">Color of fully constrained internal alignment edge color in edit mode</translation>
+      <translation>Колір повністю обмеженого внутрішнього вирівнювання ребра в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="233"/>
       <source>Constrained</source>
-      <translation type="unfinished">Constrained</translation>
+      <translation>З обмеженням</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="246"/>
       <source>Color of fully constrained construction edge color in edit mode</source>
-      <translation type="unfinished">Color of fully constrained construction edge color in edit mode</translation>
+      <translation>Колір повністю обмеженої допоміжної геометрії в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="266"/>
@@ -4270,7 +4268,7 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="279"/>
       <source>Color of vertices being edited</source>
-      <translation type="unfinished">Color of vertices being edited</translation>
+      <translation>Колір вершин у процесі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="299"/>
@@ -4280,22 +4278,22 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="312"/>
       <source>Color of fully constrained edge color in edit mode</source>
-      <translation type="unfinished">Color of fully constrained edge color in edit mode</translation>
+      <translation>Колір повністю обмеженого ребра в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="338"/>
       <source>Color of edges being edited</source>
-      <translation type="unfinished">Color of edges being edited</translation>
+      <translation>Колір ребер у процесі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="364"/>
       <source>Color of construction geometry in edit mode</source>
-      <translation type="unfinished">Color of construction geometry in edit mode</translation>
+      <translation>Колір допоміжної геометрії в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="390"/>
       <source>Color of external geometry in edit mode</source>
-      <translation type="unfinished">Color of external geometry in edit mode</translation>
+      <translation>Колір зовнішньої геометрії у режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="416"/>
@@ -4305,17 +4303,17 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="442"/>
       <source>Internal alignment edge</source>
-      <translation type="unfinished">Internal alignment edge</translation>
+      <translation>Внутрішня межа вирівнювання</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="455"/>
       <source>Color of edges of internal alignment geometry</source>
-      <translation type="unfinished">Color of edges of internal alignment geometry</translation>
+      <translation>Колір ребер внутрішньої геометрії вирівнювання</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="481"/>
       <source>Unconstrained</source>
-      <translation type="unfinished">Unconstrained</translation>
+      <translation>Без обмеження</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="488"/>
@@ -4346,37 +4344,37 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="565"/>
       <source>Invalid Sketch</source>
-      <translation type="unfinished">Invalid Sketch</translation>
+      <translation>Неприпустимий ескіз</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="578"/>
       <source>Fully constrained Sketch</source>
-      <translation type="unfinished">Fully constrained Sketch</translation>
+      <translation>Ескіз повністю визначений</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="591"/>
       <source>Color of fully constrained geometry in edit mode</source>
-      <translation type="unfinished">Color of fully constrained geometry in edit mode</translation>
+      <translation>Колір повністю визначеної геометрії в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="617"/>
       <source>Color of geometry indicating an invalid sketch</source>
-      <translation type="unfinished">Color of geometry indicating an invalid sketch</translation>
+      <translation>Колір геометрії, що вказує на неприпустимий ескіз</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="655"/>
       <source>Constraint colors</source>
-      <translation type="unfinished">Constraint colors</translation>
+      <translation>Кольори обмежень</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="669"/>
       <source>Constraint symbols</source>
-      <translation type="unfinished">Constraint symbols</translation>
+      <translation>Символи обмеження</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="676"/>
       <source>Color of driving constraints in edit mode</source>
-      <translation type="unfinished">Color of driving constraints in edit mode</translation>
+      <translation>Колір керуючих обмежень у режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="696"/>
@@ -4386,52 +4384,52 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="703"/>
       <source>Color of dimensional driving constraints</source>
-      <translation type="unfinished">Color of dimensional driving constraints</translation>
+      <translation>Колір обмежень габаритних розмірів</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="723"/>
       <source>Reference constraint</source>
-      <translation type="unfinished">Reference constraint</translation>
+      <translation>Посилання на обмеження</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="730"/>
       <source>Color of reference constraints in edit mode</source>
-      <translation type="unfinished">Color of reference constraints in edit mode</translation>
+      <translation>Колір посилань на обмеження у режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="750"/>
       <source>Expression dependent constraint</source>
-      <translation type="unfinished">Expression dependent constraint</translation>
+      <translation>Обмеження задані виразом</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="757"/>
       <source>Color of expression dependent constraints in edit mode</source>
-      <translation type="unfinished">Color of expression dependent constraints in edit mode</translation>
+      <translation>Колір обмежень, що залежать від виразу, в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="777"/>
       <source>Deactivated constraint</source>
-      <translation type="unfinished">Deactivated constraint</translation>
+      <translation>Деактивоване обмеження</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="784"/>
       <source>Color of deactivated constraints in edit mode</source>
-      <translation type="unfinished">Color of deactivated constraints in edit mode</translation>
+      <translation>Колір деактивованих обмежень у режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="822"/>
       <source>Colors outside Sketcher</source>
-      <translation type="unfinished">Colors outside Sketcher</translation>
+      <translation>Кольори за межами Sketcher</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="830"/>
       <source>Color of vertices</source>
-      <translation type="unfinished">Color of vertices</translation>
+      <translation>Колір вершин</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="850"/>
       <source>Color of edges</source>
-      <translation type="unfinished">Color of edges</translation>
+      <translation>Колір ребер</translation>
     </message>
   </context>
   <context>
@@ -4454,7 +4452,7 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="42"/>
       <source>Font size used for labels and constraints.</source>
-      <translation type="unfinished">Font size used for labels and constraints.</translation>
+      <translation>Розмір шрифту для обмежень та міток.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="45"/>
@@ -4464,12 +4462,12 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="73"/>
       <source>View scale ratio</source>
-      <translation type="unfinished">View scale ratio</translation>
+      <translation>Масштаб перегляду</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="83"/>
       <source>The 3D view is scaled based on this factor.</source>
-      <translation type="unfinished">The 3D view is scaled based on this factor.</translation>
+      <translation>Масштабування 3D-виду на основі цього коефіцієнта.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="114"/>
@@ -4479,74 +4477,74 @@ Requires to re-enter edit mode to take effect.</translation>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="124"/>
       <source>Line pattern used for grid lines.</source>
-      <translation type="unfinished">Line pattern used for grid lines.</translation>
+      <translation>Шаблон ліній для зображення сітки.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="134"/>
       <source>Segments per geometry</source>
-      <translation type="unfinished">Segments per geometry</translation>
+      <translation>Сегментів на геометрію</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="144"/>
       <source>The number of polygons used for geometry approximation.</source>
-      <translation type="unfinished">The number of polygons used for geometry approximation.</translation>
+      <translation>Кількість полігонів, що використовуються для апроксимації геометрії.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="163"/>
       <source>A dialog will pop up to input a value for new dimensional constraints.</source>
-      <translation type="unfinished">A dialog will pop up to input a value for new dimensional constraints.</translation>
+      <translation>При створенні нових розмірних обмежень з&apos;явиться діалог для введення значення.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="166"/>
       <source>Ask for value after creating a dimensional constraint</source>
-      <translation type="unfinished">Ask for value after creating a dimensional constraint</translation>
+      <translation>Запитувати значення при створенні розмірного обмеження</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="182"/>
       <source>The current sketcher creation tool will remain active after creation.</source>
-      <translation type="unfinished">The current sketcher creation tool will remain active after creation.</translation>
+      <translation>Поточний інструмент створення ескізів залишиться активним після створення.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="185"/>
       <source>Geometry creation &quot;Continue Mode&quot;</source>
-      <translation type="unfinished">Geometry creation &quot;Continue Mode&quot;</translation>
+      <translation>Створеня геометрії в &quot;Послідовному режимі&quot;</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="201"/>
       <source>The current constraint creation tool will remain active after creation.</source>
-      <translation type="unfinished">The current constraint creation tool will remain active after creation.</translation>
+      <translation>Поточний інструмент створення обмежень залишиться активним після створення.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="204"/>
       <source>Constraint creation &quot;Continue Mode&quot;</source>
-      <translation type="unfinished">Constraint creation &quot;Continue Mode&quot;</translation>
+      <translation>Створеня обмежень в &quot;Послідовному режимі&quot;</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="220"/>
       <source>Base length units will not be displayed in constraints.
 Supports all unit systems except &apos;US customary&apos; and &apos;Building US/Euro&apos;.</source>
-      <translation type="unfinished">Base length units will not be displayed in constraints.
-Supports all unit systems except &apos;US customary&apos; and &apos;Building US/Euro&apos;.</translation>
+      <translation>Базові одиниці довжини не відображатимуться в обмеженнях.
+Підтримується всі системи одиниць, окрім &apos;US customary&apos; та &apos;Building US/Euro&apos;.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="224"/>
       <source>Hide base length units for supported unit systems</source>
-      <translation type="unfinished">Hide base length units for supported unit systems</translation>
+      <translation>Приховати базові одиниці довжини для підтримуваних SI</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="237"/>
       <source>If checked, displays the name on dimensional constraints (if exists).</source>
-      <translation type="unfinished">If checked, displays the name on dimensional constraints (if exists).</translation>
+      <translation>Якщо вибрано, відображає ім’я на розмірних обмеженнях (за наявністю).</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="240"/>
       <source>Show dimensional constraint name with format</source>
-      <translation type="unfinished">Show dimensional constraint name with format</translation>
+      <translation>Показати назву обмеження розмірів з форматом</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="256"/>
       <source>%N = %V</source>
-      <translation type="unfinished">%N = %V</translation>
+      <translation>%N = %V</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="259"/>
@@ -4555,100 +4553,100 @@ Defaults to: %N = %V
 
 %N - name parameter
 %V - dimension value</source>
-      <translation type="unfinished">The format of the dimensional constraint string presentation.
-Defaults to: %N = %V
+      <translation>Формат подання рядка обмеження розмірів.
+За замовчуванням %N = %V
 
-%N - name parameter
-%V - dimension value</translation>
+%N - ім&apos;я параметра
+%V - значення розміру</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="266"/>
       <source>DimensionalStringFormat</source>
-      <translation type="unfinished">DimensionalStringFormat</translation>
+      <translation>Формат розмірної строки</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="306"/>
       <source>Visibility automation</source>
-      <translation type="unfinished">Visibility automation</translation>
+      <translation>Автоматизація видимості</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="312"/>
       <source>When opening a sketch, hide all features that depend on it.</source>
-      <translation type="unfinished">When opening a sketch, hide all features that depend on it.</translation>
+      <translation>При відкритті ескізу приховує всі об&apos;єкти, що від нього залежать.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="315"/>
       <source>Hide all objects that depend on the sketch</source>
-      <translation type="unfinished">Hide all objects that depend on the sketch</translation>
+      <translation>Приховати всі об&apos;єкти залежні від ескізу</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="331"/>
       <source>When opening a sketch, show sources for external geometry links.</source>
-      <translation type="unfinished">When opening a sketch, show sources for external geometry links.</translation>
+      <translation>При відкритті ескізу показує джерела зовнішніх геометричних посилань.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="334"/>
       <source>Show objects used for external geometry</source>
-      <translation type="unfinished">Show objects used for external geometry</translation>
+      <translation>Показати об&apos;єкти для зовнішньої геометрії</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="350"/>
       <source>When opening a sketch, show objects the sketch is attached to.</source>
-      <translation type="unfinished">When opening a sketch, show objects the sketch is attached to.</translation>
+      <translation>При відкритті ескізу показує об’єкти, до яких приєднаний ескіз.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="353"/>
       <source>Show objects that the sketch is attached to</source>
-      <translation type="unfinished">Show objects that the sketch is attached to</translation>
+      <translation>Показати об&apos;єкти з приєднаними ескізами</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="369"/>
       <source>When closing a sketch, move camera back to where it was before the sketch was opened.</source>
-      <translation type="unfinished">When closing a sketch, move camera back to where it was before the sketch was opened.</translation>
+      <translation>При закритті ескізу, повертає камеру на місце, де був відкритий ескіз.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="372"/>
       <source>Restore camera position after editing</source>
-      <translation type="unfinished">Restore camera position after editing</translation>
+      <translation>Відновити позицію камери після редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="388"/>
       <source>When entering edit mode, force orthographic view of camera.
 Works only when &quot;Restore camera position after editing&quot; is enabled.</source>
-      <translation type="unfinished">When entering edit mode, force orthographic view of camera.
-Works only when &quot;Restore camera position after editing&quot; is enabled.</translation>
+      <translation>Увійшовши в режим редагування, примусово встановлює ортографічний вид камери.
+Працює лише тоді, коли ввімкнено «Відновити позицію камери після редагування».</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="392"/>
       <source>Force orthographic camera when entering edit</source>
-      <translation type="unfinished">Force orthographic camera when entering edit</translation>
+      <translation>Вмикати ортографічний вид камери в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="408"/>
       <source>Open a sketch in Section View mode by default.
 Then objects are only visible behind the sketch plane.</source>
-      <translation type="unfinished">Open a sketch in Section View mode by default.
-Then objects are only visible behind the sketch plane.</translation>
+      <translation>Відкриває ескіз у режимі перегляду перезізу за замовчуванням.
+Тоді об’єкти видно лише за площиною ескізу.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="412"/>
       <source>Open sketch in Section View mode</source>
-      <translation type="unfinished">Open sketch in Section View mode</translation>
+      <translation>Відкрити ескіз у режимі перегляду перерізу</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="434"/>
       <source>Note: these settings are defaults applied to new sketches. The behavior is remembered for each sketch individually as properties on the View tab.</source>
-      <translation type="unfinished">Note: these settings are defaults applied to new sketches. The behavior is remembered for each sketch individually as properties on the View tab.</translation>
+      <translation>Примітка: ці параметри застосовуються за замовчуванням до нових ескізів. Поведінка кожного ескізу запам&apos;ятовується окремо, як властивість у вкладці Вигляд.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="453"/>
       <source>Applies current visibility automation settings to all sketches in open documents.</source>
-      <translation type="unfinished">Applies current visibility automation settings to all sketches in open documents.</translation>
+      <translation>Застосовує поточні параметри автоматизації видимості до всіх ескізів у відкритих документах.</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="456"/>
       <source>Apply to existing sketches</source>
-      <translation type="unfinished">Apply to existing sketches</translation>
+      <translation>Застосувати до існуючих ескізів</translation>
     </message>
     <message>
       <location filename="../../SketcherSettings.cpp" line="232"/>
@@ -4666,12 +4664,12 @@ Then objects are only visible behind the sketch plane.</translation>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="142"/>
       <source>No missing coincidences</source>
-      <translation type="unfinished">No missing coincidences</translation>
+      <translation>Жодних відсутніх збігів</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="143"/>
       <source>No missing coincidences found</source>
-      <translation type="unfinished">No missing coincidences found</translation>
+      <translation>Не знайдено відсутніх збігів</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="148"/>
@@ -4681,7 +4679,7 @@ Then objects are only visible behind the sketch plane.</translation>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="149"/>
       <source>%1 missing coincidences found</source>
-      <translation type="unfinished">%1 missing coincidences found</translation>
+      <translation>Відсутніх обмежень збігу: %1</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="194"/>
@@ -4709,7 +4707,7 @@ Then objects are only visible behind the sketch plane.</translation>
       <location filename="../../TaskSketcherValidation.cpp" line="255"/>
       <location filename="../../TaskSketcherValidation.cpp" line="269"/>
       <source>Reversed external geometry</source>
-      <translation type="unfinished">Reversed external geometry</translation>
+      <translation>Перевернута зовнішня геометрія</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="238"/>
@@ -4718,82 +4716,82 @@ Then objects are only visible behind the sketch plane.</translation>
 %2 constraints are linking to the endpoints. The constraints have been listed in Report view (menu View -&gt; Panels -&gt; Report view).
 
 Click &quot;Swap endpoints in constraints&quot; button to reassign endpoints. Do this only once to sketches created in FreeCAD older than v0.15</source>
-      <translation type="unfinished">%1 reversed external-geometry arcs were found. Their endpoints are encircled in 3d view.
+      <translation>Знайдено %1 перевернутих дуг зовнішньої геометрії. Їхні кінцеві точки обведені в 3D-виді.
 
-%2 constraints are linking to the endpoints. The constraints have been listed in Report view (menu View -&gt; Panels -&gt; Report view).
+%2 обмеження зв’язуються з кінцевими точками. Обмеження наведенні в Перегляді звіту (меню Перегляд -&gt; Панелі -&gt; Перегляд звіту).
 
-Click &quot;Swap endpoints in constraints&quot; button to reassign endpoints. Do this only once to sketches created in FreeCAD older than v0.15</translation>
+Натисніть кнопку «Поміняти кінцеві точки в обмеженнях», щоб перепризначити кінцеві точки. Зробіть це лише один раз для ескізів, створених у FreeCAD старше версії 0.15</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="249"/>
       <source>%1 reversed external-geometry arcs were found. Their endpoints are encircled in 3d view.
 
 However, no constraints linking to the endpoints were found.</source>
-      <translation type="unfinished">%1 reversed external-geometry arcs were found. Their endpoints are encircled in 3d view.
+      <translation>Знайдено %1 перевернутих дуг зовнішньої геометрії. Їхні кінцеві точки обведені в 3D-виді.
 
-However, no constraints linking to the endpoints were found.</translation>
+Проте жодних обмежень, пов’язаних із кінцевими точками, не виявлено.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="256"/>
       <source>No reversed external-geometry arcs were found.</source>
-      <translation type="unfinished">No reversed external-geometry arcs were found.</translation>
+      <translation>Не знайдено жодної перевернутої дуги кола.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="270"/>
       <source>%1 changes were made to constraints linking to endpoints of reversed arcs.</source>
-      <translation type="unfinished">%1 changes were made to constraints linking to endpoints of reversed arcs.</translation>
+      <translation>%1 змін було внесено до обмежень, пов’язаних із кінцевими точками перевернутих дуг.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="286"/>
       <location filename="../../TaskSketcherValidation.cpp" line="303"/>
       <source>Constraint orientation locking</source>
-      <translation type="unfinished">Constraint orientation locking</translation>
+      <translation>Обмеження блокування орієнтації</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="287"/>
       <source>Orientation locking was enabled and recomputed for %1 constraints. The constraints have been listed in Report view (menu View -&gt; Panels -&gt; Report view).</source>
-      <translation type="unfinished">Orientation locking was enabled and recomputed for %1 constraints. The constraints have been listed in Report view (menu View -&gt; Panels -&gt; Report view).</translation>
+      <translation>Блокування орієнтації було увімкнено та перераховано для %1 обмежень. Ці обмеження наведено у вікні перегляду звіту (меню Перегляд -&gt; Види -&gt; Перегляд звіту).</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="304"/>
       <source>Orientation locking was disabled for %1 constraints. The constraints have been listed in Report view (menu View -&gt; Panels -&gt; Report view). Note that for all future constraints, the locking still defaults to ON.</source>
-      <translation type="unfinished">Orientation locking was disabled for %1 constraints. The constraints have been listed in Report view (menu View -&gt; Panels -&gt; Report view). Note that for all future constraints, the locking still defaults to ON.</translation>
+      <translation>Блокування орієнтації було вимкнено для %1 обмежень. Ці обмеження наведено у вікні перегляду звіту (меню Перегляд -&gt; Види -&gt; Перегляд звіту). Зверніть увагу, що для всіх нових обмежень блокування включиться за замовчуванням.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="319"/>
       <location filename="../../TaskSketcherValidation.cpp" line="331"/>
       <source>Delete constraints to external geom.</source>
-      <translation type="unfinished">Delete constraints to external geom.</translation>
+      <translation>Видалити обмеження до зовнішньої геометрії.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="320"/>
       <source>You are about to delete ALL constraints that deal with external geometry. This is useful to rescue a sketch with broken/changed links to external geometry. Are you sure you want to delete the constraints?</source>
-      <translation type="unfinished">You are about to delete ALL constraints that deal with external geometry. This is useful to rescue a sketch with broken/changed links to external geometry. Are you sure you want to delete the constraints?</translation>
+      <translation>Ви збираєтеся видалити ВСІ обмеження, пов&apos;язані із зовнішньою геометрією. Це корисно для відновлення ескізу із пошкодженими/зміненими посиланнями на зовнішню геометрію. Ви впевнені, що хочете видалити ці обмеження?</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="332"/>
       <source>All constraints that deal with external geometry were deleted.</source>
-      <translation type="unfinished">All constraints that deal with external geometry were deleted.</translation>
+      <translation>Усі обмеження, пов&apos;язані із зовнішньою геометрією, були видалені.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="396"/>
       <source>No degenerated geometry</source>
-      <translation type="unfinished">No degenerated geometry</translation>
+      <translation>Немає виродженної геометрії</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="397"/>
       <source>No degenerated geometry found</source>
-      <translation type="unfinished">No degenerated geometry found</translation>
+      <translation>Не знайдено виродженної геометрії</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="401"/>
       <source>Degenerated geometry</source>
-      <translation type="unfinished">Degenerated geometry</translation>
+      <translation>Вироджена Геометрія</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.cpp" line="402"/>
       <source>%1 degenerated geometry found</source>
-      <translation type="unfinished">%1 degenerated geometry found</translation>
+      <translation>Знайдено %1 вироджену(их) геометрію(ій)</translation>
     </message>
   </context>
   <context>
@@ -4801,197 +4799,197 @@ However, no constraints linking to the endpoints were found.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="40"/>
       <source>Filter:</source>
-      <translation type="unfinished">Filter:</translation>
+      <translation>Фільтр:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="57"/>
       <source>All</source>
-      <translation type="unfinished">All</translation>
+      <translation>Всі</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="62"/>
       <source>Geometric</source>
-      <translation type="unfinished">Geometric</translation>
+      <translation>Геометричні</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="67"/>
       <source>Datums</source>
-      <translation type="unfinished">Datums</translation>
+      <translation>Величини</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="72"/>
       <source>Named</source>
-      <translation type="unfinished">Named</translation>
+      <translation>З іменами</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="77"/>
       <source>Reference</source>
-      <translation type="unfinished">Reference</translation>
+      <translation>Посилання</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="82"/>
       <source>Coincident</source>
-      <translation type="unfinished">Coincident</translation>
+      <translation>Збіг</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="87"/>
       <source>Point on Object</source>
-      <translation type="unfinished">Point on Object</translation>
+      <translation>Точка на об&apos;єкті</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="92"/>
       <source>Vertical</source>
-      <translation type="unfinished">Vertical</translation>
+      <translation>Вертикальні</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="97"/>
       <source>Horizontal</source>
-      <translation type="unfinished">Horizontal</translation>
+      <translation>Горизонтальні</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="102"/>
       <source>Parallel</source>
-      <translation type="unfinished">Parallel</translation>
+      <translation>Паралельні</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="107"/>
       <source>Perpendicular</source>
-      <translation type="unfinished">Perpendicular</translation>
+      <translation>Перпендикулярні</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="112"/>
       <source>Tangent</source>
-      <translation type="unfinished">Tangent</translation>
+      <translation>Дотичні</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="117"/>
       <source>Equality</source>
-      <translation type="unfinished">Equality</translation>
+      <translation>Рівність</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="122"/>
       <source>Symmetric</source>
-      <translation type="unfinished">Symmetric</translation>
+      <translation>Симетричні</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="127"/>
       <source>Block</source>
-      <translation type="unfinished">Block</translation>
+      <translation>Обмеження переміщення</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="132"/>
       <source>Horizontal Distance</source>
-      <translation type="unfinished">Horizontal Distance</translation>
+      <translation>Відстані по горизонталі</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="137"/>
       <source>Vertical Distance</source>
-      <translation type="unfinished">Vertical Distance</translation>
+      <translation>Відстані по вертикалі</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="142"/>
       <source>Distance</source>
-      <translation type="unfinished">Distance</translation>
+      <translation>Відстані</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="147"/>
       <source>Radius</source>
-      <translation type="unfinished">Radius</translation>
+      <translation>Радіусу</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="152"/>
       <source>Weight</source>
-      <translation type="unfinished">Weight</translation>
+      <translation>Ваги</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="157"/>
       <source>Diameter</source>
-      <translation type="unfinished">Diameter</translation>
+      <translation>Діаметру</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="162"/>
       <source>Angle</source>
-      <translation type="unfinished">Angle</translation>
+      <translation>Кута</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="167"/>
       <source>Snell&apos;s Law</source>
-      <translation type="unfinished">Snell&apos;s Law</translation>
+      <translation>Закону заломлення</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="172"/>
       <source>Internal Alignment</source>
-      <translation type="unfinished">Internal Alignment</translation>
+      <translation>Внутрішнього вирівнювання</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="177"/>
       <source>Multiple Filters</source>
-      <translation type="unfinished">Multiple Filters</translation>
+      <translation>Декілька Фільтрів</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="182"/>
       <source>Selection Filter</source>
-      <translation type="unfinished">Selection Filter</translation>
+      <translation>Фільт Виділення</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="187"/>
       <source>Associated Constraint Filter</source>
-      <translation type="unfinished">Associated Constraint Filter</translation>
+      <translation>Фільт пов&apos;язаних обмежень</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="207"/>
       <source>Click to select multiple filters</source>
-      <translation type="unfinished">Click to select multiple filters</translation>
+      <translation>Клацніть, щоб вибрати декілька фільтрів</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="210"/>
       <source>Select Multiple</source>
-      <translation type="unfinished">Select Multiple</translation>
+      <translation>Виберіть декілька</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="223"/>
       <source>Settings</source>
-      <translation type="unfinished">Settings</translation>
+      <translation>Налаштування</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="247"/>
       <source>Shows all the constraints in the list</source>
-      <translation type="unfinished">Shows all the constraints in the list</translation>
+      <translation>Показати всі обмеження в списку</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="250"/>
       <source>Show Listed</source>
-      <translation type="unfinished">Show Listed</translation>
+      <translation>Показати за списком</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="263"/>
       <source>Hides all the constraints in the list</source>
-      <translation type="unfinished">Hides all the constraints in the list</translation>
+      <translation>Приховати всі обмеження в списку</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="266"/>
       <source>Hide Listed</source>
-      <translation type="unfinished">Hide Listed</translation>
+      <translation>Приховати за список</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="279"/>
       <source>Restricts 3D visibility to the listed elements</source>
-      <translation type="unfinished">Restricts 3D visibility to the listed elements</translation>
+      <translation>Обмежує 3D видимість елементами в списку</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="282"/>
       <source>Restrict Visibility</source>
-      <translation type="unfinished">Restrict Visibility</translation>
+      <translation>Обмеження Видимості</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="637"/>
       <source>Constraints</source>
-      <translation type="unfinished">Constraints</translation>
+      <translation>Обмеження</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="917"/>
@@ -4999,7 +4997,7 @@ However, no constraints linking to the endpoints were found.</translation>
       <location filename="../../TaskSketcherConstraints.cpp" line="1241"/>
       <location filename="../../TaskSketcherConstraints.cpp" line="1297"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Помилка</translation>
     </message>
   </context>
   <context>
@@ -5037,7 +5035,7 @@ However, no constraints linking to the endpoints were found.</translation>
     <message>
       <location filename="../../TaskSketcherElements.ui" line="75"/>
       <source>Mode:</source>
-      <translation type="unfinished">Mode:</translation>
+      <translation>Режим геометрії:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.ui" line="95"/>
@@ -5057,17 +5055,17 @@ However, no constraints linking to the endpoints were found.</translation>
     <message>
       <location filename="../../TaskSketcherElements.ui" line="110"/>
       <source>External</source>
-      <translation type="unfinished">External</translation>
+      <translation>Зовнішня</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.ui" line="135"/>
       <source>Only the type &apos;Edge&apos; will be available for the list</source>
-      <translation type="unfinished">Only the type &apos;Edge&apos; will be available for the list</translation>
+      <translation>Обмежує список лише типом &apos;Ребра&apos;</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.ui" line="138"/>
       <source>Auto-switch to Edge</source>
-      <translation type="unfinished">Auto-switch to Edge</translation>
+      <translation>Показувати лише ребра</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="369"/>
@@ -5077,22 +5075,22 @@ However, no constraints linking to the endpoints were found.</translation>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="389"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;%1&amp;quot;: multiple selection&lt;/p&gt;&lt;p&gt;&amp;quot;%2&amp;quot;: switch to next valid type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;%1&amp;quot;: multiple selection&lt;/p&gt;&lt;p&gt;&amp;quot;%2&amp;quot;: switch to next valid type&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;%1&amp;quot;: множинне виділення&lt;/p&gt;&lt;p&gt;&amp;quot;%2&amp;quot;: перейти до наступного коректного типу&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="402"/>
       <source>Type</source>
-      <translation type="unfinished">Type</translation>
+      <translation>Тип</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="403"/>
       <source>Name</source>
-      <translation type="unfinished">Name</translation>
+      <translation>Назва</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="404"/>
       <source>Reference</source>
-      <translation type="unfinished">Reference</translation>
+      <translation>Посилання</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="405"/>
@@ -5115,7 +5113,7 @@ However, no constraints linking to the endpoints were found.</translation>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="23"/>
       <source>A grid will be shown</source>
-      <translation type="unfinished">A grid will be shown</translation>
+      <translation>Буде показана сітка</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="26"/>
@@ -5140,7 +5138,7 @@ However, no constraints linking to the endpoints were found.</translation>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="79"/>
       <source>Distance between two subsequent grid lines</source>
-      <translation type="unfinished">Distance between two subsequent grid lines</translation>
+      <translation>Відстань між двома сусідніми лініями сітки</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="117"/>
@@ -5198,7 +5196,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="231"/>
       <source>Sketcher proposes automatically sensible constraints.</source>
-      <translation type="unfinished">Sketcher proposes automatically sensible constraints.</translation>
+      <translation>Редактор Ескізів автоматично пропонує розумні обмеження.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="234"/>
@@ -5208,22 +5206,22 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="250"/>
       <source>Sketcher tries not to propose redundant auto constraints</source>
-      <translation type="unfinished">Sketcher tries not to propose redundant auto constraints</translation>
+      <translation>Редактор Ескізів намагається не пропонувати надлишкові автоматичні обмеження</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="253"/>
       <source>Avoid redundant auto constraints</source>
-      <translation type="unfinished">Avoid redundant auto constraints</translation>
+      <translation>Уникати надлишкових авто-обмежень</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="269"/>
       <source>Rendering order (global):</source>
-      <translation type="unfinished">Rendering order (global):</translation>
+      <translation>Порядок відображення (глобальний):</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="288"/>
       <source>To change, drag and drop a geometry type to top or bottom</source>
-      <translation type="unfinished">To change, drag and drop a geometry type to top or bottom</translation>
+      <translation>Щоб змінити порядок, перетягніть тип геометрії вгору або вниз</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.cpp" line="206"/>
@@ -5236,7 +5234,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherMessages.cpp" line="51"/>
       <source>Solver messages</source>
-      <translation type="unfinished">Solver messages</translation>
+      <translation>Повідомлення вирішувача</translation>
     </message>
   </context>
   <context>
@@ -5244,7 +5242,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.cpp" line="64"/>
       <source>Advanced solver control</source>
-      <translation type="unfinished">Advanced solver control</translation>
+      <translation>Додаткові налаштування вирішувача</translation>
     </message>
   </context>
   <context>
@@ -5267,7 +5265,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="36"/>
       <source>Ignore construction geometry</source>
-      <translation type="unfinished">Ignore construction geometry</translation>
+      <translation>Ігнорувати допоміжну геометрію</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="46"/>
@@ -5287,7 +5285,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="60"/>
       <source>Highlight open vertexes</source>
-      <translation type="unfinished">Highlight open vertexes</translation>
+      <translation>Підсвічувати відкриті вершини</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="70"/>
@@ -5297,27 +5295,27 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="90"/>
       <source>Delete constraints to external geom.</source>
-      <translation type="unfinished">Delete constraints to external geom.</translation>
+      <translation>Видалити обмеження до зовнішньої геометрії.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="100"/>
       <source>Degenerated geometry</source>
-      <translation type="unfinished">Degenerated geometry</translation>
+      <translation>Вироджена Геометрія</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="123"/>
       <source>Reversed external geometry</source>
-      <translation type="unfinished">Reversed external geometry</translation>
+      <translation>Перевернута зовнішня геометрія</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="136"/>
       <source>Swap endpoints in constraints</source>
-      <translation type="unfinished">Swap endpoints in constraints</translation>
+      <translation>Поміняти кінцеві точки в обмеженнях</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="146"/>
       <source>Constraint orientation locking</source>
-      <translation type="unfinished">Constraint orientation locking</translation>
+      <translation>Фіксація орієнтації обмеження</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherValidation.ui" line="152"/>
@@ -5345,12 +5343,12 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="6927"/>
       <source>Do you want to open the sketch validation tool?</source>
-      <translation type="unfinished">Do you want to open the sketch validation tool?</translation>
+      <translation>Відкрити інструмент перевірки ескізу?</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="6928"/>
       <source>The sketch is invalid and cannot be edited.</source>
-      <translation type="unfinished">The sketch is invalid and cannot be edited.</translation>
+      <translation>Ескіз містить помилки та не може бути змінений.</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7035"/>
@@ -5375,22 +5373,22 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7049"/>
       <source>The following constraint is partially redundant:</source>
-      <translation type="unfinished">The following constraint is partially redundant:</translation>
+      <translation>Наступне обмеження частково надлишкове:</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7050"/>
       <source>The following constraints are partially redundant:</source>
-      <translation type="unfinished">The following constraints are partially redundant:</translation>
+      <translation>Наступні обмеження частково надлишкові:</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7056"/>
       <source>Please remove the following malformed constraint:</source>
-      <translation type="unfinished">Please remove the following malformed constraint:</translation>
+      <translation>Видаліть, будь ласка, наступне невірне обмеження:</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7057"/>
       <source>Please remove the following malformed constraints:</source>
-      <translation type="unfinished">Please remove the following malformed constraints:</translation>
+      <translation>Видаліть, будь ласка, наступні невірні обмеження:</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7115"/>
@@ -5400,42 +5398,42 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7119"/>
       <source>Over-constrained: </source>
-      <translation type="unfinished">Over-constrained: </translation>
+      <translation>Надлишкові обмеження: </translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7125"/>
       <source>Malformed constraints: </source>
-      <translation type="unfinished">Malformed constraints: </translation>
+      <translation>Невірні обмеження: </translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7131"/>
       <source>Redundant constraints:</source>
-      <translation type="unfinished">Redundant constraints:</translation>
+      <translation>Надлишкові обмеження:</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7137"/>
       <source>Partially redundant:</source>
-      <translation type="unfinished">Partially redundant:</translation>
+      <translation>Частково надлишкові:</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7143"/>
       <source>Solver failed to converge</source>
-      <translation type="unfinished">Solver failed to converge</translation>
+      <translation>Рішення не сходиться</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7148"/>
       <source>Under constrained:</source>
-      <translation type="unfinished">Under constrained:</translation>
+      <translation>Частково обмежений:</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7150"/>
       <source>DoF</source>
-      <translation type="unfinished">DoF</translation>
+      <translation>Ступені Свободи</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7153"/>
       <source>Fully constrained</source>
-      <translation type="unfinished">Fully constrained</translation>
+      <translation>Повністю обмежений</translation>
     </message>
   </context>
   <context>
@@ -5444,7 +5442,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherBSpline.cpp" line="347"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="349"/>
       <source>Switches between showing and hiding the curvature comb for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the curvature comb for all B-splines</translation>
+      <translation>Показати/приховати кривизну всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -5453,7 +5451,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherBSpline.cpp" line="970"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="972"/>
       <source>Decreases the multiplicity of the selected knot of a B-spline</source>
-      <translation type="unfinished">Decreases the multiplicity of the selected knot of a B-spline</translation>
+      <translation>Зменьшення кратності вибраного вузла B-сплайну</translation>
     </message>
   </context>
   <context>
@@ -5462,7 +5460,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherBSpline.cpp" line="333"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="335"/>
       <source>Switches between showing and hiding the degree for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the degree for all B-splines</translation>
+      <translation>Перемикання між показом та приховуванням ступеня для всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -5471,7 +5469,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherBSpline.cpp" line="963"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="965"/>
       <source>Increases the multiplicity of the selected knot of a B-spline</source>
-      <translation type="unfinished">Increases the multiplicity of the selected knot of a B-spline</translation>
+      <translation>Збільшення кратності вибраного вузла B-сплайну</translation>
     </message>
   </context>
   <context>
@@ -5480,7 +5478,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherBSpline.cpp" line="354"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="356"/>
       <source>Switches between showing and hiding the knot multiplicity for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the knot multiplicity for all B-splines</translation>
+      <translation>Перемикання між показом та приховуванням мультиплікативних вузлів для всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -5489,7 +5487,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherBSpline.cpp" line="362"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="364"/>
       <source>Switches between showing and hiding the control point weight for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the control point weight for all B-splines</translation>
+      <translation>Перемикає між показом та приховуванням контрольної точки для всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -5498,7 +5496,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherBSpline.cpp" line="340"/>
       <location filename="../../CommandSketcherBSpline.cpp" line="342"/>
       <source>Switches between showing and hiding the control polygons for all B-splines</source>
-      <translation type="unfinished">Switches between showing and hiding the control polygons for all B-splines</translation>
+      <translation>Показати/приховати керівні полігони всіх B-сплайнів</translation>
     </message>
   </context>
   <context>
@@ -5507,7 +5505,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherTools.cpp" line="1782"/>
       <location filename="../../CommandSketcherTools.cpp" line="1783"/>
       <source>Creates a clone of the geometry taking as reference the last selected point</source>
-      <translation type="unfinished">Creates a clone of the geometry taking as reference the last selected point</translation>
+      <translation>Створює копію геометрії, взявши за основу останню виділену точку</translation>
     </message>
   </context>
   <context>
@@ -5534,7 +5532,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandConstraints.cpp" line="5976"/>
       <location filename="../../CommandConstraints.cpp" line="5977"/>
       <source>Fix the diameter of a circle or an arc</source>
-      <translation type="unfinished">Fix the diameter of a circle or an arc</translation>
+      <translation>Задає діаметр кола або дуги</translation>
     </message>
   </context>
   <context>
@@ -5568,7 +5566,7 @@ hidden edges and points on picking external objects.</translation>
       <location filename="../../CommandSketcherTools.cpp" line="1786"/>
       <location filename="../../CommandSketcherTools.cpp" line="1787"/>
       <source>Creates a simple copy of the geometry taking as reference the last selected point</source>
-      <translation type="unfinished">Creates a simple copy of the geometry taking as reference the last selected point</translation>
+      <translation>Створює просту копію геометрії, взявши за основу останню виділену точку</translation>
     </message>
   </context>
   <context>
@@ -5576,65 +5574,65 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../Command.cpp" line="534"/>
       <source>No sketch found</source>
-      <translation type="unfinished">No sketch found</translation>
+      <translation>Ескіз не знайдено</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="535"/>
       <source>The document doesn&apos;t have a sketch</source>
-      <translation type="unfinished">The document doesn&apos;t have a sketch</translation>
+      <translation>Документ без ескізу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="544"/>
       <source>Select sketch</source>
-      <translation type="unfinished">Select sketch</translation>
+      <translation>Виберіть ескіз</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="545"/>
       <source>Select a sketch from the list</source>
-      <translation type="unfinished">Select a sketch from the list</translation>
+      <translation>Виберіть ескіз зі списку</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="599"/>
       <source> (incompatible with selection)</source>
-      <translation type="unfinished"> (incompatible with selection)</translation>
+      <translation> (несумісно з вибраним)</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="601"/>
       <source> (current)</source>
-      <translation type="unfinished"> (current)</translation>
+      <translation> (поточний)</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="608"/>
       <source> (suggested)</source>
-      <translation type="unfinished"> (suggested)</translation>
+      <translation> (запропонований)</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="614"/>
       <source>Sketch attachment</source>
-      <translation type="unfinished">Sketch attachment</translation>
+      <translation>Прив&apos;язка ескізу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="616"/>
       <source>Current attachment mode is incompatible with the new selection.
 Select the method to attach this sketch to selected objects.</source>
-      <translation type="unfinished">Current attachment mode is incompatible with the new selection.
-Select the method to attach this sketch to selected objects.</translation>
+      <translation>Поточний режим вкладення несумісний із новим виділенням.
+Виберіть спосіб приєднання цього ескізу до виділених об&apos;єктів.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="620"/>
       <source>Select the method to attach this sketch to selected objects.</source>
-      <translation type="unfinished">Select the method to attach this sketch to selected objects.</translation>
+      <translation>Виберіть спосіб приєднання ескізу до виділених об&apos;єктів.</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="657"/>
       <source>Map sketch</source>
-      <translation type="unfinished">Map sketch</translation>
+      <translation>Карта ескізу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="658"/>
       <source>Can&apos;t map a sketch to support:
 %1</source>
-      <translation type="unfinished">Can&apos;t map a sketch to support:
+      <translation>Не вдалося відобразити ескіз на базу:
 %1</translation>
     </message>
   </context>
@@ -5644,7 +5642,7 @@ Select the method to attach this sketch to selected objects.</translation>
       <location filename="../../CommandSketcherTools.cpp" line="1790"/>
       <location filename="../../CommandSketcherTools.cpp" line="1791"/>
       <source>Moves the geometry taking as reference the last selected point</source>
-      <translation type="unfinished">Moves the geometry taking as reference the last selected point</translation>
+      <translation>Переміщує геометрії, приймаючи останню обрану точку в якості орієнтиру</translation>
     </message>
   </context>
   <context>
@@ -5652,12 +5650,12 @@ Select the method to attach this sketch to selected objects.</translation>
     <message>
       <location filename="../../Command.cpp" line="181"/>
       <source>Sketch attachment</source>
-      <translation type="unfinished">Sketch attachment</translation>
+      <translation>Прив&apos;язка ескізу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="182"/>
       <source>Select the method to attach this sketch to selected object</source>
-      <translation type="unfinished">Select the method to attach this sketch to selected object</translation>
+      <translation>Виберіть спосіб приєднання ескізу до виділеного об&apos;єкту</translation>
     </message>
   </context>
   <context>
@@ -5685,37 +5683,37 @@ Do you want to detach it from the support?</source>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="22"/>
       <source>DOF</source>
-      <translation type="unfinished">DOF</translation>
+      <translation>Ступені Свободи</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="29"/>
       <source>Link</source>
-      <translation type="unfinished">Link</translation>
+      <translation>Посилання</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="51"/>
       <source>New constraints that would be redundant will automatically be removed</source>
-      <translation type="unfinished">New constraints that would be redundant will automatically be removed</translation>
+      <translation>Автоматично вилучає нові обмеження, визнані надлишковими</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="54"/>
       <source>Auto remove redundants</source>
-      <translation type="unfinished">Auto remove redundants</translation>
+      <translation>Автовилучення  надлишкових</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="72"/>
       <source>Executes a recomputation of active document after every sketch action</source>
-      <translation type="unfinished">Executes a recomputation of active document after every sketch action</translation>
+      <translation>Виконує перерахунок активного документа після кожної дії з ескізом</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="75"/>
       <source>Auto update</source>
-      <translation type="unfinished">Auto update</translation>
+      <translation>Автоматичне оновлення</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="91"/>
       <source>Forces recomputation of active document</source>
-      <translation type="unfinished">Forces recomputation of active document</translation>
+      <translation>Примусово перерахувує активний документ</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="94"/>
@@ -5733,116 +5731,116 @@ Do you want to detach it from the support?</source>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="22"/>
       <source>Default algorithm used for Sketch solving</source>
-      <translation type="unfinished">Default algorithm used for Sketch solving</translation>
+      <translation>Алгоритм за замовчуванням, який використовується для вирішення ескізу</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="25"/>
       <source>Default solver:</source>
-      <translation type="unfinished">Default solver:</translation>
+      <translation>Вирішувач за замовчуванням:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="32"/>
       <source>Solver is used for solving the geometry.
 LevenbergMarquardt and DogLeg are trust region optimization algorithms.
 BFGS solver uses the Broyden–Fletcher–Goldfarb–Shanno algorithm.</source>
-      <translation type="unfinished">Solver is used for solving the geometry.
-LevenbergMarquardt and DogLeg are trust region optimization algorithms.
-BFGS solver uses the Broyden–Fletcher–Goldfarb–Shanno algorithm.</translation>
+      <translation>Вирішувач використовується для вирішення геометрії.
+LevenbergMarquardt та DogLeg - алгоритми оптимізації регіону довіри.
+Вирішувач BFGS використовує алгоритм Broyden-Fletcher-Goldfarb-Shanno.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="47"/>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="393"/>
       <source>BFGS</source>
-      <translation type="unfinished">BFGS</translation>
+      <translation>BFGS</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="52"/>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="398"/>
       <source>LevenbergMarquardt</source>
-      <translation type="unfinished">LevenbergMarquardt</translation>
+      <translation>Метод Левенберга Марквардта</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="57"/>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="403"/>
       <source>DogLeg</source>
-      <translation type="unfinished">DogLeg</translation>
+      <translation>DogLeg</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="69"/>
       <source>Type of function to apply in DogLeg for the Gauss step</source>
-      <translation type="unfinished">Type of function to apply in DogLeg for the Gauss step</translation>
+      <translation>Тип функції, яку потрібно застосувати в DogLeg для кроку Гауса</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="72"/>
       <source>DogLeg Gauss step:</source>
-      <translation type="unfinished">DogLeg Gauss step:</translation>
+      <translation>DogLeg Gauss крок:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="79"/>
       <source>Step type used in the DogLeg algorithm</source>
-      <translation type="unfinished">Step type used in the DogLeg algorithm</translation>
+      <translation>Тип кроку, який використовується в алгоритмі DogLeg</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="92"/>
       <source>FullPivLU</source>
-      <translation type="unfinished">FullPivLU</translation>
+      <translation>FullPivLU</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="97"/>
       <source>LeastNorm-FullPivLU</source>
-      <translation type="unfinished">LeastNorm-FullPivLU</translation>
+      <translation>LeastNorm-FullPivLU</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="102"/>
       <source>LeastNorm-LDLT</source>
-      <translation type="unfinished">LeastNorm-LDLT</translation>
+      <translation>LeastNorm-LDLT</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="114"/>
       <source>Maximum number of iterations of the default algorithm</source>
-      <translation type="unfinished">Maximum number of iterations of the default algorithm</translation>
+      <translation>Максимальна кількість ітерацій алгоритму за замовчуванням</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="117"/>
       <source>Maximum iterations:</source>
-      <translation type="unfinished">Maximum iterations:</translation>
+      <translation>Максимальна кількість ітерацій:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="124"/>
       <source>Maximum iterations to find convergence before solver is stopped</source>
-      <translation type="unfinished">Maximum iterations to find convergence before solver is stopped</translation>
+      <translation>Максимальна кількість ітерацій для пошуку зближення перед зупинкою вирішувача</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="150"/>
       <source>If selected, the Maximum iterations value is multiplied by the sketch size</source>
-      <translation type="unfinished">If selected, the Maximum iterations value is multiplied by the sketch size</translation>
+      <translation>Якщо прапорець встановлено, максимальне значення ітерацій множиться на розмір ескізу</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="153"/>
       <source>Sketch size multiplier:</source>
-      <translation type="unfinished">Sketch size multiplier:</translation>
+      <translation>Множник розміру ескізу:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="166"/>
       <source>Maximum iterations will be multiplied by number of parameters</source>
-      <translation type="unfinished">Maximum iterations will be multiplied by number of parameters</translation>
+      <translation>Максимальна кількість ітерацій буде помножено на кількість параметрів</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="189"/>
       <source>Error threshold under which convergence is reached</source>
-      <translation type="unfinished">Error threshold under which convergence is reached</translation>
+      <translation>Поріг помилок, при якому досягається збіжність</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="192"/>
       <source>Convergence:</source>
-      <translation type="unfinished">Convergence:</translation>
+      <translation>Сходження:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="199"/>
       <source>Threshold for squared error that is used
 to determine whether a solution converges or not</source>
-      <translation type="unfinished">Threshold for squared error that is used
-to determine whether a solution converges or not</translation>
+      <translation>Порогове значення квадрату помилки, яке використовується
+щоб визначити сходження рішення</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="226"/>
@@ -5862,141 +5860,141 @@ to determine whether a solution converges or not</translation>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="298"/>
       <source>Algorithm used for the rank revealing QR decomposition</source>
-      <translation type="unfinished">Algorithm used for the rank revealing QR decomposition</translation>
+      <translation>Алгоритм, що використовується для визначення рангу QR-декомпозиції</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="301"/>
       <source>QR algorithm:</source>
-      <translation type="unfinished">QR algorithm:</translation>
+      <translation>Алгоритм QR:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="308"/>
       <source>During diagnosing the QR rank of matrix is calculated.
 Eigen Dense QR is a dense matrix QR with full pivoting; usually slower
 Eigen Sparse QR algorithm is optimized for sparse matrices; usually faster</source>
-      <translation type="unfinished">During diagnosing the QR rank of matrix is calculated.
-Eigen Dense QR is a dense matrix QR with full pivoting; usually slower
-Eigen Sparse QR algorithm is optimized for sparse matrices; usually faster</translation>
+      <translation>Під час діагностики розраховується QR-ранг матриці.
+Eigen Dense QR — щільна матриця QR з повним поворотом; зазвичай повільніше.
+Алгоритм Eigen Sparse QR оптимізований для розріджених матриць; зазвичай швидше</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="323"/>
       <source>Eigen Dense QR</source>
-      <translation type="unfinished">Eigen Dense QR</translation>
+      <translation>Eigen Dense QR</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="328"/>
       <source>Eigen Sparse QR</source>
-      <translation type="unfinished">Eigen Sparse QR</translation>
+      <translation>Eigen Sparse QR</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="340"/>
       <source>Pivot threshold</source>
-      <translation type="unfinished">Pivot threshold</translation>
+      <translation>Поріг спрацювання</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="347"/>
       <source>During a QR, values under the pivot threshold are treated as zero</source>
-      <translation type="unfinished">During a QR, values under the pivot threshold are treated as zero</translation>
+      <translation>Під час QR значення під порогом повороту вважаються нульовими</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="350"/>
       <source>1E-13</source>
-      <translation type="unfinished">1E-13</translation>
+      <translation>1E-13</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="370"/>
       <source>Solving algorithm used for determination of Redundant constraints</source>
-      <translation type="unfinished">Solving algorithm used for determination of Redundant constraints</translation>
+      <translation>Алгоритм рішення, що використовується для визначення надлишкових обмежень</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="373"/>
       <source>Redundant solver:</source>
-      <translation type="unfinished">Redundant solver:</translation>
+      <translation>Надлишковий Вирішувач:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="380"/>
       <source>Solver used to determine whether a group is redundant or conflicting</source>
-      <translation type="unfinished">Solver used to determine whether a group is redundant or conflicting</translation>
+      <translation>Вирішувач використовується для визначення надлишковості чи конфліктів групи</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="415"/>
       <source>Maximum number of iterations of the solver used for determination of Redundant constraints</source>
-      <translation type="unfinished">Maximum number of iterations of the solver used for determination of Redundant constraints</translation>
+      <translation>Максимальна кількість ітерацій вирішувача, що використовуються для визначення надлишкових обмежень</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="418"/>
       <source>Redundant max. iterations:</source>
-      <translation type="unfinished">Redundant max. iterations:</translation>
+      <translation>Максимальна кількість ітерацій надлишковості:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="425"/>
       <source>Same as &apos;Maximum iterations&apos;, but for redundant solving</source>
-      <translation type="unfinished">Same as &apos;Maximum iterations&apos;, but for redundant solving</translation>
+      <translation>Те саме, що і &apos;Максимальна кількість ітерації&apos;, але для визначення надлишкових обмежень</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="451"/>
       <source>If selected, the Maximum iterations value for the redundant algorithm is multiplied by the sketch size</source>
-      <translation type="unfinished">If selected, the Maximum iterations value for the redundant algorithm is multiplied by the sketch size</translation>
+      <translation>Якщо вибрано, максимальне значення ітерацій для надлишкового алгоритму множиться на розмір ескізу</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="454"/>
       <source>Redundant sketch size multiplier:</source>
-      <translation type="unfinished">Redundant sketch size multiplier:</translation>
+      <translation>Множник розміру надлишковості ескізу:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="461"/>
       <source>Same as &apos;Sketch size multiplier&apos;, but for redundant solving</source>
-      <translation type="unfinished">Same as &apos;Sketch size multiplier&apos;, but for redundant solving</translation>
+      <translation>Те саме, що і «Множник розміру ескізу», але для вирішення надлишкових обмежень</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="484"/>
       <source>Error threshold under which convergence is reached for the solving of redundant constraints</source>
-      <translation type="unfinished">Error threshold under which convergence is reached for the solving of redundant constraints</translation>
+      <translation>Поріг помилки, за якого досягається сходження вирішення надлишкових обмежень</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="487"/>
       <source>Redundant convergence</source>
-      <translation type="unfinished">Redundant convergence</translation>
+      <translation>Сходження надлишкових</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="494"/>
       <source>Same as &apos;Convergence&apos;, but for redundant solving</source>
-      <translation type="unfinished">Same as &apos;Convergence&apos;, but for redundant solving</translation>
+      <translation>Те саме, що і &quot;Сходження&quot;, але для вирішення надлишкових обмежень</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="497"/>
       <source>1E-10</source>
-      <translation type="unfinished">1E-10</translation>
+      <translation>1E-10</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="517"/>
       <source>Redundant param1</source>
-      <translation type="unfinished">Redundant param1</translation>
+      <translation>Надлишковий параметр1</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="541"/>
       <source>Redundant param2</source>
-      <translation type="unfinished">Redundant param2</translation>
+      <translation>Надлишковий параметр2</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="565"/>
       <source>Redundant param3</source>
-      <translation type="unfinished">Redundant param3</translation>
+      <translation>Надлишковий параметр3</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="589"/>
       <source>Degree of verbosity of the debug output to the console</source>
-      <translation type="unfinished">Degree of verbosity of the debug output to the console</translation>
+      <translation>Ступінь детальності виводу debug-повідомлень в консолі</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="592"/>
       <source>Console debug mode:</source>
-      <translation type="unfinished">Console debug mode:</translation>
+      <translation>Режим налагодження консолі:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="599"/>
       <source>Verbosity of console output</source>
-      <translation type="unfinished">Verbosity of console output</translation>
+      <translation>Детальність консольного виводу</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="612"/>
@@ -6011,22 +6009,22 @@ Eigen Sparse QR algorithm is optimized for sparse matrices; usually faster</tran
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="622"/>
       <source>Iteration Level</source>
-      <translation type="unfinished">Iteration Level</translation>
+      <translation>Рівень ітерації</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="634"/>
       <source>Solve</source>
-      <translation type="unfinished">Solve</translation>
+      <translation>Розв’язати</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="641"/>
       <source>Resets all solver values to their default values</source>
-      <translation type="unfinished">Resets all solver values to their default values</translation>
+      <translation>Скидає всі значення вирішувача на значення за замовчуванням</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherSolverAdvanced.ui" line="644"/>
       <source>Restore Defaults</source>
-      <translation type="unfinished">Restore Defaults</translation>
+      <translation>Відновити налаштування за замовчуванням</translation>
     </message>
   </context>
   <context>
@@ -6034,7 +6032,7 @@ Eigen Sparse QR algorithm is optimized for sparse matrices; usually faster</tran
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="7099"/>
       <source>and %1 more</source>
-      <translation type="unfinished">and %1 more</translation>
+      <translation>та %1 більше</translation>
     </message>
   </context>
   <context>
@@ -6062,12 +6060,12 @@ Eigen Sparse QR algorithm is optimized for sparse matrices; usually faster</tran
     <message>
       <location filename="../../Workbench.cpp" line="42"/>
       <source>Sketcher B-spline tools</source>
-      <translation type="unfinished">Sketcher B-spline tools</translation>
+      <translation>Інструменти B-сплайна ескіза</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="43"/>
       <source>Sketcher virtual space</source>
-      <translation type="unfinished">Sketcher virtual space</translation>
+      <translation>Віртуальний простір ескізу</translation>
     </message>
   </context>
 </TS>
