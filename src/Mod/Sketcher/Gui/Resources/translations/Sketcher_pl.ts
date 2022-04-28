@@ -6,12 +6,12 @@
     <message>
       <location filename="Profiles.py" line="56"/>
       <source>Creates a hexagonal profile</source>
-      <translation type="unfinished">Creates a hexagonal profile</translation>
+      <translation>Tworzy profil sześciokątny</translation>
     </message>
     <message>
       <location filename="Profiles.py" line="61"/>
       <source>Creates a hexagonal profile in the sketch</source>
-      <translation type="unfinished">Creates a hexagonal profile in the sketch</translation>
+      <translation>Tworzy profil sześciokątny na szkicu</translation>
     </message>
   </context>
   <context>
@@ -19,7 +19,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6837"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6838"/>
@@ -1039,7 +1039,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6776"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6777"/>
@@ -1083,7 +1083,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6868"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6869"/>
@@ -1114,7 +1114,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2392"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2393"/>
@@ -1132,7 +1132,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2253"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2254"/>
@@ -1176,7 +1176,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7020"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7021"/>
@@ -1195,7 +1195,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6982"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6983"/>
@@ -1544,7 +1544,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2420"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2421"/>
@@ -1588,7 +1588,7 @@ This will clear the &apos;Support&apos; property, if any.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6946"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6947"/>
@@ -1647,7 +1647,7 @@ w trybie ustawień lub przeglądania</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6908"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6909"/>
@@ -1742,7 +1742,7 @@ nieprawidłowych wiązań, zdegenerowanej geometrii itp.</translation>
     <message>
       <location filename="../../Command.cpp" line="764"/>
       <source>View sketch</source>
-      <translation type="unfinished">View sketch</translation>
+      <translation>Widok szkicu</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="765"/>
@@ -2281,7 +2281,7 @@ nieprawidłowych wiązań, zdegenerowanej geometrii itp.</translation>
     <message>
       <location filename="../../Workbench.cpp" line="37"/>
       <source>Sketcher</source>
-      <translation type="unfinished">Sketcher</translation>
+      <translation>Szkicownik</translation>
     </message>
   </context>
   <context>
@@ -3388,42 +3388,42 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="105"/>
       <source>Point</source>
-      <translation type="unfinished">Point</translation>
+      <translation>Punkt</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="106"/>
       <source>Line</source>
-      <translation type="unfinished">Line</translation>
+      <translation>Linia</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="107"/>
       <source>Arc</source>
-      <translation type="unfinished">Arc</translation>
+      <translation>Wzdłuż łuku</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="108"/>
       <source>Circle</source>
-      <translation type="unfinished">Circle</translation>
+      <translation>Okrąg</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="109"/>
       <source>Ellipse</source>
-      <translation type="unfinished">Ellipse</translation>
+      <translation>Elipsa</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="110"/>
       <source>Elliptical Arc</source>
-      <translation type="unfinished">Elliptical Arc</translation>
+      <translation>Łuk eliptyczny</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="111"/>
       <source>Hyperbolic Arc</source>
-      <translation type="unfinished">Hyperbolic Arc</translation>
+      <translation>Łuk hiperboliczny</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="112"/>
       <source>Parabolic Arc</source>
-      <translation type="unfinished">Parabolic Arc</translation>
+      <translation>Łuk paraboliczny</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="113"/>
@@ -3433,12 +3433,12 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="117"/>
       <source>Other</source>
-      <translation type="unfinished">Other</translation>
+      <translation>Inne</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="123"/>
       <source>Construction</source>
-      <translation type="unfinished">Construction</translation>
+      <translation>Konstrukcyjny</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="133"/>
@@ -3453,7 +3453,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="6896"/>
       <source>Transform</source>
-      <translation type="unfinished">Transform</translation>
+      <translation>Przemieszczenie</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="6897"/>
@@ -3529,112 +3529,112 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="52"/>
       <source>All</source>
-      <translation type="unfinished">All</translation>
+      <translation>Wszystkie</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="57"/>
       <source>Geometric</source>
-      <translation type="unfinished">Geometric</translation>
+      <translation>Geometryczne</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="62"/>
       <source>Datums</source>
-      <translation type="unfinished">Datums</translation>
+      <translation>Odniesienia</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="67"/>
       <source>Named</source>
-      <translation type="unfinished">Named</translation>
+      <translation>Nazwane</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="72"/>
       <source>Reference</source>
-      <translation type="unfinished">Reference</translation>
+      <translation>Odniesienie</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="77"/>
       <source>Coincident</source>
-      <translation type="unfinished">Coincident</translation>
+      <translation>Zbieżność</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="82"/>
       <source>Point on Object</source>
-      <translation type="unfinished">Point on Object</translation>
+      <translation>Punkt na obiekcie</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="87"/>
       <source>Vertical</source>
-      <translation type="unfinished">Vertical</translation>
+      <translation>Pionowo</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="92"/>
       <source>Horizontal</source>
-      <translation type="unfinished">Horizontal</translation>
+      <translation>Poziomo</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="97"/>
       <source>Parallel</source>
-      <translation type="unfinished">Parallel</translation>
+      <translation>Równolegle</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="102"/>
       <source>Perpendicular</source>
-      <translation type="unfinished">Perpendicular</translation>
+      <translation>Prostopadle</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="107"/>
       <source>Tangent</source>
-      <translation type="unfinished">Tangent</translation>
+      <translation>Stycznie</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="112"/>
       <source>Equality</source>
-      <translation type="unfinished">Equality</translation>
+      <translation>Równość</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="117"/>
       <source>Symmetric</source>
-      <translation type="unfinished">Symmetric</translation>
+      <translation>Symetrycznie</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="122"/>
       <source>Block</source>
-      <translation type="unfinished">Block</translation>
+      <translation>Zablokuj</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="127"/>
       <source>Horizontal Distance</source>
-      <translation type="unfinished">Horizontal Distance</translation>
+      <translation>Odległość pozioma</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="132"/>
       <source>Vertical Distance</source>
-      <translation type="unfinished">Vertical Distance</translation>
+      <translation>Odległość pionowa</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="137"/>
       <source>Distance</source>
-      <translation type="unfinished">Distance</translation>
+      <translation>Odległość</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="142"/>
       <source>Radius</source>
-      <translation type="unfinished">Radius</translation>
+      <translation>Promień</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="147"/>
       <source>Weight</source>
-      <translation type="unfinished">Weight</translation>
+      <translation>Grubość</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="152"/>
       <source>Diameter</source>
-      <translation type="unfinished">Diameter</translation>
+      <translation>Średnica</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="157"/>
       <source>Angle</source>
-      <translation type="unfinished">Angle</translation>
+      <translation>Kąt</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="162"/>
@@ -3644,12 +3644,12 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="167"/>
       <source>Internal Alignment</source>
-      <translation type="unfinished">Internal Alignment</translation>
+      <translation>Wyrównanie wewnętrzne</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="186"/>
       <source>Shows all the constraints in the list</source>
-      <translation type="unfinished">Shows all the constraints in the list</translation>
+      <translation>Pokazuje wszystkie wiązania na liście</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="189"/>
@@ -3659,7 +3659,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="202"/>
       <source>Hides all the constraints in the list</source>
-      <translation type="unfinished">Hides all the constraints in the list</translation>
+      <translation>Ukrywa wszystkie wiązania na liście</translation>
     </message>
     <message>
       <location filename="../../ConstraintMultiFilterDialog.ui" line="205"/>
@@ -3682,22 +3682,22 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="47"/>
       <source>Internal alignments will be hidden</source>
-      <translation type="unfinished">Internal alignments will be hidden</translation>
+      <translation>Wyrównania wewnętrzne zostaną ukryte</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="50"/>
       <source>Hide internal alignment</source>
-      <translation type="unfinished">Hide internal alignment</translation>
+      <translation>Ukryj wewnętrzne wyrównanie</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="72"/>
       <source>Extended information will be added to the list</source>
-      <translation type="unfinished">Extended information will be added to the list</translation>
+      <translation>Rozszerzone informacje zostaną dodane do listy</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="75"/>
       <source>Extended information</source>
-      <translation type="unfinished">Extended information</translation>
+      <translation>Informacje rozszerzone</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="100"/>
@@ -3707,7 +3707,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="112"/>
       <source>Constraint visualisation tracks filter selection so that filtered out constraints are hidden</source>
-      <translation type="unfinished">Constraint visualisation tracks filter selection so that filtered out constraints are hidden</translation>
+      <translation>Wyświetlanie wiązań podąża za wyborem filtra, dzięki czemu filtrowane wiązania pozostają ukryte</translation>
     </message>
     <message>
       <location filename="../../ConstraintSettingsDialog.ui" line="115"/>
@@ -3876,7 +3876,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6445"/>
       <source>Linking this will cause circular dependency. </source>
-      <translation type="unfinished">Linking this will cause circular dependency. </translation>
+      <translation>Powiązanie to spowoduje zależność cykliczną. </translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6456"/>
@@ -4799,122 +4799,122 @@ Nie znaleziono jednak żadnych wiązań z punktami końcowymi.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Formularz</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="40"/>
       <source>Filter:</source>
-      <translation type="unfinished">Filter:</translation>
+      <translation>Filtr:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="57"/>
       <source>All</source>
-      <translation type="unfinished">All</translation>
+      <translation>Wszystkie</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="62"/>
       <source>Geometric</source>
-      <translation type="unfinished">Geometric</translation>
+      <translation>Geometryczne</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="67"/>
       <source>Datums</source>
-      <translation type="unfinished">Datums</translation>
+      <translation>Odniesienia</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="72"/>
       <source>Named</source>
-      <translation type="unfinished">Named</translation>
+      <translation>Nazwane</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="77"/>
       <source>Reference</source>
-      <translation type="unfinished">Reference</translation>
+      <translation>Odniesienie</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="82"/>
       <source>Coincident</source>
-      <translation type="unfinished">Coincident</translation>
+      <translation>Zbieżność</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="87"/>
       <source>Point on Object</source>
-      <translation type="unfinished">Point on Object</translation>
+      <translation>Punkt na obiekcie</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="92"/>
       <source>Vertical</source>
-      <translation type="unfinished">Vertical</translation>
+      <translation>Pionowo</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="97"/>
       <source>Horizontal</source>
-      <translation type="unfinished">Horizontal</translation>
+      <translation>Poziomo</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="102"/>
       <source>Parallel</source>
-      <translation type="unfinished">Parallel</translation>
+      <translation>Równolegle</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="107"/>
       <source>Perpendicular</source>
-      <translation type="unfinished">Perpendicular</translation>
+      <translation>Prostopadle</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="112"/>
       <source>Tangent</source>
-      <translation type="unfinished">Tangent</translation>
+      <translation>Stycznie</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="117"/>
       <source>Equality</source>
-      <translation type="unfinished">Equality</translation>
+      <translation>Równość</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="122"/>
       <source>Symmetric</source>
-      <translation type="unfinished">Symmetric</translation>
+      <translation>Symetrycznie</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="127"/>
       <source>Block</source>
-      <translation type="unfinished">Block</translation>
+      <translation>Zablokuj</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="132"/>
       <source>Horizontal Distance</source>
-      <translation type="unfinished">Horizontal Distance</translation>
+      <translation>Odległość pozioma</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="137"/>
       <source>Vertical Distance</source>
-      <translation type="unfinished">Vertical Distance</translation>
+      <translation>Odległość pionowa</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="142"/>
       <source>Distance</source>
-      <translation type="unfinished">Distance</translation>
+      <translation>Odległość</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="147"/>
       <source>Radius</source>
-      <translation type="unfinished">Radius</translation>
+      <translation>Promień</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="152"/>
       <source>Weight</source>
-      <translation type="unfinished">Weight</translation>
+      <translation>Grubość</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="157"/>
       <source>Diameter</source>
-      <translation type="unfinished">Diameter</translation>
+      <translation>Średnica</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="162"/>
       <source>Angle</source>
-      <translation type="unfinished">Angle</translation>
+      <translation>Kąt</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="167"/>
@@ -4924,7 +4924,7 @@ Nie znaleziono jednak żadnych wiązań z punktami końcowymi.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="172"/>
       <source>Internal Alignment</source>
-      <translation type="unfinished">Internal Alignment</translation>
+      <translation>Wyrównanie wewnętrzne</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="177"/>
@@ -4954,12 +4954,12 @@ Nie znaleziono jednak żadnych wiązań z punktami końcowymi.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="223"/>
       <source>Settings</source>
-      <translation type="unfinished">Settings</translation>
+      <translation>Ustawienia</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="247"/>
       <source>Shows all the constraints in the list</source>
-      <translation type="unfinished">Shows all the constraints in the list</translation>
+      <translation>Pokazuje wszystkie wiązania na liście</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="250"/>
@@ -4969,7 +4969,7 @@ Nie znaleziono jednak żadnych wiązań z punktami końcowymi.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="263"/>
       <source>Hides all the constraints in the list</source>
-      <translation type="unfinished">Hides all the constraints in the list</translation>
+      <translation>Ukrywa wszystkie wiązania na liście</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.ui" line="266"/>
@@ -4989,7 +4989,7 @@ Nie znaleziono jednak żadnych wiązań z punktami końcowymi.</translation>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="637"/>
       <source>Constraints</source>
-      <translation type="unfinished">Constraints</translation>
+      <translation>Wiązania</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherConstraints.cpp" line="917"/>
@@ -4997,7 +4997,7 @@ Nie znaleziono jednak żadnych wiązań z punktami końcowymi.</translation>
       <location filename="../../TaskSketcherConstraints.cpp" line="1241"/>
       <location filename="../../TaskSketcherConstraints.cpp" line="1297"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Błąd</translation>
     </message>
   </context>
   <context>
@@ -5080,17 +5080,17 @@ Nie znaleziono jednak żadnych wiązań z punktami końcowymi.</translation>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="402"/>
       <source>Type</source>
-      <translation type="unfinished">Type</translation>
+      <translation>Typ</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="403"/>
       <source>Name</source>
-      <translation type="unfinished">Name</translation>
+      <translation>Nazwa</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="404"/>
       <source>Reference</source>
-      <translation type="unfinished">Reference</translation>
+      <translation>Odniesienie</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherElements.cpp" line="405"/>
@@ -5688,7 +5688,7 @@ Chcesz odłączyć go od odniesienia?</translation>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="29"/>
       <source>Link</source>
-      <translation type="unfinished">Link</translation>
+      <translation>Odnośnik</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherMessages.ui" line="51"/>
