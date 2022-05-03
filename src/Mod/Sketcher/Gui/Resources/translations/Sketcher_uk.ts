@@ -3940,7 +3940,7 @@ You can select an existing export to modify.</translation>
       <location filename="../../SketchMirrorDialog.ui" line="14"/>
       <location filename="../../SketchMirrorDialog.ui" line="20"/>
       <source>Select Mirror Axis/Point</source>
-      <translation>Виберіть вісь/точку дзеркального відображення</translation>
+      <translation>Виберіть вісь/точку для дзеркального зображення</translation>
     </message>
     <message>
       <location filename="../../SketchMirrorDialog.ui" line="26"/>
