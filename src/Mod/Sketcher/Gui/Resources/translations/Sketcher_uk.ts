@@ -1252,7 +1252,7 @@ Pressed the button (or shortcut) to cycle behaviour</translation>
     <message>
       <location filename="../../Command.cpp" line="509"/>
       <source>Map sketch to face...</source>
-      <translation>Відобразити ескіз на поверхню...</translation>
+      <translation>Відобразити ескіз на грань...</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="510"/>
