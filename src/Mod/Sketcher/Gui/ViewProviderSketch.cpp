@@ -110,6 +110,7 @@
 #include <Gui/SoFCUnifiedSelection.h>
 #include <Gui/Inventor/MarkerBitmaps.h>
 #include <Gui/Inventor/SmSwitchboard.h>
+#include <Gui/PieMenu.h>
 
 #include <Mod/Part/App/Geometry.h>
 #include <Mod/Part/App/BodyBase.h>
@@ -125,6 +126,8 @@
 #include "DrawSketchHandler.h"
 #include "TaskDlgEditSketch.h"
 #include "TaskSketcherValidation.h"
+#include "TaskSketcherConstraints.h"
+#include "Workbench.h"
 #include "CommandConstraints.h"
 #include "ViewProviderSketchGeometryExtension.h"
 #include <Mod/Sketcher/App/SolverGeometryExtension.h>
@@ -812,6 +815,61 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
     }
     catch (const Base::DivisionByZeroError&) {
         return false;
+    }
+
+    if (_Mode == STATUS_NONE && !pressed && Button == 2) {
+        QMenu menu;
+        if (Gui::Selection().hasPreselection()) {
+            auto sel = Gui::Selection().getPreselection();
+            if (!Gui::Selection().isSelected(sel.pDocName, sel.pObjectName, sel.pSubName, 0)) {
+                if (!(QApplication::queryKeyboardModifiers() & Qt::ShiftModifier))
+                    Gui::Selection().clearSelection();
+                Gui::SelectionNoTopParentCheck guard;
+                Gui::Selection().addSelection(sel.pDocName, sel.pObjectName, sel.pSubName);
+            }
+        }
+        if (!edit->SelConstraintSet.empty()) {
+            if (auto inst = ConstraintView::getInstance())
+                inst->populateMenu(menu);
+        }
+        else if (!Gui::Selection().hasSelection()) {
+            Gui::MenuItem mitems;
+            addSketcherWorkbenchGeometries(mitems);
+            Gui::MenuManager::getInstance()->setupContextMenu(&mitems, menu);
+        } else {
+            Gui::MenuItem mitems;
+            Gui::MenuItem *cstrItems = new Gui::MenuItem;
+            cstrItems->setCommand(QT_TRANSLATE_NOOP("Sketcher", "Add constraint"));
+            addSketcherWorkbenchConstraints(*cstrItems);
+            Gui::MenuItem *toolsItems = new Gui::MenuItem;
+            toolsItems->setCommand(QT_TRANSLATE_NOOP("Sketcher", "Tools"));
+            *toolsItems << "Sketcher_Trimming"
+                       << "Sketcher_Extend"
+                       << "Sketcher_Split"
+                       << "Sketcher_CarbonCopy"
+                       << "Sketcher_ExportGeometry"
+                       << "Sketcher_ExportCompound"
+                       << "Sketcher_SwapGeometryID";
+            Gui::MenuItem *bsplineItems = new Gui::MenuItem;
+            bsplineItems->setCommand(QT_TRANSLATE_NOOP("Sketcher", "BSpline tools"));
+            addSketcherWorkbenchBSplines(*bsplineItems);
+            mitems << cstrItems
+                   << "Separator";
+            if (auto cmd = dynamic_cast<Gui::GroupCommand*>(
+                        Gui::Application::Instance->commandManager().getCommandByName("Sketcher_ExternalCmds"))) {
+                for(auto c : cmd->getCommands())
+                    mitems << c->getName();
+            }
+            mitems << "Separator"
+                   << "Sketcher_ToggleConstruction"
+                   << toolsItems
+                   << bsplineItems
+                   << "Separator";
+            addSketcherWorkbenchVirtualSpace(mitems);
+            Gui::MenuManager::getInstance()->setupContextMenu(&mitems, menu);
+        }
+        menu.exec(QCursor::pos());
+        return true;
     }
 
     // Both Mouse button is down, cancel current mode to avoid conflict with

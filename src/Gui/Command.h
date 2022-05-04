@@ -663,6 +663,7 @@ public:
     Command *addCommand(const char *cmdName);
 
     Command *getCommand(int idx) const;
+    std::vector<Command*> getCommands() const;
 
     virtual void refreshIcon();
 

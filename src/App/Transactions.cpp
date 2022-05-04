@@ -245,10 +245,6 @@ TransactionGuard::~TransactionGuard()
         }
     }
 
-    for (auto obj : _PendingRemove)
-        delete obj;
-    _PendingRemove.clear();
-
     switch (transactionType) {
     case Undo:
         for (auto &docName : _TransactionDocs) {
@@ -287,12 +283,16 @@ TransactionGuard::~TransactionGuard()
     default:
         break;
     }
+
+    for (auto obj : _PendingRemove)
+        delete obj;
+    _PendingRemove.clear();
     _TransactionDocs.clear();
 }
 
 bool TransactionGuard::addPendingRemove(TransactionalObject *obj)
 {
-    if(!_TransactionActive)
+    if(!_TransactionActive && !_FlushingProps)
         return false;
     obj->detachFromDocument();
     _PendingRemove.push_back(obj);

@@ -1056,6 +1056,16 @@ Command *GroupCommand::getCommand(int idx) const
     return nullptr;
 }
 
+std::vector<Command*> GroupCommand::getCommands() const
+{
+    std::vector<Command*> res;
+    for (const auto &v : cmds) {
+        if (v.first)
+            res.push_back(v.first);
+    }
+    return res;
+}
+
 Action * GroupCommand::createAction(void) {
     ActionGroup* pcAction = new ActionGroup(this, getMainWindow());
     pcAction->setMenuRole(QAction::NoRole);

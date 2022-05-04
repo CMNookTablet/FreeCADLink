@@ -44,6 +44,7 @@
 #include "SoFCSelection.h"
 #include "Window.h"
 #include "ViewProviderOrigin.h"
+#include "BitmapFactory.h"
 
 #include "ViewProviderOriginFeature.h"
 
@@ -245,4 +246,25 @@ bool ViewProviderOriginFeature::onDelete(const std::vector<std::string> &) {
     } else {
         return true;
     }
+}
+
+QIcon ViewProviderOriginFeature::getIcon() const
+{
+    App::OriginFeature *feat = static_cast <App::OriginFeature *> ( getObject() );
+    const char *pixmap;
+    if (feat->Role.getStrValue() == "X_Axis")
+        pixmap = "Std_AxisX";
+    else if (feat->Role.getStrValue() == "Y_Axis")
+        pixmap = "Std_AxisY";
+    else if (feat->Role.getStrValue() == "Z_Axis")
+        pixmap = "Std_AxisZ";
+    else if (feat->Role.getStrValue() == "XY_Plane")
+        pixmap = "Std_PlaneXY";
+    else if (feat->Role.getStrValue() == "XZ_Plane")
+        pixmap = "Std_PlaneXZ";
+    else if (feat->Role.getStrValue() == "YZ_Plane")
+        pixmap = "Std_PlaneYZ";
+    else
+        return ViewProviderGeometryObject::getIcon();
+    return Gui::BitmapFactory().iconFromTheme(pixmap);
 }

@@ -432,20 +432,35 @@ protected:
     QListWidget * view;
 };
 
+static ConstraintView *_ConstraintViewInstance;
+
 ConstraintView::ConstraintView(QWidget *parent)
     : QListWidget(parent)
 {
     ExpressionDelegate * delegate = new ExpressionDelegate(this);
     setItemDelegate(delegate);
+    _ConstraintViewInstance = this;
 }
 
 ConstraintView::~ConstraintView()
 {
+    _ConstraintViewInstance = nullptr;
+}
+
+ConstraintView *ConstraintView::getInstance()
+{
+    return _ConstraintViewInstance;
 }
 
 void ConstraintView::contextMenuEvent (QContextMenuEvent* event)
 {
     QMenu menu;
+    populateMenu(menu);
+    menu.exec(event->globalPos());
+}
+
+void ConstraintView::populateMenu(QMenu &menu)
+{
     QListWidgetItem* item = currentItem();
     QList<QListWidgetItem *> items = selectedItems();
 
@@ -456,18 +471,23 @@ void ConstraintView::contextMenuEvent (QContextMenuEvent* event)
     // Sync the FreeCAD selection with the selection in the ConstraintView widget
     if (didRelease) {
         Gui::Selection().clearSelection();
-        std::string doc_name = static_cast<ConstraintItem*>(item)->sketchView->getSketchObject()->getDocument()->getName();
-        std::string obj_name = static_cast<ConstraintItem*>(item)->sketchView->getSketchObject()->getNameInDocument();
 
-        std::vector<std::string> constraintSubNames;
-        for (auto&& it : items) {
-            auto ci = static_cast<ConstraintItem*>(it);
-            std::string constraint_name = Sketcher::PropertyConstraintList::getConstraintName(ci->ConstraintNbr);
-            constraintSubNames.push_back(constraint_name.c_str());
+        if (auto parent = qobject_cast<TaskSketcherConstraints*>(parentWidget())) {
+            if (auto sketchView = parent->getViewProvider()) {
+                std::string doc_name = sketchView->getSketchObject()->getDocument()->getName();
+                std::string obj_name = sketchView->getSketchObject()->getNameInDocument();
+
+                std::vector<std::string> constraintSubNames;
+                for (auto&& it : items) {
+                    auto ci = static_cast<ConstraintItem*>(it);
+                    std::string constraint_name = Sketcher::PropertyConstraintList::getConstraintName(ci->ConstraintNbr);
+                    constraintSubNames.push_back(constraint_name.c_str());
+                }
+
+                if(!constraintSubNames.empty())
+                    Gui::Selection().addSelections(doc_name.c_str(), obj_name.c_str(), constraintSubNames);
+            }
         }
-
-        if(!constraintSubNames.empty())
-            Gui::Selection().addSelections(doc_name.c_str(), obj_name.c_str(), constraintSubNames);
     }
 
     bool isQuantity = false;
@@ -524,8 +544,6 @@ void ConstraintView::contextMenuEvent (QContextMenuEvent* event)
 
     QAction* swap = menu.addAction(tr("Swap constraint names"), this, SLOT(swapNamedOfSelectedItems()));
     swap->setEnabled(items.size() == 2);
-
-    menu.exec(event->globalPos());
 }
 
 CONTEXT_MEMBER_DEF("Sketcher_SelectElementsAssociatedWithConstraints",doSelectConstraints)

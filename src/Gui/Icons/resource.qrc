@@ -253,7 +253,13 @@
         <file>GeofeaturegroupAddActive.svg</file>
         <file>Geoassembly.svg</file>
         <file>Std_Axis.svg</file>
+        <file>Std_AxisX.svg</file>
+        <file>Std_AxisY.svg</file>
+        <file>Std_AxisZ.svg</file>
         <file>Std_Plane.svg</file>
+        <file>Std_PlaneXY.svg</file>
+        <file>Std_PlaneXZ.svg</file>
+        <file>Std_PlaneYZ.svg</file>
         <file>Link.svg</file>
         <file>LinkArray.svg</file>
         <file>LinkElement.svg</file>
