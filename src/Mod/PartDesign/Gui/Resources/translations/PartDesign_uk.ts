@@ -268,12 +268,12 @@
     <message>
       <location filename="../../Command.cpp" line="1178"/>
       <source>PartDesign</source>
-      <translation type="unfinished">PartDesign</translation>
+      <translation>ДизайнДеталі</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="1179"/>
       <source>Extrusion</source>
-      <translation type="unfinished">Extrusion</translation>
+      <translation>Екструзія</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="1180"/>
@@ -306,12 +306,12 @@ The resulting shape standalone and not merged into tip.</translation>
     <message>
       <location filename="../../Command.cpp" line="2289"/>
       <source>PartDesign</source>
-      <translation type="unfinished">PartDesign</translation>
+      <translation>ДизайнДеталі</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2290"/>
       <source>GenericPattern</source>
-      <translation type="unfinished">GenericPattern</translation>
+      <translation>ЗагальнийМасив</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2291"/>
@@ -3638,17 +3638,17 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
     <message>
       <location filename="../../Command.cpp" line="424"/>
       <source>ShapeBinde</source>
-      <translation type="unfinished">ShapeBinde</translation>
+      <translation>Пов'язФОрма</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="518"/>
       <source>Clone</source>
-      <translation type="unfinished">Clone</translation>
+      <translation>Клон</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="519"/>
       <source>Body</source>
-      <translation type="unfinished">Body</translation>
+      <translation>Тіло</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="625"/>
@@ -3663,7 +3663,7 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
     <message>
       <location filename="../../Command.cpp" line="670"/>
       <source>Sketch</source>
-      <translation type="unfinished">Sketch</translation>
+      <translation>Ескіз</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="700"/>
@@ -3781,22 +3781,22 @@ Or use SubShapeBinder to import it into the body</translation>
     <message>
       <location filename="../../Command.cpp" line="2507"/>
       <source>MultiTransform</source>
-      <translation type="unfinished">MultiTransform</translation>
+      <translation>Мультиперетворення</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2647"/>
       <source>Boolean</source>
-      <translation type="unfinished">Boolean</translation>
+      <translation>Логічна</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2664"/>
       <source>Reference</source>
-      <translation type="unfinished">Reference</translation>
+      <translation>Посилання</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2743"/>
       <source>Split</source>
-      <translation type="unfinished">Split</translation>
+      <translation>Розділення</translation>
     </message>
     <message>
       <location filename="../../CommandBody.cpp" line="77"/>
