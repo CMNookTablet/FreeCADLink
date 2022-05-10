@@ -667,7 +667,7 @@ void CmdPartDesignNewSketch::activated(int iMsg)
         reference = Part::SubShapeBinder::import(reference, bodyT);
 
     // create Sketch on Face or Plane
-    QString L10nFeatName = CmdPartDesignNewSketch::tr("Sketch");
+    QString L10nFeatName = QObject::tr("Sketch");
 //    std::string FeatName = getUniqueObjectName(),pcActiveBody);
 //    QString L10nFeatName = QObject::tr("Sketch");
     std::string FeatName = getUniqueObjectName(qUtf8Printable(L10nFeatName),pcActiveBody);

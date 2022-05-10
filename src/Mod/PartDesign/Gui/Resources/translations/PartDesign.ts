@@ -515,11 +515,6 @@ The resulting shape standalone and not merged into tip.</source>
         <source>Create a new sketch</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../Command.cpp" line="670"/>
-        <source>Sketch</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CmdPartDesignPad</name>
@@ -3629,6 +3624,11 @@ overlap. Uncheck this option to perform operation in sequence.</source>
     <message>
         <location filename="../../Command.cpp" line="626"/>
         <source>You need a planar face as support for a sketch!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="670"/>
+        <source>Sketch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
