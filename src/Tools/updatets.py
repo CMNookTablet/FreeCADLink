@@ -50,13 +50,13 @@ Version:
   0.4
 """
 
-import os, re
+import os, sys
 
 directories = [
         {"tsname":"FreeCAD", "workingdir":"./src/Gui", "tsdir":"Language"},
         {"tsname":"AddonManager", "workingdir":"./src/Mod/AddonManager/", "tsdir":"Resources/translations"},
         {"tsname":"Arch", "workingdir":"./src/Mod/Arch/", "tsdir":"Resources/translations"},
-        {"tsname":"Assembly", "workingdir":"./src/Mod/Assembly/", "tsdir":"Gui/Resources/translations"},
+        #{"tsname":"Assembly", "workingdir":"./src/Mod/Assembly/", "tsdir":"Gui/Resources/translations"},
         {"tsname":"Draft", "workingdir":"./src/Mod/Draft/", "tsdir":"Resources/translations"},
         {"tsname":"Drawing", "workingdir":"./src/Mod/Drawing/", "tsdir":"Gui/Resources/translations"},
         {"tsname":"Fem", "workingdir":"./src/Mod/Fem/", "tsdir":"Gui/Resources/translations"},
@@ -93,8 +93,6 @@ def find_tools(noobsolete=True):
         QMAKE = "qmake"
     elif (os.system("qmake-qt5 -version") == 0):
         QMAKE = "qmake-qt5"
-    elif (os.system("qmake-qt4 -version") == 0):
-        QMAKE = "qmake-qt4"
     else:
         raise Exception("Cannot find qmake")
     if (os.system("lupdate -version") == 0):
@@ -106,15 +104,9 @@ def find_tools(noobsolete=True):
         LUPDATE = "lupdate-qt5"
         if noobsolete:
             LUPDATE += " -no-obsolete"
-    elif (os.system("lupdate-qt4 -version") == 0):
-        LUPDATE = "lupdate-qt4"
-        if noobsolete:
-            LUPDATE += " -noobsolete"
     else:
         raise Exception("Cannot find lupdate")
-    if (os.system("pyside2-lupdate -version") == 0):
-        PYLUPDATE = "pyside2-lupdate"
-    elif (os.system("pylupdate -version") == 0):
+    if (os.system("pylupdate -version") == 0):
         PYLUPDATE = "pylupdate"
     elif (os.system("pylupdate5 -version") == 0):
         PYLUPDATE = "pylupdate5"
@@ -124,6 +116,9 @@ def find_tools(noobsolete=True):
         PYLUPDATE = "pylupdate4"
         if noobsolete:
             PYLUPDATE += " -noobsolete"
+    elif (os.system("pyside2-lupdate -version") == 0):
+        PYLUPDATE = "pyside2-lupdate"
+        raise Exception("Please do not use pyside2-lupdate at the moment, as it shows encoding problems. Please use pylupdate5 instead.")
     else:
         raise Exception("Cannot find pylupdate")
     if (os.system("lconvert -h") == 0):
@@ -153,15 +148,16 @@ def update_translation(entry):
     tsBasename = os.path.join(entry["tsdir"],entry["tsname"])
 
     execline = []
-    execline.append (f"{QMAKE} -project -o {project_filename}")
-    execline.append (f"sed 's/<translation.*>.*<\/translation>/<translation type=\"unfinished\"><\/translation>/g' {tsBasename}.ts > {tsBasename}.ts.temp")
-    execline.append (f"touch {tsBasename}.ts") # In case it didn't get created above
+    execline.append (f"touch dummy_cpp_file_for_lupdate.cpp") #lupdate requires at least one source file to process the UI files
+    execline.append (f"{QMAKE} -project -o {project_filename} -r")
     execline.append (f"{LUPDATE} {project_filename} -ts {tsBasename}.ts {log_redirect}")
+    execline.append (f"sed 's/<translation.*>.*<\/translation>/<translation type=\"unfinished\"><\/translation>/g' {tsBasename}.ts > {tsBasename}.ts.temp")
     execline.append (f"mv {tsBasename}.ts.temp {tsBasename}.ts")
     execline.append (f"{PYLUPDATE} `find ./ -name \"*.py\"` -ts {tsBasename}py.ts {log_redirect}")
     execline.append (f"{LCONVERT} -i {tsBasename}py.ts {tsBasename}.ts -o {tsBasename}.ts {log_redirect}")
     execline.append (f"rm {tsBasename}py.ts")
-    print(f"Executing special commands in {entry['workingdir']}:")
+    execline.append (f"rm dummy_cpp_file_for_lupdate.cpp")
+    print(f"Executing commands in {entry['workingdir']}:")
     for line in execline:
         print (line)
         os.system(line)
@@ -175,7 +171,7 @@ def update_translation(entry):
     
     os.chdir(cur)
 
-def main():
+def main(mod=None):
 
     find_tools()
     path = os.path.realpath(__file__)
@@ -184,11 +180,21 @@ def main():
     os.chdir("..")
     os.chdir("..")
     print("\n\n\n BEGINNING TRANSLATION EXTRACTION \n\n")
-    for i in directories:
-        update_translation(i)
+    if mod:
+        for i in directories:
+            if i["tsname"] == mod:
+                print("WARNING - Updating",mod,"ONLY")
+                update_translation(i)
+                break
+    else:
+        for i in directories:
+            update_translation(i)
     print("\nIf updatets.py was run successfully, the next step is to run ./src/Tools/updatecrowdin.py")
     print("stderr output from lupdate can be found in tsupdate_stderr.log")
     print("stdout output from lupdate can be found in tsupdate_stdout.log")
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv[1:]) > 0:
+        main(sys.argv[1])
+    else:
+        main()
