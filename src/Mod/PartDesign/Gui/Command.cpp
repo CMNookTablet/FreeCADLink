@@ -421,7 +421,8 @@ void CmdPartDesignShapeBinder::activated(int iMsg)
         if (pcActiveBody == 0)
             return;
 
-        std::string FeatName = getUniqueObjectName("ShapeBinder",pcActiveBody);
+        QString L10nFeatName = QObject::tr("ShapeBinde");
+        std::string FeatName = getUniqueObjectName(qUtf8Printable(L10nFeatName),pcActiveBody);
 
         openCommand(QT_TRANSLATE_NOOP("Command", "Create ShapeBinder"));
         Gui::cmdAppObject(pcActiveBody, std::ostringstream()
@@ -514,8 +515,10 @@ void CmdPartDesignClone::activated(int iMsg)
         // requires a body where it is part of.
         openCommand(QT_TRANSLATE_NOOP("Command", "Create Clone"));
         auto obj = objs[0];
-        std::string FeatName = getUniqueObjectName("Clone",obj);
-        std::string BodyName = getUniqueObjectName("Body",obj);
+        QString L10nFeatName = QObject::tr("Clone");
+        QString L10nBodyName = QObject::tr("Body");
+        std::string FeatName = getUniqueObjectName(qUtf8Printable(L10nFeatName),obj);
+        std::string BodyName = getUniqueObjectName(qUtf8Printable(L10nBodyName),obj);
         FCMD_OBJ_DOC_CMD(obj,"addObject('PartDesign::Body','" << BodyName << "')");
         FCMD_OBJ_DOC_CMD(obj,"addObject('PartDesign::FeatureBase','" << FeatName << "')");
         auto Feat = obj->getDocument()->getObject(FeatName.c_str());
@@ -664,7 +667,10 @@ void CmdPartDesignNewSketch::activated(int iMsg)
         reference = Part::SubShapeBinder::import(reference, bodyT);
 
     // create Sketch on Face or Plane
-    std::string FeatName = getUniqueObjectName("Sketch",pcActiveBody);
+    QString L10nFeatName = CmdPartDesignNewSketch::tr("Sketch");
+//    std::string FeatName = getUniqueObjectName(),pcActiveBody);
+//    QString L10nFeatName = QObject::tr("Sketch");
+    std::string FeatName = getUniqueObjectName(qUtf8Printable(L10nFeatName),pcActiveBody);
 
     openCommand(QT_TRANSLATE_NOOP("Command", "Create a Sketch on Face"));
     Gui::cmdAppObject(pcActiveBody, std::ostringstream()
@@ -2498,7 +2504,8 @@ void CmdPartDesignMultiTransform::activated(int iMsg)
     if (trFeat) {
 
         // Create a MultiTransform feature and move the Transformed feature inside it
-        std::string FeatName = getUniqueObjectName("MultiTransform",pcActiveBody);
+        QString L10nFeatName = QObject::tr("MultiTransform");
+        std::string FeatName = getUniqueObjectName(qUtf8Printable(L10nFeatName),pcActiveBody);
         std::string baseFeature = getObjectCmd(trFeat->BaseFeature.getValue());
         Gui::cmdAppObject(pcActiveBody, std::ostringstream()
                 << "newObjectAt('PartDesign::MultiTransform','"
@@ -2637,7 +2644,8 @@ void CmdPartDesignBoolean::activated(int iMsg)
     }
 
     openCommand(QT_TRANSLATE_NOOP("Command", "Create Boolean"));
-    std::string FeatName = getUniqueObjectName("Boolean",pcActiveBody);
+    QString L10nFeatName = QObject::tr("Boolean");
+    std::string FeatName = getUniqueObjectName(qUtf8Printable(L10nFeatName),pcActiveBody);
     Gui::cmdAppObject(pcActiveBody, std::ostringstream()
             << "newObjectAt('PartDesign::Boolean','" << FeatName << "', "
                         <<  "FreeCADGui.Selection.getSelection())");
@@ -2653,7 +2661,8 @@ void CmdPartDesignBoolean::activated(int iMsg)
     }
 
     for(auto &v : binderLinks) {
-        std::string FeatName = getUniqueObjectName("Reference",pcActiveBody);
+        QString L10nFeatName = QObject::tr("Reference");
+        std::string FeatName = getUniqueObjectName(qUtf8Printable(L10nFeatName),pcActiveBody);
         Gui::cmdAppObject(pcActiveBody, std::ostringstream()
                 << "newObject('PartDesign::SubShapeBinder','" << FeatName << "')");
         auto binder = Base::freecad_dynamic_cast<PartDesign::SubShapeBinder>(
@@ -2731,7 +2740,8 @@ void CmdPartDesignSplit::activated(int iMsg)
     const std::string &parentSub = objT.getSubName();
 
     openCommand("Create Split");
-    std::string FeatName = getUniqueObjectName("Split",pcActiveBody);
+    QString L10nFeatName = QObject::tr("Split");
+    std::string FeatName = getUniqueObjectName(qUtf8Printable(L10nFeatName),pcActiveBody);
     Gui::cmdAppObject(pcActiveBody, std::ostringstream()
             << "newObjectAt('PartDesign::Split','" << FeatName << "', "
                         <<  "FreeCADGui.Selection.getSelection())");
