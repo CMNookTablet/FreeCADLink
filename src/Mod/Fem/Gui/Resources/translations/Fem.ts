@@ -4,12 +4,12 @@
 <context>
     <name>BoundarySelector</name>
     <message>
-        <location filename="selection_widgets.py" line="132"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="132"/>
         <source>Select Faces/Edges/Vertexes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="136"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="133"/>
         <source>To add references: select them in the 3D view  and click &quot;Add&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,47 +17,47 @@
 <context>
     <name>ControlWidget</name>
     <message>
-        <location filename="solver_taskpanel.py" line="215"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="215"/>
         <source>Solver Control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="226"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="226"/>
         <source>Working Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="303"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="303"/>
         <source>Write</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="312"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="312"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="245"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="245"/>
         <source>Elapsed Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="309"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="309"/>
         <source>Run</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="311"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="311"/>
         <source>Re-write</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="313"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="313"/>
         <source>Re-run</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="315"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="315"/>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
@@ -65,32 +65,32 @@
 <context>
     <name>GeometryElementsSelection</name>
     <message>
-        <location filename="selection_widgets.py" line="273"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="272"/>
         <source>Geometry reference selector for a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="276"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="276"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="283"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="280"/>
         <source>Click on &quot;Add&quot; and select geometric elements to add them to the list.{}The following geometry elements are allowed to select: {}{}{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="286"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="285"/>
         <source>{}If no geometry is added to the list, all remaining ones are used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="300"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="300"/>
         <source>Selection mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="302"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="302"/>
         <source>Solid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -98,12 +98,12 @@
 <context>
     <name>SolidSelector</name>
     <message>
-        <location filename="selection_widgets.py" line="151"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="151"/>
         <source>Select Solids</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="155"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="152"/>
         <source>Select elements part of the solid that shall be added to the list. To add the solid click &quot;Add&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,12 +111,12 @@
 <context>
     <name>_Selector</name>
     <message>
-        <location filename="selection_widgets.py" line="52"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="52"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="53"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="53"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3126,30 +3126,6 @@ exported from FreeCAD.</source>
     <message>
         <location filename="../../ViewProviderFemConstraint.cpp" line="148"/>
         <source>Edit constraint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderFemConstraintBearing.cpp" line="77"/>
-        <location filename="../../ViewProviderFemConstraintFixed.cpp" line="77"/>
-        <location filename="../../ViewProviderFemConstraintFluidBoundary.cpp" line="75"/>
-        <location filename="../../ViewProviderFemConstraintForce.cpp" line="76"/>
-        <location filename="../../ViewProviderFemConstraintGear.cpp" line="76"/>
-        <location filename="../../ViewProviderFemConstraintPulley.cpp" line="75"/>
-        <location filename="../../ViewProviderFemPostFunction.cpp" line="277"/>
-        <location filename="../../ViewProviderFemPostObject.cpp" line="579"/>
-        <source>A dialog is already open in the task panel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderFemConstraintBearing.cpp" line="78"/>
-        <location filename="../../ViewProviderFemConstraintFixed.cpp" line="78"/>
-        <location filename="../../ViewProviderFemConstraintFluidBoundary.cpp" line="76"/>
-        <location filename="../../ViewProviderFemConstraintForce.cpp" line="77"/>
-        <location filename="../../ViewProviderFemConstraintGear.cpp" line="77"/>
-        <location filename="../../ViewProviderFemConstraintPulley.cpp" line="76"/>
-        <location filename="../../ViewProviderFemPostFunction.cpp" line="278"/>
-        <location filename="../../ViewProviderFemPostObject.cpp" line="580"/>
-        <source>Do you want to close this dialog?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

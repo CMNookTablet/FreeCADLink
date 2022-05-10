@@ -4,12 +4,12 @@
 <context>
     <name>PartDesign_InvoluteGear</name>
     <message>
-        <location filename="InvoluteGearFeature.py" line="57"/>
+        <location filename="../../../InvoluteGearFeature.py" line="57"/>
         <source>Involute gear...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="InvoluteGearFeature.py" line="61"/>
+        <location filename="../../../InvoluteGearFeature.py" line="59"/>
         <source>Creates or edit the involute gear definition.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,12 +17,12 @@
 <context>
     <name>PartDesign_Sprocket</name>
     <message>
-        <location filename="SprocketFeature.py" line="62"/>
+        <location filename="../../../SprocketFeature.py" line="62"/>
         <source>Sprocket...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="SprocketFeature.py" line="66"/>
+        <location filename="../../../SprocketFeature.py" line="64"/>
         <source>Creates or edit the sprocket definition.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30,12 +30,12 @@
 <context>
     <name>WizardShaft</name>
     <message>
-        <location filename="WizardShaft.py" line="211"/>
+        <location filename="../../../WizardShaft/WizardShaft.py" line="210"/>
         <source>Shaft design wizard...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WizardShaft.py" line="212"/>
+        <location filename="../../../WizardShaft/WizardShaft.py" line="211"/>
         <source>Start the shaft design wizard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -43,42 +43,42 @@
 <context>
     <name>WizardShaftTable</name>
     <message>
-        <location filename="WizardShaftTable.py" line="43"/>
+        <location filename="../../../WizardShaft/WizardShaftTable.py" line="43"/>
         <source>Length [mm]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WizardShaftTable.py" line="44"/>
+        <location filename="../../../WizardShaft/WizardShaftTable.py" line="44"/>
         <source>Diameter [mm]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WizardShaftTable.py" line="45"/>
+        <location filename="../../../WizardShaft/WizardShaftTable.py" line="45"/>
         <source>Inner diameter [mm]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WizardShaftTable.py" line="46"/>
+        <location filename="../../../WizardShaft/WizardShaftTable.py" line="46"/>
         <source>Constraint type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WizardShaftTable.py" line="47"/>
+        <location filename="../../../WizardShaft/WizardShaftTable.py" line="47"/>
         <source>Start edge type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WizardShaftTable.py" line="48"/>
+        <location filename="../../../WizardShaft/WizardShaftTable.py" line="48"/>
         <source>Start edge size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WizardShaftTable.py" line="49"/>
+        <location filename="../../../WizardShaft/WizardShaftTable.py" line="49"/>
         <source>End edge type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WizardShaftTable.py" line="53"/>
+        <location filename="../../../WizardShaft/WizardShaftTable.py" line="50"/>
         <source>End edge size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -86,17 +86,17 @@
 <context>
     <name>CmdPartDesignAdditiveHelix</name>
     <message>
-        <location filename="../../Command.cpp" line="1699"/>
+        <location filename="../../Command.cpp" line="1649"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1700"/>
+        <location filename="../../Command.cpp" line="1650"/>
         <source>Additive helix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1701"/>
+        <location filename="../../Command.cpp" line="1651"/>
         <source>Sweep a selected sketch along a helix</source>
         <translation type="unfinished"></translation>
     </message>
@@ -104,17 +104,17 @@
 <context>
     <name>CmdPartDesignAdditiveLoft</name>
     <message>
-        <location filename="../../Command.cpp" line="1600"/>
+        <location filename="../../Command.cpp" line="1549"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1601"/>
+        <location filename="../../Command.cpp" line="1550"/>
         <source>Additive loft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1602"/>
+        <location filename="../../Command.cpp" line="1551"/>
         <source>Loft a selected profile through other profile sections</source>
         <translation type="unfinished"></translation>
     </message>
@@ -122,17 +122,17 @@
 <context>
     <name>CmdPartDesignAdditivePipe</name>
     <message>
-        <location filename="../../Command.cpp" line="1500"/>
+        <location filename="../../Command.cpp" line="1448"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1501"/>
+        <location filename="../../Command.cpp" line="1449"/>
         <source>Additive pipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1502"/>
+        <location filename="../../Command.cpp" line="1450"/>
         <source>Sweep a selected sketch along a path or to other profiles</source>
         <translation type="unfinished"></translation>
     </message>
@@ -140,17 +140,17 @@
 <context>
     <name>CmdPartDesignBody</name>
     <message>
-        <location filename="../../CommandBody.cpp" line="89"/>
+        <location filename="../../CommandBody.cpp" line="95"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="90"/>
+        <location filename="../../CommandBody.cpp" line="96"/>
         <source>Create body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="91"/>
+        <location filename="../../CommandBody.cpp" line="97"/>
         <source>Create a new body and make it active</source>
         <translation type="unfinished"></translation>
     </message>
@@ -158,17 +158,17 @@
 <context>
     <name>CmdPartDesignBoolean</name>
     <message>
-        <location filename="../../Command.cpp" line="2558"/>
+        <location filename="../../Command.cpp" line="2568"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2559"/>
+        <location filename="../../Command.cpp" line="2569"/>
         <source>Boolean operation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2560"/>
+        <location filename="../../Command.cpp" line="2570"/>
         <source>Boolean operation with two or more bodies</source>
         <translation type="unfinished"></translation>
     </message>
@@ -176,17 +176,17 @@
 <context>
     <name>CmdPartDesignCS</name>
     <message>
-        <location filename="../../Command.cpp" line="250"/>
+        <location filename="../../Command.cpp" line="364"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="251"/>
+        <location filename="../../Command.cpp" line="365"/>
         <source>Create a local coordinate system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="252"/>
+        <location filename="../../Command.cpp" line="366"/>
         <source>Create a new local coordinate system</source>
         <translation type="unfinished"></translation>
     </message>
@@ -194,17 +194,17 @@
 <context>
     <name>CmdPartDesignChamfer</name>
     <message>
-        <location filename="../../Command.cpp" line="1961"/>
+        <location filename="../../Command.cpp" line="1917"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1962"/>
+        <location filename="../../Command.cpp" line="1918"/>
         <source>Chamfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1963"/>
+        <location filename="../../Command.cpp" line="1919"/>
         <source>Chamfer the selected edges of a shape</source>
         <translation type="unfinished"></translation>
     </message>
@@ -212,17 +212,17 @@
 <context>
     <name>CmdPartDesignClone</name>
     <message>
-        <location filename="../../Command.cpp" line="430"/>
+        <location filename="../../Command.cpp" line="498"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="431"/>
+        <location filename="../../Command.cpp" line="499"/>
         <source>Create a clone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="432"/>
+        <location filename="../../Command.cpp" line="500"/>
         <source>Create a new clone</source>
         <translation type="unfinished"></translation>
     </message>
@@ -230,17 +230,17 @@
 <context>
     <name>CmdPartDesignDraft</name>
     <message>
-        <location filename="../../Command.cpp" line="1990"/>
+        <location filename="../../Command.cpp" line="1949"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1991"/>
+        <location filename="../../Command.cpp" line="1950"/>
         <source>Draft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1992"/>
+        <location filename="../../Command.cpp" line="1951"/>
         <source>Make a draft on a face</source>
         <translation type="unfinished"></translation>
     </message>
@@ -248,53 +248,90 @@
 <context>
     <name>CmdPartDesignDuplicateSelection</name>
     <message>
-        <location filename="../../CommandBody.cpp" line="606"/>
+        <location filename="../../CommandBody.cpp" line="699"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="607"/>
+        <location filename="../../CommandBody.cpp" line="700"/>
         <source>Duplicate selected object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="608"/>
+        <location filename="../../CommandBody.cpp" line="701"/>
         <source>Duplicates the selected object and adds it to the active body</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CmdPartDesignExtrusion</name>
+    <message>
+        <location filename="../../Command.cpp" line="1178"/>
+        <source>PartDesign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="1179"/>
+        <source>Extrusion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="1180"/>
+        <source>Extrude a vertex/edge/face/sketch.
+The resulting shape standalone and not merged into tip.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CmdPartDesignFillet</name>
     <message>
-        <location filename="../../Command.cpp" line="1933"/>
+        <location filename="../../Command.cpp" line="1886"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1934"/>
+        <location filename="../../Command.cpp" line="1887"/>
         <source>Fillet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1935"/>
+        <location filename="../../Command.cpp" line="1888"/>
         <source>Make a fillet on an edge, face or body</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CmdPartDesignGenericPattern</name>
+    <message>
+        <location filename="../../Command.cpp" line="2289"/>
+        <source>PartDesign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2290"/>
+        <source>GenericPattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2291"/>
+        <source>Create a generic pattern feature</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CmdPartDesignGroove</name>
     <message>
-        <location filename="../../Command.cpp" line="1434"/>
+        <location filename="../../Command.cpp" line="1381"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1435"/>
+        <location filename="../../Command.cpp" line="1382"/>
         <source>Groove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1436"/>
+        <location filename="../../Command.cpp" line="1383"/>
         <source>Groove a selected sketch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -302,17 +339,17 @@
 <context>
     <name>CmdPartDesignHole</name>
     <message>
-        <location filename="../../Command.cpp" line="1330"/>
+        <location filename="../../Command.cpp" line="1274"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1331"/>
+        <location filename="../../Command.cpp" line="1275"/>
         <source>Hole</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1332"/>
+        <location filename="../../Command.cpp" line="1276"/>
         <source>Create a hole with the selected sketch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -320,17 +357,17 @@
 <context>
     <name>CmdPartDesignLine</name>
     <message>
-        <location filename="../../Command.cpp" line="194"/>
+        <location filename="../../Command.cpp" line="308"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="195"/>
+        <location filename="../../Command.cpp" line="309"/>
         <source>Create a datum line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="196"/>
+        <location filename="../../Command.cpp" line="310"/>
         <source>Create a new datum line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -338,17 +375,17 @@
 <context>
     <name>CmdPartDesignLinearPattern</name>
     <message>
-        <location filename="../../Command.cpp" line="2257"/>
+        <location filename="../../Command.cpp" line="2219"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2258"/>
+        <location filename="../../Command.cpp" line="2220"/>
         <source>LinearPattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2259"/>
+        <location filename="../../Command.cpp" line="2221"/>
         <source>Create a linear pattern feature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -356,17 +393,17 @@
 <context>
     <name>CmdPartDesignMigrate</name>
     <message>
-        <location filename="../../CommandBody.cpp" line="312"/>
+        <location filename="../../CommandBody.cpp" line="403"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="313"/>
+        <location filename="../../CommandBody.cpp" line="404"/>
         <source>Migrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="314"/>
+        <location filename="../../CommandBody.cpp" line="405"/>
         <source>Migrate document to the modern PartDesign workflow</source>
         <translation type="unfinished"></translation>
     </message>
@@ -374,17 +411,17 @@
 <context>
     <name>CmdPartDesignMirrored</name>
     <message>
-        <location filename="../../Command.cpp" line="2195"/>
+        <location filename="../../Command.cpp" line="2149"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2196"/>
+        <location filename="../../Command.cpp" line="2150"/>
         <source>Mirrored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2197"/>
+        <location filename="../../Command.cpp" line="2151"/>
         <source>Create a mirrored feature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -392,17 +429,17 @@
 <context>
     <name>CmdPartDesignMoveFeature</name>
     <message>
-        <location filename="../../CommandBody.cpp" line="662"/>
+        <location filename="../../CommandBody.cpp" line="767"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="663"/>
+        <location filename="../../CommandBody.cpp" line="768"/>
         <source>Move object to other body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="664"/>
+        <location filename="../../CommandBody.cpp" line="769"/>
         <source>Moves the selected object to another body</source>
         <translation type="unfinished"></translation>
     </message>
@@ -410,17 +447,17 @@
 <context>
     <name>CmdPartDesignMoveFeatureInTree</name>
     <message>
-        <location filename="../../CommandBody.cpp" line="824"/>
+        <location filename="../../CommandBody.cpp" line="929"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="825"/>
+        <location filename="../../CommandBody.cpp" line="930"/>
         <source>Move object after other object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="826"/>
+        <location filename="../../CommandBody.cpp" line="931"/>
         <source>Moves the selected object and insert it after another object</source>
         <translation type="unfinished"></translation>
     </message>
@@ -428,17 +465,17 @@
 <context>
     <name>CmdPartDesignMoveTip</name>
     <message>
-        <location filename="../../CommandBody.cpp" line="527"/>
+        <location filename="../../CommandBody.cpp" line="620"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="528"/>
+        <location filename="../../CommandBody.cpp" line="621"/>
         <source>Set tip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="529"/>
+        <location filename="../../CommandBody.cpp" line="622"/>
         <source>Move the tip of the body</source>
         <translation type="unfinished"></translation>
     </message>
@@ -446,17 +483,17 @@
 <context>
     <name>CmdPartDesignMultiTransform</name>
     <message>
-        <location filename="../../Command.cpp" line="2435"/>
+        <location filename="../../Command.cpp" line="2456"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2436"/>
+        <location filename="../../Command.cpp" line="2457"/>
         <source>Create MultiTransform</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2437"/>
+        <location filename="../../Command.cpp" line="2458"/>
         <source>Create a multitransform feature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -464,35 +501,40 @@
 <context>
     <name>CmdPartDesignNewSketch</name>
     <message>
-        <location filename="../../Command.cpp" line="488"/>
+        <location filename="../../Command.cpp" line="561"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="489"/>
+        <location filename="../../Command.cpp" line="562"/>
         <source>Create sketch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="490"/>
+        <location filename="../../Command.cpp" line="563"/>
         <source>Create a new sketch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="670"/>
+        <source>Sketch</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CmdPartDesignPad</name>
     <message>
-        <location filename="../../Command.cpp" line="1229"/>
+        <location filename="../../Command.cpp" line="1124"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1230"/>
+        <location filename="../../Command.cpp" line="1125"/>
         <source>Pad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1231"/>
+        <location filename="../../Command.cpp" line="1126"/>
         <source>Pad a selected sketch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -500,17 +542,17 @@
 <context>
     <name>CmdPartDesignPlane</name>
     <message>
-        <location filename="../../Command.cpp" line="166"/>
+        <location filename="../../Command.cpp" line="280"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="167"/>
+        <location filename="../../Command.cpp" line="281"/>
         <source>Create a datum plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="168"/>
+        <location filename="../../Command.cpp" line="282"/>
         <source>Create a new datum plane</source>
         <translation type="unfinished"></translation>
     </message>
@@ -518,17 +560,17 @@
 <context>
     <name>CmdPartDesignPocket</name>
     <message>
-        <location filename="../../Command.cpp" line="1283"/>
+        <location filename="../../Command.cpp" line="1228"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1284"/>
+        <location filename="../../Command.cpp" line="1229"/>
         <source>Pocket</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1285"/>
+        <location filename="../../Command.cpp" line="1230"/>
         <source>Create a pocket with the selected sketch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -536,17 +578,17 @@
 <context>
     <name>CmdPartDesignPoint</name>
     <message>
-        <location filename="../../Command.cpp" line="222"/>
+        <location filename="../../Command.cpp" line="336"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="223"/>
+        <location filename="../../Command.cpp" line="337"/>
         <source>Create a datum point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="224"/>
+        <location filename="../../Command.cpp" line="338"/>
         <source>Create a new datum point</source>
         <translation type="unfinished"></translation>
     </message>
@@ -554,17 +596,17 @@
 <context>
     <name>CmdPartDesignPolarPattern</name>
     <message>
-        <location filename="../../Command.cpp" line="2321"/>
+        <location filename="../../Command.cpp" line="2336"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2322"/>
+        <location filename="../../Command.cpp" line="2337"/>
         <source>PolarPattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2323"/>
+        <location filename="../../Command.cpp" line="2338"/>
         <source>Create a polar pattern feature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -572,17 +614,17 @@
 <context>
     <name>CmdPartDesignRevolution</name>
     <message>
-        <location filename="../../Command.cpp" line="1376"/>
+        <location filename="../../Command.cpp" line="1319"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1377"/>
+        <location filename="../../Command.cpp" line="1320"/>
         <source>Revolution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1378"/>
+        <location filename="../../Command.cpp" line="1321"/>
         <source>Revolve a selected sketch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -590,49 +632,69 @@
 <context>
     <name>CmdPartDesignScaled</name>
     <message>
-        <location filename="../../Command.cpp" line="2386"/>
+        <location filename="../../Command.cpp" line="2404"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2387"/>
+        <location filename="../../Command.cpp" line="2405"/>
         <source>Scaled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2388"/>
-        <source>Create a scaled feature</source>
+        <location filename="../../Command.cpp" line="2406"/>
+        <source>Create a scaled feature. WARNING! Scaling may convert
+planar surface into BSpline, causing trouble in subsequent
+Modeling. Use with caution!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CmdPartDesignShapeBinder</name>
     <message>
-        <location filename="../../Command.cpp" line="282"/>
+        <location filename="../../Command.cpp" line="396"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="283"/>
+        <location filename="../../Command.cpp" line="397"/>
         <source>Create a shape binder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="284"/>
+        <location filename="../../Command.cpp" line="398"/>
         <source>Create a new shape binder</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CmdPartDesignSplit</name>
+    <message>
+        <location filename="../../Command.cpp" line="2714"/>
+        <source>PartDesign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2715"/>
+        <source>Split operation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2716"/>
+        <source>Split the previous feature into multiple solids</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CmdPartDesignSubShapeBinder</name>
     <message>
-        <location filename="../../Command.cpp" line="347"/>
+        <location filename="../../Command.cpp" line="463"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="348"/>
-        <location filename="../../Command.cpp" line="349"/>
+        <location filename="../../Command.cpp" line="464"/>
+        <location filename="../../Command.cpp" line="465"/>
         <source>Create a sub-object(s) shape binder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -640,17 +702,17 @@
 <context>
     <name>CmdPartDesignSubtractiveHelix</name>
     <message>
-        <location filename="../../Command.cpp" line="1769"/>
+        <location filename="../../Command.cpp" line="1716"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1770"/>
+        <location filename="../../Command.cpp" line="1717"/>
         <source>Subtractive helix</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1771"/>
+        <location filename="../../Command.cpp" line="1718"/>
         <source>Sweep a selected sketch along a helix and remove it from the body</source>
         <translation type="unfinished"></translation>
     </message>
@@ -658,17 +720,17 @@
 <context>
     <name>CmdPartDesignSubtractiveLoft</name>
     <message>
-        <location filename="../../Command.cpp" line="1650"/>
+        <location filename="../../Command.cpp" line="1601"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1651"/>
+        <location filename="../../Command.cpp" line="1602"/>
         <source>Subtractive loft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1652"/>
+        <location filename="../../Command.cpp" line="1603"/>
         <source>Loft a selected profile through other profile sections and remove it from the body</source>
         <translation type="unfinished"></translation>
     </message>
@@ -676,17 +738,17 @@
 <context>
     <name>CmdPartDesignSubtractivePipe</name>
     <message>
-        <location filename="../../Command.cpp" line="1550"/>
+        <location filename="../../Command.cpp" line="1500"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1551"/>
+        <location filename="../../Command.cpp" line="1501"/>
         <source>Subtractive pipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1552"/>
+        <location filename="../../Command.cpp" line="1502"/>
         <source>Sweep a selected sketch along a path or to other profiles and remove it from the body</source>
         <translation type="unfinished"></translation>
     </message>
@@ -694,17 +756,17 @@
 <context>
     <name>CmdPartDesignThickness</name>
     <message>
-        <location filename="../../Command.cpp" line="2047"/>
+        <location filename="../../Command.cpp" line="2006"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2048"/>
+        <location filename="../../Command.cpp" line="2007"/>
         <source>Thickness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2049"/>
+        <location filename="../../Command.cpp" line="2008"/>
         <source>Make a thick solid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -712,53 +774,53 @@
 <context>
     <name>CmdPrimtiveCompAdditive</name>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="69"/>
+        <location filename="../../CommandPrimitive.cpp" line="84"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="70"/>
-        <location filename="../../CommandPrimitive.cpp" line="71"/>
+        <location filename="../../CommandPrimitive.cpp" line="85"/>
+        <location filename="../../CommandPrimitive.cpp" line="86"/>
         <source>Create an additive primitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="199"/>
+        <location filename="../../CommandPrimitive.cpp" line="225"/>
         <source>Additive Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="203"/>
+        <location filename="../../CommandPrimitive.cpp" line="229"/>
         <source>Additive Cylinder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="207"/>
+        <location filename="../../CommandPrimitive.cpp" line="233"/>
         <source>Additive Sphere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="211"/>
+        <location filename="../../CommandPrimitive.cpp" line="237"/>
         <source>Additive Cone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="215"/>
+        <location filename="../../CommandPrimitive.cpp" line="241"/>
         <source>Additive Ellipsoid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="219"/>
+        <location filename="../../CommandPrimitive.cpp" line="245"/>
         <source>Additive Torus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="223"/>
+        <location filename="../../CommandPrimitive.cpp" line="249"/>
         <source>Additive Prism</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="227"/>
+        <location filename="../../CommandPrimitive.cpp" line="253"/>
         <source>Additive Wedge</source>
         <translation type="unfinished"></translation>
     </message>
@@ -766,53 +828,53 @@
 <context>
     <name>CmdPrimtiveCompSubtractive</name>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="243"/>
+        <location filename="../../CommandPrimitive.cpp" line="269"/>
         <source>PartDesign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="244"/>
-        <location filename="../../CommandPrimitive.cpp" line="245"/>
+        <location filename="../../CommandPrimitive.cpp" line="270"/>
+        <location filename="../../CommandPrimitive.cpp" line="271"/>
         <source>Create a subtractive primitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="355"/>
+        <location filename="../../CommandPrimitive.cpp" line="392"/>
         <source>Subtractive Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="359"/>
+        <location filename="../../CommandPrimitive.cpp" line="396"/>
         <source>Subtractive Cylinder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="363"/>
+        <location filename="../../CommandPrimitive.cpp" line="400"/>
         <source>Subtractive Sphere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="367"/>
+        <location filename="../../CommandPrimitive.cpp" line="404"/>
         <source>Subtractive Cone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="371"/>
+        <location filename="../../CommandPrimitive.cpp" line="408"/>
         <source>Subtractive Ellipsoid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="375"/>
+        <location filename="../../CommandPrimitive.cpp" line="412"/>
         <source>Subtractive Torus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="379"/>
+        <location filename="../../CommandPrimitive.cpp" line="416"/>
         <source>Subtractive Prism</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="383"/>
+        <location filename="../../CommandPrimitive.cpp" line="420"/>
         <source>Subtractive Wedge</source>
         <translation type="unfinished"></translation>
     </message>
@@ -820,99 +882,68 @@
 <context>
     <name>Command</name>
     <message>
-        <location filename="../../Command.cpp" line="303"/>
+        <location filename="../../Command.cpp" line="417"/>
         <source>Edit ShapeBinder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="312"/>
+        <location filename="../../Command.cpp" line="427"/>
         <source>Create ShapeBinder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="394"/>
-        <source>Create SubShapeBinder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="448"/>
+        <location filename="../../Command.cpp" line="516"/>
         <source>Create Clone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="645"/>
-        <location filename="../../Command.cpp" line="1159"/>
-        <source>Make copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="669"/>
-        <source>Create a Sketch on Face</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="690"/>
+        <location filename="../../Command.cpp" line="656"/>
         <source>Create a new Sketch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2484"/>
-        <source>Convert to MultiTransform feature</source>
+        <location filename="../../Command.cpp" line="675"/>
+        <source>Create a Sketch on Face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2575"/>
+        <location filename="../../Command.cpp" line="2646"/>
         <source>Create Boolean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="193"/>
+        <location filename="../../CommandBody.cpp" line="122"/>
         <source>Add a Body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="430"/>
+        <location filename="../../CommandBody.cpp" line="523"/>
         <source>Migrate legacy part design features to Bodies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="575"/>
+        <location filename="../../CommandBody.cpp" line="668"/>
         <source>Move tip to selected feature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="620"/>
+        <location filename="../../CommandBody.cpp" line="725"/>
         <source>Duplicate a PartDesign object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="738"/>
+        <location filename="../../CommandBody.cpp" line="843"/>
         <source>Move an object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="887"/>
+        <location filename="../../CommandBody.cpp" line="992"/>
         <source>Move an object inside tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="296"/>
-        <source>Mirrored</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="322"/>
-        <source>Make LinearPattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="358"/>
-        <source>PolarPattern</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="384"/>
-        <source>Scaled</source>
+        <location filename="../../ViewProvider.cpp" line="528"/>
+        <source>Auto import to body</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1018,9 +1049,50 @@
     </message>
 </context>
 <context>
+    <name>LoftProfileSelectionGate</name>
+    <message>
+        <location filename="../../TaskLoftParameters.cpp" line="85"/>
+        <source>Loft feature not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.cpp" line="89"/>
+        <source>Selecting this will cause circular dependency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.cpp" line="93"/>
+        <source>Section object cannot be used as profile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LoftSectionSelectionGate</name>
+    <message>
+        <location filename="../../TaskLoftParameters.cpp" line="128"/>
+        <source>Loft feature not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.cpp" line="132"/>
+        <source>Selecting this will cause circular dependency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.cpp" line="136"/>
+        <source>Profile object cannot be used as section.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.cpp" line="147"/>
+        <source>Section object must have the same number of wires.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PartDesign::Groove</name>
     <message>
-        <location filename="../../../App/FeatureGroove.cpp" line="110"/>
+        <location filename="../../../App/FeatureGroove.cpp" line="113"/>
         <source>The requested feature cannot be created. The reason may be that:
   - the active Body does not contain a base shape, so there is no
   material to be removed;
@@ -1031,18 +1103,7 @@
 <context>
     <name>PartDesign::Hole</name>
     <message>
-        <location filename="../../../App/FeatureHole.cpp" line="1608"/>
-        <source>The requested feature cannot be created. The reason may be that:
-  - the active Body does not contain a base shape, so there is no
-  material to be removed;
-  - the selected sketch does not belong to the active Body.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PartDesign::Pocket</name>
-    <message>
-        <location filename="../../../App/FeaturePocket.cpp" line="124"/>
+        <location filename="../../../App/FeatureHole.cpp" line="1623"/>
         <source>The requested feature cannot be created. The reason may be that:
   - the active Body does not contain a base shape, so there is no
   material to be removed;
@@ -1364,9 +1425,42 @@ If zero, it is equal to Radius2</source>
     </message>
 </context>
 <context>
+    <name>PartDesignGui::MonitorProxy</name>
+    <message>
+        <location filename="../../Utils.cpp" line="1315"/>
+        <source>Show preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1316"/>
+        <source>Show base feature with preview shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1322"/>
+        <source>Transparent preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1323"/>
+        <source>Show preview shape with transarency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1329"/>
+        <source>Show on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1330"/>
+        <source>Show the editing feature always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PartDesignGui::NoDependentsSelection</name>
     <message>
-        <location filename="../../ReferenceSelection.cpp" line="193"/>
+        <location filename="../../ReferenceSelection.cpp" line="197"/>
         <source>Selecting this will cause circular dependency.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1379,82 +1473,150 @@ If zero, it is equal to Radius2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskBooleanParameters.ui" line="22"/>
-        <source>Add body</source>
+        <location filename="../../TaskBooleanParameters.ui" line="20"/>
+        <source>Make new shape using the tool features without base feature.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskBooleanParameters.ui" line="32"/>
-        <source>Remove body</source>
+        <location filename="../../TaskBooleanParameters.ui" line="23"/>
+        <source>New shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskBooleanParameters.ui" line="48"/>
+        <location filename="../../TaskBooleanParameters.ui" line="30"/>
+        <source>Delete tool features on remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.ui" line="49"/>
+        <source>Tool features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.ui" line="57"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.ui" line="64"/>
+        <location filename="../../TaskBooleanParameters.cpp" line="103"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.ui" line="87"/>
         <source>Fuse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskBooleanParameters.ui" line="53"/>
+        <location filename="../../TaskBooleanParameters.ui" line="92"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskBooleanParameters.ui" line="58"/>
+        <location filename="../../TaskBooleanParameters.ui" line="97"/>
         <source>Common</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskBooleanParameters.cpp" line="56"/>
+        <location filename="../../TaskBooleanParameters.ui" line="102"/>
+        <source>Compound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.ui" line="107"/>
+        <source>Section</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.cpp" line="61"/>
         <source>Boolean parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskBooleanParameters.cpp" line="85"/>
-        <source>Remove</source>
+        <location filename="../../TaskBooleanParameters.cpp" line="296"/>
+        <source>Boolean: invalid state</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.cpp" line="297"/>
+        <source>No editing object found. Please restart thit task panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.cpp" line="311"/>
+        <location filename="../../TaskBooleanParameters.cpp" line="319"/>
+        <source>Boolean: Invalid state</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.cpp" line="312"/>
+        <source>Invalid boolean object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.cpp" line="320"/>
+        <source>Invalid owner of boolean object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.cpp" line="337"/>
+        <location filename="../../TaskBooleanParameters.cpp" line="365"/>
+        <source>Boolean: Input error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.cpp" line="338"/>
+        <source>Cyclic reference to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskBooleanParameters.cpp" line="366"/>
+        <source>Failed to add reference: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PartDesignGui::TaskBoxPrimitives</name>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="56"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="58"/>
         <source>Primitive parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="725"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="748"/>
         <source>Cone radii are equal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="726"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="749"/>
         <source>The radii for cones must not be equal!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="801"/>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="806"/>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="811"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="824"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="829"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="834"/>
         <source>Invalid wedge parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="802"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="825"/>
         <source>X min must not be equal to X max!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="807"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="830"/>
         <source>Y min must not be equal to Y max!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="812"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="835"/>
         <source>Z min must not be equal to Z max!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="850"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="873"/>
         <source>Create primitive</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1467,85 +1629,53 @@ If zero, it is equal to Radius2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="22"/>
-        <location filename="../../TaskChamferParameters.ui" line="36"/>
-        <location filename="../../TaskChamferParameters.cpp" line="166"/>
-        <source>Click button to enter selection mode,
-click again to end selection</source>
+        <location filename="../../TaskChamferParameters.ui" line="29"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In toggle mode, you can select geometry either&lt;/p&gt;&lt;p&gt;in the list below, or in the 3D view to toggle&lt;/p&gt;&lt;p&gt;its state.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;In normal mode, you can only add new geometry&lt;/p&gt;&lt;p&gt;by selection. Existing geometry references can&lt;/p&gt;&lt;p&gt;be removed using the Delete key.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="26"/>
-        <source>Add</source>
+        <location filename="../../TaskChamferParameters.ui" line="32"/>
+        <source>Toggle mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="40"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskChamferParameters.ui" line="52"/>
-        <source>- select an item to highlight it
-- double-click on an item to see the chamfers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskChamferParameters.ui" line="67"/>
+        <location filename="../../TaskChamferParameters.ui" line="51"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="75"/>
+        <location filename="../../TaskChamferParameters.ui" line="59"/>
         <source>Equal distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="80"/>
+        <location filename="../../TaskChamferParameters.ui" line="64"/>
         <source>Two distances</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="85"/>
+        <location filename="../../TaskChamferParameters.ui" line="69"/>
         <source>Distance and angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="98"/>
+        <location filename="../../TaskChamferParameters.ui" line="82"/>
         <source>Flip direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="119"/>
+        <location filename="../../TaskChamferParameters.ui" line="103"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="158"/>
+        <location filename="../../TaskChamferParameters.ui" line="142"/>
         <source>Size 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskChamferParameters.ui" line="191"/>
+        <location filename="../../TaskChamferParameters.ui" line="175"/>
         <source>Angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskChamferParameters.cpp" line="176"/>
-        <location filename="../../TaskChamferParameters.cpp" line="178"/>
-        <location filename="../../TaskChamferParameters.cpp" line="243"/>
-        <location filename="../../TaskChamferParameters.cpp" line="245"/>
-        <source>There must be at least one item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskChamferParameters.cpp" line="211"/>
-        <source>Selection error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskChamferParameters.cpp" line="211"/>
-        <source>At least one item must be kept.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1560,30 +1690,25 @@ click again to end selection</source>
 <context>
     <name>PartDesignGui::TaskDlgBooleanParameters</name>
     <message>
-        <location filename="../../TaskBooleanParameters.cpp" line="356"/>
+        <location filename="../../TaskBooleanParameters.cpp" line="537"/>
         <source>Empty body list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskBooleanParameters.cpp" line="357"/>
+        <location filename="../../TaskBooleanParameters.cpp" line="538"/>
         <source>The body list cannot be empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskBooleanParameters.cpp" line="368"/>
-        <source>Boolean: Accept: Input error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PartDesignGui::TaskDlgDatumParameters</name>
     <message>
-        <location filename="../../TaskDatumParameters.cpp" line="121"/>
+        <location filename="../../TaskDatumParameters.cpp" line="116"/>
         <source>Incompatible reference set</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskDatumParameters.cpp" line="122"/>
+        <location filename="../../TaskDatumParameters.cpp" line="117"/>
         <source>There is no attachment mode that fits the current set of references. If you choose to continue, the feature will remain where it is now, and will not be moved as the references change. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1591,7 +1716,23 @@ click again to end selection</source>
 <context>
     <name>PartDesignGui::TaskDlgFeatureParameters</name>
     <message>
-        <location filename="../../TaskFeatureParameters.cpp" line="137"/>
+        <location filename="../../TaskFeatureParameters.cpp" line="357"/>
+        <source>Input error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PartDesignGui::TaskDlgLoftParameters</name>
+    <message>
+        <location filename="../../TaskLoftParameters.cpp" line="573"/>
+        <source>Input error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PartDesignGui::TaskDlgPipeParameters</name>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="1283"/>
         <source>Input error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1605,6 +1746,14 @@ click again to end selection</source>
     </message>
 </context>
 <context>
+    <name>PartDesignGui::TaskDlgTransformedParameters</name>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="620"/>
+        <source>Transform offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PartDesignGui::TaskDraftParameters</name>
     <message>
         <location filename="../../TaskDraftParameters.ui" line="14"/>
@@ -1612,79 +1761,91 @@ click again to end selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskDraftParameters.ui" line="22"/>
-        <location filename="../../TaskDraftParameters.ui" line="36"/>
-        <location filename="../../TaskDraftParameters.cpp" line="143"/>
-        <source>Click button to enter selection mode,
-click again to end selection</source>
+        <location filename="../../TaskDraftParameters.ui" line="29"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In toggle mode, you can select geometry either&lt;/p&gt;&lt;p&gt;in the list below, or in the 3D view to toggle&lt;/p&gt;&lt;p&gt;its state.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;In normal mode, you can only add new geometry&lt;/p&gt;&lt;p&gt;by selection. Existing geometry references can&lt;/p&gt;&lt;p&gt;be removed using the Delete key.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskDraftParameters.ui" line="26"/>
-        <source>Add face</source>
+        <location filename="../../TaskDraftParameters.ui" line="32"/>
+        <source>Toggle mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskDraftParameters.ui" line="40"/>
-        <source>Remove face</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskDraftParameters.ui" line="52"/>
-        <source>- select an item to highlight it
-- double-click on an item to see the drafts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskDraftParameters.ui" line="65"/>
+        <location filename="../../TaskDraftParameters.ui" line="49"/>
         <source>Draft angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskDraftParameters.ui" line="98"/>
+        <location filename="../../TaskDraftParameters.ui" line="82"/>
         <source>Neutral plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskDraftParameters.ui" line="115"/>
+        <location filename="../../TaskDraftParameters.ui" line="99"/>
+        <location filename="../../TaskDraftParameters.ui" line="127"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskDraftParameters.ui" line="110"/>
         <source>Pull direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskDraftParameters.ui" line="130"/>
+        <location filename="../../TaskDraftParameters.ui" line="136"/>
         <source>Reverse pull direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskDraftParameters.cpp" line="153"/>
-        <location filename="../../TaskDraftParameters.cpp" line="155"/>
-        <location filename="../../TaskDraftParameters.cpp" line="276"/>
-        <location filename="../../TaskDraftParameters.cpp" line="278"/>
-        <source>There must be at least one item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskDraftParameters.cpp" line="244"/>
-        <source>Selection error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskDraftParameters.cpp" line="244"/>
-        <source>At least one item must be kept.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PartDesignGui::TaskDressUpParameters</name>
     <message>
-        <location filename="../../TaskDressUpParameters.cpp" line="233"/>
+        <location filename="../../TaskDressUpParameters.cpp" line="162"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskDressUpParameters.cpp" line="243"/>
-        <location filename="../../TaskDressUpParameters.cpp" line="245"/>
-        <source>There must be at least one item</source>
+        <location filename="../../TaskDressUpParameters.cpp" line="500"/>
+        <source>Recompute failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PartDesignGui::TaskFeatureParameters</name>
+    <message>
+        <location filename="../../TaskFeatureParameters.cpp" line="237"/>
+        <source>Update view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskFeatureParameters.cpp" line="281"/>
+        <source>Operation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskFeatureParameters.cpp" line="283"/>
+        <location filename="../../TaskFeatureParameters.cpp" line="292"/>
+        <source>New shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskFeatureParameters.cpp" line="284"/>
+        <source>Additive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskFeatureParameters.cpp" line="285"/>
+        <source>Subtractive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskFeatureParameters.cpp" line="286"/>
+        <source>Intersecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskFeatureParameters.cpp" line="293"/>
+        <source>Make a new separate solid using this feature</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1789,50 +1950,46 @@ click again to end selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskFilletParameters.ui" line="22"/>
-        <location filename="../../TaskFilletParameters.ui" line="36"/>
-        <location filename="../../TaskFilletParameters.cpp" line="121"/>
-        <source>Click button to enter selection mode,
-click again to end selection</source>
+        <location filename="../../TaskFilletParameters.ui" line="29"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In toggle mode, you can select geometry either&lt;/p&gt;&lt;p&gt;in the list below, or in the 3D view to toggle&lt;/p&gt;&lt;p&gt;its state.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;In normal mode, you can only add new geometry&lt;/p&gt;&lt;p&gt;by selection. Existing geometry references can&lt;/p&gt;&lt;p&gt;be removed using the Delete key.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskFilletParameters.ui" line="26"/>
-        <source>Add</source>
+        <location filename="../../TaskFilletParameters.ui" line="32"/>
+        <source>Toggle mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskFilletParameters.ui" line="40"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskFilletParameters.ui" line="52"/>
-        <source>- select an item to highlight it
-- double-click on an item to see the fillets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskFilletParameters.ui" line="65"/>
+        <location filename="../../TaskFilletParameters.ui" line="49"/>
         <source>Radius:</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>PartDesignGui::TaskGenericPatternParameters</name>
     <message>
-        <location filename="../../TaskFilletParameters.cpp" line="131"/>
-        <location filename="../../TaskFilletParameters.cpp" line="133"/>
-        <location filename="../../TaskFilletParameters.cpp" line="198"/>
-        <location filename="../../TaskFilletParameters.cpp" line="200"/>
-        <source>There must be at least one item</source>
+        <location filename="../../TaskGenericPatternParameters.ui" line="26"/>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskFilletParameters.cpp" line="166"/>
-        <source>Selection error</source>
+        <location filename="../../TaskGenericPatternParameters.ui" line="32"/>
+        <source>Write an expression that return a list of App.Matrix.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskFilletParameters.cpp" line="166"/>
-        <source>At least one item must be kept.</source>
+        <location filename="../../TaskGenericPatternParameters.ui" line="35"/>
+        <source>Expression:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskGenericPatternParameters.ui" line="61"/>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskGenericPatternParameters.ui" line="68"/>
+        <source>Update view</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1844,122 +2001,117 @@ click again to end selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="23"/>
+        <location filename="../../TaskHelixParameters.ui" line="22"/>
         <source>Status:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="30"/>
+        <location filename="../../TaskHelixParameters.ui" line="29"/>
         <source>Valid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="42"/>
+        <location filename="../../TaskHelixParameters.ui" line="40"/>
         <source>Axis:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="50"/>
-        <location filename="../../TaskHelixParameters.cpp" line="220"/>
+        <location filename="../../TaskHelixParameters.ui" line="48"/>
+        <location filename="../../TaskHelixParameters.cpp" line="209"/>
         <source>Base X axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="55"/>
-        <location filename="../../TaskHelixParameters.cpp" line="221"/>
+        <location filename="../../TaskHelixParameters.ui" line="53"/>
+        <location filename="../../TaskHelixParameters.cpp" line="210"/>
         <source>Base Y axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="60"/>
-        <location filename="../../TaskHelixParameters.cpp" line="222"/>
+        <location filename="../../TaskHelixParameters.ui" line="58"/>
+        <location filename="../../TaskHelixParameters.cpp" line="211"/>
         <source>Base Z axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="65"/>
+        <location filename="../../TaskHelixParameters.ui" line="63"/>
         <source>Horizontal sketch axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="70"/>
+        <location filename="../../TaskHelixParameters.ui" line="68"/>
         <source>Vertical sketch axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="75"/>
-        <location filename="../../TaskHelixParameters.cpp" line="229"/>
+        <location filename="../../TaskHelixParameters.ui" line="73"/>
+        <location filename="../../TaskHelixParameters.cpp" line="218"/>
         <source>Select reference...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="88"/>
+        <location filename="../../TaskHelixParameters.ui" line="85"/>
         <source>Mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="96"/>
+        <location filename="../../TaskHelixParameters.ui" line="93"/>
         <source>Pitch-Height-Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="101"/>
+        <location filename="../../TaskHelixParameters.ui" line="98"/>
         <source>Pitch-Turns-Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="106"/>
+        <location filename="../../TaskHelixParameters.ui" line="103"/>
         <source>Height-Turns-Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="111"/>
+        <location filename="../../TaskHelixParameters.ui" line="108"/>
         <source>Height-Turns-Growth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="124"/>
+        <location filename="../../TaskHelixParameters.ui" line="120"/>
         <source>Pitch:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="155"/>
+        <location filename="../../TaskHelixParameters.ui" line="150"/>
         <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="186"/>
+        <location filename="../../TaskHelixParameters.ui" line="180"/>
         <source>Turns:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="214"/>
+        <location filename="../../TaskHelixParameters.ui" line="207"/>
         <source>Cone angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="248"/>
+        <location filename="../../TaskHelixParameters.ui" line="240"/>
         <source>Growth:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="277"/>
+        <location filename="../../TaskHelixParameters.ui" line="269"/>
         <source>Left handed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="288"/>
+        <location filename="../../TaskHelixParameters.ui" line="279"/>
         <source>Reversed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.ui" line="296"/>
+        <location filename="../../TaskHelixParameters.ui" line="286"/>
         <source>Remove outside of profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHelixParameters.ui" line="315"/>
-        <source>Update view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2034,62 +2186,42 @@ click again to end selection</source>
 <context>
     <name>PartDesignGui::TaskLinearPatternParameters</name>
     <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="14"/>
+        <location filename="../../TaskLinearPatternParameters.ui" line="20"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="22"/>
-        <source>Add feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="32"/>
-        <source>Remove feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="44"/>
-        <source>List can be reordered by dragging</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="56"/>
+        <location filename="../../TaskLinearPatternParameters.ui" line="28"/>
         <source>Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="68"/>
+        <location filename="../../TaskLinearPatternParameters.ui" line="40"/>
         <source>Reverse direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="77"/>
+        <location filename="../../TaskLinearPatternParameters.ui" line="49"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="101"/>
+        <location filename="../../TaskLinearPatternParameters.ui" line="70"/>
         <source>Occurrences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="115"/>
+        <location filename="../../TaskLinearPatternParameters.ui" line="84"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLinearPatternParameters.ui" line="124"/>
+        <location filename="../../TaskLinearPatternParameters.ui" line="93"/>
         <source>Update view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLinearPatternParameters.cpp" line="114"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskLinearPatternParameters.cpp" line="342"/>
+        <location filename="../../TaskLinearPatternParameters.cpp" line="261"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2103,51 +2235,52 @@ click again to end selection</source>
     </message>
     <message>
         <location filename="../../TaskLoftParameters.ui" line="20"/>
-        <source>Ruled surface</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskLoftParameters.ui" line="27"/>
-        <source>Closed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskLoftParameters.ui" line="34"/>
         <source>Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLoftParameters.ui" line="42"/>
+        <location filename="../../TaskLoftParameters.ui" line="28"/>
         <source>Object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLoftParameters.ui" line="65"/>
+        <location filename="../../TaskLoftParameters.ui" line="48"/>
+        <source>Closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.ui" line="55"/>
+        <source>Ruled surface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.ui" line="64"/>
+        <source>Split profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.ui" line="83"/>
+        <source>Sections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskLoftParameters.ui" line="92"/>
         <source>Add Section</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLoftParameters.ui" line="78"/>
-        <source>Remove Section</source>
+        <location filename="../../TaskLoftParameters.ui" line="117"/>
+        <source>List can be reordered by dragging.
+Right click or press &apos;Del&apos; to delete the selected items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLoftParameters.ui" line="103"/>
-        <source>List can be reordered by dragging</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskLoftParameters.ui" line="120"/>
-        <source>Update view</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskLoftParameters.cpp" line="59"/>
+        <location filename="../../TaskLoftParameters.cpp" line="166"/>
         <source>Loft parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskLoftParameters.cpp" line="81"/>
+        <location filename="../../TaskLoftParameters.cpp" line="207"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2155,47 +2288,27 @@ click again to end selection</source>
 <context>
     <name>PartDesignGui::TaskMirroredParameters</name>
     <message>
-        <location filename="../../TaskMirroredParameters.ui" line="14"/>
+        <location filename="../../TaskMirroredParameters.ui" line="20"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMirroredParameters.ui" line="22"/>
-        <source>Add feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMirroredParameters.ui" line="32"/>
-        <source>Remove feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMirroredParameters.ui" line="44"/>
-        <source>List can be reordered by dragging</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMirroredParameters.ui" line="56"/>
+        <location filename="../../TaskMirroredParameters.ui" line="28"/>
         <source>Plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMirroredParameters.ui" line="70"/>
+        <location filename="../../TaskMirroredParameters.ui" line="42"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMirroredParameters.ui" line="79"/>
+        <location filename="../../TaskMirroredParameters.ui" line="51"/>
         <source>Update view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMirroredParameters.cpp" line="111"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMirroredParameters.cpp" line="255"/>
+        <location filename="../../TaskMirroredParameters.cpp" line="193"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2208,77 +2321,57 @@ click again to end selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.ui" line="22"/>
-        <source>Add feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMultiTransformParameters.ui" line="32"/>
-        <source>Remove feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMultiTransformParameters.ui" line="44"/>
-        <source>List can be reordered by dragging</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMultiTransformParameters.ui" line="54"/>
+        <location filename="../../TaskMultiTransformParameters.ui" line="20"/>
         <source>Transformations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.ui" line="71"/>
+        <location filename="../../TaskMultiTransformParameters.ui" line="37"/>
         <source>Update view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="79"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="92"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="80"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="96"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="84"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="100"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="88"/>
         <source>Add mirrored transformation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="104"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="92"/>
         <source>Add linear pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="108"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="96"/>
         <source>Add polar pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="112"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="100"/>
         <source>Add scaled transformation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="116"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="104"/>
         <source>Move up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="120"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="108"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskMultiTransformParameters.cpp" line="147"/>
+        <location filename="../../TaskMultiTransformParameters.cpp" line="144"/>
         <source>Right-click to add</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2292,181 +2385,241 @@ click again to end selection</source>
     </message>
     <message>
         <location filename="../../TaskPadParameters.ui" line="22"/>
-        <source>Type</source>
+        <source>Check face limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="30"/>
-        <location filename="../../TaskPadParameters.cpp" line="154"/>
-        <location filename="../../TaskPadParameters.cpp" line="708"/>
-        <source>Dimension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPadParameters.ui" line="38"/>
+        <location filename="../../TaskPadParameters.ui" line="29"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="57"/>
-        <source>Direction</source>
+        <location filename="../../TaskPadParameters.ui" line="37"/>
+        <location filename="../../TaskPadParameters.cpp" line="146"/>
+        <location filename="../../TaskPadParameters.cpp" line="886"/>
+        <source>Dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="45"/>
+        <source>2nd length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskPadParameters.ui" line="65"/>
-        <source>Direction/edge:</source>
+        <source>Offset to face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskPadParameters.ui" line="72"/>
-        <source>Either along the sketch normal
-or select an edge as reference</source>
+        <source>Face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="77"/>
-        <location filename="../../TaskPadParameters.cpp" line="698"/>
-        <source>Sketch normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPadParameters.ui" line="82"/>
-        <location filename="../../TaskPadParameters.cpp" line="364"/>
-        <location filename="../../TaskPadParameters.cpp" line="699"/>
-        <source>Select reference...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPadParameters.ui" line="92"/>
-        <source>Use custom direction</source>
+        <location filename="../../TaskPadParameters.ui" line="95"/>
+        <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskPadParameters.ui" line="102"/>
-        <source>Use custom vector for pad direction, otherwise
-the sketch plane&apos;s normal vector will be used</source>
+        <source>Offset from face in which pad will end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="112"/>
+        <source>Reverses pad direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskPadParameters.ui" line="115"/>
-        <source>x-component of direction vector</source>
+        <source>Reversed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="137"/>
-        <source>z</source>
+        <location filename="../../TaskPadParameters.ui" line="125"/>
+        <source>Applies length symmetrically to sketch plane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="128"/>
+        <source>Symmetric to plane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="140"/>
+        <source>Use custom vector for pad direction otherwise
+the sketch plane&apos;s normal vector will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskPadParameters.ui" line="144"/>
-        <source>y-component of direction vector</source>
+        <source>Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="166"/>
-        <source>y</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPadParameters.ui" line="173"/>
-        <source>z-component of direction vector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPadParameters.ui" line="198"/>
-        <source>x</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPadParameters.ui" line="211"/>
+        <location filename="../../TaskPadParameters.ui" line="156"/>
         <source>If unchecked, the length will be
 measured along the specified direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="215"/>
-        <source>Length along sketch normal</source>
+        <location filename="../../TaskPadParameters.ui" line="160"/>
+        <source>Length along profile normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="227"/>
-        <source>Offset to face</source>
+        <location filename="../../TaskPadParameters.ui" line="169"/>
+        <source>Set a direction or select an edge
+from the model as reference</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="234"/>
-        <source>Offset from face in which pad will end</source>
+        <location filename="../../TaskPadParameters.ui" line="174"/>
+        <source>Profile normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="249"/>
-        <source>Applies length symmetrically to sketch plane</source>
+        <location filename="../../TaskPadParameters.ui" line="179"/>
+        <location filename="../../TaskPadParameters.cpp" line="469"/>
+        <source>Select reference...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="252"/>
-        <source>Symmetric to plane</source>
+        <location filename="../../TaskPadParameters.ui" line="184"/>
+        <source>Custom direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="259"/>
-        <source>Reverses pad direction</source>
+        <location filename="../../TaskPadParameters.ui" line="194"/>
+        <source>Direction axis:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="262"/>
-        <source>Reversed</source>
+        <location filename="../../TaskPadParameters.ui" line="204"/>
+        <source>Use custom vector for pad direction, otherwise
+the sketch plane&apos;s normal vector will be used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="271"/>
-        <source>2nd length</source>
+        <location filename="../../TaskPadParameters.ui" line="217"/>
+        <source>x</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="289"/>
-        <location filename="../../TaskPadParameters.cpp" line="143"/>
-        <location filename="../../TaskPadParameters.cpp" line="729"/>
-        <source>Face</source>
+        <location filename="../../TaskPadParameters.ui" line="224"/>
+        <source>x-component of direction vector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.ui" line="308"/>
-        <source>Update view</source>
+        <location filename="../../TaskPadParameters.ui" line="246"/>
+        <source>y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.cpp" line="59"/>
+        <location filename="../../TaskPadParameters.ui" line="253"/>
+        <source>y-component of direction vector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="275"/>
+        <source>z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="282"/>
+        <source>z-component of direction vector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="313"/>
+        <source>Enable this option to use pipe (i.e. sweep) operation to create draft angles.
+If disabled, then use loft operation instead. Pipe operation can avoid some
+unnecessary use of BSplineSurface for planar faces in the resulting shape.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="318"/>
+        <source>Use pipe operation for draft</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="327"/>
+        <source>Taper angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="337"/>
+        <location filename="../../TaskPadParameters.ui" line="364"/>
+        <location filename="../../TaskPadParameters.ui" line="391"/>
+        <location filename="../../TaskPadParameters.ui" line="418"/>
+        <source>deg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="354"/>
+        <source>2nd taper angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="381"/>
+        <source>Inner taper angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.ui" line="408"/>
+        <source>2nd inner taper angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.cpp" line="63"/>
         <source>Pad parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.cpp" line="66"/>
-        <location filename="../../TaskPadParameters.cpp" line="715"/>
+        <location filename="../../TaskPadParameters.cpp" line="82"/>
+        <location filename="../../TaskPadParameters.cpp" line="897"/>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.cpp" line="84"/>
+        <location filename="../../TaskPadParameters.cpp" line="899"/>
+        <source>No element selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.cpp" line="89"/>
+        <location filename="../../TaskPadParameters.cpp" line="904"/>
         <source>No face selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.cpp" line="155"/>
-        <location filename="../../TaskPadParameters.cpp" line="709"/>
+        <location filename="../../TaskPadParameters.cpp" line="147"/>
+        <location filename="../../TaskPadParameters.cpp" line="887"/>
         <source>To last</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.cpp" line="156"/>
-        <location filename="../../TaskPadParameters.cpp" line="710"/>
+        <location filename="../../TaskPadParameters.cpp" line="148"/>
+        <location filename="../../TaskPadParameters.cpp" line="888"/>
         <source>To first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.cpp" line="157"/>
-        <location filename="../../TaskPadParameters.cpp" line="711"/>
+        <location filename="../../TaskPadParameters.cpp" line="150"/>
+        <location filename="../../TaskPadParameters.cpp" line="890"/>
+        <source>Up to Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.cpp" line="152"/>
+        <location filename="../../TaskPadParameters.cpp" line="892"/>
         <source>Up to face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.cpp" line="158"/>
-        <location filename="../../TaskPadParameters.cpp" line="712"/>
+        <location filename="../../TaskPadParameters.cpp" line="153"/>
+        <location filename="../../TaskPadParameters.cpp" line="893"/>
         <source>Two dimensions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2514,52 +2667,52 @@ measured along the specified direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeOrientation.ui" line="83"/>
+        <location filename="../../TaskPipeOrientation.ui" line="95"/>
         <source>Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeOrientation.ui" line="91"/>
+        <location filename="../../TaskPipeOrientation.ui" line="109"/>
         <source>Object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeOrientation.ui" line="125"/>
+        <location filename="../../TaskPipeOrientation.ui" line="147"/>
         <source>Add Edge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeOrientation.ui" line="144"/>
-        <source>Remove Edge</source>
+        <location filename="../../TaskPipeOrientation.ui" line="174"/>
+        <source>Right click or press &apos;Del&apos; to delete the selected items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeOrientation.ui" line="166"/>
+        <location filename="../../TaskPipeOrientation.ui" line="194"/>
         <source>Set the constant binormal vector used to calculate the profiles orientation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeOrientation.ui" line="190"/>
+        <location filename="../../TaskPipeOrientation.ui" line="218"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeOrientation.ui" line="197"/>
+        <location filename="../../TaskPipeOrientation.ui" line="225"/>
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeOrientation.ui" line="204"/>
+        <location filename="../../TaskPipeOrientation.ui" line="232"/>
         <source>Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.cpp" line="558"/>
+        <location filename="../../TaskPipeParameters.cpp" line="616"/>
         <source>Section orientation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.cpp" line="588"/>
+        <location filename="../../TaskPipeParameters.cpp" line="654"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2567,117 +2720,111 @@ measured along the specified direction</source>
 <context>
     <name>PartDesignGui::TaskPipeParameters</name>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="14"/>
+        <location filename="../../TaskPipeParameters.ui" line="20"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="20"/>
+        <location filename="../../TaskPipeParameters.ui" line="26"/>
         <source>Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="28"/>
-        <location filename="../../TaskPipeParameters.ui" line="93"/>
+        <location filename="../../TaskPipeParameters.ui" line="34"/>
+        <location filename="../../TaskPipeParameters.ui" line="115"/>
         <source>Object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="51"/>
+        <location filename="../../TaskPipeParameters.ui" line="61"/>
         <source>Corner Transition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="65"/>
+        <location filename="../../TaskPipeParameters.ui" line="75"/>
         <source>Transformed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="70"/>
+        <location filename="../../TaskPipeParameters.ui" line="80"/>
         <source>Right Corner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="75"/>
+        <location filename="../../TaskPipeParameters.ui" line="85"/>
         <source>Round Corner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="85"/>
+        <location filename="../../TaskPipeParameters.ui" line="107"/>
         <source>Path to sweep along</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="119"/>
+        <location filename="../../TaskPipeParameters.ui" line="145"/>
         <source>Add Edge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.ui" line="138"/>
-        <source>Remove Edge</source>
+        <location filename="../../TaskPipeParameters.ui" line="172"/>
+        <source>Right click or press &apos;Del&apos; to delete the selected items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.cpp" line="75"/>
+        <location filename="../../TaskPipeParameters.cpp" line="265"/>
         <source>Pipe parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.cpp" line="95"/>
+        <location filename="../../TaskPipeParameters.cpp" line="297"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPipeParameters.cpp" line="447"/>
-        <location filename="../../TaskPipeParameters.cpp" line="544"/>
-        <source>Input error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPipeParameters.cpp" line="447"/>
-        <source>No active body</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PartDesignGui::TaskPipeScaling</name>
     <message>
-        <location filename="../../TaskPipeScaling.ui" line="14"/>
+        <location filename="../../TaskPipeScaling.ui" line="26"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeScaling.ui" line="22"/>
+        <location filename="../../TaskPipeScaling.ui" line="34"/>
         <source>Transform mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeScaling.ui" line="36"/>
+        <location filename="../../TaskPipeScaling.ui" line="48"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeScaling.ui" line="41"/>
+        <location filename="../../TaskPipeScaling.ui" line="53"/>
         <source>Multisection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeScaling.ui" line="64"/>
+        <location filename="../../TaskPipeScaling.ui" line="95"/>
+        <source>Sections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeScaling.ui" line="112"/>
         <source>Add Section</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeScaling.ui" line="77"/>
-        <source>Remove Section</source>
+        <location filename="../../TaskPipeScaling.ui" line="139"/>
+        <source>Right click or press &apos;Del&apos; to delete the selected items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.cpp" line="885"/>
+        <location filename="../../TaskPipeParameters.cpp" line="991"/>
         <source>Section transformation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPipeParameters.cpp" line="903"/>
+        <location filename="../../TaskPipeParameters.cpp" line="1014"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2690,86 +2837,124 @@ measured along the specified direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.ui" line="22"/>
+        <location filename="../../TaskPocketParameters.ui" line="35"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.ui" line="30"/>
-        <location filename="../../TaskPocketParameters.cpp" line="119"/>
-        <location filename="../../TaskPocketParameters.cpp" line="441"/>
-        <source>Dimension</source>
+        <location filename="../../TaskPocketParameters.ui" line="42"/>
+        <source>Offset to face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.ui" line="38"/>
-        <source>Length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPocketParameters.ui" line="55"/>
-        <source>Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPocketParameters.ui" line="74"/>
-        <source>Symmetric to plane</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPocketParameters.ui" line="81"/>
-        <source>Reversed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPocketParameters.ui" line="90"/>
-        <source>2nd length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPocketParameters.ui" line="108"/>
-        <location filename="../../TaskPocketParameters.cpp" line="107"/>
-        <location filename="../../TaskPocketParameters.cpp" line="464"/>
+        <location filename="../../TaskPocketParameters.ui" line="49"/>
         <source>Face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.ui" line="127"/>
-        <source>Update view</source>
+        <location filename="../../TaskPocketParameters.ui" line="70"/>
+        <location filename="../../TaskPocketParameters.cpp" line="86"/>
+        <location filename="../../TaskPocketParameters.cpp" line="604"/>
+        <source>Dimension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.cpp" line="56"/>
+        <location filename="../../TaskPocketParameters.ui" line="78"/>
+        <source>Length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="95"/>
+        <source>Check face limit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="102"/>
+        <source>2nd length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="112"/>
+        <source>Symmetric to plane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="119"/>
+        <source>Reversed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="128"/>
+        <source>Enable this option to use pipe (i.e. sweep) operation to create draft angles.
+If disabled, then use loft operation instead. Pipe operation can avoid some
+unnecessary use of BSplineSurface for planar faces in the resulting shape.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="133"/>
+        <source>Use pipe operation for draft</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="142"/>
+        <source>Taper angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="152"/>
+        <location filename="../../TaskPocketParameters.ui" line="179"/>
+        <location filename="../../TaskPocketParameters.ui" line="206"/>
+        <location filename="../../TaskPocketParameters.ui" line="233"/>
+        <source>deg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="169"/>
+        <source>2nd taper angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="196"/>
+        <source>Inner taper angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.ui" line="223"/>
+        <source>2nd inner taper angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPocketParameters.cpp" line="58"/>
         <source>Pocket parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.cpp" line="64"/>
-        <location filename="../../TaskPocketParameters.cpp" line="449"/>
+        <location filename="../../TaskPocketParameters.cpp" line="66"/>
+        <location filename="../../TaskPocketParameters.cpp" line="612"/>
         <source>No face selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.cpp" line="120"/>
-        <location filename="../../TaskPocketParameters.cpp" line="442"/>
+        <location filename="../../TaskPocketParameters.cpp" line="87"/>
+        <location filename="../../TaskPocketParameters.cpp" line="605"/>
         <source>Through all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.cpp" line="121"/>
-        <location filename="../../TaskPocketParameters.cpp" line="443"/>
+        <location filename="../../TaskPocketParameters.cpp" line="88"/>
+        <location filename="../../TaskPocketParameters.cpp" line="606"/>
         <source>To first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.cpp" line="122"/>
-        <location filename="../../TaskPocketParameters.cpp" line="444"/>
+        <location filename="../../TaskPocketParameters.cpp" line="89"/>
+        <location filename="../../TaskPocketParameters.cpp" line="607"/>
         <source>Up to face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPocketParameters.cpp" line="123"/>
-        <location filename="../../TaskPocketParameters.cpp" line="445"/>
+        <location filename="../../TaskPocketParameters.cpp" line="90"/>
+        <location filename="../../TaskPocketParameters.cpp" line="608"/>
         <source>Two dimensions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2777,62 +2962,42 @@ measured along the specified direction</source>
 <context>
     <name>PartDesignGui::TaskPolarPatternParameters</name>
     <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="14"/>
+        <location filename="../../TaskPolarPatternParameters.ui" line="20"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="22"/>
-        <source>Add feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="32"/>
-        <source>Remove feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="44"/>
-        <source>List can be reordered by dragging</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="56"/>
+        <location filename="../../TaskPolarPatternParameters.ui" line="28"/>
         <source>Axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="68"/>
+        <location filename="../../TaskPolarPatternParameters.ui" line="40"/>
         <source>Reverse direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="77"/>
+        <location filename="../../TaskPolarPatternParameters.ui" line="49"/>
         <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="107"/>
+        <location filename="../../TaskPolarPatternParameters.ui" line="76"/>
         <source>Occurrences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="121"/>
+        <location filename="../../TaskPolarPatternParameters.ui" line="90"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPolarPatternParameters.ui" line="130"/>
+        <location filename="../../TaskPolarPatternParameters.ui" line="99"/>
         <source>Update view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPolarPatternParameters.cpp" line="112"/>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskPolarPatternParameters.cpp" line="333"/>
+        <location filename="../../TaskPolarPatternParameters.cpp" line="250"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2840,7 +3005,7 @@ measured along the specified direction</source>
 <context>
     <name>PartDesignGui::TaskPrimitiveParameters</name>
     <message>
-        <location filename="../../TaskPrimitiveParameters.cpp" line="900"/>
+        <location filename="../../TaskPrimitiveParameters.cpp" line="887"/>
         <source>Attachment</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2859,19 +3024,19 @@ measured along the specified direction</source>
     </message>
     <message>
         <location filename="../../TaskRevolutionParameters.ui" line="30"/>
-        <location filename="../../TaskRevolutionParameters.cpp" line="151"/>
+        <location filename="../../TaskRevolutionParameters.cpp" line="182"/>
         <source>Base X axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskRevolutionParameters.ui" line="35"/>
-        <location filename="../../TaskRevolutionParameters.cpp" line="152"/>
+        <location filename="../../TaskRevolutionParameters.cpp" line="183"/>
         <source>Base Y axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskRevolutionParameters.ui" line="40"/>
-        <location filename="../../TaskRevolutionParameters.cpp" line="153"/>
+        <location filename="../../TaskRevolutionParameters.cpp" line="184"/>
         <source>Base Z axis</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2887,7 +3052,7 @@ measured along the specified direction</source>
     </message>
     <message>
         <location filename="../../TaskRevolutionParameters.ui" line="55"/>
-        <location filename="../../TaskRevolutionParameters.cpp" line="160"/>
+        <location filename="../../TaskRevolutionParameters.cpp" line="191"/>
         <source>Select reference...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2907,11 +3072,6 @@ measured along the specified direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskRevolutionParameters.ui" line="122"/>
-        <source>Update view</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../TaskRevolutionParameters.cpp" line="61"/>
         <source>Revolution parameters</source>
         <translation type="unfinished"></translation>
@@ -2920,43 +3080,28 @@ measured along the specified direction</source>
 <context>
     <name>PartDesignGui::TaskScaledParameters</name>
     <message>
-        <location filename="../../TaskScaledParameters.ui" line="14"/>
+        <location filename="../../TaskScaledParameters.ui" line="20"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskScaledParameters.ui" line="22"/>
-        <source>Add feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskScaledParameters.ui" line="32"/>
-        <source>Remove feature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskScaledParameters.ui" line="53"/>
+        <location filename="../../TaskScaledParameters.ui" line="28"/>
         <source>Factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskScaledParameters.ui" line="67"/>
+        <location filename="../../TaskScaledParameters.ui" line="42"/>
         <source>Occurrences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskScaledParameters.ui" line="81"/>
+        <location filename="../../TaskScaledParameters.ui" line="56"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskScaledParameters.ui" line="90"/>
+        <location filename="../../TaskScaledParameters.ui" line="65"/>
         <source>Update view</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskScaledParameters.cpp" line="98"/>
-        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2991,7 +3136,27 @@ measured along the specified direction</source>
 <context>
     <name>PartDesignGui::TaskSketchBasedParameters</name>
     <message>
-        <location filename="../../TaskSketchBasedParameters.cpp" line="167"/>
+        <location filename="../../TaskSketchBasedParameters.cpp" line="91"/>
+        <source>Fit tolerance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskSketchBasedParameters.cpp" line="103"/>
+        <source>Fit join type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskSketchBasedParameters.cpp" line="116"/>
+        <source>Inner fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskSketchBasedParameters.cpp" line="129"/>
+        <source>Inner fit join type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskSketchBasedParameters.cpp" line="335"/>
         <source>Face</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3004,91 +3169,59 @@ measured along the specified direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="22"/>
-        <location filename="../../TaskThicknessParameters.ui" line="36"/>
-        <location filename="../../TaskThicknessParameters.cpp" line="143"/>
-        <source>Click button to enter selection mode,
-click again to end selection</source>
+        <location filename="../../TaskThicknessParameters.ui" line="29"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In toggle mode, you can select geometry either&lt;/p&gt;&lt;p&gt;in the list below, or in the 3D view to toggle&lt;/p&gt;&lt;p&gt;its state.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;In normal mode, you can only add new geometry&lt;/p&gt;&lt;p&gt;by selection. Existing geometry references can&lt;/p&gt;&lt;p&gt;be removed using the Delete key.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="26"/>
-        <source>Add face</source>
+        <location filename="../../TaskThicknessParameters.ui" line="32"/>
+        <source>Toggle mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="40"/>
-        <source>Remove face</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskThicknessParameters.ui" line="52"/>
-        <source>- select an item to highlight it
-- double-click on an item to see the features</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskThicknessParameters.ui" line="65"/>
+        <location filename="../../TaskThicknessParameters.ui" line="49"/>
         <source>Thickness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="94"/>
+        <location filename="../../TaskThicknessParameters.ui" line="78"/>
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="101"/>
+        <location filename="../../TaskThicknessParameters.ui" line="85"/>
         <source>Join Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="109"/>
+        <location filename="../../TaskThicknessParameters.ui" line="93"/>
         <source>Skin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="114"/>
+        <location filename="../../TaskThicknessParameters.ui" line="98"/>
         <source>Pipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="119"/>
+        <location filename="../../TaskThicknessParameters.ui" line="103"/>
         <source>Recto Verso</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="128"/>
+        <location filename="../../TaskThicknessParameters.ui" line="112"/>
         <source>Arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="133"/>
-        <location filename="../../TaskThicknessParameters.ui" line="143"/>
+        <location filename="../../TaskThicknessParameters.ui" line="117"/>
+        <location filename="../../TaskThicknessParameters.ui" line="127"/>
         <source>Intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskThicknessParameters.ui" line="150"/>
+        <location filename="../../TaskThicknessParameters.ui" line="134"/>
         <source>Make thickness inwards</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskThicknessParameters.cpp" line="153"/>
-        <location filename="../../TaskThicknessParameters.cpp" line="155"/>
-        <location filename="../../TaskThicknessParameters.cpp" line="220"/>
-        <location filename="../../TaskThicknessParameters.cpp" line="222"/>
-        <source>There must be at least one item</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskThicknessParameters.cpp" line="188"/>
-        <source>Selection error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskThicknessParameters.cpp" line="188"/>
-        <source>At least one item must be kept.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3103,110 +3236,224 @@ click again to end selection</source>
 <context>
     <name>PartDesignGui::TaskTransformedParameters</name>
     <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="247"/>
-        <source>Normal sketch axis</source>
+        <location filename="../../TaskTransformedParameters.cpp" line="234"/>
+        <source>Select one or more objects as the base for transformation.
+Or Leave it unselected to transform the previous feature.
+
+Click item in &apos;Object&apos; column to make selection in both the
+feature list and 3D view.
+
+Click item in &apos;Element&apos; column to make selection only in 3D
+view without changing the feature list.
+
+Element (Face) selection is only effecitive for features with
+multiple solids.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="248"/>
-        <source>Vertical sketch axis</source>
+        <location filename="../../TaskTransformedParameters.cpp" line="257"/>
+        <source>Transform sub-feature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="249"/>
-        <source>Horizontal sketch axis</source>
+        <location filename="../../TaskTransformedParameters.cpp" line="258"/>
+        <source>Check this option to transform individual sub-features,
+or else, transform the entire history up till the selected base.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="251"/>
-        <location filename="../../TaskTransformedParameters.cpp" line="287"/>
-        <source>Construction line %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="265"/>
-        <source>Base X axis</source>
+        <location filename="../../TaskTransformedParameters.cpp" line="264"/>
+        <source>Operate in parallel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskTransformedParameters.cpp" line="266"/>
-        <source>Base Y axis</source>
+        <source>Check this option to perform boolean operation on pattern in
+parallel. Note that this may fail if the pattern shape contains
+overlap. Uncheck this option to perform operation in sequence.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="267"/>
-        <source>Base Z axis</source>
+        <location filename="../../TaskTransformedParameters.cpp" line="273"/>
+        <source>New shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskTransformedParameters.cpp" line="274"/>
-        <location filename="../../TaskTransformedParameters.cpp" line="310"/>
+        <source>Make a new shape using the resulting pattern shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="424"/>
+        <source>Normal sketch axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="425"/>
+        <source>Vertical sketch axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="426"/>
+        <source>Horizontal sketch axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="428"/>
+        <location filename="../../TaskTransformedParameters.cpp" line="464"/>
+        <source>Construction line %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="442"/>
+        <source>Base X axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="443"/>
+        <source>Base Y axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="444"/>
+        <source>Base Z axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedParameters.cpp" line="451"/>
+        <location filename="../../TaskTransformedParameters.cpp" line="487"/>
         <source>Select reference...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="301"/>
+        <location filename="../../TaskTransformedParameters.cpp" line="478"/>
         <source>Base XY plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="302"/>
+        <location filename="../../TaskTransformedParameters.cpp" line="479"/>
         <source>Base YZ plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskTransformedParameters.cpp" line="303"/>
+        <location filename="../../TaskTransformedParameters.cpp" line="480"/>
         <source>Base XZ plane</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PartDesignGui::TaskWrapParameters</name>
+    <message>
+        <location filename="../../TaskWrapParameters.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskWrapParameters.ui" line="20"/>
+        <source>Reverses pad direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskWrapParameters.ui" line="23"/>
+        <source>Frozen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskWrapParameters.ui" line="30"/>
+        <source>Update wrap view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskWrapParameters.cpp" line="42"/>
+        <source>PartDesign wrap</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PartDesignGui::ViewProviderBody</name>
     <message>
-        <location filename="../../ViewProviderBody.cpp" line="138"/>
+        <location filename="../../ViewProviderBody.cpp" line="150"/>
         <source>Toggle active body</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderBody.cpp" line="154"/>
+        <source>Disable auto solid group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderBody.cpp" line="154"/>
+        <source>Enable auto solid group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderBody.cpp" line="165"/>
+        <location filename="../../ViewProviderBody.cpp" line="219"/>
+        <source>Auto group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderBody.cpp" line="166"/>
+        <location filename="../../ViewProviderBody.cpp" line="220"/>
+        <source>Toggle auto group failed. Please check report view for more details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderBody.cpp" line="171"/>
+        <source>Toggle auto auxiliary group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderBody.cpp" line="225"/>
+        <location filename="../../ViewProviderBody.cpp" line="239"/>
+        <source>Add group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderBody.cpp" line="240"/>
+        <source>Failed to add group. Please check report view for more details.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PartDesign_CompPrimitiveAdditive</name>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="200"/>
+        <location filename="../../CommandPrimitive.cpp" line="226"/>
         <source>Create an additive box by its width, height, and length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="204"/>
+        <location filename="../../CommandPrimitive.cpp" line="230"/>
         <source>Create an additive cylinder by its radius, height, and angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="208"/>
+        <location filename="../../CommandPrimitive.cpp" line="234"/>
         <source>Create an additive sphere by its radius and various angles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="212"/>
+        <location filename="../../CommandPrimitive.cpp" line="238"/>
         <source>Create an additive cone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="216"/>
+        <location filename="../../CommandPrimitive.cpp" line="242"/>
         <source>Create an additive ellipsoid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="220"/>
+        <location filename="../../CommandPrimitive.cpp" line="246"/>
         <source>Create an additive torus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="224"/>
+        <location filename="../../CommandPrimitive.cpp" line="250"/>
         <source>Create an additive prism</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="228"/>
+        <location filename="../../CommandPrimitive.cpp" line="254"/>
         <source>Create an additive wedge</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3214,42 +3461,42 @@ click again to end selection</source>
 <context>
     <name>PartDesign_CompPrimitiveSubtractive</name>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="356"/>
+        <location filename="../../CommandPrimitive.cpp" line="393"/>
         <source>Create a subtractive box by its width, height and length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="360"/>
+        <location filename="../../CommandPrimitive.cpp" line="397"/>
         <source>Create a subtractive cylinder by its radius, height and angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="364"/>
+        <location filename="../../CommandPrimitive.cpp" line="401"/>
         <source>Create a subtractive sphere by its radius and various angles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="368"/>
+        <location filename="../../CommandPrimitive.cpp" line="405"/>
         <source>Create a subtractive cone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="372"/>
+        <location filename="../../CommandPrimitive.cpp" line="409"/>
         <source>Create a subtractive ellipsoid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="376"/>
+        <location filename="../../CommandPrimitive.cpp" line="413"/>
         <source>Create a subtractive torus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="380"/>
+        <location filename="../../CommandPrimitive.cpp" line="417"/>
         <source>Create a subtractive prism</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="384"/>
+        <location filename="../../CommandPrimitive.cpp" line="421"/>
         <source>Create a subtractive wedge</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3257,12 +3504,12 @@ click again to end selection</source>
 <context>
     <name>PartDesign_MoveFeature</name>
     <message>
-        <location filename="../../CommandBody.cpp" line="729"/>
+        <location filename="../../CommandBody.cpp" line="834"/>
         <source>Select body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="730"/>
+        <location filename="../../CommandBody.cpp" line="835"/>
         <source>Select a body from the list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3270,494 +3517,607 @@ click again to end selection</source>
 <context>
     <name>PartDesign_MoveFeatureInTree</name>
     <message>
-        <location filename="../../CommandBody.cpp" line="879"/>
+        <location filename="../../CommandBody.cpp" line="984"/>
         <source>Select feature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="880"/>
+        <location filename="../../CommandBody.cpp" line="985"/>
         <source>Select a feature from the list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="950"/>
+        <location filename="../../CommandBody.cpp" line="1055"/>
         <source>Move tip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="951"/>
+        <location filename="../../CommandBody.cpp" line="1056"/>
         <source>The moved feature appears after the currently set tip.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="952"/>
+        <location filename="../../CommandBody.cpp" line="1057"/>
         <source>Do you want the last feature to be the new tip?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PipeProfileSelectionGate</name>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="175"/>
+        <source>Pipe feature not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="179"/>
+        <source>Selecting this will cause circular dependency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="183"/>
+        <source>Section object cannot be used as profile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PipeSectionSelectionGate</name>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="218"/>
+        <source>Pipe feature not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="222"/>
+        <source>Selecting this will cause circular dependency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="226"/>
+        <source>Profile object cannot be used as section.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="230"/>
+        <source>Section object already selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="241"/>
+        <source>Section object must have the same number of wires.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../Command.cpp" line="143"/>
+        <location filename="../../Command.cpp" line="255"/>
         <source>Invalid selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="143"/>
+        <location filename="../../Command.cpp" line="255"/>
         <source>There are no attachment modes that fit selected objects. Select something else.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="149"/>
-        <location filename="../../Command.cpp" line="152"/>
-        <location filename="../../Command.cpp" line="154"/>
+        <location filename="../../Command.cpp" line="266"/>
+        <location filename="../../Command.cpp" line="268"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="149"/>
-        <source>There is no active body. Please make a body active before inserting a datum entity.</source>
+        <location filename="../../Command.cpp" line="424"/>
+        <source>ShapeBinde</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="411"/>
-        <source>Sub-Shape Binder</source>
+        <location filename="../../Command.cpp" line="518"/>
+        <source>Clone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="593"/>
-        <source>Several sub-elements selected</source>
+        <location filename="../../Command.cpp" line="519"/>
+        <source>Body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="594"/>
-        <source>You have to select a single face as support for a sketch!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="604"/>
-        <source>No support face selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="605"/>
-        <source>You have to select a face as support for a sketch!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="614"/>
+        <location filename="../../Command.cpp" line="625"/>
         <source>No planar support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="615"/>
+        <location filename="../../Command.cpp" line="626"/>
         <source>You need a planar face as support for a sketch!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="800"/>
-        <source>No valid planes in this document</source>
+        <location filename="../../Command.cpp" line="700"/>
+        <source>Sketch attachment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="801"/>
-        <source>Please create a plane first or select a face to sketch on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="814"/>
-        <location filename="../../Command.cpp" line="1180"/>
-        <location filename="../../Command.cpp" line="2146"/>
-        <location filename="../../ViewProvider.cpp" line="117"/>
-        <location filename="../../ViewProviderBoolean.cpp" line="86"/>
-        <location filename="../../ViewProviderDatum.cpp" line="256"/>
-        <location filename="../../ViewProviderHole.cpp" line="81"/>
-        <location filename="../../ViewProviderPrimitive.cpp" line="91"/>
-        <location filename="../../ViewProviderShapeBinder.cpp" line="96"/>
-        <source>A dialog is already open in the task panel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="815"/>
-        <location filename="../../Command.cpp" line="1181"/>
-        <location filename="../../Command.cpp" line="2147"/>
-        <location filename="../../ViewProvider.cpp" line="118"/>
-        <location filename="../../ViewProviderBoolean.cpp" line="87"/>
-        <location filename="../../ViewProviderDatum.cpp" line="257"/>
-        <location filename="../../ViewProviderHole.cpp" line="82"/>
-        <location filename="../../ViewProviderPrimitive.cpp" line="92"/>
-        <location filename="../../ViewProviderShapeBinder.cpp" line="97"/>
-        <source>Do you want to close this dialog?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="1060"/>
+        <location filename="../../Command.cpp" line="1025"/>
         <source>Cannot use this command as there is no solid to subtract from.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1061"/>
+        <location filename="../../Command.cpp" line="1026"/>
         <source>Ensure that the body contains a feature before attempting a subtractive command.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1082"/>
-        <source>Cannot use selected object. Selected object must belong to the active body</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="1083"/>
-        <source>Consider using a ShapeBinder or a BaseFeature to reference external geometry in a body.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Command.cpp" line="1105"/>
+        <location filename="../../Command.cpp" line="1064"/>
         <source>No sketch to work on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1106"/>
-        <source>No sketch is available in the document</source>
+        <location filename="../../Command.cpp" line="1065"/>
+        <source>No sketch is available in the body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1836"/>
-        <location filename="../../Command.cpp" line="1840"/>
-        <location filename="../../Command.cpp" line="1866"/>
-        <location filename="../../Command.cpp" line="1878"/>
+        <location filename="../../Command.cpp" line="1783"/>
+        <location filename="../../Command.cpp" line="1787"/>
+        <location filename="../../Command.cpp" line="1817"/>
+        <location filename="../../Command.cpp" line="1829"/>
         <source>Wrong selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1837"/>
+        <location filename="../../Command.cpp" line="1784"/>
         <source>Select an edge, face, or body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1841"/>
+        <location filename="../../Command.cpp" line="1788"/>
         <source>Select an edge, face, or body from a single body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1845"/>
-        <location filename="../../Command.cpp" line="2173"/>
+        <location filename="../../Command.cpp" line="1792"/>
+        <location filename="../../Command.cpp" line="2109"/>
+        <location filename="../../Command.cpp" line="2483"/>
         <source>Selection is not in Active Body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1846"/>
+        <location filename="../../Command.cpp" line="1793"/>
         <source>Select an edge, face, or body from an active body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1856"/>
+        <location filename="../../Command.cpp" line="1797"/>
+        <source>Selection is not a solid feature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="1798"/>
+        <source>The selected object is not a solid feature. Please use the &apos;Boolean&apos; feature to fuse it into the body first.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="1807"/>
         <source>Wrong object type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1857"/>
+        <location filename="../../Command.cpp" line="1808"/>
         <source>%1 works only on parts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1867"/>
+        <location filename="../../Command.cpp" line="1818"/>
         <source>Shape of the selected Part is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="1879"/>
+        <location filename="../../Command.cpp" line="1830"/>
         <source> not possible on selected faces/edges.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2164"/>
-        <source>No valid features in this document</source>
+        <location filename="../../Command.cpp" line="2110"/>
+        <source>Please select only feature(s) in the active body.
+Or use SubShapeBinder to import it into the body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2165"/>
-        <source>Please create a feature first.</source>
+        <location filename="../../Command.cpp" line="2484"/>
+        <source>Please select only one feature in the active body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Command.cpp" line="2174"/>
-        <source>Please select only one feature in an active body.</source>
+        <location filename="../../Command.cpp" line="2489"/>
+        <location filename="../../Command.cpp" line="2496"/>
+        <source>Invalid MultiTransform selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="71"/>
+        <location filename="../../Command.cpp" line="2490"/>
+        <source>MultiTransform feature cannot be nested.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2497"/>
+        <source>Please select one and only one pattern feature.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2507"/>
+        <source>MultiTransform</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2647"/>
+        <source>Boolean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2664"/>
+        <source>Reference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="2743"/>
+        <source>Split</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../CommandBody.cpp" line="77"/>
         <source>Part creation failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="72"/>
+        <location filename="../../CommandBody.cpp" line="78"/>
         <source>Failed to create a part object.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="119"/>
-        <location filename="../../CommandBody.cpp" line="124"/>
-        <location filename="../../CommandBody.cpp" line="137"/>
-        <location filename="../../CommandBody.cpp" line="186"/>
+        <location filename="../../CommandBody.cpp" line="216"/>
         <source>Bad base feature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="120"/>
-        <source>Body can&apos;t be based on a PartDesign feature.</source>
+        <location filename="../../CommandBody.cpp" line="217"/>
+        <source>No shape found in the selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="125"/>
-        <source>%1 already belongs to a body, can&apos;t use it as base feature for another body.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../CommandBody.cpp" line="138"/>
-        <source>Base feature (%1) belongs to other part.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../CommandBody.cpp" line="162"/>
-        <source>The selected shape consists of multiple solids.
-This may lead to unexpected results.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../CommandBody.cpp" line="166"/>
-        <source>The selected shape consists of multiple shells.
-This may lead to unexpected results.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../CommandBody.cpp" line="170"/>
-        <source>The selected shape consists of only a shell.
-This may lead to unexpected results.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../CommandBody.cpp" line="174"/>
-        <source>The selected shape consists of multiple solids or shells.
-This may lead to unexpected results.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../CommandBody.cpp" line="179"/>
+        <location filename="../../CommandBody.cpp" line="232"/>
         <source>Base feature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="187"/>
-        <source>Body may be based on no more than one feature.</source>
+        <location filename="../../CommandBody.cpp" line="234"/>
+        <source>You are about to use the following feature as base for the new body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="343"/>
+        <location filename="../../CommandBody.cpp" line="236"/>
+        <source>Select &apos;Yes&apos; to continue, &apos;No&apos; to create the body without base feature, or &apos;Abort&apos; to exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../CommandBody.cpp" line="242"/>
+        <source>Name body after the selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../CommandBody.cpp" line="243"/>
+        <source>Name the new body after the selected object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../CommandBody.cpp" line="436"/>
         <source>Nothing to migrate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="344"/>
+        <location filename="../../CommandBody.cpp" line="437"/>
         <source>No PartDesign features found that don&apos;t belong to a body. Nothing to migrate.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="492"/>
+        <location filename="../../CommandBody.cpp" line="585"/>
         <source>Sketch plane cannot be migrated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="493"/>
+        <location filename="../../CommandBody.cpp" line="586"/>
         <source>Please edit &apos;%1&apos; and redefine it to use a Base or Datum plane as the sketch plane.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="555"/>
-        <location filename="../../CommandBody.cpp" line="559"/>
-        <location filename="../../CommandBody.cpp" line="564"/>
-        <location filename="../../CommandBody.cpp" line="851"/>
-        <location filename="../../CommandBody.cpp" line="858"/>
+        <location filename="../../CommandBody.cpp" line="648"/>
+        <location filename="../../CommandBody.cpp" line="652"/>
+        <location filename="../../CommandBody.cpp" line="657"/>
+        <location filename="../../CommandBody.cpp" line="956"/>
+        <location filename="../../CommandBody.cpp" line="963"/>
         <source>Selection error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="556"/>
+        <location filename="../../CommandBody.cpp" line="649"/>
         <source>Select exactly one PartDesign feature or a body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="560"/>
+        <location filename="../../CommandBody.cpp" line="653"/>
         <source>Couldn&apos;t determine a body for the selected feature &apos;%s&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="565"/>
+        <location filename="../../CommandBody.cpp" line="658"/>
         <source>Only a solid feature can be the tip of a body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="680"/>
-        <location filename="../../CommandBody.cpp" line="702"/>
-        <location filename="../../CommandBody.cpp" line="717"/>
+        <location filename="../../CommandBody.cpp" line="785"/>
+        <location filename="../../CommandBody.cpp" line="807"/>
+        <location filename="../../CommandBody.cpp" line="822"/>
         <source>Features cannot be moved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="681"/>
+        <location filename="../../CommandBody.cpp" line="786"/>
         <source>Some of the selected features have dependencies in the source body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="703"/>
+        <location filename="../../CommandBody.cpp" line="808"/>
         <source>Only features of a single source Body can be moved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="718"/>
+        <location filename="../../CommandBody.cpp" line="823"/>
         <source>There are no other bodies to move to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="852"/>
+        <location filename="../../CommandBody.cpp" line="957"/>
         <source>Impossible to move the base feature of a body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="859"/>
+        <location filename="../../CommandBody.cpp" line="964"/>
         <source>Select one or more features from the same body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="872"/>
+        <location filename="../../CommandBody.cpp" line="977"/>
         <source>Beginning of the body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="936"/>
+        <location filename="../../CommandBody.cpp" line="1041"/>
         <source>Dependency violation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandBody.cpp" line="937"/>
+        <location filename="../../CommandBody.cpp" line="1042"/>
         <source>Early feature must not depend on later feature.
 
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="269"/>
+        <location filename="../../CommandPrimitive.cpp" line="306"/>
         <source>No previous feature found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../CommandPrimitive.cpp" line="270"/>
+        <location filename="../../CommandPrimitive.cpp" line="307"/>
         <source>It is not possible to create a subtractive feature without a base feature available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.cpp" line="205"/>
-        <location filename="../../TaskRevolutionParameters.cpp" line="136"/>
-        <location filename="../../TaskTransformedParameters.cpp" line="284"/>
+        <location filename="../../TaskHelixParameters.cpp" line="194"/>
+        <location filename="../../TaskRevolutionParameters.cpp" line="167"/>
+        <location filename="../../TaskTransformedParameters.cpp" line="461"/>
         <source>Vertical sketch axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.cpp" line="206"/>
-        <location filename="../../TaskRevolutionParameters.cpp" line="137"/>
-        <location filename="../../TaskTransformedParameters.cpp" line="285"/>
+        <location filename="../../TaskHelixParameters.cpp" line="195"/>
+        <location filename="../../TaskRevolutionParameters.cpp" line="168"/>
+        <location filename="../../TaskTransformedParameters.cpp" line="462"/>
         <source>Horizontal sketch axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHelixParameters.cpp" line="208"/>
-        <location filename="../../TaskRevolutionParameters.cpp" line="139"/>
+        <location filename="../../TaskHelixParameters.cpp" line="197"/>
+        <location filename="../../TaskRevolutionParameters.cpp" line="170"/>
         <source>Construction line %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskSketchBasedParameters.cpp" line="85"/>
-        <source>Face</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../Utils.cpp" line="130"/>
+        <location filename="../../Utils.cpp" line="179"/>
         <source>In order to use PartDesign you need an active Body object in the document. Please make one active (double click) or create one.
 
 If you have a legacy document with PartDesign objects without Body, use the migrate function in PartDesign to put them into a Body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Utils.cpp" line="177"/>
+        <location filename="../../Utils.cpp" line="239"/>
         <source>Active Body Required</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Utils.cpp" line="178"/>
+        <location filename="../../Utils.cpp" line="240"/>
         <source>To create a new PartDesign object, there must be an active Body object in the document. Please make one active (double click) or create a new Body.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Utils.cpp" line="213"/>
+        <location filename="../../Utils.cpp" line="284"/>
         <source>Feature is not in a body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Utils.cpp" line="214"/>
+        <location filename="../../Utils.cpp" line="285"/>
         <source>In order to use this feature it needs to belong to a body object in the document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Utils.cpp" line="246"/>
+        <location filename="../../Utils.cpp" line="317"/>
         <source>Feature is not in a part</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../Utils.cpp" line="247"/>
+        <location filename="../../Utils.cpp" line="318"/>
         <source>In order to use this feature it needs to belong to a part object in the document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="97"/>
+        <location filename="../../Utils.cpp" line="664"/>
+        <location filename="../../Utils.cpp" line="683"/>
+        <source>PartDesign Command override</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="666"/>
+        <source>You are invoking a non-PartDesign command while referecing a PartDesign feature.
+
+Do you want to override this command with an equivalent PartDesign command?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="670"/>
+        <source>You are invoking a non-PartDesign command while having an active PartDesign body.
+
+Do you want to override this command with an equivalent PartDesign command?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="677"/>
+        <location filename="../../Utils.cpp" line="1101"/>
+        <source>Remember the choice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="684"/>
+        <location filename="../../Utils.cpp" line="1108"/>
+        <source>You can change your choice in &apos;Part design&apos; preference page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1093"/>
+        <location filename="../../Utils.cpp" line="1107"/>
+        <source>PartDesign feature wrap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1094"/>
+        <source>You are referencing a PartDesign feature in a non-PartDesign object.
+
+Do you want to incorporate this object into PartDesign body using a wrap feature?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1252"/>
+        <location filename="../../Utils.cpp" line="1263"/>
+        <source>Failed to import external object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Utils.cpp" line="1253"/>
+        <source>No active body found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="113"/>
+        <location filename="../../ViewProviderDressUp.cpp" line="50"/>
+        <location filename="../../ViewProviderTransformed.cpp" line="72"/>
+        <source>Edit %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="135"/>
+        <source>Toggle export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="147"/>
+        <source>Ungroup solid feature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="158"/>
+        <source>Group solid feature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="171"/>
+        <source>Group all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="175"/>
+        <source>Ungroup all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="180"/>
+        <source>Select solid features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="185"/>
+        <source>Set body tip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="189"/>
         <source>Set colors...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderBoolean.cpp" line="69"/>
+        <location filename="../../ViewProvider.cpp" line="714"/>
+        <source>Feature suppressed. ALT + click this icon to unsppress.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="717"/>
+        <source>This is the tip of the body. New feature will be inserted after it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="719"/>
+        <source>Alt + click this icon to set this feature as the tip of the body.
+New feature will be inserted after it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderBoolean.cpp" line="73"/>
         <source>Edit boolean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderDatum.cpp" line="126"/>
-        <location filename="../../ViewProviderDatum.cpp" line="216"/>
+        <location filename="../../ViewProviderDatum.cpp" line="125"/>
+        <location filename="../../ViewProviderDatum.cpp" line="217"/>
         <source>Plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderDatum.cpp" line="130"/>
-        <location filename="../../ViewProviderDatum.cpp" line="212"/>
+        <location filename="../../ViewProviderDatum.cpp" line="129"/>
+        <location filename="../../ViewProviderDatum.cpp" line="213"/>
         <source>Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderDatum.cpp" line="134"/>
-        <location filename="../../ViewProviderDatum.cpp" line="220"/>
+        <location filename="../../ViewProviderDatum.cpp" line="133"/>
+        <location filename="../../ViewProviderDatum.cpp" line="221"/>
         <source>Point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderDatum.cpp" line="138"/>
+        <location filename="../../ViewProviderDatum.cpp" line="137"/>
         <source>Coordinate System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderDatum.cpp" line="237"/>
+        <location filename="../../ViewProviderDatum.cpp" line="233"/>
         <source>Edit datum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderDressUp.cpp" line="50"/>
-        <location filename="../../ViewProviderTransformed.cpp" line="69"/>
-        <source>Edit %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3772,73 +4132,48 @@ This feature is broken and can&apos;t be edited.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderGroove.cpp" line="51"/>
+        <location filename="../../ViewProviderGroove.cpp" line="50"/>
         <source>Edit groove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderHole.cpp" line="64"/>
+        <location filename="../../ViewProviderHole.cpp" line="65"/>
         <source>Edit hole</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderLoft.cpp" line="79"/>
+        <location filename="../../ViewProviderLoft.cpp" line="80"/>
         <source>Edit loft</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderPad.cpp" line="54"/>
+        <location filename="../../ViewProviderPad.cpp" line="50"/>
         <source>Edit pad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderPipe.cpp" line="87"/>
+        <location filename="../../ViewProviderPipe.cpp" line="89"/>
         <source>Edit pipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderPocket.cpp" line="53"/>
+        <location filename="../../ViewProviderPocket.cpp" line="52"/>
         <source>Edit pocket</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderPrimitive.cpp" line="76"/>
+        <location filename="../../ViewProviderPrimitive.cpp" line="104"/>
         <source>Edit primitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderRevolution.cpp" line="51"/>
+        <location filename="../../ViewProviderRevolution.cpp" line="50"/>
         <source>Edit revolution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderShapeBinder.cpp" line="192"/>
+        <location filename="../../ViewProviderShapeBinder.cpp" line="190"/>
         <source>Edit shape binder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderShapeBinder.cpp" line="259"/>
-        <source>Synchronize</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderShapeBinder.cpp" line="261"/>
-        <source>Select bound object</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderTransformed.cpp" line="173"/>
-        <source>One transformed shape does not intersect support</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderTransformed.cpp" line="175"/>
-        <source>%1 transformed shapes do not intersect support</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderTransformed.cpp" line="185"/>
-        <source>Transformation succeeded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3874,7 +4209,7 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProviderHelix.cpp" line="57"/>
+        <location filename="../../ViewProviderHelix.cpp" line="58"/>
         <source>Edit helix</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3884,8 +4219,66 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPadParameters.cpp" line="362"/>
-        <source>Sketch normal</source>
+        <location filename="../../ReferenceSelection.cpp" line="255"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.cpp" line="467"/>
+        <source>Profile normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPadParameters.cpp" line="471"/>
+        <source>Custom direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderExtrusion.cpp" line="73"/>
+        <source>Edit Extrusion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderExtrusion.cpp" line="81"/>
+        <source>Extrusion parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderSolid.cpp" line="64"/>
+        <source>Toggle active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderTransformed.cpp" line="107"/>
+        <source>One transformed shape is causing error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProviderTransformed.cpp" line="109"/>
+        <source>%1 transformed shapes are causing error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SpineSelectionGate</name>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="122"/>
+        <source>Pipe feature not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="126"/>
+        <source>Not from pipe spine object.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="130"/>
+        <source>Selecting this will cause circular dependency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskPipeParameters.cpp" line="138"/>
+        <source>No edge found in selection.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4215,233 +4608,235 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
     </message>
     <message>
         <location filename="../../TaskHoleParameters.ui" line="26"/>
-        <source>&lt;b&gt;Threading and size&lt;/b&gt;</source>
+        <source>Threading and size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="39"/>
-        <source>Profile</source>
+        <location filename="../../TaskHoleParameters.ui" line="41"/>
+        <source>Class</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="68"/>
-        <source>Whether the hole gets a thread</source>
+        <location filename="../../TaskHoleParameters.ui" line="60"/>
+        <source>Tolerance class for threaded holes according to hole profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="71"/>
-        <source>Threaded</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="84"/>
-        <source>Whether the hole gets a modelled thread</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="87"/>
-        <source>Model Thread</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="97"/>
-        <source>Live update of changes to the thread
-Note that the calculation can take some time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="101"/>
-        <source>Update view</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="114"/>
-        <source>Customize thread clearance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="117"/>
-        <source>Custom Thread Clearance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location filename="../../TaskHoleParameters.ui" line="79"/>
         <location filename="../../TaskHoleParameters.ui" line="130"/>
-        <location filename="../../TaskHoleParameters.ui" line="251"/>
+        <source>Hole diameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="92"/>
         <source>Clearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../TaskHoleParameters.ui" line="149"/>
-        <source>Custom Thread clearance value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="171"/>
         <source>Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="190"/>
+        <location filename="../../TaskHoleParameters.ui" line="188"/>
+        <source>Hole depth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="193"/>
+        <location filename="../../TaskHoleParameters.ui" line="245"/>
+        <source>Dimension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="198"/>
+        <source>Tapped (DIN76)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="209"/>
         <source>Right hand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="206"/>
+        <location filename="../../TaskHoleParameters.ui" line="250"/>
+        <source>Through all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="264"/>
+        <source>Thread Depth Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="271"/>
         <source>Left hand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="222"/>
+        <location filename="../../TaskHoleParameters.ui" line="284"/>
+        <source>Hole Depth Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="297"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="270"/>
+        <location filename="../../TaskHoleParameters.ui" line="310"/>
+        <source>Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="317"/>
+        <source>Custom Thread Clearance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="324"/>
+        <source>Fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="343"/>
         <source>Hole clearance
 Only available for holes without thread</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="275"/>
-        <location filename="../../TaskHoleParameters.cpp" line="580"/>
+        <location filename="../../TaskHoleParameters.ui" line="348"/>
+        <location filename="../../TaskHoleParameters.cpp" line="604"/>
         <source>Standard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="280"/>
-        <location filename="../../TaskHoleParameters.cpp" line="581"/>
-        <location filename="../../TaskHoleParameters.cpp" line="592"/>
+        <location filename="../../TaskHoleParameters.ui" line="353"/>
+        <location filename="../../TaskHoleParameters.cpp" line="605"/>
+        <location filename="../../TaskHoleParameters.cpp" line="616"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="285"/>
-        <location filename="../../TaskHoleParameters.cpp" line="582"/>
+        <location filename="../../TaskHoleParameters.ui" line="358"/>
+        <location filename="../../TaskHoleParameters.cpp" line="606"/>
         <source>Wide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="299"/>
-        <source>Class</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="318"/>
-        <source>Tolerance class for threaded holes according to hole profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="331"/>
-        <location filename="../../TaskHoleParameters.ui" line="536"/>
+        <location filename="../../TaskHoleParameters.ui" line="372"/>
+        <location filename="../../TaskHoleParameters.ui" line="459"/>
         <source>Diameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="350"/>
-        <source>Hole diameter</source>
+        <location filename="../../TaskHoleParameters.ui" line="385"/>
+        <source>Hole Depth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="369"/>
-        <location filename="../../TaskHoleParameters.ui" line="577"/>
-        <source>Depth</source>
+        <location filename="../../TaskHoleParameters.ui" line="392"/>
+        <source>Whether the hole gets a thread</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="389"/>
-        <location filename="../../TaskHoleParameters.ui" line="446"/>
-        <source>Dimension</source>
+        <location filename="../../TaskHoleParameters.ui" line="395"/>
+        <source>Threaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="394"/>
-        <source>Through all</source>
+        <location filename="../../TaskHoleParameters.ui" line="402"/>
+        <source>Model Thread</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="421"/>
+        <location filename="../../TaskHoleParameters.ui" line="437"/>
         <source>Thread Depth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="441"/>
-        <source>Hole depth</source>
+        <location filename="../../TaskHoleParameters.ui" line="447"/>
+        <source>Hole cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="451"/>
-        <source>Tapped (DIN76)</source>
+        <location filename="../../TaskHoleParameters.ui" line="503"/>
+        <source>Depth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="475"/>
-        <source>&lt;b&gt;Hole cut&lt;/b&gt;</source>
+        <location filename="../../TaskHoleParameters.ui" line="550"/>
+        <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="488"/>
-        <location filename="../../TaskHoleParameters.ui" line="666"/>
+        <location filename="../../TaskHoleParameters.ui" line="591"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="507"/>
+        <location filename="../../TaskHoleParameters.ui" line="604"/>
         <source>Cut type for screw heads</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="520"/>
+        <location filename="../../TaskHoleParameters.ui" line="617"/>
         <source>Check to override the values predefined by the &apos;Type&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="523"/>
+        <location filename="../../TaskHoleParameters.ui" line="620"/>
         <source>Custom values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="615"/>
-        <source>Countersink angle</source>
+        <location filename="../../TaskHoleParameters.ui" line="630"/>
+        <source>Drill point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="650"/>
-        <source>&lt;b&gt;Drill point&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="682"/>
-        <source>Flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="698"/>
-        <source>Angled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="730"/>
+        <location filename="../../TaskHoleParameters.ui" line="642"/>
         <source>The size of the drill point will be taken into
 account for the depth of blind holes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="734"/>
+        <location filename="../../TaskHoleParameters.ui" line="646"/>
         <source>Take into account for depth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="741"/>
-        <source>&lt;b&gt;Misc&lt;/b&gt;</source>
+        <location filename="../../TaskHoleParameters.ui" line="659"/>
+        <source>Flat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="754"/>
+        <location filename="../../TaskHoleParameters.ui" line="672"/>
+        <source>Angled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="701"/>
+        <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="713"/>
         <source>Tapered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="767"/>
+        <location filename="../../TaskHoleParameters.ui" line="726"/>
+        <source>Reverses the hole direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="729"/>
+        <source>Reversed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskHoleParameters.ui" line="742"/>
         <source>Taper angle for the hole
 90 degree: straight hole
 under 90: smaller hole radius at the bottom
@@ -4449,22 +4844,12 @@ over 90: larger hole radius at the bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.ui" line="789"/>
-        <source>Reverses the hole direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.ui" line="792"/>
-        <source>Reversed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../TaskHoleParameters.cpp" line="591"/>
+        <location filename="../../TaskHoleParameters.cpp" line="615"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskHoleParameters.cpp" line="593"/>
+        <location filename="../../TaskHoleParameters.cpp" line="617"/>
         <source>Loose</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4479,6 +4864,11 @@ over 90: larger hole radius at the bottom</source>
     <message>
         <location filename="../../TaskTransformedMessages.ui" line="25"/>
         <source>No message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../TaskTransformedMessages.ui" line="35"/>
+        <source>Transform sub-feature</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

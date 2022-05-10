@@ -86,13 +86,28 @@
         <source>Base</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Margin to be added to the calculated size of the origin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enum</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CmdMacroPreselectCommands</name>
+    <message>
+        <source>Preselection Macros</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of macros that are invoked on 3D view pre-selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CmdTestConsoleOutput</name>
-    <message>
-        <source>Standard-Test</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Test console output</source>
         <translation type="unfinished"></translation>
@@ -101,20 +116,12 @@
 <context>
     <name>CmdViewMeasureClearAll</name>
     <message>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Clear measurement</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>CmdViewMeasureToggleAll</name>
-    <message>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Toggle measurement</source>
         <translation type="unfinished"></translation>
@@ -132,10 +139,6 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Paste expressions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -194,6 +197,89 @@
         <source>Measure distance</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle tree item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle export </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle array elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change saved view</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CommandGroup</name>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Macros</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Macro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Structure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard-Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard-View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TreeView</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DlgCustomizeSpNavSettings</name>
@@ -245,19 +331,34 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Result:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Revert to last calculated value (as constant)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable line wrapping in edit box, and allow &apos;Return&apos; key
+to create multi-line expressions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No wrap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto evaluate function calls in expression and show preview.
+Be aware that some function call may have side effects and
+cause unexpected changes to objects.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Evaluate function</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -296,13 +397,48 @@
     </message>
 </context>
 <context>
-    <name>ExpressionLabel</name>
+    <name>ExprParams</name>
     <message>
-        <source>Enter an expression...</source>
+        <source>Expression completer with case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Expression: </source>
+        <source>Expression completer match exact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expression completer unfiltered completion mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable in place expressiong editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expression editor trigger character</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only show editor icon on mouse over</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow return key in expression edit box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto evaluate function call when editing expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expression editor background opacity value when using in place editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExpressionLabel</name>
+    <message>
+        <source>Press = to bring up the expression editor.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -310,6 +446,14 @@
     <name>Gui::AccelLineEdit</name>
     <message>
         <source>none</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press a keyboard shortcut</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -413,9 +557,19 @@ while doing a left or right click and move the mouse up or down</source>
     </message>
 </context>
 <context>
-    <name>Gui::Command</name>
+    <name>Gui::CmdHistoryAction</name>
     <message>
-        <source>Standard</source>
+        <source>Press SPACE to search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add toolbar or menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a Global customized toolbar or menu.
+Or, hold SHIFT key to create a toolbar/menu
+for the current workbench.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -476,7 +630,7 @@ while doing a left or right click and move the mouse up or down</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Release date</source>
@@ -629,6 +783,95 @@ while doing a left or right click and move the mouse up or down</source>
         <source>Direction</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Invert fill color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translation increment:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation increment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fill clip plane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hatch scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hatch texture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No clipping on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back face light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show clip plane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intensity of the back fac light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clip plane visual size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Concave section</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back face light color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Render clip section fill of objects with similar materials
+so that the intersecting objects effectively become a
+boolean substraction operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grouped rendering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Angles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intrinsic Euler angle about local Y axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intrinsic Euler angle about X axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close: deactivate clip planes
+Save: save the current setting of the clip planes to a &apos;SavedView&apos; object.
+SaveAll: save all current view settings to a &apos;SavedView&apos; object.
+
+You can store the setting to an existing &apos;SavedView&apos; object before by
+selecting it before clicking &apos;Save/SaveAll&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cross section fill only works with &apos;Experiemental&apos; render cache (Preferences -&gt; Display -&gt; Render cache).
+
+Do you want to enable it?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::CommandModel</name>
@@ -704,7 +947,7 @@ while doing a left or right click and move the mouse up or down</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -765,7 +1008,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Username:</source>
@@ -803,6 +1046,32 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source>Icon folders...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::Dialog::DlgCreateNewPreferencePack</name>
+    <message>
+        <source>Create New Preference Pack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Property group templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::Dialog::DlgCreateNewPreferencePackImp</name>
+    <message>
+        <source>Pack already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A preference pack with that name already exists. Do you want to overwrite it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -858,6 +1127,10 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source>Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invoke on 3D view pre-selection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -920,7 +1193,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -945,27 +1218,11 @@ If this is not ticked, then the property must be uniquely named, and it is acces
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Description:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Category:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>C&amp;ommands:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Current shortcut:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Press &amp;new shortcut:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Currently assigned to:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -994,10 +1251,42 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multi-key sequence delay: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time in milliseconds to wait for the next key stroke of the current key sequence.
+For example, pressing &apos;F&apos; twice in less than the time delay setting here will be
+be treated as shorctcut key sequence &apos;F, F&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This list shows commands having the same shortcut in the priority from high
+to low. If more than one command with the same shortcut are active at the
+same time. The one with the highest prioirty will be triggered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shorcut priority list:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1012,27 +1301,27 @@ If this is not ticked, then the property must be uniquely named, and it is acces
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>none</source>
+        <source>Type to search...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Multiple defined shortcut</source>
+        <source>Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Already defined shortcut</source>
+        <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The shortcut &apos;%1&apos; is defined more than once. This could result in unexpected behaviour.</source>
+        <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The shortcut &apos;%1&apos; is already assigned to &apos;%2&apos;.</source>
+        <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to override it?</source>
+        <source>All</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1098,14 +1387,6 @@ If this is not ticked, then the property must be uniquely named, and it is acces
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;Separator&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1131,14 +1412,88 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 module not loaded</source>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new toolbar containing recently used commands.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workbench:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assign shortcut to a toolbar to create a popup menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assign toolbar pie menu shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keyboard shortcut to bring up the corresponding pie menu of a toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset toolbar pie menu shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This list shows commands having the same shortcut in the priority from hight
+to low. If more than one command with the same shortcut are active at the
+same time. The one with the highest prioirty will be triggered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shorcut priority list:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1:%2 (command not found)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1231,7 +1586,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Line transparency:</source>
@@ -1251,6 +1606,62 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source>Document window:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Touch object for recompute on color change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifies how to map color from child objects to parent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color Mapping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mapping face color from derived shape if possible.
+You may want to disable this if you want to set a
+uniform color for all faces.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map face colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mapping edge color from base shape if possible.
+You may want to disable this if you want to set a
+uniform color for all edges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map edge colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mapping face transparency from derived shape if possible.
+You may want to disable this if you want to set a uniform
+transparency for all faces.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map transparencies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mapping vertex color from derived shape if possible.
+You may want to disable this if you want to set a
+uniform color for all vertices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map vertex colors</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1397,7 +1808,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pressing &lt;Tab&gt; will insert amount of defined indent size</source>
@@ -1437,6 +1848,13 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
         <source>Code lines will be numbered</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::Dialog::DlgExpressionInput</name>
+    <message>
+        <source>Function evaluation and attribute writing are disabled while editing. You can enable it by checking &apos;Evaluate function&apos; here. Be aware that invoking function may cause unexpected change to various objects.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1517,10 +1935,6 @@ this according to your screen size or personal taste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tree view mode:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Customize how tree view is shown in the panel (restart required).
 
 &apos;ComboView&apos;: combine tree view and property view into one panel.
@@ -1544,13 +1958,124 @@ after FreeCAD launches</source>
 horizontal space in Python console</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto apply preference options immediately after change.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save preference settings to file up on closing this dialog.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save settings to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tree view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Item spacing:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose your preference for tree view icon size in pixel.
+The tree view row height will set to icon size + 2. Set 0
+to use the system default size.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set tree view label font size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Document expansion mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Command history size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to make sure pop up windows (e.g. Preference dialog)
+are shown on the same screen as the main window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pop up window on the same screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default font size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View menu style sheet:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate task list into its own dockable widget</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate task list from task view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the default application font size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon set:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User defined icon set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workbench tab icon size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose default docking area for global toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workbench toolbar area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Global toolbar area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overlay style sheet:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose default docking area for workbench toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgGeneralImp</name>
-    <message>
-        <source>No style sheet</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Small (%1px)</source>
         <translation type="unfinished"></translation>
@@ -1583,6 +2108,114 @@ horizontal space in Python console</source>
         <source>Both</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::Dialog::DlgIconBrowser</name>
+    <message>
+        <source>Icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User defined icon set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Styled icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resource path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click &apos;Save&apos; button to save the content here to create your own icon set. Or, you
+can manually copy the content and append to your existing icon set configuration.
+
+Note, tree view, toolbar, and workbench tab bar support non-square icons. The
+size can be specified by adding an extra field as follow. Only SVG icon requires
+explicit setting of dimention.
+
+TreeItemInvisible, iconset:MyIcons/TreeItemInvisible.svg, 128x64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon export directory. It is located inside a subdirectory (Gui/IconSets)
+in your application user directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To override application icons, you can save the above configurations into your
+application user directory Gui/IconSets/. You can then select your icons set in
+Preference -&gt; General -&gt; Icon set.
+
+For stylesheet authors, you can also override icons through Gui::MainWindow
+property &apos;overrideIcons&apos; as shown below. Please note that the icon settings in
+the stylesheet takes precedence over icon set configurations.
+
+Gui--MainWindow {
+  qproperty-overrideIcons : url(
+TreeItemVisible, iconset:MyIcons/TreeItemVisible.svg
+TreeItemInvisible, iconset:MyIcons/TreeItemInvisible.svg
+);}
+
+Note, tree view, toolbar, and workbench tab bar support non-square icons. The
+size can be specified as follow,
+
+TreeItemInvisible, iconset:MyIcons/TreeItemInvisible.svg, 128x64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export selected icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgInputDialog</name>
@@ -1592,13 +2225,25 @@ horizontal space in Python console</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgInspector</name>
     <message>
         <source>Scene Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get node in console</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Children Nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>count: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1873,7 +2518,7 @@ Note: your changes will be applied when you next switch workbenches
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Emissive color:</source>
@@ -1948,6 +2593,100 @@ Specify another directory, please.</source>
     </message>
     <message>
         <source>Search Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this to expose the setting as preset in &apos;Tools -&gt; Presets&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Presets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ToolTip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add a new preset configuration from file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the current configuration as a preset with a new name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove the current configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the current configuration as a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import previously saved configuration.
+This will overwrite the current configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge an existing configuration with the current one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear the current configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart the application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this to auto select any parameter that have changed.
+You can then selectively export only the changed ones.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Monitor</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2032,6 +2771,86 @@ Specify another directory, please.</source>
         <source>Search Group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>From file...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The application will restart after resetting the configuration.
+
+Do you want to make a backup?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to make a backup before resetting the configuration?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to reset configuration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import parameter from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This will overwrite the current settings.
+Do you want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Application Settings&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool tip:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export parameter to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to export to &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge parameter from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reading from &apos;%1&apos; failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgPreferences</name>
@@ -2041,7 +2860,7 @@ Specify another directory, please.</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2060,6 +2879,18 @@ Specify another directory, please.</source>
     </message>
     <message>
         <source>If you agree all your settings will be cleared.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Revert changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to revert back to previous settings before exit?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2107,7 +2938,7 @@ Specify another directory, please.</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>UUID:</source>
@@ -2219,6 +3050,14 @@ Specify another directory, please.</source>
         <source>If enabled, then 3D view selection will be synchronized with full object hierarchy.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgReportView</name>
@@ -2264,7 +3103,7 @@ Specify another directory, please.</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Redirect internal Python errors to report view</source>
@@ -2428,7 +3267,7 @@ from Python console to Report view panel</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
@@ -2511,16 +3350,6 @@ report this setting as enabled when seeking support on the FreeCAD forums</sourc
     </message>
     <message>
         <source>Render cache</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&apos;Render Caching&apos; is another way to say &apos;Rendering Acceleration&apos;.
-There are 3 options available to achieve this: 
-1) &apos;Auto&apos; (default), let Coin3D decide where to cache.
-2) &apos;Distributed&apos;, manually turn on cache for all view provider root node.
-3) &apos;Centralized&apos;, manually turn off cache in all nodes of all view provider, and
-only cache at the scene graph root node. This offers the fastest rendering speed
-but slower response to any scene changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2622,17 +3451,53 @@ The specified value is a factor that will be multiplied with the
 bounding box size of the 3D object that is currently displayed.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable 3D picking acceleration. The effect is only noticable for very complex
+geometry shape, and may cause some initial lag due to bufferring.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick acceleration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum cache merge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&apos;Render Caching&apos; is another way to say &apos;Rendering Acceleration&apos;.
+There are 3 options available to achieve this: 
+1) &apos;Auto&apos; (default), let Coin3D decide where to cache.
+2) &apos;Distributed&apos;, manually turn on cache for all view provider root node.
+3) &apos;Centralized&apos;, manually turn off cache in all nodes of all view provider, and
+only cache at the scene graph root node. This offers the fastest rendering speed
+but slower response to any scene changes.
+4) &apos;Experimental&apos;, new experimental caching method.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Experimental</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cache merge threshold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Renderer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pre-selection delay (second):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply to existing views</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgSettings3DViewImp</name>
-    <message>
-        <source>Anti-aliasing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open a new viewer or restart %1 to apply anti-aliasing changes.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>5px</source>
         <translation type="unfinished"></translation>
@@ -2655,6 +3520,10 @@ bounding box size of the 3D object that is currently displayed.</source>
     </message>
     <message>
         <source>15px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2746,7 +3615,7 @@ bounding box size of the 3D object that is currently displayed.</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Color-gradient settings</source>
@@ -3001,6 +3870,34 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
         <source>URL describing more about the license</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Prompt recomputation after loading legacy document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Undo/Redo of recomputing documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not use native system&apos;s open and save dialog, instead, use Qt file dialog.
+Note that, only Qt file dialog allows you to open or save project file as uncompressed directory.
+
+You can hold on SHIFT key while open or save your project to temporarily
+activate the oppsite setting here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not use native file dialog for opening and saving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not save background in thumbnail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thumnail antialiasing sample size</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgSettingsDocumentImp</name>
@@ -3014,6 +3911,205 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     </message>
     <message>
         <source>Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::Dialog::DlgSettingsDrawStyles</name>
+    <message>
+        <source>Draw styles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point size multiplier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transparency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected hidden line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected line pattern scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width multiplier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum point size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected hidden line pattern</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide seam edge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide vertex</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide face</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw outline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Override background color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Override face color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Override transparency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Override line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw per face outline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shadow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ground back face culling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ground transparency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show ground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Precision</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Epsilon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bounding box scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Threshold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light intensity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Smooth border</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ground color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ground scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spread size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spread sample size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use spot light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ground texture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ground shading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ground bump map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MaxDistance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ground texture size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transparent Shadowing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update ground on scene change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flat Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>As Is</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3081,6 +4177,10 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     </message>
     <message>
         <source>Current line highlight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3584,16 +4684,39 @@ Mouse tilting is not disabled by this setting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cube size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Size of the navigation cube</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>How much will be zoomed.
 Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colors...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only applicable in gesture navigation mode.
+
+If enabled, then long press and then release either the touch screen
+or any mouse button to set the rotation center. 
+
+If disabled, then long press and then release to bring up the context menu.
+
+If ALT key is down, then does the oppsite of the above long press action.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set rotation center on long press</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3621,6 +4744,117 @@ Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</source>
     </message>
     <message>
         <source>Add checkboxes for selection in document tree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tree View Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3D View Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show selection always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pre-selected face always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show selection bounding box instead of highlight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If the number of faces exceed the threshold,&lt;/p&gt;&lt;p&gt;then show bounding box on selection instead&lt;/p&gt;&lt;p&gt;of highlight for better performance. Setting to&lt;/p&gt;&lt;p&gt;zero to disable.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Threshold for showing selection bounding box instead of highlight </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If enabled, you can select hidden lines/points in objects shown on top.
+
+Regardless of this option, you can always turn on hidden face/line/point selection
+by holding the SHIFT key. You use mouse wheel while holding the SHIFT key to
+select hidden face at various depth.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable hidden line selection for on-top-selected objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply box element selection on on-top-selected objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color difference threshold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preselection Tool Tip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Corner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offset Y</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font size</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::Dialog::DlgSettingsUI</name>
+    <message>
+        <source>UI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tree view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expression editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dockable Overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie Menu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3730,6 +4964,23 @@ Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</source>
         <source>FEM (mm, N, sec)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Number of decimals when showing coordinates in preselection message.
+Set to -1 to use the same setting of the above &apos;Number of decimals&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimals in pre-selection:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Clear user defined decimals and single step settings in all input fields.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset user defines</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgSettingsViewColor</name>
@@ -3817,12 +5068,16 @@ Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</source>
         <source>Background color for active containers in tree view</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Selecting group</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::DlgTipOfTheDay</name>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4273,23 +5528,24 @@ The &apos;Status&apos; column shows whether the document could be recovered.</so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export parameter to file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import parameter from file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reading from &apos;%1&apos; failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do you really want to remove this parameter group?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export the current parameter group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import saved parameter into the current group.
+Only an empty group is allowed to accept import.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge the saved parameter into the current group</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4337,6 +5593,18 @@ The &apos;Status&apos; column shows whether the document could be recovered.</so
     </message>
     <message>
         <source>The item &apos;%1&apos; already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Touch item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read only settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The current configuration settings is read only. You can copy it and then make changes.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4508,10 +5776,6 @@ The &apos;Status&apos; column shows whether the document could be recovered.</so
 <context>
     <name>Gui::Dialog::SceneInspector</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4519,15 +5783,15 @@ The &apos;Status&apos; column shows whether the document could be recovered.</so
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Scene Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::Dialog::SceneModel</name>
     <message>
         <source>Inventor Tree</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4596,31 +5860,11 @@ The &apos;Status&apos; column shows whether the document could be recovered.</so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dependency</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>State</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hierarchy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Partial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4630,6 +5874,30 @@ The &apos;Status&apos; column shows whether the document could be recovered.</so
     <message>
         <source>Ignore dependencies and proceed with objects
 originally selected prior to opening this dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto select depending objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show dependencies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depending on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Depended by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4645,7 +5913,7 @@ originally selected prior to opening this dialog</source>
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4660,6 +5928,10 @@ originally selected prior to opening this dialog</source>
     </message>
     <message>
         <source>Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task View</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4822,6 +6094,18 @@ originally selected prior to opening this dialog</source>
         <source>Picked object list</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Gui::DocumentModel</name>
@@ -4889,16 +6173,17 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>Gui::ExpressionLineEdit</name>
+    <name>Gui::ExpressionCompleter</name>
     <message>
         <source>Exact match</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Gui::ExpressionTextEdit</name>
     <message>
-        <source>Exact match</source>
+        <source>Case sensitive match</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiltered completion</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5145,14 +6430,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Toggles this toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Toggles this dockable window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5167,6 +6444,18 @@ Do you want to save your changes?</source>
     <message>
         <source>To link to external objects, the document must be saved at least once.
 Do you want to save the document now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progress bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5302,6 +6591,108 @@ How do you want to proceed?</source>
     </message>
 </context>
 <context>
+    <name>Gui::OpenSCADNavigationStyle</name>
+    <message>
+        <source>Press left mouse button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press right mouse button and move mouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press left mouse button and move mouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press SHIFT and middle or right mouse button</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::OverlayTabWidget</name>
+    <message>
+        <source>Toggle transparent mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn off auto hide/show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide docked widgets on leave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide on edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide docked widgets on editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show on edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto show docked widgets on editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto show task view for any current task, and hide the view when there is no task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase window size, either width or height depending on the docking site.
+Hold CTRL key while pressing the button to change size in the other dimension.
+Hold SHIFT key while pressing the button to move the window.
+Hold CTRL + SHIFT key to move the window in the other direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease window size, either width or height depending on the docking site.
+Hold CTRL key while pressing to change size in the other dimension.
+Hold SHIFT key while pressing the button to move the window.
+Hold CTRL + SHIFT key to move the window in the other direction.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select auto show/hide mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::OverlayTitleBar</name>
+    <message>
+        <source>Mouse pass through, ESC to stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::PieMenu</name>
+    <message>
+        <source>Show pie menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Gui::PrefQuantitySpinBox</name>
     <message>
         <source>Edit</source>
@@ -5313,6 +6704,30 @@ How do you want to proceed?</source>
     </message>
     <message>
         <source>Clear list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to apply expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expression</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::PresetsAction</name>
+    <message>
+        <source>Revert </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to apply the setting.
+Ctrl + Click to revert to default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5392,6 +6807,26 @@ How do you want to proceed?</source>
     </message>
     <message>
         <source>Auto expand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide header</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to console</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename property group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group name:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5570,6 +7005,43 @@ Do you want to exit without saving your data?</source>
     </message>
 </context>
 <context>
+    <name>Gui::SearchBar</name>
+    <message>
+        <source>Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole words</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::SelStackAction</name>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole object</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::SelUpAction</name>
+    <message>
+        <source>&lt;None&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Gui::SelectModule</name>
     <message>
         <source>Select module</source>
@@ -5587,10 +7059,6 @@ Do you want to exit without saving your data?</source>
 <context>
     <name>Gui::StdCmdDescription</name>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Des&amp;cription</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5601,10 +7069,6 @@ Do you want to exit without saving your data?</source>
 </context>
 <context>
     <name>Gui::StdCmdDownloadOnlineHelp</name>
-    <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Download online help</source>
         <translation type="unfinished"></translation>
@@ -5641,10 +7105,6 @@ Do you want to specify another directory?</source>
 <context>
     <name>Gui::StdCmdPythonHelp</name>
     <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Automatic python modules documentation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5679,6 +7139,10 @@ Do you want to specify another directory?</source>
     </message>
     <message>
         <source>Rotation Increment:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show on top</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5717,7 +7181,81 @@ Do you want to specify another directory?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>On-top when selected</source>
+        <source>Enable mapping line (edge) color from shapes in history.
+
+If enabled, lines that does not have explicit color set will
+be colored according to its ancestor shapes. Lines that do
+not have ancestor will be assigned the default line color
+of this object. 
+
+Disable this option if you want to reset the line color of
+the whole object.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map line color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable mapping face color from shapes in history.
+
+If enabled, faces that does not have explicit color
+set will be colored according to its ancestor shapes.
+Faces that do not have ancestor will be assigned the
+default face color of this object. 
+
+Disable this option if you want to reset the  face color
+of the whole object.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map face color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable mapping transparency from shapes in history.
+
+If enabled, faces that does not have explicit transparency
+(alpha setting in color dialog) set will get the transparency
+value from its ancestor shapes. Faces that do not have
+ancestor will be assigned the default transparency of this
+object.
+
+Disable this option if you want to reset the whole object
+transparency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map transparency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force mapping color for this object even if it does not claim
+any children, i.e. no explicit shape history.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force map colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable mapping point (vertex) color from shapes in history.
+
+If enabled, points that does not have explicit color set will
+be colored according to its ancestor shapes. Points that do
+not have ancestor will be assigned the default point color
+of this object. 
+
+Disable this option if you want to reset the point color of
+the whole object.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map point color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show on top</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5805,6 +7343,13 @@ Do you want to specify another directory?</source>
     </message>
     <message>
         <source>Edit text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Gui::ToolBarManager</name>
+    <message>
+        <source>Undock toolbars</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6003,18 +7548,6 @@ Do you want to specify another directory?</source>
 <context>
     <name>Gui::TreeWidget</name>
     <message>
-        <source>Create group...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create a group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6060,10 +7593,6 @@ Do you want to specify another directory?</source>
     </message>
     <message>
         <source>Mark this object to be recomputed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1, Internal name: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6127,7 +7656,25 @@ Do you want to specify another directory?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> (but must be executed)</source>
+        <source>Toggle selecting group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The drop action is auto selected depending on dropping site.
+
+You can hold Ctrl key while dropping if you want to drop without
+draggging object out, or make copy instead of move.
+
+You can hold Alt or Ctrl + Alt key to choose alternative drop action,
+including link, reorder, or replace depending on dropping site.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show temporary document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show hidden temporary document items</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6166,9 +7713,40 @@ Do you want to specify another directory?</source>
     </message>
 </context>
 <context>
+    <name>Gui::ViewCameraBindingAction</name>
+    <message>
+        <source>Sync camera</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unbind</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Gui::WorkbenchGroup</name>
     <message>
         <source>Select the &apos;%1&apos; workbench</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Collapse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled workbenches</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6340,6 +7918,18 @@ Do you want to specify another directory?</source>
     </message>
     <message>
         <source>DAG View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task List</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QGuiApplication</name>
+    <message>
+        <source>QT_LAYOUT_DIRECTION</source>
+        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6959,6 +8549,517 @@ Would you like to save the file with a different name?</source>
         <source>Some documents could not be saved. Do you want to cancel closing?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Recompution required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some document(s) require recomputation for migration purpose. It is highly recommended to perform a recomputation before any modification to avoid compatibility problem.
+
+Do you want to recompute now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recompute error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to recompute some document(s).
+Please check report view for more details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate file path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are about to load a file through some symbolic link to an already loaded document. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open document directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document as directory...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as a directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is a FreeCAD document inside directory &quot;%1&quot;.
+
+Do you want to replace it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exported to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Some icons failed to exported to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save icon stylesheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to save icon stylesheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Claim all children</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remember hidden children</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export children by visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always create origin features in origin group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow cross coordinate links in GeoFeatureGroup (App::Part)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> (Cyclic reference!)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Object not found!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning! Cyclic reference may occur if you reference this object
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Access violation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggles this toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lock this toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lock toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default locking of all toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Relocate outlier toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggles this dockable window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other dockables</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotate to nearest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Buttons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide navigation buttons on mouse leave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigation cube</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide navigation cube on mouse leave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide timeout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show coordinate system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cube size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size of the navigation cube</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Steps by turn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Border width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cube face border line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colors...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change navigation cube face colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Labels...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change navigation cube labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Axis labels...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change coordinate system axis labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigation Cube Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto scale font pixel size based on navigation cube size.
+If disabled, then use the selected font point size.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigation Cube Axis Labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Navigation Cube Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick geometry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press ESC to hide hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle floating window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close dock window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decimals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single step</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left click to select the geometry.
+CTRL + Left click for multiselection.
+Shift + left click to edit the object.
+Right click to bring up the hierarchy menu.
+Shift + right click to bring up the object context menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTRL + right click to trace geometry history.
+CTRL + Shift + right click to list derived geometries.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggles visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undock from status bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Touched, </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This object is unselectable. Click to re-enable selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left click to select.
+Right click to show children.
+Shift + Left click to edit.
+Shift + Right click show the edit menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to toggle visibility.
+Alt + click to toggle show on top.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This object is marked for export for its owner group.
+ALT + click this icon to disable. You can re-enable it
+by right click and choose menu action &apos;Toggle export&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transform at the origin of the placement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transform at</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transform at the center of the shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Ctrl + click to toggle all children visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Setup configurable object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select which object to copy or exclude when configuration changes.All external linked object are excluded by default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select which objects to copy when the configuration is changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply to all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply the setting to all links. Or, uncheck this
+option to apply only to this link.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy on change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable auto copy of linked object when its configuration is changed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tracking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy the linked object when its configuration is changed.
+Also auto redo the copy if the original linked object is changed.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable copy on change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rerefresh configurable object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Synchronize the original configurable source object by
+creating a new deep copy. Note that any changes made to
+the current copy will be lost.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle array elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change whether show each link array element as individual objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The configurable source object has be changed.
+ALT + click this icon to refresh.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This link points to a mutated instance of a configurable object.
+ALT + click this icon to select the source object</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create origin features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partial capture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clipping settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Camera settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibilities</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shadow settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Capture all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Partial restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double click to restore the captured view.
+ALT + click this icon to capture current view.
+ALT + right click for more actions.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SelectionFilter</name>
@@ -6974,10 +9075,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdBoxElementSelection</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Box element selection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6985,20 +9082,12 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdBoxSelection</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Box selection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdCmdAbout</name>
-    <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;About %1</source>
         <translation type="unfinished"></translation>
@@ -7011,10 +9100,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdAboutQt</name>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7025,10 +9110,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdActivateNextWindow</name>
-    <message>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Ne&amp;xt</source>
         <translation type="unfinished"></translation>
@@ -7041,10 +9122,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdActivatePrevWindow</name>
     <message>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pre&amp;vious</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7055,10 +9132,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdAlignment</name>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Alignment...</source>
         <translation type="unfinished"></translation>
@@ -7071,10 +9144,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdArrangeIcons</name>
     <message>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Arrange &amp;Icons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7086,20 +9155,23 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdAxisCross</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle axis cross</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>StdCmdCascadeWindows</name>
+    <name>StdCmdBindViewCamera</name>
     <message>
-        <source>Window</source>
+        <source>Bind view camera</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bind the camera position of the active view to another view</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdCascadeWindows</name>
     <message>
         <source>&amp;Cascade</source>
         <translation type="unfinished"></translation>
@@ -7110,11 +9182,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdCloseActiveWindow</name>
+    <name>StdCmdClipPlaneDragger</name>
     <message>
-        <source>Window</source>
+        <source>Clip plane dragger</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toggles clipping plane dragger</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdCloseActiveWindow</name>
     <message>
         <source>Cl&amp;ose</source>
         <translation type="unfinished"></translation>
@@ -7127,10 +9206,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdCloseAllWindows</name>
     <message>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Close Al&amp;l</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7140,11 +9215,30 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdCommandLine</name>
+    <name>StdCmdCloseLinkedView</name>
     <message>
-        <source>Tools</source>
+        <source>Close all linked view</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Close all views of the linked documents.
+The linked documents stayed open.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdColorRecompute</name>
+    <message>
+        <source>Recompute on color change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Touch object for recompute on color change</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdCommandLine</name>
     <message>
         <source>Start command &amp;line...</source>
         <translation type="unfinished"></translation>
@@ -7157,10 +9251,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdCopy</name>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>C&amp;opy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7172,10 +9262,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdCut</name>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Cut</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7185,11 +9271,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdDelete</name>
+    <name>StdCmdDatumActions</name>
     <message>
-        <source>Edit</source>
+        <source>Datum actions</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Actions for making various datum features</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDelete</name>
     <message>
         <source>&amp;Delete</source>
         <translation type="unfinished"></translation>
@@ -7202,10 +9295,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdDemoMode</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>View turntable...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7217,10 +9306,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdDependencyGraph</name>
     <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Dependency graph...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7231,10 +9316,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdDlgCustomize</name>
-    <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Cu&amp;stomize...</source>
         <translation type="unfinished"></translation>
@@ -7254,17 +9335,9 @@ Would you like to save the file with a different name?</source>
         <source>Opens a dialog to let you execute a recorded macro</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>StdCmdDlgMacroExecuteDirect</name>
-    <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Execute macro</source>
         <translation type="unfinished"></translation>
@@ -7284,17 +9357,9 @@ Would you like to save the file with a different name?</source>
         <source>Opens a dialog to record a macro</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>StdCmdDlgParameter</name>
-    <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>E&amp;dit parameters ...</source>
         <translation type="unfinished"></translation>
@@ -7307,10 +9372,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdDlgPreferences</name>
     <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Preferences ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7320,11 +9381,97 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdDockViewMenu</name>
+    <name>StdCmdDockOverlay</name>
     <message>
-        <source>View</source>
+        <source>Dock window overlay</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Setting docked window overlay mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDockOverlayAll</name>
+    <message>
+        <source>Toggle overlay for all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle overlay mode for all docked windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDockOverlayDecrease</name>
+    <message>
+        <source>Decrease overlay size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease the overlayed widget size under cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDockOverlayIncrease</name>
+    <message>
+        <source>Increase overlay size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase the overlayed widget size under cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDockOverlayMouseTransparent</name>
+    <message>
+        <source>Bypass mouse event in dock overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bypass all mouse event in dock overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDockOverlayToggle</name>
+    <message>
+        <source>Toggle overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle overlay mode of the docked window under cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDockOverlayToggleTransparent</name>
+    <message>
+        <source>Toggle transparent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle transparent mode for the docked widget under cursor.
+This makes the docked widget stay transparent at al times.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDockOverlayTransparentAll</name>
+    <message>
+        <source>Toggle transparent for all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle transparent for all overlay docked window.
+This makes the docked widget stay transparent at al times.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdDockViewMenu</name>
     <message>
         <source>Panels</source>
         <translation type="unfinished"></translation>
@@ -7337,10 +9484,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdDrawStyle</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Draw style</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7352,10 +9495,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdDuplicateSelection</name>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Duplicate selection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7366,10 +9505,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdEdit</name>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Toggle &amp;Edit mode</source>
         <translation type="unfinished"></translation>
@@ -7385,10 +9520,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdExport</name>
-    <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Export...</source>
         <translation type="unfinished"></translation>
@@ -7409,20 +9540,12 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdExpression</name>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Expression actions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdCmdFeatRecompute</name>
-    <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Recompute</source>
         <translation type="unfinished"></translation>
@@ -7435,10 +9558,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdFreeCADDonation</name>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7449,10 +9568,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdFreeCADFAQ</name>
-    <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>FreeCAD FAQ</source>
         <translation type="unfinished"></translation>
@@ -7469,10 +9584,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdFreeCADForum</name>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>FreeCAD Forum</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7487,10 +9598,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdFreeCADPowerUserHub</name>
-    <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Python scripting documentation</source>
         <translation type="unfinished"></translation>
@@ -7507,10 +9614,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdFreeCADUserHub</name>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Users documentation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7521,10 +9624,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdFreeCADWebsite</name>
-    <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>FreeCAD Website</source>
         <translation type="unfinished"></translation>
@@ -7537,10 +9636,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdFreezeViews</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Freeze display</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7552,10 +9647,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdGroup</name>
     <message>
-        <source>Structure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create group</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7565,11 +9656,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdHideObjects</name>
+    <name>StdCmdGroupRandomColor</name>
     <message>
-        <source>Standard-View</source>
+        <source>Random color</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Actions for setting random color</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdHideObjects</name>
     <message>
         <source>Hide all objects</source>
         <translation type="unfinished"></translation>
@@ -7582,10 +9680,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdHideSelection</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Hide selection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7595,11 +9689,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdImport</name>
+    <name>StdCmdHistory</name>
     <message>
-        <source>File</source>
+        <source>Command history</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>List of recently used commands</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdImport</name>
     <message>
         <source>&amp;Import...</source>
         <translation type="unfinished"></translation>
@@ -7618,11 +9719,19 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdLinkActions</name>
+    <name>StdCmdItemMenu</name>
     <message>
-        <source>View</source>
+        <source>Item menu</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Bring up the context menu of either a document or
+an object item under the mouse cursor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdLinkActions</name>
     <message>
         <source>Link actions</source>
         <translation type="unfinished"></translation>
@@ -7630,10 +9739,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdLinkImport</name>
-    <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Import links</source>
         <translation type="unfinished"></translation>
@@ -7646,10 +9751,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdLinkImportAll</name>
     <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Import all links</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7660,10 +9761,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdLinkMake</name>
-    <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Make link</source>
         <translation type="unfinished"></translation>
@@ -7676,10 +9773,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdLinkMakeGroup</name>
     <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Make link group</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7690,10 +9783,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdLinkMakeRelative</name>
-    <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Make sub-link</source>
         <translation type="unfinished"></translation>
@@ -7706,10 +9795,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdLinkReplace</name>
     <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Replace with link</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7720,10 +9805,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdLinkSelectActions</name>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Link navigation</source>
         <translation type="unfinished"></translation>
@@ -7736,10 +9817,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdLinkSelectAllLinks</name>
     <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Select all links</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7750,10 +9827,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdLinkSelectLinked</name>
-    <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Go to linked object</source>
         <translation type="unfinished"></translation>
@@ -7766,10 +9839,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdLinkSelectLinkedFinal</name>
     <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Go to the deepest linked object</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7780,10 +9849,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdLinkUnlink</name>
-    <message>
-        <source>Link</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Unlink</source>
         <translation type="unfinished"></translation>
@@ -7796,10 +9861,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdMacroAttachDebugger</name>
     <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Attach to remote debugger...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7810,10 +9871,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdMacroStartDebug</name>
-    <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Debug macro</source>
         <translation type="unfinished"></translation>
@@ -7826,10 +9883,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdMacroStepInto</name>
     <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Step into</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7837,20 +9890,12 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdMacroStepOver</name>
     <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Step over</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdCmdMacroStopDebug</name>
-    <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Stop debugging</source>
         <translation type="unfinished"></translation>
@@ -7863,10 +9908,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdMacroStopRecord</name>
     <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>S&amp;top macro recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7878,20 +9919,12 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdMeasureDistance</name>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Measure distance</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdCmdMeasurementSimple</name>
-    <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Measures distance between two selected objects</source>
         <translation type="unfinished"></translation>
@@ -7903,10 +9936,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdMergeProjects</name>
-    <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Merge project...</source>
         <translation type="unfinished"></translation>
@@ -7927,10 +9956,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdNew</name>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7940,6 +9965,17 @@ Would you like to save the file with a different name?</source>
     </message>
     <message>
         <source>Unnamed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdObjectRandomColor</name>
+    <message>
+        <source>Object random color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force the whole object to use a uniform randomly picked color</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7957,10 +9993,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdOnlineHelpWebsite</name>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Help Website</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7971,10 +10003,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdOpen</name>
-    <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Open...</source>
         <translation type="unfinished"></translation>
@@ -8001,11 +10029,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdPart</name>
+    <name>StdCmdOpenDirectory</name>
     <message>
-        <source>Structure</source>
+        <source>Open &amp;Directory...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open a document saved as uncompressed directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdPart</name>
     <message>
         <source>Create part</source>
         <translation type="unfinished"></translation>
@@ -8016,11 +10051,29 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdPaste</name>
+    <name>StdCmdPartActions</name>
     <message>
-        <source>Edit</source>
+        <source>Part actions</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Actions for making a part</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdPartActive</name>
+    <message>
+        <source>Create part in active container</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new part and add it to current active container</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdPaste</name>
     <message>
         <source>&amp;Paste</source>
         <translation type="unfinished"></translation>
@@ -8031,11 +10084,19 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdPlacement</name>
+    <name>StdCmdPickGeometry</name>
     <message>
-        <source>Edit</source>
+        <source>Pick geometry</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Pick hidden geometires under the mouse cursor in 3D view.
+This command is supposed to be activated by keyboard shortcut.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdPlacement</name>
     <message>
         <source>Placement...</source>
         <translation type="unfinished"></translation>
@@ -8046,11 +10107,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdPrint</name>
+    <name>StdCmdPresets</name>
     <message>
-        <source>File</source>
+        <source>Preset Configurations</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>List of preset configurations</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdPrint</name>
     <message>
         <source>&amp;Print...</source>
         <translation type="unfinished"></translation>
@@ -8063,10 +10131,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdPrintPdf</name>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Export PDF...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8077,10 +10141,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdPrintPreview</name>
-    <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Print preview...</source>
         <translation type="unfinished"></translation>
@@ -8097,10 +10157,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdProjectInfo</name>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Project i&amp;nformation...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8111,10 +10167,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdProjectUtil</name>
-    <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Project utility...</source>
         <translation type="unfinished"></translation>
@@ -8127,10 +10179,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdPythonWebsite</name>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Python Website</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8141,10 +10189,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdQuit</name>
-    <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>E&amp;xit</source>
         <translation type="unfinished"></translation>
@@ -8157,20 +10201,18 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdRandomColor</name>
     <message>
-        <source>File</source>
+        <source>Random color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Random color</source>
+        <source>Pick a random color for the selected object.
+Note, depending on the object and its &apos;MapFaceColor&apos;
+setting, not all faces may be assigned the color</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdCmdRecentFiles</name>
-    <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Recent files</source>
         <translation type="unfinished"></translation>
@@ -8183,10 +10225,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdRecentMacros</name>
     <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Recent macros</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8197,10 +10235,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdRedo</name>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Redo</source>
         <translation type="unfinished"></translation>
@@ -8213,10 +10247,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdRefresh</name>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Refresh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8226,11 +10256,40 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdRevert</name>
+    <name>StdCmdRenameActiveObject</name>
     <message>
-        <source>File</source>
+        <source>Rename new object</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rename the newly created object</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdResetAndRestart</name>
+    <message>
+        <source>Restart with reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset the application configuration and restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdRestart</name>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart the application</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdRevert</name>
     <message>
         <source>Revert</source>
         <translation type="unfinished"></translation>
@@ -8241,11 +10300,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdSave</name>
+    <name>StdCmdRotationCenterSelection</name>
     <message>
-        <source>File</source>
+        <source>Rotation center at selection</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Set rotation center at the center of current selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdSave</name>
     <message>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
@@ -8258,10 +10324,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdSaveAll</name>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8273,10 +10335,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdSaveAs</name>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save &amp;As...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8286,11 +10344,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdSaveCopy</name>
+    <name>StdCmdSaveAsDirectory</name>
     <message>
-        <source>File</source>
+        <source>Save as &amp;Directory...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save the active document in a directory without compression</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdSaveCopy</name>
     <message>
         <source>Save a &amp;Copy...</source>
         <translation type="unfinished"></translation>
@@ -8301,11 +10366,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdSceneInspector</name>
+    <name>StdCmdSaveView</name>
     <message>
-        <source>Tools</source>
+        <source>Save view</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save the current view into an object</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdSceneInspector</name>
     <message>
         <source>Scene inspector...</source>
         <translation type="unfinished"></translation>
@@ -8318,10 +10390,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdSelBack</name>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8331,26 +10399,7 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdSelBoundingBox</name>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Bounding box</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show selection bounding box</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>StdCmdSelForward</name>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Forward</source>
         <translation type="unfinished"></translation>
@@ -8361,11 +10410,29 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdSelectAll</name>
+    <name>StdCmdSelOptions</name>
     <message>
-        <source>Edit</source>
+        <source>Selection options</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Selection behavior options</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdSelUp</name>
+    <message>
+        <source>&amp;Up hierarchy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go up object hierarchy of the current selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdSelectAll</name>
     <message>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
@@ -8376,11 +10443,29 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdSelectVisibleObjects</name>
+    <name>StdCmdSelectDependents</name>
     <message>
-        <source>Standard-View</source>
+        <source>Select direct dependent objects</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select objects that are directly depended on the current selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdSelectDependentsRecursive</name>
+    <message>
+        <source>Select all dependent objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all dependent objects of the current selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdSelectVisibleObjects</name>
     <message>
         <source>Select visible objects</source>
         <translation type="unfinished"></translation>
@@ -8393,10 +10478,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdSendToPythonConsole</name>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Send to Python Console</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8407,10 +10488,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdSetAppearance</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Appearance...</source>
         <translation type="unfinished"></translation>
@@ -8423,10 +10500,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdShowObjects</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show all objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8437,10 +10510,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdShowSelection</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Show selection</source>
         <translation type="unfinished"></translation>
@@ -8453,10 +10522,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdStatusBar</name>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Status bar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8467,10 +10532,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdTextDocument</name>
-    <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Add text document</source>
         <translation type="unfinished"></translation>
@@ -8483,10 +10544,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdTextureMapping</name>
     <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Texture mapping...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8497,10 +10554,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdTileWindows</name>
-    <message>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Tile</source>
         <translation type="unfinished"></translation>
@@ -8513,20 +10566,12 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdToggleBreakpoint</name>
     <message>
-        <source>Macro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle breakpoint</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdCmdToggleClipPlane</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Clipping plane</source>
         <translation type="unfinished"></translation>
@@ -8537,11 +10582,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdToggleNavigation</name>
+    <name>StdCmdToggleGroupVisibility</name>
     <message>
-        <source>Standard-View</source>
+        <source>Toggle group visibility</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toggles visibility of a group and all its nested children</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdToggleNavigation</name>
     <message>
         <source>Toggle navigation/Edit mode</source>
         <translation type="unfinished"></translation>
@@ -8554,10 +10606,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdToggleObjects</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle all objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8569,10 +10617,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdToggleSelectability</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Toggle selectability</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8582,11 +10626,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdToggleVisibility</name>
+    <name>StdCmdToggleShowOnTop</name>
     <message>
-        <source>Standard-View</source>
+        <source>Toggle show on top</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toggles whether to show the object on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdToggleVisibility</name>
     <message>
         <source>Toggle visibility</source>
         <translation type="unfinished"></translation>
@@ -8599,10 +10650,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdToolBarMenu</name>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Tool&amp;bars</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8612,11 +10659,18 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdTransform</name>
+    <name>StdCmdToolbarMenus</name>
     <message>
-        <source>Edit</source>
+        <source>Toolbar menus</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Collection of user defined toolbars</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdTransform</name>
     <message>
         <source>Transform...</source>
         <translation type="unfinished"></translation>
@@ -8629,10 +10683,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdTransformManip</name>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Transform</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8643,10 +10693,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdTreeCollapse</name>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Collapse selected item</source>
         <translation type="unfinished"></translation>
@@ -8659,10 +10705,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdTreeExpand</name>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Expand selected item</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8673,10 +10715,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdTreeSelectAllInstances</name>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Select all instances</source>
         <translation type="unfinished"></translation>
@@ -8689,10 +10727,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdTreeViewActions</name>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>TreeView actions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8704,10 +10738,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdUndo</name>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8718,10 +10748,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdUnitsCalculator</name>
-    <message>
-        <source>Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Units calculator...</source>
         <translation type="unfinished"></translation>
@@ -8745,10 +10771,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdUserInterface</name>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Dock views</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8759,10 +10781,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewBottom</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
@@ -8775,10 +10793,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewCreate</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create new view</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8789,10 +10803,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewDimetric</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Dimetric</source>
         <translation type="unfinished"></translation>
@@ -8805,10 +10815,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewExample1</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Inventor example #1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8819,10 +10825,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewExample2</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Inventor example #2</source>
         <translation type="unfinished"></translation>
@@ -8835,10 +10837,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewExample3</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Inventor example #3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8849,10 +10847,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewFitAll</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Fit all</source>
         <translation type="unfinished"></translation>
@@ -8865,10 +10859,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewFitSelection</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Fit selection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8879,10 +10869,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewFront</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Front</source>
         <translation type="unfinished"></translation>
@@ -8895,10 +10881,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewHome</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Home</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8909,10 +10891,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewIsometric</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Isometric</source>
         <translation type="unfinished"></translation>
@@ -8925,10 +10903,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewIvIssueCamPos</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Issue camera position</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8939,10 +10913,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewIvStereoInterleavedColumns</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Stereo Interleaved Columns</source>
         <translation type="unfinished"></translation>
@@ -8955,10 +10925,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewIvStereoInterleavedRows</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Stereo Interleaved Rows</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8969,10 +10935,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewIvStereoOff</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Stereo Off</source>
         <translation type="unfinished"></translation>
@@ -8985,10 +10947,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewIvStereoQuadBuff</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Stereo quad buffer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8999,10 +10957,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewIvStereoRedGreen</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Stereo red/cyan</source>
         <translation type="unfinished"></translation>
@@ -9015,10 +10969,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewLeft</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9029,10 +10979,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewRear</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Rear</source>
         <translation type="unfinished"></translation>
@@ -9045,10 +10991,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewRestoreCamera</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Restore saved camera</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9059,10 +11001,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewRight</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Right</source>
         <translation type="unfinished"></translation>
@@ -9075,10 +11013,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewRotateLeft</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rotate Left</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9089,10 +11023,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewRotateRight</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Rotate Right</source>
         <translation type="unfinished"></translation>
@@ -9105,10 +11035,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewSaveCamera</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save current camera</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9118,11 +11044,29 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdCmdViewTop</name>
+    <name>StdCmdViewSelection</name>
     <message>
-        <source>Standard-View</source>
+        <source>View selection</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Adjust camera to view selected contents on screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdViewSelectionExtend</name>
+    <message>
+        <source>View selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Adjust the camera view to include the selected contents on the screen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdCmdViewTop</name>
     <message>
         <source>Top</source>
         <translation type="unfinished"></translation>
@@ -9135,10 +11079,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdViewTrimetric</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Trimetric</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9149,10 +11089,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdViewVR</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>FreeCAD-VR</source>
         <translation type="unfinished"></translation>
@@ -9165,10 +11101,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdWhatsThis</name>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;What&apos;s This?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9179,10 +11111,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdCmdWindows</name>
-    <message>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Windows...</source>
         <translation type="unfinished"></translation>
@@ -9195,20 +11123,12 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdCmdWindowsMenu</name>
     <message>
-        <source>Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Activates this window</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdCmdWorkbench</name>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Workbench</source>
         <translation type="unfinished"></translation>
@@ -9219,11 +11139,21 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdMainFullscreen</name>
+    <name>StdCmdWorkbenchItem</name>
     <message>
-        <source>Standard-View</source>
+        <source>Workbench</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>StdLassoElementSelection</name>
+    <message>
+        <source>Lasso element selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdMainFullscreen</name>
     <message>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
@@ -9236,10 +11166,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdOrthographicCamera</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Orthographic view</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9250,10 +11176,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdPerspectiveCamera</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Perspective view</source>
         <translation type="unfinished"></translation>
@@ -9273,17 +11195,9 @@ Would you like to save the file with a different name?</source>
         <source>Expand active document and collapse all others</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>TreeView</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>StdTreeDrag</name>
-    <message>
-        <source>TreeView</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Initiate dragging</source>
         <translation type="unfinished"></translation>
@@ -9294,13 +11208,20 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdTreeMultiDocument</name>
+    <name>StdTreeHideSelection</name>
     <message>
-        <source>Display all documents in the tree view</source>
+        <source>Hide item in tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TreeView</source>
+        <source>Hides the selected item in the tree view</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StdTreeMultiDocument</name>
+    <message>
+        <source>Display all documents in the tree view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9309,47 +11230,17 @@ Would you like to save the file with a different name?</source>
     </message>
 </context>
 <context>
-    <name>StdTreePreSelection</name>
-    <message>
-        <source>TreeView</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pre-selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preselect the object in 3D view when mouse over the tree item</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StdTreeRecordSelection</name>
-    <message>
-        <source>TreeView</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Record selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Record selection in tree view in order to go back/forward using navigation button</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>StdTreeSelection</name>
     <message>
-        <source>TreeView</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Scroll to first selected item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show selection in tree view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scroll the tree view to the first selected item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9360,65 +11251,23 @@ Would you like to save the file with a different name?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TreeView</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Single document</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>StdTreeSyncPlacement</name>
+    <name>StdTreeToggleShowHidden</name>
     <message>
-        <source>TreeView</source>
+        <source>Toggle showing hidden items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sync placement</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto adjust placement on drag and drop objects across coordinate systems</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StdTreeSyncSelection</name>
-    <message>
-        <source>TreeView</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sync selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto expand tree item when the corresponding object is selected in 3D view</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StdTreeSyncView</name>
-    <message>
-        <source>TreeView</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sync view</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto switch to the 3D view containing the selected item</source>
+        <source>Toggles whether or not hidden items are visible in the tree</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdViewBoxZoom</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Box zoom</source>
         <translation type="unfinished"></translation>
@@ -9426,10 +11275,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdViewDock</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Docked</source>
         <translation type="unfinished"></translation>
@@ -9442,10 +11287,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdViewDockUndockFullscreen</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Document window</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9456,10 +11297,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdViewFullscreen</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
@@ -9472,10 +11309,6 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdViewScreenShot</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save picture...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9486,10 +11319,6 @@ Would you like to save the file with a different name?</source>
 </context>
 <context>
     <name>StdViewUndock</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Undocked</source>
         <translation type="unfinished"></translation>
@@ -9502,20 +11331,12 @@ Would you like to save the file with a different name?</source>
 <context>
     <name>StdViewZoomIn</name>
     <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>StdViewZoomOut</name>
-    <message>
-        <source>Standard-View</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Zoom Out</source>
         <translation type="unfinished"></translation>
@@ -9547,65 +11368,6 @@ Are you sure you want to continue?
     </message>
 </context>
 <context>
-    <name>Std_DrawStyle</name>
-    <message>
-        <source>As is</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wireframe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wireframe mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flat lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flat lines mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shaded</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shaded mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Points mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hidden line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hidden line mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No shading</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No shading mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Std_DuplicateSelection</name>
     <message>
         <source>Object dependencies</source>
@@ -9621,6 +11383,13 @@ Do you want to save the document now?</source>
     <name>Std_Group</name>
     <message>
         <source>Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Std_Part</name>
+    <message>
+        <source>Part</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9650,46 +11419,521 @@ Do you still want to proceed?</source>
     </message>
 </context>
 <context>
-    <name>ViewIsometricCmd</name>
+    <name>TreeParams</name>
     <message>
-        <source>Isometric</source>
+        <source>Tree view item background. Only effecitve in overlay.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set NaviCube to Isometric mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ViewOrthographicCmd</name>
-    <message>
-        <source>Orthographic</source>
+        <source>Tree view item background padding.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set View to Orthographic mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ViewPerspectiveCmd</name>
-    <message>
-        <source>Perspective</source>
+        <source>Hide extra tree view column for item description.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set View to Perspective mode</source>
+        <source>Hide tree view scroll bar in dock overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide tree view header view in dock overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow tree view columns to be manually resized</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ViewZoomToFitCmd</name>
+    <name>ViewParams</name>
     <message>
-        <source>Zoom to fit</source>
+        <source>Show selection bounding box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Zoom so that model fills the view</source>
+        <source>Threshold for showing bounding box instead of selection highlight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show selection always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pre-selected face always on top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pre-selected face outline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make pre-selected object transparent for picking hidden lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do box/lasso element selection on already selected object(sg if SelectionOnTop is enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transparency for the selected object when being shown on top.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable hidden line/point selection when SelectionOnTop is active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable partial highlight on full selection for object that supports it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Muplication factor to increase the width of the selected line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Limit the selected line width when applying line thickening.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Muplication factor to increase the size of the selected point.
+If zero, then use line multiplication factor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Limit the selected point size when applying size scale.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width of the hidden line.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pre-selection highlight edge only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show more accurate bounds when using bounding box selection style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show projected bounding box that is aligned to axes of
+global coordinate space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show hidden tirangulation wires for selected face</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map child object into parent&apos;s coordinate space when showing on top.
+Note that once activated, this option will also activate option ShowOnTop.
+WARNING! This is an experimental option. Please use with caution.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotates to nearest possible state when clicking a cube face</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of steps by turn when using arrows (default = 8 : step angle = 360/8 = 45 deg),</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overlay dock (re),layout delay.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overlay splitter handle auto hide delay. Set zero to disable auto hiding.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show auto hidden dock overlay on mouse over.
+If disabled, then show on mouse click.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto mouse click through transparent part of dock overlay.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto pass through mouse wheel event on transparent dock overlay.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay capturing mouse wheel event for passing through if it is
+previously handled by other widget.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If auto mouse click through is enabled, then this radius
+defines a region of alpha test under the mouse cursor.
+Auto click through is only activated if all pixels within
+the region are non-opaque.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leave space for Navigation Cube in dock overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide hint visual display triggering width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide hint visual display size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show tab bar on mouse over when auto hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide tab bar in dock overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay before show hint visual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide animation duration, 0 to disable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto hide animation curve type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide property view scroll bar in dock overlay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatically make all object transparent except the one in edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overridden transparency value of all objects in the scene.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whether to override transparency of all objects in the scene.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable preselection and highlight by specified color.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable selection highlighting and use specified color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show outline in hidden line draw style (only works in experiemental renderer),.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Render per face outline in hidden line draw style (Warning! this may cause slow down),.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide seam edges in hidden line draw style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide vertex in hidden line draw style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide face in hidden line draw style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw object with &apos;Flat lines&apos; style when shadow is enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Override view object display mode when shadow is enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whether to use spot light or directional light.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whether to show auto generated ground face. You can specify you own ground
+object by changing its view property &apos;ShadowStyle&apos; to &apos;Shadowed&apos;, meaning
+that it will only receive but not cast shadow.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whether to show the ground when viewing from under the ground face</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The auto generated ground face is determined by the scene bounding box
+multiplied by this scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifies the physcal length of the ground texture image size.
+Texture mappings beyond this size will be wrapped around</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifics the ground transparency. When set to 0, the non-shadowed part
+of the ground will be complete transparent, showing only the shadowed part
+of the ground with some transparency.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Render ground with shading. If disabled, the ground and the shadow casted
+on ground will not change shading when viewing in different angle.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifies the blur raidus of the shadow edge. Higher number will result in
+slower rendering speed on scene change. Use a lower &apos;Precision&apos; value to
+counter the effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifies the spread size for a soft shadow. The resulting spread size is
+dependent on the model scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifies the sample size used for rendering shadow spread. A value 0
+corresponds to a sampling square of 2x2. And 1 corresponds to 3x3, etc.
+The bigger the size the slower the rendering speed. You can use a lower
+&apos;Precision&apos; value to counter the effect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifies shadow precision. This parameter affects the internal texture
+size used to hold the casted shadows. You might want a bigger texture if
+you want a hard shadow but a smaller one for soft shadow.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Epsilon is used to offset the shadow map depth from the model depth.
+Should be set to as low a number as possible without causing flickering
+in the shadows or on non-shadowed objects.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can be used to avoid light bleeding in merged shadows cast from different objects.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scene bounding box is used to determine the scale of the shadow texture.
+You can increase the bounding box scale to avoid execessive clipping of
+shadows when viewing up close in certain angle.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specifics the clipping distance for when rendering shadows.
+You can increase the bounding box scale to avoid execessive
+clipping of shadows when viewing up close in certain angle.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whether to cast shadow from transparent objects.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto update shadow ground on scene changes. You can manually
+update the ground by using the &apos;Fit view&apos; command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable selection of upper hierarchy by repeatedly click some already
+selected sub-element.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum number of commands saved in history</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu hover trigger radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu font size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu sub-menu hover trigger delay, 0 to disable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu action trigger on hover</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu animation duration, 0 to disable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu animation curve type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pie menu center circle radius, 0 to disable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pie menu as a popup widget, disable it to work around some graphics driver problem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Makes the task dialog buttons stay at top or bottom of task view.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show object on top when editing its color.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recompute affected object(s), after editing color.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort workbench entries by their names in the combo box.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum camera move animation duration in milliseconds.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not accept wheel focus on input fields in task panels.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set rotation center on press in gesture navigation mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check widget position and size on restore to make sure it is within the current screen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text cursor width in pixel.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preselection tool tip docking corner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preselection tool tip x offset relative to its docking corner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preselection tool tip y offset relative to its docking corner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preselection tool tip font size. Set to 0 to use system default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fill cross section plane.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invert cross section plane fill color.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cross section in concave.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore section clip planes when rendering on top.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Section filling texture image scale.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Section filling texture image path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable section fill texture.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Render cross section filling of objects with similar materials together.
+Intersecting objects will act as boolean cut operation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show clip plane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clip plane visual size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clip plane color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clip plane line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color difference threshold for auto making distinct
+selection highlight color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Merge draw caches of multiple objects to reduce number of draw
+calls and improve render performance. Set zero to disable. Only
+effective when using experimental render cache.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Internal use to limit the render cache merge count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum draw crash merges on any hierarchy. Zero means no limit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum hierarchy depth that the cache merge can happen. Less than 0 means no limit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum hierarchy depth that the cache merge can happen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Force single side lighting on solid. This can help visualizing invalid
+solid shapes with flipped normals.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Override object selectability to enable selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum selection history record size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9761,6 +12005,17 @@ Do you still want to proceed?</source>
     </message>
     <message>
         <source>Axonometric</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>_name</name>
+    <message>
+        <source>Create a </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
