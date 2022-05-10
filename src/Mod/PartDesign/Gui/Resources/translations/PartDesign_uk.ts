@@ -383,7 +383,7 @@ The resulting shape standalone and not merged into tip.</translation>
     <message>
       <location filename="../../Command.cpp" line="2220"/>
       <source>LinearPattern</source>
-      <translation>Лінійний шаблон</translation>
+      <translation>ЛінійнийШаблон</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2221"/>
