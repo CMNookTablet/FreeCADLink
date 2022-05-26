@@ -6,57 +6,57 @@
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="739"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Таблиця</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="874"/>
       <source>Cell</source>
-      <translation type="unfinished">Cell</translation>
+      <translation>Комірка</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="751"/>
       <source>Apply</source>
-      <translation type="unfinished">Apply</translation>
+      <translation>Застосувати</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="753"/>
       <source>Apply the changes to the current cell</source>
-      <translation type="unfinished">Apply the changes to the current cell</translation>
+      <translation>Застосувати зміни до поточної комірки</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="755"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Видалити</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="757"/>
       <source>Deletes the contents of the current cell</source>
-      <translation type="unfinished">Deletes the contents of the current cell</translation>
+      <translation>Видаляє вміст поточної комірки</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="759"/>
       <source>Compute</source>
-      <translation type="unfinished">Compute</translation>
+      <translation>Обчислити</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="761"/>
       <source>Updates the values handled by controllers</source>
-      <translation type="unfinished">Updates the values handled by controllers</translation>
+      <translation>Оновлює значення, які обробляються елементами керування</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="907"/>
       <source>Create Spreadsheet</source>
-      <translation type="unfinished">Create Spreadsheet</translation>
+      <translation>Створити таблицю</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="933"/>
       <source>Add controller</source>
-      <translation type="unfinished">Add controller</translation>
+      <translation>Додати елемент керування</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="973"/>
       <source>Add property controller</source>
-      <translation type="unfinished">Add property controller</translation>
+      <translation>Додати контролер властивостей</translation>
     </message>
   </context>
   <context>
@@ -64,12 +64,12 @@
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="919"/>
       <source>Add controller</source>
-      <translation type="unfinished">Add controller</translation>
+      <translation>Додати елемент керування</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="920"/>
       <source>Adds a cell controller to a selected spreadsheet</source>
-      <translation type="unfinished">Adds a cell controller to a selected spreadsheet</translation>
+      <translation>Додає елемент керування коміркою до вибраної електронної таблиці</translation>
     </message>
   </context>
   <context>
@@ -77,12 +77,12 @@
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="902"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Таблиця</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="903"/>
       <source>Adds a spreadsheet object to the active document</source>
-      <translation type="unfinished">Adds a spreadsheet object to the active document</translation>
+      <translation>Додає об’єкт електронної таблиці до активного документа</translation>
     </message>
   </context>
   <context>
@@ -90,12 +90,12 @@
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="944"/>
       <source>Add property controller</source>
-      <translation type="unfinished">Add property controller</translation>
+      <translation>Додати контролер властивостей</translation>
     </message>
     <message>
       <location filename="../../../App/Spreadsheet_legacy.py" line="945"/>
       <source>Adds a property controller to a selected spreadsheet</source>
-      <translation type="unfinished">Adds a property controller to a selected spreadsheet</translation>
+      <translation>Додає контролер властивостей до вибраної електронної таблиці</translation>
     </message>
   </context>
   <context>
@@ -221,7 +221,7 @@
     <message>
       <location filename="../../Command.cpp" line="552"/>
       <source>Vertically center-align contents of selected cells</source>
-      <translation type="unfinished">Vertically center-align contents of selected cells</translation>
+      <translation>Вирівнює вміст виділених комірок вертикально у центрі</translation>
     </message>
   </context>
   <context>
@@ -391,82 +391,82 @@
     <message>
       <location filename="../../Command.cpp" line="312"/>
       <source>Left-align cell</source>
-      <translation type="unfinished">Left-align cell</translation>
+      <translation>Вирівнювання ліворуч</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="364"/>
       <source>Center cell</source>
-      <translation type="unfinished">Center cell</translation>
+      <translation>Вирівнювання по центру</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="416"/>
       <source>Right-align cell</source>
-      <translation type="unfinished">Right-align cell</translation>
+      <translation>Вирівнювання праворуч</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="468"/>
       <source>Top-align cell</source>
-      <translation type="unfinished">Top-align cell</translation>
+      <translation>Вирівнювання по верхньому краю</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="520"/>
       <source>Bottom-align cell</source>
-      <translation type="unfinished">Bottom-align cell</translation>
+      <translation>Вирівнювання по нижньому краю</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="572"/>
       <source>Vertically center cells</source>
-      <translation type="unfinished">Vertically center cells</translation>
+      <translation>Вирівнювання вертикально по центру</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="641"/>
       <source>Set bold text</source>
-      <translation type="unfinished">Set bold text</translation>
+      <translation>Зробити текст напівжирним</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="715"/>
       <source>Set italic text</source>
-      <translation type="unfinished">Set italic text</translation>
+      <translation>Зробити текст курсивом</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="789"/>
       <source>Set underline text</source>
-      <translation type="unfinished">Set underline text</translation>
+      <translation>Підкреслити текст</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="901"/>
       <source>Create Spreadsheet</source>
-      <translation type="unfinished">Create Spreadsheet</translation>
+      <translation>Створити таблицю</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.cpp" line="238"/>
       <source>Set cell properties</source>
-      <translation type="unfinished">Set cell properties</translation>
+      <translation>Зміна властивостей комірок</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="310"/>
       <source>Remove cell alias</source>
-      <translation type="unfinished">Remove cell alias</translation>
+      <translation>Видалити псевдонім для комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="343"/>
       <source>Cell edit mode</source>
-      <translation type="unfinished">Cell edit mode</translation>
+      <translation>Режим редагування комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="365"/>
       <source>Cell persistent edit</source>
-      <translation type="unfinished">Cell persistent edit</translation>
+      <translation>Постійне редагування комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="384"/>
       <source>Recompute cells</source>
-      <translation type="unfinished">Recompute cells</translation>
+      <translation>Переобчислити комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="399"/>
       <source>Recompute cells only</source>
-      <translation type="unfinished">Recompute cells only</translation>
+      <translation>Переобчислити лише комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="498"/>
@@ -488,23 +488,23 @@
     <message>
       <location filename="../../SheetTableView.cpp" line="668"/>
       <source>Remove columns</source>
-      <translation type="unfinished">Remove columns</translation>
+      <translation>Видалити стовпці</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="872"/>
       <location filename="../../SpreadsheetView.cpp" line="165"/>
       <source>Clear cell(s)</source>
-      <translation type="unfinished">Clear cell(s)</translation>
+      <translation>Очистити комірку(и)</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="138"/>
       <source>Set foreground color</source>
-      <translation type="unfinished">Set foreground color</translation>
+      <translation>Вибір кольору переднього плану</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="165"/>
       <source>Set background color</source>
-      <translation type="unfinished">Set background color</translation>
+      <translation>Вибір кольору фону</translation>
     </message>
   </context>
   <context>
@@ -512,78 +512,78 @@
     <message>
       <location filename="../../DlgBindSheet.ui" line="14"/>
       <source>Bind Spreadsheet Cells</source>
-      <translation type="unfinished">Bind Spreadsheet Cells</translation>
+      <translation>Зв’язування комірок таблиці</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="20"/>
       <source>From cells:</source>
-      <translation type="unfinished">From cells:</translation>
+      <translation>З комірки:</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="27"/>
       <source>Binding cell range start</source>
-      <translation type="unfinished">Binding cell range start</translation>
+      <translation>Початковий діапазон зв’язування комірок</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="34"/>
       <source>Binding cell range end
 </source>
-      <translation type="unfinished">Binding cell range end
+      <translation>Кінцевий діапазон зв’язування комірок
 </translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="42"/>
       <source>To cells:</source>
-      <translation type="unfinished">To cells:</translation>
+      <translation>До комірки:</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="49"/>
       <source>Starting cell address to bind to. Type &apos;=&apos; if you want to use expression.
 The expression must evaluates to a string of some cell address.</source>
-      <translation type="unfinished">Starting cell address to bind to. Type &apos;=&apos; if you want to use expression.
-The expression must evaluates to a string of some cell address.</translation>
+      <translation>Початковий діапазон для зв’язування комірок. Наберіть &apos;=&apos; якщо хочете використати вираз.
+Вираз має бути строкою з використанням адреси комірки.</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="57"/>
       <source>Ending cell address to bind to. Type &apos;=&apos; if you want to use expression.
 The expression must evaluates to a string of some cell address.</source>
-      <translation type="unfinished">Ending cell address to bind to. Type &apos;=&apos; if you want to use expression.
-The expression must evaluates to a string of some cell address.</translation>
+      <translation>Кінцевий діапазон для зв’язування комірок. Наберіть &apos;=&apos; якщо хочете використати вираз.
+Вираз має бути строкою з використанням адреси комірки.</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="65"/>
       <source>Sheet:</source>
-      <translation type="unfinished">Sheet:</translation>
+      <translation>Таблиця:</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="72"/>
       <source>Use hidden reference not avoid creating a depdenecy with the referenced object. Use with caution!</source>
-      <translation type="unfinished">Use hidden reference not avoid creating a depdenecy with the referenced object. Use with caution!</translation>
+      <translation>Використання прихованого посилання дозволяє уникнути створення залежності з об’єктом, на який посилаються. Використовуйте з обережністю!</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="75"/>
       <source>Use hidden reference</source>
-      <translation type="unfinished">Use hidden reference</translation>
+      <translation>Використати приховані посилання</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="84"/>
       <source>Unbind</source>
-      <translation type="unfinished">Unbind</translation>
+      <translation>Відв’язати</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="91"/>
       <source>Cancel</source>
-      <translation type="unfinished">Cancel</translation>
+      <translation>Відмінити</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="98"/>
       <source>OK</source>
-      <translation type="unfinished">OK</translation>
+      <translation>Зв’язати</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="110"/>
       <source>Select which spread sheet to bind to.</source>
-      <translation type="unfinished">Select which spread sheet to bind to.</translation>
+      <translation>Виберіть таблицю для зв’язування.</translation>
     </message>
   </context>
   <context>
@@ -591,12 +591,12 @@ The expression must evaluates to a string of some cell address.</translation>
     <message>
       <location filename="../../DlgSheetConf.ui" line="14"/>
       <source>Setup Configuration Table</source>
-      <translation type="unfinished">Setup Configuration Table</translation>
+      <translation>Створення Таблиці Конфігурацій</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="20"/>
       <source>Property:</source>
-      <translation type="unfinished">Property:</translation>
+      <translation>Властивість:</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="27"/>
@@ -609,20 +609,20 @@ property for user to dynamically switch configuration.
 The first row of the range will be bound to whatever row (indirectly) selected
 by that property.
 </source>
-      <translation type="unfinished">Ending cell address.
+      <translation>Кінцева адреса комірки.
 
-The first column of the range is assumed to contain a list of configuration
-names, which will be used to generate a string list and bind to the given
-property for user to dynamically switch configuration.
+Передбачається, що перший стовпець діапазону містить список імен конфігурації,
+які будуть використовуватися для створення списку рядків та прив’язки до цієї 
+властивості, щоб користувач міг динамічно перемикати конфігурації.
 
-The first row of the range will be bound to whatever row (indirectly) selected
-by that property.
+Перший рядок діапазону буде прив’язаний до будь-якого рядка (непрямо), 
+обраного за допомогою цієї властивості.
 </translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="42"/>
       <source>Cell range:</source>
-      <translation type="unfinished">Cell range:</translation>
+      <translation>Діап. комірок:</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="49"/>
@@ -635,47 +635,47 @@ property for user to dynamically switch configuration.
 The first row of the range will be bound to whatever row (indirectly) selected
 by that property.
 </source>
-      <translation type="unfinished">Starting cell address.
+      <translation>Початкова адреса комірки.
 
-The first column of the range is assumed to contain a list of configuration
-names, which will be used to generate a string list and bind to the given
-property for user to dynamically switch configuration.
+Передбачається, що перший стовпець діапазону містить список імен конфігурації,
+які будуть використовуватися для створення списку рядків та прив’язки до цієї 
+властивості, щоб користувач міг динамічно перемикати конфігурації.
 
-The first row of the range will be bound to whatever row (indirectly) selected
-by that property.
+Перший рядок діапазону буде прив’язаний до будь-якого рядка (непрямо), 
+обраного за допомогою цієї властивості.
 </translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="64"/>
       <source>Type in an expression to specify the object and property name to dynamically
 switch the design configuration. The property will be created if not exist.</source>
-      <translation type="unfinished">Type in an expression to specify the object and property name to dynamically
-switch the design configuration. The property will be created if not exist.</translation>
+      <translation>Введіть вираз, щоб вказати назву об’єкта та властивості, щоб динамічно 
+змінювати конфігурацію проекту. Якщо властивість не існує, вона буде створена.</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="72"/>
       <source>Optional property group name.</source>
-      <translation type="unfinished">Optional property group name.</translation>
+      <translation>Не обов’язкова назва групи властивостей.</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="79"/>
       <source>Group:</source>
-      <translation type="unfinished">Group:</translation>
+      <translation>Група:</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="88"/>
       <source>Unsetup</source>
-      <translation type="unfinished">Unsetup</translation>
+      <translation>Видалити</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="95"/>
       <source>Cancel</source>
-      <translation type="unfinished">Cancel</translation>
+      <translation>Відмінити</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="102"/>
       <source>OK</source>
-      <translation type="unfinished">OK</translation>
+      <translation>Зв’язати</translation>
     </message>
   </context>
   <context>
@@ -835,61 +835,61 @@ switch the design configuration. The property will be created if not exist.</tra
     <message>
       <location filename="../../SheetTableView.cpp" line="321"/>
       <source>Failed to remove alias</source>
-      <translation type="unfinished">Failed to remove alias</translation>
+      <translation>Не вдалося видалити псевдонім</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="359"/>
       <location filename="../../SheetTableView.cpp" line="378"/>
       <source>Failed to set edit mode</source>
-      <translation type="unfinished">Failed to set edit mode</translation>
+      <translation>Не вдалося встановити режим редагування</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="393"/>
       <location filename="../../SheetTableView.cpp" line="407"/>
       <source>Failed to recompute cells</source>
-      <translation type="unfinished">Failed to recompute cells</translation>
+      <translation>Не вдалося переобчислити комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="523"/>
       <source>Failed to insert rows</source>
-      <translation type="unfinished">Failed to insert rows</translation>
+      <translation>Не вдалося вставити рядки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="574"/>
       <source>Failed to remove rows</source>
-      <translation type="unfinished">Failed to remove rows</translation>
+      <translation>Не вдалося видалити рядки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="627"/>
       <source>Failed to insert columns</source>
-      <translation type="unfinished">Failed to insert columns</translation>
+      <translation>Не вдалося вставити стовпці</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="677"/>
       <source>Failed to remove columns</source>
-      <translation type="unfinished">Failed to remove columns</translation>
+      <translation>Не вдалося видалити стовпці</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="884"/>
       <source>Failed to clear cells</source>
-      <translation type="unfinished">Failed to clear cells</translation>
+      <translation>Не вдалося очистити комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="1022"/>
       <source>Copy &amp; Paste failed</source>
-      <translation type="unfinished">Copy &amp; Paste failed</translation>
+      <translation>Копіювання і вставлення провалено</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="396"/>
       <source>Alias contains invalid characters!</source>
-      <translation type="unfinished">Alias contains invalid characters!</translation>
+      <translation>Псевдонім містить некоректні символи!</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="402"/>
       <source>Refer to cell by alias, for example
 Spreadsheet.my_alias_name instead of Spreadsheet.B1</source>
-      <translation type="unfinished">Refer to cell by alias, for example
-Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
+      <translation>Зверніться до комірки за псевдонімом, наприклад
+Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     </message>
   </context>
   <context>
@@ -1013,19 +1013,19 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../Sheet.ui" line="22"/>
       <source>&amp;Content:</source>
-      <translation type="unfinished">&amp;Content:</translation>
+      <translation>&amp;Зміст:</translation>
     </message>
     <message>
       <location filename="../../Sheet.ui" line="39"/>
       <source>&amp;Alias:</source>
-      <translation type="unfinished">&amp;Alias:</translation>
+      <translation>&amp;Псевдонім:</translation>
     </message>
     <message>
       <location filename="../../Sheet.ui" line="52"/>
       <source>Refer to cell by alias, for example
 Spreadsheet.my_alias_name instead of Spreadsheet.B1</source>
-      <translation type="unfinished">Refer to cell by alias, for example
-Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
+      <translation>Зверніться до комірки за псевдонімом, наприклад
+Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     </message>
   </context>
   <context>
@@ -1033,42 +1033,42 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../../App/Cell.h" line="139"/>
       <source>Normal</source>
-      <translation type="unfinished">Normal</translation>
+      <translation>Звичайне</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="140"/>
       <source>Button</source>
-      <translation type="unfinished">Button</translation>
+      <translation>Кнопка</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="145"/>
       <source>ComboBox</source>
-      <translation type="unfinished">ComboBox</translation>
+      <translation>ComboBox</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="156"/>
       <source>Label</source>
-      <translation type="unfinished">Label</translation>
+      <translation>Позначка</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="163"/>
       <source>Quantity</source>
-      <translation type="unfinished">Quantity</translation>
+      <translation>Кількість</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="172"/>
       <source>CheckBox</source>
-      <translation type="unfinished">CheckBox</translation>
+      <translation>Відмітка</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="177"/>
       <source>Auto alias</source>
-      <translation type="unfinished">Auto alias</translation>
+      <translation>Автоматичний псевдонім</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.h" line="184"/>
       <source>Auto alias vertical</source>
-      <translation type="unfinished">Auto alias vertical</translation>
+      <translation>Автоматичний псевдонім по вертикалі</translation>
     </message>
   </context>
   <context>
@@ -1076,12 +1076,12 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../DlgBindSheet.cpp" line="180"/>
       <source>Bind cells</source>
-      <translation type="unfinished">Bind cells</translation>
+      <translation>Зв’язати комірки</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.cpp" line="197"/>
       <source>Unbind cells</source>
-      <translation type="unfinished">Unbind cells</translation>
+      <translation>Відв’язати комірки</translation>
     </message>
   </context>
   <context>
@@ -1089,67 +1089,67 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../DlgSettings.ui" line="20"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Таблиця</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="26"/>
       <source>Import/Export Settings</source>
-      <translation type="unfinished">Import/Export Settings</translation>
+      <translation>Параметри Імпорту/Експорту</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="38"/>
       <source>Escape Character: </source>
-      <translation type="unfinished">Escape Character: </translation>
+      <translation>Символ &quot;Escape&quot;: </translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="45"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Character used to delimit strings, typically is single quote (&apos;) or double quote (&amp;quot;). Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Character used to delimit strings, typically is single quote (&apos;) or double quote (&amp;quot;). Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Символ, що використовується для розділення рядків, зазвичай це одинарні лапки (&apos;) або подвійні лапки (&amp;quot;). Має бути один символ.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="51"/>
       <source>&quot;</source>
-      <translation type="unfinished">&quot;</translation>
+      <translation>&quot;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="70"/>
       <source>Delimiter Character: </source>
-      <translation type="unfinished">Delimiter Character: </translation>
+      <translation>Символ розділювача: </translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="77"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Escape character, typically the backslash (\), used to indicate special unprintable characters, e.g. \t = tab. Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Escape character, typically the backslash (\), used to indicate special unprintable characters, e.g. \t = tab. Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Символ &quot;Escape&quot;, як правило, зворотний слеш (\), який використовується для позначення спеціальних символів, які не друкуються, напр. \t = вкладка. Має бути один символ.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="80"/>
       <source>\</source>
-      <translation type="unfinished">\</translation>
+      <translation>\</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="99"/>
       <source>Quote Character: </source>
-      <translation type="unfinished">Quote Character: </translation>
+      <translation>Символ лапок: </translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="106"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Character to use as field delimiter.  Default is tab, but also commonly used are commas (,) and semicolons (;). Select from the list or enter your own in the field. Must be a single character or the words &lt;span style=&quot; font-style:italic;&quot;&gt;tab&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;comma&lt;/span&gt;, or &lt;span style=&quot; font-style:italic;&quot;&gt;semicolon&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Character to use as field delimiter.  Default is tab, but also commonly used are commas (,) and semicolons (;). Select from the list or enter your own in the field. Must be a single character or the words &lt;span style=&quot; font-style:italic;&quot;&gt;tab&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;comma&lt;/span&gt;, or &lt;span style=&quot; font-style:italic;&quot;&gt;semicolon&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Символ для позначення роздільника полів. За замовчуванням це символ табулювання, але також часто використовуються коми (,) і крапка з комою (;). Виберіть зі списку або введіть свій власний у поле. Має бути один символ або слова &lt;span style=&quot; font-style:italic;&quot;&gt;табуляція&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;кома&lt;/span&gt;, або &lt;span style=&quot; font-style:italic;&quot;&gt;крапка з комою&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="122"/>
       <source>tab</source>
-      <translation type="unfinished">tab</translation>
+      <translation>табуляція</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="127"/>
       <source>;</source>
-      <translation type="unfinished">;</translation>
+      <translation>;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="132"/>
       <source>,</source>
-      <translation type="unfinished">,</translation>
+      <translation>,</translation>
     </message>
   </context>
   <context>
@@ -1157,12 +1157,12 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../DlgSheetConf.cpp" line="246"/>
       <source>Setup configuration table</source>
-      <translation type="unfinished">Setup configuration table</translation>
+      <translation>Створити Таблицю Конфігурацій</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.cpp" line="293"/>
       <source>Unsetup configuration table</source>
-      <translation type="unfinished">Unsetup configuration table</translation>
+      <translation>Видалити таблицю конфігурацій</translation>
     </message>
   </context>
   <context>
@@ -1178,7 +1178,7 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetModel.cpp" line="555"/>
       <source>Edit cell</source>
-      <translation type="unfinished">Edit cell</translation>
+      <translation>Редагування комірки</translation>
     </message>
   </context>
   <context>
@@ -1186,107 +1186,107 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="117"/>
       <source>Show all rows</source>
-      <translation type="unfinished">Show all rows</translation>
+      <translation>Показати всі рядки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="120"/>
       <source>Show all columns</source>
-      <translation type="unfinished">Show all columns</translation>
+      <translation>Показати всі стовпці</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="131"/>
       <source>Bind...</source>
-      <translation type="unfinished">Bind...</translation>
+      <translation>Прив’язати...</translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="143"/>
       <source>Insert %n row(s) above</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n row(s) above</numerusform>
-        <numerusform>Insert %n row(s) above</numerusform>
-        <numerusform>Insert %n row(s) above</numerusform>
-        <numerusform>Insert %n row(s) above</numerusform>
+      <translation>
+        <numerusform>Вставити %n рядок(ів) вище</numerusform>
+        <numerusform>Вставити %n рядків вище</numerusform>
+        <numerusform>Вставити %n рядків вище</numerusform>
+        <numerusform>Вставити %n рядок(ків) вище</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="147"/>
       <source>Insert %n row(s) below</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n row(s) below</numerusform>
-        <numerusform>Insert %n row(s) below</numerusform>
-        <numerusform>Insert %n row(s) below</numerusform>
-        <numerusform>Insert %n row(s) below</numerusform>
+      <translation>
+        <numerusform>Вставити %n рядок нижче</numerusform>
+        <numerusform>Вставити %n рядків нижче</numerusform>
+        <numerusform>Вставити %n рядків нижче</numerusform>
+        <numerusform>Вставити %n рядок(ків) нижче</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="151"/>
       <source>Insert %n non-contiguous rows</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n non-contiguous rows</numerusform>
-        <numerusform>Insert %n non-contiguous rows</numerusform>
-        <numerusform>Insert %n non-contiguous rows</numerusform>
-        <numerusform>Insert %n non-contiguous rows</numerusform>
+      <translation>
+        <numerusform>Вставити %n несуміжний рядок</numerusform>
+        <numerusform>Вставити %n несуміжних рядків</numerusform>
+        <numerusform>Вставити %n несуміжних рядків</numerusform>
+        <numerusform>Вставити %n несуміжний(х) рядок(ів)</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="154"/>
       <source>Remove row(s)</source>
-      <translation type="unfinished">
-        <numerusform>Remove row(s)</numerusform>
-        <numerusform>Remove row(s)</numerusform>
-        <numerusform>Remove row(s)</numerusform>
-        <numerusform>Remove row(s)</numerusform>
+      <translation>
+        <numerusform>Видалити рядок</numerusform>
+        <numerusform>Видалити декілька рядків</numerusform>
+        <numerusform>Видалити рядки</numerusform>
+        <numerusform>Видалити рядок(ки)</numerusform>
       </translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="159"/>
       <source>Toggle row visibility</source>
-      <translation type="unfinished">Toggle row visibility</translation>
+      <translation>Увімкнути видимість рядка</translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="178"/>
       <source>Insert %n column(s) left</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n column(s) left</numerusform>
-        <numerusform>Insert %n column(s) left</numerusform>
-        <numerusform>Insert %n column(s) left</numerusform>
-        <numerusform>Insert %n column(s) left</numerusform>
+      <translation>
+        <numerusform>Вставити %n стовпець ліворуч</numerusform>
+        <numerusform>Вставити %n стовпця ліворуч</numerusform>
+        <numerusform>Вставити %n стовпців ліворуч</numerusform>
+        <numerusform>Вставити %n стовпець(і) ліворуч</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="182"/>
       <source>Insert %n column(s) right</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n column(s) right</numerusform>
-        <numerusform>Insert %n column(s) right</numerusform>
-        <numerusform>Insert %n column(s) right</numerusform>
-        <numerusform>Insert %n column(s) right</numerusform>
+      <translation>
+        <numerusform>Вставити %n стовпець праворуч</numerusform>
+        <numerusform>Вставити %n стовпця праворуч</numerusform>
+        <numerusform>Вставити %n стовпців праворуч</numerusform>
+        <numerusform>Вставити %n стовпець(і) праворуч</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="186"/>
       <source>Insert %n non-contiguous columns</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n non-contiguous columns</numerusform>
-        <numerusform>Insert %n non-contiguous columns</numerusform>
-        <numerusform>Insert %n non-contiguous columns</numerusform>
-        <numerusform>Insert %n non-contiguous columns</numerusform>
+      <translation>
+        <numerusform>Вставити %n несуміжний стовпець</numerusform>
+        <numerusform>Вставити %n несуміжних стовпців</numerusform>
+        <numerusform>Вставити %n несуміжних стовпців</numerusform>
+        <numerusform>Вставити %n несуміжний(х) стовпець(ів)</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="189"/>
       <source>Remove column(s)</source>
-      <translation type="unfinished">
-        <numerusform>Remove column(s)</numerusform>
-        <numerusform>Remove column(s)</numerusform>
-        <numerusform>Remove column(s)</numerusform>
-        <numerusform>Remove column(s)</numerusform>
+      <translation>
+        <numerusform>Видалити стовпець</numerusform>
+        <numerusform>Видалити стовпці</numerusform>
+        <numerusform>Видалити стовпці</numerusform>
+        <numerusform>Видалити стовпець(і)</numerusform>
       </translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="194"/>
       <source>Toggle column visibility</source>
-      <translation type="unfinished">Toggle column visibility</translation>
+      <translation>Перемкнути видимість стовпця</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="206"/>
@@ -1296,106 +1296,106 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="210"/>
       <source>Alias...</source>
-      <translation type="unfinished">Alias...</translation>
+      <translation>Псевдонім...</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="214"/>
       <source>Remove alias(es)</source>
-      <translation type="unfinished">Remove alias(es)</translation>
+      <translation>Видалити псевдонім(и)</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="231"/>
       <source>Edit mode</source>
-      <translation type="unfinished">Edit mode</translation>
+      <translation>Режим редагування</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="238"/>
       <source>Persistent</source>
-      <translation type="unfinished">Persistent</translation>
+      <translation>Постійно</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="245"/>
       <source>Recompute cells</source>
-      <translation type="unfinished">Recompute cells</translation>
+      <translation>Переобчислити комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="248"/>
       <source>Mark selected cells as touched, and recompute the entire spreadsheet</source>
-      <translation type="unfinished">Mark selected cells as touched, and recompute the entire spreadsheet</translation>
+      <translation>Позначити вибрані комірки як редаговані та перерахувати всю таблицю</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="250"/>
       <source>Recompute cells only</source>
-      <translation type="unfinished">Recompute cells only</translation>
+      <translation>Переобчислити лише комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="253"/>
       <source>Recompute only the selected cells without touching other depending cells
 It can be used as a way out of tricky cyclic dependency problem, but may
 may affect cells dependency coherence. Use with care!</source>
-      <translation type="unfinished">Recompute only the selected cells without touching other depending cells
-It can be used as a way out of tricky cyclic dependency problem, but may
-may affect cells dependency coherence. Use with care!</translation>
+      <translation>Повторно обчислює лише вибрані клітинки, не торкаючись інших залежних комірок. 
+Це можна використовувати як вирішення проблеми циклічної залежності, але може 
+вплинути на узгодженість залежностей комірок. Використовуйте з обережністю!</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="261"/>
       <source>Configuration table...</source>
-      <translation type="unfinished">Configuration table...</translation>
+      <translation>Таблиця Конфігурації...</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="266"/>
       <source>Merge cells</source>
-      <translation type="unfinished">Merge cells</translation>
+      <translation>Об’єднати комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="268"/>
       <source>Split cells</source>
-      <translation type="unfinished">Split cells</translation>
+      <translation>Роз’єднати комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="271"/>
       <source>Cut</source>
-      <translation type="unfinished">Cut</translation>
+      <translation>Вирізати</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="273"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Видалити</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="275"/>
       <source>Copy</source>
-      <translation type="unfinished">Copy</translation>
+      <translation>Копіювати</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="277"/>
       <source>Paste</source>
-      <translation type="unfinished">Paste</translation>
+      <translation>Вставити</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="280"/>
       <source>Paste special...</source>
-      <translation type="unfinished">Paste special...</translation>
+      <translation>Спеціальна вставка...</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="282"/>
       <source>Paste value</source>
-      <translation type="unfinished">Paste value</translation>
+      <translation>Вставити значення</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="284"/>
       <source>Paste format</source>
-      <translation type="unfinished">Paste format</translation>
+      <translation>Вставити формат</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="286"/>
       <source>Paste value &amp;&amp; format</source>
-      <translation type="unfinished">Paste value &amp;&amp; format</translation>
+      <translation>Вставити значення &amp;&amp; формат</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="288"/>
       <source>Paste formula</source>
-      <translation type="unfinished">Paste formula</translation>
+      <translation>Вставити формулу</translation>
     </message>
   </context>
   <context>
@@ -1403,22 +1403,22 @@ may affect cells dependency coherence. Use with care!</translation>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="356"/>
       <source>Edit alias</source>
-      <translation type="unfinished">Edit alias</translation>
+      <translation>Редагувати псевдонім</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="356"/>
       <source>Remove alias</source>
-      <translation type="unfinished">Remove alias</translation>
+      <translation>Видалити псевдонім</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="370"/>
       <source>Edit cell alias</source>
-      <translation type="unfinished">Edit cell alias</translation>
+      <translation>Редагувати псевдонім комірки</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="371"/>
       <source>Failed to edit cell alias: %1</source>
-      <translation type="unfinished">Failed to edit cell alias: %1</translation>
+      <translation>Не вдалося відредагувати псевдонім комірки: %1</translation>
     </message>
   </context>
   <context>
@@ -1431,17 +1431,17 @@ may affect cells dependency coherence. Use with care!</translation>
     <message>
       <location filename="../../Workbench.cpp" line="50"/>
       <source>&amp;Spreadsheet</source>
-      <translation type="unfinished">&amp;Spreadsheet</translation>
+      <translation>&amp;Таблиця</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="51"/>
       <source>&amp;Alignment</source>
-      <translation type="unfinished">&amp;Alignment</translation>
+      <translation>&amp;Вирівнювання</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="52"/>
       <source>&amp;Styles</source>
-      <translation type="unfinished">&amp;Styles</translation>
+      <translation>&amp;Стилі</translation>
     </message>
   </context>
 </TS>
