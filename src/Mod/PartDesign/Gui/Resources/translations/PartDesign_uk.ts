@@ -670,7 +670,7 @@ Modeling. Use with caution!</translation>
     <message>
       <location filename="../../Command.cpp" line="2714"/>
       <source>PartDesign</source>
-      <translation type="unfinished">PartDesign</translation>
+      <translation>ДизайнДеталі</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="2715"/>
@@ -1733,7 +1733,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskLoftParameters.cpp" line="573"/>
       <source>Input error</source>
-      <translation type="unfinished">Input error</translation>
+      <translation>Помилка вводу</translation>
     </message>
   </context>
   <context>
@@ -1741,7 +1741,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskPipeParameters.cpp" line="1283"/>
       <source>Input error</source>
-      <translation type="unfinished">Input error</translation>
+      <translation>Помилка вводу</translation>
     </message>
   </context>
   <context>
@@ -1977,7 +1977,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskGenericPatternParameters.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskGenericPatternParameters.ui" line="32"/>
@@ -1992,7 +1992,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskGenericPatternParameters.ui" line="61"/>
       <source>OK</source>
-      <translation type="unfinished">OK</translation>
+      <translation>Зв’язати</translation>
     </message>
     <message>
       <location filename="../../TaskGenericPatternParameters.ui" line="68"/>
@@ -2059,7 +2059,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskHelixParameters.ui" line="85"/>
       <source>Mode:</source>
-      <translation type="unfinished">Mode:</translation>
+      <translation>Режим геометрії:</translation>
     </message>
     <message>
       <location filename="../../TaskHelixParameters.ui" line="93"/>
@@ -2205,7 +2205,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="40"/>
       <source>Reverse direction</source>
-      <translation type="unfinished">Reverse direction</translation>
+      <translation>Зворотний напрямок</translation>
     </message>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="49"/>
@@ -2463,7 +2463,7 @@ the sketch plane&apos;s normal vector will be used</translation>
     <message>
       <location filename="../../TaskPadParameters.ui" line="144"/>
       <source>Direction</source>
-      <translation type="unfinished">Direction</translation>
+      <translation>Напрямок</translation>
     </message>
     <message>
       <location filename="../../TaskPadParameters.ui" line="156"/>
@@ -2493,7 +2493,7 @@ from the model as reference</translation>
       <location filename="../../TaskPadParameters.ui" line="179"/>
       <location filename="../../TaskPadParameters.cpp" line="469"/>
       <source>Select reference...</source>
-      <translation type="unfinished">Select reference...</translation>
+      <translation>Виберіть посилання...</translation>
     </message>
     <message>
       <location filename="../../TaskPadParameters.ui" line="184"/>
@@ -2990,7 +2990,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="40"/>
       <source>Reverse direction</source>
-      <translation type="unfinished">Reverse direction</translation>
+      <translation>Зворотний напрямок</translation>
     </message>
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="49"/>
@@ -3375,7 +3375,7 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
     <message>
       <location filename="../../TaskWrapParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskWrapParameters.ui" line="20"/>
@@ -3668,7 +3668,7 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
     <message>
       <location filename="../../Command.cpp" line="700"/>
       <source>Sketch attachment</source>
-      <translation type="unfinished">Sketch attachment</translation>
+      <translation>Прив&apos;язка ескізу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="1025"/>
@@ -4270,7 +4270,7 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
     <message>
       <location filename="../../ReferenceSelection.cpp" line="255"/>
       <source>None</source>
-      <translation type="unfinished">None</translation>
+      <translation>Немає</translation>
     </message>
     <message>
       <location filename="../../TaskPadParameters.cpp" line="467"/>
@@ -4817,7 +4817,7 @@ Only available for holes without thread</translation>
     <message>
       <location filename="../../TaskHoleParameters.ui" line="550"/>
       <source>Angle</source>
-      <translation type="unfinished">Angle</translation>
+      <translation>Кута</translation>
     </message>
     <message>
       <location filename="../../TaskHoleParameters.ui" line="591"/>
