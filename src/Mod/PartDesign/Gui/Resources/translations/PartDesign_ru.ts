@@ -2567,7 +2567,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
       <location filename="../../TaskPadParameters.ui" line="391"/>
       <location filename="../../TaskPadParameters.ui" line="418"/>
       <source>deg</source>
-      <translation type="unfinished">deg</translation>
+      <translation>°</translation>
     </message>
     <message>
       <location filename="../../TaskPadParameters.ui" line="354"/>
@@ -2922,7 +2922,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
       <location filename="../../TaskPocketParameters.ui" line="206"/>
       <location filename="../../TaskPocketParameters.ui" line="233"/>
       <source>deg</source>
-      <translation type="unfinished">deg</translation>
+      <translation>°</translation>
     </message>
     <message>
       <location filename="../../TaskPocketParameters.ui" line="169"/>
@@ -3648,7 +3648,7 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
     <message>
       <location filename="../../Command.cpp" line="519"/>
       <source>Body</source>
-      <translation type="unfinished">Body</translation>
+      <translation>Контур</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="625"/>
@@ -3663,7 +3663,7 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
     <message>
       <location filename="../../Command.cpp" line="670"/>
       <source>Sketch</source>
-      <translation type="unfinished">Sketch</translation>
+      <translation>Контур</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="700"/>
