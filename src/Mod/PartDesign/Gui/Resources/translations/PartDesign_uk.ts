@@ -1683,7 +1683,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskChamferParameters.ui" line="175"/>
       <source>Angle</source>
-      <translation>Кут</translation>
+      <translation>Кута</translation>
     </message>
   </context>
   <context>
@@ -2162,7 +2162,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskHoleParameters.cpp" line="70"/>
       <source>None</source>
-      <translation>Нічого</translation>
+      <translation>Немає</translation>
     </message>
     <message>
       <location filename="../../TaskHoleParameters.cpp" line="71"/>
@@ -2220,12 +2220,12 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="84"/>
       <source>OK</source>
-      <translation>Гаразд</translation>
+      <translation>Зв’язати</translation>
     </message>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="93"/>
       <source>Update view</source>
-      <translation>Оновити вигляд</translation>
+      <translation type="unfinished">Update view</translation>
     </message>
     <message>
       <location filename="../../TaskLinearPatternParameters.cpp" line="261"/>
@@ -2308,12 +2308,12 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskMirroredParameters.ui" line="42"/>
       <source>OK</source>
-      <translation>Гаразд</translation>
+      <translation>Зв’язати</translation>
     </message>
     <message>
       <location filename="../../TaskMirroredParameters.ui" line="51"/>
       <source>Update view</source>
-      <translation>Оновити вигляд</translation>
+      <translation type="unfinished">Update view</translation>
     </message>
     <message>
       <location filename="../../TaskMirroredParameters.cpp" line="193"/>
@@ -2336,7 +2336,7 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskMultiTransformParameters.ui" line="37"/>
       <source>Update view</source>
-      <translation>Оновити вигляд</translation>
+      <translation type="unfinished">Update view</translation>
     </message>
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="80"/>
@@ -2995,7 +2995,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="49"/>
       <source>Angle</source>
-      <translation>Кут</translation>
+      <translation>Кута</translation>
     </message>
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="76"/>
@@ -3005,12 +3005,12 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="90"/>
       <source>OK</source>
-      <translation>Гаразд</translation>
+      <translation>Зв’язати</translation>
     </message>
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="99"/>
       <source>Update view</source>
-      <translation>Оновити вигляд</translation>
+      <translation type="unfinished">Update view</translation>
     </message>
     <message>
       <location filename="../../TaskPolarPatternParameters.cpp" line="250"/>
@@ -3113,12 +3113,12 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskScaledParameters.ui" line="56"/>
       <source>OK</source>
-      <translation>Гаразд</translation>
+      <translation>Зв’язати</translation>
     </message>
     <message>
       <location filename="../../TaskScaledParameters.ui" line="65"/>
       <source>Update view</source>
-      <translation>Оновити вигляд</translation>
+      <translation type="unfinished">Update view</translation>
     </message>
   </context>
   <context>
@@ -3643,7 +3643,7 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
     <message>
       <location filename="../../Command.cpp" line="518"/>
       <source>Clone</source>
-      <translation>Клон</translation>
+      <translation>Клонувати</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="519"/>
@@ -4546,7 +4546,7 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
       <location filename="../../../FeatureHole/TaskHole.ui" line="63"/>
       <location filename="../../../FeatureHole/TaskHole.ui" line="101"/>
       <source>Distance</source>
-      <translation>Відстань</translation>
+      <translation>Відстані</translation>
     </message>
     <message>
       <location filename="../../../FeatureHole/TaskHole.ui" line="137"/>
@@ -4599,7 +4599,7 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
       <location filename="../../../FeatureHole/TaskHole.ui" line="368"/>
       <location filename="../../../FeatureHole/TaskHole.ui" line="474"/>
       <source>Diameter</source>
-      <translation>Діаметр</translation>
+      <translation>Діаметру</translation>
     </message>
     <message>
       <location filename="../../../FeatureHole/TaskHole.ui" line="280"/>
@@ -4777,7 +4777,7 @@ Only available for holes without thread</translation>
       <location filename="../../TaskHoleParameters.ui" line="372"/>
       <location filename="../../TaskHoleParameters.ui" line="459"/>
       <source>Diameter</source>
-      <translation>Діаметр</translation>
+      <translation>Діаметру</translation>
     </message>
     <message>
       <location filename="../../TaskHoleParameters.ui" line="385"/>
