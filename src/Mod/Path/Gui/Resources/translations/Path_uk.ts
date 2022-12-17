@@ -3973,7 +3973,7 @@ If it is necessary to set the FinalDepth manually please select a different oper
     <message>
       <location filename="../panels/DlgJobTemplateExport.ui" line="169"/>
       <source>Placement</source>
-      <translation>Розташування</translation>
+      <translation>Розташувати</translation>
     </message>
     <message>
       <location filename="../panels/DlgJobTemplateExport.ui" line="185"/>
@@ -4048,7 +4048,7 @@ If it is necessary to set the FinalDepth manually please select a different oper
     <message>
       <location filename="../panels/DlgToolControllerEdit.ui" line="201"/>
       <source>Reverse</source>
-      <translation>Навпаки</translation>
+      <translation>Зворотній напрямок</translation>
     </message>
     <message>
       <location filename="../panels/DlgToolControllerEdit.ui" line="244"/>
@@ -4217,7 +4217,7 @@ If it is necessary to set the FinalDepth manually please select a different oper
     <message>
       <location filename="../panels/DlgToolCopy.ui" line="29"/>
       <source>Destination</source>
-      <translation>Призначення</translation>
+      <translation>Тека Призначення</translation>
     </message>
   </context>
   <context>
@@ -4948,7 +4948,7 @@ If it is necessary to set the FinalDepth manually please select a different oper
     <message>
       <location filename="../panels/PageOpPocketExtEdit.ui" line="149"/>
       <source>Enable</source>
-      <translation>Увімкнути</translation>
+      <translation>Ввімкнути</translation>
     </message>
     <message>
       <location filename="../panels/PageOpPocketExtEdit.ui" line="156"/>
@@ -5494,7 +5494,7 @@ If it is necessary to set the FinalDepth manually please select a different oper
       <location filename="../panels/PageOpWaterlineEdit.ui" line="242"/>
       <location filename="../panels/PageOpSurfaceEdit.ui" line="188"/>
       <source>Step over</source>
-      <translation>Переступити</translation>
+      <translation>Крок за кроком</translation>
     </message>
     <message>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="161"/>
@@ -6245,7 +6245,7 @@ If it is necessary to set the FinalDepth manually please select a different oper
     <message>
       <location filename="../preferences/PathJob.ui" line="539"/>
       <source>Placement</source>
-      <translation>Розташування</translation>
+      <translation>Розташувати</translation>
     </message>
     <message>
       <location filename="../preferences/PathJob.ui" line="554"/>
