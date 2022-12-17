@@ -1,6 +1,77 @@
+pull_request_title: '[skip ci] Crowdin upload'
+pull_request_labels:
+  - crowdin
+  - l10n
 files:
+  - source: src/Mod/AddonManager/Resources/translations/AddonManager.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /AddonManagerRT.ts
+  - source: src/Mod/Arch/Resources/translations/Arch.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /ArchRT.ts
+  - source: src/Mod/Draft/Resources/translations/Draft.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /DraftRT.ts
+  - source: src/Mod/Drawing/Gui/Resources/translations/Drawing.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /DrawingRT.ts
+  - source: src/Mod/Fem/Gui/Resources/translations/Fem.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /FemRT.ts
+  - source: src/Gui/Language/FreeCAD.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /FreeCADRT.ts
+  - source: src/Mod/Image/Gui/Resources/translations/Image.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /ImageRT.ts
+  - source: src/Mod/MeshPart/Gui/Resources/translations/MeshPart.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /MeshPartRT.ts
+  - source: src/Mod/Mesh/Gui/Resources/translations/Mesh.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /MeshRT.ts
+  - source: src/Mod/OpenSCAD/Resources/translations/OpenSCAD.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /OpenSCADRT.ts
+  - source: src/Mod/PartDesign/Gui/Resources/translations/PartDesign.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /PartDesignRT.ts
+  - source: src/Mod/Part/Gui/Resources/translations/Part.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /PartRT.ts
+  - source: src/Mod/Path/Gui/Resources/translations/Path.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /PathRT.ts
+  - source: src/Mod/Points/Gui/Resources/translations/Points.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /PointsRT.ts
+  - source: src/Mod/Raytracing/Gui/Resources/translations/Raytracing.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /RaytracingRT.ts
+  - source: src/Mod/ReverseEngineering/Gui/Resources/translations/ReverseEngineering.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /ReverseEngineeringRT.ts
+  - source: src/Mod/Robot/Gui/Resources/translations/Robot.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /RobotRT.ts
   - source: src/Mod/Sketcher/Gui/Resources/translations/Sketcher.ts
     translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
-    dest: /SketcherLink.ts
-    escape_quotes: 0
-    escape_special_characters: 0
+    dest: /SketcherRT.ts
+  - source: src/Mod/Spreadsheet/Gui/Resources/translations/Spreadsheet.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /SpreadsheetRT.ts
+  - source: src/Mod/Start/Gui/Resources/translations/StartPage.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /StartPageRT.ts
+  - source: src/Mod/TechDraw/Gui/Resources/translations/TechDraw.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /TechDrawRT.ts
+  - source: src/Mod/Test/Gui/Resources/translations/Test.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /TestRT.ts
+  - source: src/Mod/Tux/Resources/translations/Tux.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /TuxRT.ts
+  - source: src/Mod/Web/Gui/Resources/translations/Web.ts
+    translation: /%original_path%/%file_name%_%two_letters_code%.%file_extension%
+    dest: /WebRT.ts    
