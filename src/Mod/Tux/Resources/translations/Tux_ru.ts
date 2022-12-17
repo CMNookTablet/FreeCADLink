@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="1.1" language="ru" sourcelanguage="en">
+<TS version="2.1" language="ru" sourcelanguage="en">
   <context>
     <name>NavigationIndicator</name>
     <message>
@@ -44,6 +44,11 @@
       <translation>Центр вращения</translation>
     </message>
     <message>
+      <location filename="NavigationIndicatorGui.py" line="71"/>
+      <source>Middle mouse button or H key.</source>
+      <translation>Средняя кнопка мыши или клавиша H.</translation>
+    </message>
+    <message>
       <location filename="NavigationIndicatorGui.py" line="73"/>
       <source>Middle mouse button.</source>
       <translation>Средняя кнопка мыши.</translation>
@@ -81,17 +86,12 @@
     <message>
       <location filename="NavigationIndicatorGui.py" line="296"/>
       <source>Trackball</source>
-      <translation>Trackball</translation>
+      <translation type="unfinished">Trackball</translation>
     </message>
     <message>
       <location filename="NavigationIndicatorGui.py" line="297"/>
       <source>Undefined</source>
       <translation>Не определено</translation>
-    </message>
-    <message>
-      <location filename="NavigationIndicatorGui.py" line="71"/>
-      <source>Middle mouse button or H key.</source>
-      <translation>Средняя кнопка мыши или клавиша H.</translation>
     </message>
   </context>
 </TS>
