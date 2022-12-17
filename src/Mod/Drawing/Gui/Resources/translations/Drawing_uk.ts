@@ -238,129 +238,129 @@
   <context>
     <name>DrawingGui::DrawingView</name>
     <message>
-      <location filename="../../DrawingView.cpp" line="215"/>
+      <location filename="../../DrawingView.cpp" line="217"/>
       <source>&amp;Background</source>
       <translation>&amp;Фон</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="221"/>
+      <location filename="../../DrawingView.cpp" line="223"/>
       <source>&amp;Outline</source>
       <translation>&amp;Контур</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="227"/>
+      <location filename="../../DrawingView.cpp" line="229"/>
       <source>&amp;Native</source>
       <translation>&amp;Рідне</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="231"/>
+      <location filename="../../DrawingView.cpp" line="233"/>
       <source>&amp;OpenGL</source>
-      <translation>&amp;OpenGL</translation>
+      <translation type="unfinished">&amp;OpenGL</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="234"/>
+      <location filename="../../DrawingView.cpp" line="236"/>
       <source>&amp;Image</source>
       <translation>&amp;Зображення</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="238"/>
+      <location filename="../../DrawingView.cpp" line="240"/>
       <source>&amp;High Quality Antialiasing</source>
       <translation>&amp;Висока якість згладжування</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="275"/>
+      <location filename="../../DrawingView.cpp" line="277"/>
       <source>Open SVG File</source>
       <translation>Відкрити SVG файл</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="276"/>
-      <source>Could not open file '%1'.</source>
-      <translation>Не вдається відкрити файл '%1'.</translation>
+      <location filename="../../DrawingView.cpp" line="278"/>
+      <source>Could not open file &apos;%1&apos;.</source>
+      <translation type="unfinished">Could not open file &apos;%1&apos;.</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="363"/>
+      <location filename="../../DrawingView.cpp" line="365"/>
       <source>&amp;Renderer</source>
       <translation>&amp;Промалювувач</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="468"/>
+      <location filename="../../DrawingView.cpp" line="470"/>
       <source>Export PDF</source>
       <translation>Експорт в PDF</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="469"/>
+      <location filename="../../DrawingView.cpp" line="471"/>
       <source>PDF file</source>
       <translation>PDF-файл</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="485"/>
+      <location filename="../../DrawingView.cpp" line="487"/>
       <source>Page sizes</source>
       <translation>Розміри сторінки</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="486"/>
-      <source>A0</source>
-      <translation>A0</translation>
-    </message>
-    <message>
       <location filename="../../DrawingView.cpp" line="488"/>
-      <source>A1</source>
-      <translation>A1</translation>
+      <source>A0</source>
+      <translation type="unfinished">A0</translation>
     </message>
     <message>
       <location filename="../../DrawingView.cpp" line="490"/>
-      <source>A2</source>
-      <translation>A2</translation>
+      <source>A1</source>
+      <translation type="unfinished">A1</translation>
     </message>
     <message>
       <location filename="../../DrawingView.cpp" line="492"/>
-      <source>A3</source>
-      <translation>A3</translation>
+      <source>A2</source>
+      <translation type="unfinished">A2</translation>
     </message>
     <message>
       <location filename="../../DrawingView.cpp" line="494"/>
-      <source>A4</source>
-      <translation>A4</translation>
+      <source>A3</source>
+      <translation type="unfinished">A3</translation>
     </message>
     <message>
       <location filename="../../DrawingView.cpp" line="496"/>
-      <source>A5</source>
-      <translation>A5</translation>
+      <source>A4</source>
+      <translation type="unfinished">A4</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="579"/>
+      <location filename="../../DrawingView.cpp" line="498"/>
+      <source>A5</source>
+      <translation type="unfinished">A5</translation>
+    </message>
+    <message>
+      <location filename="../../DrawingView.cpp" line="581"/>
       <source>Different orientation</source>
       <translation>Відмінна орієнтація</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="580"/>
+      <location filename="../../DrawingView.cpp" line="582"/>
       <source>The printer uses a different orientation than the drawing.
 Do you want to continue?</source>
       <translation>Принтер використовує відмінну від креслення орієнтацію.
 Бажаєте продовжити?</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="587"/>
-      <location filename="../../DrawingView.cpp" line="595"/>
+      <location filename="../../DrawingView.cpp" line="589"/>
+      <location filename="../../DrawingView.cpp" line="597"/>
       <source>Different paper size</source>
       <translation>Відмінний розмір паперу</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="588"/>
-      <location filename="../../DrawingView.cpp" line="596"/>
+      <location filename="../../DrawingView.cpp" line="590"/>
+      <location filename="../../DrawingView.cpp" line="598"/>
       <source>The printer uses a different paper size than the drawing.
 Do you want to continue?</source>
       <translation>Принтер використовує відмінний від креслення розмір паперу. Бажаєте продовжити?</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="607"/>
+      <location filename="../../DrawingView.cpp" line="609"/>
       <source>Opening file failed</source>
       <translation>Відкриття файлу не вдалося</translation>
     </message>
     <message>
-      <location filename="../../DrawingView.cpp" line="608"/>
-      <source>Can't open file '%1' for writing.</source>
-      <translation>Не вдалося відкрити файл '%1' для запису.</translation>
+      <location filename="../../DrawingView.cpp" line="610"/>
+      <source>Can&apos;t open file &apos;%1&apos; for writing.</source>
+      <translation type="unfinished">Can&apos;t open file &apos;%1&apos; for writing.</translation>
     </message>
   </context>
   <context>
@@ -450,41 +450,41 @@ Do you want to continue?</source>
       <location filename="../../TaskOrthoViews.ui" line="605"/>
       <location filename="../../TaskOrthoViews.ui" line="805"/>
       <source>X +ve</source>
-      <translation>X +ve</translation>
+      <translation type="unfinished">X +ve</translation>
     </message>
     <message>
       <location filename="../../TaskOrthoViews.ui" line="610"/>
       <location filename="../../TaskOrthoViews.ui" line="685"/>
       <location filename="../../TaskOrthoViews.ui" line="810"/>
       <source>Y +ve</source>
-      <translation>Y +ve</translation>
+      <translation type="unfinished">Y +ve</translation>
     </message>
     <message>
       <location filename="../../TaskOrthoViews.ui" line="615"/>
       <location filename="../../TaskOrthoViews.ui" line="690"/>
       <location filename="../../TaskOrthoViews.ui" line="815"/>
       <source>Z +ve</source>
-      <translation>Z +ve</translation>
+      <translation type="unfinished">Z +ve</translation>
     </message>
     <message>
       <location filename="../../TaskOrthoViews.ui" line="620"/>
       <location filename="../../TaskOrthoViews.ui" line="820"/>
       <source>X -ve</source>
-      <translation>X -ve</translation>
+      <translation type="unfinished">X -ve</translation>
     </message>
     <message>
       <location filename="../../TaskOrthoViews.ui" line="625"/>
       <location filename="../../TaskOrthoViews.ui" line="695"/>
       <location filename="../../TaskOrthoViews.ui" line="825"/>
       <source>Y -ve</source>
-      <translation>Y -ve</translation>
+      <translation type="unfinished">Y -ve</translation>
     </message>
     <message>
       <location filename="../../TaskOrthoViews.ui" line="630"/>
       <location filename="../../TaskOrthoViews.ui" line="700"/>
       <location filename="../../TaskOrthoViews.ui" line="830"/>
       <source>Z -ve</source>
-      <translation>Z -ve</translation>
+      <translation type="unfinished">Z -ve</translation>
     </message>
     <message>
       <location filename="../../TaskOrthoViews.ui" line="642"/>
@@ -656,7 +656,7 @@ Do you want to continue?</source>
     <message>
       <location filename="../../Command.cpp" line="237"/>
       <source>%1%2 %3 (%4)</source>
-      <translation>%1%2 %3 (%4)</translation>
+      <translation type="unfinished">%1%2 %3 (%4)</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="243"/>
