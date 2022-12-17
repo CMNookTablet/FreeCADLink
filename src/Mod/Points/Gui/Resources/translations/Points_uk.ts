@@ -4,18 +4,18 @@
   <context>
     <name>CmdPointsConvert</name>
     <message>
-      <location filename="../../Command.cpp" line="189"/>
+      <location filename="../../Command.cpp" line="190"/>
       <source>Points</source>
       <translation>Точки</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="190"/>
+      <location filename="../../Command.cpp" line="191"/>
       <source>Convert to points...</source>
       <translation>Конвертувати в точки...</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="191"/>
-      <location filename="../../Command.cpp" line="193"/>
+      <location filename="../../Command.cpp" line="192"/>
+      <location filename="../../Command.cpp" line="194"/>
       <source>Convert to points</source>
       <translation>Конвертувати в точки</translation>
     </message>
@@ -23,18 +23,18 @@
   <context>
     <name>CmdPointsExport</name>
     <message>
-      <location filename="../../Command.cpp" line="112"/>
+      <location filename="../../Command.cpp" line="113"/>
       <source>Points</source>
       <translation>Точки</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="113"/>
+      <location filename="../../Command.cpp" line="114"/>
       <source>Export points...</source>
       <translation>Експорт точок...</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="114"/>
-      <location filename="../../Command.cpp" line="116"/>
+      <location filename="../../Command.cpp" line="115"/>
+      <location filename="../../Command.cpp" line="117"/>
       <source>Exports a point cloud</source>
       <translation>Експорт хмари точок</translation>
     </message>
@@ -42,18 +42,18 @@
   <context>
     <name>CmdPointsImport</name>
     <message>
-      <location filename="../../Command.cpp" line="67"/>
+      <location filename="../../Command.cpp" line="68"/>
       <source>Points</source>
       <translation>Точки</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="68"/>
+      <location filename="../../Command.cpp" line="69"/>
       <source>Import points...</source>
       <translation>Імпорт точок...</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="69"/>
-      <location filename="../../Command.cpp" line="71"/>
+      <location filename="../../Command.cpp" line="70"/>
+      <location filename="../../Command.cpp" line="72"/>
       <source>Imports a point cloud</source>
       <translation>Імпорт хмари точок</translation>
     </message>
@@ -61,18 +61,18 @@
   <context>
     <name>CmdPointsMerge</name>
     <message>
-      <location filename="../../Command.cpp" line="320"/>
+      <location filename="../../Command.cpp" line="327"/>
       <source>Points</source>
       <translation>Точки</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="321"/>
+      <location filename="../../Command.cpp" line="328"/>
       <source>Merge point clouds</source>
       <translation>Об'єднання хмарки точок</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="322"/>
-      <location filename="../../Command.cpp" line="324"/>
+      <location filename="../../Command.cpp" line="329"/>
+      <location filename="../../Command.cpp" line="331"/>
       <source>Merge several point clouds into one</source>
       <translation>Об'єднати декілька груп точок в одну</translation>
     </message>
@@ -80,18 +80,18 @@
   <context>
     <name>CmdPointsPolyCut</name>
     <message>
-      <location filename="../../Command.cpp" line="275"/>
+      <location filename="../../Command.cpp" line="282"/>
       <source>Points</source>
       <translation>Точки</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="276"/>
+      <location filename="../../Command.cpp" line="283"/>
       <source>Cut point cloud</source>
       <translation>Вирізати хмару точок</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="277"/>
-      <location filename="../../Command.cpp" line="279"/>
+      <location filename="../../Command.cpp" line="284"/>
+      <location filename="../../Command.cpp" line="286"/>
       <source>Cuts a point cloud with a picked polygon</source>
       <translation>Вирізати точки у виділеній області</translation>
     </message>
@@ -99,18 +99,18 @@
   <context>
     <name>CmdPointsStructure</name>
     <message>
-      <location filename="../../Command.cpp" line="363"/>
+      <location filename="../../Command.cpp" line="370"/>
       <source>Points</source>
       <translation>Точки</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="364"/>
+      <location filename="../../Command.cpp" line="371"/>
       <source>Structured point cloud</source>
       <translation type="unfinished">Structured point cloud</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="365"/>
-      <location filename="../../Command.cpp" line="367"/>
+      <location filename="../../Command.cpp" line="372"/>
+      <location filename="../../Command.cpp" line="374"/>
       <source>Convert points to structured point cloud</source>
       <translation type="unfinished">Convert points to structured point cloud</translation>
     </message>
@@ -118,18 +118,18 @@
   <context>
     <name>CmdPointsTransform</name>
     <message>
-      <location filename="../../Command.cpp" line="152"/>
+      <location filename="../../Command.cpp" line="153"/>
       <source>Points</source>
       <translation>Точки</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="153"/>
+      <location filename="../../Command.cpp" line="154"/>
       <source>Transform Points</source>
       <translation>Перетворення точок</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="154"/>
-      <location filename="../../Command.cpp" line="156"/>
+      <location filename="../../Command.cpp" line="155"/>
+      <location filename="../../Command.cpp" line="157"/>
       <source>Test to transform a point cloud</source>
       <translation>Випробування для перетворення хмари точок</translation>
     </message>
@@ -137,17 +137,17 @@
   <context>
     <name>Command</name>
     <message>
-      <location filename="../../Command.cpp" line="88"/>
+      <location filename="../../Command.cpp" line="89"/>
       <source>Import points</source>
       <translation type="unfinished">Import points</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="168"/>
+      <location filename="../../Command.cpp" line="169"/>
       <source>Transform points</source>
       <translation type="unfinished">Transform points</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="208"/>
+      <location filename="../../Command.cpp" line="215"/>
       <source>Convert to points</source>
       <translation>Конвертувати в точки</translation>
     </message>
@@ -265,22 +265,22 @@
     <message>
       <location filename="../../DlgPointsRead.ui" line="275"/>
       <source>\t</source>
-      <translation>\t</translation>
+      <translation type="unfinished">\t</translation>
     </message>
     <message>
       <location filename="../../DlgPointsRead.ui" line="280"/>
       <source>\w</source>
-      <translation>\w</translation>
+      <translation type="unfinished">\w</translation>
     </message>
     <message>
       <location filename="../../DlgPointsRead.ui" line="289"/>
       <source>X,Y,Z</source>
-      <translation>X,Y,Z</translation>
+      <translation type="unfinished">X,Y,Z</translation>
     </message>
     <message>
       <location filename="../../DlgPointsRead.ui" line="294"/>
       <source>X,Y</source>
-      <translation>X,Y</translation>
+      <translation type="unfinished">X,Y</translation>
     </message>
     <message>
       <location filename="../../DlgPointsRead.ui" line="302"/>
@@ -300,30 +300,30 @@
     <message>
       <location filename="../../DlgPointsRead.ui" line="348"/>
       <source>100</source>
-      <translation>100</translation>
+      <translation type="unfinished">100</translation>
     </message>
   </context>
   <context>
     <name>QObject</name>
     <message>
-      <location filename="../../Command.cpp" line="81"/>
-      <location filename="../../Command.cpp" line="129"/>
+      <location filename="../../Command.cpp" line="82"/>
+      <location filename="../../Command.cpp" line="130"/>
       <source>Point formats</source>
       <translation>Формат точок</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="81"/>
-      <location filename="../../Command.cpp" line="129"/>
+      <location filename="../../Command.cpp" line="82"/>
+      <location filename="../../Command.cpp" line="130"/>
       <source>All Files</source>
       <translation>Всі файли</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="202"/>
+      <location filename="../../Command.cpp" line="209"/>
       <source>Distance</source>
       <translation>Відстань</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="203"/>
+      <location filename="../../Command.cpp" line="210"/>
       <source>Enter maximum distance:</source>
       <translation>Введіть максимальну відстань:</translation>
     </message>
