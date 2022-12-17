@@ -2896,7 +2896,7 @@ of projection.</translation>
     <message>
       <location filename="../../Command.cpp" line="1240"/>
       <source>Reverse</source>
-      <translation>Навпаки</translation>
+      <translation>Зворотній напрямок</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="1363"/>
