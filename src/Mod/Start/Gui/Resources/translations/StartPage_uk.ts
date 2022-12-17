@@ -36,7 +36,7 @@
     <message>
       <location filename="TranslationTexts.py" line="48"/>
       <source>Adjust the number of recent files to be shown here in menu Edit -&gt; Preferences -&gt; General -&gt; Size of recent file list</source>
-      <translation>Налаштувати кількість останніх файлів, які будуть показані тут, можна в меню Редагування -&gt; Налаштування -&gt; Загальні -&gt; Розмір списку останніх файлів</translation>
+      <translation>Налаштувати кількість останніх файлів, які будуть показані тут, можна в меню Правка -&gt; Налаштування -&gt; Загальні -&gt; Розмір списку останніх файлів</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="49"/>
@@ -56,7 +56,7 @@
     <message>
       <location filename="TranslationTexts.py" line="52"/>
       <source>This section contains documentation useful for FreeCAD users in general: a list of all the workbenches, detailed instructions on how to install and use the FreeCAD application, tutorials, and all you need to get started.</source>
-      <translation>Цей розділ містить документацію, корисну для користувачів FreeCAD загалом: перелік усіх робочих столів, детальні інструкції для встановлення та використання додатку FreeCAD, навчальні посібники та все, що вам потрібно для початку.</translation>
+      <translation>Цей розділ містить документацію, корисну для користувачів FreeCAD загалом: перелік усіх робочих середовищ, детальні інструкції для встановлення та використання додатку FreeCAD, навчальні посібники та все, що вам потрібно для початку.</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="53"/>
@@ -76,12 +76,12 @@
     <message>
       <location filename="TranslationTexts.py" line="56"/>
       <source>This section contains material for developers: How to compile FreeCAD yourself, how the FreeCAD source code is structured + how to navigate in it, how to develop new workbenches and/or embed FreeCAD in your own application.</source>
-      <translation>Цей розділ містить матеріали для розробників: Як самостійно встановити FreeCAD, як структурувати вихідний код FreeCAD + як орієнтуватися в ньому, як розробляти нові робочі середовища та / або вбудовувати FreeCAD у свій власний додаток.</translation>
+      <translation>Цей розділ містить матеріали для розробників: Як самостійно встановити FreeCAD, як структурувати початковий код FreeCAD + як орієнтуватися в ньому, як розробляти нові робочі середовища та / або вбудовувати FreeCAD у свій власний додаток.</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="57"/>
       <source>Manual</source>
-      <translation>Керівництво</translation>
+      <translation>Посібник</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="58"/>
@@ -91,12 +91,12 @@
     <message>
       <location filename="TranslationTexts.py" line="59"/>
       <source>Workbenches documentation</source>
-      <translation>Документація робочих просторів</translation>
+      <translation>Документація робочих середовищ</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="60"/>
       <source>These are the help pages of all the workbenches currently installed on this computer.</source>
-      <translation>Це довідкові сторінки всіх верстатів, встановлених на цьому комп’ютері.</translation>
+      <translation>Це сторінки допомоги всіх робочих середовищ, встановлених на цьому комп’ютері.</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="61"/>
@@ -126,12 +126,12 @@
     <message>
       <location filename="TranslationTexts.py" line="66"/>
       <source>Below is a list of available extra workbenches that can be added to your FreeCAD installation. Browse and install them from menu Tools -&gt; Addons manager. You can learn more about any of them by clicking the links below.</source>
-      <translation>Нижче наведено список доступних додаткових робочих місць, які можна додати до інсталяції FreeCAD. Перегляньте та встановіть їх з меню Інструменти -&gt; Менеджер доповнень. Ви можете дізнатись більше про будь-який з них, натиснувши посилання нижче.</translation>
+      <translation>Нижче наведено список доступних додаткових робочих середовищ, які можна додати до інсталяції FreeCAD. Перегляньте та встановіть їх з меню Інструменти -&gt; Менеджер додатків. Ви можете дізнатись більше про будь-яке з них, натиснувши посилання нижче.</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="67"/>
       <source>If not bundled with your FreeCAD version, install the FreeCAD documentation package to get documentation hubs, workbench help and individual command documentation without an internet connection.</source>
-      <translation>Якщо не сходиться з вашою версією FreeCAD, встановіть пакет документації FreeCAD, щоб отримати центри документації, довідку по робочих питаннях та окрему командну документацію без підключення до Інтернету.</translation>
+      <translation>Встановіть пакет документації FreeCAD (якщо він не входить до комплекту постачання вашої версії FreeCAD), щоб отримати пакети документації, довідку з робочих середовищ та документацію за окремими командами без підключення до Інтернету.</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="68"/>
@@ -141,7 +141,7 @@
     <message>
       <location filename="TranslationTexts.py" line="69"/>
       <source>Recent commits</source>
-      <translation>Останні коміти</translation>
+      <translation>Останні комміти</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="70"/>
@@ -151,12 +151,12 @@
     <message>
       <location filename="TranslationTexts.py" line="71"/>
       <source>See all commits on github</source>
-      <translation>Прегляд комітів на GitHub</translation>
+      <translation>Переглянути всі комміти на GitHub</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="72"/>
       <source>You can configure a custom folder to display here in menu Edit -&gt; Preferences -&gt; Start -&gt; Show additional folder</source>
-      <translation>Ви можете налаштувати папку на замовлення, яка відображатиметься у меню Редагувати -&gt; Налаштування -&gt; Пуск -&gt; Показати додаткову папку</translation>
+      <translation>Ви можете налаштувати показ теки користувача в меню Правка -&gt; Налаштування -&gt; Пуск -&gt; Показати додаткову теку</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="73"/>
@@ -211,7 +211,7 @@
     <message>
       <location filename="TranslationTexts.py" line="83"/>
       <source>Open start page preferences</source>
-      <translation type="unfinished">Open start page preferences</translation>
+      <translation>Відкрити налаштування стартової сторінки</translation>
     </message>
   </context>
   <context>
@@ -237,7 +237,7 @@
     <message>
       <location filename="../../Command.cpp" line="47"/>
       <source>Displays the start page in a browser view</source>
-      <translation type="unfinished">Displays the start page in a browser view</translation>
+      <translation>Показує початкову сторінку у виді браузера</translation>
     </message>
   </context>
   <context>
@@ -285,7 +285,7 @@
     <message>
       <location filename="../../DlgStartPreferences.ui" line="91"/>
       <source>If this is checked, the latest posts from the FreeCAD forum will be displayed on the Activity tab</source>
-      <translation type="unfinished">If this is checked, the latest posts from the FreeCAD forum will be displayed on the Activity tab</translation>
+      <translation>Якщо позначено цей пункт, останні повідомлення з форуму FreeCAD будуть показані на вкладці Активність</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="110"/>
@@ -297,22 +297,22 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="127"/>
       <source>Show notepad</source>
-      <translation type="unfinished">Show notepad</translation>
+      <translation>Показати нотатник</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="134"/>
       <source>Shows a notepad next to the file thumbnails, where you can keep notes across sessions</source>
-      <translation type="unfinished">Shows a notepad next to the file thumbnails, where you can keep notes across sessions</translation>
+      <translation>Показує нотатки біля мініатюр файлів, що дозволяє зберігати нотатки в різних сеансах</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="153"/>
       <source>Show tips</source>
-      <translation type="unfinished">Show tips</translation>
+      <translation>Показати Підказки</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="163"/>
       <source>Displays help tips in the Start workbench Documents tab</source>
-      <translation type="unfinished">Displays help tips in the Start workbench Documents tab</translation>
+      <translation>Показує підказки на вкладці Документи робочого середовища Start</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="185"/>
@@ -322,7 +322,7 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="197"/>
       <source>The background of the main start page area</source>
-      <translation type="unfinished">The background of the main start page area</translation>
+      <translation>Тло головної області стартової сторінки</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="217"/>
@@ -342,42 +342,42 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="266"/>
       <source>Background color down gradient</source>
-      <translation type="unfinished">Background color down gradient</translation>
+      <translation>Градієнт вниз кольору тла</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="279"/>
       <source>The color of the version text</source>
-      <translation type="unfinished">The color of the version text</translation>
+      <translation>Колір тексту назви версії</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="299"/>
       <source>Link color</source>
-      <translation type="unfinished">Link color</translation>
+      <translation>Колір посилання</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="306"/>
       <source>An optional image to display as background</source>
-      <translation type="unfinished">An optional image to display as background</translation>
+      <translation>Необовʼязкове зображення для показу як тло</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="319"/>
       <source>If this is checked and a style sheet is specified in General preferences, it will be used and override the colors below</source>
-      <translation type="unfinished">If this is checked and a style sheet is specified in General preferences, it will be used and override the colors below</translation>
+      <translation>Якщо цей прапорець встановлений і таблиця стилів вказана у загальних налаштуваннях, вона буде використана та скасує кольори, наведені нижче</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="338"/>
       <source>Page background color</source>
-      <translation>Колір фону сторінки</translation>
+      <translation>Колір тла сторінки</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="351"/>
       <source>The color of the text on the main pages</source>
-      <translation type="unfinished">The color of the text on the main pages</translation>
+      <translation>Колір тексту на основних сторінках</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="371"/>
       <source>Background image</source>
-      <translation>Фонове зображення</translation>
+      <translation>Зображення тла</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="378"/>
@@ -392,22 +392,22 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="417"/>
       <source>The background color of the boxes inside the pages</source>
-      <translation type="unfinished">The background color of the boxes inside the pages</translation>
+      <translation>Колір тла блоків на сторінках</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="437"/>
       <source>Box background color</source>
-      <translation type="unfinished">Box background color</translation>
+      <translation>Колір тла блоків</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="450"/>
       <source>The background color behind the panels</source>
-      <translation type="unfinished">The background color behind the panels</translation>
+      <translation>Колір тла позаду панелей</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="479"/>
       <source>The down gradient for the background color (currently unsupported)</source>
-      <translation type="unfinished">The down gradient for the background color (currently unsupported)</translation>
+      <translation>Встановлює градієнт вниз для кольору тла (нині не підтримується)</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="502"/>
@@ -417,7 +417,7 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="509"/>
       <source>Background text color</source>
-      <translation>Колір фону текста</translation>
+      <translation>Колір тла тексту</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="516"/>
@@ -432,7 +432,7 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="532"/>
       <source>The font family to use on the start page. Can be a font name or a comma-separated series of fallback fonts</source>
-      <translation type="unfinished">The font family to use on the start page. Can be a font name or a comma-separated series of fallback fonts</translation>
+      <translation>Сімейство шрифтів, яке використовується на стартовій сторінці. Може бути імʼям шрифту або переліком запасних шрифтів, розділених комами</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="538"/>
@@ -442,7 +442,7 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="551"/>
       <source>The base font size to use for all texts of the Start page</source>
-      <translation type="unfinished">The base font size to use for all texts of the Start page</translation>
+      <translation>Базовий розмір шрифту для всіх текстів Стартової сторінки</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="554"/>
@@ -452,7 +452,7 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="572"/>
       <source>Use gradient for New File icon</source>
-      <translation type="unfinished">Use gradient for New File icon</translation>
+      <translation>Використовувати градієнт для значка нового файлу</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="579"/>
@@ -467,32 +467,32 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="607"/>
       <source>Choose which workbench to switch to after the program launches</source>
-      <translation type="unfinished">Choose which workbench to switch to after the program launches</translation>
+      <translation>Дозволяє обрати робоче середовище, яке буде активоване після запуску програми</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="614"/>
       <source>If checked, will automatically close the Start page when FreeCAD launches</source>
-      <translation type="unfinished">If checked, will automatically close the Start page when FreeCAD launches</translation>
+      <translation>Якщо прапорець встановлений, при запуску FreeCAD автоматично закриє Стартову сторінку</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="633"/>
       <source>Switch workbench after loading</source>
-      <translation type="unfinished">Switch workbench after loading</translation>
+      <translation>Запустити робоче середовище після завантаження</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="640"/>
       <source>Close start page after loading</source>
-      <translation type="unfinished">Close start page after loading</translation>
+      <translation>Закрити стартову сторінку після завантаження</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="647"/>
       <source>Close and switch on opening file</source>
-      <translation type="unfinished">Close and switch on opening file</translation>
+      <translation>Закрити та перейти до відкриття файлу</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="654"/>
       <source>If application is started by opening a file, apply the two settings above</source>
-      <translation type="unfinished">If application is started by opening a file, apply the two settings above</translation>
+      <translation>Якщо програма запускається відкриттям файлу, застосуйте два налаштування вище</translation>
     </message>
   </context>
 </TS>
