@@ -103,17 +103,17 @@
     <message>
       <location filename="../../Command.cpp" line="887"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="888"/>
       <source>Create spreadsheet</source>
-      <translation type="unfinished">Create spreadsheet</translation>
+      <translation>Создать электронную таблицу</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="889"/>
       <source>Create a new spreadsheet</source>
-      <translation type="unfinished">Create a new spreadsheet</translation>
+      <translation>Создать новую электронную таблицу</translation>
     </message>
   </context>
   <context>
@@ -121,17 +121,17 @@
     <message>
       <location filename="../../Command.cpp" line="498"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="499"/>
       <source>Align bottom</source>
-      <translation type="unfinished">Align bottom</translation>
+      <translation>Выровнять по нижнему краю</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="500"/>
       <source>Bottom-align contents of selected cells</source>
-      <translation type="unfinished">Bottom-align contents of selected cells</translation>
+      <translation>Выравнять содержимое выделенных ячеек по нижнему краю</translation>
     </message>
   </context>
   <context>
@@ -139,17 +139,17 @@
     <message>
       <location filename="../../Command.cpp" line="342"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="343"/>
       <source>Align center</source>
-      <translation type="unfinished">Align center</translation>
+      <translation>Выровнять по центру</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="344"/>
       <source>Center-align contents of selected cells</source>
-      <translation type="unfinished">Center-align contents of selected cells</translation>
+      <translation>Выровнять содержимое выделенных ячеек по центру</translation>
     </message>
   </context>
   <context>
@@ -157,17 +157,17 @@
     <message>
       <location filename="../../Command.cpp" line="290"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="291"/>
       <source>Align left</source>
-      <translation type="unfinished">Align left</translation>
+      <translation>Выровнять по левому краю</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="292"/>
       <source>Left-align contents of selected cells</source>
-      <translation type="unfinished">Left-align contents of selected cells</translation>
+      <translation>Выровнять содержимое выделенных ячеек по левому краю</translation>
     </message>
   </context>
   <context>
@@ -175,17 +175,17 @@
     <message>
       <location filename="../../Command.cpp" line="394"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="395"/>
       <source>Align right</source>
-      <translation type="unfinished">Align right</translation>
+      <translation>Выровнять по правому краю</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="396"/>
       <source>Right-align contents of selected cells</source>
-      <translation type="unfinished">Right-align contents of selected cells</translation>
+      <translation>Выровнять содержимое выделенных ячеек по правому краю</translation>
     </message>
   </context>
   <context>
@@ -193,17 +193,17 @@
     <message>
       <location filename="../../Command.cpp" line="446"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="447"/>
       <source>Align top</source>
-      <translation type="unfinished">Align top</translation>
+      <translation>Выровнять по верхнему краю</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="448"/>
       <source>Top-align contents of selected cells</source>
-      <translation type="unfinished">Top-align contents of selected cells</translation>
+      <translation>Выровнять содержимое выделенных ячеек по верхнему краю</translation>
     </message>
   </context>
   <context>
@@ -211,17 +211,17 @@
     <message>
       <location filename="../../Command.cpp" line="550"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="551"/>
       <source>Vertically center-align</source>
-      <translation type="unfinished">Vertically center-align</translation>
+      <translation>Выровнять вертикально по центру</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="552"/>
       <source>Vertically center-align contents of selected cells</source>
-      <translation type="unfinished">Vertically center-align contents of selected cells</translation>
+      <translation>Вертикально выровнять содержимое выделенных ячеек по центру</translation>
     </message>
   </context>
   <context>
@@ -229,17 +229,17 @@
     <message>
       <location filename="../../Command.cpp" line="229"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="230"/>
       <source>Export spreadsheet</source>
-      <translation type="unfinished">Export spreadsheet</translation>
+      <translation>Экспорт электронной таблицы</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="231"/>
       <source>Export spreadsheet to CSV file</source>
-      <translation type="unfinished">Export spreadsheet to CSV file</translation>
+      <translation>Экспорт электронной таблицы в CSV-файл</translation>
     </message>
   </context>
   <context>
@@ -247,17 +247,17 @@
     <message>
       <location filename="../../Command.cpp" line="179"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="180"/>
       <source>Import spreadsheet</source>
-      <translation type="unfinished">Import spreadsheet</translation>
+      <translation>Импорт электронной таблицы</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="181"/>
       <source>Import CSV file into spreadsheet</source>
-      <translation type="unfinished">Import CSV file into spreadsheet</translation>
+      <translation>Импорт CSV-файла в таблицу</translation>
     </message>
   </context>
   <context>
@@ -265,17 +265,17 @@
     <message>
       <location filename="../../Command.cpp" line="70"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="71"/>
       <source>Merge cells</source>
-      <translation type="unfinished">Merge cells</translation>
+      <translation>Объединить ячейки</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="72"/>
       <source>Merge selected cells</source>
-      <translation type="unfinished">Merge selected cells</translation>
+      <translation>Объединить выделенные ячейки</translation>
     </message>
   </context>
   <context>
@@ -283,17 +283,17 @@
     <message>
       <location filename="../../Command.cpp" line="823"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="824"/>
       <source>Set alias</source>
-      <translation type="unfinished">Set alias</translation>
+      <translation>Установить псевдоним</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="825"/>
       <source>Set alias for selected cell</source>
-      <translation type="unfinished">Set alias for selected cell</translation>
+      <translation>Установить псевдоним для выбранной ячейки</translation>
     </message>
   </context>
   <context>
@@ -301,17 +301,17 @@
     <message>
       <location filename="../../Command.cpp" line="123"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="124"/>
       <source>Split cell</source>
-      <translation type="unfinished">Split cell</translation>
+      <translation>Разделить ячейку</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="125"/>
       <source>Split previously merged cells</source>
-      <translation type="unfinished">Split previously merged cells</translation>
+      <translation>Разделить ранее объединенные ячейки</translation>
     </message>
   </context>
   <context>
@@ -319,17 +319,17 @@
     <message>
       <location filename="../../Command.cpp" line="602"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="603"/>
       <source>Bold text</source>
-      <translation type="unfinished">Bold text</translation>
+      <translation>Полужирный текст</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="604"/>
       <source>Set text in selected cells bold</source>
-      <translation type="unfinished">Set text in selected cells bold</translation>
+      <translation>Сделать текст в выбранных ячейках жирным шрифтом</translation>
     </message>
   </context>
   <context>
@@ -337,17 +337,17 @@
     <message>
       <location filename="../../Command.cpp" line="676"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="677"/>
       <source>Italic text</source>
-      <translation type="unfinished">Italic text</translation>
+      <translation>Курсивный текст</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="678"/>
       <source>Set text in selected cells italic</source>
-      <translation type="unfinished">Set text in selected cells italic</translation>
+      <translation>Сделать текст в выбранных ячейках курсивом</translation>
     </message>
   </context>
   <context>
@@ -355,17 +355,17 @@
     <message>
       <location filename="../../Command.cpp" line="750"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="751"/>
       <source>Underline text</source>
-      <translation type="unfinished">Underline text</translation>
+      <translation>Подчеркивание текста</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="752"/>
       <source>Underline text in selected cells</source>
-      <translation type="unfinished">Underline text in selected cells</translation>
+      <translation>Подчеркивание текста в выбранных ячейках</translation>
     </message>
   </context>
   <context>
@@ -373,7 +373,7 @@
     <message>
       <location filename="../../qtcolorpicker.cpp" line="910"/>
       <source>Custom Color</source>
-      <translation type="unfinished">Custom Color</translation>
+      <translation>﻿Пользовательский цвет</translation>
     </message>
   </context>
   <context>
@@ -381,12 +381,12 @@
     <message>
       <location filename="../../Command.cpp" line="91"/>
       <source>Merge cells</source>
-      <translation type="unfinished">Merge cells</translation>
+      <translation>Объединить ячейки</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="144"/>
       <source>Split cell</source>
-      <translation type="unfinished">Split cell</translation>
+      <translation>Разделить ячейку</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="312"/>
@@ -472,18 +472,18 @@
       <location filename="../../SheetTableView.cpp" line="498"/>
       <location filename="../../SheetTableView.cpp" line="539"/>
       <source>Insert rows</source>
-      <translation type="unfinished">Insert rows</translation>
+      <translation>Вставить строки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="565"/>
       <source>Remove rows</source>
-      <translation type="unfinished">Remove rows</translation>
+      <translation>Удалить строки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="601"/>
       <location filename="../../SheetTableView.cpp" line="643"/>
       <source>Insert columns</source>
-      <translation type="unfinished">Insert columns</translation>
+      <translation>Вставить столбцы</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="668"/>
@@ -683,103 +683,103 @@ switch the design configuration. The property will be created if not exist.</tra
     <message>
       <location filename="../../PropertiesDialog.ui" line="14"/>
       <source>Cell properties</source>
-      <translation type="unfinished">Cell properties</translation>
+      <translation>Свойства ячеек</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="37"/>
       <source>&amp;Color</source>
-      <translation type="unfinished">&amp;Color</translation>
+      <translation>&amp;Цвет</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="43"/>
       <source>Text</source>
-      <translation type="unfinished">Text</translation>
+      <translation>Текст</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="66"/>
       <source>Background</source>
-      <translation type="unfinished">Background</translation>
+      <translation>Фон</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="90"/>
       <source>&amp;Alignment</source>
-      <translation type="unfinished">&amp;Alignment</translation>
+      <translation>&amp;Выравнивание</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="98"/>
       <source>Horizontal</source>
-      <translation type="unfinished">Horizontal</translation>
+      <translation>По горизонтали</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="105"/>
       <source>Left</source>
-      <translation type="unfinished">Left</translation>
+      <translation>Слева</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="112"/>
       <location filename="../../PropertiesDialog.ui" line="156"/>
       <source>Center</source>
-      <translation type="unfinished">Center</translation>
+      <translation>Центр</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="119"/>
       <source>Right</source>
-      <translation type="unfinished">Right</translation>
+      <translation>Справа</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="142"/>
       <source>Vertical</source>
-      <translation type="unfinished">Vertical</translation>
+      <translation>По вертикали</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="149"/>
       <source>Top</source>
-      <translation type="unfinished">Top</translation>
+      <translation>Сверху</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="163"/>
       <source>Bottom</source>
-      <translation type="unfinished">Bottom</translation>
+      <translation>Снизу</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="189"/>
       <source>&amp;Style</source>
-      <translation type="unfinished">&amp;Style</translation>
+      <translation>&amp;Стиль</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="197"/>
       <source>Bold</source>
-      <translation type="unfinished">Bold</translation>
+      <translation>Полужирный</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="204"/>
       <source>Italic</source>
-      <translation type="unfinished">Italic</translation>
+      <translation>Курсив</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="211"/>
       <source>Underline</source>
-      <translation type="unfinished">Underline</translation>
+      <translation>Подчеркивание</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="234"/>
       <source>&amp;Display unit</source>
-      <translation type="unfinished">&amp;Display unit</translation>
+      <translation>&amp;Показывать Единицы измерения</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="256"/>
       <source>Unit string</source>
-      <translation type="unfinished">Unit string</translation>
+      <translation>Строка единицы измерения</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="264"/>
       <source>A&amp;lias</source>
-      <translation type="unfinished">A&amp;lias</translation>
+      <translation>&amp;Псевдоним</translation>
     </message>
     <message>
       <location filename="../../PropertiesDialog.ui" line="273"/>
       <source>Alias for this cell</source>
-      <translation type="unfinished">Alias for this cell</translation>
+      <translation>Псевдоним для этой ячейки</translation>
     </message>
   </context>
   <context>
@@ -788,49 +788,49 @@ switch the design configuration. The property will be created if not exist.</tra
       <location filename="../../Command.cpp" line="191"/>
       <location filename="../../Command.cpp" line="247"/>
       <source>All (*)</source>
-      <translation type="unfinished">All (*)</translation>
+      <translation>Всё (*)</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="193"/>
       <source>Import file</source>
-      <translation type="unfinished">Import file</translation>
+      <translation>Импорт файла</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="249"/>
       <source>Export file</source>
-      <translation type="unfinished">Export file</translation>
+      <translation>Экспорт файла</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="898"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSpreadsheet.cpp" line="145"/>
       <source>Show spreadsheet</source>
-      <translation type="unfinished">Show spreadsheet</translation>
+      <translation>Показать таблицу</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="84"/>
       <location filename="../../Workbench.cpp" line="86"/>
       <source>Set cell(s) foreground color</source>
-      <translation type="unfinished">Set cell(s) foreground color</translation>
+      <translation>Установить цвет переднего плана ячеек</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="85"/>
       <source>Sets the Spreadsheet cell(s) foreground color</source>
-      <translation type="unfinished">Sets the Spreadsheet cell(s) foreground color</translation>
+      <translation>Задает цвет переднего плана ячеек таблицы</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="97"/>
       <location filename="../../Workbench.cpp" line="99"/>
       <source>Set cell(s) background color</source>
-      <translation type="unfinished">Set cell(s) background color</translation>
+      <translation>Установить цвет фона ячеек</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="98"/>
       <source>Sets the Spreadsheet cell(s) background color</source>
-      <translation type="unfinished">Sets the Spreadsheet cell(s) background color</translation>
+      <translation>Задает цвет фона ячеек таблицы</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="321"/>
@@ -877,19 +877,19 @@ switch the design configuration. The property will be created if not exist.</tra
     <message>
       <location filename="../../SheetTableView.cpp" line="1022"/>
       <source>Copy &amp; Paste failed</source>
-      <translation type="unfinished">Copy &amp; Paste failed</translation>
+      <translation>Скопировать и вставить не удалось</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="396"/>
       <source>Alias contains invalid characters!</source>
-      <translation type="unfinished">Alias contains invalid characters!</translation>
+      <translation>Псевдоним содержит недопустимые символы!</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="402"/>
       <source>Refer to cell by alias, for example
 Spreadsheet.my_alias_name instead of Spreadsheet.B1</source>
-      <translation type="unfinished">Refer to cell by alias, for example
-Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
+      <translation>Обратитесь к ячейке по псевдониму, например
+Spreadsheet.my_alias_name вместо Spreadsheet.B1</translation>
     </message>
   </context>
   <context>
@@ -899,108 +899,108 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
       <location filename="../../qtcolorpicker.cpp" line="410"/>
       <location filename="../../qtcolorpicker.cpp" line="520"/>
       <source>Black</source>
-      <translation type="unfinished">Black</translation>
+      <translation>Чёрный</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="411"/>
       <location filename="../../qtcolorpicker.cpp" line="521"/>
       <source>White</source>
-      <translation type="unfinished">White</translation>
+      <translation>Белый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="412"/>
       <location filename="../../qtcolorpicker.cpp" line="522"/>
       <source>Red</source>
-      <translation type="unfinished">Red</translation>
+      <translation>Красный</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="413"/>
       <location filename="../../qtcolorpicker.cpp" line="523"/>
       <source>Dark red</source>
-      <translation type="unfinished">Dark red</translation>
+      <translation>Бордовый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="414"/>
       <location filename="../../qtcolorpicker.cpp" line="524"/>
       <source>Green</source>
-      <translation type="unfinished">Green</translation>
+      <translation>Лайм</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="415"/>
       <location filename="../../qtcolorpicker.cpp" line="525"/>
       <source>Dark green</source>
-      <translation type="unfinished">Dark green</translation>
+      <translation>Зелёный</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="416"/>
       <location filename="../../qtcolorpicker.cpp" line="526"/>
       <source>Blue</source>
-      <translation type="unfinished">Blue</translation>
+      <translation>Синий</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="417"/>
       <location filename="../../qtcolorpicker.cpp" line="527"/>
       <source>Dark blue</source>
-      <translation type="unfinished">Dark blue</translation>
+      <translation>Тёмно-синий</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="418"/>
       <location filename="../../qtcolorpicker.cpp" line="528"/>
       <source>Cyan</source>
-      <translation type="unfinished">Cyan</translation>
+      <translation>Голубой</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="419"/>
       <location filename="../../qtcolorpicker.cpp" line="529"/>
       <source>Dark cyan</source>
-      <translation type="unfinished">Dark cyan</translation>
+      <translation>Морской волны</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="420"/>
       <location filename="../../qtcolorpicker.cpp" line="530"/>
       <source>Magenta</source>
-      <translation type="unfinished">Magenta</translation>
+      <translation>Розовый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="421"/>
       <location filename="../../qtcolorpicker.cpp" line="531"/>
       <source>Dark magenta</source>
-      <translation type="unfinished">Dark magenta</translation>
+      <translation>Фиолетовый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="422"/>
       <location filename="../../qtcolorpicker.cpp" line="532"/>
       <source>Yellow</source>
-      <translation type="unfinished">Yellow</translation>
+      <translation>Жёлтый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="423"/>
       <location filename="../../qtcolorpicker.cpp" line="533"/>
       <source>Dark yellow</source>
-      <translation type="unfinished">Dark yellow</translation>
+      <translation>Оливковый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="424"/>
       <location filename="../../qtcolorpicker.cpp" line="534"/>
       <source>Gray</source>
-      <translation type="unfinished">Gray</translation>
+      <translation>Серый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="425"/>
       <location filename="../../qtcolorpicker.cpp" line="535"/>
       <source>Dark gray</source>
-      <translation type="unfinished">Dark gray</translation>
+      <translation>Тёмно-серый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="426"/>
       <location filename="../../qtcolorpicker.cpp" line="536"/>
       <source>Light gray</source>
-      <translation type="unfinished">Light gray</translation>
+      <translation>Светло-серый</translation>
     </message>
     <message>
       <location filename="../../qtcolorpicker.cpp" line="448"/>
       <source>Custom Color</source>
-      <translation type="unfinished">Custom Color</translation>
+      <translation>﻿Пользовательский цвет</translation>
     </message>
   </context>
   <context>
@@ -1008,24 +1008,24 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../Sheet.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../Sheet.ui" line="22"/>
       <source>&amp;Content:</source>
-      <translation type="unfinished">&amp;Content:</translation>
+      <translation>&amp;Содержание:</translation>
     </message>
     <message>
       <location filename="../../Sheet.ui" line="39"/>
       <source>&amp;Alias:</source>
-      <translation type="unfinished">&amp;Alias:</translation>
+      <translation>&amp;Псевдоним:</translation>
     </message>
     <message>
       <location filename="../../Sheet.ui" line="52"/>
       <source>Refer to cell by alias, for example
 Spreadsheet.my_alias_name instead of Spreadsheet.B1</source>
-      <translation type="unfinished">Refer to cell by alias, for example
-Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
+      <translation>Обратитесь к ячейке по псевдониму, например
+Spreadsheet.my_alias_name вместо Spreadsheet.B1</translation>
     </message>
   </context>
   <context>
@@ -1170,7 +1170,7 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../AppSpreadsheetGui.cpp" line="87"/>
       <source>Unnamed</source>
-      <translation type="unfinished">Unnamed</translation>
+      <translation>Безымянный</translation>
     </message>
   </context>
   <context>
@@ -1201,41 +1201,41 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="143"/>
       <source>Insert %n row(s) above</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n row(s) above</numerusform>
-        <numerusform>Insert %n row(s) above</numerusform>
-        <numerusform>Insert %n row(s) above</numerusform>
-        <numerusform>Insert %n row(s) above</numerusform>
+      <translation>
+        <numerusform>Вставить %n строку выше</numerusform>
+        <numerusform>Вставить %n строки выше</numerusform>
+        <numerusform>Вставить %n строк выше</numerusform>
+        <numerusform>Вставить %n строк выше</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="147"/>
       <source>Insert %n row(s) below</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n row(s) below</numerusform>
-        <numerusform>Insert %n row(s) below</numerusform>
-        <numerusform>Insert %n row(s) below</numerusform>
-        <numerusform>Insert %n row(s) below</numerusform>
+      <translation>
+        <numerusform>Вставить %n строку ниже</numerusform>
+        <numerusform>Вставить %n строки ниже</numerusform>
+        <numerusform>Вставить %n строк ниже</numerusform>
+        <numerusform>Вставить %n строк ниже</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="151"/>
       <source>Insert %n non-contiguous rows</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n non-contiguous rows</numerusform>
-        <numerusform>Insert %n non-contiguous rows</numerusform>
-        <numerusform>Insert %n non-contiguous rows</numerusform>
-        <numerusform>Insert %n non-contiguous rows</numerusform>
+      <translation>
+        <numerusform>Вставить %n строку с пропуском строк</numerusform>
+        <numerusform>Вставить %n строки с пропуском строк</numerusform>
+        <numerusform>Вставить %n строк с пропуском строк</numerusform>
+        <numerusform>Вставить %n строк с пропуском строк</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="154"/>
       <source>Remove row(s)</source>
-      <translation type="unfinished">
-        <numerusform>Remove row(s)</numerusform>
-        <numerusform>Remove row(s)</numerusform>
-        <numerusform>Remove row(s)</numerusform>
-        <numerusform>Remove row(s)</numerusform>
+      <translation>
+        <numerusform>Удалить строку</numerusform>
+        <numerusform>Удалить строки</numerusform>
+        <numerusform>Удалить строки</numerusform>
+        <numerusform>Удалить строки</numerusform>
       </translation>
     </message>
     <message>
@@ -1246,41 +1246,41 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="178"/>
       <source>Insert %n column(s) left</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n column(s) left</numerusform>
-        <numerusform>Insert %n column(s) left</numerusform>
-        <numerusform>Insert %n column(s) left</numerusform>
-        <numerusform>Insert %n column(s) left</numerusform>
+      <translation>
+        <numerusform>Вставить %n столбец слева</numerusform>
+        <numerusform>Вставить %n столбца слева</numerusform>
+        <numerusform>Вставить %n столбцов слева</numerusform>
+        <numerusform>Вставить %n столбцов слева</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="182"/>
       <source>Insert %n column(s) right</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n column(s) right</numerusform>
-        <numerusform>Insert %n column(s) right</numerusform>
-        <numerusform>Insert %n column(s) right</numerusform>
-        <numerusform>Insert %n column(s) right</numerusform>
+      <translation>
+        <numerusform>Вставить %n столбец справа</numerusform>
+        <numerusform>Вставить %n столбца справа</numerusform>
+        <numerusform>Вставить %n столбцов справа</numerusform>
+        <numerusform>Вставить %n столбцов справа</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="186"/>
       <source>Insert %n non-contiguous columns</source>
-      <translation type="unfinished">
-        <numerusform>Insert %n non-contiguous columns</numerusform>
-        <numerusform>Insert %n non-contiguous columns</numerusform>
-        <numerusform>Insert %n non-contiguous columns</numerusform>
-        <numerusform>Insert %n non-contiguous columns</numerusform>
+      <translation>
+        <numerusform>Вставить %n столбец с пропуском столбцов</numerusform>
+        <numerusform>Вставить %n столбца с пропуском столбцов</numerusform>
+        <numerusform>Вставить %n столбцов с пропуском столбцов</numerusform>
+        <numerusform>Вставить %n столбцов с пропуском столбцов</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="189"/>
       <source>Remove column(s)</source>
-      <translation type="unfinished">
-        <numerusform>Remove column(s)</numerusform>
-        <numerusform>Remove column(s)</numerusform>
-        <numerusform>Remove column(s)</numerusform>
-        <numerusform>Remove column(s)</numerusform>
+      <translation>
+        <numerusform>Удалить столбец</numerusform>
+        <numerusform>Удалить столбцы</numerusform>
+        <numerusform>Удалить столбцы</numerusform>
+        <numerusform>Удалить столбцы</numerusform>
       </translation>
     </message>
     <message>
@@ -1291,7 +1291,7 @@ Spreadsheet.my_alias_name instead of Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="206"/>
       <source>Properties...</source>
-      <translation type="unfinished">Properties...</translation>
+      <translation>Свойства...</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="210"/>
@@ -1426,7 +1426,7 @@ may affect cells dependency coherence. Use with care!</translation>
     <message>
       <location filename="../../Workbench.cpp" line="49"/>
       <source>Spreadsheet</source>
-      <translation type="unfinished">Spreadsheet</translation>
+      <translation>Электронная таблица</translation>
     </message>
     <message>
       <location filename="../../Workbench.cpp" line="50"/>
