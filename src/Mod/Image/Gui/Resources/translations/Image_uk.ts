@@ -4,12 +4,12 @@
   <context>
     <name>Image_Scaling</name>
     <message>
-      <location filename="_CommandImageScaling.py" line="62"/>
+      <location filename="../../../ImageTools/_CommandImageScaling.py" line="62"/>
       <source>Scale image plane</source>
       <translation>Масштабувати зображення площини</translation>
     </message>
     <message>
-      <location filename="_CommandImageScaling.py" line="66"/>
+      <location filename="../../../ImageTools/_CommandImageScaling.py" line="66"/>
       <source>Scales an image plane by defining a distance between two points</source>
       <translation>Масштабує зображення площини, визначаючи відстань між двома точками</translation>
     </message>
@@ -17,17 +17,17 @@
   <context>
     <name>CmdCreateImagePlane</name>
     <message>
-      <location filename="../../Command.cpp" line="99"/>
+      <location filename="../../Command.cpp" line="100"/>
       <source>Image</source>
       <translation>Зображення</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="100"/>
+      <location filename="../../Command.cpp" line="101"/>
       <source>Create image plane...</source>
       <translation>Створити площину зображення...</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="101"/>
+      <location filename="../../Command.cpp" line="102"/>
       <source>Create a planar image in the 3D space</source>
       <translation>Створити плоске зображення у 3D-просторі</translation>
     </message>
@@ -35,17 +35,17 @@
   <context>
     <name>CmdImageOpen</name>
     <message>
-      <location filename="../../Command.cpp" line="54"/>
+      <location filename="../../Command.cpp" line="55"/>
       <source>Image</source>
       <translation>Зображення</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="55"/>
+      <location filename="../../Command.cpp" line="56"/>
       <source>Open...</source>
       <translation>Відкрити...</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="56"/>
+      <location filename="../../Command.cpp" line="57"/>
       <source>Open image view</source>
       <translation>Відкрити зображення</translation>
     </message>
@@ -53,17 +53,17 @@
   <context>
     <name>CmdImageScaling</name>
     <message>
-      <location filename="../../Command.cpp" line="173"/>
+      <location filename="../../Command.cpp" line="174"/>
       <source>Image</source>
       <translation>Зображення</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="174"/>
+      <location filename="../../Command.cpp" line="175"/>
       <source>Scale...</source>
       <translation>Масштаб...</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="175"/>
+      <location filename="../../Command.cpp" line="176"/>
       <source>Image Scaling</source>
       <translation>Масштабування зображення</translation>
     </message>
@@ -71,7 +71,7 @@
   <context>
     <name>Command</name>
     <message>
-      <location filename="../../Command.cpp" line="149"/>
+      <location filename="../../Command.cpp" line="150"/>
       <source>Create ImagePlane</source>
       <translation type="unfinished">Create ImagePlane</translation>
     </message>
@@ -79,14 +79,14 @@
   <context>
     <name>ImageGui::GLImageBox</name>
     <message>
-      <location filename="../../GLImageBox.cpp" line="334"/>
       <location filename="../../OpenGLImageBox.cpp" line="392"/>
+      <location filename="../../GLImageBox.cpp" line="334"/>
       <source>Image pixel format</source>
       <translation>Формат пікселя зображення</translation>
     </message>
     <message>
-      <location filename="../../GLImageBox.cpp" line="335"/>
       <location filename="../../OpenGLImageBox.cpp" line="393"/>
+      <location filename="../../GLImageBox.cpp" line="335"/>
       <source>Undefined type of colour space for image viewing</source>
       <translation>Невизначений тип кольору простору для перегляду зображень</translation>
     </message>
@@ -193,30 +193,30 @@
   <context>
     <name>QObject</name>
     <message>
-      <location filename="../../Command.cpp" line="69"/>
-      <location filename="../../Command.cpp" line="113"/>
+      <location filename="../../Command.cpp" line="70"/>
+      <location filename="../../Command.cpp" line="114"/>
       <source>Images</source>
       <translation>Зображення</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="74"/>
-      <location filename="../../Command.cpp" line="118"/>
+      <location filename="../../Command.cpp" line="75"/>
+      <location filename="../../Command.cpp" line="119"/>
       <source>All files</source>
       <translation>Всі файли</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="76"/>
-      <location filename="../../Command.cpp" line="120"/>
+      <location filename="../../Command.cpp" line="77"/>
+      <location filename="../../Command.cpp" line="121"/>
       <source>Choose an image file to open</source>
       <translation>Оберіть файл зображення для відкриття</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="126"/>
+      <location filename="../../Command.cpp" line="127"/>
       <source>Error opening image</source>
       <translation>Не вдалося відкрити файл зображення</translation>
     </message>
     <message>
-      <location filename="../../Command.cpp" line="127"/>
+      <location filename="../../Command.cpp" line="128"/>
       <source>Could not load the chosen image</source>
       <translation>Не вдалося завантажити вибране зображення</translation>
     </message>
