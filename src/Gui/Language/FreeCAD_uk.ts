@@ -9,15 +9,15 @@
     </message>
     <message>
       <source>A:</source>
-      <translation>A:</translation>
+      <translation type="unfinished">A:</translation>
     </message>
     <message>
       <source>B:</source>
-      <translation>B:</translation>
+      <translation type="unfinished">B:</translation>
     </message>
     <message>
       <source>C:</source>
-      <translation>C:</translation>
+      <translation type="unfinished">C:</translation>
     </message>
     <message>
       <source>Angle Snap</source>
@@ -25,35 +25,35 @@
     </message>
     <message>
       <source>1 °</source>
-      <translation>1 °</translation>
+      <translation type="unfinished">1 °</translation>
     </message>
     <message>
       <source>2 °</source>
-      <translation>2 °</translation>
+      <translation type="unfinished">2 °</translation>
     </message>
     <message>
       <source>5 °</source>
-      <translation>5 °</translation>
+      <translation type="unfinished">5 °</translation>
     </message>
     <message>
       <source>10 °</source>
-      <translation>10 °</translation>
+      <translation type="unfinished">10 °</translation>
     </message>
     <message>
       <source>20 °</source>
-      <translation>20 °</translation>
+      <translation type="unfinished">20 °</translation>
     </message>
     <message>
       <source>45 °</source>
-      <translation>45 °</translation>
+      <translation type="unfinished">45 °</translation>
     </message>
     <message>
       <source>90 °</source>
-      <translation>90 °</translation>
+      <translation type="unfinished">90 °</translation>
     </message>
     <message>
       <source>180 °</source>
-      <translation>180 °</translation>
+      <translation type="unfinished">180 °</translation>
     </message>
   </context>
   <context>
@@ -68,7 +68,7 @@
     </message>
     <message>
       <source>&lt;empty&gt;</source>
-      <translation>&lt;empty&gt;</translation>
+      <translation type="unfinished">&lt;empty&gt;</translation>
     </message>
     <message>
       <source>Angle</source>
@@ -269,7 +269,7 @@
     </message>
     <message>
       <source>Ico</source>
-      <translation>Ico</translation>
+      <translation type="unfinished">Ico</translation>
     </message>
     <message>
       <source>Filename</source>
@@ -476,7 +476,7 @@ while doing a left or right click and move the mouse up or down</source>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Release date</source>
@@ -548,12 +548,12 @@ while doing a left or right click and move the mouse up or down</source>
       <translation>Поза межами припустимого діапазону</translation>
     </message>
     <message>
-      <source> "</source>
-      <translation> "</translation>
+      <source> &quot;</source>
+      <translation type="unfinished"> &quot;</translation>
     </message>
     <message>
-      <source>"</source>
-      <translation>"</translation>
+      <source>&quot;</source>
+      <translation>&quot;</translation>
     </message>
   </context>
   <context>
@@ -568,19 +568,19 @@ while doing a left or right click and move the mouse up or down</source>
     </message>
     <message>
       <source>Q0</source>
-      <translation>Q0</translation>
+      <translation type="unfinished">Q0</translation>
     </message>
     <message>
       <source>Q1</source>
-      <translation>Q1</translation>
+      <translation type="unfinished">Q1</translation>
     </message>
     <message>
       <source>Q2</source>
-      <translation>Q2</translation>
+      <translation type="unfinished">Q2</translation>
     </message>
     <message>
       <source>Q3</source>
-      <translation>Q3</translation>
+      <translation type="unfinished">Q3</translation>
     </message>
     <message>
       <source>Current view</source>
@@ -665,7 +665,7 @@ while doing a left or right click and move the mouse up or down</source>
     </message>
     <message>
       <source> s</source>
-      <translation> s</translation>
+      <translation type="unfinished"> s</translation>
     </message>
     <message>
       <source>Angle</source>
@@ -673,11 +673,11 @@ while doing a left or right click and move the mouse up or down</source>
     </message>
     <message>
       <source>90°</source>
-      <translation>90°</translation>
+      <translation type="unfinished">90°</translation>
     </message>
     <message>
       <source>-90°</source>
-      <translation>-90°</translation>
+      <translation type="unfinished">-90°</translation>
     </message>
     <message>
       <source>Play</source>
@@ -704,7 +704,7 @@ while doing a left or right click and move the mouse up or down</source>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -741,16 +741,16 @@ while doing a left or right click and move the mouse up or down</source>
       <translation>Документація</translation>
     </message>
     <message>
-      <source>Prefix the property name with the group name in the form 'Group_Name' to avoid conflicts with an existing property.
+      <source>Prefix the property name with the group name in the form &apos;Group_Name&apos; to avoid conflicts with an existing property.
 In this case the prefix will be automatically trimmed when shown in the property editor.
-However, the property is still used in a script with the full name, like 'obj.Group_Name'.
+However, the property is still used in a script with the full name, like &apos;obj.Group_Name&apos;.
 
-If this is not ticked, then the property must be uniquely named, and it is accessed like 'obj.Name'.</source>
-      <translation type="unfinished">Prefix the property name with the group name in the form 'Group_Name' to avoid conflicts with an existing property.
+If this is not ticked, then the property must be uniquely named, and it is accessed like &apos;obj.Name&apos;.</source>
+      <translation type="unfinished">Prefix the property name with the group name in the form &apos;Group_Name&apos; to avoid conflicts with an existing property.
 In this case the prefix will be automatically trimmed when shown in the property editor.
-However, the property is still used in a script with the full name, like 'obj.Group_Name'.
+However, the property is still used in a script with the full name, like &apos;obj.Group_Name&apos;.
 
-If this is not ticked, then the property must be uniquely named, and it is accessed like 'obj.Name'.</translation>
+If this is not ticked, then the property must be uniquely named, and it is accessed like &apos;obj.Name&apos;.</translation>
     </message>
     <message>
       <source>Prefix group name</source>
@@ -769,7 +769,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Username:</source>
@@ -837,8 +837,8 @@ If this is not ticked, then the property must be uniquely named, and it is acces
       <translation>Прискорювач:</translation>
     </message>
     <message>
-      <source>What's this:</source>
-      <translation>Що це:</translation>
+      <source>What&apos;s this:</source>
+      <translation type="unfinished">What&apos;s this:</translation>
     </message>
     <message>
       <source>Status text:</source>
@@ -888,8 +888,8 @@ If this is not ticked, then the property must be uniquely named, and it is acces
       <translation>Макрос не знайдено</translation>
     </message>
     <message>
-      <source>Sorry, couldn't find macro file '%1'.</source>
-      <translation>На жаль, не вдалось знайти файл "%1" макросу.</translation>
+      <source>Sorry, couldn&apos;t find macro file &apos;%1&apos;.</source>
+      <translation type="unfinished">Sorry, couldn&apos;t find macro file &apos;%1&apos;.</translation>
     </message>
     <message>
       <source>Empty macro</source>
@@ -924,7 +924,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -978,7 +978,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source>Alt+A</source>
-      <translation>Alt+A</translation>
+      <translation type="unfinished">Alt+A</translation>
     </message>
     <message>
       <source>&amp;Reset</source>
@@ -986,7 +986,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source>Alt+R</source>
-      <translation>Alt+R</translation>
+      <translation type="unfinished">Alt+R</translation>
     </message>
     <message>
       <source>Re&amp;set All</source>
@@ -994,11 +994,11 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source>Alt+S</source>
-      <translation>Alt+S</translation>
+      <translation type="unfinished">Alt+S</translation>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Clear</source>
@@ -1028,12 +1028,12 @@ If this is not ticked, then the property must be uniquely named, and it is acces
       <translation>Скорочення вже призначено</translation>
     </message>
     <message>
-      <source>The shortcut '%1' is defined more than once. This could result in unexpected behaviour.</source>
-      <translation>Комбінація кнопопк '%1' визначена більше одного разу. Це може призвести до невизначеної поведінки.</translation>
+      <source>The shortcut &apos;%1&apos; is defined more than once. This could result in unexpected behaviour.</source>
+      <translation type="unfinished">The shortcut &apos;%1&apos; is defined more than once. This could result in unexpected behaviour.</translation>
     </message>
     <message>
-      <source>The shortcut '%1' is already assigned to '%2'.</source>
-      <translation>Комбінація кнопок '%1' вже призначена на комбінацію '%2'.</translation>
+      <source>The shortcut &apos;%1&apos; is already assigned to &apos;%2&apos;.</source>
+      <translation type="unfinished">The shortcut &apos;%1&apos; is already assigned to &apos;%2&apos;.</translation>
     </message>
     <message>
       <source>Do you want to override it?</source>
@@ -1054,8 +1054,8 @@ If this is not ticked, then the property must be uniquely named, and it is acces
       <translation>Панелі інструментів</translation>
     </message>
     <message>
-      <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Note:&lt;/span&gt; The changes become active the next time you load the appropriate workbench&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;/head&gt;&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-weight:600;"&gt;Замітка:&lt;/span&gt; Зміни вступлять в дію при наступному завантаженні відповідних інструментальних засобів&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt; The changes become active the next time you load the appropriate workbench&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt; The changes become active the next time you load the appropriate workbench&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Move right</source>
@@ -1126,8 +1126,8 @@ If this is not ticked, then the property must be uniquely named, and it is acces
       <translation>Повторення назви</translation>
     </message>
     <message>
-      <source>The toolbar name '%1' is already used</source>
-      <translation>Назва '%1' для панелі інструментів уже використовується</translation>
+      <source>The toolbar name &apos;%1&apos; is already used</source>
+      <translation type="unfinished">The toolbar name &apos;%1&apos; is already used</translation>
     </message>
     <message>
       <source>Rename toolbar</source>
@@ -1135,7 +1135,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Global</source>
@@ -1235,7 +1235,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Line transparency:</source>
@@ -1302,11 +1302,11 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source>Neon GNC</source>
-      <translation>Neon GNC</translation>
+      <translation type="unfinished">Neon GNC</translation>
     </message>
     <message>
       <source>Neon PHC</source>
-      <translation>Neon PHC</translation>
+      <translation type="unfinished">Neon PHC</translation>
     </message>
     <message>
       <source>Obsidian</source>
@@ -1401,7 +1401,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Pressing &lt;Tab&gt; will insert amount of defined indent size</source>
@@ -1499,8 +1499,8 @@ If this is not ticked, then the property must be uniquely named, and it is acces
       <translation>Увімкнути перенос слова</translation>
     </message>
     <message>
-      <source>Language of the application's user interface</source>
-      <translation>Мова інтерфейсу користувача програми</translation>
+      <source>Language of the application&apos;s user interface</source>
+      <translation type="unfinished">Language of the application&apos;s user interface</translation>
     </message>
     <message>
       <source>How many files should be listed in recent files list</source>
@@ -1529,14 +1529,14 @@ this according to your screen size or personal taste</translation>
     <message>
       <source>Customize how tree view is shown in the panel (restart required).
 
-'ComboView': combine tree view and property view into one panel.
-'TreeView and PropertyView': split tree view and property view into separate panel.
-'Both': keep all three panels, and you can have two sets of tree view and property view.</source>
+&apos;ComboView&apos;: combine tree view and property view into one panel.
+&apos;TreeView and PropertyView&apos;: split tree view and property view into separate panel.
+&apos;Both&apos;: keep all three panels, and you can have two sets of tree view and property view.</source>
       <translation type="unfinished">Customize how tree view is shown in the panel (restart required).
 
-'ComboView': combine tree view and property view into one panel.
-'TreeView and PropertyView': split tree view and property view into separate panel.
-'Both': keep all three panels, and you can have two sets of tree view and property view.</translation>
+&apos;ComboView&apos;: combine tree view and property view into one panel.
+&apos;TreeView and PropertyView&apos;: split tree view and property view into separate panel.
+&apos;Both&apos;: keep all three panels, and you can have two sets of tree view and property view.</translation>
     </message>
     <message>
       <source>A Splash screen is a small loading window that is shown
@@ -1606,7 +1606,7 @@ horizontal space in Python console</translation>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -1694,26 +1694,26 @@ horizontal space in Python console</translation>
       <translation>Існуючий файл</translation>
     </message>
     <message>
-      <source>'%1'.
+      <source>&apos;%1&apos;.
 This file already exists.</source>
-      <translation>'%1'.
-Цей файл вже існує.</translation>
+      <translation type="unfinished">&apos;%1&apos;.
+This file already exists.</translation>
     </message>
     <message>
       <source>Delete macro</source>
       <translation>Видалити макрос</translation>
     </message>
     <message>
-      <source>Do you really want to delete the macro '%1'?</source>
-      <translation>Ви дійсно бажаєте видалити макрос "%1"?</translation>
+      <source>Do you really want to delete the macro &apos;%1&apos;?</source>
+      <translation type="unfinished">Do you really want to delete the macro &apos;%1&apos;?</translation>
     </message>
     <message>
       <source>Cannot create file</source>
       <translation>Не вдається створити файл</translation>
     </message>
     <message>
-      <source>Creation of file '%1' failed.</source>
-      <translation>Створення файлу '%1' не вдалося.</translation>
+      <source>Creation of file &apos;%1&apos; failed.</source>
+      <translation type="unfinished">Creation of file &apos;%1&apos; failed.</translation>
     </message>
     <message>
       <source>Read-only</source>
@@ -1728,19 +1728,20 @@ This file already exists.</source>
       <translation>Введіть нове ім'я:</translation>
     </message>
     <message>
-      <source>'%1'
+      <source>&apos;%1&apos;
  already exists.</source>
-      <translation>'%1' вже існує.</translation>
+      <translation type="unfinished">&apos;%1&apos;
+ already exists.</translation>
     </message>
     <message>
       <source>Rename Failed</source>
       <translation>Не вдалося перейменувати</translation>
     </message>
     <message>
-      <source>Failed to rename to '%1'.
+      <source>Failed to rename to &apos;%1&apos;.
 Perhaps a file permission error?</source>
-      <translation>Не вдалося перейменувати '%1'.
-Можливо, помилка дозволу на файл?</translation>
+      <translation type="unfinished">Failed to rename to &apos;%1&apos;.
+Perhaps a file permission error?</translation>
     </message>
     <message>
       <source>Duplicate Macro</source>
@@ -1751,10 +1752,10 @@ Perhaps a file permission error?</source>
       <translation>Не вдалося створити копію</translation>
     </message>
     <message>
-      <source>Failed to duplicate to '%1'.
+      <source>Failed to duplicate to &apos;%1&apos;.
 Perhaps a file permission error?</source>
-      <translation>Не вдалося здублювати в '%1'.
-Можливо помилка доступу до файлу?</translation>
+      <translation type="unfinished">Failed to duplicate to &apos;%1&apos;.
+Perhaps a file permission error?</translation>
     </message>
     <message>
       <source>Do not show again</source>
@@ -1845,12 +1846,12 @@ Note: your changes will be applied when you next switch workbenches
       <translation>Наявні макроси</translation>
     </message>
     <message>
-      <source>The macro '%1' already exists. Do you want to overwrite?</source>
-      <translation>Макрос "%1" уже існує. Бажаєте замінити?</translation>
+      <source>The macro &apos;%1&apos; already exists. Do you want to overwrite?</source>
+      <translation type="unfinished">The macro &apos;%1&apos; already exists. Do you want to overwrite?</translation>
     </message>
     <message>
-      <source>The macro directory doesn't exist. Please, choose another one.</source>
-      <translation>Каталог макросів не існує. Будь ласка, оберіть інший.</translation>
+      <source>The macro directory doesn&apos;t exist. Please, choose another one.</source>
+      <translation type="unfinished">The macro directory doesn&apos;t exist. Please, choose another one.</translation>
     </message>
     <message>
       <source>Choose macro directory</source>
@@ -1885,7 +1886,7 @@ Note: your changes will be applied when you next switch workbenches
     </message>
     <message>
       <source>%</source>
-      <translation>%</translation>
+      <translation type="unfinished">%</translation>
     </message>
     <message>
       <source>Ambient color:</source>
@@ -1893,7 +1894,7 @@ Note: your changes will be applied when you next switch workbenches
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Emissive color:</source>
@@ -1922,11 +1923,12 @@ Note: your changes will be applied when you next switch workbenches
       <translation>Доступ заборонено</translation>
     </message>
     <message>
-      <source>Access denied to '%1'
+      <source>Access denied to &apos;%1&apos;
 
 Specify another directory, please.</source>
-      <translation>Відмовлено в доступі до '%1'
-Вкажіть інший каталог, будь ласка.</translation>
+      <translation type="unfinished">Access denied to &apos;%1&apos;
+
+Specify another directory, please.</translation>
     </message>
     <message>
       <source>HTML files</source>
@@ -1945,7 +1947,7 @@ Specify another directory, please.</source>
     </message>
     <message>
       <source>Alt+C</source>
-      <translation>Alt+C</translation>
+      <translation type="unfinished">Alt+C</translation>
     </message>
     <message>
       <source>&amp;Close</source>
@@ -2011,8 +2013,8 @@ Specify another directory, please.</source>
       <translation>Не знайдено</translation>
     </message>
     <message>
-      <source>Can't find the text: %1</source>
-      <translation>Не вдається знайти текст: %1</translation>
+      <source>Can&apos;t find the text: %1</source>
+      <translation type="unfinished">Can&apos;t find the text: %1</translation>
     </message>
   </context>
   <context>
@@ -2042,8 +2044,8 @@ Specify another directory, please.</source>
       <translation>Некоректний ввід</translation>
     </message>
     <message>
-      <source>Invalid key name '%1'</source>
-      <translation>Невірне ім'я ключа '%1'</translation>
+      <source>Invalid key name &apos;%1&apos;</source>
+      <translation type="unfinished">Invalid key name &apos;%1&apos;</translation>
     </message>
     <message>
       <source>System parameter</source>
@@ -2062,7 +2064,7 @@ Specify another directory, please.</source>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -2128,11 +2130,11 @@ Specify another directory, please.</source>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>UUID:</source>
-      <translation>UUID:</translation>
+      <translation type="unfinished">UUID:</translation>
     </message>
     <message>
       <source>License information:</source>
@@ -2285,7 +2287,7 @@ Specify another directory, please.</source>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Redirect internal Python errors to report view</source>
@@ -2454,7 +2456,7 @@ from Python console to Report view panel</source>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Anti-Aliasing</source>
@@ -2470,15 +2472,15 @@ from Python console to Report view panel</source>
     </message>
     <message>
       <source>MSAA 2x</source>
-      <translation>MSAA 2x</translation>
+      <translation type="unfinished">MSAA 2x</translation>
     </message>
     <message>
       <source>MSAA 4x</source>
-      <translation>MSAA 4x</translation>
+      <translation type="unfinished">MSAA 4x</translation>
     </message>
     <message>
       <source>MSAA 8x</source>
-      <translation>MSAA 8x</translation>
+      <translation type="unfinished">MSAA 8x</translation>
     </message>
     <message>
       <source>Or&amp;thographic rendering</source>
@@ -2551,18 +2553,18 @@ report this setting as enabled when seeking support on the FreeCAD forums</trans
       <translation>Кеш рендера</translation>
     </message>
     <message>
-      <source>'Render Caching' is another way to say 'Rendering Acceleration'.
+      <source>&apos;Render Caching&apos; is another way to say &apos;Rendering Acceleration&apos;.
 There are 3 options available to achieve this: 
-1) 'Auto' (default), let Coin3D decide where to cache.
-2) 'Distributed', manually turn on cache for all view provider root node.
-3) 'Centralized', manually turn off cache in all nodes of all view provider, and
+1) &apos;Auto&apos; (default), let Coin3D decide where to cache.
+2) &apos;Distributed&apos;, manually turn on cache for all view provider root node.
+3) &apos;Centralized&apos;, manually turn off cache in all nodes of all view provider, and
 only cache at the scene graph root node. This offers the fastest rendering speed
 but slower response to any scene changes.</source>
-      <translation type="unfinished">'Render Caching' is another way to say 'Rendering Acceleration'.
+      <translation type="unfinished">&apos;Render Caching&apos; is another way to say &apos;Rendering Acceleration&apos;.
 There are 3 options available to achieve this: 
-1) 'Auto' (default), let Coin3D decide where to cache.
-2) 'Distributed', manually turn on cache for all view provider root node.
-3) 'Centralized', manually turn off cache in all nodes of all view provider, and
+1) &apos;Auto&apos; (default), let Coin3D decide where to cache.
+2) &apos;Distributed&apos;, manually turn on cache for all view provider root node.
+3) &apos;Centralized&apos;, manually turn off cache in all nodes of all view provider, and
 only cache at the scene graph root node. This offers the fastest rendering speed
 but slower response to any scene changes.</translation>
     </message>
@@ -2685,27 +2687,27 @@ bounding box size of the 3D object that is currently displayed.</translation>
     </message>
     <message>
       <source>5px</source>
-      <translation>5px</translation>
+      <translation type="unfinished">5px</translation>
     </message>
     <message>
       <source>7px</source>
-      <translation>7px</translation>
+      <translation type="unfinished">7px</translation>
     </message>
     <message>
       <source>9px</source>
-      <translation>9px</translation>
+      <translation type="unfinished">9px</translation>
     </message>
     <message>
       <source>11px</source>
-      <translation>11px</translation>
+      <translation type="unfinished">11px</translation>
     </message>
     <message>
       <source>13px</source>
-      <translation>13px</translation>
+      <translation type="unfinished">13px</translation>
     </message>
     <message>
       <source>15px</source>
-      <translation>15px</translation>
+      <translation type="unfinished">15px</translation>
     </message>
   </context>
   <context>
@@ -2744,7 +2746,7 @@ bounding box size of the 3D object that is currently displayed.</translation>
     </message>
     <message>
       <source>Alt+R</source>
-      <translation>Alt+R</translation>
+      <translation type="unfinished">Alt+R</translation>
     </message>
     <message>
       <source>Out &amp;invisible</source>
@@ -2752,7 +2754,7 @@ bounding box size of the 3D object that is currently displayed.</translation>
     </message>
     <message>
       <source>Alt+I</source>
-      <translation>Alt+I</translation>
+      <translation type="unfinished">Alt+I</translation>
     </message>
     <message>
       <source>Style</source>
@@ -2764,7 +2766,7 @@ bounding box size of the 3D object that is currently displayed.</translation>
     </message>
     <message>
       <source>Alt+Z</source>
-      <translation>Alt+Z</translation>
+      <translation type="unfinished">Alt+Z</translation>
     </message>
     <message>
       <source>&amp;Flow</source>
@@ -2772,7 +2774,7 @@ bounding box size of the 3D object that is currently displayed.</translation>
     </message>
     <message>
       <source>Alt+F</source>
-      <translation>Alt+F</translation>
+      <translation type="unfinished">Alt+F</translation>
     </message>
     <message>
       <source>Parameter range</source>
@@ -2796,7 +2798,7 @@ bounding box size of the 3D object that is currently displayed.</translation>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
     <message>
       <source>Color-gradient settings</source>
@@ -2900,7 +2902,7 @@ bounding box size of the 3D object that is currently displayed.</translation>
     </message>
     <message>
       <source>FreeArt</source>
-      <translation>FreeArt</translation>
+      <translation type="unfinished">FreeArt</translation>
     </message>
     <message>
       <source>Other</source>
@@ -2981,9 +2983,9 @@ Common sizes are 128, 256 and 512</translation>
       <translation type="unfinished">How many backup files will be kept when saving document</translation>
     </message>
     <message>
-      <source>Backup files will get extension '.FCbak' and file names
+      <source>Backup files will get extension &apos;.FCbak&apos; and file names
 get date suffix according to the specified format</source>
-      <translation type="unfinished">Backup files will get extension '.FCbak' and file names
+      <translation type="unfinished">Backup files will get extension &apos;.FCbak&apos; and file names
 get date suffix according to the specified format</translation>
     </message>
     <message>
@@ -3023,8 +3025,8 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
 Також можна використати цю форму: Джон До &lt;john@doe.com&gt;</translation>
     </message>
     <message>
-      <source>The field 'Last modified by' will be set to specified author when saving the file</source>
-      <translation type="unfinished">The field 'Last modified by' will be set to specified author when saving the file</translation>
+      <source>The field &apos;Last modified by&apos; will be set to specified author when saving the file</source>
+      <translation type="unfinished">The field &apos;Last modified by&apos; will be set to specified author when saving the file</translation>
     </message>
     <message>
       <source>Default company name to use for new files</source>
@@ -3217,31 +3219,31 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     </message>
     <message>
       <source>Alt+S</source>
-      <translation>Alt+S</translation>
+      <translation type="unfinished">Alt+S</translation>
     </message>
     <message>
       <source>&amp;4:3</source>
-      <translation>&amp;4:3</translation>
+      <translation type="unfinished">&amp;4:3</translation>
     </message>
     <message>
       <source>Alt+4</source>
-      <translation>Alt+4</translation>
+      <translation type="unfinished">Alt+4</translation>
     </message>
     <message>
       <source>1&amp;6:9</source>
-      <translation>1&amp;6:9</translation>
+      <translation type="unfinished">1&amp;6:9</translation>
     </message>
     <message>
       <source>Alt+6</source>
-      <translation>Alt+6</translation>
+      <translation type="unfinished">Alt+6</translation>
     </message>
     <message>
       <source>&amp;1:1</source>
-      <translation>&amp;1:1</translation>
+      <translation type="unfinished">&amp;1:1</translation>
     </message>
     <message>
       <source>Alt+1</source>
-      <translation>Alt+1</translation>
+      <translation type="unfinished">Alt+1</translation>
     </message>
     <message>
       <source>Image comment</source>
@@ -3365,7 +3367,7 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     </message>
     <message>
       <source>FullScript.FCScript</source>
-      <translation>FullScript.FCScript</translation>
+      <translation type="unfinished">FullScript.FCScript</translation>
     </message>
     <message>
       <source>Gui commands</source>
@@ -3660,9 +3662,9 @@ Mouse tilting is not disabled by this setting.</translation>
     </message>
     <message>
       <source>How much will be zoomed.
-Zoom step of '1' means a factor of 7.5 for every zoom step.</source>
+Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</source>
       <translation type="unfinished">How much will be zoomed.
-Zoom step of '1' means a factor of 7.5 for every zoom step.</translation>
+Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</translation>
     </message>
   </context>
   <context>
@@ -3743,32 +3745,32 @@ Zoom step of '1' means a factor of 7.5 for every zoom step.</translation>
       <translation>Мінімальна частина дюйма:</translation>
     </message>
     <message>
-      <source>1/2"</source>
-      <translation>1/2"</translation>
+      <source>1/2&quot;</source>
+      <translation type="unfinished">1/2&quot;</translation>
     </message>
     <message>
-      <source>1/4"</source>
-      <translation>1/4"</translation>
+      <source>1/4&quot;</source>
+      <translation type="unfinished">1/4&quot;</translation>
     </message>
     <message>
-      <source>1/8"</source>
-      <translation>1/8"</translation>
+      <source>1/8&quot;</source>
+      <translation type="unfinished">1/8&quot;</translation>
     </message>
     <message>
-      <source>1/16"</source>
-      <translation>1/16"</translation>
+      <source>1/16&quot;</source>
+      <translation type="unfinished">1/16&quot;</translation>
     </message>
     <message>
-      <source>1/32"</source>
-      <translation>1/32"</translation>
+      <source>1/32&quot;</source>
+      <translation type="unfinished">1/32&quot;</translation>
     </message>
     <message>
-      <source>1/64"</source>
-      <translation>1/64"</translation>
+      <source>1/64&quot;</source>
+      <translation type="unfinished">1/64&quot;</translation>
     </message>
     <message>
-      <source>1/128"</source>
-      <translation>1/128"</translation>
+      <source>1/128&quot;</source>
+      <translation type="unfinished">1/128&quot;</translation>
     </message>
     <message>
       <source>Unit system:</source>
@@ -3890,7 +3892,7 @@ Zoom step of '1' means a factor of 7.5 for every zoom step.</translation>
     <name>Gui::Dialog::DlgTipOfTheDay</name>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -3905,7 +3907,7 @@ Zoom step of '1' means a factor of 7.5 for every zoom step.</translation>
     </message>
     <message>
       <source>=&gt;</source>
-      <translation>=&gt;</translation>
+      <translation type="unfinished">=&gt;</translation>
     </message>
     <message>
       <source>Quantity:</source>
@@ -4002,24 +4004,24 @@ The preference system is the one set in the general preferences.</translation>
       <translation>Перемістити вниз</translation>
     </message>
     <message>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Move the selected item down.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved down&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Перемістити обраний елемент вниз.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Елемент буде переміщено вниз&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected item down.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved down&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected item down.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved down&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Move left</source>
       <translation>Перемістити ліворуч</translation>
     </message>
     <message>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Remove the selected workbench from enabled workbenches&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Видалити з активних робочих середовищ обране&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remove the selected workbench from enabled workbenches&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remove the selected workbench from enabled workbenches&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Move right</source>
       <translation>Перемістити праворуч</translation>
     </message>
     <message>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Move the selected workbench to enabled workbenches.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Перемістити до активних робочих середовищ обране середовище.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected workbench to enabled workbenches.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected workbench to enabled workbenches.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Sort enabled workbenches</source>
@@ -4030,8 +4032,8 @@ The preference system is the one set in the general preferences.</translation>
       <translation>Перемістити вгору</translation>
     </message>
     <message>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Move the selected item up.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-weight:600;"&gt;Перемістити обраний елемент вгору.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Елемент буде переміщений вгору.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected item up.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected item up.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Add all to enabled workbenches</source>
@@ -4042,8 +4044,8 @@ The preference system is the one set in the general preferences.</translation>
       <translation>&lt;p&gt;Сортувати активні робочі середовища&lt;/p&gt;</translation>
     </message>
     <message>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:600;"&gt;Note:&lt;/span&gt;&lt;span style=" font-family:'MS Shell Dlg 2'; font-size:8pt;"&gt; The changes become active the next time you start the application&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:600;"&gt;Note:&lt;/span&gt;&lt;span style=" font-family:'MS Shell Dlg 2'; font-size:8pt;"&gt; Зміни стануть активними при наступному запуску програми&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600;&quot;&gt;Note:&lt;/span&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt; The changes become active the next time you start the application&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600;&quot;&gt;Note:&lt;/span&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt; The changes become active the next time you start the application&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
   </context>
   <context>
@@ -4112,8 +4114,8 @@ The preference system is the one set in the general preferences.</translation>
       <translation>Ви дійсно бажаєте видалити вибрані тимчасові каталоги?</translation>
     </message>
     <message>
-      <source>When deleting the selected transient directory you won't be able to recover any files afterwards.</source>
-      <translation>При видаленні вибраних тимчасових каталогів, ви не зможете відновити після цього будь-які файли.</translation>
+      <source>When deleting the selected transient directory you won&apos;t be able to recover any files afterwards.</source>
+      <translation type="unfinished">When deleting the selected transient directory you won&apos;t be able to recover any files afterwards.</translation>
     </message>
     <message>
       <source>Are you sure you want to delete all transient directories?</source>
@@ -4128,16 +4130,16 @@ The preference system is the one set in the general preferences.</translation>
       <translation>Тимчасові каталоги видалені.</translation>
     </message>
     <message>
-      <source>Press 'Start Recovery' to start the recovery process of the document listed below.
+      <source>Press &apos;Start Recovery&apos; to start the recovery process of the document listed below.
 
-The 'Status' column shows whether the document could be recovered.</source>
-      <translation>Натисніть 'Почати відновлення' щоб почати процес відновлення документів, що перелічені нижче.
+The &apos;Status&apos; column shows whether the document could be recovered.</source>
+      <translation type="unfinished">Press &apos;Start Recovery&apos; to start the recovery process of the document listed below.
 
-Колонка 'Статус' показує чи можливе відновлення документів.</translation>
+The &apos;Status&apos; column shows whether the document could be recovered.</translation>
     </message>
     <message>
-      <source>When deleting all transient directories you won't be able to recover any files afterwards.</source>
-      <translation>При видаленні всіх тимчасових каталогів, ви не зможете відновити після цього будь-які файли.</translation>
+      <source>When deleting all transient directories you won&apos;t be able to recover any files afterwards.</source>
+      <translation type="unfinished">When deleting all transient directories you won&apos;t be able to recover any files afterwards.</translation>
     </message>
   </context>
   <context>
@@ -4184,7 +4186,7 @@ The 'Status' column shows whether the document could be recovered.</source>
     </message>
     <message>
       <source>?</source>
-      <translation>?</translation>
+      <translation type="unfinished">?</translation>
     </message>
     <message>
       <source>%1 of %2 - Stopped</source>
@@ -4341,8 +4343,8 @@ The 'Status' column shows whether the document could be recovered.</source>
       <translation>Існуючі підгрупи</translation>
     </message>
     <message>
-      <source>The sub-group '%1' already exists.</source>
-      <translation>Підгрупа "%1" вже існує.</translation>
+      <source>The sub-group &apos;%1&apos; already exists.</source>
+      <translation type="unfinished">The sub-group &apos;%1&apos; already exists.</translation>
     </message>
     <message>
       <source>Export parameter to file</source>
@@ -4357,8 +4359,8 @@ The 'Status' column shows whether the document could be recovered.</source>
       <translation>Помилка імпорту</translation>
     </message>
     <message>
-      <source>Reading from '%1' failed.</source>
-      <translation>Помилка читання з '%1'.</translation>
+      <source>Reading from &apos;%1&apos; failed.</source>
+      <translation type="unfinished">Reading from &apos;%1&apos; failed.</translation>
     </message>
     <message>
       <source>Do you really want to remove this parameter group?</source>
@@ -4408,8 +4410,8 @@ The 'Status' column shows whether the document could be recovered.</source>
       <translation>Існуючий елемент</translation>
     </message>
     <message>
-      <source>The item '%1' already exists.</source>
-      <translation>Елемент '%1' вже існує.</translation>
+      <source>The item &apos;%1&apos; already exists.</source>
+      <translation type="unfinished">The item &apos;%1&apos; already exists.</translation>
     </message>
   </context>
   <context>
@@ -4531,8 +4533,8 @@ The 'Status' column shows whether the document could be recovered.</source>
       <translation type="unfinished">Roll (around the x-axis)</translation>
     </message>
     <message>
-      <source>Euler angles (zy'x'')</source>
-      <translation type="unfinished">Euler angles (zy'x'')</translation>
+      <source>Euler angles (zy&apos;x&apos;&apos;)</source>
+      <translation type="unfinished">Euler angles (zy&apos;x&apos;&apos;)</translation>
     </message>
   </context>
   <context>
@@ -4718,7 +4720,7 @@ originally selected prior to opening this dialog</translation>
     </message>
     <message>
       <source/>
-      <translation>Про програму</translation>
+      <translation type="unfinished"/>
     </message>
   </context>
   <context>
@@ -5088,16 +5090,16 @@ Do you want to save your changes?</source>
       <translation>Graphviz не знайдено</translation>
     </message>
     <message>
-      <source>Graphviz couldn't be found on your system.</source>
-      <translation>Graphviz пакет не знайдений в вашій системі.</translation>
+      <source>Graphviz couldn&apos;t be found on your system.</source>
+      <translation type="unfinished">Graphviz couldn&apos;t be found on your system.</translation>
     </message>
     <message>
       <source>Read more about it here.</source>
       <translation>Дізнайтеся більше про це тут.</translation>
     </message>
     <message>
-      <source>Do you want to specify its installation path if it's already installed?</source>
-      <translation>Ви хочете, вказати шлях для інсталяції, якщо його вже інстальовано?</translation>
+      <source>Do you want to specify its installation path if it&apos;s already installed?</source>
+      <translation type="unfinished">Do you want to specify its installation path if it&apos;s already installed?</translation>
     </message>
     <message>
       <source>Graphviz installation path</source>
@@ -5202,12 +5204,12 @@ Do you want to save your changes?</source>
       <translation>Макроси</translation>
     </message>
     <message>
-      <source>Macro file doesn't exist</source>
-      <translation>Файл макросу не існує</translation>
+      <source>Macro file doesn&apos;t exist</source>
+      <translation type="unfinished">Macro file doesn&apos;t exist</translation>
     </message>
     <message>
-      <source>No such macro file: '%1'</source>
-      <translation>Нема такого файлу макросу: «%1»</translation>
+      <source>No such macro file: &apos;%1&apos;</source>
+      <translation type="unfinished">No such macro file: &apos;%1&apos;</translation>
     </message>
   </context>
   <context>
@@ -5609,8 +5611,8 @@ Do you want to exit without saving your data?</source>
       <translation>Файл не знайдено</translation>
     </message>
     <message>
-      <source>The file '%1' cannot be opened.</source>
-      <translation>Файл '%1' не може бути відкритий.</translation>
+      <source>The file &apos;%1&apos; cannot be opened.</source>
+      <translation type="unfinished">The file &apos;%1&apos; cannot be opened.</translation>
     </message>
   </context>
   <context>
@@ -5624,8 +5626,8 @@ Do you want to exit without saving your data?</source>
       <translation>Файл не знайдено</translation>
     </message>
     <message>
-      <source>The file '%1' cannot be opened.</source>
-      <translation>Файл '%1' не може бути відкритий.</translation>
+      <source>The file &apos;%1&apos; cannot be opened.</source>
+      <translation type="unfinished">The file &apos;%1&apos; cannot be opened.</translation>
     </message>
   </context>
   <context>
@@ -5688,32 +5690,32 @@ Do you want to exit without saving your data?</source>
       <translation>Завантажити довідку з інтернету</translation>
     </message>
     <message>
-      <source>Download %1's online help</source>
-      <translation>Завантаження %1's довідки з інтернету</translation>
+      <source>Download %1&apos;s online help</source>
+      <translation type="unfinished">Download %1&apos;s online help</translation>
     </message>
     <message>
       <source>Non-existing directory</source>
       <translation>Неіснуючий каталог</translation>
     </message>
     <message>
-      <source>The directory '%1' does not exist.
+      <source>The directory &apos;%1&apos; does not exist.
 
 Do you want to specify an existing directory?</source>
-      <translation>Каталог '%1' не існує.
+      <translation type="unfinished">The directory &apos;%1&apos; does not exist.
 
-Бажаєте призначити існуючий каталог?</translation>
+Do you want to specify an existing directory?</translation>
     </message>
     <message>
       <source>Missing permission</source>
       <translation>Відсутній дозвіл</translation>
     </message>
     <message>
-      <source>You don't have write permission to '%1'
+      <source>You don&apos;t have write permission to &apos;%1&apos;
 
 Do you want to specify another directory?</source>
-      <translation>Ви не маєте дозволу на запис до '%1'
+      <translation type="unfinished">You don&apos;t have write permission to &apos;%1&apos;
 
-Бажаєте вказати інший каталог?</translation>
+Do you want to specify another directory?</translation>
     </message>
     <message>
       <source>Stop downloading</source>
@@ -5882,8 +5884,8 @@ Do you want to specify another directory?</source>
       <translation>Бажаєте зберегти ваші зміни перед закриттям?</translation>
     </message>
     <message>
-      <source>If you don't save, your changes will be lost.</source>
-      <translation>Якщо ви не збережете зміни, вони будуть утрачені.</translation>
+      <source>If you don&apos;t save, your changes will be lost.</source>
+      <translation type="unfinished">If you don&apos;t save, your changes will be lost.</translation>
     </message>
     <message>
       <source>Edit text</source>
@@ -6197,8 +6199,8 @@ Do you want to specify another directory?</source>
       <translation type="unfinished">Allow partial recomputes</translation>
     </message>
     <message>
-      <source>Enable or disable recomputating editing object when 'skip recomputation' is enabled</source>
-      <translation type="unfinished">Enable or disable recomputating editing object when 'skip recomputation' is enabled</translation>
+      <source>Enable or disable recomputating editing object when &apos;skip recomputation&apos; is enabled</source>
+      <translation type="unfinished">Enable or disable recomputating editing object when &apos;skip recomputation&apos; is enabled</translation>
     </message>
     <message>
       <source>Recompute object</source>
@@ -6243,15 +6245,15 @@ Do you want to specify another directory?</source>
       <translation>Відкриття файлу не вдалося</translation>
     </message>
     <message>
-      <source>Can't open file '%1' for writing.</source>
-      <translation>Не вдалося відкрити файл '%1' для запису.</translation>
+      <source>Can&apos;t open file &apos;%1&apos; for writing.</source>
+      <translation type="unfinished">Can&apos;t open file &apos;%1&apos; for writing.</translation>
     </message>
   </context>
   <context>
     <name>Gui::WorkbenchGroup</name>
     <message>
-      <source>Select the '%1' workbench</source>
-      <translation>Оберіть '%1' робочу область</translation>
+      <source>Select the &apos;%1&apos; workbench</source>
+      <translation type="unfinished">Select the &apos;%1&apos; workbench</translation>
     </message>
   </context>
   <context>
@@ -6288,12 +6290,12 @@ Do you want to specify another directory?</source>
   <context>
     <name>NetworkAccessManager</name>
     <message>
-      <source>&lt;qt&gt;Enter username and password for "%1" at %2&lt;/qt&gt;</source>
-      <translation>&lt;qt&gt;Ввести логін і пароль для "%1" на %2&lt;/qt&gt;</translation>
+      <source>&lt;qt&gt;Enter username and password for &quot;%1&quot; at %2&lt;/qt&gt;</source>
+      <translation type="unfinished">&lt;qt&gt;Enter username and password for &quot;%1&quot; at %2&lt;/qt&gt;</translation>
     </message>
     <message>
-      <source>&lt;qt&gt;Connect to proxy "%1" using:&lt;/qt&gt;</source>
-      <translation>&lt;qt&gt;Підключення до проксі-сервера за допомогою "%1":&lt;/qt&gt;</translation>
+      <source>&lt;qt&gt;Connect to proxy &quot;%1&quot; using:&lt;/qt&gt;</source>
+      <translation type="unfinished">&lt;qt&gt;Connect to proxy &quot;%1&quot; using:&lt;/qt&gt;</translation>
     </message>
   </context>
   <context>
@@ -6422,7 +6424,7 @@ Do you want to specify another directory?</source>
     </message>
     <message>
       <source>DAG View</source>
-      <translation>DAG View</translation>
+      <translation type="unfinished">DAG View</translation>
     </message>
   </context>
   <context>
@@ -6453,7 +6455,7 @@ Do you want to specify another directory?</source>
     </message>
     <message>
       <source>%1</source>
-      <translation>%1</translation>
+      <translation type="unfinished">%1</translation>
     </message>
     <message>
       <source>Exception</source>
@@ -6522,8 +6524,8 @@ Do you want to continue?</source>
       <translation>Відновлення заморожених виглядів</translation>
     </message>
     <message>
-      <source>Cannot open file '%1'.</source>
-      <translation>Не вдається відкрити файл %1.</translation>
+      <source>Cannot open file &apos;%1&apos;.</source>
+      <translation type="unfinished">Cannot open file &apos;%1&apos;.</translation>
     </message>
     <message>
       <source>files</source>
@@ -6578,16 +6580,16 @@ Do you want to continue?</source>
       <translation>Перейменувати групу</translation>
     </message>
     <message>
-      <source>The group '%1' cannot be renamed.</source>
-      <translation>Групу '%1' неможливо перейменувати.</translation>
+      <source>The group &apos;%1&apos; cannot be renamed.</source>
+      <translation type="unfinished">The group &apos;%1&apos; cannot be renamed.</translation>
     </message>
     <message>
       <source>Existing group</source>
       <translation>Існуюча група</translation>
     </message>
     <message>
-      <source>The group '%1' already exists.</source>
-      <translation>Група '%1' вже існує.</translation>
+      <source>The group &apos;%1&apos; already exists.</source>
+      <translation type="unfinished">The group &apos;%1&apos; already exists.</translation>
     </message>
     <message>
       <source>Change value</source>
@@ -6746,12 +6748,12 @@ Be aware the point where you click matters.</source>
       <translation>Ви бажаєте закрити це діалогове вікно?</translation>
     </message>
     <message>
-      <source>Do you want to save your changes to document '%1' before closing?</source>
-      <translation>Бажаєте зберегти зміни, які були внесені до документа '%1' перед його закриттям?</translation>
+      <source>Do you want to save your changes to document &apos;%1&apos; before closing?</source>
+      <translation type="unfinished">Do you want to save your changes to document &apos;%1&apos; before closing?</translation>
     </message>
     <message>
-      <source>If you don't save, your changes will be lost.</source>
-      <translation>Якщо ви не збережете зміни, вони будуть утрачені.</translation>
+      <source>If you don&apos;t save, your changes will be lost.</source>
+      <translation type="unfinished">If you don&apos;t save, your changes will be lost.</translation>
     </message>
     <message>
       <source>Save a copy of the document under new filename...</source>
@@ -6839,7 +6841,7 @@ Be aware the point where you click matters.</source>
     </message>
     <message>
       <source>Paste</source>
-      <translation type="unfinished">Paste</translation>
+      <translation>Вставити</translation>
     </message>
     <message>
       <source>Expression error</source>
@@ -6906,16 +6908,16 @@ underscore, and must not start with a digit.</source>
 underscore, and must not start with a digit.</translation>
     </message>
     <message>
-      <source>The property '%1' already exists in '%2'</source>
-      <translation type="unfinished">The property '%1' already exists in '%2'</translation>
+      <source>The property &apos;%1&apos; already exists in &apos;%2&apos;</source>
+      <translation type="unfinished">The property &apos;%1&apos; already exists in &apos;%2&apos;</translation>
     </message>
     <message>
       <source>Add property</source>
       <translation>Додати властивість</translation>
     </message>
     <message>
-      <source>Failed to add property to '%1': %2</source>
-      <translation type="unfinished">Failed to add property to '%1': %2</translation>
+      <source>Failed to add property to &apos;%1&apos;: %2</source>
+      <translation type="unfinished">Failed to add property to &apos;%1&apos;: %2</translation>
     </message>
     <message>
       <source>Save dependent files</source>
@@ -6935,23 +6937,23 @@ underscore, and must not start with a digit.</translation>
     </message>
     <message>
       <source>Undo</source>
-      <translation type="unfinished">Undo</translation>
+      <translation>Скасувати</translation>
     </message>
     <message>
       <source>Redo</source>
-      <translation type="unfinished">Redo</translation>
+      <translation>Повторити</translation>
     </message>
     <message>
       <source>There are grouped transactions in the following documents with other preceding transactions</source>
       <translation type="unfinished">There are grouped transactions in the following documents with other preceding transactions</translation>
     </message>
     <message>
-      <source>Choose 'Yes' to roll back all preceding transactions.
-Choose 'No' to roll back in the active document only.
-Choose 'Abort' to abort</source>
-      <translation type="unfinished">Choose 'Yes' to roll back all preceding transactions.
-Choose 'No' to roll back in the active document only.
-Choose 'Abort' to abort</translation>
+      <source>Choose &apos;Yes&apos; to roll back all preceding transactions.
+Choose &apos;No&apos; to roll back in the active document only.
+Choose &apos;Abort&apos; to abort</source>
+      <translation type="unfinished">Choose &apos;Yes&apos; to roll back all preceding transactions.
+Choose &apos;No&apos; to roll back in the active document only.
+Choose &apos;Abort&apos; to abort</translation>
     </message>
     <message>
       <source>Do you want to save your changes to document before closing?</source>
@@ -7036,12 +7038,12 @@ Physical path: </translation>
     <message>
       <source>There was an issue trying to save the file. This may be because some of the parent folders do not exist, or you do not have sufficient permissions, or for other reasons. Error details:
 
-"%1"
+&quot;%1&quot;
 
 Would you like to save the file with a different name?</source>
       <translation type="unfinished">There was an issue trying to save the file. This may be because some of the parent folders do not exist, or you do not have sufficient permissions, or for other reasons. Error details:
 
-"%1"
+&quot;%1&quot;
 
 Would you like to save the file with a different name?</translation>
     </message>
@@ -7477,12 +7479,12 @@ Would you like to save the file with a different name?</translation>
       <translation>Переключити режим &amp;Редагувати</translation>
     </message>
     <message>
-      <source>Toggles the selected object's edit mode</source>
-      <translation>Змінити режим редагування обраного об'єкту</translation>
+      <source>Toggles the selected object&apos;s edit mode</source>
+      <translation type="unfinished">Toggles the selected object&apos;s edit mode</translation>
     </message>
     <message>
-      <source>Activates or Deactivates the selected object's edit mode</source>
-      <translation type="unfinished">Activates or Deactivates the selected object's edit mode</translation>
+      <source>Activates or Deactivates the selected object&apos;s edit mode</source>
+      <translation type="unfinished">Activates or Deactivates the selected object&apos;s edit mode</translation>
     </message>
   </context>
   <context>
@@ -9257,7 +9259,7 @@ Would you like to save the file with a different name?</translation>
     </message>
     <message>
       <source>FreeCAD-VR</source>
-      <translation>FreeCAD-VR</translation>
+      <translation type="unfinished">FreeCAD-VR</translation>
     </message>
     <message>
       <source>Extend the FreeCAD 3D Window to a Oculus Rift</source>
@@ -9271,12 +9273,12 @@ Would you like to save the file with a different name?</translation>
       <translation>Довідка</translation>
     </message>
     <message>
-      <source>&amp;What's This?</source>
-      <translation>&amp;Що це?</translation>
+      <source>&amp;What&apos;s This?</source>
+      <translation type="unfinished">&amp;What&apos;s This?</translation>
     </message>
     <message>
-      <source>What's This</source>
-      <translation>Що це таке</translation>
+      <source>What&apos;s This</source>
+      <translation type="unfinished">What&apos;s This</translation>
     </message>
   </context>
   <context>
@@ -9880,22 +9882,22 @@ Do you still want to proceed?</source>
       <translation>Тест</translation>
     </message>
     <message>
-      <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+      <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-size:20pt; font-weight:600;"&gt;iisTaskPanel&lt;/span&gt;&lt;/p&gt;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;"&gt;&lt;span style=" font-size:12pt;"&gt;Created for Qt 4.3.x&lt;/span&gt;&lt;/p&gt;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"&gt;www.ii-system.com&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:600;&quot;&gt;iisTaskPanel&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Created for Qt 4.3.x&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;&quot;&gt;www.ii-system.com&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"&gt;&lt;span style=" font-size:20pt; font-weight:600;"&gt;iisTaskPanel&lt;/span&gt;&lt;/p&gt;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;"&gt;&lt;span style=" font-size:12pt;"&gt;Created for Qt 4.3.x&lt;/span&gt;&lt;/p&gt;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;"&gt;www.ii-system.com&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:600;&quot;&gt;iisTaskPanel&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:20pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Created for Qt 4.3.x&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt; font-weight:600;&quot;&gt;www.ii-system.com&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <source>Choose the style of the Task Panel</source>
@@ -9907,7 +9909,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
       <source>Windows XP</source>
-      <translation>Windows XP</translation>
+      <translation type="unfinished">Windows XP</translation>
     </message>
   </context>
 </TS>
