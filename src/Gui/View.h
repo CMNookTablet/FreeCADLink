@@ -25,7 +25,7 @@
 #define GUI_VIEW_H
 
 #include <vector>
-#include <Base/BaseClass.h>
+#include <App/PropertyContainer.h>
 
 namespace App
 {
@@ -48,9 +48,9 @@ class ViewProvider;
  *  @see Application
  *  @author Juergen Riegel
  */
-class GuiExport BaseView : public Base::BaseClass
+class GuiExport BaseView : public App::PropertyContainer
 {
-    TYPESYSTEM_HEADER();
+    PROPERTY_HEADER(Gui::BaseView);
 
 public:
     /** View constructor
@@ -80,6 +80,12 @@ public:
     App::Document* getAppDocument() const;
     /// indicates if the view is in passive mode
     bool isPassive(void) const {return bIsPassive;}
+
+    virtual void onChanged(const App::Property *);
+
+    virtual App::Document *getOwnerDocument() const {
+        return getAppDocument();
+    }
 
     /** @name methods to override
      */

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>278</width>
-    <height>291</height>
+    <height>268</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,9 +33,9 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="label0">
+      <widget class="QLabel" name="labelAxis">
        <property name="text">
         <string>Axis:</string>
        </property>
@@ -108,7 +108,7 @@
          <string>Height-Turns-Growth</string>
         </property>
        </item>
-       </widget>
+      </widget>
      </item>
     </layout>
    </item>
@@ -242,43 +242,46 @@
       </widget>
      </item>
      <item>
-      <widget class="Gui::QuantitySpinBox" name="growth">
-       <property name="keyboardTracking">
+      <widget class="Gui::QuantitySpinBox" name="growth" native="true">
+       <property name="keyboardTracking" stdset="0">
         <bool>false</bool>
        </property>
        <property name="unit" stdset="0">
         <string notr="true">mm</string>
        </property>
-       <property name="singleStep">
+       <property name="singleStep" stdset="0">
         <double>5.000000000000000</double>
        </property>
-       <property name="value">
+       <property name="value" stdset="0">
         <double>0.000000000000000</double>
        </property>
       </widget>
      </item>
     </layout>
    </item>
-
    <item>
-    <widget class="QCheckBox" name="checkBoxLeftHanded">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="text">
-      <string>Left handed</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="checkBoxReversed">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="text">
-      <string>Reversed</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="checkBoxReversed">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Reversed</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBoxLeftHanded">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Left handed</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QCheckBox" name="checkBoxOutside">

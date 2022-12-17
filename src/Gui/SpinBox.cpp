@@ -62,6 +62,11 @@ ExpressionSpinBox::~ExpressionSpinBox()
 {
 }
 
+void ExpressionSpinBox::setUnit(const Base::Unit &unit)
+{
+    this->unit = unit;
+}
+
 void ExpressionSpinBox::setExpression(std::shared_ptr<Expression> expr)
 {
     Q_ASSERT(isBound());
@@ -134,11 +139,12 @@ void ExpressionSpinBox::openFormulaDialog()
 {
     Q_ASSERT(isBound());
 
-    PropertyQuantity *  qprop = freecad_dynamic_cast<PropertyQuantity>(getPath().getProperty());
-    Unit unit;
+    Unit unit = this->unit;
 
-    if (qprop != 0)
-        unit = qprop->getUnit();
+    if (unit.isEmpty()) {
+        if (auto qprop = freecad_dynamic_cast<PropertyQuantity>(getPath().getProperty()))
+            unit = qprop->getUnit();
+    }
 
     auto box = new Gui::Dialog::DlgExpressionInput(getPath(), getExpression(), unit, spinbox);
     QObject::connect(box, &Gui::Dialog::DlgExpressionInput::finished, [=]() {

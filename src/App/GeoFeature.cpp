@@ -146,7 +146,8 @@ DocumentObject *GeoFeature::resolveElement(DocumentObject *obj, const char *subn
         subname = "";
     const char *element = Data::ComplexGeoData::findElementName(subname);
     if(_element) *_element = element;
-    auto sobj = obj->getSubObject(subname);
+    // Exclude element in subname to prevent warning message of element not found
+    auto sobj = obj->getSubObject(std::string(subname, element).c_str());
     if(!sobj)
         return 0;
     auto linked = sobj->getLinkedObject(true);

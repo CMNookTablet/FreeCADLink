@@ -105,9 +105,6 @@ App::DocumentObjectExecReturn *Thickness::execute(void)
     double tol = Precision::Confusion();
     short mode = (short)Mode.getValue();
     short join = (short)Join.getValue();
-    //we do not offer tangent join type
-    if(join == 1)
-        join = 2;
 
     std::vector<TopoShape> shapes;
     int count = baseShape.countSubShapes(TopAbs_SOLID);
@@ -125,7 +122,8 @@ App::DocumentObjectExecReturn *Thickness::execute(void)
             try {
                 shapes.back().makEThickSolid(
                         baseShape.getSubTopoShape(TopAbs_SOLID,it->first), 
-                        it->second, thickness, tol, intersection, false, mode, join);
+                        it->second, thickness, tol, intersection, false, mode,
+                        static_cast<Part::TopoShape::JoinType>(join));
             }catch(Standard_Failure &e) {
                 FC_ERR("Exception on making thick solid: " << e.GetMessageString());
                 return new App::DocumentObjectExecReturn("Failed to make thick solid");

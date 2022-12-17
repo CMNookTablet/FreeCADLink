@@ -29,47 +29,12 @@
 # include <QMessageBox>
 # include <QAction>
 # include <QMenu>
-# include <Inventor/actions/SoGetBoundingBoxAction.h>
-# include <Inventor/nodes/SoSeparator.h>
-# include <Inventor/nodes/SoPickStyle.h>
-# include <Inventor/nodes/SoShapeHints.h>
-# include <Inventor/nodes/SoMaterial.h>
-# include <Inventor/nodes/SoBaseColor.h>
-# include <Inventor/nodes/SoTransparencyType.h>
-# include <Inventor/nodes/SoDrawStyle.h>
-# include <Inventor/nodes/SoMarkerSet.h>
-# include <Inventor/nodes/SoVertexProperty.h>
-# include <Inventor/nodes/SoLineSet.h>
-# include <Inventor/nodes/SoFaceSet.h>
-# include <Inventor/details/SoLineDetail.h>
-# include <Inventor/details/SoFaceDetail.h>
-# include <Inventor/details/SoPointDetail.h>
-# include <TopoDS_Vertex.hxx>
-# include <TopoDS.hxx>
-# include <BRep_Tool.hxx>
-# include <gp_Pnt.hxx>
-# include <Precision.hxx>
-# include <Geom_Plane.hxx>
-# include <Geom_Line.hxx>
-# include <GeomAPI_IntCS.hxx>
 #endif
 
-#include <App/DocumentObjectGroup.h>
-#include <App/GeoFeatureGroupExtension.h>
+#include <Mod/Part/App/DatumFeature.h>
 #include <Gui/Control.h>
 #include <Gui/Command.h>
 #include <Gui/Application.h>
-#include <Gui/MDIView.h>
-#include <Gui/ViewProviderOrigin.h>
-#include <Gui/View3DInventor.h>
-#include <Gui/View3DInventorViewer.h>
-#include <Gui/BitmapFactory.h>
-
-#include <Mod/PartDesign/App/DatumPoint.h>
-#include <Mod/PartDesign/App/DatumLine.h>
-#include <Mod/PartDesign/App/DatumPlane.h>
-#include <Mod/PartDesign/App/Body.h>
-#include <Mod/PartDesign/App/DatumCS.h>
 
 #include "TaskDatumParameters.h"
 #include "ViewProviderBody.h"
@@ -79,152 +44,16 @@
 
 using namespace PartDesignGui;
 
-PROPERTY_SOURCE_WITH_EXTENSIONS(PartDesignGui::ViewProviderDatum,Gui::ViewProviderGeometryObject)
+PROPERTY_SOURCE_WITH_EXTENSIONS(PartDesignGui::ViewProviderDatum, Gui::ViewProviderDatum)
 
 ViewProviderDatum::ViewProviderDatum()
 {
     PartGui::ViewProviderAttachExtension::initExtension(this);
-
-    pShapeSep = new SoSeparator();
-    pShapeSep->renderCaching = SoSeparator::OFF;
-    pShapeSep->boundingBoxCaching = SoSeparator::OFF;
-    pShapeSep->ref();
-    pPickStyle = new SoPickStyle();
-    pPickStyle->ref();
-
-    DisplayMode.setStatus(App::Property::Hidden, true);
-
-    // set default color for datums (golden yellow with 60% transparency)
-    ParameterGrp::handle hGrp = App::GetApplication().GetParameterGroupByPath (
-            "User parameter:BaseApp/Preferences/Mod/PartDesign");
-    unsigned long shcol = hGrp->GetUnsigned ( "DefaultDatumColor", 0xFFD70099 );
-
-    App::Color col ( (uint32_t) shcol );
-    ShapeColor.setValue ( col );
-
-    Transparency.setValue (col.a * 100);
-
     oldWb = "";
-    oldTip = NULL;
 }
 
 ViewProviderDatum::~ViewProviderDatum()
 {
-    pShapeSep->unref();
-    pPickStyle->unref();
-}
-
-void ViewProviderDatum::attach(App::DocumentObject *obj)
-{
-    ViewProviderGeometryObject::attach ( obj );
-
-    // TODO remove this field (2015-09-08, Fat-Zer)
-    App::DocumentObject* o = getObject();
-    if (o->getTypeId() == PartDesign::Plane::getClassTypeId()) {
-        datumType = QStringLiteral("Plane");
-        datumText = QObject::tr("Plane");
-    }
-    else if (o->getTypeId() == PartDesign::Line::getClassTypeId()) {
-        datumType = QStringLiteral("Line");
-        datumText = QObject::tr("Line");
-    }
-    else if (o->getTypeId() == PartDesign::Point::getClassTypeId()) {
-        datumType = QStringLiteral("Point");
-        datumText = QObject::tr("Point");
-    }
-    else if (o->getTypeId() == PartDesign::CoordinateSystem::getClassTypeId()) {
-        datumType = QStringLiteral("CoordinateSystem");
-        datumText = QObject::tr("Coordinate System");
-    }
-
-    SoShapeHints* hints = new SoShapeHints();
-    hints->shapeType.setValue(SoShapeHints::UNKNOWN_SHAPE_TYPE);
-    hints->vertexOrdering.setValue(SoShapeHints::COUNTERCLOCKWISE);
-    SoDrawStyle* fstyle = new SoDrawStyle();
-    fstyle->style = SoDrawStyle::FILLED;
-    fstyle->lineWidth = 3;
-    fstyle->pointSize = 5;
-    pPickStyle->style = SoPickStyle::SHAPE;
-    SoMaterialBinding* matBinding = new SoMaterialBinding;
-    matBinding->value = SoMaterialBinding::OVERALL;
-
-    SoSeparator* sep = new SoSeparator();
-    sep->renderCaching = SoSeparator::OFF;
-    sep->boundingBoxCaching = SoSeparator::OFF;
-    sep->addChild(hints);
-    sep->addChild(fstyle);
-    sep->addChild(pPickStyle);
-    sep->addChild(matBinding);
-    sep->addChild(pcShapeMaterial);
-    sep->addChild(pShapeSep);
-
-    addDisplayMaskMode(sep, "Base");
-}
-
-bool ViewProviderDatum::onDelete(const std::vector<std::string> &)
-{
-    // TODO: Ask user what to do about dependent objects, e.g. Sketches that have this feature as their support
-    // 1. Delete
-    // 2. Suppress
-    // 3. Re-route
-
-    return true;
-}
-
-std::vector<std::string> ViewProviderDatum::getDisplayModes(void) const
-{
-    return { "Base" };
-}
-
-void ViewProviderDatum::setDisplayMode(const char* ModeName)
-{
-    if (strcmp(ModeName, "Base") == 0)
-        setDisplayMaskMode("Base");
-    ViewProviderGeometryObject::setDisplayMode(ModeName);
-}
-
-std::string ViewProviderDatum::getElement(const SoDetail* detail) const
-{
-    if (detail) {
-        int element = 1;
-
-        if (detail->getTypeId() == SoLineDetail::getClassTypeId()) {
-            const SoLineDetail* line_detail = static_cast<const SoLineDetail*>(detail);
-            element = line_detail->getLineIndex();
-        } else if (detail->getTypeId() == SoFaceDetail::getClassTypeId()) {
-            const SoFaceDetail* face_detail = static_cast<const SoFaceDetail*>(detail);
-            element = face_detail->getPartIndex();
-        } else if (detail->getTypeId() == SoPointDetail::getClassTypeId()) {
-            const SoPointDetail* point_detail = static_cast<const SoPointDetail*>(detail);
-            element = point_detail->getCoordinateIndex();
-        }
-
-        if (element == 0)
-            return datumType.toStdString();
-    }
-
-    return std::string("");
-}
-
-SoDetail* ViewProviderDatum::getDetail(const char* subelement) const
-{
-    QString subelem = QString::fromUtf8(subelement);
-
-    if (subelem == QObject::tr("Line")) {
-         SoLineDetail* detail = new SoLineDetail();
-         detail->setPartIndex(0);
-         return detail;
-    } else if (subelem == QObject::tr("Plane")) {
-        SoFaceDetail* detail = new SoFaceDetail();
-        detail->setPartIndex(0);
-        return detail;
-   } else if (subelem == QObject::tr("Point")) {
-        SoPointDetail* detail = new SoPointDetail();
-        detail->setCoordinateIndex(0);
-        return detail;
-   }
-
-    return NULL;
 }
 
 void ViewProviderDatum::setupContextMenu(QMenu* menu, QObject* receiver, const char* member)
@@ -287,103 +116,9 @@ void ViewProviderDatum::unsetEdit(int ModNum)
     }
 }
 
-void ViewProviderDatum::updateExtents () {
-    setExtents ( getRelevantBoundBox () );
-}
-
-void ViewProviderDatum::setExtents (const SbBox3f &bbox) {
-    if(bbox.isEmpty())
-        return;
-    const SbVec3f & min = bbox.getMin ();
-    const SbVec3f & max = bbox.getMax ();
-    setExtents ( Base::BoundBox3d ( min.getValue()[0], min.getValue()[1], min.getValue()[2],
-                                    max.getValue()[0], max.getValue()[1], max.getValue()[2] ) );
-}
-
-SbBox3f ViewProviderDatum::getRelevantBoundBox () const {
-    std::vector<App::DocumentObject *> objs;
-
-    // Probe body first
-    PartDesign::Body* body = PartDesign::Body::findBodyOf ( this->getObject() );
-    if (body) {
-        objs = body->getFullModel ();
-    } else {
-        // Probe if we belongs to some group
-        App::DocumentObject* group =  App::DocumentObjectGroup::getGroupOfObject ( this->getObject () );
-
-        if(group) {
-            auto* ext = group->getExtensionByType<App::GroupExtension>();
-            if(ext)
-                objs = ext->getObjects ();
-        } else {
-            // Fallback to whole document
-            objs = this->getObject ()->getDocument ()->getObjects ();
-            for(auto it=objs.begin();it!=objs.end();) {
-                auto obj = *it;
-                if(!obj->Visibility.getValue()
-                        || App::GeoFeatureGroupExtension::getGroupOfObject(obj))
-                {
-                    it = objs.erase(it);
-                    continue;
-                }
-                auto vp = Gui::Application::Instance->getViewProvider(obj);
-                if(!vp || !vp->canAddToSceneGraph()) {
-                    it = objs.erase(it);
-                    continue;
-                }
-                ++it;
-            }
-        }
-    }
-    return getRelevantBoundBox (objs);
-}
-
-SbBox3f ViewProviderDatum::getRelevantBoundBox (
-        const std::vector <App::DocumentObject *> &objs )
+Base::Vector3d ViewProviderDatum::getBasePoint () const
 {
-    Base::BoundBox3d bbox;
-
-    // Adds the bbox of given feature to the output
-    for (auto obj :objs) {
-        if(!obj || !obj->getNameInDocument())
-            continue;
-
-        ViewProvider *vp = Gui::Application::Instance->getViewProvider(obj);
-        if (!vp) { continue; }
-        if (!vp->isVisible ()) { continue; }
-
-        if (obj->isDerivedFrom (Part::Datum::getClassTypeId() ) ) {
-            // Treat datums only as their basepoint
-            bbox.Add(static_cast<Part::Datum *> ( obj )->getBasePoint ());
-        } else {
-            bbox.Add(vp->getBoundingBox());
-        }
-    }
-
-    if(!bbox.IsValid())
-        return SbBox3f();
-
-    return SbBox3f(bbox.MinX,bbox.MinY,bbox.MinZ,bbox.MaxX,bbox.MaxY,bbox.MaxZ);
-}
-
-SbBox3f ViewProviderDatum::defaultBoundBox () {
-    float s = defaultSize();
-    return SbBox3f (-s, -s, -s, s, s, s);
-}
-
-double ViewProviderDatum::defaultSize() {
-    return Gui::ViewProviderOrigin::defaultSize();
-}
-
-bool ViewProviderDatum::isPickable() {
-
-    return bool(pPickStyle->style.getValue() == SoPickStyle::SHAPE);
-}
-
-void ViewProviderDatum::setPickable(bool val) {
-
-    if(val)
-        pPickStyle->style = SoPickStyle::SHAPE;
-    else
-        pPickStyle->style = SoPickStyle::UNPICKABLE;
+    if (auto datum = Base::freecad_dynamic_cast<Part::Datum>(getObject()))
+        return datum->getBasePoint();
+    return Base::Vector3d();
 }

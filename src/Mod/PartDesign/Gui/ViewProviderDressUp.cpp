@@ -107,7 +107,7 @@ void ViewProviderDressUp::highlightReferences(const bool on)
                 // Note: std::stoi may throw in case of bad or very long face name, but screw the try {} catch
                 int idx = std::stoi(f->substr(4)) - 1;
                 assert ( idx>=0 );
-                if ( idx < (ssize_t) colors.size() )
+                if ( idx < (int) colors.size() )
                     colors[idx] = App::Color(1.0,0.0,1.0); // magenta
             }
             vp->DiffuseColor.setValues(colors);
@@ -122,7 +122,7 @@ void ViewProviderDressUp::highlightReferences(const bool on)
             for (std::vector<std::string>::const_iterator e = edges.begin(); e != edges.end(); ++e) {
                 int idx = std::stoi(e->substr(4)) - 1;
                 assert ( idx>=0 );
-                if ( idx < (ssize_t) colors.size() )
+                if ( idx < (int) colors.size() )
                     colors[idx] = App::Color(1.0,0.0,1.0); // magenta
             }
             vp->LineColorArray.setValues(colors);

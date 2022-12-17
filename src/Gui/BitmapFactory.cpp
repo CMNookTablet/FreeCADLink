@@ -36,6 +36,7 @@
 # include <QSvgRenderer>
 # include <QStyleOption>
 # include <sstream>
+# include <unordered_map>
 #endif
 
 #include <boost/algorithm/string/predicate.hpp>
@@ -81,6 +82,21 @@ static const char *not_found[]={
 "........................",
 "........................"};
 
+static inline void adjustIconName(std::string &_name, const char *&name)
+{
+    // Remove redundant ending '.svg' if this is not an absolute path for better
+    // icon key search in DlgIconBrowser
+    if (boost::iends_with(name, ".svg")
+            && !strchr(name, '/')
+            && !strchr(name, '\\')
+            && !strchr(name, ':'))
+    {
+        _name = name;
+        _name.resize(_name.size()-4);
+        name = _name.c_str();
+    }
+}
+
 namespace Gui {
 
 static std::vector<const char *> _BitmapContext;
@@ -104,11 +120,17 @@ public:
     struct XpmInfo {
         QPixmap xpm;
         QPixmap pixmap;
+        std::string pixmapPath;
         QPixmap styledPixmap;
+        std::string styledPath;
         bool styled = false;
-        std::set<std::string> context;
+        mutable std::set<std::string> context;
 
-        void checkContext(const char *ctx = nullptr)
+        XpmInfo()
+        {
+        }
+
+        void checkContext(const char *ctx = nullptr) const
         {
             if (_BitmapContext.size() && _BitmapContext.back()[0])
                 context.insert(_BitmapContext.back());
@@ -116,7 +138,12 @@ public:
                 context.insert(ctx);
         }
     };
-    QMap<std::string, XpmInfo> xpmCache;
+
+    // NOTE! xpmCache must not be a std::unordered_map, because pathMap stores a
+    // pointer to XpmInfo inside xpmCache. unordered_map may reallocate when
+    // increase buket size.
+    std::map<std::string, XpmInfo> xpmCache;
+    std::unordered_map<const char *, XpmInfo *, App::CStringHasher, App::CStringHasher> pathMap;
 };
 }
 
@@ -220,61 +247,113 @@ void BitmapFactoryInst::addXPM(const char* name, const char** pXPM)
     d->xpmCache[name].xpm = QPixmap(pXPM);
 }
 
-void BitmapFactoryInst::addPixmapToCache(const char* name, const QPixmap& icon, bool styled, const char *ctx)
+void BitmapFactoryInst::addPixmapToCache(const char* name,
+                                         const QPixmap& icon,
+                                         const char *path,
+                                         bool styled,
+                                         const char *ctx)
 {
+    std::string _name;
+    adjustIconName(_name, name);
+
     auto &info = d->xpmCache[name];
     info.checkContext(ctx);
     if (styled) {
         info.styled = styled;
         info.styledPixmap = icon;
-    } else
+        d->pathMap.erase(info.styledPath.c_str());
+        info.styledPath = path ? path : "";
+        if (info.styledPath.size())
+            d->pathMap[info.styledPath.c_str()] = &info;
+    } else {
         info.pixmap = icon;
+        d->pathMap.erase(info.pixmapPath.c_str());
+        info.pixmapPath = path ? path : "";
+        if (info.pixmapPath.size())
+            d->pathMap[info.pixmapPath.c_str()] = &info;
+    }
 }
 
-bool BitmapFactoryInst::findPixmapInCache(const char* name, QPixmap& px, QPixmap *original) const
+const char *BitmapFactoryInst::getIconPath(const char *name) const
 {
+    std::string _name;
+    adjustIconName(_name, name);
+
     auto it = d->xpmCache.find(name);
-    if (it != d->xpmCache.end()) {
-        it->checkContext();
-        if (!it->styledPixmap.isNull()) {
-            if (original) {
-                if (!it->pixmap.isNull())
-                    *original = it->pixmap;
-                else
-                    *original = it->xpm;
-            }
-            px = it->styledPixmap;
-        } else if (!it->pixmap.isNull())
-            px = it->pixmap;
+    if (it == d->xpmCache.end())
+        return "";
+    return it->second.styledPath.size() ?
+        it->second.styledPath.c_str() : it->second.pixmapPath.c_str();
+}
+
+bool BitmapFactoryInst::findPixmapInCache(const char* name,
+                                          QPixmap& px,
+                                          QPixmap *original,
+                                          std::string *path) const
+{
+    std::string _name;
+    adjustIconName(_name, name);
+
+    const BitmapFactoryInstP::XpmInfo *entry = nullptr;
+    auto it = d->xpmCache.find(name);
+    if (it != d->xpmCache.end())
+        entry = &it->second;
+    else {
+        auto it = d->pathMap.find(name);
+        if (it != d->pathMap.end())
+            entry = it->second;
         else
-            px = it->xpm;
-        return !px.isNull();
+            return false;
     }
-    return false;
+
+    entry->checkContext();
+    if (!entry->styledPixmap.isNull()) {
+        if (original) {
+            if (!entry->pixmap.isNull())
+                *original = entry->pixmap;
+            else
+                *original = entry->xpm;
+        }
+        px = entry->styledPixmap;
+        if (path)
+            *path = entry->styledPath;
+    } else if (!entry->pixmap.isNull())
+        px = entry->pixmap;
+    else
+        px = entry->xpm;
+    if (path && path->empty())
+        *path = entry->pixmapPath;
+    return !px.isNull();
 }
 
 void BitmapFactoryInst::onStyleChange()
 {
     for (auto it = d->xpmCache.begin(); it != d->xpmCache.end(); ++it) {
-        if (!it.value().styled)
-            it.value().styledPixmap = QPixmap();
+        if (!it->second.styled)
+            it->second.styledPixmap = QPixmap();
         else
-            it.value().styled = false;
+            it->second.styled = false;
     }
 }
 
 void BitmapFactoryInst::addContext(const char *name, const char *ctx)
 {
+    std::string _name;
+    adjustIconName(_name, name);
+
     auto it = d->xpmCache.find(name);
     if (ctx && it != d->xpmCache.end())
-        it->context.insert(ctx);
+        it->second.context.insert(ctx);
 }
 
 const std::set<std::string> &BitmapFactoryInst::getContext(const char *name) const
 {
+    std::string _name;
+    adjustIconName(_name, name);
+
     auto it = d->xpmCache.find(name);
     if (it != d->xpmCache.end())
-        return it->context;
+        return it->second.context;
 
     static std::set<std::string> dummy;
     return dummy;
@@ -282,15 +361,19 @@ const std::set<std::string> &BitmapFactoryInst::getContext(const char *name) con
 
 QIcon BitmapFactoryInst::iconFromTheme(const char* name, bool silent, const QIcon& fallback)
 {
-    if (!name)
+    if (!name || *name == '\0')
         return QIcon();
 
     QString iconName = QString::fromUtf8(name);
+
+    std::string _name;
+    adjustIconName(_name, name);
+
     auto it = d->xpmCache.find(name);
     if (it != d->xpmCache.end()) {
-        it->checkContext();
-        if (!it->styledPixmap.isNull())
-            return it->styledPixmap;
+        it->second.checkContext();
+        if (!it->second.styledPixmap.isNull())
+            return it->second.styledPixmap;
     }
 
     QIcon icon = QIcon::fromTheme(iconName, fallback);
@@ -299,10 +382,10 @@ QIcon BitmapFactoryInst::iconFromTheme(const char* name, bool silent, const QIco
 
     if (it == d->xpmCache.end())
         return pixmap(name, silent);
-    else if (!it->pixmap.isNull())
-        return it->pixmap;
+    else if (!it->second.pixmap.isNull())
+        return it->second.pixmap;
     else
-        return it->xpm;
+        return it->second.xpm;
 }
 
 bool BitmapFactoryInst::loadPixmap(const QString& filename, QPixmap& icon) const
@@ -326,25 +409,19 @@ bool BitmapFactoryInst::loadPixmap(const QString& filename, QPixmap& icon) const
     return !icon.isNull();
 }
 
-QPixmap BitmapFactoryInst::pixmap(const char* name, bool silent, QPixmap *original) const
+QPixmap BitmapFactoryInst::pixmap(const char* name,
+                                  bool silent,
+                                  QPixmap *original,
+                                  std::string *iconpath) const
 {
     if (!name || *name == '\0')
         return QPixmap();
 
-    // Remove redundant ending '.svg' if this is not an absolute path for better
-    // icon key search in DlgIconBrowser
     std::string _name;
-    if (boost::iends_with(name, ".svg")
-            && !strchr(name, '/')
-            && !strchr(name, '\\')
-            && !strchr(name, ':'))
-    {
-        _name = name;
-        _name.resize(_name.size()-4);
-        name = _name.c_str();
-    }
+    adjustIconName(_name, name);
+
     QPixmap icon;
-    if (findPixmapInCache(name, icon, original))
+    if (findPixmapInCache(name, icon, original, iconpath))
         return icon;
 
     QString path;
@@ -377,7 +454,12 @@ QPixmap BitmapFactoryInst::pixmap(const char* name, bool silent, QPixmap *origin
     if (!icon.isNull()) {
         // "-|" is a marker used to identify path in context, used in
         // DlgIconBrowser
-        const_cast<BitmapFactoryInst*>(this)->addPixmapToCache(name, icon, false, 
+        std::string _iconpath;
+        if (!iconpath)
+            iconpath = &_iconpath;
+        *iconpath = path.toUtf8().constData();
+        const_cast<BitmapFactoryInst*>(this)->addPixmapToCache(
+                name, icon, iconpath->c_str(), false, 
                 (path+QStringLiteral("-|")).toUtf8().constData());
         return icon;
     }
@@ -419,7 +501,13 @@ QPixmap BitmapFactoryInst::pixmapFromSvg(const char* name, const QSizeF& size,
         if (file.open(QFile::ReadOnly | QFile::Text)) {
             QByteArray content = file.readAll();
             icon = pixmapFromSvg(content, size, colorMapping);
-        }
+            if (icon.isNull()) {
+                // pixmapFormSvg() may fail for some type of SVG for some
+                // reason. Fallback to Qt's built in loader.
+                icon = QPixmap(QSize(size.width(), size.height()));
+                icon.load(iconPath);
+            }
+         }
     }
 
     return icon;
@@ -456,7 +544,7 @@ QStringList BitmapFactoryInst::pixmapNames() const
 {
     QStringList names;
     for (auto It = d->xpmCache.begin(); It != d->xpmCache.end(); ++It) {
-        QString item = QString::fromUtf8(It.key().c_str());
+        QString item = QString::fromUtf8(It->first.c_str());
         if (!names.contains(item))
             names << item;
     }

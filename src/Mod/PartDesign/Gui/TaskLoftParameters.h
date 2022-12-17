@@ -56,41 +56,20 @@ public:
     TaskLoftParameters(ViewProviderLoft *LoftView,bool newObj=false,QWidget *parent = 0);
     ~TaskLoftParameters();
 
-    void exitSelectionMode();
-
 private Q_SLOTS:
-    void onProfileButton(bool);
-    void onRefButtonAdd(bool);
     void onClosed(bool);
     void onRuled(bool);
     void onSplitProfile(bool);
-    void onDeleteSection();
-    void indexesMoved();
-    void onItemEntered(QListWidgetItem *);
-    void onItemSelectionChanged();
     void updateUI();
 
 protected:
-    void changeEvent(QEvent *e);
-    bool eventFilter(QObject *o, QEvent *e);
     void refresh();
-
-private:
-    void onSelectionChanged(const Gui::SelectionChanges& msg);
-    void clearButtons();
-    void addItem(App::DocumentObject *obj, bool select=false);
 
 private:
     QWidget* proxy;
     std::unique_ptr<Ui_TaskLoftParameters> ui;
-
-    enum selectionModes { none, refAdd, refProfile };
-    selectionModes selectionMode = none;
-
-    App::SubObjectT lastProfile;
-    boost::signals2::scoped_connection connProfile;
-    std::vector<App::SubObjectT> lastSections;
     boost::signals2::scoped_connection connSections;
+    LinkSubListWidget *sectionWidget;
 };
 
 /// simulation dialog for the TaskView

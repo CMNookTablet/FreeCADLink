@@ -244,6 +244,8 @@ public:
     SoFCSeparator(bool trackCacheMode=true);
 
     virtual void GLRenderBelowPath(SoGLRenderAction * action);
+    virtual void GLRenderInPath(SoGLRenderAction * action);
+    static void _GLRenderInPath(SoNode *node, SoGLRenderAction *);
 
     static void setCacheMode(CacheEnabled mode) {
         CacheMode = mode;

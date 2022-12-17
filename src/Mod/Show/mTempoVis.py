@@ -435,7 +435,7 @@ class TempoVis(object):
                         result.append(obj)
         return result
         
-    def sketchClipPlane(self, sketch, enable = None):
+    def sketchClipPlane(self, sketch, enable = None, reverse = False):
         '''sketchClipPlane(sketch, enable = None): Clips all objects by plane of sketch. 
         If enable argument is omitted, calling the routine repeatedly will toggle clipping plane.'''
         
@@ -448,10 +448,14 @@ class TempoVis(object):
         else:
             doc = editDoc.Document
             pla = App.Placement(editDoc.EditingTransform)
+
+        if reverse:
+            pla.rotate(pla.Base, App.Vector(1, 0, 0), 180)
+
         toggle = {False: 0, True: 1, None: -1}[enable]
-        
+
         self.modify(ClipPlane(doc, toggle, pla, 0.02))
-    
+
     def activateWorkbench(self, wb_name):
         from .SceneDetails.Workbench import Workbench
         self.modify(Workbench(wb_name))

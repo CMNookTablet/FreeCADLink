@@ -40,7 +40,7 @@ public:
     App::PropertyBool SaveShowOnTop;
     App::PropertyBool SaveCamera;
     App::PropertyBool SaveClippings;
-    App::PropertyBool SaveShadowSettings;
+    App::PropertyBool SaveDrawStyleSettings;
 
     SavedView();
     virtual ~SavedView();
@@ -48,6 +48,8 @@ public:
     virtual const char* getViewProviderName(void) const override{
         return "Gui::ViewProviderSavedView";
     }
+
+    virtual void handleChangedPropertyName(Base::XMLReader &reader, const char * TypeName, const char *PropName) override;
 
     template<class PropT>
     PropT *getVisibilityProperty(const char *name, bool create=false) {

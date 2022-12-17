@@ -44,6 +44,7 @@
 #include <Base/Parameter.h>
 #include <App/ExpressionParser.h>
 #include <App/Application.h>
+#include <App/Material.h>
 #include "Sheet.h"
 #include <iomanip>
 #include <cctype>
@@ -1138,37 +1139,167 @@ App::Color Cell::decodeColor(const std::string & color, const App::Color & defau
         return defaultColor;
 }
 
-#define SHEET_CELL_MODE(_name, _label, _doc) #_name,
-static const char *_EditModeNames[] = {
-    SHEET_CELL_MODES
-};
-#undef SHEET_CELL_MODE
+/*[[[cog
+import SheetParams
+SheetParams.define_edit_modes()
+]]]*/
 
+// Auto generated code (Mod/Spreadsheet/App/SheetParams.py:114)
 const char *Cell::editModeName(EditMode mode)
 {
-    if(mode < 0 || mode >= sizeof(_EditModeNames)/sizeof(_EditModeNames[0]))
-        return "Unknown";
-    else
-        return _EditModeNames[mode];
+    switch(mode) {
+    case EditNormal:
+        return "Normal";
+    case EditButton:
+        return "Button";
+    case EditCombo:
+        return "Combo";
+    case EditLabel:
+        return "Label";
+    case EditQuantity:
+        return "Quantity";
+    case EditCheckBox:
+        return "CheckBox";
+    case EditAutoAlias:
+        return "AutoAlias";
+    case EditAutoAliasV:
+        return "AutoAliasV";
+    case EditColor:
+        return "Color";
+    default:
+        return "?";
+    }
 }
 
-Cell::EditMode Cell::getEditMode() const {
-    return hasException()?EditNormal:editMode;
+// Auto generated code (Mod/Spreadsheet/App/SheetParams.py:131)
+const char *Cell::editModeLabel(EditMode mode)
+{
+    switch(mode) {
+    case EditNormal:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "Normal");
+    case EditButton:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "Button");
+    case EditCombo:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "ComboBox");
+    case EditLabel:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "Label");
+    case EditQuantity:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "Quantity");
+    case EditCheckBox:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "CheckBox");
+    case EditAutoAlias:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "Auto alias");
+    case EditAutoAliasV:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "Auto alias vertical");
+    case EditColor:
+        return QT_TRANSLATE_NOOP("Spreadsheet", "Color");
+    default:
+        return "?";
+    }
 }
 
-bool Cell::setEditMode(const char *name, bool silent) {
-#define SHEET_CELL_MODE(_name, _label, _doc) {#_name, Edit##_name},
-    static std::unordered_map<const char *, EditMode, App::CStringHasher, App::CStringHasher> _Map = {
-        SHEET_CELL_MODES
-    };
-    auto iter = _Map.find(name);
-    if(iter == _Map.end()) {
+// Auto generated code (Mod/Spreadsheet/App/SheetParams.py:148)
+const char *Cell::editModeToolTips(EditMode mode)
+{
+    switch(mode) {
+    case EditNormal:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"Reset edit mode");
+    case EditButton:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"Make a button with the current cell. Expects the cell to define a callable.\n"
+"The button label is defined by the doc string of the callable. If empty,\n"
+"then use the alias. If no alias, then use the cell address.");
+    case EditCombo:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"Edit the cell using a ComboBox. This mode Expects the cell to contain a \n"
+"list(dict, string), where the keys of dict defines the item list, and the\n"
+"string defines the current item.\n"
+"\n"
+"The cell also accepts list(list, int), where the inner list defines the item\n"
+"list, and the int is the index of the current item.\n"
+"\n"
+"In both caes, there can be a third optional item that defines a callable with\n"
+"arguments (spreadsheet, cell_address, current_value, old_value). It will be\n"
+"invoked after the user makes a new selection in the ComboBox.");
+    case EditLabel:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"Edit the cell using a plain text box. This edit mode is used to hide expression\n"
+"details in the cell. The cell is expected to contain a list. And only the first\n"
+"item will be shown, and the rest of items hidden\n"
+"\n"
+"It can also be used to edit string property from other object using the double\n"
+"binding function, e.g. dbind(Box.Label2).");
+    case EditQuantity:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"Edit the cell using a unit aware SpinBox. This mode expects the cell\n"
+"to contain either a simple number, a 'quantity' (i.e. number with unit)\n"
+"or a list(quantity, dict). The dict contains optional keys ('step','max',\n"
+"'min','unit'). All keys are expects to have 'double' type of value, except\n"
+"'unit' which must be a string.\n"
+"\n"
+"If no 'unit' setting is found, the 'display unit' setting of the current cell\n"
+"will be used");
+    case EditCheckBox:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"Edit the cell using a CheckBox. The cell is expected to contain any value\n"
+"that can be converted to boolean. If you want a check box with a title, use\n"
+"a list(boolean, title).");
+    case EditAutoAlias:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"A pseudo edit mode that expects the content of the cell to be plain text.\n"
+"It will use the first line of the text to set alias of the right sibling cell.\n"
+"space is converted to '_'.\n"
+"\n"
+"Moreover, a new cell added below an existing cell with 'Auto alias' edit mode\n"
+"will inherit this edit mode.");
+    case EditAutoAliasV:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"Similar to 'Auto alias' edit mode but works in vertical, i.e. assign alias to\n"
+"the bottom sibling cell.");
+    case EditColor:
+        return QT_TRANSLATE_NOOP("Spreadsheet",
+"Edit the cell using a color button. The cell is expected to contain\n"
+"a tuple of three or four floating numbers");
+    default:
+        return "?";
+    }
+}
+
+// Auto generated code (Mod/Spreadsheet/App/SheetParams.py:166)
+bool Cell::setEditMode(const char *name, bool silent)
+{
+    EditMode mode;
+    if (boost::equals(name, "Normal"))
+        mode = EditNormal;
+    else if (boost::equals(name, "Button"))
+        mode = EditButton;
+    else if (boost::equals(name, "Combo"))
+        mode = EditCombo;
+    else if (boost::equals(name, "Label"))
+        mode = EditLabel;
+    else if (boost::equals(name, "Quantity"))
+        mode = EditQuantity;
+    else if (boost::equals(name, "CheckBox"))
+        mode = EditCheckBox;
+    else if (boost::equals(name, "AutoAlias"))
+        mode = EditAutoAlias;
+    else if (boost::equals(name, "AutoAliasV"))
+        mode = EditAutoAliasV;
+    else if (boost::equals(name, "Color"))
+        mode = EditColor;
+    else {
         if(silent)
             FC_THROWM(Base::ValueError, "Unknown edit mode: " << (name?name:"?"));
         FC_WARN("Unknown edit mode " << (name?name:"?"));
         return false;
     }
-    return setEditMode(iter->second, silent);
+    return setEditMode(mode, silent);
+}
+//[[[end]]]
+
+Cell::EditMode Cell::getEditMode() const {
+    return hasException()?EditNormal:editMode;
 }
 
 bool Cell::setEditData(const QVariant &d) {
@@ -1380,6 +1511,26 @@ bool Cell::setEditData(const QVariant &d) {
         }
         break;
     }
+    case EditColor: {
+        auto color = App::Color(d.toUInt());
+        if(!owner || !owner->getContainer()) 
+            FC_THROWM(Base::RuntimeError,"Invalid cell '" << address.toString() << "'");
+        auto vexpr = VariableExpression::isDoubleBinding(expression.get());
+        if(vexpr) {
+            Base::PyGILStateLocker lock;
+            vexpr->assign(Py::TupleN(Py::Float(color.r),
+                                     Py::Float(color.g),
+                                     Py::Float(color.b),
+                                     Py::Float(color.a)));
+            return true;
+        }
+        auto parent = Base::freecad_dynamic_cast<App::DocumentObject>(owner->getContainer());
+        std::ostringstream oss;
+        oss << "tuple(" << color.r << ", " << color.g << ", " << color.b << ", " << color.a << ")";
+        auto res = Expression::parse(parent, oss.str());
+        setExpression(std::move(res));
+        break;
+    }
     default:
         setContent(d.toString().toUtf8().constData());
         return owner->isTouched();
@@ -1423,6 +1574,41 @@ QVariant Cell::getEditData(bool silent) const {
         if(!silent)
             FC_THROWM(Base::TypeError,"Expects the cell '" << address.toString() << 
                     "' evaluates to a Python callable");
+        break;
+    }
+    case EditColor: {
+        if(!owner || !owner->getContainer()) {
+            if(silent) break;
+            FC_THROWM(Base::RuntimeError,"Invalid cell '" << address.toString() << "'");
+        }
+        auto prop = owner->getContainer()->getPropertyByName(address.toString().c_str());
+        if(prop && prop->isDerivedFrom(App::PropertyPythonObject::getClassTypeId())) {
+            Base::PyGILStateLocker lock;
+            try {
+                Py::Object obj(static_cast<App::PropertyPythonObject*>(prop)->getPyObject(),true);
+                if(obj.isSequence()) {
+                    Py::Sequence seq(obj);
+                    if(seq.size()>=3 && seq.size()<=4) {
+                        App::Color color;
+                        color.r = Py::Float(seq[0].ptr());
+                        color.g = Py::Float(seq[1].ptr());
+                        color.b = Py::Float(seq[2].ptr());
+                        color.a = seq.size() < 4 ? 1.0 : Py::Float(seq[3].ptr());
+                        return color.getPackedValue();
+                    }
+                }
+            } catch (Py::Exception &) {
+                Base::PyException e;
+                if(!silent)
+                    e.ReportException();
+            } catch (Base::Exception &e) {
+                if(!silent)
+                    e.ReportException();
+            }
+        }
+        if(!silent)
+            FC_THROWM(Base::TypeError,"Expects the cell '" << address.toString() << 
+                    "' contains a tuple of three or four floating numbers");
         break;
     }
     case EditCombo:
@@ -1652,6 +1838,7 @@ QVariant Cell::getDisplayData(bool silent) const {
             str.remove(QLocale().groupSeparator());
         return str;
     }
+    case EditColor:
     case EditButton:
     case EditCheckBox:
         return QVariant();
@@ -1708,7 +1895,7 @@ Py::Object Cell::getPyValue() const {
 
 bool Cell::setEditMode(EditMode mode, bool silent) {
     if(editMode == mode || mode < 0 
-                        || mode >= sizeof(_EditModeNames)/sizeof(_EditModeNames[0]))
+                        || mode >= EditModeMax)
         return false;
 
     if(!silent && mode!=EditNormal && mode!=EditAutoAlias && mode!=EditAutoAliasV) {
@@ -1728,6 +1915,26 @@ bool Cell::setEditMode(EditMode mode, bool silent) {
                     FC_THROWM(Base::TypeError,"Expects the cell '" << address.toString() << 
                             "' evaluates to a Python callable");
                 }
+                break;
+            }
+            case EditColor: {
+                bool valid = false;
+                if(SimpleStatement::cast<ListExpression>(expression.get())
+                        || VariableExpression::isDoubleBinding(expression.get()))
+                {
+                    if(obj.isSequence()) {
+                        Py::Sequence seq(obj);
+                        if(seq.size() >= 3 && seq.size() <= 4) {
+                            valid = seq[0].isNumeric()
+                                    && seq[1].isNumeric()
+                                    && seq[2].isNumeric()
+                                    && (seq.size() < 4 || seq[3].isNumeric());
+                        }
+                    }
+                }
+                if(!valid)
+                    FC_THROWM(Base::TypeError,"Expects the cell '" << address.toString() << 
+                            "' to be a tuple of three or four floating numbers");
                 break;
             }
             case EditCombo: {
@@ -1799,12 +2006,14 @@ bool Cell::setEditMode(EditMode mode, bool silent) {
     }
     editMode = mode;
     applyAutoAlias();
+    setDirty();
     signaler.tryInvoke();
     return true;
 }
 
 bool Cell::setPersistentEditMode(bool enable) {
     if(editMode == EditButton
+            || editMode == EditColor
             || editMode == EditCheckBox
             || editMode == EditNormal
             || enable == editPersistent)
@@ -1877,7 +2086,8 @@ bool Cell::isPersistentEditMode() const
         return false;
     return editPersistent
         || editMode == EditButton
-        || editMode == EditCheckBox;
+        || editMode == EditCheckBox
+        || editMode == EditColor;
 }
 
 void Cell::applyAutoAlias()

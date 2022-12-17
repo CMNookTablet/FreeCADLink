@@ -42,7 +42,8 @@ using namespace Gui;
 using namespace Gui::Dialog;
 
 DlgAddProperty::DlgAddProperty(QWidget* parent,
-        std::unordered_set<App::PropertyContainer *> &&c)
+        std::unordered_set<App::PropertyContainer *> &&c,
+        const std::vector<Base::Type> &filters)
   : QDialog( parent )
   , containers(std::move(c))
   , ui(new Ui_DlgAddProperty)
@@ -67,6 +68,15 @@ DlgAddProperty::DlgAddProperty(QWidget* parent,
     std::vector<Base::Type> types;
     Base::Type::getAllDerivedFrom(Base::Type::fromName("App::Property"),types);
     for(auto type : types) {
+        bool filtered = false;
+        for (auto &t : filters) {
+            if (type.isDerivedFrom(t)) {
+                filtered = true;
+                break;
+            }
+        }
+        if (filtered)
+            continue;
         ui->comboType->addItem(QString::fromUtf8(type.getName()));
         if(type == defType)
             ui->comboType->setCurrentIndex(ui->comboType->count()-1);

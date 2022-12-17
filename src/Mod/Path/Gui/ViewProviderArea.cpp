@@ -53,9 +53,9 @@ bool ViewProviderArea::canDragObjects() const
     return true;
 }
 
-bool ViewProviderArea::canDragObject(App::DocumentObject* obj) const
+bool ViewProviderArea::canDragObject(App::DocumentObject* ) const
 {
-    return obj && obj->getTypeId().isDerivedFrom(Part::Feature::getClassTypeId());
+    return true;
 }
 
 void ViewProviderArea::dragObject(App::DocumentObject* obj)
@@ -76,9 +76,9 @@ bool ViewProviderArea::canDropObjects() const
     return true;
 }
 
-bool ViewProviderArea::canDropObject(App::DocumentObject* obj) const
+bool ViewProviderArea::canDropObject(App::DocumentObject* ) const
 {
-    return canDragObject(obj);
+    return true;
 }
 
 void ViewProviderArea::dropObject(App::DocumentObject* obj)

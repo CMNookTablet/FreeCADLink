@@ -43,6 +43,7 @@
 #include <Gui/SoFCUnifiedSelection.h>
 #include <Gui/CommandT.h>
 #include <Gui/ViewParams.h>
+#include <Gui/Tree.h>
 #include <Base/Exception.h>
 #include <Base/Tools.h>
 #include <Mod/Part/App/PartParams.h>
@@ -504,7 +505,7 @@ void ViewProvider::onChanged(const App::Property* prop) {
     else if (auto linkProp = Base::freecad_dynamic_cast<App::PropertyLinkBase>(
                 const_cast<App::Property*>(prop)))
     {
-        if (autoCorrectingLink || !Part::PartParams::AutoCorrectLink()) {
+        if (autoCorrectingLink || !Part::PartParams::getAutoCorrectLink()) {
             PartGui::ViewProviderPartExt::onChanged(prop);
             return;
         }
@@ -710,14 +711,16 @@ bool ViewProvider::iconMouseEvent(QMouseEvent *ev, const QByteArray &tag)
 
 QString ViewProvider::getToolTip(const QByteArray &tag) const
 {
-    if (tag == _SuppressedTag)
-        return QObject::tr("Feature suppressed. ALT + click this icon to unsppress.");
-    else if (tag == _IconTag) {
-        if (isSetTipIcon)
-            return QObject::tr("This is the tip of the body. New feature will be inserted after it.");
-        else
-            return QObject::tr("Alt + click this icon to set this feature as the tip of the body.\n"
-                               "New feature will be inserted after it.");
+    if (!Gui::isTreeViewDragging()) {
+        if (tag == _SuppressedTag)
+            return QObject::tr("Feature suppressed. ALT + click this icon to unsppress.");
+        else if (tag == _IconTag) {
+            if (isSetTipIcon)
+                return QObject::tr("This is the tip of the body. New feature will be inserted after it.");
+            else
+                return QObject::tr("Alt + click this icon to set this feature as the tip of the body.\n"
+                                "New feature will be inserted after it.");
+        }
     }
     return inherited::getToolTip(tag);
 }

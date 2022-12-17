@@ -190,6 +190,7 @@ public:
     enum SelectStyle {
       Full,
       Box,
+      BoxFull, // override full selection by showing only bounding box
       Unpickable,
     };
     enum FlagBits {

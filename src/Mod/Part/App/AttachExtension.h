@@ -27,6 +27,8 @@
 #ifndef PARTATTACHABLEOBJECT_H
 #define PARTATTACHABLEOBJECT_H
 
+#include <memory>
+
 #include <App/PropertyStandard.h>
 #include <App/PropertyLinks.h>
 #include <App/GeoFeature.h>
@@ -74,7 +76,7 @@ public:
      * destroyed, or when a new attacher is set. The default attacher is AttachEngine3D.
      * @param attacher. AttachableObject takes ownership and will delete it eventually.
      */
-    virtual void setAttacher(Attacher::AttachEngine* attacher);
+    virtual void setAttacher(Attacher::AttachEngine* attacher, bool base=false);
 
     /**
      * @brief changeAttacherType
@@ -83,13 +85,13 @@ public:
      * @return true if attacher was changed. false if attacher is already of the
      * type requested. Throws if invalid type is supplied.
      */
-    bool changeAttacherType(const char* typeName);
+    bool changeAttacherType(const char* typeName, bool base=false);
 
-    Attacher::AttachEngine &attacher(void) const {if(!_attacher) throw AttachEngineException("AttachableObject: no attacher is set."); return *_attacher;}
-
+    Attacher::AttachEngine &attacher(bool base=false) const;
 
     App::PropertyString         AttacherType;
-    App::PropertyLinkSubList    Support;
+    App::PropertyLinkSubList    Support; // deprecated, leave here for backward compatibility
+    App::PropertyLinkSubList    AttachmentSupport;
     App::PropertyEnumeration    MapMode; //see AttachEngine::eMapMode
     App::PropertyBool           MapReversed; //inverts Z and X internal axes
     App::PropertyPlacement      AttachmentOffset;
@@ -119,17 +121,40 @@ public:
     virtual PyObject* getExtensionPyObject(void);
     virtual void onExtendedDocumentRestored();
 
+    struct Properties {
+        App::PropertyString       *attacherType = nullptr;
+        App::PropertyLinkSubList  *attachment = nullptr;
+        App::PropertyEnumeration  *mapMode = nullptr;
+        App::PropertyBool         *mapReversed = nullptr;
+        App::PropertyFloat        *mapPathParameter = nullptr;
+        bool matchProperty(const App::Property *prop) const {
+            return prop == attachment
+                || prop == mapMode
+                || prop == mapReversed
+                || prop == mapPathParameter;
+        }
+    };
+    Properties getProperties(bool base) const;
+    Properties getInitedProperties(bool base);
+
 protected:
     virtual void extensionOnChanged(const App::Property* /*prop*/);
     virtual void extHandleChangedPropertyName(Base::XMLReader &reader, const char* TypeName, const char* PropName);
     
     App::PropertyPlacement& getPlacement() const;
+    void initBase(bool force);
 
 public:
-    void updateAttacherVals();
+    void updateAttacherVals(bool base=false) const;
+    void updatePropertyStatus(bool attached, bool base=false);
 
 private:
-    Attacher::AttachEngine* _attacher;
+    struct _Properties : Properties {
+        mutable std::unique_ptr<Attacher::AttachEngine> attacher;
+    };
+    _Properties _props;
+    _Properties _baseProps;
+
     mutable int _active = -1;
 };
 

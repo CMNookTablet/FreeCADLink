@@ -226,9 +226,9 @@ QWidget * PropertyItemDelegate::createEditor (QWidget * parent, const QStyleOpti
     }
     if (editor) // Make sure the editor background is painted so the cell content doesn't show through
         editor->setAutoFillBackground(true);
-    if (editor && childItem->isReadOnly())
-        editor->setDisabled(true);
-    else if (editor /*&& this->pressed*/) {
+    if (editor && childItem->isReadOnly()) {
+        childItem->disableEditor(editor);
+    } else if (editor /*&& this->pressed*/) {
         // We changed the way editor is activated in PropertyEditor (in response
         // of signal activated and clicked), so now we should grab focus
         // regardless of "pressed" or not (e.g. when activated by keyboard

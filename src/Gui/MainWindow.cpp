@@ -93,6 +93,7 @@
 #include "View.h"
 #include "Macro.h"
 #include "ProgressBar.h"
+#include "Widgets.h"
 
 #include "WidgetFactory.h"
 #include "BitmapFactory.h"
@@ -209,7 +210,7 @@ struct MainWindowP
     bool hasOverrideExtraIcons = false;
 
     void restoreWindowState(const QByteArray &);
-    void applyOverrideIcons(const QString &icons);
+    void applyOverrideIcons(const QStringList &icons);
 };
 
 class MDITabbar : public QTabBar
@@ -492,6 +493,9 @@ MainWindow::MainWindow(QWidget * parent, Qt::WindowFlags f)
         [this](const QString &msg) {
             if (msg.size()) d->actionLabel->clear();
         });
+
+    // Initialize customized tooltip manager
+    ToolTip::instance();
 }
 
 MainWindow::~MainWindow()
@@ -660,12 +664,14 @@ MainWindow* MainWindow::getInstance()
 }
 
 namespace {
+
 enum MenuType {
     ToolBarMenu,
     DockWindowMenu,
 };
 
-void populateMenu(QMenu *menu, MenuType type, bool popup)
+void populateMenu(QMenu *menu, MenuType type, bool popup,
+                  const QString &shortcutPrefix = QString())
 {
     auto mw = getMainWindow();
     QMap<QString, QAction*> actions;
@@ -780,19 +786,69 @@ void populateMenu(QMenu *menu, MenuType type, bool popup)
         }
     }
 
-    for(auto it=actions.begin(); it!=actions.end(); ++it) {
-        auto action = *it;
-        auto m = hiddenMenu && !action->isVisible() ? hiddenMenu : menu;
-        if (!popup) {
-            m->addAction(action);
-            continue;
-        }
+    auto addCheckBox = [&](QMenu *m, const QString &title, QAction *action) {
         QCheckBox *checkbox;
         auto wa = Action::addCheckBox(
-                m, it.key(), tooltip, action->icon(), action->isChecked(), &checkbox);
+                m, title, tooltip, action->icon(), action->isChecked(), &checkbox);
         QObject::connect(checkbox, SIGNAL(toggled(bool)), action, SIGNAL(triggered(bool)));
         QObject::connect(wa, SIGNAL(triggered(bool)), action, SIGNAL(triggered(bool)));
+        return wa;
+    };
+
+    if (!popup || shortcutPrefix.isEmpty()) {
+        for(auto it=actions.begin(); it!=actions.end(); ++it) {
+            auto action = *it;
+            auto m = hiddenMenu && !action->isVisible() ? hiddenMenu : menu;
+            if (!popup)
+                m->addAction(action);
+            else
+                addCheckBox(m, it.key(), action);
+        }
     }
+    else {
+        // Auto assign shortcuts. Try to reuse old one so that the shortcut won't
+        // jump around due to the fact that the actions are sorted by their names.
+        std::map<int, std::pair<QString, QAction*>> shortcutMap;
+        for(auto it=actions.begin(); it!=actions.end();) {
+            auto action = *it;
+            if (hiddenMenu && !action->isVisible()) {
+                addCheckBox(hiddenMenu, it.key(), action);
+                it = actions.erase(it);
+                continue;
+            }
+            QString shortcut = action->shortcut().toString();
+            if (shortcut.startsWith(shortcutPrefix)) {
+                int idx = shortcut.right(shortcut.size()-shortcutPrefix.size()).toInt();
+                if (!shortcutMap.emplace(idx, std::make_pair(it.key(), action)).second) {
+                    action->setShortcut(QString());
+                } else {
+                    it = actions.erase(it);
+                    continue;
+                }
+            }
+            ++it;
+        }
+        int i = 1;
+        for(auto it=actions.begin(); it!=actions.end(); ++it) {
+            for (; shortcutMap.count(i); ++i);
+            shortcutMap.emplace(i,std::make_pair(it.key(), it.value()));
+        }
+
+        for (const auto &v : shortcutMap) {
+            int idx = v.first;
+            QString title = v.second.first;
+            QAction *action = v.second.second;
+            QString shortcut;
+            if (idx <= 9) {
+                shortcut = QStringLiteral("%1%2").arg(shortcutPrefix).arg(idx);
+                title += QStringLiteral("  (%1)").arg(shortcut);
+            }
+            auto wa = addCheckBox(menu, title, action);
+            wa->setShortcut(shortcut);
+            action->setShortcut(shortcut);
+        }
+    }
+
     if (hiddenMenu)
         menu->addMenu(hiddenMenu);
     if (lockMenu)
@@ -1422,7 +1478,15 @@ void MainWindow::onDockWindowMenuAboutToShow()
 {
     QMenu* menu = static_cast<QMenu*>(sender());
     menu->clear();
-    populateMenu(menu, DockWindowMenu, false);
+    QString shortcutPrefix = QString::fromUtf8(d->hGrp->GetASCII("DockableWindowShortcut", "D, D").c_str());
+    shortcutPrefix = shortcutPrefix.trimmed();
+    if (!shortcutPrefix.isEmpty()) {
+        if (!shortcutPrefix.endsWith(QLatin1Char(',')))
+            shortcutPrefix += QStringLiteral(", ");
+        else
+            shortcutPrefix += QStringLiteral(" ");
+    }
+    populateMenu(menu, DockWindowMenu, false, shortcutPrefix);
 }
 
 QList<QWidget*> MainWindow::windows(QMdiArea::WindowOrder order) const
@@ -1470,7 +1534,7 @@ void MainWindow::closeEvent (QCloseEvent * e)
         /*emit*/ mainWindowClosed();
         d->activityTimer->stop();
         saveWindowSettings();
-        d->_restoring = true; // prevent futher triggering of saving window setting
+        d->_restoring = true; // prevent further triggering of saving window setting
         delete d->assistant;
         d->assistant = 0;
 
@@ -1690,7 +1754,7 @@ void MainWindow::loadWindowSettings()
     config.endGroup();
 
     std::string geometry = d->hGrp->GetASCII("Geometry");
-    std::istringstream iss;
+    std::istringstream iss(geometry);
     int x,y,w,h;
     if (iss >> x >> y >> w >> h) {
         pos = QPoint(x,y);
@@ -2139,11 +2203,11 @@ void MainWindow::insertFromMimeData (const QMimeData * mimeData)
         in.rdbuf(&buf);
         MergeDocuments mimeView(doc);
         std::vector<App::DocumentObject*> newObj = mimeView.importObjects(in);
-        std::vector<App::DocumentObjectGroup*> grp = Gui::Selection().getObjectsOfType<App::DocumentObjectGroup>();
+        auto grp = Gui::Selection().getSelection(doc->getName(), /*resolve*/1, /*single*/true);
         if (grp.size() == 1) {
             Gui::Document* gui = Application::Instance->getDocument(doc);
             if (gui)
-                gui->addRootObjectsToGroup(newObj, grp.front());
+                gui->addRootObjectsToGroup(newObj, grp.front().pObject);
         }
         doc->commitTransaction();
     }
@@ -2156,11 +2220,11 @@ void MainWindow::insertFromMimeData (const QMimeData * mimeData)
         MergeDocuments mimeView(doc);
         std::vector<App::DocumentObject*> newObj = mimeView.importObjects(str);
         str.close();
-        std::vector<App::DocumentObjectGroup*> grp = Gui::Selection().getObjectsOfType<App::DocumentObjectGroup>();
+        auto grp = Gui::Selection().getSelection(doc->getName(), /*resolve*/1, /*single*/true);
         if (grp.size() == 1) {
             Gui::Document* gui = Application::Instance->getDocument(doc);
             if (gui)
-                gui->addRootObjectsToGroup(newObj, grp.front());
+                gui->addRootObjectsToGroup(newObj, grp.front().pObject);
         }
         doc->commitTransaction();
     }
@@ -2271,10 +2335,10 @@ void MainWindow::setOverrideExtraIcons(const QString &icons)
     d->hasOverrideExtraIcons = true;
 }
 
-void MainWindowP::applyOverrideIcons(const QString &icons)
+void MainWindowP::applyOverrideIcons(const QStringList &icons)
 {
-    for (auto &s : icons.split(QRegExp(QStringLiteral("[\r\n]")),QString::SkipEmptyParts)) {
-        s = s.trimmed();
+    for (const auto &line : icons) {
+        auto s = line.left(line.size()).trimmed();
         if (s.startsWith(QStringLiteral("#")) || s.startsWith(QStringLiteral("//")))
             continue;
         auto pair = s.split(QLatin1Char(','));
@@ -2284,10 +2348,11 @@ void MainWindowP::applyOverrideIcons(const QString &icons)
             FC_WARN("Invalid icon override in stylesheet: " << s.toUtf8().constData());
             continue;
         }
+        QString path;
         QByteArray name = pair[0].trimmed().toUtf8();
         QPixmap icon;
         if (pair.size() >= 2) {
-            QString path = pair[1].trimmed();
+            path = pair[1].trimmed();
             if (path.size()) {
                 QSize size(64, 64);
                 if (pair.size() == 3) {
@@ -2308,9 +2373,61 @@ void MainWindowP::applyOverrideIcons(const QString &icons)
                             << " from " << path.toUtf8().constData());
             }
         }
-        BitmapFactory().addPixmapToCache(name, icon, true);
+        BitmapFactory().addPixmapToCache(name, icon, path.toUtf8().constData(), true);
     }
 }
+
+namespace {
+QStringList loadIconSet(std::set<QString> &files,
+                        QString content,
+                        bool asFileName)
+{
+    QStringList lines;
+    if (asFileName) {
+        static QString prefix(QStringLiteral("iconset:"));
+
+        QFileInfo finfo;
+        if (QFile::exists(content)) {
+            finfo.setFile(content);
+        }
+        else if (QFile::exists(prefix + content)) {
+            finfo.setFile(prefix + content);
+        }
+        else {
+            FC_WARN("Cannot file icon set file " << content.toUtf8().constData());
+            return lines;
+        }
+        if (!files.insert(finfo.canonicalFilePath()).second) {
+            FC_WARN("Cyclic icon set import " << content.toUtf8().constData());
+            return lines;
+        }
+        QFile file(finfo.filePath());
+        if (!file.open(QFile::ReadOnly | QFile::Text))
+            return lines;
+
+        QTextStream str(&file);
+        content = str.readAll();
+    }
+
+    static QString keyword(QStringLiteral("#import "));
+    lines = content.split(QRegExp(QStringLiteral("[\r\n]")),QString::SkipEmptyParts);
+    for (auto it = lines.begin(); it != lines.end(); ++it) {
+        auto line = it->left(it->size()).trimmed();
+        if (!line.startsWith(keyword))
+            continue;
+        auto importFile = line.right(line.size() - keyword.size()).trimmed();
+        for (const auto &s : loadIconSet(files, importFile, /*asFileName*/true))
+            it = lines.insert(++it, s);
+    }
+    return lines;
+}
+
+QStringList loadIconSet(QString content, bool asFileName)
+{
+    std::set<QString> files;
+    return loadIconSet(files, content, asFileName);
+}
+} // anonymous namespace
 
 void MainWindow::changeEvent(QEvent *e)
 {
@@ -2329,19 +2446,20 @@ void MainWindow::changeEvent(QEvent *e)
     else if (e->type() == QEvent::StyleChange) {
         if (d->hasOverrideExtraIcons) {
             d->hasOverrideExtraIcons = false;
-            d->applyOverrideIcons(d->overrideExtraIcons);
+            d->applyOverrideIcons(loadIconSet(d->overrideExtraIcons, /*asFileName*/true));
         } else
             d->overrideExtraIcons.clear();
 
         if (d->hasOverrideIcons) {
             d->hasOverrideIcons = false;
-            d->applyOverrideIcons(d->overrideIcons);
+            d->applyOverrideIcons(loadIconSet(d->overrideIcons, /*asFileName*/false));
         } else
             d->overrideIcons.clear();
 
         BitmapFactory().onStyleChange();
         Application::Instance->commandManager().refreshIcons();
         OverlayManager::instance()->refreshIcons();
+        TipLabel::refreshIcons();
     }
     else if (e->type() == QEvent::ActivationChange) {
         if (isActiveWindow()) {

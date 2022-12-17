@@ -111,8 +111,8 @@ int Part::ImportStepParts(App::Document *pcDoc, const char* Name)
         throw Base::FileException("Cannot open STEP file");
     }
 
-#if OCC_VERSION_HEX < 0x070500
     Handle(Message_ProgressIndicator) pi = new ProgressIndicator(100);
+#if OCC_VERSION_HEX < 0x070500
     aReader.WS()->MapReader()->SetProgress(pi);
     pi->NewScope(100, "Reading STEP file...");
     pi->Show();
@@ -123,7 +123,11 @@ int Part::ImportStepParts(App::Document *pcDoc, const char* Name)
     //aReader.PrintCheckTransfer (failsonly, IFSelect_ItemsByEntity);
     for (Standard_Integer n = 1; n<= nbr; n++) {
         Base::Console().Log("STEP: Transferring Root %d\n",n);
+#if OCC_VERSION_HEX < 0x070500
         aReader.TransferRoot(n);
+#else
+        aReader.TransferRoot(n, pi->Start());
+#endif
     }
 #if OCC_VERSION_HEX < 0x070500
     pi->EndScope();

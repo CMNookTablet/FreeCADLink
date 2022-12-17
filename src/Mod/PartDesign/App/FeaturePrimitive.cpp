@@ -113,19 +113,19 @@ App::DocumentObjectExecReturn* FeaturePrimitive::execute(const TopoDS_Shape& pri
         const char *maker;
         switch(getAddSubType()) {
         case Additive:
-            maker = TOPOP_FUSE;
+            maker = Part::OpCodes::Fuse;
             break;
         case Subtractive:
-            maker = TOPOP_CUT;
+            maker = Part::OpCodes::Cut;
             break;
         case Intersecting:
-            maker = TOPOP_COMMON;
+            maker = Part::OpCodes::Common;
             break;
         default:
             return new App::DocumentObjectExecReturn("Unknown operation type");
         }
         try {
-            boolOp.makEShape(maker, {base,primitiveShape});
+            boolOp.makEBoolean(maker, {base,primitiveShape});
         }catch(Standard_Failure &e) {
             return new App::DocumentObjectExecReturn("Failed to perform boolean operation");
         }
@@ -425,7 +425,7 @@ Ellipsoid::Ellipsoid()
 
 void Ellipsoid::setupObject()
 {
-    Split.setValue(Part::PartParams::SplitEllipsoid());
+    Split.setValue(Part::PartParams::getSplitEllipsoid());
     FeaturePrimitive::setupObject();
 }
 

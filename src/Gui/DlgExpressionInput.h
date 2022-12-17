@@ -136,6 +136,8 @@ protected:
     void onClose();
     int hitTest(const QPoint &point);
 
+    void accept();
+
 private Q_SLOTS:
     void textChanged();
     void setDiscarded();

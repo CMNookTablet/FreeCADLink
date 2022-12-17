@@ -135,31 +135,9 @@ SheetView::~SheetView()
     //delete delegate;
 }
 
-bool SheetView::onMsg(const char *pMsg, const char **)
+bool SheetView::onMsg(const char *pMsg, const char **ppReturn)
 {
-    if(strcmp("Undo",pMsg) == 0 ) {
-        getGuiDocument()->undo(1);
-        App::Document* doc = getAppDocument();
-        if (doc)
-            doc->recompute();
-        return true;
-    }
-    else  if(strcmp("Redo",pMsg) == 0 ) {
-        getGuiDocument()->redo(1);
-        App::Document* doc = getAppDocument();
-        if (doc)
-            doc->recompute();
-        return true;
-    }
-    else if (strcmp("Save",pMsg) == 0) {
-        getGuiDocument()->save();
-        return true;
-    }
-    else if (strcmp("SaveAs",pMsg) == 0) {
-        getGuiDocument()->saveAs();
-        return true;
-    }
-    else if(strcmp("Std_Delete",pMsg) == 0) {
+    if(strcmp("Std_Delete",pMsg) == 0) {
         std::vector<Range> ranges = selectedRanges();
         if (sheet->hasCell(ranges)) {
             Gui::Command::openCommand(QT_TRANSLATE_NOOP("Command", "Clear cell(s)"));
@@ -185,7 +163,7 @@ bool SheetView::onMsg(const char *pMsg, const char **)
         return true;
     }
     else
-        return false;
+        return Gui::MDIView::onMsg(pMsg, ppReturn);
 }
 
 bool SheetView::onHasMsg(const char *pMsg) const

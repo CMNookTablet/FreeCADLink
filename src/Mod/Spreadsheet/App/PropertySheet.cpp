@@ -306,6 +306,9 @@ void PropertySheet::Paste(const Property &from)
     }
 
     mergedCells = froms.mergedCells;
+
+    if (owner)
+        owner->tableRefresh();
     signaller.tryInvoke();
 }
 
@@ -1604,7 +1607,7 @@ void PropertySheet::updateElementReference(DocumentObject *feature,bool reverse,
         expr->visit(visitor);
     }
     if(feature && visitor.changed()) {
-        auto owner = dynamic_cast<App::DocumentObject*>(getContainer());
+        auto owner = Base::freecad_dynamic_cast<App::DocumentObject>(getContainer());
         if(owner)
             owner->onUpdateElementReference(this);
     }
@@ -1783,8 +1786,11 @@ bool PropertySheet::isBindingPath(const ObjectIdentifier &path,
     return true;
 }
 
-PropertySheet::BindingType PropertySheet::getBinding(
-        const Range &range, ExpressionPtr *pStart, ExpressionPtr *pEnd) const
+PropertySheet::BindingType
+PropertySheet::getBinding(const Range &range,
+                          ExpressionPtr *pStart,
+                          ExpressionPtr *pEnd,
+                          App::ObjectIdentifier *pTarget) const
 {
     if(!owner)
         return BindingNone;
@@ -1807,6 +1813,10 @@ PropertySheet::BindingType PropertySheet::getBinding(
             }
 
             if(expr->type()==FunctionExpression::TUPLE && expr->getArgs().size()==3) {
+                if (pTarget) {
+                    if (auto e = SimpleStatement::cast<VariableExpression>(expr->getArgs().front().get()))
+                        *pTarget = e->getPath();
+                }
                 if(pStart)
                     *pStart = expr->getArgs()[1]->copy();
                 if(pEnd)
@@ -1853,78 +1863,135 @@ void PropertySheet::setPathValue(const ObjectIdentifier &path, const App::any &v
             App::CellAddress targetTo = other->getCellAddress(
                 Py::Object(seq[2].ptr()).as_string().c_str());
 
-            App::Range range(from,to);
-            App::Range rangeTarget(targetFrom,targetTo);
-
             std::string expr(href?"hiddenref(":"");
             if(other != this) {
                 if(otherOwner->getDocument() == owner->getDocument())
-                    expr = otherOwner->getNameInDocument();
+                    expr += otherOwner->getNameInDocument();
                 else
-                    expr = otherOwner->getFullName();
+                    expr += otherOwner->getFullName();
             }
             expr += ".";
             std::size_t exprSize = expr.size();
 
-            do {
-                CellAddress target(*rangeTarget);
-                CellAddress source(*range);
-                if(other == this && source.row() >= targetFrom.row()
-                        && source.row() <= targetTo.row()
-                        && source.col() >= targetFrom.col()
-                        && source.col() <= targetTo.col())
-                    continue;
-
-                Cell *dst = other->getValue(target);
-                Cell *src = getValue(source);
-                if(!dst) {
-                    if(src && !VariableExpression::isDoubleBinding(src->getExpression())) {
-                        signaller.aboutToChange();
-                        owner->clear(source);
-                        owner->cellUpdated(source);
-                    }
-                    continue;
+            auto normalize = [](CellAddress &from, CellAddress &to) {
+                if (from.row() > to.row()) {
+                    int tmp = from.row();
+                    from.setRow(to.row());
+                    to.setRow(tmp);
                 }
-
-                if(!src) {
-                    signaller.aboutToChange();
-                    src = createCell(source);
-                    src->checkAutoAlias();
+                if (from.col() > to.col()) {
+                    int tmp = from.col();
+                    from.setCol(to.col());
+                    to.setCol(tmp);
                 }
+            };
 
-                std::string alias;
-                if(this!=other && dst->getAlias(alias) && !src->isAliasLocked()) {
-                    auto *oldCell = getValueFromAlias(alias);
-                    if(oldCell && oldCell!=dst) {
-                        signaller.aboutToChange();
-                        oldCell->setAlias("");
-                    }
-                    std::string oldAlias;
-                    if(!src->getAlias(oldAlias) || oldAlias!=alias) {
-                        signaller.aboutToChange();
-                        setAlias(source,alias);
-                    }
-                }
+            normalize(from, to);
+            normalize(targetFrom, targetTo);
+            App::Range totalRange(from, to);
+            std::set<CellAddress> touched;
 
-                expr.resize(exprSize);
-                expr += rangeTarget.address();
-                if(href)
-                    expr += ")";
-                auto e2 = src->getExpression();
-                auto vexpr = VariableExpression::isDoubleBinding(e2);
-                if(vexpr) {
-                    vexpr->assign(dst->getPyValue());
-                } else {
-                    auto e = ExpressionPtr(App::Expression::parse(owner,expr));
-                    if(!e2 || !e->isSame(*e2,false)) {
-                        signaller.aboutToChange();
-                        src->setEditMode(Cell::EditNormal);
-                        src->setExpression(std::move(e));
-                    }
-                }
+            while(from.row() <= to.row()
+                    && from.col() <= to.col()
+                    && targetFrom.row() <= targetTo.row()
+                    && targetFrom.col() <= targetTo.col())
+            {
+                App::Range range(from, to);
+                App::Range rangeTarget(targetFrom, targetTo);
+                int rowCount = std::min(range.rowCount(), rangeTarget.rowCount());
+                int colCount = std::min(range.colCount(), rangeTarget.colCount());
+                if (rowCount == range.rowCount())
+                    from.setCol(from.col() + colCount);
+                else if (colCount == range.colCount())
+                    from.setRow(from.row() + rowCount);
+                if (rowCount == rangeTarget.rowCount())
+                    targetFrom.setCol(targetFrom.col() + colCount);
+                else if (colCount == rangeTarget.colCount())
+                    targetFrom.setRow(targetFrom.row() + rowCount);
 
-            } while(range.next() && rangeTarget.next());
-            owner->rangeUpdated(range);
+                range = App::Range(range.from().row(),
+                                   range.from().col(),
+                                   range.from().row()+rowCount-1,
+                                   range.from().col()+colCount-1);
+                rangeTarget = App::Range(rangeTarget.from().row(),
+                                         rangeTarget.from().col(),
+                                         rangeTarget.from().row()+rowCount-1,
+                                         rangeTarget.from().col()+colCount-1);
+                do {
+                    CellAddress target(*rangeTarget);
+                    CellAddress source(*range);
+                    if(other == this && source.row() >= rangeTarget.from().row()
+                            && source.row() <= rangeTarget.to().row()
+                            && source.col() >= rangeTarget.from().col()
+                            && source.col() <= rangeTarget.to().col())
+                        continue;
+
+                    Cell *dst = other->getValue(target);
+                    Cell *src = getValue(source);
+                    if(!dst || !dst->getExpression()) {
+                        if(src && src->getExpression()
+                               && !VariableExpression::isDoubleBinding(src->getExpression())) {
+                            signaller.aboutToChange();
+                            src->setExpression(nullptr);
+                            owner->cellUpdated(source);
+                        }
+                        continue;
+                    }
+                    touched.insert(source);
+
+                    if(!src) {
+                        signaller.aboutToChange();
+                        src = createCell(source);
+                        src->checkAutoAlias();
+                    }
+
+                    std::string alias;
+                    if(this!=other && dst->getAlias(alias) && !src->isAliasLocked()) {
+                        auto *oldCell = getValueFromAlias(alias);
+                        if(oldCell && oldCell!=dst) {
+                            signaller.aboutToChange();
+                            oldCell->setAlias("");
+                        }
+                        std::string oldAlias;
+                        if(!src->getAlias(oldAlias) || oldAlias!=alias) {
+                            signaller.aboutToChange();
+                            setAlias(source,alias);
+                        }
+                    }
+
+                    expr.resize(exprSize);
+                    expr += rangeTarget.address();
+                    if(href)
+                        expr += ")";
+                    auto e2 = src->getExpression();
+                    auto vexpr = VariableExpression::isDoubleBinding(e2);
+                    if(vexpr) {
+                        vexpr->assign(dst->getPyValue());
+                    } else {
+                        auto e = ExpressionPtr(App::Expression::parse(owner,expr));
+                        if(!e2 || !e->isSame(*e2,false)) {
+                            signaller.aboutToChange();
+                            src->setEditMode(Cell::EditNormal);
+                            src->setExpression(std::move(e));
+                        }
+                    }
+                } while(range.next() && rangeTarget.next());
+            }
+
+            if (totalRange.size() != (int)touched.size()) {
+                do {
+                    CellAddress addr(*totalRange);
+                    if (touched.count(addr))
+                        continue;
+                    Cell *src = getValue(addr);
+                    if (src && src->getExpression()) {
+                        signaller.aboutToChange();
+                        src->setExpression(nullptr);
+                    }
+                } while(totalRange.next());
+            }
+
+            owner->rangeUpdated(totalRange);
             signaller.tryInvoke();
             return;
         }
@@ -1943,4 +2010,55 @@ App::any PropertySheet::getPathValue(const App::ObjectIdentifier & path) const {
 bool PropertySheet::isTouched() const
 {
     return isDirty();
+}
+
+bool PropertySheet::hasSpan() const
+{
+    return !mergedCells.empty();
+}
+
+void PropertySheet::getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                               App::DocumentObject *obj,
+                               const char *subname,
+                               bool all) const
+{
+    Expression::DepOption option = all ? Expression::DepOption::DepAll
+                                       : Expression::DepOption::DepNormal;
+
+    App::SubObjectT objT(obj, subname);
+    auto sobj = objT.getSubObject();
+    auto subElement = objT.getOldElementName();
+
+    auto owner = Base::freecad_dynamic_cast<App::DocumentObject>(getContainer());
+    for (const auto &v : data) {
+        if (auto expr = v.second->getExpression()) {
+            const auto &deps = expr->getDeps(option);
+            auto it = deps.find(obj);
+            if(it==deps.end())
+                continue;
+            for(auto &dep : it->second)  {
+                if (!subname) {
+                    identifiers.emplace_back(owner, v.first.toString().c_str());
+                    break;
+                }
+                bool found = false;
+                for (const auto &path : dep.second) {
+                    if (path.getSubObjectName() == subname) {
+                        identifiers.emplace_back(owner, v.first.toString().c_str());
+                        found = true;
+                        break;
+                    }
+                    App::SubObjectT sobjT(obj, path.getSubObjectName().c_str());
+                    if (sobjT.getSubObject() == sobj
+                            && sobjT.getOldElementName() == subElement) {
+                        identifiers.emplace_back(owner, v.first.toString().c_str());
+                        found = true;
+                        break;
+                    }
+                }
+                if (found)
+                    break;
+            }
+        }
+    }
 }

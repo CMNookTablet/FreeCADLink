@@ -53,6 +53,8 @@ namespace Path
             virtual void Restore(Base::XMLReader &/*reader*/);
             void SaveDocFile (Base::Writer &writer) const;
             void RestoreDocFile(Base::Reader &reader);
+
+            void _Restore(Base::XMLReader &/*reader*/, Base::Persistence *owner);
         
             // interface
             void clear(void); // clears the internal data

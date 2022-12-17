@@ -24,10 +24,6 @@
 #ifndef PARTDESIGN_Loft_H
 #define PARTDESIGN_Loft_H
 
-#include <App/PropertyUnits.h>
-#include <App/PropertyStandard.h>
-#include <App/PropertyUnits.h>
-
 #include "FeatureSketchBased.h"
 
 namespace PartDesign
@@ -40,9 +36,9 @@ class PartDesignExport Loft : public ProfileBased
 public:
     Loft();
 
-    App::PropertyLinkList Sections;
+    App::PropertyLinkSubList Sections;
     App::PropertyBool     Ruled;
-    App::PropertyBool     Closed;    
+    App::PropertyBool     Closed;
     App::PropertyBool     SplitProfile;    
 
     /** @name methods override feature */
@@ -54,6 +50,15 @@ public:
         return "PartDesignGui::ViewProviderLoft";
     }
     //@}
+
+    static std::vector<Part::TopoShape> getSectionShape(const char *name,
+                                                 App::DocumentObject *obj,
+                                                 const std::vector<std::string> &subname,
+                                                 size_t expected_size = 0);
+
+protected:
+    // handle changed property
+    virtual void handleChangedPropertyType(Base::XMLReader& reader, const char* TypeName, App::Property* prop);
 
 private:
     //static const char* TypeEnums[];

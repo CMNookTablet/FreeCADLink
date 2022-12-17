@@ -254,6 +254,11 @@ void AttachEngine::setUp(const AttachEngine &another)
     this->attachmentOffset = another.attachmentOffset;
 }
 
+void AttachEngine::setOffset(const Base::Placement &offset)
+{
+    this->attachmentOffset = offset;
+}
+
 Base::Placement AttachEngine::placementFactory(const gp_Dir &ZAxis,
                                         gp_Vec XAxis,
                                         gp_Pnt Origin,
@@ -829,7 +834,32 @@ void AttachEngine::readLinks(const std::vector<App::DocumentObject*> &objs,
         App::GeoFeature* geof = static_cast<App::GeoFeature*>(objs[i]);
         geofs[i] = geof;
         Part::TopoShape shape;
-        if (geof->isDerivedFrom(Part::Feature::getClassTypeId())){
+        if (  geof->isDerivedFrom(App::Plane::getClassTypeId())  ){
+            //obtain Z axis and origin of placement
+            Base::Vector3d norm;
+            geof->Placement.getValue().getRotation().multVec(Base::Vector3d(0.0,0.0,1.0),norm);
+            Base::Vector3d org;
+            geof->Placement.getValue().multVec(Base::Vector3d(),org);
+            //make shape - an local-XY plane infinite face
+            gp_Pln pl = gp_Pln(gp_Pnt(org.x, org.y, org.z), gp_Dir(norm.x, norm.y, norm.z));
+            TopoDS_Shape myShape = BRepBuilderAPI_MakeFace(pl).Shape();
+            myShape.Infinite(true);
+            storage.push_back(myShape);
+            shapes[i] = &(storage[storage.size()-1]);
+        } else if (  geof->isDerivedFrom(App::Line::getClassTypeId())  ){
+            //obtain X axis and origin of placement
+            //note an inconsistency: App::Line is along local X, PartDesign::DatumLine is along local Z.
+            Base::Vector3d dir;
+            geof->Placement.getValue().getRotation().multVec(Base::Vector3d(1.0,0.0,0.0),dir);
+            Base::Vector3d org;
+            geof->Placement.getValue().multVec(Base::Vector3d(),org);
+            //make shape - an infinite line along local X axis
+            gp_Lin l = gp_Lin(gp_Pnt(org.x, org.y, org.z), gp_Dir(dir.x, dir.y, dir.z));
+            TopoDS_Shape myShape = BRepBuilderAPI_MakeEdge(l).Shape();
+            myShape.Infinite(true);
+            storage.push_back(myShape);
+            shapes[i] = &(storage[storage.size()-1]);
+        } else {
             try{
                 shape = Part::Feature::getTopoShape(geof, sub[i].c_str(), true);
                 for(;;) {
@@ -856,35 +886,6 @@ void AttachEngine::readLinks(const std::vector<App::DocumentObject*> &objs,
                 FC_THROWM(AttachEngineException, "AttachEngine3D: null subshape "
                         << objs[i]->getNameInDocument() << '.' << sub[i]);
             shapes[i] = &(storage.back());
-        } else if (  geof->isDerivedFrom(App::Plane::getClassTypeId())  ){
-            //obtain Z axis and origin of placement
-            Base::Vector3d norm;
-            geof->Placement.getValue().getRotation().multVec(Base::Vector3d(0.0,0.0,1.0),norm);
-            Base::Vector3d org;
-            geof->Placement.getValue().multVec(Base::Vector3d(),org);
-            //make shape - an local-XY plane infinite face
-            gp_Pln pl = gp_Pln(gp_Pnt(org.x, org.y, org.z), gp_Dir(norm.x, norm.y, norm.z));
-            TopoDS_Shape myShape = BRepBuilderAPI_MakeFace(pl).Shape();
-            myShape.Infinite(true);
-            storage.push_back(myShape);
-            shapes[i] = &(storage[storage.size()-1]);
-        } else if (  geof->isDerivedFrom(App::Line::getClassTypeId())  ){
-            //obtain X axis and origin of placement
-            //note an inconsistency: App::Line is along local X, PartDesign::DatumLine is along local Z.
-            Base::Vector3d dir;
-            geof->Placement.getValue().getRotation().multVec(Base::Vector3d(1.0,0.0,0.0),dir);
-            Base::Vector3d org;
-            geof->Placement.getValue().multVec(Base::Vector3d(),org);
-            //make shape - an infinite line along local X axis
-            gp_Lin l = gp_Lin(gp_Pnt(org.x, org.y, org.z), gp_Dir(dir.x, dir.y, dir.z));
-            TopoDS_Shape myShape = BRepBuilderAPI_MakeEdge(l).Shape();
-            myShape.Infinite(true);
-            storage.push_back(myShape);
-            shapes[i] = &(storage[storage.size()-1]);
-        } else {
-            Base::Console().Warning("Attacher: linked object %s is unexpected, assuming it has no shape.\n",geof->getNameInDocument());
-            storage.emplace_back();
-            shapes[i] = &(storage[storage.size()-1]);
         }
 
         //FIXME: unpack single-child compounds here? Compounds are not used so far, so it should be considered later, when the need arises.
@@ -969,10 +970,12 @@ Base::Placement AttachEngine::calculateAttachedPlacement(
         if(pla.getPosition().IsEqual(origPlacement.getPosition(),1e-7)
             && pla.getRotation().isSame(origPlacement.getRotation(),1e-12))
         {
-            if(subChanged) *subChanged = true;
-            subnames = std::move(subs);
-            for(auto &v : subChanges)
-                shadowSubs[v.first] = v.second.first;
+            if(subChanged) {
+                *subChanged = true;
+                subnames = std::move(subs);
+                for(auto &v : subChanges)
+                    shadowSubs[v.first] = v.second.first;
+            }
             return pla;
         }
     }

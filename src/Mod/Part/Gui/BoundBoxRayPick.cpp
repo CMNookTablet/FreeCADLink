@@ -43,11 +43,7 @@ inline bool intersects<MySbBox3f>(MySbBox3f const& box, Ray const &ray);
 
 }}
 
-#include <boost/geometry.hpp>
-#include <boost/geometry/index/rtree.hpp>
-#include <boost/geometry/geometries/geometries.hpp>
-#include <boost/geometry/geometries/register/point.hpp>
-#include <boost/geometry/geometries/register/box.hpp>
+#include <boost_geometry.hpp>
 
 #include "BoundBoxRayPick.h"
 

@@ -98,6 +98,10 @@
         <file>icons/PartWorkbench.svg</file>
         <file>icons/preferences-part_design.svg</file>
         <file>icons/Part_Attachment_Detached.svg</file>
+        <file>icons/Part_Suppressed.svg</file>
+        <file>icons/Part_Replacement.svg</file>
+        <file>icons/Part_ReplacementSuppressed.svg</file>
+        <file>icons/Part_ContentDetached.svg</file>
     </qresource>
     <qresource>
         <file>translations/Part_af.qm</file>

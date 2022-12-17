@@ -47,6 +47,7 @@
 #include <Gui/BitmapFactory.h>
 #include <Gui/ActionFunction.h>
 #include <Gui/Command.h>
+#include <Gui/MenuManager.h>
 
 #include <Mod/Part/App/SubShapeBinder.h>
 #include <Mod/Part/App/BodyBase.h>
@@ -94,7 +95,7 @@ void ViewProviderSubShapeBinder::onChanged(const App::Property *prop) {
         if(UseBinderStyle.getValue()) {
             //get the datum coloring scheme
             // set default color for datums (golden yellow with 60% transparency)
-            shapeColor.setPackedValue(PartParams::DefaultDatumColor());
+            shapeColor.setPackedValue(PartParams::getDefaultDatumColor());
             lineColor = shapeColor;
             pointColor = shapeColor;
             transparency = 60;
@@ -507,46 +508,70 @@ QString ViewProviderSubShapeBinder::getToolTip(const QByteArray &tag) const
     std::ostringstream ss;
     auto doc = getObject()->getDocument()->getName();
 
-    if (tag == Gui::treeMainIconTag()) {
-        if (!self->Support.getValue()) {
-            if (self->BindMode.getValue() == 2)
-                return QObject::tr("Detached shape binder");
-            return QString();
+    const int limit = 10;
+    int count = 0;
+    bool hit = false;
+    auto it = iconMap.find(tag);
+    if (it != iconMap.end()) {
+        hit = true;
+        for (auto &objT : it->second.objs) {
+            if (++count > limit) {
+                ss << "\n...";
+                break;
+            }
+            ss << "\n" << objT.getSubObjectFullName(doc);
         }
+    }
+    if (count == 0) {
         for(auto &link : self->Support.getSubListValues()) {
             auto obj = link.getValue();
             if(!obj || !obj->getNameInDocument())
                 continue;
             const auto &subs = link.getSubValues();
             if(subs.size()) {
-                for (auto &sub : subs)
+                for (auto &sub : subs) {
+                    if (++count > limit) {
+                        ss << "\n...";
+                        break;
+                    }
                     ss << "\n" << App::SubObjectT(obj, sub.c_str()).getSubObjectFullName(doc);
-            } else
+                }
+            } else {
+                if (++count > limit) {
+                    ss << "\n...";
+                    break;
+                }
                 ss << "\n" << App::SubObjectT(obj, "").getObjectFullName(doc);
+            }
         }
-    } else {
-        auto it = iconMap.find(tag);
-        if (it == iconMap.end())
-            return inherited::getToolTip(tag);
-        for (auto &objT : it->second.objs)
-            ss << "\n" << objT.getSubObjectFullName(doc);
     }
 
-    if (!ss.tellp())
-        return QString();
+    QString bindInfo;
+    if (self->BindMode.getValue() == 2)
+        bindInfo = QObject::tr("Detached shape binder. ");
+    else if (self->BindMode.getValue() == 1)
+        bindInfo = QObject::tr("Frozen shape binder. ");
+    
+    if (ss.tellp()) {
+        bindInfo = QStringLiteral("%1%2\n%3").arg(
+                        bindInfo,
+                        hit ? QObject::tr("Bound objects with this icon:")
+                            : QObject::tr("Bound objects:"),
+                        QString::fromUtf8(ss.str().c_str()));
+    }
 
     if (Gui::isTreeViewDragging()) {
-        return QStringLiteral("%1\n%2\n%3").arg(
-                QObject::tr("Drop to add more binding, or hold CTRL to clear before assign new bindings."),
-                self->BindMode.getValue() == 1 ? 
-                    QObject::tr("Frozen bound objects:") : QObject::tr("Current bound objects:"),
-                QString::fromUtf8(ss.str().c_str()));
+        return QStringLiteral("%1%2%3").arg(QObject::tr(
+                "Drop to add more binding, or hold CTRL to clear before assign new bindings."),
+                bindInfo.isEmpty() ? QString() : QStringLiteral("\n\n"),
+                bindInfo);
     }
-    return QStringLiteral("%1 %2\n%3").arg(
-            self->BindMode.getValue() == 1 ?
-                QObject::tr("Frozen bound objects") : QObject::tr("Bound objects"),
-            QObject::tr("(ALT + click this icon to select):"),
-            QString::fromUtf8(ss.str().c_str()));
+    if (hit)
+        return QStringLiteral("%1%2%3").arg(QObject::tr(
+                    "ALT + click this icon to select the bound objects."),
+                    bindInfo.isEmpty() ? QString() : QStringLiteral("\n\n"),
+                    bindInfo);
+    return bindInfo;
 }
 
 bool ViewProviderSubShapeBinder::iconMouseEvent(QMouseEvent *ev, const QByteArray &tag)

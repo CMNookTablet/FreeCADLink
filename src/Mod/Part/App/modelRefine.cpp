@@ -75,6 +75,7 @@
 
 #include "modelRefine.h"
 #include "PartFeature.h"
+#include "TopoShape.h"
 
 FC_LOG_LEVEL_INIT("Part", true, true);
 
@@ -1064,7 +1065,7 @@ bool FaceUniter::process()
                 if (!newFace.IsNull())
                 {
                     Bnd_Box newBounds;
-                    BRepBndLib::Add(newFace, newBounds);
+                    BRepBndLib::AddOptimal(newFace, newBounds);
                     newBounds.SetGap(0.0);
                     Standard_Real xMin, yMin, zMin, xMax, yMax, zMax;
                     newBounds.Get(xMin, yMin, zMin, xMax, yMax, zMax);
@@ -1072,21 +1073,38 @@ bool FaceUniter::process()
                     Bnd_Box oldBounds;
                     const FaceVectorType &temp = adjacencySplitter.getGroup(adjacentIndex);
                     for (auto &s : temp)
-                        BRepBndLib::Add(s, oldBounds);
+                        BRepBndLib::AddOptimal(s, oldBounds);
 
                     oldBounds.SetGap(0.0);
                     Standard_Real xMin1, yMin1, zMin1, xMax1, yMax1, zMax1;
                     oldBounds.Get(xMin1, yMin1, zMin1, xMax1, yMax1, zMax1);
-                    if (std::fabs(xMin-xMin1) > Precision::Confusion()
-                        || std::fabs(yMin-yMin1) > Precision::Confusion()
-                        || std::fabs(zMin-zMin1) > Precision::Confusion()
-                        || std::fabs(xMax-xMax1) > Precision::Confusion()
-                        || std::fabs(yMax-yMax1) > Precision::Confusion()
-                        || std::fabs(zMax-zMax1) > Precision::Confusion())
-                    {
-                        if (FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG))
-                            FC_WARN("united face bounding box mismatch");
-                        continue;
+                    double tol = BRep_Tool::Tolerance(newFace);
+                    double tbound = std::max({std::fabs(xMin-xMin1),
+                                              std::fabs(yMin-yMin1),
+                                              std::fabs(zMin-zMin1),
+                                              std::fabs(xMax-xMax1),
+                                              std::fabs(yMax-yMax1),
+                                              std::fabs(zMax-zMax1)});
+                    if (tbound > tol) {
+                        bool proceed = false;
+                        if (tbound <= Precision::Confusion()*10.0) {
+                            Part::TopoShape s(newFace, -1);
+                            if (s.fix(tbound, tbound, tbound)) {
+                                newFace = TopoDS::Face(s.getShape());
+                                proceed = true;
+                                if (FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG))
+                                    FC_WARN("Face refine auto correct precision to "
+                                            << std::setprecision(std::numeric_limits<double>::digits10 + 1)
+                                            << tbound);
+                            }
+                        }
+                        if (!proceed) {
+                            if (FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG))
+                                FC_WARN("Face refine failed because of bounding box mismatch, "
+                                        << std::setprecision(std::numeric_limits<double>::digits10 + 1)
+                                        << tbound);
+                            continue;
+                        }
                     }
 
                     // the created face should have the same orientation as the input faces

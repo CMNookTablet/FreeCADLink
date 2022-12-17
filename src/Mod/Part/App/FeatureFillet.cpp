@@ -126,7 +126,7 @@ App::DocumentObjectExecReturn *Fillet::execute(void)
             return new App::DocumentObjectExecReturn("Resulting shape is null");
 
         TopoShape res(0,getDocument()->getStringHasher());
-        this->Shape.setValue(res.makEShape(mkFillet,baseTopoShape,TOPOP_FILLET));
+        this->Shape.setValue(res.makEShape(mkFillet,baseTopoShape,Part::OpCodes::Fillet));
 #endif
 
         return Part::Feature::execute();

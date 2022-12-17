@@ -117,7 +117,7 @@ public:
         add_keyword_method("export",&Module::exporter,
             "export(list,string) -- Export a list of objects into a single file."
         );
-         add_varargs_method("readDXF",&Module::readDXF,
+         add_keyword_method("readDXF",&Module::readDXF,
             "readDXF(filename,[document,ignore_errors]): Imports a DXF file into the given document. ignore_errors is True by default."
         );
         add_varargs_method("writeDXFShape",&Module::writeDXFShape,
@@ -176,13 +176,15 @@ private:
                         throw Py::Exception(PyExc_IOError, "cannot read STEP file");
                     }
 
-#if OCC_VERSION_HEX < 0x070500
                     Handle(Message_ProgressIndicator) pi = new Part::ProgressIndicator(100);
+#if OCC_VERSION_HEX < 0x070500
                     aReader.Reader().WS()->MapReader()->SetProgress(pi);
                     pi->NewScope(100, "Reading STEP file...");
                     pi->Show();
-#endif
                     aReader.Transfer(hDoc);
+#else
+                    aReader.Transfer(hDoc, pi->Start());
+#endif
 #if OCC_VERSION_HEX < 0x070500
                     pi->EndScope();
 #endif
@@ -212,13 +214,15 @@ private:
                         throw Py::Exception(PyExc_IOError, "cannot read IGES file");
                     }
 
-#if OCC_VERSION_HEX < 0x070500
                     Handle(Message_ProgressIndicator) pi = new Part::ProgressIndicator(100);
+#if OCC_VERSION_HEX < 0x070500
                     aReader.WS()->MapReader()->SetProgress(pi);
                     pi->NewScope(100, "Reading IGES file...");
                     pi->Show();
-#endif
                     aReader.Transfer(hDoc);
+#else
+                    aReader.Transfer(hDoc, pi->Start());
+#endif
 #if OCC_VERSION_HEX < 0x070500
                     pi->EndScope();
 #endif
@@ -407,14 +411,18 @@ private:
         return Py::None();
     }
 
-    Py::Object readDXF(const Py::Tuple& args)
+    Py::Object readDXF(const Py::Tuple& args, const Py::Dict &kwds)
     {
         char* Name;
         const char* DocName=0;
         const char* optionSource = nullptr;
+        bool doRecompute = true;
         std::string defaultOptions = "User parameter:BaseApp/Preferences/Mod/Draft";
         bool IgnoreErrors=true;
-        if (!PyArg_ParseTuple(args.ptr(), "et|sbs","utf-8",&Name,&DocName,&IgnoreErrors,&optionSource))
+        static char* kwd_list[] = {"filename","document","ignore_errors",
+                                   "option_source","recompute",nullptr};
+        if(!PyArg_ParseTupleAndKeywords(args.ptr(), kwds.ptr(), "et|sbsb", kwd_list,
+                    "utf-8",&Name,&DocName,&IgnoreErrors,&optionSource,&doRecompute))
             throw Py::Exception();
 
         std::string EncodedName = std::string(Name);
@@ -441,7 +449,8 @@ private:
             dxf_file.setOptionSource(defaultOptions);
             dxf_file.setOptions();
             dxf_file.DoRead(IgnoreErrors);
-            pcDoc->recompute();
+            if (doRecompute)
+                pcDoc->recompute();
         }
         catch (const Standard_Failure& e) {
             throw Py::RuntimeError(e.GetMessageString());

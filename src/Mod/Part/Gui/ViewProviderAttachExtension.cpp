@@ -96,7 +96,7 @@ void ViewProviderAttachExtension::extensionUpdateData(const App::Property* prop)
         auto* attach = getExtendedViewProvider()->getObject()->getExtensionByType<Part::AttachExtension>();
 
         if(attach) {
-            if( prop == &(attach->Support) ||
+            if( prop == &(attach->AttachmentSupport) ||
                 prop == &(attach->MapMode) ||
                 prop == &(attach->MapPathParameter) ||
                 prop == &(attach->MapReversed) ||
@@ -112,12 +112,17 @@ void ViewProviderAttachExtension::extensionUpdateData(const App::Property* prop)
 
 void ViewProviderAttachExtension::extensionSetupContextMenu(QMenu* menu, QObject*, const char*)
 {
+    // The "Attachment" menu is now exposed by PartGui::ViewProviderExt
+#if 0
     // toggle command to display components
     Gui::ActionFunction* func = new Gui::ActionFunction(menu);
     QAction* act = menu->addAction(QObject::tr("Attachment editor"));
     if (Gui::Control().activeDialog())
         act->setDisabled(true);
     func->trigger(act, boost::bind(&ViewProviderAttachExtension::showAttachmentEditor, this));
+#else
+    (void)menu;
+#endif
 }
 
 void ViewProviderAttachExtension::showAttachmentEditor()

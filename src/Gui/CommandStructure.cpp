@@ -30,6 +30,7 @@
 #include <Base/Console.h>
 #include "App/Part.h"
 #include "App/Document.h"
+#include "App/GroupParams.h"
 #include "CommandT.h"
 #include "Application.h"
 #include "Document.h"
@@ -127,54 +128,69 @@ static App::SubObjectT addGroup(const char *type, const char *name, const QStrin
         cmdAppDocument(app, std::ostringstream() << "Tip = " << newgrp->getFullName(true));
         cmdAppObjectArgs(newgrp, "Label = u'%s'", label.toUtf8().constData());
 
-        for (int i=0; i<2; ++i) {
-            auto grp = i ? geogroup : group;
-            if (!grp)
-                continue;
-            auto ext = grp->getExtensionByType<App::GroupExtension>();
-            if (!ext->allowObject(newgrp)) {
-                geogroup = nullptr;
-                group = nullptr;
-                children.clear();
-                FC_WARN("Ignore selections because "
-                        << grp->getFullName() << " does not accept " << type);
-            }
-        }
-        bool remove = false;
-        if (geogroup && newgrp->hasExtension(App::GeoFeatureGroupExtension::getExtensionClassTypeId())) {
-            remove = true;
-            auto vp = Application::Instance->getViewProvider(geogroup);
-            if (vp) {
-                if (!vp->canDragObjects()) {
-                    FC_WARN("Ignore selections because "
-                            << geogroup->getFullName() << " does not allow removing children");
-                    children.clear();
-                }
-                for (auto it=children.begin(); it!=children.end();) {
-                    if (!vp->canDragObject(*it)) {
-                        it = children.erase(it);
-                        FC_WARN("Ignore selected object " << (*it)->getFullName()
-                                << " cannot be removed from " << geogroup->getFullName());
-                    } else
-                        ++it;
+        bool done = false;
+        if (sels.size()==1 && App::GroupParams::getCreateGroupInGroup()) {
+            if (auto sobj = sels.front().getSubObject()) {
+                if (auto grpExt = sobj->getExtensionByType<App::GroupExtension>(true)) {
+                    if (grpExt->allowObject(newgrp)) {
+                        cmdAppObjectArgs(sobj, "addObject(%s)", newgrp->getFullName(true));
+                        ctx = sels.front();
+                        done = true;
+                    }
                 }
             }
         }
 
-        if (children.size()) {
-            if (geogroup)
-                cmdAppObjectArgs(geogroup, "addObject(%s)", newgrp->getFullName(true));
-            if (group)
-                cmdAppObjectArgs(group, "addObject(%s)", newgrp->getFullName(true));
-            std::ostringstream ss;
-            for (auto child : children) {
-                if (remove)
-                    cmdAppObjectArgs(geogroup, "removeObject(%s)", child->getFullName(true));
-                ss << child->getFullName(true) << ", ";
+        if (!done) {
+            for (int i=0; i<2; ++i) {
+                auto grp = i ? geogroup : group;
+                if (!grp)
+                    continue;
+                auto ext = grp->getExtensionByType<App::GroupExtension>();
+                if (!ext->allowObject(newgrp)) {
+                    geogroup = nullptr;
+                    group = nullptr;
+                    children.clear();
+                    FC_WARN("Ignore selections because "
+                            << grp->getFullName() << " does not accept " << type);
+                }
             }
-            cmdAppObjectArgs(newgrp, "addObjects([%s])", ss.str());
-        } else
-            ctx = App::SubObjectT();
+            bool remove = false;
+            if (geogroup && newgrp->hasExtension(App::GeoFeatureGroupExtension::getExtensionClassTypeId())) {
+                remove = true;
+                auto vp = Application::Instance->getViewProvider(geogroup);
+                if (vp) {
+                    if (!vp->canDragObjects()) {
+                        FC_WARN("Ignore selections because "
+                                << geogroup->getFullName() << " does not allow removing children");
+                        children.clear();
+                    }
+                    for (auto it=children.begin(); it!=children.end();) {
+                        if (!vp->canDragObject(*it)) {
+                            it = children.erase(it);
+                            FC_WARN("Ignore selected object " << (*it)->getFullName()
+                                    << " cannot be removed from " << geogroup->getFullName());
+                        } else
+                            ++it;
+                    }
+                }
+            }
+
+            if (children.size()) {
+                if (geogroup)
+                    cmdAppObjectArgs(geogroup, "addObject(%s)", newgrp->getFullName(true));
+                if (group)
+                    cmdAppObjectArgs(group, "addObject(%s)", newgrp->getFullName(true));
+                std::ostringstream ss;
+                for (auto child : children) {
+                    if (remove)
+                        cmdAppObjectArgs(geogroup, "removeObject(%s)", child->getFullName(true));
+                    ss << child->getFullName(true) << ", ";
+                }
+                cmdAppObjectArgs(newgrp, "addObjects([%s])", ss.str());
+            } else
+                ctx = App::SubObjectT();
+        }
         
         Gui::Selection().clearSelection();
         ctx = ctx.getChild(newgrp);

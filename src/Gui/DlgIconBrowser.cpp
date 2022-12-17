@@ -30,6 +30,8 @@
 #include <QCompleter>
 #include <QFileInfo>
 #include <QDir>
+#include <QDesktopServices>
+#include <QUrl>
 
 #include "ui_DlgIconBrowser.h"
 
@@ -350,6 +352,20 @@ void DlgIconBrowser::on_btnSave_clicked()
             QMessageBox::critical(this, QObject::tr("Failed"),
                     QObject::tr("Failed to save icon stylesheet"));
     }
+}
+
+void DlgIconBrowser::on_btnBrowse_clicked()
+{
+    QString text = ui->editPrefix->text();
+    QString prefix = QStringLiteral("Gui/IconSets/");
+    QDir dir(QString::fromUtf8(App::Application::getUserAppDataDir().c_str()));
+    dir.mkpath(prefix);
+    dir.cd(prefix);
+    if (!text.isEmpty()) {
+        dir.mkpath(text);
+        dir.cd(text);
+    }
+    QDesktopServices::openUrl(QUrl::fromLocalFile(dir.absolutePath()));
 }
 
 #include "moc_DlgIconBrowser.cpp"

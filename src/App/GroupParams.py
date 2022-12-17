@@ -1,15 +1,37 @@
+# -*- coding: utf-8 -*-
+# ***************************************************************************
+# *   Copyright (c) 2022 Zheng Lei (realthunder) <realthunder.dev@gmail.com>*
+# *                                                                         *
+# *   This program is free software; you can redistribute it and/or modify  *
+# *   it under the terms of the GNU Lesser General Public License (LGPL)    *
+# *   as published by the Free Software Foundation; either version 2 of     *
+# *   the License, or (at your option) any later version.                   *
+# *   for detail see the LICENCE text file.                                 *
+# *                                                                         *
+# *   This program is distributed in the hope that it will be useful,       *
+# *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+# *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+# *   GNU Library General Public License for more details.                  *
+# *                                                                         *
+# *   You should have received a copy of the GNU Library General Public     *
+# *   License along with this program; if not, write to the Free Software   *
+# *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
+# *   USA                                                                   *
+# *                                                                         *
+# ***************************************************************************
+'''Auto code generator for parameters in Preferences/Group
+'''
 import sys
 from os import sys, path
 
-# import Base/params_utils.py
-sys.path.append(path.join(path.dirname(path.dirname(path.abspath(__file__))), 'Base'))
+# import Tools/params_utils.py
+sys.path.append(path.join(path.dirname(path.dirname(path.abspath(__file__))), 'Tools'))
 import params_utils
 
 from params_utils import ParamBool, ParamInt, ParamString, ParamUInt, ParamFloat
 
 NameSpace = 'App'
 ClassName = 'GroupParams'
-HeadFile = 'App/GroupParams.h'
 ParamPath = 'User parameter:BaseApp/Preferences/Group'
 ClassDoc = 'Convenient class to obtain group object (App::GroupExtension and GeoFeatureGroupExtension) related parameters'
 
@@ -34,8 +56,15 @@ Params = [
     ParamBool('GeoGroupAllowCrossLink', False,
         title = 'Allow cross coordinate links in GeoFeatureGroup (App::Part)',
         doc = "Allow objects to be contained in more than one GeoFeatureGroup (e.g. App::Part).\n"
-              "If diabled, adding an object to one group will auto remove it from other groups.\n"
+              "If disabled, adding an object to one group will auto remove it from other groups.\n"
               "WARNING! Disabling this option may produce an invalid group after changing its children."),
+    ParamBool('CreateGroupInGroup', True,
+        title = 'Create new group inside current selected group',
+        doc = 'This option only applies to creating a new group when there is a single\n'
+              'selected object that is also a group (either plain or App::Part).\n\n'
+              'If the option is enabled, then the new group will be created inside the\n'
+              'selected group. If disabled, then the selected group will be moved into\n'
+              'the newly created group instead.'),
 ]
 
 def declare():
@@ -45,4 +74,4 @@ def declare():
 def define():
     params_utils.define(sys.modules[__name__])
 
-params_utils.init_params(Params, HeadFile, NameSpace, ClassName, ParamPath)
+params_utils.init_params(Params, NameSpace, ClassName, ParamPath)

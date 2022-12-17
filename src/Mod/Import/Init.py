@@ -51,7 +51,6 @@ for p in (("UseAppPart",True),
           ("ExportHiddenObject",True),
           ("ExportKeepPlacement",True),
           ("ReduceObjects", False),
-          ("ShowProgress", True),
-          ("ExpandCompound",True)):
+          ("ShowProgress", True)):
     _checkParamBool(paramGetV,*p)
 

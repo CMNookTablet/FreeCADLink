@@ -282,7 +282,7 @@ bool ExpressionBinding::setExpressionString(const char *str, bool no_throw)
 void ExpressionBinding::objectDeleted(const App::DocumentObject& obj)
 {
     DocumentObject * docObj = path.getDocumentObject();
-    if (docObj == &obj) {
+    if (docObj == &obj || path.getOwner() == &obj) {
         unbind();
     }
 }

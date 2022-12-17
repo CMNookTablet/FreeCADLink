@@ -262,6 +262,9 @@ public:
     ViewProvider *startEditing(int ModNum) override;
     bool doubleClicked() override;
 
+    bool startDragArrayElement(int mode, int index);
+    void endDragArrayElement();
+
     PyObject *getPyObject() override;
     PyObject *getPyLinkView();
 
@@ -379,11 +382,13 @@ protected:
     struct DraggerContext{
         Base::Matrix4D preTransform;
         Base::Placement initialPlacement;
+        Base::Matrix4D plaInverse;
         Base::Matrix4D mat;
         Base::BoundBox3d bbox;
         bool cmdPending;
     };
     std::unique_ptr<DraggerContext> dragCtx;
+    int dragPlacementIndex = -1;
     CoinPtr<SoDragger> pcDragger;
     CoinPtr<SoMatrixTransform> pcMatrixTransform;
     ViewProviderDocumentObject *childVp;

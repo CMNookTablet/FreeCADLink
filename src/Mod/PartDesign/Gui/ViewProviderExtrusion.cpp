@@ -45,7 +45,7 @@ ViewProviderExtrusion::ViewProviderExtrusion()
 
     // Default to datum color
     //
-    unsigned long shcol = PartGui::PartParams::DefaultDatumColor();
+    unsigned long shcol = PartGui::PartParams::getDefaultDatumColor();
     App::Color col ( (uint32_t) shcol );
     
     MapFaceColor.setValue(false);

@@ -67,7 +67,9 @@ std::vector<App::DocumentObject*> ViewProviderLoft::_claimChildren(void)const
         temp.push_back(sketch);
 
     for(App::DocumentObject* obj : pcLoft->Sections.getValues()) {
-        if (obj != NULL && !obj->isDerivedFrom(PartDesign::Feature::getClassTypeId()))
+        if (obj != NULL
+                && !obj->isDerivedFrom(PartDesign::Feature::getClassTypeId())
+                && std::find(temp.begin(), temp.end(), obj) == temp.end())
             temp.push_back(obj);
     }
 

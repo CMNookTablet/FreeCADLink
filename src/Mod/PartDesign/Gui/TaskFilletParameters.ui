@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>208</width>
-    <height>169</height>
+    <width>439</width>
+    <height>298</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,7 +26,12 @@
      <item>
       <widget class="QCheckBox" name="buttonRefAdd">
        <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;In toggle mode, you can select geometry either&lt;/p&gt;&lt;p&gt;in the list below, or in the 3D view to toggle&lt;/p&gt;&lt;p&gt;its state.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;In normal mode, you can only add new geometry&lt;/p&gt;&lt;p&gt;by selection. Existing geometry references can&lt;/p&gt;&lt;p&gt;be removed using the Delete key.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>In toggle mode, you can select geometry either in the list below,
+or in the 3D view to toggle its state.
+
+In normal mode, you can add new geometry by selection. Existing
+geometry references can be removed using the 'Remove' button
+or 'Delete' key.</string>
        </property>
        <property name="text">
         <string>Toggle mode</string>
@@ -36,26 +41,156 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="btnClear">
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Remove all segments in the current edge</string>
+       </property>
+       <property name="text">
+        <string>Clear</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAdd">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Add a new segment in the current edge.</string>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnRemove">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Remove the selected semgnets from the current edge</string>
+       </property>
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
-    <widget class="QListWidget" name="listWidgetReferences"/>
+    <widget class="QTreeWidget" name="treeWidgetReferences">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>150</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <attribute name="headerVisible">
+      <bool>true</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Element</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Radius</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Parameter</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Length</string>
+      </property>
+     </column>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>Radius:</string>
+        <string>Default Radius:</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="Gui::QuantitySpinBox" name="filletRadius" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="keyboardTracking" stdset="0">
         <bool>false</bool>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

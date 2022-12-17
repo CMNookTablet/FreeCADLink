@@ -71,7 +71,7 @@ int TopoShapeCompSolidPy::PyInit(PyObject* args, PyObject* /*kwd*/)
 
 #ifndef FC_NO_ELEMENT_MAP
     PY_TRY {
-        getTopoShapePtr()->makEShape(TOPOP_COMPSOLID,getPyShapes(pcObj));
+        getTopoShapePtr()->makEBoolean(Part::OpCodes::Compsolid,getPyShapes(pcObj));
     } _PY_CATCH_OCC(return(-1))
 #else
     BRep_Builder builder;
@@ -98,7 +98,7 @@ int TopoShapeCompSolidPy::PyInit(PyObject* args, PyObject* /*kwd*/)
 PyObject*  TopoShapeCompSolidPy::add(PyObject *args)
 {
     PyObject *obj;
-    if (!PyArg_ParseTuple(args, "O!", &(Part::TopoShapeSolidPy::Type), &obj))
+    if (!PyArg_ParseTuple(args, "O", &obj))
         return NULL;
 
     BRep_Builder builder;

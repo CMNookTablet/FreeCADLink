@@ -119,6 +119,9 @@ App::DocumentObjectExecReturn *DrawViewDimExtent::execute(void)
 
     double tolerance = 0.00001;
     std::vector<std::string> edgeNames = getSubNames();
+    if (edgeNames.empty())
+        return App::DocumentObject::StdReturn;
+
     int direction = DirExtent.getValue();
 
     std::pair<Base::Vector3d, Base::Vector3d> endPoints =

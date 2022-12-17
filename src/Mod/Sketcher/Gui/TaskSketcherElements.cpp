@@ -146,7 +146,23 @@ public:
     {
     }
 
-    void setElement(Sketcher::SketchObject *sketch, int element) {
+    void setVisibility(int filterindex)
+    {
+        if (filterindex == 0)
+            this->setHidden(false);
+        else {
+            if( (!this->isConstruction && !this->isExternal && filterindex == 1)  ||
+                (this->isConstruction  && filterindex == 2)  ||
+                (this->isExternal && filterindex == 3) ) {
+                this->setHidden(false);
+            }
+            else {
+                this->setHidden(true);
+            }
+        }
+    }
+
+    void setElement(Sketcher::SketchObject *sketch, int element, int filterIndex) {
         static std::map<std::pair<Base::Type,int>, MultIcon> iconMap;
         static QIcon none;
         if(iconMap.empty()) {
@@ -237,18 +253,15 @@ public:
         if(isMissing)
             icon = none;
         else {
-            bool hidden = false;
             auto it = iconMap.find(std::make_pair(GeometryType,element));
             if(it == iconMap.end()) {
                 if(!element && GeometryType != Part::GeomPoint::getClassTypeId())
                     icon = none;
-                else
-                    hidden = true;
             } else
                 icon = it->second.getIcon(isConstruction, isExternal);
-            setHidden(hidden);
         }
         setIcon(0,icon);
+        setVisibility(filterIndex);
 
         Data::IndexedName name = sketch->shapeTypeFromGeoId(ElementNbr, (Sketcher::PointPos)(element));
         std::string tmp;
@@ -431,7 +444,7 @@ TaskSketcherElements::TaskSketcherElements(ViewProviderSketch *sketchView)
         this                     , SLOT  (on_autoSwitchBox_stateChanged(int))
        );
 
-    connectionElementsChanged = sketchView->signalElementsChanged.connect(
+    connectionElementsChanged = sketchView->getSketchObject()->signalElementsChanged.connect(
         boost::bind(&SketcherGui::TaskSketcherElements::slotElementsChanged, this));
 
     this->groupLayout()->addWidget(proxy);
@@ -725,7 +738,14 @@ void TaskSketcherElements::on_elementsWidget_itemEntered(QTreeWidgetItem *item)
     switch(element)
     {
     case 0:
-        {
+        if (it->GeometryType == Part::GeomPoint::getClassTypeId()) {
+            vertex= it->StartingVertex;
+            if (vertex!=-1) {
+                ss << "Vertex" << vertex + 1;
+                sketchView->selectElement(ss.str().c_str(), true);
+            }
+        } 
+        else {
             if(it->ElementNbr>=0)
                 ss << "Edge" << it->ElementNbr + 1;
             else
@@ -758,29 +778,38 @@ void TaskSketcherElements::slotElementsChanged(void)
     // Build up ListView with the elements
     const std::vector< Part::Geometry * > &vals = sketchView->getSketchObject()->Geometry.getValues();
 
+    int currentRow = 0;
+    auto currentIndex = ui->elementsWidget->indexAt(QPoint(0,0));
+    if (currentIndex.isValid())
+        currentRow = currentIndex.row();
+
     ui->elementsWidget->blockSignals(true);
     ui->elementsWidget->clear();
     itemMap.clear();
 
     int element = ui->comboBoxElementFilter->currentIndex();
+    int filterindex = ui->comboBoxModeFilter->currentIndex();
 
     auto sketch = sketchView->getSketchObject();
     for(int i=0;i<(int)vals.size();++i) {
         auto item = new ElementItem(ui->elementsWidget,sketch, i, vals[i]);
-        item->setElement(sketch,element);
+        item->setElement(sketch,element, filterindex);
         itemMap[item->ElementNbr] = item;
     }
 
     const std::vector< Part::Geometry * > &ext_vals = sketchView->getSketchObject()->getExternalGeometry();
     for(int i=2;i<(int)ext_vals.size();++i) {
         auto item = new ElementItem(ui->elementsWidget,sketch, -i-1, ext_vals[i]);
-        item->setElement(sketch,element);
+        item->setElement(sketch,element, filterindex);
         itemMap[item->ElementNbr] = item;
     }
 
     for(int i = 0; i < ui->elementsWidget->columnCount(); i++)
         ui->elementsWidget->resizeColumnToContents(i);
+
     ui->elementsWidget->blockSignals(false);
+
+    ui->elementsWidget->setCurrentIndex(ui->elementsWidget->rootIndex().child(currentRow, 0));
 }
 
 
@@ -897,19 +926,7 @@ void TaskSketcherElements::setItemVisibility(int elementindex,int filterindex)
     // 3 => External
 
     ElementItem* item = static_cast<ElementItem*> (ui->elementsWidget->topLevelItem(elementindex));
-
-    if (filterindex == 0)
-        item->setHidden(false);
-    else {
-        if( (!item->isConstruction && !item->isExternal && filterindex == 1)  ||
-            (item->isConstruction  && filterindex == 2)  ||
-            (item->isExternal && filterindex == 3) ) {
-            item->setHidden(false);
-        }
-        else {
-            item->setHidden(true);
-        }
-    }
+    item->setVisibility(filterindex);
 }
 
 void TaskSketcherElements::updateVisibility(int filterindex)
@@ -921,9 +938,10 @@ void TaskSketcherElements::updateVisibility(int filterindex)
 
 void TaskSketcherElements::updateIcons(int element)
 {
+    int filterindex = ui->comboBoxModeFilter->currentIndex();
     auto sketch = sketchView->getSketchObject();
     for (int i=0;i<ui->elementsWidget->topLevelItemCount(); i++)
-      static_cast<ElementItem *>(ui->elementsWidget->topLevelItem(i))->setElement(sketch,element);
+      static_cast<ElementItem *>(ui->elementsWidget->topLevelItem(i))->setElement(sketch,element,filterindex);
 }
 
 void TaskSketcherElements::changeEvent(QEvent *e)

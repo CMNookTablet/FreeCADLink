@@ -66,19 +66,24 @@ std::vector<App::DocumentObject*> ViewProviderPipe::_claimChildren(void)const
     if (sketch != NULL && !sketch->isDerivedFrom(PartDesign::Feature::getClassTypeId()))
         temp.push_back(sketch);
 
-
     for(App::DocumentObject* obj : pcPipe->Sections.getValues()) {
-        if (obj != NULL && !obj->isDerivedFrom(PartDesign::Feature::getClassTypeId()))
-            temp.push_back(obj);
+        if (obj != NULL && !obj->isDerivedFrom(PartDesign::Feature::getClassTypeId())) {
+            if (std::find(temp.begin(), temp.end(), obj) == temp.end())
+                temp.push_back(obj);
+        }
     }
 
     App::DocumentObject* spine = pcPipe->Spine.getValue();
-    if (spine != NULL && !spine->isDerivedFrom(PartDesign::Feature::getClassTypeId()))
-        temp.push_back(spine);
+    if (spine != NULL && !spine->isDerivedFrom(PartDesign::Feature::getClassTypeId())) {
+        if (std::find(temp.begin(), temp.end(), spine) == temp.end())
+            temp.push_back(spine);
+    }
 
     App::DocumentObject* auxspine = pcPipe->AuxillerySpine.getValue();
-    if (auxspine != NULL && !auxspine->isDerivedFrom(PartDesign::Feature::getClassTypeId()))
-        temp.push_back(auxspine);
+    if (auxspine != NULL && !auxspine->isDerivedFrom(PartDesign::Feature::getClassTypeId())) {
+        if (std::find(temp.begin(), temp.end(), auxspine) == temp.end())
+            temp.push_back(auxspine);
+    }
 
     return temp;
 }

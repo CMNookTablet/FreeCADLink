@@ -214,23 +214,23 @@ public:
 
     static bool addPendingRemove(TransactionalObject *);
 
-    template<class FunctionT, class... Args>
-    void exceptionSafeCall(std::string &errMsg, FunctionT &&f, Args&&... args) const {
-        try {
-            f(std::forward<Args>(args)...);
-        }catch(Base::Exception &e) {
-            e.ReportException();
-            errMsg = e.what();
-        }catch(std::exception &e) {
-            errMsg = e.what();
-        }catch(...) {
-            errMsg = "Unknown exception";
-        }
-    }
-
 private:
     TransactionType transactionType;
 };
+
+template<class FunctionT, class... Args>
+void exceptionSafeCall(std::string &errMsg, FunctionT &&f, Args&&... args) {
+    try {
+        f(std::forward<Args>(args)...);
+    }catch(Base::Exception &e) {
+        e.ReportException();
+        errMsg = e.what();
+    }catch(std::exception &e) {
+        errMsg = e.what();
+    }catch(...) {
+        errMsg = "Unknown exception";
+    }
+}
 
 } //namespace App
 

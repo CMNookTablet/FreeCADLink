@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>336</width>
-    <height>285</height>
+    <height>377</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,7 +39,22 @@
     </layout>
    </item>
    <item>
-    <widget class="QListWidget" name="listWidgetReferences"/>
+    <widget class="QTreeWidget" name="treeWidgetReferences">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>150</height>
+      </size>
+     </property>
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -139,7 +154,7 @@
    </item>
   </layout>
   <zorder>checkReverse</zorder>
-  <zorder>listWidgetReferences</zorder>
+  <zorder>treeWidgetReferences</zorder>
   <zorder>message</zorder>
  </widget>
  <customwidgets>
@@ -151,7 +166,7 @@
  </customwidgets>
  <tabstops>
   <tabstop>buttonRefAdd</tabstop>
-  <tabstop>listWidgetReferences</tabstop>
+  <tabstop>treeWidgetReferences</tabstop>
   <tabstop>buttonPlane</tabstop>
   <tabstop>btnClearPlane</tabstop>
   <tabstop>buttonLine</tabstop>

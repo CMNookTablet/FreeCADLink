@@ -89,6 +89,7 @@ protected:
     bool eventFilter(QObject*, QEvent*) override;
     void refresh() override;
     void getReferenceAxis(App::DocumentObject*& obj, std::vector<std::string>& sub) const;
+    void onSelectionModeChanged(SelectionMode) override;
 
 private:
     double getLength(void) const;
@@ -104,7 +105,7 @@ private:
     bool   getMidplane(void) const;
     int    getMode(void) const;
     QString getFaceName(void) const;
-    void onSelectionChanged(const Gui::SelectionChanges& msg) override;
+    void _onSelectionChanged(const Gui::SelectionChanges& msg) override;
     void updateUI(int index);
     void updateDirectionEdits(void);
     void setupUI(bool newObj);

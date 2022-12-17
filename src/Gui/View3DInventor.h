@@ -28,6 +28,7 @@
 #include <Inventor/SbVec3f.h>
 #include <Inventor/SbRotation.h>
 
+#include <App/PropertyStandard.h>
 #include "MDIView.h"
 
 #include <Base/Parameter.h>
@@ -40,12 +41,31 @@ class SoCamera;
 class SoNodeSensor;
 class QPrinter;
 class QStackedWidget;
+class SoDragger;
 
 namespace Gui {
 
 class Document;
 class View3DInventorViewer;
-class View3DPy;
+class View3DInventorPy;
+
+class GuiExport Camera
+{
+public:
+    enum Orientation {
+        Top,
+        Bottom,
+        Front,
+        Rear,
+        Left,
+        Right,
+        Isometric,
+        Dimetric,
+        Trimetric,
+    };
+
+    static SbRotation rotation(Orientation view);
+};
 
 class GuiExport GLOverlayWidget : public QWidget
 {
@@ -72,9 +92,23 @@ class GuiExport View3DInventor : public MDIView, public ParameterGrp::ObserverTy
 {
     Q_OBJECT
 
-    TYPESYSTEM_HEADER();
+    PROPERTY_HEADER(Gui::View3DInventor);
 
 public:
+    /// Helper class to apply user parameter settings to view properties
+    class ApplySettings {
+    public:
+        ApplySettings();
+        ~ApplySettings();
+        static bool isApplying();
+    private:
+        /// Private new operator to prevent heap allocation
+        void* operator new(size_t size);
+    };
+    
+    App::PropertyEnumeration DrawStyle;
+    App::PropertyBool ShowNaviCube;
+
     View3DInventor(Gui::Document* pcDocument, QWidget* parent, const QtGLWidget* sharewidget = 0, Qt::WindowFlags wflags=Qt::WindowFlags());
     ~View3DInventor();
 
@@ -89,6 +123,7 @@ public:
     virtual void onUpdate(void);
     virtual void viewAll();
     virtual const char *getName(void) const;
+    virtual void onChanged(const App::Property *prop);
 
     /** ID of this view
      * Currently only used for saving and restoring view binding.
@@ -130,6 +165,21 @@ public:
 
     View3DInventorViewer *getViewer(void) const {return _viewer;}
     virtual bool containsViewProvider(const ViewProvider*) const;
+
+    template<class PropT, class ValueT, class CallbackT>
+    ValueT getProperty(const char *_name, const char *_docu, const char *group, const ValueT &def, CallbackT cb) {
+        char name[128];
+        snprintf(name,sizeof(name)-1,"%s_%s",group,_name);
+        auto prop = this->getPropertyByName(name);
+        if(prop && !prop->isDerivedFrom(PropT::getClassTypeId()))
+            return def;
+        if(!prop) {
+            prop = this->addDynamicProperty(PropT::getClassTypeId().getName(), name, group, _docu);
+            static_cast<PropT*>(prop)->setValue(def);
+        }
+        cb(*static_cast<PropT*>(prop));
+        return static_cast<PropT*>(prop)->getValue();
+    }
 
 public Q_SLOTS:
     /// override the cursor in this view
@@ -176,7 +226,7 @@ protected:
 
 private:
     View3DInventorViewer * _viewer;
-    PyObject *_viewerPy;
+    View3DInventorPy *_viewerPy;
     QTimer * stopSpinTimer;
     QStackedWidget* stack;
 
@@ -185,7 +235,7 @@ private:
     int _id;
 
     // friends
-    friend class View3DPy;
+    friend class View3DInventorPy;
 };
 
 } // namespace Gui

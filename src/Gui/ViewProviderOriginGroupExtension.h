@@ -25,6 +25,7 @@
 #ifndef GUI_VIEWPROVIDERORIGINGROUPEXTENSION_H
 #define GUI_VIEWPROVIDERORIGINGROUPEXTENSION_H
 
+#include <memory>
 #include <App/Extension.h>
 #include "ViewProviderGeoFeatureGroup.h"
 
@@ -56,6 +57,10 @@ protected:
 
 private:
     void constructChildren ( std::vector<App::DocumentObject*> &children ) const;
+
+private:
+    class Private;
+    std::shared_ptr<Private> pimpl;
 };
 
 typedef ViewProviderExtensionPythonT<Gui::ViewProviderOriginGroupExtension> ViewProviderOriginGroupExtensionPython;

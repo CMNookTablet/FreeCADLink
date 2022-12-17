@@ -69,17 +69,28 @@ public:
     /** Adds a build in XPM pixmap under a given name
      * @param name: pixmap cache key
      * @param icon: the pixmap to be cached
+     * @param path: the file (or resource) path to the icon
      * @param styled: indicate if this is a pixmap set by a stylesheet
      * @param ctx: optional text indicating the usage context of this pixmap
      */
-    void addPixmapToCache(const char* name, const QPixmap& icon, bool styled=false, const char *ctx=nullptr);
+    void addPixmapToCache(const char* name,
+                          const QPixmap& icon,
+                          const char *path=nullptr,
+                          bool styled=false,
+                          const char *ctx=nullptr);
+    /** Return the file path to a cached icon **/
+    const char *getIconPath(const char *name) const;
     /** Checks whether the pixmap is already registered.
      * @param name: pixmap cache key
      * @param icon: output as the cached pixmap
      * @param original: optional output of the original pixmap if the icon is overridden by stylesheet
+     * @param path: optional output of the file path to the icon
      * @return Return whether the cached icon is found
      */
-    bool findPixmapInCache(const char* name, QPixmap& icon, QPixmap *original=nullptr) const;
+    bool findPixmapInCache(const char* name,
+                           QPixmap& icon,
+                           QPixmap *original=nullptr,
+                           std::string *path=nullptr) const;
     /** Returns the QIcon corresponding to name in the current icon theme.
      * If no such icon is found in the current theme fallback is returned instead.
      */
@@ -88,8 +99,12 @@ public:
      * @param name: pixmap cache name
      * @param silent: do not output error if the requested pixmap does not exist
      * @param original: optional output of the original pixmap if the icon is overridden by stylesheet
+     * @param path: optional output of the file path to the icon
      */
-    QPixmap pixmap(const char* name, bool silent=false, QPixmap *original=nullptr) const;
+    QPixmap pixmap(const char* name,
+                   bool silent=false,
+                   QPixmap *original=nullptr,
+                   std::string *path=nullptr) const;
     /// Add a user defined context of a cached icon
     void addContext(const char *name, const char *ctx);
     /// Retrieve user defined contexts of a cached icon

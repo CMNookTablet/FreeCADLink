@@ -189,15 +189,6 @@ void Workbench::setupContextMenu(const char* recipient, Gui::MenuItem* item) con
 
         body = PartDesignGui::getBodyFor (feature, false, false, assertModern);
 
-        // lote of assertion so feature should be marked as a tip
-        if ( selection.size () == 1 && feature && (
-            // ( feature->isDerivedFrom ( PartDesign::Feature::getClassTypeId () ) && body ) ||
-            ( feature->isDerivedFrom ( Part::Feature::getClassTypeId () ) && body &&
-              body->BaseFeature.getValue() == feature )
-        ) ) {
-            *item << "PartDesign_MoveTip";
-        }
-
         if (strcmp(recipient, "Tree") == 0) {
 
             Gui::MDIView *activeView = Gui::Application::Instance->activeView();
@@ -207,29 +198,15 @@ void Workbench::setupContextMenu(const char* recipient, Gui::MenuItem* item) con
                                         PartDesign::Body::getClassTypeId () ) > 0;
 
                 if ( docHaveBodies ) {
-                    bool addMoveFeature = true;
                     bool addMoveFeatureInTree = (body != nullptr);
                     for (auto sel: selection) {
-                        // if at least one selected feature cannot be moved to a body
-                        // disable the entry
-                        if ( addMoveFeature && !PartDesign::Body::isAllowed ( sel.pObject ) ) {
-                            addMoveFeature = false;
-                        }
                         // if all at least one selected feature doesn't belong to the same body
                         // disable the menu entry
                         if ( addMoveFeatureInTree && !body->hasObject ( sel.pObject ) ) {
                             addMoveFeatureInTree = false;
-                        }
-
-                        if ( !addMoveFeatureInTree && !addMoveFeature ) {
                             break;
                         }
                     }
-
-                    if (addMoveFeature) {
-                        *item   << "PartDesign_MoveFeature";
-                    }
-
                     if (addMoveFeatureInTree) {
                         *item   << "PartDesign_MoveFeatureInTree";
                     }
@@ -242,13 +219,11 @@ void Workbench::setupContextMenu(const char* recipient, Gui::MenuItem* item) con
 
             if (Gui::Selection().countObjectsOfType(App::DocumentObject::getClassTypeId()) > 0) {
                 *item << "Std_SetAppearance"
-                      << "Std_GroupRandomColor"
-                      << "Std_Cut"
-                      << "Std_Copy"
-                      << "Std_Paste"
-                      << "Separator"
-                      << "Std_Delete";
+                      << "Std_GroupRandomColor";
             }
+            if (item->hasItems())
+                *item << "Separator";
+            Gui::StdWorkbench::setupContextMenu(recipient, item);
         }
     }
 
@@ -432,7 +407,7 @@ void Workbench::activated()
         "PartDesign_Extrusion",
         0};
     Watcher.push_back(new Gui::TaskView::TaskWatcherCommands(
-        "SELECT Sketcher::SketchObject COUNT 1",
+        "SELECT Sketcher::SketchObject COUNT 1..",
         Sketch,
         "Sketch tools",
         "Part_Box"
@@ -666,7 +641,9 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
           << "Separator"
           << "PartDesign_Boolean"
           << "PartDesign_Split"
-          << "PartDesign_Extrusion";
+          << "PartDesign_Extrusion"
+          << "Separator"
+          << "Part_CheckGeometry";
 
     // use Part's measure features also for PartDesign
     Gui::ToolBarItem* measure = new Gui::ToolBarItem(root);

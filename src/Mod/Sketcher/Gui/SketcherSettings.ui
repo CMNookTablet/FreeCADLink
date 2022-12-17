@@ -166,6 +166,19 @@ Requires to re-enter edit mode to take effect.</string>
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="Gui::PrefCheckBox" name="checkBoxMakeInternals">
+        <property name="text">
+         <string>Auto generate internal geometries</string>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/Sketcher</cstring>
+        </property>
+        <property name="prefEntry" stdset="0">
+         <cstring>MakeInternals</cstring>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

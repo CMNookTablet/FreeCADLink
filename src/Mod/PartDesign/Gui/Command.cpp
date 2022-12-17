@@ -61,6 +61,7 @@
 #include <Mod/PartDesign/App/FeatureGroove.h>
 #include <Mod/PartDesign/App/FeatureSplit.h>
 #include <Mod/PartDesign/App/FeatureRevolution.h>
+#include <Mod/PartDesign/App/FeaturePipe.h>
 
 #include <Mod/PartDesign/App/FeatureTransformed.h>
 #include <Mod/PartDesign/App/FeatureMultiTransform.h>
@@ -846,14 +847,15 @@ unsigned validateSketches(std::vector<App::DocumentObject*>& sketches,
 }
 
 void prepareProfileBased(PartDesign::Body *pcActiveBody, Gui::Command* cmd, const std::string& which,
-                        boost::function<void (Part::Feature*, App::DocumentObject*)> func,
-                        bool needSubElement = false)
+                        boost::function<void (Part::Feature*, App::DocumentObject*)> func)
 {
-    //if a profile is selected we can make our life easy and fast
-    auto sels = Gui::Selection().getSelectionT("*", 0);
+    auto base_worker = [=](const std::vector<App::SubObjectT> &profile,
+                           const std::vector<App::SubObjectT> &sels)
+    {
+        if (profile.empty())
+            return;
 
-    auto base_worker = [=](App::DocumentObject* feature, const std::vector<string> &subs) {
-
+        auto feature = profile.front().getSubObject();
         if (!feature || !feature->isDerivedFrom(Part::Feature::getClassTypeId()))
             return;
 
@@ -877,54 +879,12 @@ void prepareProfileBased(PartDesign::Body *pcActiveBody, Gui::Command* cmd, cons
         Gui::cmdAppObject(pcActiveBody, std::ostringstream()
                 << "newObjectAt('PartDesign::" << which << "','" << FeatName << "', "
                             <<  "FreeCADGui.Selection.getSelection())");
-        auto Feat = pcActiveBody->getDocument()->getObject(FeatName.c_str());
+        auto Feat = Base::freecad_dynamic_cast<PartDesign::ProfileBased>(
+                pcActiveBody->getDocument()->getObject(FeatName.c_str()));
+        if (!Feat)
+            return;
 
-        auto objCmd = Gui::Command::getObjectCmd(feature);
-        bool profileSet = false;
-        if (subs.size() && !needSubElement
-                        && feature->isDerivedFrom(Part::Part2DObject::getClassTypeId()))
-        {
-            auto shape = Part::Feature::getTopoShape(feature);
-            if (subs.size() < shape.countSubShapes(TopAbs_EDGE)) {
-                std::vector<Part::TopoShape> shapes;
-                for (auto &sub : subs) {
-                    auto subshape = shape.getSubShape(sub.c_str(), true);
-                    if (subshape.IsNull() || subshape.ShapeType() != TopAbs_EDGE)
-                        break;
-                    shapes.push_back(subshape);
-                }
-                if (subs.size() == shapes.size()) {
-                    std::string BinderName = cmd->getUniqueObjectName(
-                            "Binder", pcActiveBody);
-                    Gui::cmdAppObject(pcActiveBody, std::ostringstream()
-                            << "newObject('PartDesign::SubShapeBinder', '" << BinderName << "')");
-                    auto binder = pcActiveBody->getDocument()->getObject(BinderName.c_str());
-                    std::ostringstream ss;
-                    for (auto &s : subs)
-                        ss << "'" << s << "',";
-                    Gui::cmdAppObject(binder, std::ostringstream() << "Support = (" << objCmd
-                            << ", [" << ss.str() << "])");
-                    Gui::cmdAppObject(Feat, std::ostringstream() << "Profile = "
-                            << Gui::Command::getObjectCmd(binder));
-                    profileSet = true;
-                }
-            }
-        }
-
-        if (!profileSet) {
-            if (subs.empty()
-                    || (!needSubElement
-                        && feature->isDerivedFrom(Part::Part2DObject::getClassTypeId())))
-            {
-                Gui::cmdAppObject(Feat, std::ostringstream() <<"Profile = " << objCmd);
-            } else {
-                std::ostringstream ss;
-                for (auto &s : subs)
-                    ss << "'" << s << "',";
-                Gui::cmdAppObject(Feat, std::ostringstream() <<"Profile = (" << objCmd
-                        << ", [" << ss.str() << "])");
-            }
-        }
+        PartDesignGui::importExternalElements(Feat->Profile, profile);
 
         //for additive and subtractive lofts allow the user to preselect the sections
         if (which.compare("AdditiveLoft") == 0 || which.compare("SubtractiveLoft") == 0) {
@@ -932,45 +892,62 @@ void prepareProfileBased(PartDesign::Body *pcActiveBody, Gui::Command* cmd, cons
             int count = 0;
             ss << "Sections = [";
             std::set<App::DocumentObject*> objSet;
-            for (unsigned i=1; i<sels.size(); ++i) {
-                if (!objSet.insert(sels[i].getSubObject()).second)
+            for (const auto &sel : sels) {
+                if (!objSet.insert(sel.getSubObject()).second)
                     continue;
-                auto objT = PartDesignGui::importExternalElement(sels[i], false);
+                auto objT = PartDesignGui::importExternalObject(sel);
                 if (objT.getObjectName().empty())
                     continue;
-                ss << objT.getObjectPython() << ", ";
+                ss << objT.getSubObjectPython() << ", ";
                 ++count;
             }
             if (count)
                 Gui::cmdAppObject(Feat, ss << "]");
         }
-        // for additive and subtractive pipes allow the user to preselect the spines
         if (which.compare("AdditivePipe") == 0 || which.compare("SubtractivePipe") == 0) {
             if (sels.size() > 1) {
-                //treat additional selected object as spine
+                // for additive and subtractive pipes, treat the first extra
+                // selection as spine, and the remaining selection as multi
+                // sections
                 App::DocumentObject *spine = nullptr;
-                App::SubObjectT ref;
+                App::SubObjectT spineT;
                 std::vector<std::string> subs;
+                std::vector<App::SubObjectT> sections;
                 for (unsigned i=1; i<sels.size(); ++i) {
                     if (!spine) {
-                        ref = PartDesignGui::importExternalObject(sels[i], false);
-                        if (ref.getObjectName().empty())
+                        spineT = PartDesignGui::importExternalObject(sels[i], false);
+                        if (spineT.getObjectName().empty())
                             continue;
                         spine = sels[i].getSubObject();
                         if (!spine)
                             continue;
-                    } else if (spine != sels[i].getSubObject())
+                    } else if (spine != sels[i].getSubObject()) {
+                        auto ref = PartDesignGui::importExternalObject(sels[i], false);
+                        if (ref.getObjectName().size())
+                            sections.push_back(ref);
                         continue;
+                    }
                     auto sub = sels[i].getOldElementName();
                     if (sub.size())
                         subs.push_back(std::move(sub));
                 }
                 if (spine) {
                     std::ostringstream ss;
-                    for(auto &s : subs)
+                    for(const auto &s : subs)
                         ss << "'" << s << "',";
                     Gui::cmdAppObject(Feat, std::ostringstream()
-                            <<"Spine = (" << ref.getObjectPython() << ", [" << ss.str() << "])");
+                            << "Spine = (" << spineT.getObjectPython() << ", [" << ss.str() << "])");
+                }
+
+                if (sections.size()) {
+                    std::ostringstream ss;
+                    ss << "Sections = [";
+                    for(const auto &sobjT : sections)
+                        ss << sobjT.getSubObjectPython() << ",";
+                    ss << "]";
+                    Gui::cmdAppObject(Feat, ss);
+                    Gui::cmdAppObject(Feat, std::ostringstream() << "Transition = 'Transformed'");
+                    Gui::cmdAppObject(Feat, std::ostringstream() << "Transformation = 'Multisection'");
                 }
             }
         }
@@ -1008,44 +985,40 @@ void prepareProfileBased(PartDesign::Body *pcActiveBody, Gui::Command* cmd, cons
         func(static_cast<Part::Feature*>(feature), Feat);
     };
 
-#if 0
-    // in case of subtractive types, check that there is something to subtract from
-    if ((which.find("Subtractive") != std::string::npos)  ||
-        (which.compare("Groove") == 0) ||
-        (which.compare("Pocket") == 0)) {
-
-        if (!pcActiveBody->isSolid()) {
-            QMessageBox msgBox;
-            msgBox.setText(QObject::tr("Cannot use this command as there is no solid to subtract from."));
-            msgBox.setInformativeText(QObject::tr("Ensure that the body contains a feature before attempting a subtractive command."));
-            msgBox.setStandardButtons(QMessageBox::Ok);
-            msgBox.setDefaultButton(QMessageBox::Ok);
-            msgBox.exec();
-            return;
-        }
-    }
-#endif
+    //if a profile is selected we can make our life easy and fast
+    auto sels = Gui::Selection().getSelectionT("*", 0);
 
     if (!sels.empty()) {
         App::SubObjectT ref;
-        for (unsigned i=0; i<sels.size(); ++i) {
-            auto sobj = sels[i].getSubObject();
-            if (!sobj)
+        auto inList = pcActiveBody->getInListEx(true);
+        inList.insert(pcActiveBody);
+        for (auto it=sels.begin(); it!=sels.end();) {
+            const auto &selT = *it;
+            auto sobj = selT.getSubObject();
+            if (!sobj) {
+                it = sels.erase(it);
                 continue;
-            ref = PartDesignGui::importExternalObject(sels[i], false);
-            if (auto obj = ref.getSubObject()) {
-                std::vector<std::string> subs;
-                if (sels[i].hasSubElement())
-                    subs.push_back(sels[i].getOldElementName());
-                for (unsigned j=i+1; j<sels.size(); ++j) {
-                    if (sels[j].getSubObject() == sobj && sels[j].hasSubElement())
-                        subs.push_back(sels[j].getOldElementName());
-                }
-                base_worker(obj, subs);
-                if (PartGui::PartParams::AdjustCameraForNewFeature())
-                    cmd->adjustCameraPosition();
-                return;
             }
+            if (inList.count(sobj)) {
+                FC_WARN("ignore selection of " << sobj->getFullName() << " to avoid dependency loop");
+                it = sels.erase(it);
+                continue;
+            }
+
+            std::vector<App::SubObjectT> profile;
+            for (; it!=sels.end();) {
+                const auto &sobjT = *it;
+                if (sobjT.getSubObject() == sobj) {
+                    profile.push_back(sobjT);
+                    it = sels.erase(it);
+                }
+                else 
+                    ++it;
+            }
+            base_worker(profile, sels);
+            if (PartGui::PartParams::getAdjustCameraForNewFeature())
+                cmd->adjustCameraPosition();
+            return;
         }
     }
 
@@ -1072,8 +1045,10 @@ void prepareProfileBased(PartDesign::Body *pcActiveBody, Gui::Command* cmd, cons
         return true;
     };
 
-    auto sketch_worker = [&, base_worker](std::vector<App::DocumentObject*> features) {
-        base_worker(features.front(), {});
+    auto sketch_worker = [=](std::vector<App::DocumentObject*> features) mutable {
+        std::vector<App::SubObjectT> profile;
+        profile.emplace_back(features.front());
+        base_worker(profile, {});
     };
 
     // Show sketch choose dialog and let user pick sketch if no sketch was selected and no free one available or
@@ -1202,7 +1177,7 @@ void CmdPartDesignExtrusion::activated(int iMsg)
         finishFeature(cmd, Feat, nullptr, false, false);
     };
 
-    prepareProfileBased(pcActiveBody, this, "Extrusion", worker, true);
+    prepareProfileBased(pcActiveBody, this, "Extrusion", worker);
 }
 
 bool CmdPartDesignExtrusion::isActive(void)
@@ -2652,6 +2627,7 @@ void CmdPartDesignBoolean::activated(int iMsg)
         break;
     }
 
+    std::set<App::SubObjectT> boundObjects;
     for(auto &v : binderLinks) {
         std::string FeatName = getUniqueObjectName("Reference",pcActiveBody);
         Gui::cmdAppObject(pcActiveBody, std::ostringstream()
@@ -2665,8 +2641,12 @@ void CmdPartDesignBoolean::activated(int iMsg)
         auto &subs = links[v.first.first];
         if(v.second.empty())
             v.second.push_back("");
-        for(auto &s : v.second)
+        for(auto &s : v.second) {
             subs.push_back(v.first.second + s);
+            App::SubObjectT sobjT(v.first.first, subs.back().c_str());
+            sobjT.setSubName(sobjT.getSubNameNoElement());
+            boundObjects.insert(sobjT);
+        }
         binder->setLinks(std::move(links));
         objs.push_back(binder);
     }
@@ -2678,6 +2658,13 @@ void CmdPartDesignBoolean::activated(int iMsg)
         updateDocument = true;
         std::string bodyString = PartDesignGui::buildLinkListPythonStr(objs);
         Gui::cmdAppObject(Feat, std::ostringstream() <<"addObjects("<<bodyString<<")");
+    }
+
+    for (auto sobjT : boundObjects) {
+        if (auto sobj = sobjT.getSubObject()) {
+            if (pcActiveBody->Group.find(sobj->getNameInDocument()))
+                sobj->Visibility.setValue(false);
+        }
     }
 
     finishFeature(this, Feat, nullptr, false, updateDocument);

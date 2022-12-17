@@ -24,11 +24,13 @@
 #ifndef PATH_FeaturePath_H
 #define PATH_FeaturePath_H
 
+#include <set>
 #include <App/DocumentObject.h>
 #include <App/GeoFeature.h>
 #include <App/PropertyFile.h>
 #include <App/PropertyGeo.h>
 #include <App/FeaturePython.h>
+#include <Mod/Part/App/PartFeature.h>
 
 #include "Path.h"
 #include "PropertyPath.h"
@@ -36,8 +38,9 @@
 namespace Path
 {
 
-class PathExport Feature : public App::GeoFeature
+class PathExport Feature : public Part::Feature
 {
+    typedef Part::Feature inherited;
     PROPERTY_HEADER(Path::Feature);
 
 public:
@@ -55,14 +58,17 @@ public:
     virtual short mustExecute(void) const;
     virtual PyObject *getPyObject(void);
 
-    PropertyPath           Path;
-
+    PropertyPath                Path;
+    App::PropertyBool           BuildShape;
+    App::PropertyIntegerList    CommandFilter;
 
 protected:
     /// get called by the container when a property has changed
     virtual void onChanged (const App::Property* prop);
 
 };
+
+Part::TopoShape PathExport shapeFromPath(const Toolpath &path, const std::set<int> &filter={});
 
 typedef App::FeaturePythonT<Feature> FeaturePython;
 

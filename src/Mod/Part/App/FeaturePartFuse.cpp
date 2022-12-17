@@ -59,7 +59,7 @@ BRepAlgoAPI_BooleanOperation* Fuse::makeOperation(const TopoDS_Shape& base, cons
 }
 
 const char *Fuse::opCode() const {
-    return TOPOP_FUSE;
+    return Part::OpCodes::Fuse;
 }
 
 // ----------------------------------------------------
@@ -248,7 +248,7 @@ App::DocumentObjectExecReturn *MultiFuse::execute(void)
     }
 
     TopoShape res(0,getDocument()->getStringHasher());
-    res.makEShape(TOPOP_FUSE,shapes);
+    res.makEBoolean(Part::OpCodes::Fuse,shapes);
     if (res.isNull())
         throw Base::RuntimeError("Resulting shape is null");
 

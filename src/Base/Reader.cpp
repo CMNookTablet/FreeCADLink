@@ -281,6 +281,7 @@ void Base::XMLReader::readElement(const char* ElementName, int *guard)
                 // Missing element. Consider this as non-fatal
                 FC_ERR("Document XML element '" << (ElementName?ElementName:"") << "' not found\n"
                         << "In context: " << _ReaderContext);
+                AttrMap.clear();
             }
             break;
         }
@@ -399,6 +400,7 @@ std::istream &Base::XMLReader::beginCharStream(bool base64) {
     // child elements and character content at the same time.
     if (ReadType == StartElement) {
         CharacterOffset = 0;
+        Characters.clear();
         read();
     } else if (ReadType == StartEndElement) {
         // If we are current at a self closing element, just leave the offset
@@ -570,7 +572,8 @@ void Base::XMLReader::characters(const   XMLCh* const chars, const XMLSize_t len
 
     // We only capture characters when some one wants it
     if(CharacterOffset>=0) {
-        Characters = StrXUTF8(chars).c_str();
+        Characters.erase(Characters.begin(), Characters.begin()+CharacterOffset);
+        Characters += StrXUTF8(chars).c_str();
         CharacterOffset = 0;
     }
 }

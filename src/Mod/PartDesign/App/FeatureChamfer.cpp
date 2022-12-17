@@ -78,6 +78,9 @@ Chamfer::Chamfer()
 
     ADD_PROPERTY_TYPE(FlipDirection, (false), "Chamfer", App::Prop_None, "Flip direction");
 
+    ADD_PROPERTY(ChamferInfo,());
+    ChamferInfo.connectLinkProperty(Base);
+
     updateProperties();
 }
 
@@ -99,7 +102,7 @@ short Chamfer::mustExecute() const
             break;
     }
 
-    if (Placement.isTouched() || touched)
+    if (Placement.isTouched() || ChamferInfo.isTouched() || touched)
         return 1;
     return DressUp::mustExecute();
 }
@@ -132,20 +135,26 @@ App::DocumentObjectExecReturn *Chamfer::execute(void)
         return res;
     }
 
+    Part::TopoShape::ChamferInfo defaultChamfer;
+    defaultChamfer.size = size;
+    defaultChamfer.size2 = chamferType == 1 ? size2 : size;
+    defaultChamfer.angle = chamferType == 2 ? angle : 0.0;
+    defaultChamfer.flip = flipDirection;
+
+    std::string name;
+    std::vector<Part::TopoShape::ChamferInfo> chamferInfo;
+    for (const auto &edge : edges) {
+        int idx = baseShape.findShape(edge.getShape());
+        name = "Edge";
+        name += std::to_string(idx);
+        chamferInfo.push_back(defaultChamfer);
+        ChamferInfo.getValue(name.c_str(),chamferInfo.back());
+    }
+
     this->positionByBaseFeature();
     try {
         TopoShape shape(0,getDocument()->getStringHasher());
-        switch (chamferType) {
-        case 1: // Two distances
-            shape.makEChamfer(baseShape,edges,size,size2,nullptr,flipDirection);
-            break;
-        case 2: // Distance and angle
-            shape.makEChamfer(baseShape,edges,size,Base::toRadians(angle),nullptr,flipDirection,true);
-            break;
-        default: // Equal distance
-            shape.makEChamfer(baseShape,edges,size,size);
-            break;
-        }
+        shape.makEChamfer(baseShape, edges, chamferInfo);
         if (shape.isNull())
             return new App::DocumentObjectExecReturn("Failed to create chamfer");
 
@@ -155,9 +164,7 @@ App::DocumentObjectExecReturn *Chamfer::execute(void)
         if (!BRepAlgo::IsValid(aLarg, shape.getShape(), Standard_False, Standard_False)) {
             ShapeFix_ShapeTolerance aSFT;
             aSFT.LimitTolerance(shape.getShape(), Precision::Confusion(), Precision::Confusion(), TopAbs_SHAPE);
-            Handle(ShapeFix_Shape) aSfs = new ShapeFix_Shape(shape.getShape());
-            aSfs->Perform();
-            shape.setShape(aSfs->Shape(),false);
+            shape.fix();
             if (!BRepAlgo::IsValid(aLarg, shape.getShape(), Standard_False, Standard_False))
                 failed = true;
         }

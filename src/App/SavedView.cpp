@@ -33,7 +33,7 @@ SavedView::SavedView()
     ADD_PROPERTY_TYPE(SaveShowOnTop, (true), "VisibilitySettings", App::Prop_None, "Enable saving show on top objects");
     ADD_PROPERTY_TYPE(SaveCamera, (true), "CameraSettings", App::Prop_None, "Enable saving camera settings");
     ADD_PROPERTY_TYPE(SaveClippings, (true), "ClipSettings", App::Prop_None, "Enable saving clipping planes");
-    ADD_PROPERTY_TYPE(SaveShadowSettings, (true), "Shadow", App::Prop_None, "Enable saving shadow drawstyle settings");
+    ADD_PROPERTY_TYPE(SaveDrawStyleSettings, (true), "DrawStyleSettings", App::Prop_None, "Enable saving drawstyle settings");
 }
 
 SavedView::~SavedView()
@@ -54,4 +54,12 @@ App::Property *SavedView::getProperty(const Base::Type &type, const char *name, 
         prop->setStatus(App::Property::Hidden, true);
     }
     return prop;
+}
+
+void SavedView::handleChangedPropertyName(Base::XMLReader &reader, const char * TypeName, const char *PropName)
+{
+    if (strcmp(PropName, "SaveShadowSettings") == 0 && strcmp(TypeName, App::PropertyBool::getClassTypeId().getName()) == 0)
+    {
+        SaveDrawStyleSettings.Restore(reader);
+    }
 }

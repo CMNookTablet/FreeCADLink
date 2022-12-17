@@ -95,7 +95,7 @@ class ParameterManager;
  *  and exporting groups of parameters and enables streaming
  *  to a persistent medium via XML.
  *  \par
- *  Its main task is making user parameter persitent, saving
+ *  Its main task is making user parameter persistent, saving
  *  last used values in dialog boxes, setting and retrieving all
  *  kind of preferences and so on.
  *  @see ParameterManager
@@ -315,6 +315,10 @@ protected:
     XERCES_CPP_NAMESPACE_QUALIFIER DOMElement *FindOrCreateElement(XERCES_CPP_NAMESPACE_QUALIFIER DOMElement *Start, const char* Type, const char* Name);
 
     XERCES_CPP_NAMESPACE_QUALIFIER DOMElement *CreateElement(XERCES_CPP_NAMESPACE_QUALIFIER DOMElement *Start, const char* Type, const char* Name);
+
+    /** Find an attribute specified by Name
+     */
+    XERCES_CPP_NAMESPACE_QUALIFIER DOMNode *FindAttribute(XERCES_CPP_NAMESPACE_QUALIFIER DOMNode *Node, const char* Name) const;
 
     /// DOM Node of the Base node of this group
     XERCES_CPP_NAMESPACE_QUALIFIER DOMElement *_pGroupNode;

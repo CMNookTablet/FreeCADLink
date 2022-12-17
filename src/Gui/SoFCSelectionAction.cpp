@@ -89,6 +89,7 @@
 #include <Inventor/nodes/SoSphere.h>
 #include <Inventor/nodes/SoTransformation.h>
 
+#include "InventorBase.h"
 #include "SoFCUnifiedSelection.h"
 #include "SoFCSelectionAction.h"
 #include "SoFCSelection.h"
@@ -1106,7 +1107,7 @@ SoBoxSelectionRenderActionP::updateBbox(const SoPath * path)
 
     SbXfBox3f & box = this->bboxaction->getXfBoundingBox();
 
-    if (!box.isEmpty()) {
+    if (isValidBBox(box)) {
         // set cube size
         float x, y, z;
         box.getSize(x, y, z);
@@ -1140,6 +1141,28 @@ void
 SoBoxSelectionRenderAction::initClass(void)
 {
     SO_ACTION_INIT_CLASS(SoBoxSelectionRenderAction, SoGLRenderAction);
+
+    auto handler = [](SoAction *action, SoNode *node) {
+        assert(action && node);
+        if (action->isOfType(SoGLRenderAction::getClassTypeId())) {
+            if (node->getTypeId() == SoSeparator::getClassTypeId()) {
+                auto glaction = static_cast<SoGLRenderAction*>(action);
+                switch(glaction->getCurPathCode()) {
+                case SoAction::NO_PATH:
+                case SoAction::BELOW_PATH:
+                    node->GLRenderBelowPath(glaction);
+                    break;
+                case SoAction::OFF_PATH:
+                    break;
+                case SoAction::IN_PATH:
+                    SoFCSeparator::_GLRenderInPath(node, glaction);
+                    break;
+                }
+            } else
+                SoNode::GLRenderS(action, node);
+        }
+    };
+    addMethod(SoSeparator::getClassTypeId(), handler);
 }
 
 SoBoxSelectionRenderAction::SoBoxSelectionRenderAction(void)

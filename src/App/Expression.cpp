@@ -1904,35 +1904,35 @@ bool NumberExpression::isInteger(long *l) const {
 EXPR_TYPESYSTEM_SOURCE(App::OperatorExpression, App::Expression);
 
 enum Operator {
-    OP_NONE,
-    OP_ADD,
-    OP_SUB,
-    OP_MUL,
-    OP_DIV,
-    OP_FDIV,
-    OP_MOD,
-    OP_POW,
-    OP_POW2,
-    OP_EQ,
-    OP_NEQ,
+    OP_NONE = 0,
+    OP_ADD = 1,
+    OP_SUB = 2,
+    OP_MUL = 3,
+    OP_DIV = 4,
+    OP_FDIV = 5,
+    OP_MOD = 6,
+    OP_POW = 7,
+    OP_POW2 = 8,
+    OP_EQ = 9,
+    OP_NEQ = 10,
     OP_NE = OP_NEQ,
-    OP_LT,
-    OP_GT,
-    OP_LTE,
+    OP_LT = 11,
+    OP_GT = 12,
+    OP_LTE = 13,
     OP_LE = OP_LTE,
-    OP_GTE,
+    OP_GTE = 14,
     OP_GE = OP_GTE,
-    OP_UNIT,
-    OP_UNIT_ADD,
-    OP_NEG,
-    OP_POS,
-    OP_AND,
-    OP_OR,
-    OP_IS,
-    OP_IS_NOT,
-    OP_NOT,
-    OP_IN,
-    OP_NOT_IN,
+    OP_UNIT = 15,
+    OP_UNIT_ADD = 16,
+    OP_NEG = 17,
+    OP_POS = 18,
+    OP_AND = 19,
+    OP_OR = 20,
+    OP_IS = 21,
+    OP_IS_NOT = 22,
+    OP_NOT = 23,
+    OP_IN = 24,
+    OP_NOT_IN = 25,
 };
 
 namespace App {
@@ -1945,11 +1945,12 @@ bool isSimpleExpression(const Expression *expr, bool no_arithmetics)
     GenericExpressionVisitor visitor(
         [no_arithmetics](ExpressionVisitor *, Expression &e) {
             if (no_arithmetics) {
-                if (e.isDerivedFrom(OperatorExpression::getClassTypeId())) {
-                    switch(static_cast<const OperatorExpression&>(e).getOperator()) {
+                if (auto expr = Base::freecad_dynamic_cast<OperatorExpression>(&e)) {
+                    switch(expr->getOperator()) {
                     case OP_UNIT:
                     case OP_UNIT_ADD:
                     case OP_DIV:
+                    case OP_NEG:
                         return;
                     default:
                         throw Base::RuntimeError();
@@ -2794,8 +2795,8 @@ const std::vector<FunctionExpression::FunctionInfo> &FunctionExpression::getFunc
 {
     static std::vector<FunctionInfo> functions = {
         {ACOS, "acos", "Inverse cosine of a value"},
-        {ASIN, "asin", "Iverse sine of a value"},
-        {ATAN, "atan", "Iverse tangent of a value"},
+        {ASIN, "asin", "Inverse sine of a value"},
+        {ATAN, "atan", "Inverse tangent of a value"},
         {ABS, "abs", "Absolute value of a number"},
         {EXP, "exp", "Euler's number raised to a power"},
         {LOG, "log", "The natural (base e) logarithm of a number"},

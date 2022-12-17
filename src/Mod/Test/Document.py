@@ -1527,6 +1527,44 @@ class DocumentExpressionCases(unittest.TestCase):
     # must not raise a topological error
     self.assertEqual(self.Doc.recompute(), 2)
 
+  def testDependency(self):
+    self.Obj1.Link = self.Obj2
+
+    try:
+        # references parent, cyclic dependency
+        self.Obj2.setExpression('Integer', '._self.Document.Test.Integer')
+        self.Doc.recompute()
+    except Exception as e:
+        self.assertTrue(str(e).count('cyclic') > 0)
+    else:
+        self.assertFalse('Expects excption of cyclic dependency')
+
+    self.Obj2.setExpression('Integer', None)
+
+    self.Sheet = self.Doc.addObject("Spreadsheet::Sheet","Sheet")
+    self.Sheet.set('A1', '=Test.Link.Integer')
+    self.assertIn(self.Obj1, self.Sheet.OutList)
+    self.assertIn(self.Obj2, self.Sheet.OutList)
+
+    self.Sheet.set('A1', '=Test._self.Document.Test001.Integer')
+    self.assertIn(self.Obj1, self.Sheet.OutList)
+    self.assertIn(self.Obj2, self.Sheet.OutList)
+
+    self.Sheet.set('A1', '=Test.Link')
+    self.assertIn(self.Obj1, self.Sheet.OutList)
+    # It is by design that if the object identifier references an object without
+    # referencing any of its property, it is not counted as a dependency. The
+    # only dependency, in this case, is the 'Link' property of object 'Test'
+    # (i.e. self.Obj1) . The logic is that even if 'Test001' (self.Obj2)
+    # changes, the content of 'Test.Link' does not change, so 'Sheet' should not
+    # be recomputed.
+    self.assertFalse(self.Obj2 in self.Sheet.OutList)
+
+    # Now 'Sheet' contains identifier referencing Test001.Integer, it should
+    # be included as dependency even if it is indirectly referenced.
+    self.Sheet.set('A2', '=A1.Integer')
+    self.assertIn(self.Obj1, self.Sheet.OutList)
+
   def tearDown(self):
     #closing doc
     FreeCAD.closeDocument(self.Doc.Name)

@@ -93,10 +93,10 @@ void Thumbnail::SaveDocFile (Base::Writer &writer) const
     }
 
     QColor bgcolor;
-    if (App::DocumentParams::ThumbnailNoBackground())
+    if (App::DocumentParams::getThumbnailNoBackground())
         bgcolor = QColor(0,0,0,0);
     this->viewer->imageFromFramebuffer(this->size, this->size,
-            App::DocumentParams::ThumbnailSampleSize(), bgcolor, img);
+            App::DocumentParams::getThumbnailSampleSize(), bgcolor, img);
 
     // Get app icon and resize to half size to insert in topbottom position over the current view snapshot
     QPixmap appIcon = Gui::BitmapFactory().pixmap(App::Application::Config()["AppIcon"].c_str());

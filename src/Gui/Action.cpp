@@ -205,6 +205,7 @@ void Action::setIcon (const QIcon & icon)
     _action->setIcon(icon);
     if (!icon.isNull())
         ToolBarManager::getInstance()->checkToolbarIconSize(_action);
+    setToolTip(_tooltip, _title);
 }
 
 QIcon Action::icon () const
@@ -315,7 +316,8 @@ QString Action::createToolTip(QString _tooltip,
                               const QString & title,
                               const QFont &font,
                               const QString &sc,
-                              const Command *pcCmd)
+                              const Command *pcCmd,
+                              QString iconPath)
 {
     QString text = cleanTitle(title);
 
@@ -342,34 +344,52 @@ QString Action::createToolTip(QString _tooltip,
 
     QString cmdName;
     if (pcCmd && pcCmd->getName()) {
+        auto pCmd = pcCmd;
         cmdName = QString::fromUtf8(pcCmd->getName());
-        if (auto groupcmd = dynamic_cast<const GroupCommand*>(pcCmd)) {
-            if (auto act = pcCmd->getAction()) {
-                int idx = act->property("defaultAction").toInt();
-                auto cmd = groupcmd->getCommand(idx);
-                if (cmd && cmd->getName())
-                    cmdName = QStringLiteral("%1 (%2:%3)")
-                        .arg(QString::fromUtf8(cmd->getName()))
-                        .arg(cmdName)
-                        .arg(idx);
+        int idx = 0;
+        if (auto action = pCmd->getChildAction(-1, &idx)) {
+            auto cmd = action->command();
+            if (cmd && cmd->getName()) {
+                cmdName = QStringLiteral("%1 (%2:%3)")
+                    .arg(QString::fromUtf8(cmd->getName()))
+                    .arg(cmdName)
+                    .arg(idx);
+                pCmd = cmd;
+            }
+        }
+        if (iconPath.isEmpty() && ViewParams::getToolTipIconSize() > 0) {
+            if (auto pixmap = pCmd->getPixmap()) {
+                auto path = BitmapFactory().getIconPath(pixmap);
+                if (path)
+                    iconPath = QString::fromUtf8(path);
             }
         }
         cmdName = QStringLiteral("<p style='white-space:pre; margin-top:0.5em;'><i>%1</i></p>")
             .arg(cmdName.toHtmlEscaped());
     }
 
+    QString img;
+    if (!iconPath.isEmpty() && ViewParams::getToolTipIconSize() > 0) {
+        img = QStringLiteral("<img src='%1' style='float:right'/>")
+            .arg(iconPath.toHtmlEscaped());
+        if (cmdName.size() > title.size() + shortcut.size()) {
+            tooltip = img + tooltip;
+            img.clear();
+        }
+    }
+
     if (shortcut.size() && _tooltip.endsWith(shortcut))
         _tooltip.resize(_tooltip.size() - shortcut.size());
 
     if (_tooltip.isEmpty()
-            || _tooltip == text
-            || _tooltip == title)
+            || _tooltip.compare(text, Qt::CaseInsensitive)==0
+            || _tooltip.compare(title, Qt::CaseInsensitive)==0)
     {
-        return tooltip + cmdName;
+        return tooltip + cmdName + img;
     }
     if (Qt::mightBeRichText(_tooltip)) {
         // already rich text, so let it be to avoid duplicated unwrapping
-        return tooltip + _tooltip + cmdName;
+        return img + tooltip + _tooltip + cmdName;
     }
 
     tooltip += QStringLiteral(
@@ -398,7 +418,9 @@ QString Action::createToolTip(QString _tooltip,
                 + _tooltip.right(_tooltip.size()-index).trimmed().toHtmlEscaped();
         }
     }
-    return tooltip + cmdName;
+    if (img.size() && _tooltip.size() < text.size() + shortcut.size())
+        return tooltip + cmdName + img;
+    return img + tooltip + cmdName;
 }
 
 QString Action::toolTip() const
@@ -456,19 +478,23 @@ Action::addCheckBox(QMenu *menu,
 
 class MenuFocusEventFilter: public QObject {
 public:
-    MenuFocusEventFilter(QMenu *menu, QAction *action)
+    MenuFocusEventFilter(QMenu *menu, QAction *action, QWidget *focusWidget=nullptr)
         :QObject(menu)
-        ,menu(menu), action(action)
+        ,menu(menu), action(action), focusWidget(focusWidget)
     {}
 
     bool eventFilter(QObject *, QEvent *e) {
-        if (e->type() == QEvent::Enter)
+        if (e->type() == QEvent::Enter) {
             menu->setActiveAction(action);
+            if (focusWidget)
+                focusWidget->setFocus();
+        }
         return false;
     }
 
     QMenu *menu;
     QAction *action;
+    QWidget *focusWidget;
 };
 
 QAction *
@@ -492,7 +518,7 @@ Action::addWidget(QMenu *menu,
     layout->setContentsMargins(4,0,4,0);
     widget->setFocusProxy(w);
     widget->setFocusPolicy(Qt::TabFocus);
-    w->installEventFilter(new MenuFocusEventFilter(menu, wa));
+    w->installEventFilter(new MenuFocusEventFilter(menu, wa, w));
     w->setFocusPolicy(Qt::TabFocus);
     wa->setDefaultWidget(widget);
     wa->setToolTip(tooltip);
@@ -514,7 +540,6 @@ ActionGroup::ActionGroup ( Command* pcCmd,QObject * parent)
 {
     _group = new QActionGroup(this);
     connect(_group, SIGNAL(triggered(QAction*)), this, SLOT(onActivated (QAction*)));
-    connect(_group, SIGNAL(hovered(QAction*)), this, SLOT(onHovered(QAction*)));
 }
 
 ActionGroup::~ActionGroup()
@@ -555,7 +580,6 @@ void ActionGroup::addTo(QWidget *w)
             QMenu* menu = new QMenu(w);
             menu->addActions(actions());
             tb->setMenu(menu);
-            //tb->addActions(_group->actions());
             ToolBarManager::getInstance()->checkToolbarIconSize(static_cast<QToolBar*>(w));
         }
         else {
@@ -694,11 +718,6 @@ void ActionGroup::onActivated (QAction* a)
 #endif
 
     _pcCmd->invoke(index, Command::TriggerChildAction);
-}
-
-void ActionGroup::onHovered (QAction *a)
-{
-    Gui::ToolTip::showText(QCursor::pos(), a->toolTip());
 }
 
 
@@ -890,9 +909,48 @@ public:
 
 // --------------------------------------------------------------------
 
-WorkbenchTabBar::WorkbenchTabBar(WorkbenchGroup* wb, QWidget* parent)
+void WorkbenchTabBar::setTabSize(int s)
+{
+    hasTabSize = true;
+    _tabSize = s;
+}
+
+QSize WorkbenchTabBar::tabSizeHint(int index) const
+{
+    QSize size = QTabBar::tabSizeHint(index);
+    if (!tabText(index).isEmpty())
+        return size;
+    switch (shape()) {
+    case QTabBar::RoundedWest:
+    case QTabBar::RoundedEast:
+    case QTabBar::TriangularWest:
+    case QTabBar::TriangularEast:
+        if (_tabSize <= 0)
+            return QSize(size.width(), std::max(iconSize().width(), size.width()+2));
+        return QSize(size.width(), _tabSize);
+    default:
+        if (_tabSize <= 0)
+            return QSize(std::max(iconSize().width(), size.height()+2), size.height());
+        return QSize(_tabSize, size.height());
+    }
+}
+
+void WorkbenchTabBar::changeEvent(QEvent *ev)
+{
+    QTabBar::changeEvent(ev);
+    if (ev->type() == QEvent::StyleChange) {
+        if (!hasTabSize)
+            _tabSize = 0;
+        hasTabSize = false;
+    }
+}
+
+// --------------------------------------------------------------------
+
+WorkbenchTabWidget::WorkbenchTabWidget(WorkbenchGroup* wb, QWidget* parent)
     : QTabWidget(parent), group(wb)
 {
+    this->setTabBar(new WorkbenchTabBar(this));
     connect(this, SIGNAL(currentChanged(int)), this, SLOT(onCurrentChanged()));
     connect(this->tabBar(), SIGNAL(tabMoved(int, int)), this, SLOT(onTabMoved(int, int)));
     connect(getMainWindow(), SIGNAL(workbenchActivated(const QString&)),
@@ -932,11 +990,11 @@ WorkbenchTabBar::WorkbenchTabBar(WorkbenchGroup* wb, QWidget* parent)
     onChangeOrientation();
 }
 
-WorkbenchTabBar::~WorkbenchTabBar()
+WorkbenchTabWidget::~WorkbenchTabWidget()
 {
 }
 
-QToolBar *WorkbenchTabBar::getToolBar()
+QToolBar *WorkbenchTabWidget::getToolBar()
 {
     for (auto parent = parentWidget(); parent; parent = parent->parentWidget()) {
         if (auto tb = qobject_cast<QToolBar*>(parent))
@@ -945,7 +1003,7 @@ QToolBar *WorkbenchTabBar::getToolBar()
     return nullptr;
 }
 
-void WorkbenchTabBar::setupVisibility()
+void WorkbenchTabWidget::setupVisibility()
 {
     if (!action)
         return;
@@ -974,7 +1032,7 @@ void WorkbenchTabBar::setupVisibility()
     }
 }
 
-void WorkbenchTabBar::onChangeOrientation()
+void WorkbenchTabWidget::onChangeOrientation()
 {
     auto parent = qobject_cast<QToolBar*>(parentWidget());
     if (!parent)
@@ -1000,7 +1058,7 @@ void WorkbenchTabBar::onChangeOrientation()
     setupVisibility();
 }
 
-void WorkbenchTabBar::updateWorkbenches()
+void WorkbenchTabWidget::updateWorkbenches()
 {
     auto tab = this->tabBar();
 
@@ -1031,17 +1089,17 @@ void WorkbenchTabBar::updateWorkbenches()
         if (!action->isVisible())
             continue;
         bool changed = true;
+        QString wb = action->objectName();
         if (i >= this->count())
             this->addTab(new QWidget(), action->icon(), QString());
         else if (tab->tabData(i).toString() == action->objectName())
             changed = false;
 
+        QString iconPath; 
+        QPixmap px = Application::Instance->workbenchIcon(wb, &iconPath);
+
         tab->setTabIcon(i, action->icon());
-        tab->setTabToolTip(i, 
-                Action::createToolTip(action->toolTip(),
-                                        action->text(),
-                                        action->font(),
-                                        action->shortcut().toString(QKeySequence::NativeText)));
+        tab->setTabToolTip(i, action->toolTip());
         if (changed) {
             tab->setTabData(i, action->objectName());
         }
@@ -1062,7 +1120,7 @@ void WorkbenchTabBar::updateWorkbenches()
         this->removeTab(this->count()-1);
 }
 
-void WorkbenchTabBar::onCurrentChanged()
+void WorkbenchTabWidget::onCurrentChanged()
 {
     if (QApplication::mouseButtons() & Qt::LeftButton) {
         timerCurrentChange.start(10);
@@ -1083,12 +1141,12 @@ void WorkbenchTabBar::onCurrentChanged()
     Application::Instance->activateWorkbench(name.toUtf8());
 }
 
-void WorkbenchTabBar::onTabMoved(int, int)
+void WorkbenchTabWidget::onTabMoved(int, int)
 {
     moved = true;
 }
 
-bool WorkbenchTabBar::eventFilter(QObject *o, QEvent *ev)
+bool WorkbenchTabWidget::eventFilter(QObject *o, QEvent *ev)
 {
     if (moved && o == this->tabBar()
               && ev->type() == QEvent::MouseButtonRelease
@@ -1106,7 +1164,7 @@ bool WorkbenchTabBar::eventFilter(QObject *o, QEvent *ev)
     return QTabWidget::eventFilter(o, ev);
 }
 
-void WorkbenchTabBar::onWorkbenchActivated(const QString& name)
+void WorkbenchTabWidget::onWorkbenchActivated(const QString& name)
 {
     QSignalBlocker block(this);
     auto tab = this->tabBar();
@@ -1221,7 +1279,7 @@ void WorkbenchGroup::addTo(QWidget *w)
         connect(box, SIGNAL(customContextMenuRequested(QPoint)),
                 this, SLOT(onContextMenuRequested(QPoint)));
 
-        auto tabbar = new WorkbenchTabBar(this, w);
+        auto tabbar = new WorkbenchTabWidget(this, w);
         auto actTab = bar->addWidget(tabbar);
         tabbar->setAction(actTab);
         tabbar->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -1265,17 +1323,21 @@ void WorkbenchGroup::setWorkbenchData(int i, const QString& wb)
 {
     QList<QAction*> workbenches = _group->actions();
     QString name = Application::Instance->workbenchMenuText(wb);
-    QPixmap px = Application::Instance->workbenchIcon(wb);
+    QString iconPath;
+    QPixmap px = Application::Instance->workbenchIcon(wb, &iconPath);
     QString tip = Application::Instance->workbenchToolTip(wb);
-
     workbenches[i]->setObjectName(wb);
     workbenches[i]->setIcon(px);
     workbenches[i]->setText(name);
-    workbenches[i]->setToolTip(tip);
     workbenches[i]->setStatusTip(tr("Select the '%1' workbench").arg(name));
     workbenches[i]->setVisible(true);
-    if (i < 9)
-        workbenches[i]->setShortcut(QKeySequence(QString::fromUtf8("W,%1").arg(i+1)));
+    QString shortcut;
+    if (i < 9) {
+        shortcut = QString::fromUtf8("W,%1").arg(i+1);
+        workbenches[i]->setShortcut(QKeySequence(shortcut));
+    }
+    workbenches[i]->setToolTip(Action::createToolTip(
+                tip, name, workbenches[i]->font(), shortcut, nullptr, iconPath));
 }
 
 void WorkbenchGroup::refreshWorkbenchList()
@@ -1347,32 +1409,20 @@ void WorkbenchGroup::slotActivateWorkbench(const char* /*name*/)
 
 void WorkbenchGroup::slotAddWorkbench(const char* name)
 {
-    QList<QAction*> workbenches = _group->actions();
-    QAction* action = nullptr;
-    for (QList<QAction*>::Iterator it = workbenches.begin(); it != workbenches.end(); ++it) {
-        if (!(*it)->isVisible()) {
-            action = *it;
-            break;
-        }
-    }
-
-    if (!action) {
-        int index = workbenches.size();
-        action = _group->addAction(QStringLiteral(""));
-        action->setCheckable(true);
-        action->setData(QVariant(index)); // set the index
-    }
-
     QString wb = QString::fromUtf8(name);
-    QPixmap px = Application::Instance->workbenchIcon(wb);
-    QString text = Application::Instance->workbenchMenuText(wb);
-    QString tip = Application::Instance->workbenchToolTip(wb);
-    action->setIcon(px);
-    action->setObjectName(wb);
-    action->setText(text);
-    action->setToolTip(tip);
-    action->setStatusTip(tr("Select the '%1' workbench").arg(wb));
-    action->setVisible(true); // do this at last
+    int index = 0;
+    for (QAction *action : _group->actions()) {
+        if (!action->isVisible()) {
+            setWorkbenchData(index, wb);
+            return;
+        }
+        ++index;
+    }
+
+    auto action = _group->addAction(QStringLiteral(""));
+    action->setCheckable(true);
+    action->setData(QVariant(index)); // set the index
+    setWorkbenchData(index, wb);
 }
 
 void WorkbenchGroup::slotRemoveWorkbench(const char* name)
@@ -1898,6 +1948,7 @@ void DockWidgetAction::addTo ( QWidget * w )
       _menu = new QMenu();
       _action->setMenu(_menu);
       connect(_menu, SIGNAL(aboutToShow()), getMainWindow(), SLOT(onDockWindowMenuAboutToShow()));
+      _menu->aboutToShow();
     }
 
     if (qobject_cast<QToolBar*>(w))
@@ -2156,6 +2207,7 @@ void SelStackAction::populate()
 
         QAction *act;
         if (sels.size() == 1) {
+            sels[0].setSubName(sels[0].getSubNameNoElement() + sels[0].getOldElementName());
             act = _menu->addAction(QString::fromUtf8(
                         sels[0].getSubObjectFullName(activeDocName).c_str()), [=](){select(idx);});
         } else {

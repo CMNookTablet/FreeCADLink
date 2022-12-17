@@ -194,6 +194,8 @@ public:
         return accMode;
     }
 
+    void setFileNameStd( const std::string &fn );
+
 public Q_SLOTS:
     virtual void setFileName( const QString &fn );
     virtual void setMode( Mode m );

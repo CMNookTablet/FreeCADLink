@@ -2153,32 +2153,40 @@ void ComplexGeoData::restoreStream(std::istream &s, std::size_t count) {
     bool warned = false;
 
     const auto & types = getElementTypes();
-
-    for(size_t i=0;i<count;++i) {
-        ElementIDRefs sids;
-        std::size_t scount;
-        if(!(s >> value >> key >> scount))
-            throw Base::RuntimeError("Failed to restore element map");
-        sids.reserve(scount);
-        for(std::size_t j=0;j<scount;++j) {
-            long id;
-            if(!(s >> id))
-                throw Base::RuntimeError("Failed to restore element map");
-            if (Hasher) {
-                auto sid = Hasher->getID(id);
-                if(!sid) 
-                    ++invalid_count;
-                else
-                    sids.push_back(sid);
+    try {
+        for(size_t i=0;i<count;++i) {
+            ElementIDRefs sids;
+            std::size_t scount;
+            if(!(s >> value >> key >> scount))
+                FC_THROWM(Base::RuntimeError,
+                        "Failed to restore element map " << _PersistenceName);
+            sids.reserve(scount);
+            for(std::size_t j=0;j<scount;++j) {
+                long id;
+                if(!(s >> id))
+                    FC_THROWM(Base::RuntimeError,
+                            "Failed to restore element map " << _PersistenceName);
+                if (Hasher) {
+                    auto sid = Hasher->getID(id);
+                    if(!sid) 
+                        ++invalid_count;
+                    else
+                        sids.push_back(sid);
+                }
             }
-        }
-        if(scount && !Hasher) {
-            if(!warned) {
-                warned = true;
-                FC_ERR("missing hasher");
+            if(scount && !Hasher) {
+                sids.clear();
+                if(!warned) {
+                    warned = true;
+                    FC_ERR("missing hasher");
+                }
             }
+            setElementName(IndexedName(value.c_str(), types), MappedName(key), &sids);
         }
-        setElementName(IndexedName(value.c_str(), types), MappedName(key), &sids);
+    } catch (Base::Exception &e) {
+        e.ReportException();
+        _restoreFailed = true;
+        _ElementMap.reset();
     }
     if(invalid_count)
         FC_ERR("Found " << invalid_count << " invalid string id");
@@ -2249,7 +2257,7 @@ void ComplexGeoData::traceElement(const MappedName &name, TraceCallback cb) cons
 
     // TODO: element tracing without object is inheriently unsafe, because of
     // possible external linking object which means the element may be encoded
-    // using external string table. Looking up the wrong table may accidently
+    // using external string table. Looking up the wrong table may accidentally
     // cause circular mapping, and is actually quite easy to reproduce. See
     //
     // https://github.com/realthunder/FreeCAD_assembly3/issues/968

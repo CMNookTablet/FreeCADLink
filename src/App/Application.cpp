@@ -691,7 +691,7 @@ std::vector<Document*> Application::openDocuments(const std::vector<std::string>
 
     signalStartOpenDocument();
 
-    _allowPartial = !DocumentParams::NoPartialLoading();
+    _allowPartial = !DocumentParams::getNoPartialLoading();
 
     for (auto &name : filenames)
         _pendingDocs.push_back(name.c_str());
@@ -1672,29 +1672,31 @@ void Application::cleanupUnits()
 
 void Application::destruct(void)
 {
-    // saving system parameter
-    Console().Log("Saving system parameter...\n");
-    _pcSysParamMngr->SaveDocument();
-    // saving the User parameter
-    Console().Log("Saving system parameter...done\n");
-    Console().Log("Saving user parameter...\n");
-    _pcUserParamMngr->SaveDocument();
-    Console().Log("Saving user parameter...done\n");
+    if (mConfig["RunMode"] != "Cmd") {
+        // saving system parameter
+        Console().Log("Saving system parameter...\n");
+        _pcSysParamMngr->SaveDocument();
+        // saving the User parameter
+        Console().Log("Saving system parameter...done\n");
+        Console().Log("Saving user parameter...\n");
+        _pcUserParamMngr->SaveDocument();
+        Console().Log("Saving user parameter...done\n");
 
-    // now save all other parameter files
-    auto& paramMgr = _pcSingleton->mpcPramManager;
-    for (auto it = paramMgr.begin(); it != paramMgr.end(); ++it) {
-        if ((it->second != _pcSysParamMngr) && (it->second != _pcUserParamMngr)) {
-            if (it->second->HasSerializer()
-                    && !boost::starts_with(it->second->GetSerializeFileName(), getResourceDir())) {
-                Console().Log("Saving %s...\n", it->first.c_str());
-                it->second->SaveDocument();
-                Console().Log("Saving %s...done\n", it->first.c_str());
+        // now save all other parameter files
+        auto& paramMgr = _pcSingleton->mpcPramManager;
+        for (auto it = paramMgr.begin(); it != paramMgr.end(); ++it) {
+            if ((it->second != _pcSysParamMngr) && (it->second != _pcUserParamMngr)) {
+                if (it->second->HasSerializer()
+                        && !boost::starts_with(it->second->GetSerializeFileName(), getResourceDir())) {
+                    Console().Log("Saving %s...\n", it->first.c_str());
+                    it->second->SaveDocument();
+                    Console().Log("Saving %s...done\n", it->first.c_str());
+                }
             }
         }
+        paramMgr.clear();
     }
 
-    paramMgr.clear();
     _pcSysParamMngr = 0;
     _pcUserParamMngr = 0;
 

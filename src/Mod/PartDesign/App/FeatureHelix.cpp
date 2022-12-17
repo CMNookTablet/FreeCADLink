@@ -141,8 +141,7 @@ App::DocumentObjectExecReturn *Helix::execute(void)
 
     // update Axis from ReferenceAxis
     try {
-        positionByPrevious();
-        invObjLoc = getLocation().Inverted();
+        invObjLoc = positionByPrevious();
         updateAxis();
         return Pipe::_execute(this, generateHelixPath(), invObjLoc);
     }

@@ -305,7 +305,7 @@ void FillingPanel::setEditedObject(Surface::Filling* fea)
     auto count = objects.size();
 
     // fill up faces if wrong size
-    auto faces = editedObject->BoundaryFaces.getValues();
+    auto faces = editedObject->BoundaryFaces.getSubValues();
     if (faces.size() != edges.size()) {
         faces.resize(edges.size());
         std::fill(faces.begin(), faces.end(), std::string());
@@ -622,10 +622,10 @@ void FillingPanel::onSelectionChanged(const Gui::SelectionChanges& msg)
             editedObject->BoundaryEdges.setValues(objects, element);
 
             // extend faces and continuities lists if needed
-            auto faces = editedObject->BoundaryFaces.getValues();
+            auto faces = editedObject->BoundaryFaces.getSubValues();
             if (count == faces.size()) {
                 faces.emplace_back();
-                editedObject->BoundaryFaces.setValues(faces);
+                editedObject->BoundaryFaces.setValues(objects, faces);
             }
             auto conts = editedObject->BoundaryOrder.getValues();
             if (count == conts.size()) {
@@ -672,10 +672,10 @@ void FillingPanel::onSelectionChanged(const Gui::SelectionChanges& msg)
                     editedObject->BoundaryEdges.setValues(objects, element);
 
                     // try to remove the item also from the faces
-                    auto faces = editedObject->BoundaryFaces.getValues();
+                    auto faces = editedObject->BoundaryFaces.getSubValues();
                     if (index < faces.size()) {
                         faces.erase(faces.begin() + index);
-                        editedObject->BoundaryFaces.setValues(faces);
+                        editedObject->BoundaryFaces.setValues(objects, faces);
                     }
 
                     // try to remove the item also from the orders
@@ -725,10 +725,10 @@ void FillingPanel::onDeleteEdge()
                 editedObject->BoundaryEdges.setValues(objects, element);
 
                 // try to remove the item also from the faces
-                auto faces = editedObject->BoundaryFaces.getValues();
+                auto faces = editedObject->BoundaryFaces.getSubValues();
                 if (index < faces.size()) {
                     faces.erase(faces.begin() + index);
-                    editedObject->BoundaryFaces.setValues(faces);
+                    editedObject->BoundaryFaces.setValues(objects, faces);
                 }
 
                 // try to remove the item also from the orders
@@ -778,7 +778,7 @@ void FillingPanel::onIndexesMoved()
     }
 
     editedObject->BoundaryEdges.setValues(objects, element);
-    editedObject->BoundaryFaces.setValues(faces);
+    editedObject->BoundaryFaces.setValues(objects, faces);
     editedObject->BoundaryOrder.setValues(order);
     editedObject->recomputeFeature();
 }
@@ -806,10 +806,11 @@ void FillingPanel::on_buttonAccept_clicked()
         std::size_t index = ui->listBoundary->row(item);
 
         // try to set the item of the faces
-        auto faces = editedObject->BoundaryFaces.getValues();
+        auto faces = editedObject->BoundaryFaces.getSubValues();
         if (index < faces.size()) {
             faces[index] = face.toByteArray().data();
-            editedObject->BoundaryFaces.setValues(faces);
+            auto objects = editedObject->BoundaryFaces.getValues();
+            editedObject->BoundaryFaces.setValues(objects, faces);
         }
 
         // try to set the item of the orders

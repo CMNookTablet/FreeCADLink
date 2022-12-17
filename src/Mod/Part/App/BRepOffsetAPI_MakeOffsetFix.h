@@ -27,6 +27,8 @@
 #include <BRepOffsetAPI_MakeOffset.hxx>
 #include <list>
 #include <map>
+#include <unordered_map>
+#include "TopoShape.h"
 
 namespace Part {
 /*!
@@ -75,8 +77,13 @@ private:
     void MakeWire(TopoDS_Shape&);
 
 private:
-    BRepOffsetAPI_MakeOffset mkOffset;
+    GeomAbs_JoinType myJoin;
+    Standard_Boolean myIsOpenResult;
+    std::unique_ptr<BRepOffsetAPI_MakeOffset> mkOffset;
     std::list<std::pair<TopoDS_Shape, TopLoc_Location> > myLocations;
+    std::unordered_map<TopoDS_Shape, TopTools_ListOfShape, ShapeHasher, ShapeHasher> myMap;
+    std::vector<TopoDS_Wire> myWires;
+    std::vector<TopoDS_Edge> myOffsetCircles;
     TopoDS_Shape myResult;
 };
 

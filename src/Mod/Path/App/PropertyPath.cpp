@@ -111,31 +111,9 @@ void PropertyPath::Save (Base::Writer &writer) const
 
 void PropertyPath::Restore(Base::XMLReader &reader)
 {
-#if 0
-    reader.readElement("Path");
-
-    std::string file (reader.getAttribute("file") );
-    if (!file.empty()) {
-        // initiate a file read
-        reader.addFile(file.c_str(),this);
-    }
-
-    if (reader.hasAttribute("version")) {
-        int version = reader.getAttributeAsInteger("version");
-        if (version >= Toolpath::SchemaVersion) {
-            reader.readElement("Center");
-            double x = reader.getAttributeAsFloat("x");
-            double y = reader.getAttributeAsFloat("y");
-            double z = reader.getAttributeAsFloat("z");
-            Base::Vector3d center(x, y, z);
-            _Path.setCenter(center);
-        }
-    }
-#else
     aboutToSetValue();
-    _Path.Restore(reader);
+    _Path._Restore(reader, this);
     hasSetValue();
-#endif
 }
 
 void PropertyPath::SaveDocFile (Base::Writer &) const
@@ -145,40 +123,9 @@ void PropertyPath::SaveDocFile (Base::Writer &) const
 
 void PropertyPath::RestoreDocFile(Base::Reader &reader)
 {
-    // Since we are calling  _Path.Restore() above, RestoreDocFile will be called 
-    // on _Path instead. I guess the reason for the original 'unnatural'
-    // implementation is because 
-    //
-    // a) Need to call aboutToSetValue(), which is now called inside
-    //    PropertyPath::Restore(). Besides, I don't think aboutTo/hasSetValue() does
-    //    anything useful during restore, unless someone want to undo from a restore?
-    //    Even so, the above call inside Restore() is enough
-    //
-    // b) Need to to manually set ObjectStatus::Restore because App::Document has
-    //    reset that flag when calling RestoreDocFile. However, this is no
-    //    longer the case, the flag will remain until calling onDocumentRestored().
-
-#if 1
-    (void)reader;
-#else
-    App::PropertyContainer *container = getContainer();
-    App::DocumentObject *obj = 0;
-    if (container->isDerivedFrom(App::DocumentObject::getClassTypeId())) {
-        obj = static_cast<App::DocumentObject*>(container);
-    }
-
-    if (obj) {
-        obj->setStatus(App::ObjectStatus::Restore, true);
-    }
-
     aboutToSetValue();
     _Path.RestoreDocFile(reader);
     hasSetValue();
-
-    if (obj) {
-        obj->setStatus(App::ObjectStatus::Restore, false);
-    }
-#endif
 }
 
 

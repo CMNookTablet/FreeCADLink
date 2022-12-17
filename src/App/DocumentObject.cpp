@@ -23,6 +23,7 @@
 
 
 #include "PreCompiled.h"
+#include "PropertyContainer.h"
 
 #ifndef _PreComp_
 #endif
@@ -83,6 +84,12 @@ DocumentObject::DocumentObject(void)
     TreeRank.setStatus(App::Property::Hidden, true);
     TreeRank.setStatus(App::Property::NoRecompute, true);
     TreeRank.setStatus(App::Property::Output, true);
+
+    ADD_PROPERTY_TYPE(ViewObject, (), "Base",
+            (App::PropertyType)(App::Prop_Output
+                               |App::Prop_Hidden
+                               |App::Prop_ReadOnly
+                               |App::Prop_NoPersist), "View object");
 
     ADD_PROPERTY(Visibility, (true));
 
@@ -198,6 +205,7 @@ void DocumentObject::purgeTouched()
     FC_TRACE("purgeTouched " << getFullName());
     StatusBits.reset(ObjectStatus::Enforce);
     setPropertyStatus(Property::Touched, false);
+    _enforceRecompute = false;
     if(StatusBits.test(ObjectStatus::Touch)) {
         StatusBits.reset(ObjectStatus::Touch);
         if (_pDoc)
@@ -463,7 +471,9 @@ std::vector<App::DocumentObject*> DocumentObject::getInListRecursive(void) const
 // including possible external parents.  One shortcoming of this algorithm is
 // it does not detect cyclic reference, althgouth it won't crash either.
 void DocumentObject::getInListEx(std::set<App::DocumentObject*> &inSet, 
-        bool recursive, std::vector<App::DocumentObject*> *inList) const
+                                 bool recursive,
+                                 std::vector<App::DocumentObject*> *inList,
+                                 std::function<bool (App::DocumentObject*)> filter) const
 {
 #ifdef USE_OLD_DAG
     std::map<DocumentObject*,std::set<App::DocumentObject*> > outLists;
@@ -473,7 +483,7 @@ void DocumentObject::getInListEx(std::set<App::DocumentObject*> &inSet,
     // outLists first here.
     for(auto doc : GetApplication().getDocuments()) {
         for(auto obj : doc->getObjects()) {
-            if(!obj || !obj->getNameInDocument() || obj==this)
+            if(!obj || !obj->getNameInDocument() || obj==this || (filter && filter(obj))
                 continue;
             const auto &outList = obj->getOutList();
             outLists[obj].insert(outList.begin(),outList.end());
@@ -492,6 +502,7 @@ void DocumentObject::getInListEx(std::set<App::DocumentObject*> &inSet,
             // object for recursive check if it's not already in the inList
             if(outList.find(obj)!=outList.end() && 
                inSet.insert(v.first).second &&
+               && (!filter || !filter(v.first))
                recursive)
             {
                 pendings.push(v.first);
@@ -501,9 +512,19 @@ void DocumentObject::getInListEx(std::set<App::DocumentObject*> &inSet,
 #else // USE_OLD_DAG
 
     if(!recursive) {
-        inSet.insert(_inList.begin(),_inList.end());
-        if(inList)
-            *inList = _inList;
+        if (!filter) {
+            inSet.insert(_inList.begin(),_inList.end());
+            if(inList)
+                *inList = _inList;
+        } else {
+            for (auto o : _inList) {
+                if (!filter(o)) {
+                    inSet.insert(o);
+                    if (inList)
+                        inList->push_back(o);
+                }
+            }
+        }
         return;
     }
 
@@ -513,7 +534,10 @@ void DocumentObject::getInListEx(std::set<App::DocumentObject*> &inSet,
         auto obj = pendings.top();
         pendings.pop();
         for(auto o : obj->getInList()) {
-            if(o && o->getNameInDocument() && inSet.insert(o).second) {
+            if(o && o->getNameInDocument()
+                 && (!filter || !filter(o))
+                 && inSet.insert(o).second)
+            {
                 pendings.push(o);
                 if(inList)
                     inList->push_back(o);
@@ -524,9 +548,12 @@ void DocumentObject::getInListEx(std::set<App::DocumentObject*> &inSet,
 #endif
 }
 
-std::set<App::DocumentObject*> DocumentObject::getInListEx(bool recursive) const {
+std::set<App::DocumentObject*>
+DocumentObject::getInListEx(bool recursive,
+                            std::function<bool (App::DocumentObject*)> filter) const
+{
     std::set<App::DocumentObject*> ret;
-    getInListEx(ret,recursive);
+    getInListEx(ret,recursive,nullptr, filter);
     return ret;
 }
 
@@ -1041,19 +1068,22 @@ DocumentObject::expandSubObjectNames(const char *subname, int reason, bool check
     return res;
 }
 
-std::vector<std::pair<App::DocumentObject *,std::string> > DocumentObject::getParents(int depth) const {
+std::vector<std::pair<App::DocumentObject *,std::string> >
+DocumentObject::getParents(int depth) const {
     std::vector<std::pair<App::DocumentObject *,std::string> > ret;
     if(!getNameInDocument() || !GetApplication().checkLinkDepth(depth))
         return ret;
-    std::string name(getNameInDocument());
-    name += ".";
     for(auto parent : getInList()) {
         if(!parent || !parent->getNameInDocument())
             continue;
-        if(!parent->hasChildElement() && 
-           !parent->hasExtension(GeoFeatureGroupExtension::getExtensionClassTypeId()))
-            continue;
-        if(!parent->getSubObject(name.c_str()))
+        std::string subname;
+        for (auto &sub : parent->getSubObjects(GS_SELECT)) {
+            if (parent->getSubObject(sub.c_str()) == this) {
+                subname = std::move(sub);
+                break;
+            }
+        }
+        if (subname.empty())
             continue;
 
         auto links = GetApplication().getLinksTo(parent,
@@ -1063,8 +1093,8 @@ std::vector<std::pair<App::DocumentObject *,std::string> > DocumentObject::getPa
             auto parents = parent->getParents(depth+1);
             if(parents.empty()) 
                 parents.emplace_back(parent,std::string());
-            for(auto &v : parents) 
-                ret.emplace_back(v.first,v.second+name);
+            for(auto &v : parents)
+                ret.emplace_back(v.first,v.second+subname);
         }
     }
     return ret;
@@ -1339,10 +1369,39 @@ DocumentObject *
 DocumentObject::resolveRelativeLink(std::string &subname,
                                     DocumentObject *&link,
                                     std::string &linkSub,
-                                    bool flatten) const
+                                    RelativeLinkOptions options) const
 {
     if(!link || !link->getNameInDocument() || !getNameInDocument())
         return nullptr;
+
+    bool flatten = options & RelativeLinkOption::Flatten;
+    bool top = options & RelativeLinkOption::TopParent;
+    if (top) {
+        // Check for top parents of both the this and linked object, and pick
+        // one common top parent to resolve relative link.
+        auto myParents = getParents();
+        if (myParents.empty())
+            myParents.emplace_back(const_cast<DocumentObject*>(this), "");
+        auto otherParents = link->getParents();
+        for (const auto &v : myParents) {
+            auto parent = v.first;
+            for (auto &other : otherParents) {
+                if (parent == other.first) {
+                    std::string newSub = v.second + subname;
+                    auto newLink = parent;
+                    auto newLinkSub = other.second + linkSub;
+                    auto res = parent->resolveRelativeLink(newSub, newLink, newLinkSub, options);
+                    if (res && newSub.size() < subname.size()
+                            && newLinkSub.size() <= linkSub.size()) {
+                        subname = newSub;
+                        link = newLink;
+                        linkSub = newLinkSub;
+                        return res;
+                    }
+                }
+            }
+        }
+    }
 
     std::vector<int> mysubs;
     std::vector<int> linksubs;
@@ -1378,10 +1437,7 @@ DocumentObject::resolveRelativeLink(std::string &subname,
         ++itlink;
     }
 
-    if (itself == myobjs.begin() && itlink == linkobjs.begin()) {
-        // This function is meant to return the first non-common parent of this
-        // object.  If no common parents found, return the immediate parent of
-        // this object, or the object itself if no parents.
+    if (!top && itself == myobjs.begin() && itlink == linkobjs.begin()) {
         itself = myobjs.end() - 1;
         if (myobjs.size() > 1)
             --itself;

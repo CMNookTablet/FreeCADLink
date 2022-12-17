@@ -62,10 +62,8 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
     // we need a separate container widget to add all controls to
     proxy = new QWidget(this);
     ui->setupUi(proxy);
-#if QT_VERSION >= 0x040700
     ui->lineFaceName->setPlaceholderText(tr("No face selected"));
-    addBlinkEditor(ui->lineFaceName);
-#endif
+    addBlinkWidget(ui->lineFaceName);
 
     ui->lineFaceName->installEventFilter(this);
     ui->lineFaceName->setMouseTracking(true);
@@ -99,9 +97,11 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
     ui->taperAngleEdit2->setToolTip(QApplication::translate(
                 "Property", pcPocket->TaperAngleRev.getDocumentation()));
     ui->innerTaperAngleEdit->setToolTip(QApplication::translate(
-                "Property", pcPocket->InnerTaperAngle.getDocumentation()));
+                "Property", pcPocket->TaperInnerAngle.getDocumentation()));
     ui->innerTaperAngleEdit2->setToolTip(QApplication::translate(
-                "Property", pcPocket->InnerTaperAngleRev.getDocumentation()));
+                "Property", pcPocket->TaperInnerAngleRev.getDocumentation()));
+    ui->autoInnerTaperAngle->setToolTip(QApplication::translate(
+                "Property", pcPocket->AutoTaperInnerAngle.getDocumentation()));
 
     // Bind input fields to properties
     ui->lengthEdit->bind(pcPocket->Length);
@@ -109,8 +109,8 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
     ui->offsetEdit->bind(pcPocket->Offset);
     ui->taperAngleEdit->bind(pcPocket->TaperAngle);
     ui->taperAngleEdit2->bind(pcPocket->TaperAngleRev);
-    ui->innerTaperAngleEdit->bind(pcPocket->InnerTaperAngle);
-    ui->innerTaperAngleEdit2->bind(pcPocket->InnerTaperAngleRev);
+    ui->innerTaperAngleEdit->bind(pcPocket->TaperInnerAngle);
+    ui->innerTaperAngleEdit2->bind(pcPocket->TaperInnerAngleRev);
 
     QMetaObject::connectSlotsByName(this);
 
@@ -142,6 +142,14 @@ TaskPocketParameters::TaskPocketParameters(ViewProviderPocket *PocketView,QWidge
             this, SLOT(onButtonFace()));
     connect(ui->lineFaceName, SIGNAL(textEdited(QString)),
             this, SLOT(onFaceName(QString)));
+
+    QObject::connect(ui->autoInnerTaperAngle, &QCheckBox::toggled, [this](bool checked) {
+        PartDesign::Pocket* pcPocket = static_cast<PartDesign::Pocket*>(vp->getObject());
+        pcPocket->AutoTaperInnerAngle.setValue(checked);
+        ui->innerTaperAngleEdit->setDisabled(checked);
+        ui->innerTaperAngleEdit2->setDisabled(checked);
+        recomputeFeature();
+    });
 
     // Due to signals attached after changes took took into effect we should update the UI now.
     refresh();
@@ -204,8 +212,8 @@ void TaskPocketParameters::refresh()
     int index = pcPocket->Type.getValue(); // must extract value here, clear() kills it!
     double angle = pcPocket->TaperAngle.getValue();
     double angle2 = pcPocket->TaperAngleRev.getValue();
-    double innerAngle = pcPocket->InnerTaperAngle.getValue();
-    double innerAngle2 = pcPocket->InnerTaperAngleRev.getValue();
+    double innerAngle = pcPocket->TaperInnerAngle.getValue();
+    double innerAngle2 = pcPocket->TaperInnerAngleRev.getValue();
 
     // Temporarily prevent unnecessary feature recomputes
     for (QWidget* child : proxy->findChildren<QWidget*>())
@@ -248,6 +256,8 @@ void TaskPocketParameters::refresh()
     ui->changeMode->setCurrentIndex(index);
 
     ui->checkFaceLimits->setChecked(pcPocket->CheckUpToFaceLimits.getValue());
+
+    ui->autoInnerTaperAngle->setChecked(pcPocket->AutoTaperInnerAngle.getValue());
 
     // Temporarily prevent unnecessary feature recomputes
     for (QWidget* child : proxy->findChildren<QWidget*>())
@@ -358,32 +368,28 @@ void TaskPocketParameters::updateUI(int index)
     ui->labelInnerTaperAngle2->setVisible( angleVisible );
 }
 
-void TaskPocketParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
+void TaskPocketParameters::_onSelectionChanged(const Gui::SelectionChanges& msg)
 {
     if (msg.Type == Gui::SelectionChanges::AddSelection) {
-        QString refText = onAddSelection(msg);
+        QSignalBlocker guard(ui->lineFaceName);
+        QString refText = onSelectUpToFace(msg);
         if (refText.length() > 0) {
-            ui->lineFaceName->blockSignals(true);
             ui->lineFaceName->setText(refText);
             QStringList list(refText.split(QLatin1Char(':')));
             ui->lineFaceName->setProperty("FeatureName", list[0].toUtf8());
             ui->lineFaceName->setProperty("FaceName", list.size()>1 ? list[1].toLatin1() : QByteArray());
-            ui->lineFaceName->blockSignals(false);
             // Turn off reference selection mode
             onButtonFace(false);
         } else {
-            ui->lineFaceName->blockSignals(true);
             ui->lineFaceName->clear();
             ui->lineFaceName->setProperty("FeatureName", QVariant());
             ui->lineFaceName->setProperty("FaceName", QVariant());
-            ui->lineFaceName->blockSignals(false);
         }
     } else if (msg.Type == Gui::SelectionChanges::ClrSelection) {
-        ui->lineFaceName->blockSignals(true);
+        QSignalBlocker guard(ui->lineFaceName);
         ui->lineFaceName->clear();
         ui->lineFaceName->setProperty("FeatureName", QVariant());
         ui->lineFaceName->setProperty("FaceName", QVariant());
-        ui->lineFaceName->blockSignals(false);
     }
 }
 
@@ -418,14 +424,14 @@ void TaskPocketParameters::onAngle2Changed(double angle)
 void TaskPocketParameters::onInnerAngleChanged(double angle)
 {
     PartDesign::Pocket* pcPocket = static_cast<PartDesign::Pocket*>(vp->getObject());
-    pcPocket->InnerTaperAngle.setValue(angle);
+    pcPocket->TaperInnerAngle.setValue(angle);
     recomputeFeature();
 }
 
 void TaskPocketParameters::onInnerAngle2Changed(double angle)
 {
     PartDesign::Pocket* pcPocket = static_cast<PartDesign::Pocket*>(vp->getObject());
-    pcPocket->InnerTaperAngleRev.setValue(angle);
+    pcPocket->TaperInnerAngleRev.setValue(angle);
     recomputeFeature();
 }
 
@@ -509,12 +515,20 @@ void TaskPocketParameters::onModeChanged(int index)
 
 void TaskPocketParameters::onButtonFace(const bool pressed)
 {
-    this->blockConnection(!pressed);
+    if (!pressed) {
+        exitSelectionMode();
+        return;
+    }
+    TaskSketchBasedParameters::onSelectReference(ui->buttonFace);
+}
 
-    TaskSketchBasedParameters::onSelectReference(pressed, false, true, false);
-
-    // Update button if onButtonFace() is called explicitly
-    ui->buttonFace->setChecked(pressed);
+void TaskPocketParameters::onSelectionModeChanged(SelectionMode)
+{
+    if (getSelectionMode() == SelectionMode::refAdd) {
+        ui->buttonFace->setChecked(true);
+    } else {
+        ui->buttonFace->setChecked(false);
+    }
 }
 
 void TaskPocketParameters::onFaceName(const QString& text)
@@ -608,10 +622,9 @@ void TaskPocketParameters::changeEvent(QEvent *e)
         ui->changeMode->addItem(tr("Two dimensions"));
         ui->changeMode->setCurrentIndex(index);
 
-#if QT_VERSION >= 0x040700
         ui->lineFaceName->setPlaceholderText(tr("No face selected"));
-        addBlinkEditor(ui->lineFaceName);
-#endif
+        addBlinkWidget(ui->lineFaceName);
+        
         ui->lengthEdit->blockSignals(false);
         ui->lengthEdit2->blockSignals(false);
         ui->offsetEdit->blockSignals(false);

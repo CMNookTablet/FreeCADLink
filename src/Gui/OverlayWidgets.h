@@ -76,6 +76,10 @@ public:
         TransparentAll,
         TransparentNone,
         ToggleTransparentAll,
+        ToggleLeft,
+        ToggleRight,
+        ToggleTop,
+        ToggleBottom,
     };
     void setOverlayMode(OverlayMode mode);
 
@@ -99,6 +103,8 @@ public:
                         bool drop = false);
 
     void floatDockWidget(QDockWidget *);
+
+    QWidget *getLastMouseInterceptWidget() const;
 
     static OverlayManager * instance();
     static void destruct();
@@ -127,11 +133,6 @@ private:
     Private * d;
 };
 
-#if QT_VERSION  >= 0x050000
-#   define FC_HAS_DOCK_OVERLAY
-#endif
-
-#ifdef FC_HAS_DOCK_OVERLAY
 
 class OverlayTitleBar;
 class OverlayProxyWidget;
@@ -159,6 +160,7 @@ public:
     void addWidget(QDockWidget *widget, const QString &title);
     void removeWidget(QDockWidget *widget, QDockWidget *last=nullptr);
     void setCurrent(QDockWidget *widget);
+    bool onEscape();
 
     void setTransparent(bool enable);
     bool isTransparent() const;
@@ -240,6 +242,7 @@ public:
         State_Normal,
         State_Hint,
         State_HintHidden,
+        State_Hidden,
     };
     void setState(State);
     State getState() const {return _state;}
@@ -338,6 +341,7 @@ class OverlayTitleBar: public QWidget
 public:
     OverlayTitleBar(QWidget * parent);
     void setTitleItem(QLayoutItem *);
+    void endDrag();
 
 protected:
     void mouseMoveEvent(QMouseEvent *);
@@ -403,6 +407,7 @@ public:
 
     void showTitle(bool enable);
     bool isShowing() const { return _showTitle; }
+    void endDrag();
 
 protected:
     virtual void showEvent(QShowEvent *);
@@ -415,8 +420,6 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent *);
     virtual void keyPressEvent(QKeyEvent *);
     virtual QSize sizeHint() const;
-
-    void endDrag();
 
 protected Q_SLOTS:
     void onAction();
@@ -450,18 +453,20 @@ public:
     OverlayProxyWidget(OverlayTabWidget *);
 
     OverlayTabWidget *getOwner() const {return owner;}
-    bool hitTest(QPoint, bool delay=true);
+    int hitTest(const QPoint &, bool delay=true);
     bool isActivated() const;
 
     QBrush hintColor() const;
     void setHintColor(const QBrush &);
+
+    QRect getRect() const;
+    void onMousePress();
 
 protected:
     void enterEvent(QEvent*);
     void leaveEvent(QEvent*);
     void hideEvent(QHideEvent*);
     void paintEvent(QPaintEvent*);
-    void mousePressEvent(QMouseEvent *);
 
 protected Q_SLOTS:
     void onTimer();
@@ -513,8 +518,6 @@ private:
     QColor _color;
     QPointF _offset;
 };
-
-#endif // FC_HAS_DOCK_OVERLAY
 
 } // namespace Gui
 

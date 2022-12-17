@@ -360,13 +360,23 @@ void InteractiveInterpreter::runCode(PyCodeObject* code) const
     }
 }
 
+bool InteractiveInterpreter::push(const char *line)
+{
+    return push(QString::fromUtf8(line));
+}
+
+bool InteractiveInterpreter::hasPending() const
+{
+    return !d->buffer.isEmpty();
+}
+
 /**
  * Store the line into the internal buffer and compile the total buffer.
  * In case it is a complete Python command the buffer is emptied.
  */
-bool InteractiveInterpreter::push(const char* line)
+bool InteractiveInterpreter::push(const QString &line)
 {
-    d->buffer.append(QString::fromUtf8(line));
+    d->buffer.append(line);
     QString source = d->buffer.join(QStringLiteral("\n"));
     try {
         bool more = runSource(source.toUtf8());
@@ -823,12 +833,39 @@ void PythonConsole::runSource(const QString& line)
     PySys_SetObject("stderr", d->_stderrPy);
     d->interactive = true;
 
+    // Interpreter::runSource (i.e. code.compile()) seems unable to handle more
+    // than one statement at a time. It can deal with partial statement, but
+    // not multiple ones, although a statement can be a composite one
+    // containing arbitrary number of recursed sub-statements. Therefore, we
+    // look for lines without any indentation as a mean to segment the input
+    // into multiple top-level statements, and make sure to insert an empty
+    // line to terminate each statement (as demanded by the interpreter, or so
+    // it seems).
+    QStringList statements;
+    QStringList lines;
+    bool pending = d->interpreter->hasPending();
+    for (const auto &line : line.split(QLatin1Char('\n'), QString::SkipEmptyParts)) {
+        if (!line[0].isSpace() && (lines.size() || pending)) {
+            pending = false;
+            lines.append(QString());
+            statements.append(lines.join(QLatin1Char('\n')));
+            lines.clear();
+        }
+        lines.append(line);
+    }
+    if (lines.size())
+        statements.append(lines.join(QLatin1Char('\n')));
+    else if (lines.isEmpty())
+        statements.append(QStringLiteral("\n"));
+
     try {
-        d->history.markScratch();        //< mark current history position ...
-        // launch the command now
-        incomplete = d->interpreter->push(line.toUtf8());
-        if (!incomplete)
-          { d->history.doScratch(); }    //< ... and scratch history entries that might have been added by executing the line.
+        for (const auto &s : statements) {
+            d->history.markScratch();        //< mark current history position ...
+            // launch the command now
+            incomplete = d->interpreter->push(s);
+            if (!incomplete)
+            { d->history.doScratch(); }    //< ... and scratch history entries that might have been added by executing the line.
+        }
         setFocus(); // if focus was lost
     }
     catch (const Base::SystemExitException&) {

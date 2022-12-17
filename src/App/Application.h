@@ -551,6 +551,7 @@ private:
     static PyObject *sDumpSWIG(PyObject *self,PyObject *args);
 
     static PyObject *sCheckAbort(PyObject *self,PyObject *args);
+    static PyObject *sSilenceSequencer(PyObject *self, PyObject *args);
     static PyMethodDef    Methods[];
 
     friend class ApplicationObserver;

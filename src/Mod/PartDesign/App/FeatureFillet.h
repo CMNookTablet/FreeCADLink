@@ -24,10 +24,12 @@
 #ifndef PARTDESIGN_FEATUREFILLET_H
 #define PARTDESIGN_FEATUREFILLET_H
 
+#include "FeatureDressUp.h"
+
 #include <App/PropertyStandard.h>
 #include <App/PropertyUnits.h>
 #include <App/PropertyLinks.h>
-#include "FeatureDressUp.h"
+#include <Mod/Part/App/PropertyDressUp.h>
 
 namespace PartDesign
 {
@@ -40,6 +42,7 @@ public:
     Fillet();
 
     App::PropertyQuantityConstraint Radius;
+    Part::PropertyFilletSegments Segments;
 
     /** @name methods override feature */
     //@{
@@ -54,6 +57,9 @@ public:
 
 protected:
     void handleChangedPropertyType(Base::XMLReader &reader, const char * TypeName, App::Property * prop);
+
+private:
+    std::vector<int> edgeIndices;
 };
 
 } //namespace Part

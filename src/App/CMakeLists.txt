@@ -179,6 +179,7 @@ SET(Document_CPP_SRCS
     MergeDocuments.cpp
     TextDocument.cpp
     Link.cpp
+    LinkParams.cpp
     LinkBaseExtensionPyImp.cpp
     ExpressionPyImp.cpp
     SavedView.cpp

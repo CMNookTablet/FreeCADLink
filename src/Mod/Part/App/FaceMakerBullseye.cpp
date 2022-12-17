@@ -43,6 +43,7 @@
 # include <ShapeFix_Wire.hxx>
 # include <Standard_Failure.hxx>
 # include <TopoDS.hxx>
+# include <TopExp.hxx>
 # include <TopExp_Explorer.hxx>
 # include <TopTools_IndexedMapOfShape.hxx>
 # include <TopTools_HSequenceOfShape.hxx>
@@ -53,7 +54,9 @@
 #include "FaceMakerBullseye.h"
 #include "FaceMakerCheese.h"
 
+#include "PartFeature.h"
 #include "TopoShape.h"
+#include "WireJoiner.h"
 
 
 
@@ -75,6 +78,11 @@ std::string FaceMakerBullseye::getUserFriendlyName() const
 std::string FaceMakerBullseye::getBriefExplanation() const
 {
     return std::string(QT_TRANSLATE_NOOP("Part_FaceMaker","Supports making planar faces with holes with islands."));
+}
+
+bool FaceMakerBullseye::WireInfo::operator<(const WireInfo &other) const
+{
+    return extent - other.extent > Precision::Confusion();
 }
 
 void FaceMakerBullseye::Build_Essence()
@@ -106,42 +114,74 @@ void FaceMakerBullseye::Build_Essence()
         plane = GeomAdaptor_Surface(planeFinder.Surface()).Plane();
     }
 
-    //sort wires by length of diagonal of bounding box.
-    std::vector<TopoDS_Wire> wires = this->myWires;
-    std::stable_sort(wires.begin(), wires.end(), FaceMakerCheese::Wire_Compare());
-
-    //add wires one by one to current set of faces.
-    //We go from last to first, to make it so that outer wires come before inner wires.
-    std::vector< std::unique_ptr<FaceDriller> > faces;
-    for (int i = static_cast<int>(wires.size())-1; i >= 0; --i) {
-        TopoDS_Wire &w = wires[i];
-
-        //test if this wire is on any of existing faces (if yes, it's a hole;
-        // if no, it's a beginning of a new face).
-        //Since we are assuming the wires do not intersect, testing if one vertex of wire is in a face is enough.
-        gp_Pnt p = BRep_Tool::Pnt(TopoDS::Vertex(TopExp_Explorer(w, TopAbs_VERTEX).Current()));
-        FaceDriller* foundFace = nullptr;
-        for(std::unique_ptr<FaceDriller> &ff : faces){
-            if(ff->hitTest(p)){
-                foundFace = &(*ff);
-                break;
-            }
-        }
-
-        if(foundFace){
-            //wire is on a face.
-            foundFace->addHole(w);
-        } else {
-            //wire is not on a face. Start a new face.
-            faces.push_back(std::unique_ptr<FaceDriller>(
-                                new FaceDriller(plane, w)
-                           ));
-        }
+    std::vector<WireInfo> wireInfos;
+    for (const auto &w : this->myTopoWires) {
+        Bnd_Box box;
+        if (w.isNull())
+            continue;
+        BRepBndLib::AddOptimal(w.getShape(), box, Standard_False);
+        if (box.IsVoid())
+            continue;
+        wireInfos.emplace_back(w, box);
     }
+        
+    // Sort wires by length of diagonal of bounding box.
+    std::stable_sort(wireInfos.begin(), wireInfos.end());
 
-    //and we are done!
-    for(std::unique_ptr<FaceDriller> &ff : faces){
-        this->myShapesToReturn.push_back(ff->Face());
+    for (int i=0; i < (reuseInnerWire ? 2 : 1); ++i) {
+        //add wires one by one to current set of faces.
+        std::vector< std::unique_ptr<FaceDriller> > faces;
+        for (auto it = wireInfos.begin(); it != wireInfos.end(); ) {
+
+            //test if this wire is on any of existing faces (if yes, it's a hole;
+            // if no, it's a beginning of a new face).
+            FaceDriller* foundFace = nullptr;
+            bool hitted = false;
+            for(auto rit=faces.rbegin(); rit!=faces.rend(); ++rit){
+                switch((*rit)->hitTest(it->wire)) {
+                case FaceDriller::HitTest::Hit:
+                    foundFace = rit->get();
+                    hitted = true;
+                    break;
+                case FaceDriller::HitTest::HitOuter:
+                    // Shape in outer wire but not on face, which means it is
+                    // within a hole. So it's a hit and we shall make a new face
+                    // with the wire.
+                    hitted = true;
+                    break;
+                default:
+                    break;
+                }
+            }
+
+            TopoDS_Wire w = TopoDS::Wire(it->wire.getShape());
+
+            if(foundFace){
+                //wire is on a face.
+                if (reuseInnerWire)
+                    foundFace->addHole(*it, mySourceShapes);
+                else
+                    foundFace->addHole(w);
+            } else {
+                //wire is not on a face. Start a new face.
+                faces.push_back(std::unique_ptr<FaceDriller>(
+                                    new FaceDriller(plane, w)
+                            ));
+            }
+
+            if (i==0 && reuseInnerWire && !hitted) {
+                // If reuseInnerWire, then discard the outer-most wire, and
+                // retry so that the previous hole (and nested hole) wires can
+                // become outer wire for new faces.
+                it = wireInfos.erase(it);
+            } else
+                ++it;
+        }
+
+        //and we are done!
+        for(std::unique_ptr<FaceDriller> &ff : faces){
+            this->myShapesToReturn.push_back(ff->Face());
+        }
     }
 }
 
@@ -159,22 +199,68 @@ FaceMakerBullseye::FaceDriller::FaceDriller(const gp_Pln& plane, TopoDS_Wire out
     BRep_Builder builder;
     builder.MakeFace(this->myFace, myHPlane, Precision::Confusion());
     builder.Add(this->myFace, outerWire);
+    this->myTopoFace = TopoShape(this->myFace);
 }
 
-bool FaceMakerBullseye::FaceDriller::hitTest(const gp_Pnt& point) const
+FaceMakerBullseye::FaceDriller::HitTest
+FaceMakerBullseye::FaceDriller::hitTest(const TopoShape &shape) const
 {
+    auto vertex = TopoDS::Vertex(shape.getSubShape(TopAbs_VERTEX, 1));
+    if (!myFaceBound.IsNull()) {
+        if (myTopoFaceBound.findShape(vertex) > 0)
+            return HitTest::HitNone;
+        for (const auto &info : myHoles) {
+            if (info.wire.findShape(vertex))
+                return HitTest::Hit;
+        }
+    } else if (myTopoFace.findShape(vertex) > 0)
+        return HitTest::HitNone;
+
+    double tol = BRep_Tool::Tolerance(vertex);
+    auto point = BRep_Tool::Pnt(vertex);
     double u,v;
     GeomAPI_ProjectPointOnSurf(point, myHPlane).LowerDistanceParameters(u,v);
-    BRepClass_FaceClassifier cl(myFace, gp_Pnt2d(u,v), Precision::Confusion());
+    const char *err = "FaceMakerBullseye::FaceDriller::hitTest: result unknown.";
+    auto hit = HitTest::HitNone;
+    if (!myFaceBound.IsNull()) {
+        BRepClass_FaceClassifier cl(myFaceBound, gp_Pnt2d(u,v), tol);
+        switch (cl.State()) {
+        case TopAbs_OUT:
+        case TopAbs_ON:
+            return HitTest::HitNone;
+        case TopAbs_IN:
+            hit = HitTest::HitOuter;
+            break;
+        default:
+            throw Base::ValueError(err);
+        }
+    }
+    BRepClass_FaceClassifier cl(myFace, gp_Pnt2d(u,v), tol);
     TopAbs_State ret = cl.State();
     switch(ret){
-        case TopAbs_UNKNOWN:
-            throw Base::ValueError("FaceMakerBullseye::FaceDriller::hitTest: result unknown.");
-        break;
-        default:
-            return ret == TopAbs_IN || ret == TopAbs_ON;
+    case TopAbs_IN:
+        return HitTest::Hit;
+    case TopAbs_ON:
+        if (hit == HitTest::HitOuter) {
+            // the given point is within the outer wire, but on some other wire
+            // of the face, which must be a hole wire, which means that two hole
+            // wires have shared vertex (or edge). We can deal with this if
+            // reuseInnerWire is on by merging these holes.
+            return HitTest::Hit;
+        }
+        return HitTest::HitNone;
+    case TopAbs_OUT:
+        return hit;
+    default:
+        throw Base::ValueError(err);
     }
 
+}
+
+void FaceMakerBullseye::FaceDriller::copyFaceBound(TopoDS_Face &face, TopoShape &topoFace, const TopoShape &source)
+{
+    face = BRepBuilderAPI_MakeFace(myHPlane, TopoDS::Wire(source.getSubShape(TopAbs_WIRE, 1)));
+    topoFace = TopoShape(face);
 }
 
 void FaceMakerBullseye::FaceDriller::addHole(TopoDS_Wire w)
@@ -183,8 +269,62 @@ void FaceMakerBullseye::FaceDriller::addHole(TopoDS_Wire w)
     if (getWireDirection(myPlane, w) > 0) //if wire is CCW..
         w.Reverse();   //.. we want CW!
 
+    if (this->myFaceBound.IsNull())
+        copyFaceBound(this->myFaceBound, this->myTopoFaceBound, this->myTopoFace);
+
     BRep_Builder builder;
     builder.Add(this->myFace, w);
+}
+
+void FaceMakerBullseye::FaceDriller::addHole(const WireInfo &wireInfo,
+                                             std::vector<TopoShape> &sources)
+{
+    if (this->myFaceBound.IsNull())
+        copyFaceBound(this->myFaceBound, this->myTopoFaceBound, this->myTopoFace);
+
+    if (!myJoiner) {
+        myJoiner.reset(new WireJoiner);
+        myJoiner->setOutline(true);
+    }
+    myJoiner->addShape(wireInfo.wire);
+
+    bool intersected = false;
+    for (const auto &info : myHoles) {
+        if (!info.bound.IsOut(wireInfo.bound)
+                || !wireInfo.bound.IsOut(info.bound)) {
+            intersected = true;
+            break;
+        }
+    }
+
+    myHoles.push_back(wireInfo);
+    TopoShape wire = wireInfo.wire;
+
+    if (intersected) {
+        TopoShape hole;
+        // Join intersected wires and get their outline
+        myJoiner->getResultWires(hole);
+        // Check if the hole gets merged.
+        if (!hole.findShape(wireInfo.wire.getShape())) {
+            for (const auto &e : wireInfo.wire.getSubTopoShapes(TopAbs_EDGE)) {
+                if (hole.findShape(e.getShape()) > 0)
+                    continue;
+                for (const auto &e : hole.searchSubShape(e.getShape()))
+                    sources.push_back(e);
+            }
+            copyFaceBound(this->myFace, this->myTopoFace, this->myTopoFaceBound);
+            wire = hole;
+        }
+    }
+
+    BRep_Builder builder;
+    for (const auto &w : wire.getSubShapes(TopAbs_WIRE)) {
+        //Ensure correct orientation of the wire.
+        if (getWireDirection(myPlane, TopoDS::Wire(w)) > 0) //if wire is CCW..
+            builder.Add(this->myFace, TopoDS::Wire(w.Reversed())); //.. we want CW!
+        else
+            builder.Add(this->myFace, TopoDS::Wire(w));
+    }
 }
 
 int FaceMakerBullseye::FaceDriller::getWireDirection(const gp_Pln& plane, const TopoDS_Wire& wire)
@@ -206,3 +346,23 @@ int FaceMakerBullseye::FaceDriller::getWireDirection(const gp_Pln& plane, const 
 
     return normal_co ? 1 : -1;
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+TYPESYSTEM_SOURCE(Part::FaceMakerRing, Part::FaceMakerBullseye)
+
+FaceMakerRing::FaceMakerRing()
+{
+    reuseInnerWire = true;
+}
+
+std::string FaceMakerRing::getUserFriendlyName() const
+{
+    return std::string(QT_TRANSLATE_NOOP("Part_FaceMaker","Ring facemaker"));
+}
+
+std::string FaceMakerRing::getBriefExplanation() const
+{
+    return std::string(QT_TRANSLATE_NOOP("Part_FaceMaker","Supports making planar faces with holes and holes as faces."));
+}
+

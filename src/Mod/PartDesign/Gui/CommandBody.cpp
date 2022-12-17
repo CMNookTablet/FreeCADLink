@@ -241,15 +241,15 @@ void CmdPartDesignBody::activated(int iMsg)
 
         QCheckBox checkBox(QObject::tr("Name body after the selection"));
         checkBox.setToolTip(QObject::tr("Name the new body after the selected object"));
-        checkBox.setChecked(Part::PartParams::UseBaseObjectName());
+        checkBox.setChecked(Part::PartParams::getUseBaseObjectName());
         checkBox.blockSignals(true);
         box.addButton(&checkBox, QMessageBox::ResetRole);
 
         auto res = box.exec();
         if(res == QMessageBox::Abort)
             return;
-        if (checkBox.isChecked() != Part::PartParams::UseBaseObjectName())
-            Part::PartParams::set_UseBaseObjectName(checkBox.isChecked());
+        if (checkBox.isChecked() != Part::PartParams::getUseBaseObjectName())
+            Part::PartParams::setUseBaseObjectName(checkBox.isChecked());
         if(res == QMessageBox::No) {
             support.clear();
             baseFeature = nullptr;
@@ -263,7 +263,7 @@ void CmdPartDesignBody::activated(int iMsg)
     // add the Body feature itself, and make it active
     Gui::cmdAppDocument(doc, std::ostringstream() << "addObject('PartDesign::Body','" << bodyName << "')");
     auto body = Base::freecad_dynamic_cast<PartDesign::Body>(doc->getObject(bodyName.c_str()));
-    if (Part::PartParams::UseBaseObjectName() && labelSource.getObjectName().size())
+    if (Part::PartParams::getUseBaseObjectName() && labelSource.getObjectName().size())
         Gui::cmdAppObjectArgs(body, "Label = %s.Label", labelSource.getObjectPython());
     if (baseFeature) {
         if (baseFeature->isDerivedFrom(Part::Part2DObject::getClassTypeId())) {
@@ -371,7 +371,7 @@ void CmdPartDesignBody::activated(int iMsg)
     }
 
     // if no part feature was there then auto-adjust the camera
-    if (viewAll && PartGui::PartParams::AdjustCameraForNewFeature()) {
+    if (viewAll && PartGui::PartParams::getAdjustCameraForNewFeature()) {
         Gui::Document* doc = Gui::Application::Instance->getDocument(getDocument());
         Gui::View3DInventor* view = doc ? qobject_cast<Gui::View3DInventor*>(doc->getActiveView()) : nullptr;
         if (view) {

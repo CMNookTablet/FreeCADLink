@@ -95,7 +95,7 @@ TaskThicknessParameters::TaskThicknessParameters(ViewProviderDressUp *DressUpVie
     int join = pcThickness->Join.getValue();
     ui->joinComboBox->setCurrentIndex(join);
 
-    setup(ui->message, ui->listWidgetReferences, ui->buttonRefAdd);
+    setup(ui->message, ui->treeWidgetReferences, ui->buttonRefAdd);
 }
 
 void TaskThicknessParameters::refresh()

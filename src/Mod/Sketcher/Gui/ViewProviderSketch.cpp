@@ -31,6 +31,7 @@
 # include <Geom_Circle.hxx>
 # include <Geom_Ellipse.hxx>
 # include <Geom_TrimmedCurve.hxx>
+# include <TopoDS.hxx>
 # include <Inventor/actions/SoGetBoundingBoxAction.h>
 # include <Inventor/SoPath.h>
 # include <Inventor/SbBox3f.h>
@@ -109,11 +110,14 @@
 #include <Gui/SoFCBoundingBox.h>
 #include <Gui/SoFCUnifiedSelection.h>
 #include <Gui/Inventor/MarkerBitmaps.h>
+#include <Gui/Inventor/SoFCSwitch.h>
 #include <Gui/Inventor/SmSwitchboard.h>
+#include <Gui/InventorBase.h>
 #include <Gui/PieMenu.h>
 
 #include <Mod/Part/App/Geometry.h>
 #include <Mod/Part/App/BodyBase.h>
+#include <Mod/Part/Gui/PartParams.h>
 #include <Mod/Sketcher/App/SketchObject.h>
 #include <Mod/Sketcher/App/Sketch.h>
 #include <Mod/Sketcher/App/GeometryFacade.h>
@@ -194,9 +198,11 @@ SbVec2f ViewProviderSketch::prvPickedPoint;
 static bool _AllowFaceExternal = true;
 static double _SnapTolerance;
 static bool _ViewBottomOnEdit;
+static bool _AdjustCamera;
 static const char *_ParamAllowFaceExternal = "AllowFaceExternalPick";
 static const char *_ParamSnapTolerance = "SnapTolerance";
 static const char *_ParamViewBottomOnEdit = "ViewBottomOnEdit";
+static const char *_ParamAdjustCamera = "AdjustCamera";
 
 //**************************************************************************
 // Edit data structure
@@ -264,6 +270,7 @@ struct EditData {
         _AllowFaceExternal = hSketchGeneral->GetBool(_ParamAllowFaceExternal, true);
         _SnapTolerance = hSketchGeneral->GetFloat(_ParamSnapTolerance, 0.2);
         _ViewBottomOnEdit = hSketchGeneral->GetBool(_ParamViewBottomOnEdit, false);
+        _AdjustCamera = hSketchGeneral->GetBool(_ParamAdjustCamera, true);
 
         timer.setSingleShot(true);
         QObject::connect(&timer, &QTimer::timeout, [master]() {
@@ -390,6 +397,7 @@ struct EditData {
     SoDrawStyle * InformationDrawStyle;
 
     QTimer timer;
+    QTimer timerSectionView;
 };
 
 
@@ -447,6 +455,14 @@ ViewProviderSketch::ViewProviderSketch()
         this->Autoconstraints.setValue(hGrp->GetBool("AutoConstraints", true));
         this->AvoidRedundant.setValue(hGrp->GetBool("AvoidRedundantAutoconstraints", true));
         this->GridAutoSize.setValue(false); //Grid size is managed by this class
+
+        unsigned long shcol = hGrp->GetUnsigned("FaceColor", 0x54abff80);
+        float r = ((shcol >> 24) & 0xff) / 255.0;
+        float g = ((shcol >> 16) & 0xff) / 255.0;
+        float b = ((shcol >> 8) & 0xff) / 255.0;
+        int t = 100 * (shcol & 0xff) / 255;
+        this->ShapeColor.setValue(App::Color(r, g, b));
+        this->Transparency.setValue(t);
     }
 
     sPixmap = "Sketcher_Sketch";
@@ -516,6 +532,11 @@ void ViewProviderSketch::setSketchMode(SketchMode mode)
 {
     if (_Mode != mode) {
         _Mode = mode;
+        if (edit && _Mode == STATUS_NONE) {
+            edit->DragCurve = -1;
+            edit->DragPoint = -1;
+            edit->DragConstraintSet.clear();
+        }
         Gui::getMainWindow()->updateActions();
     }
 }
@@ -551,6 +572,7 @@ void ViewProviderSketch::forceUpdateData()
         Gui::Command::updateActive();
     }
 #endif
+    draw(true, true);
 }
 
 // handler management ***************************************************************
@@ -573,8 +595,8 @@ void ViewProviderSketch::activateHandler(DrawSketchHandler *newHandler)
     // make sure receiver has focus so immediately pressing Escape will be handled by
     // ViewProviderSketch::keyPressed() and dismiss the active handler, and not the entire
     // sketcher editor
-    Gui::MDIView *mdi = Gui::Application::Instance->activeDocument()->getActiveView();
-    mdi->setFocus();
+    if (edit->viewer)
+        edit->viewer->setFocus();
 }
 
 void ViewProviderSketch::deactivateHandler()
@@ -619,7 +641,7 @@ void ViewProviderSketch::setAxisPickStyle(bool on)
 bool ViewProviderSketch::keyPressed(bool pressed, int key)
 {
     if (!edit)
-        return ViewProvider2DObjectGrid::keyPressed(pressed, key);
+        return inherited::keyPressed(pressed, key);
 
     switch (key)
     {
@@ -778,7 +800,7 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
                                             const Gui::View3DInventorViewer *viewer)
 {
     if (!edit)
-        return ViewProvider2DObjectGrid::mouseButtonPressed(
+        return inherited::mouseButtonPressed(
                 Button, pressed, cursorPos, viewer);
 
     assert(edit);
@@ -1318,6 +1340,11 @@ void ViewProviderSketch::editDoubleClicked(void)
     }
 }
 
+const char* ViewProviderSketch::getDefaultDisplayMode() const
+{
+    return "Flat Lines";
+}
+
 bool ViewProviderSketch::getElementPicked(const SoPickedPoint *pp, std::string &subname) const
 {
     if (edit && edit->viewer) {
@@ -1348,13 +1375,49 @@ bool ViewProviderSketch::getElementPicked(const SoPickedPoint *pp, std::string &
         }
         return true;
     }
-    return PartGui::ViewProvider2DObjectGrid::getElementPicked(pp, subname);
+    if (pInternalView && pp->getPath()->containsNode(pInternalView->getRoot())) {
+        if(pInternalView->getElementPicked(pp, subname)) {
+            if (edit) {
+                subname.clear();
+                return false;
+            }
+            subname = SketchObject::internalPrefix() + subname;
+            return true;
+        }
+    }
+    return inherited::getElementPicked(pp, subname);
+}
+
+bool ViewProviderSketch::getDetailPath(
+        const char *subname, SoFullPath *pPath, bool append, SoDetail *&det) const
+{
+    if (!edit && pInternalView && subname) {
+        const char *realName = strrchr(subname, '.');
+        if (realName)
+            ++realName;
+        else
+            realName = subname;
+        realName = SketchObject::convertInternalName(realName);
+        if (realName) {
+            auto len = pPath->getLength();
+            if(append) {
+                pPath->append(pcRoot);
+                pPath->append(pcModeSwitch);
+            }
+            if (!pInternalView->getDetailPath(realName, pPath, false, det)) {
+                pPath->truncate(len);
+                return false;
+            }
+            return true;
+        }
+    }
+    return inherited::getDetailPath(subname, pPath, append, det);
 }
 
 bool ViewProviderSketch::mouseMove(const SbVec2s &cursorPos, Gui::View3DInventorViewer *viewer)
 {
     if (!edit)
-        return ViewProvider2DObjectGrid::mouseMove(cursorPos, viewer);
+        return inherited::mouseMove(cursorPos, viewer);
     // maximum radius for mouse moves when selecting a geometry before switching to drag mode
     const int dragIgnoredDistance = 3;
 
@@ -1897,7 +1960,7 @@ bool ViewProviderSketch::isSelectable(void) const
         // return false;
         return true;
     } else
-        return PartGui::ViewProvider2DObjectGrid::isSelectable();
+        return inherited::isSelectable();
 }
 
 void ViewProviderSketch::onSelectionChanged(const Gui::SelectionChanges& msg)
@@ -2505,7 +2568,7 @@ void ViewProviderSketch::centerSelection()
     group->unref();
 
     SbBox3f box = action.getBoundingBox();
-    if (!box.isEmpty()) {
+    if (Gui::isValidBBox(box)) {
         SoCamera* camera = viewer->getSoRenderManager()->getCamera();
         SbVec3f direction;
         camera->orientation.getValue().multVec(SbVec3f(0, 0, 1), direction);
@@ -4316,6 +4379,8 @@ void ViewProviderSketch::OnChange(Base::Subject<const char*> &rCaller, const cha
         _SnapTolerance = edit->hSketchGeneral->GetFloat(_ParamSnapTolerance, 0.2);
     else if (boost::equals(sReason, _ParamViewBottomOnEdit))
         _ViewBottomOnEdit = edit->hSketchGeneral->GetBool(_ParamViewBottomOnEdit, false);
+    else if (boost::equals(sReason, _ParamAdjustCamera))
+        _AdjustCamera = edit->hSketchGeneral->GetBool(_ParamAdjustCamera, false);
 }
 
 bool ViewProviderSketch::allowFaceExternalPick()
@@ -4328,10 +4393,37 @@ bool ViewProviderSketch::viewBottomOnEdit()
     return _ViewBottomOnEdit;
 }
 
+ViewProviderSketch *ViewProviderSketch::getEditingViewProvider()
+{
+    if (auto gdoc = Gui::Application::Instance->getDocument(App::GetApplication().getActiveDocument()))
+        return Base::freecad_dynamic_cast<ViewProviderSketch>(gdoc->getInEdit());
+    return nullptr;
+}
+
 void ViewProviderSketch::setViewBottomOnEdit(bool enable)
 {
     if (_ViewBottomOnEdit != enable && edit)
         edit->hSketchGeneral->SetBool(_ParamViewBottomOnEdit, enable);
+}
+
+void ViewProviderSketch::toggleViewSection(int toggle)
+{
+    if (edit) {
+        bool enable;
+        if (toggle > 0)
+            enable = true;
+        else if (toggle == 0)
+            enable = false;
+        else {
+            SectionView.setValue(!SectionView.getValue());
+            return;
+        }
+        Gui::cmdGuiObject(getObject(), std::ostringstream()
+                << "TempoVis.sketchClipPlane("
+                << getObject()->getFullName(/*python*/true)
+                << ", reverse=" << (viewBottomOnEdit() ? "True" : "False")
+                << ", enable=" << (enable ? "True" : "False") << ")");
+    }
 }
 
 void ViewProviderSketch::updateInventorNodeSizes()
@@ -4772,6 +4864,10 @@ void ViewProviderSketch::draw(bool temp /*=false*/, bool rebuildinformationlayer
                 std::swap(startangle, endangle);
 
             double range = endangle-startangle;
+            if (range < Precision::Confusion()) {
+                range = 2 * M_PI;
+                endangle = startangle + range;
+            }
             int countSegments = std::max(6, int(stdcountsegments * range / (2 * M_PI)));
             double segment = range / countSegments;
 
@@ -4914,26 +5010,62 @@ void ViewProviderSketch::draw(bool temp /*=false*/, bool rebuildinformationlayer
             Base::Vector3d startp  = spline->getStartPoint();
             Base::Vector3d endp    = spline->getEndPoint();
 
-            double first = curve->FirstParameter();
-            double last = curve->LastParameter();
-            if (first > last) // if arc is reversed
-                std::swap(first, last);
+            // Because BSpline can be arbitrary complex in curvature, using a
+            // constant segment limit won't give satisfying result in many
+            // cases. We opt to use the same way PartGui::ViewProviderPartExt
+            // to discretize the edge.
+            auto edge = Part::TopoShape(spline->toShape());
+            auto bound = edge.getBoundBox();
+            double deflection = std::max(Precision::Confusion(),
+                (bound.LengthX()+bound.LengthY()+bound.LengthZ())/300.0 *
+                    std::max(PartGui::PartParams::getOverrideTessellation() ? 
+                                PartGui::PartParams::getMeshDeviation() : Deviation.getValue(),
+                        PartGui::PartParams::getMinimumDeviation()));
 
-            double range = last-first;
-            int countSegments = stdcountsegments;
-            double segment = range / countSegments;
+            double angDeflectionRads = std::max(Precision::Angular(),
+                    std::max((PartGui::PartParams::getOverrideTessellation() ?
+                                PartGui::PartParams::getMeshAngularDeflection() : AngularDeflection.getValue()),
+                      PartGui::PartParams::getMinimumAngularDeflection()) / 180.0 * M_PI);
+            edge.meshShape(deflection, angDeflectionRads);
+            TopLoc_Location aLoc;
+            Handle(Poly_Polygon3D) aPoly = BRep_Tool::Polygon3D(TopoDS::Edge(edge.getShape()), aLoc);
+            if (!aPoly.IsNull()) {
+                gp_Trsf trsf;
+                if (!aLoc.IsIdentity())
+                    trsf = aLoc.Transformation();
+                const TColgp_Array1OfPnt& aNodes = aPoly->Nodes();
+                int nbNodesInEdge = aPoly->NbNodes();
+                gp_Pnt pnt;
+                for (Standard_Integer j=1;j <= nbNodesInEdge;j++) {
+                    pnt = aNodes(j);
+                    if (!aLoc.IsIdentity())
+                        pnt.Transform(trsf);
+                    Coords.emplace_back((float)(pnt.X()),(float)(pnt.Y()),(float)(pnt.Z()));
+                }
+                Index.push_back(nbNodesInEdge);
 
-            for (int i=0; i < countSegments; i++) {
-                gp_Pnt pnt = curve->Value(first);
-                Coords.emplace_back(pnt.X(), pnt.Y(), pnt.Z());
-                first += segment;
+            } else {
+                double first = curve->FirstParameter();
+                double last = curve->LastParameter();
+                if (first > last) // if arc is reversed
+                    std::swap(first, last);
+
+                double range = last-first;
+                int countSegments = stdcountsegments;
+                double segment = range / countSegments;
+
+                for (int i=0; i < countSegments; i++) {
+                    gp_Pnt pnt = curve->Value(first);
+                    Coords.emplace_back(pnt.X(), pnt.Y(), pnt.Z());
+                    first += segment;
+                }
+
+                // end point
+                gp_Pnt end = curve->Value(last);
+                Coords.emplace_back(end.X(), end.Y(), end.Z());
+                Index.push_back(countSegments+1);
             }
 
-            // end point
-            gp_Pnt end = curve->Value(last);
-            Coords.emplace_back(end.X(), end.Y(), end.Z());
-
-            Index.push_back(countSegments+1);
             edit->CurvIdToGeoId.push_back(GeoId);
             Points.push_back(startp);
             Points.push_back(endp);
@@ -5005,12 +5137,16 @@ void ViewProviderSketch::draw(bool temp /*=false*/, bool rebuildinformationlayer
     if ( (combrepscale > (2 * combrepscalehyst)) || (combrepscale < (combrepscalehyst/2)))
         combrepscalehyst = combrepscale ;
 
+    bool externalVisible = hGrpsk->GetBool("BSplineExternalVisible", false);
 
     // geometry information layer for bsplines, as they need a second round now that max curvature is known
     for (std::vector<int>::const_iterator it = bsplineGeoIds.begin(); it != bsplineGeoIds.end(); ++it) {
 
         int GeoId = *it;
-        const Part::Geometry *geo = GeoById(*geomlist, *it);
+        if (GeoId <= Sketcher::GeoEnum::RefExt && !externalVisible)
+            continue;
+
+        const Part::Geometry *geo = GeoById(*geomlist, GeoId);
 
         const Part::GeomBSplineCurve *spline = static_cast<const Part::GeomBSplineCurve *>(geo);
 
@@ -6561,10 +6697,7 @@ Restart:
         }
     }
 
-    Gui::MDIView *mdi = this->getActiveView();
-    if (mdi && mdi->isDerivedFrom(Gui::View3DInventor::getClassTypeId())) {
-        static_cast<Gui::View3DInventor *>(mdi)->getViewer()->redraw();
-    }
+    edit->viewer->redraw();
 }
 
 void ViewProviderSketch::rebuildConstraintsVisual(void)
@@ -6867,30 +7000,9 @@ void ViewProviderSketch::drawEditMarkers(const std::vector<Base::Vector2d> &Edit
 
 void ViewProviderSketch::updateData(const App::Property *prop)
 {
-    ViewProvider2DObjectGrid::updateData(prop);
+    inherited::updateData(prop);
 
     auto sketch = getSketchObject();
-
-    // In the case of an undo/redo transaction, updateData is triggered by SketchObject::onUndoRedoFinished() in the solve()
-    //
-    // (Amendment: class App::TransactionGuard makes sure to only notify
-    // property changes after all changes (to all affect propertied of all
-    // objects) have been applied. So there will be no intermediate state to
-    // watch for. On the other hand, performing a recomputation (done in
-    // onUndoRedoFinished()) is not a good idea, as it may affects multiple
-    // objects and causing an inconsistent undo/redo state, which is why
-    // recomputation is now forbidden during undo/redo by the core.)
-#if 0
-    if (edit && !sketch->getDocument()->isPerformingTransaction()
-             && !sketch->isPerformingInternalTransaction()
-#else
-    // In the case of an internal transaction, touching the geometry results in a call to updateData.
-    if (edit && !sketch->isPerformingInternalTransaction()
-#endif
-             && (prop == &(sketch->Geometry) ||
-                 prop == &(sketch->ExternalGeo))) {
-        signalElementsChanged();
-    }
 
     if (prop == &sketch->FullyConstrained || prop == &sketch->Geometry) {
         const char *pixmap;
@@ -6903,6 +7015,18 @@ void ViewProviderSketch::updateData(const App::Property *prop)
             signalChangeIcon();
         }
     }
+    else if (prop == &sketch->InternalShape) {
+        if (pInternalView)
+            pInternalView->updateVisual();
+    }
+}
+
+void ViewProviderSketch::finishRestoring()
+{
+    inherited::finishRestoring();
+    auto sketch = getSketchObject();
+    if (pInternalView && sketch->MakeInternals.getValue())
+        pInternalView->updateVisual();
 }
 
 void ViewProviderSketch::slotSolverUpdate()
@@ -6924,9 +7048,7 @@ void ViewProviderSketch::slotSolverUpdate()
     auto sketch = getSketchObject();
     if(sketch->getExternalGeometryCount()+sketch->getHighestCurveIndex() + 1 ==
         getSolvedSketch().getGeometrySize()) {
-        Gui::MDIView *mdi = Gui::Application::Instance->editDocument()->getActiveView();
-        if (mdi->isDerivedFrom(Gui::View3DInventor::getClassTypeId()))
-            draw(false,true);
+        draw(false,true);
 
         signalConstraintsChanged();
     }
@@ -6935,12 +7057,58 @@ void ViewProviderSketch::slotSolverUpdate()
 void ViewProviderSketch::onChanged(const App::Property *prop)
 {
     // call father
-    PartGui::ViewProvider2DObjectGrid::onChanged(prop);
+    inherited::onChanged(prop);
+    if (pInternalView) {
+        if (prop == &ShapeColor)
+            pInternalView->ShapeColor.setValue(ShapeColor.getValue());
+        else if (prop == &Transparency)
+            pInternalView->Transparency.setValue(Transparency.getValue());
+        else if (prop == &ShapeMaterial)
+            pInternalView->ShapeMaterial.setValue(ShapeMaterial.getValue());
+    }
+    if (prop == &SectionView)
+        toggleViewSection(SectionView.getValue() ? 1 : 0);
 }
 
 void ViewProviderSketch::attach(App::DocumentObject *pcFeat)
 {
-    ViewProviderPart::attach(pcFeat);
+    inherited::attach(pcFeat);
+
+    if (pFaceRoot) {
+        pInternalView.reset(new PartGui::ViewProviderPart);
+        pInternalView->setShapePropertyName("InternalShape");
+        pInternalView->forceUpdate();
+        pInternalView->MapFaceColor.setValue(false);    
+        pInternalView->MapLineColor.setValue(false);    
+        pInternalView->MapPointColor.setValue(false);    
+        pInternalView->MapTransparency.setValue(false);    
+        pInternalView->ForceMapColors.setValue(false);
+        pInternalView->ShapeColor.setValue(ShapeColor.getValue());
+        pInternalView->Transparency.setValue(Transparency.getValue());
+        pInternalView->Lighting.setValue(1);
+        pInternalView->enableFullSelectionHighlight(false, false, false);
+        pInternalView->setStatus(Gui::SecondaryView,true);
+        pInternalView->attach(getObject());
+        pInternalView->setDefaultMode(1);
+        if(pInternalView->getModeSwitch()->isOfType(SoFCSwitch::getClassTypeId()))
+            static_cast<SoFCSwitch*>(pInternalView->getModeSwitch())->defaultChild = 0;
+        pInternalView->show();
+        pFaceRoot->addChild(pInternalView->getRoot());
+    }
+}
+
+void ViewProviderSketch::beforeDelete()
+{
+    inherited::beforeDelete();
+    if (pInternalView)
+        pInternalView->beforeDelete();
+}
+
+void ViewProviderSketch::reattach(App::DocumentObject *obj)
+{
+    inherited::reattach(obj);
+    if (pInternalView)
+        pInternalView->reattach(obj);
 }
 
 void ViewProviderSketch::setupContextMenu(QMenu *menu, QObject *receiver, const char *member)
@@ -6949,23 +7117,13 @@ void ViewProviderSketch::setupContextMenu(QMenu *menu, QObject *receiver, const 
     QAction *act = menu->addAction(tr("Edit sketch"), receiver, member);
     func->trigger(act, boost::bind(&ViewProviderSketch::doubleClicked, this));
 
-    auto sketch = static_cast<Sketcher::SketchObject*>(getObject());
-    if (sketch->MapMode.getValue() == Attacher::mmDeactivated || !sketch->Support.getValue()) {
-        QAction* act = menu->addAction(QObject::tr("Transform"), receiver, member);
-        act->setToolTip(QObject::tr("Transform at the origin of the placement"));
-        act->setData(QVariant((int)ViewProvider::Transform));
-        act = menu->addAction(QObject::tr("Transform at"), receiver, member);
-        act->setToolTip(QObject::tr("Transform at the center of the shape"));
-        act->setData(QVariant((int)ViewProvider::TransformAt));
-    }
-
-    PartGui::ViewProviderAttachExtension::extensionSetupContextMenu(menu, receiver, member);
+    inherited::setupContextMenu(menu, receiver, member);
 }
 
 bool ViewProviderSketch::setEdit(int ModNum)
 {
     if (ModNum == Transform || ModNum == TransformAt)
-        return ViewProvider2DObjectGrid::setEdit(ModNum);
+        return inherited::setEdit(ModNum);
 
     // When double-clicking on the item for this sketch the
     // object unsets and sets its edit mode without closing
@@ -7060,7 +7218,7 @@ bool ViewProviderSketch::setEdit(int ModNum)
 
     TightGrid.setValue(false);
 
-    ViewProvider2DObjectGrid::setEdit(ModNum); // notify to handle grid according to edit mode property
+    inherited::setEdit(ModNum); // notify to handle grid according to edit mode property
 
     // start the edit dialog
     if (sketchDlg)
@@ -7074,6 +7232,12 @@ bool ViewProviderSketch::setEdit(int ModNum)
         ->signalRedoDocument.connect(boost::bind(&ViewProviderSketch::slotRedoDocument, this, bp::_1));
     connectSolverUpdate = getSketchObject()
         ->signalSolverUpdate.connect(boost::bind(&ViewProviderSketch::slotSolverUpdate, this));
+    connectMoved = getDocument()->signalEditingTransformChanged.connect([this](const Gui::Document &) {
+        if (edit && SectionView.getValue()) {
+            toggleViewSection(0);
+            toggleViewSection(1);
+        }
+    });
 
     // Enable solver initial solution update while dragging.
     ParameterGrp::handle hGrp2 = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/Mod/Sketcher");
@@ -7476,7 +7640,7 @@ void ViewProviderSketch::showGeometry(bool visible) {
 void ViewProviderSketch::unsetEdit(int ModNum)
 {
     if (ModNum == Transform || ModNum == TransformAt)
-        return ViewProvider2DObjectGrid::unsetEdit(ModNum);
+        return inherited::unsetEdit(ModNum);
 
     TightGrid.setValue(true);
 
@@ -7516,6 +7680,7 @@ void ViewProviderSketch::unsetEdit(int ModNum)
     connectUndoDocument.disconnect();
     connectRedoDocument.disconnect();
     connectSolverUpdate.disconnect();
+    connectMoved.disconnect();
 
     // when pressing ESC make sure to close the dialog
     Gui::Control().closeDialog();
@@ -7538,13 +7703,13 @@ void ViewProviderSketch::unsetEdit(int ModNum)
         e.ReportException();
     }
 
-    ViewProvider2DObjectGrid::unsetEdit(ModNum); // notify grid that edit mode is being left
+    inherited::unsetEdit(ModNum); // notify grid that edit mode is being left
 }
 
 void ViewProviderSketch::setEditViewer(Gui::View3DInventorViewer* viewer, int ModNum)
 {
     if (ModNum == Transform || ModNum == TransformAt)
-        return ViewProvider2DObjectGrid::setEditViewer(viewer, ModNum);
+        return inherited::setEditViewer(viewer, ModNum);
 
     //visibility automation: save camera
     if (! this->TempoVis.getValue().isNone()){
@@ -7559,6 +7724,9 @@ void ViewProviderSketch::setEditViewer(Gui::View3DInventorViewer* viewer, int Mo
                               QString::fromUtf8(getSketchObject()->getNameInDocument()));
             QByteArray cmdstr_bytearray = cmdstr.toUtf8();
             Gui::Command::runCommand(Gui::Command::Gui, cmdstr_bytearray);
+
+            if (SectionView.getValue())
+                toggleViewSection(1);
         } catch (Base::PyException &e){
             Base::Console().Error("ViewProviderSketch::setEdit: visibility automation failed with an error: \n");
             e.ReportException();
@@ -7588,38 +7756,40 @@ void ViewProviderSketch::setEditViewer(Gui::View3DInventorViewer* viewer, int Mo
     else
         editSubName.resize(dot-editSubName.c_str()+1);
 
-    auto transform = getEditingPlacement();
+    if (_AdjustCamera) {
+        auto transform = getEditingPlacement();
 
-    // Will the sketch be visible from the new position (#0000957)?
-    //
-    SoCamera* camera = viewer->getSoRenderManager()->getCamera();
-    SbVec3f curdir; // current view direction
-    camera->orientation.getValue().multVec(SbVec3f(0, 0, -1), curdir);
-    SbVec3f focal = camera->position.getValue() +
-                    camera->focalDistance.getValue() * curdir;
+        // Will the sketch be visible from the new position (#0000957)?
+        //
+        SoCamera* camera = viewer->getSoRenderManager()->getCamera();
+        SbVec3f curdir; // current view direction
+        camera->orientation.getValue().multVec(SbVec3f(0, 0, -1), curdir);
+        SbVec3f focal = camera->position.getValue() +
+                        camera->focalDistance.getValue() * curdir;
 
-    Base::Vector3d v0, v1; // future view direction
-    transform.multVec(Base::Vector3d(0, 0, -1), v1);
-    transform.multVec(Base::Vector3d(0, 0, 0), v0);
-    Base::Vector3d dir = (v1 - v0).Normalize();
-    SbVec3f newdir(dir.x, dir.y, dir.z);
-    SbVec3f newpos = focal - camera->focalDistance.getValue() * newdir;
+        Base::Vector3d v0, v1; // future view direction
+        transform.multVec(Base::Vector3d(0, 0, -1), v1);
+        transform.multVec(Base::Vector3d(0, 0, 0), v0);
+        Base::Vector3d dir = (v1 - v0).Normalize();
+        SbVec3f newdir(dir.x, dir.y, dir.z);
+        SbVec3f newpos = focal - camera->focalDistance.getValue() * newdir;
 
-    double dist = (SbVec3f(v0.x, v0.y, v0.z) - newpos).dot(newdir);
-    if (dist < 0) {
-        float focalLength = camera->focalDistance.getValue() - dist + 5;
-        camera->position = focal - focalLength * curdir;
-        camera->focalDistance.setValue(focalLength);
+        double dist = (SbVec3f(v0.x, v0.y, v0.z) - newpos).dot(newdir);
+        if (dist < 0) {
+            float focalLength = camera->focalDistance.getValue() - dist + 5;
+            camera->position = focal - focalLength * curdir;
+            camera->focalDistance.setValue(focalLength);
+        }
+
+
+        Base::Vector3d t,s;
+        Base::Rotation r, so;
+        transform.getTransform(t, r, s, so);
+        SbRotation rot((float)r[0],(float)r[1],(float)r[2],(float)r[3]);
+        if (viewBottomOnEdit())
+            rot = SbRotation(SbVec3f(0,1,0), M_PI) * rot;
+        viewer->setCameraOrientation(rot);
     }
-
-
-    Base::Vector3d t,s;
-    Base::Rotation r, so;
-    transform.getTransform(t, r, s, so);
-    SbRotation rot((float)r[0],(float)r[1],(float)r[2],(float)r[3]);
-    if (viewBottomOnEdit())
-        rot = SbRotation(SbVec3f(0,1,0), M_PI) * rot;
-    viewer->setCameraOrientation(rot);
 
     viewer->setEditing(true);
     SoNode* root = viewer->getSceneGraph();
@@ -7643,7 +7813,7 @@ void ViewProviderSketch::setEditViewer(Gui::View3DInventorViewer* viewer, int Mo
     // with the solver information, including solver extensions, and triggers a draw(true) via ViewProvider::UpdateData.
     getSketchObject()->solve(true);
 
-    ViewProvider2DObjectGrid::setEditViewer(viewer, ModNum);
+    inherited::setEditViewer(viewer, ModNum);
 }
 
 void ViewProviderSketch::unsetEditViewer(Gui::View3DInventorViewer* viewer)
@@ -7656,7 +7826,7 @@ void ViewProviderSketch::unsetEditViewer(Gui::View3DInventorViewer* viewer)
         edit->viewer = nullptr;
     }
 
-    ViewProvider2DObjectGrid::unsetEditViewer(viewer);
+    inherited::unsetEditViewer(viewer);
 }
 
 void ViewProviderSketch::setPositionText(const Base::Vector2d &Pos, const SbString &text)
@@ -7951,9 +8121,15 @@ bool ViewProviderSketch::onDelete(const std::vector<std::string> &subList)
             stream.str(std::string());
         }
 
-        for (rit = delExternalGeometries.rbegin(); rit != delExternalGeometries.rend(); ++rit) {
+        if (!delExternalGeometries.empty()) {
+            std::stringstream stream;
+            auto endit = std::prev(delExternalGeometries.end());
+            for (auto it = delExternalGeometries.begin(); it != endit; ++it) {
+                stream << *it << ",";
+            }
+            stream << *endit;
             try {
-                Gui::cmdAppObjectArgs(getObject(), "delExternal(%i)", *rit);
+                Gui::cmdAppObjectArgs(getObject(), "delExternal(%s)", stream.str());
             }
             catch (const Base::Exception& e) {
                 Base::Console().Error("%s\n", e.what());
@@ -7986,7 +8162,7 @@ bool ViewProviderSketch::onDelete(const std::vector<std::string> &subList)
         return false;
     }
     // if not in edit delete the whole object
-    return PartGui::ViewProviderPart::onDelete(subList);
+    return inherited::onDelete(subList);
 }
 
 void ViewProviderSketch::showRestoreInformationLayer() {
@@ -8105,7 +8281,7 @@ bool ViewProviderSketchExport::doubleClicked(void) {
     // Now forward the editing request
     if(!vp->doubleClicked()) return false;
 
-    if(transform) {
+    if(transform && _AdjustCamera) {
         auto doc = Gui::Application::Instance->editDocument();
         if(doc) {
             auto cmd = Gui::Application::Instance->commandManager().getCommandByName(
@@ -8143,6 +8319,6 @@ void ViewProviderSketchExport::updateData(const App::Property *prop)
             }
         }
     }
-    ViewProvider2DObject::updateData(prop);
+    inherited::updateData(prop);
 }
 

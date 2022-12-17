@@ -51,7 +51,7 @@ Common::Common(void)
 }
 
 const char *Common::opCode() const {
-    return TOPOP_COMMON;
+    return Part::OpCodes::Common;
 }
 
 BRepAlgoAPI_BooleanOperation* Common::makeOperation(const TopoDS_Shape& base, const TopoDS_Shape& tool) const
@@ -214,7 +214,7 @@ App::DocumentObjectExecReturn *MultiCommon::execute(void)
     }
 
     TopoShape res(0,getDocument()->getStringHasher());
-    res.makEShape(TOPOP_COMMON,shapes);
+    res.makEBoolean(Part::OpCodes::Common,shapes);
     if (res.isNull())
         throw Base::RuntimeError("Resulting shape is null");
 

@@ -518,7 +518,7 @@ public:
 
         auto &vMat = *reinterpret_cast<const float4x4*>(viewMat);
         auto &pMat = *reinterpret_cast<const float4x4*>(projMat);
-        m_ViewProjMatrix = pMat * vMat;
+        m_ViewProjMatrix = vMat * pMat;
 
         auto CurrTime = m_Timer.GetElapsedTime();
         m_RotationMatrix = float4x4::RotationY(static_cast<float>(CurrTime) * 1.0f) *
@@ -611,7 +611,7 @@ public:
 
     float4x4             m_ViewProjMatrix;
     float4x4             m_RotationMatrix;
-    int                  m_GridSize   = 10;
+    int                  m_GridSize   = 30;
     static constexpr int MaxGridSize  = 32;
     static constexpr int MaxInstances = MaxGridSize * MaxGridSize * MaxGridSize;
 };

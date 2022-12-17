@@ -59,7 +59,7 @@ static bool getOptions(PyObject *tuple, ViewProviderSavedView::CaptureOptions &o
             if (!PyArg_ParseTuple(tuple, "O", &args))
                 return false;
             if (!PySequence_Check(args)) {
-                PyErr_SetString(PyExc_TypeError, "Expectes argument of a string or sequence of string");
+                PyErr_SetString(PyExc_TypeError, "Expects argument of a string or sequence of string");
                 return false;
             }
             Py::Sequence seq(args);
@@ -80,8 +80,8 @@ static bool getOptions(PyObject *tuple, ViewProviderSavedView::CaptureOptions &o
                 options |= ViewProviderSavedView::CaptureOption::ShowOnTop;
             else if (boost::iequals(opt, "camera"))
                 options |= ViewProviderSavedView::CaptureOption::Camera;
-            else if (boost::iequals(opt, "shadow"))
-                options |= ViewProviderSavedView::CaptureOption::Shadow;
+            else if (boost::iequals(opt, "drawstyle"))
+                options |= ViewProviderSavedView::CaptureOption::DrawStyle;
             else if (boost::iequals(opt, "clippings"))
                 options |= ViewProviderSavedView::CaptureOption::Clippings;
             else if (boost::iequals(opt, "all"))

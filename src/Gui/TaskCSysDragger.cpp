@@ -25,11 +25,14 @@
 #include <assert.h>
 #include <limits>
 #include <QApplication>
-#include <QCheckBox>
+#include <QTimer>
+#include <QMessageBox>
 #endif
 
 #include <QGridLayout>
 #include <QFontMetrics>
+
+#include <boost/algorithm/string/predicate.hpp>
 
 #include <Gui/TaskView/TaskView.h>
 #include "QuantitySpinBox.h"
@@ -44,6 +47,8 @@
 #include <Gui/ViewProviderDragger.h>
 #include <Gui/SoFCCSysDragger.h>
 #include <Gui/ViewParams.h>
+#include <Gui/PrefWidgets.h>
+#include <Gui/MainWindow.h>
 
 #include "TaskCSysDragger.h"
 
@@ -63,8 +68,30 @@ TaskCSysDragger::TaskCSysDragger(Gui::ViewProviderDocumentObject* vpObjectIn, Gu
   assert(draggerIn);
   vpObject = vpObjectIn->getObject();
   dragger->ref();
-
   setupGui();
+
+  QTimer::singleShot(0, this, [this]() {
+    auto obj = vpObject.getObject();
+    if (!obj)
+        return;
+    for(auto &v : obj->ExpressionEngine.getExpressions()) {
+      auto str = v.first.toString();
+      if (str == "Placement"
+            || boost::starts_with(str, "Placement.")
+            || boost::starts_with(str, ".Placement."))
+      {
+        auto res = QMessageBox::warning(getMainWindow(),
+                        tr("Warning"),
+                        tr("Warning! There is expression binding on object's placement. "
+                            "Moving such object may cause unexpected result.\n\n"
+                            "Do you still want to continue?"),
+                        QMessageBox::Yes | QMessageBox::No);
+        if (res == QMessageBox::No)
+          Application::Instance->setEditDocument(nullptr);
+        break;
+      }
+    }
+  });
 }
 
 TaskCSysDragger::~TaskCSysDragger()
@@ -105,17 +132,38 @@ void TaskCSysDragger::setupGui()
   rSpinBox->setMinimumWidth(spinBoxWidth);
   gridLayout->addWidget(rSpinBox, 1, 1, Qt::AlignLeft);
 
-  auto checkBox = new QCheckBox(incrementsBox);
-  checkBox->setText(tr("Show on top"));
-  connect(checkBox, SIGNAL(toggled(bool)), this, SLOT(onToggleShowOnTop(bool)), Qt::QueuedConnection);
-  checkBox->setChecked(ViewParams::getTransformOnTop());
-  gridLayout->addWidget(checkBox, 2, 0);
+  checkBoxShowOnTop = new PrefCheckBox(incrementsBox);
+  checkBoxShowOnTop->setText(tr("Show on top"));
+  checkBoxShowOnTop->setParamGrpPath(QByteArray("Dialog/TaskCSysDragger"));
+  checkBoxShowOnTop->setEntryName(QByteArray("ShowOnTop"));
+  checkBoxShowOnTop->setChecked(true);
+  checkBoxShowOnTop->initAutoSave();
+  checkBoxShowOnTop->setText(tr("Show on top"));
+  connect(checkBoxShowOnTop, SIGNAL(toggled(bool)), this, SLOT(onToggleShowOnTop(bool)), Qt::QueuedConnection);
+  gridLayout->addWidget(checkBoxShowOnTop, 2, 0);
+
+  checkBoxRecompute = new PrefCheckBox(incrementsBox);
+  checkBoxRecompute->setText(tr("Auto recompute"));
+  checkBoxRecompute->setParamGrpPath(QByteArray("Dialog/TaskCSysDragger"));
+  checkBoxRecompute->setEntryName(QByteArray("AutoRecompute"));
+  checkBoxRecompute->initAutoSave();
+  gridLayout->addWidget(checkBoxRecompute, 3, 0, 1, 2);
+  
+  timer = new QTimer(this);
+  timer->setSingleShot(true);
+  QObject::connect(timer, &QTimer::timeout, [this]() {recompute(false);});
 
   incrementsBox->groupLayout()->addLayout(gridLayout);
   Content.push_back(incrementsBox);
 
   connect(tSpinBox, SIGNAL(valueChanged(double)), this, SLOT(onTIncrementSlot(double)));
   connect(rSpinBox, SIGNAL(valueChanged(double)), this, SLOT(onRIncrementSlot(double)));
+}
+
+void TaskCSysDragger::onEndMove()
+{
+    if (checkBoxRecompute->isChecked())
+        timer->start(10);
 }
 
 void TaskCSysDragger::onToggleShowOnTop(bool checked)
@@ -176,12 +224,8 @@ void TaskCSysDragger::open()
   Gui::TaskView::TaskDialog::open();
 }
 
-bool TaskCSysDragger::accept()
+void TaskCSysDragger::recompute(bool finish)
 {
-  ParameterGrp::handle hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/History/Dragger");
-  hGrp->SetFloat("LastTranslationIncrement", tSpinBox->rawValue());
-  hGrp->SetFloat("LastRotationIncrement", rSpinBox->rawValue());
-
   App::DocumentObject* dObject = vpObject.getObject();
   if (dObject) {
     Gui::Document* document = Gui::Application::Instance->editDocument();
@@ -189,9 +233,19 @@ bool TaskCSysDragger::accept()
         if (!App::GetApplication().getActiveTransaction())
             App::GetApplication().setActiveTransaction("Recompute");
         document->getDocument()->recompute();
-        document->resetEdit();
+        if (finish)
+            document->resetEdit();
     }
   }
+}
+
+bool TaskCSysDragger::accept()
+{
+  ParameterGrp::handle hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/History/Dragger");
+  hGrp->SetFloat("LastTranslationIncrement", tSpinBox->rawValue());
+  hGrp->SetFloat("LastRotationIncrement", rSpinBox->rawValue());
+
+  recompute(true);
   return Gui::TaskView::TaskDialog::accept();
 }
 

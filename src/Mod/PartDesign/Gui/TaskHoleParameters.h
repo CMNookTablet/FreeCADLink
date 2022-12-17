@@ -132,9 +132,6 @@ protected:
     void changedObject(const App::Document&, const App::Property& Prop);
 
 private:
-    void onSelectionChanged(const Gui::SelectionChanges &msg) override;
-
-private:
 
     typedef boost::signals2::scoped_connection Connection;
     Connection connectPropChanged;

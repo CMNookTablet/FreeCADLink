@@ -74,7 +74,7 @@ std::string PreferencePack::name() const
 bool PreferencePack::apply() const
 {
     // Run the pre.FCMacro, if it exists: if it raises an exception, abort the process
-    auto preMacroPath = _path / "pre.FCMacro";
+    auto preMacroPath = fs::path(_path).append("pre.FCMacro");
     if (fs::exists(preMacroPath)) {
         try {
             Base::Interpreter().runFile(preMacroPath.string().c_str(), false);
@@ -86,8 +86,8 @@ bool PreferencePack::apply() const
     }
 
     // Back up the old config file
-    auto savedPreferencePacksDirectory = fs::path(App::Application::getUserAppDataDir()) / "SavedPreferencePacks";
-    auto backupFile = savedPreferencePacksDirectory / "user.cfg.backup";
+    auto savedPreferencePacksDirectory = fs::path(App::Application::getUserAppDataDir()).append("SavedPreferencePacks");
+    auto backupFile = savedPreferencePacksDirectory.append("user.cfg.backup");
     try {
         fs::remove(backupFile);
     }
@@ -98,7 +98,7 @@ bool PreferencePack::apply() const
     applyConfigChanges();
 
     // Run the Post.FCMacro, if it exists
-    auto postMacroPath = _path / "post.FCMacro";
+    auto postMacroPath = fs::path(_path).append("post.FCMacro");
     if (fs::exists(postMacroPath)) {
         try {
             Base::Interpreter().runFile(postMacroPath.string().c_str(), false);
@@ -121,7 +121,7 @@ App::Metadata Gui::PreferencePack::metadata() const
 
 void PreferencePack::applyConfigChanges() const
 {
-    auto configFile = _path / (_metadata.name() + ".cfg");
+    auto configFile = fs::path(_path).append(_metadata.name() + ".cfg");
     if (fs::exists(configFile)) {
         ParameterManager newParameters;
         newParameters.LoadDocument(configFile.string().c_str());
@@ -134,9 +134,9 @@ void PreferencePack::applyConfigChanges() const
 
 PreferencePackManager::PreferencePackManager()
 {
-    auto modPath = fs::path(App::Application::getUserAppDataDir()) / "Mod";
-    auto savedPath = fs::path(App::Application::getUserAppDataDir()) / "SavedPreferencePacks";
-    auto resourcePath = fs::path(App::Application::getResourceDir()) / "Gui" / "PreferencePacks";
+    auto modPath = fs::path(App::Application::getUserAppDataDir()).append("Mod");
+    auto savedPath = fs::path(App::Application::getUserAppDataDir()).append("SavedPreferencePacks");
+    auto resourcePath = fs::path(App::Application::getResourceDir()).append("Gui").append("PreferencePacks");
     _preferencePackPaths.push_back(resourcePath);
     _preferencePackPaths.push_back(modPath);
     _preferencePackPaths.push_back(savedPath);
@@ -163,14 +163,14 @@ void PreferencePackManager::rescan()
 
 void Gui::PreferencePackManager::FindPreferencePacksInPackage(const fs::path& mod)
 {
-    auto packageMetadataFile = mod / "package.xml";
+    auto packageMetadataFile = fs::path(mod).append("package.xml");
     if (fs::exists(packageMetadataFile) && fs::is_regular_file(packageMetadataFile)) {
         try {
             App::Metadata metadata(packageMetadataFile);
             auto content = metadata.content();
             for (const auto& item : content) {
                 if (item.first == "preferencepack") {
-                    PreferencePack newPreferencePack(mod / item.second.name(), item.second);
+                    PreferencePack newPreferencePack(fs::path(mod).append(item.second.name()), item.second);
                     _preferencePacks.insert(std::make_pair(newPreferencePack.name(), newPreferencePack));
                 }
             }
@@ -287,8 +287,8 @@ void PreferencePackManager::save(const std::string& name, const std::vector<Temp
         return;
 
     std::lock_guard<std::mutex> lock(_mutex);
-    auto savedPreferencePacksDirectory = fs::path(App::Application::getUserAppDataDir()) / "SavedPreferencePacks";
-    fs::path preferencePackDirectory(savedPreferencePacksDirectory / name);
+    auto savedPreferencePacksDirectory = fs::path(App::Application::getUserAppDataDir()).append("SavedPreferencePacks");
+    fs::path preferencePackDirectory(fs::path(savedPreferencePacksDirectory).append(name));
     if (fs::exists(preferencePackDirectory) && !fs::is_directory(preferencePackDirectory))
         throw std::runtime_error("Cannot create " + savedPreferencePacksDirectory.string() + ": file with that name exists already");
 
@@ -297,8 +297,8 @@ void PreferencePackManager::save(const std::string& name, const std::vector<Temp
 
     // Create or update the saved user preferencePacks package.xml metadata file
     std::unique_ptr<App::Metadata> metadata;
-    if (fs::exists(savedPreferencePacksDirectory / "package.xml")) {
-        metadata = std::make_unique<App::Metadata>(savedPreferencePacksDirectory / "package.xml");
+    if (fs::exists(fs::path(savedPreferencePacksDirectory).append("package.xml"))) {
+        metadata = std::make_unique<App::Metadata>(fs::path(savedPreferencePacksDirectory).append("package.xml"));
     }
     else {
         // Create and set all of the required metadata to make it easier for PreferencePack authors to copy this
@@ -316,7 +316,7 @@ void PreferencePackManager::save(const std::string& name, const std::vector<Temp
     newPreferencePackMetadata.setVersion(1);
 
     metadata->addContentItem("preferencepack", newPreferencePackMetadata);
-    metadata->write(savedPreferencePacksDirectory / "package.xml");
+    metadata->write(fs::path(savedPreferencePacksDirectory).append("package.xml"));
 
     // Create the config file
     ParameterManager outputParameterManager;
@@ -326,7 +326,7 @@ void PreferencePackManager::save(const std::string& name, const std::vector<Temp
         templateParameterManager.LoadDocument(t.path.string().c_str());
         copyTemplateParameters(templateParameterManager, outputParameterManager);
     }
-    auto cfgFilename = savedPreferencePacksDirectory / name / (name + ".cfg");
+    auto cfgFilename = savedPreferencePacksDirectory.append(name).append(name + ".cfg");
     outputParameterManager.SaveDocument(cfgFilename.string().c_str());
 }
 
@@ -394,8 +394,8 @@ std::vector<PreferencePackManager::TemplateFile> PreferencePackManager::template
     // * $DATA_DIR/Mod/**/PreferencePackTemplates/(Appearance|Behavior)/*
     // (alternate spellings are provided for packages using CamelCase and snake_case, and both major English dialects)
 
-    auto resourcePath = fs::path(App::Application::getResourceDir()) / "Gui";
-    auto modPath = fs::path(App::Application::getUserAppDataDir()) / "Mod";
+    auto resourcePath = fs::path(App::Application::getResourceDir()).append("Gui");
+    auto modPath = fs::path(App::Application::getUserAppDataDir()).append("Mod");
 
     std::string group = "Built-In";
     if (fs::exists(resourcePath) && fs::is_directory(resourcePath)) {
@@ -416,14 +416,14 @@ std::vector<PreferencePackManager::TemplateFile> PreferencePackManager::template
 
 void Gui::PreferencePackManager::BackupCurrentConfig() const
 {
-    auto backupDirectory = fs::path(App::Application::getUserAppDataDir()) / "SavedPreferencePacks" / "Backups";
+    auto backupDirectory = fs::path(App::Application::getUserAppDataDir()).append("SavedPreferencePacks").append("Backups");
     fs::create_directories(backupDirectory);
 
     // Create a timestamped filename:
     auto time = std::time(nullptr);
     std::ostringstream timestampStream;
     timestampStream << "user." << time << ".cfg";
-    auto filename = backupDirectory / timestampStream.str();
+    auto filename = backupDirectory.append(timestampStream.str());
 
     // Save the current config:
     App::GetApplication().GetUserParameter().SaveDocument(filename.string().c_str());
@@ -433,7 +433,7 @@ void Gui::PreferencePackManager::DeleteOldBackups() const
 {
     constexpr auto oneWeek = 60.0 * 60.0 * 24.0 * 7.0;
     const auto now = std::time(nullptr);
-    auto backupDirectory = fs::path(App::Application::getUserAppDataDir()) / "SavedPreferencePacks" / "Backups";
+    auto backupDirectory = fs::path(App::Application::getUserAppDataDir()).append("SavedPreferencePacks").append("Backups");
     if (fs::exists(backupDirectory) && fs::is_directory(backupDirectory)) {
         for (const auto& backup : fs::directory_iterator(backupDirectory)) {
             if (std::difftime(now, fs::last_write_time(backup)) > oneWeek) {

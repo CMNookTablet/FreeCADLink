@@ -110,7 +110,7 @@ PropertyView::PropertyView(QWidget *parent)
     tabs->setTabPosition(QTabWidget::South);
     pLayout->addWidget(tabs, 0, 0);
 
-    propertyEditorView = new Gui::PropertyEditor::PropertyEditor();
+    propertyEditorView = new Gui::PropertyEditor::PropertyEditor(true);
     tabs->addTab(propertyEditorView, tr("View"));
 
     propertyEditorData = new Gui::PropertyEditor::PropertyEditor();
@@ -135,7 +135,7 @@ PropertyView::PropertyView(QWidget *parent)
         (&PropertyView::slotChangePropertyData, this, bp::_2));
     this->connectPropView =
     Gui::Application::Instance->signalChangedObject.connect(boost::bind
-        (&PropertyView::slotChangePropertyView, this, bp::_1, bp::_2));
+        (&PropertyView::slotChangePropertyView, this, bp::_2));
     this->connectPropAppend =
     App::GetApplication().signalAppendDynamicProperty.connect(boost::bind
         (&PropertyView::slotAppendDynamicProperty, this, bp::_1));
@@ -159,10 +159,10 @@ PropertyView::PropertyView(QWidget *parent)
                 boost::bind(&PropertyView::slotDeleteDocument, this, bp::_1));
     this->connectDelViewObject =
         Application::Instance->signalDeletedObject.connect(
-                boost::bind(&PropertyView::slotDeletedViewObject, this, bp::_1));
+                boost::bind(&PropertyView::slotDeletedContainer, this, bp::_1));
     this->connectDelObject =
         App::GetApplication().signalDeletedObject.connect(
-                boost::bind(&PropertyView::slotDeletedObject, this, bp::_1));
+                boost::bind(&PropertyView::slotDeletedContainer, this, bp::_1));
     this->connectBeforeRecompute =
         App::GetApplication().signalBeforeRecomputeDocument.connect([this](const App::Document &) {
             if(this->timer->isActive())
@@ -170,6 +170,12 @@ PropertyView::PropertyView(QWidget *parent)
         });
     this->connectChangedDocument = App::GetApplication().signalChangedDocument.connect(
             boost::bind(&PropertyView::slotChangePropertyData, this, bp::_2));
+    this->connectChangedView = Application::Instance->signalChangedView.connect(
+            boost::bind(&PropertyView::slotChangePropertyView, this, bp::_2));
+    this->connectDetachView = Application::Instance->signalDetachView.connect(
+                boost::bind(&PropertyView::slotDeletedContainer, this, bp::_1));
+    this->connectActivateView = Application::Instance->signalActivateView.connect(
+                boost::bind(&PropertyView::slotActivateView, this, bp::_1));
 }
 
 PropertyView::~PropertyView()
@@ -188,6 +194,9 @@ PropertyView::~PropertyView()
     this->connectDelViewObject.disconnect();
     this->connectBeforeRecompute.disconnect();
     this->connectChangedDocument.disconnect();
+    this->connectChangedView.disconnect();
+    this->connectDetachView.disconnect();
+    this->connectActivateView.disconnect();
 }
 
 static bool _ShowAll;
@@ -271,7 +280,7 @@ void PropertyView::slotChangePropertyData(const App::Property& prop)
     }
 }
 
-void PropertyView::slotChangePropertyView(const Gui::ViewProvider&, const App::Property& prop)
+void PropertyView::slotChangePropertyView(const App::Property& prop)
 {
     if (propertyEditorView->propOwners.count(prop.getContainer())) {
         propertyEditorView->updateProperty(prop);
@@ -322,29 +331,15 @@ void PropertyView::slotChangePropertyEditor(const App::Document &, const App::Pr
 }
 
 void PropertyView::slotDeleteDocument(const Gui::Document &doc) {
-    if(propertyEditorData->propOwners.count(doc.getDocument())) {
-        propertyEditorView->buildUp();
-        propertyEditorData->setAutomaticDocumentUpdate(false);
-        propertyEditorData->buildUp();
-        propertyEditorData->setAutomaticDocumentUpdate(true);
-        clearPropertyItemSelection();
-        timer->start(ViewParams::getPropertyViewTimer());
-    }
+    slotDeletedContainer(*doc.getDocument());
+    if (auto view = doc.getActiveView())
+        slotDeletedContainer(*view);
 }
 
-void PropertyView::slotDeletedViewObject(const Gui::ViewProvider &vp) {
-    if(propertyEditorView->propOwners.count(&vp)) {
-        propertyEditorView->buildUp();
-        propertyEditorData->setAutomaticDocumentUpdate(false);
-        propertyEditorData->buildUp();
-        propertyEditorData->setAutomaticDocumentUpdate(true);
-        clearPropertyItemSelection();
-        timer->start(ViewParams::getPropertyViewTimer());
-    }
-}
-
-void PropertyView::slotDeletedObject(const App::DocumentObject &obj) {
-    if(propertyEditorData->propOwners.count(&obj)) {
+void PropertyView::slotDeletedContainer(const App::PropertyContainer &container) {
+    if(propertyEditorView->propOwners.count(&container)
+        || propertyEditorData->propOwners.count(&container))
+    {
         propertyEditorView->buildUp();
         propertyEditorData->setAutomaticDocumentUpdate(false);
         propertyEditorData->buildUp();
@@ -419,6 +414,23 @@ void PropertyView::applyParams()
     propertyEditorData->hideHeader(hideHeader);
 }
 
+void PropertyView::slotActivateView(const Gui::MDIView *view)
+{
+    if (!view)
+        return;
+    if (auto doc = view->getAppDocument()) {
+        if (propertyEditorData->propOwners.count(doc)) {
+            std::map<std::string,App::Property*> props;
+            view->getPropertyMap(props);
+            PropertyModel::PropertyList docProps;
+            for(auto &v : props)
+                docProps.emplace_back(v.first,
+                        std::vector<App::Property*>(1,v.second));
+            propertyEditorView->buildUp(std::move(docProps));
+        }
+    }
+}
+
 void PropertyView::onTimer() {
     timer->stop();
     applyParams();
@@ -448,7 +460,16 @@ void PropertyView::onTimer() {
                     std::vector<App::Property*>(1,v.second));
         propertyEditorData->setAutomaticDocumentUpdate(false);
         propertyEditorData->buildUp(std::move(docProps));
-        tabs->setCurrentIndex(1);
+        if (auto view = gdoc->getActiveView()) {
+            props.clear();
+            view->getPropertyMap(props);
+            for(auto &v : props)
+                docProps.emplace_back(v.first,
+                        std::vector<App::Property*>(1,v.second));
+            propertyEditorView->buildUp(std::move(docProps));
+        }
+        if (props.empty())
+            tabs->setCurrentIndex(1);
         return;
     }
 

@@ -51,6 +51,8 @@
 #include <BRep_Tool.hxx>
 #include <BRepAdaptor_Curve.hxx>
 
+#include <Mod/Part/App/OCCError.h>
+#include <Mod/Part/App/PartPyCXX.h>
 #include "CommandPy.h"
 #include "PathPy.h"
 #include "Path.h"
@@ -58,39 +60,7 @@
 #include "FeaturePathCompound.h"
 #include "Area.h"
 
-#define PATH_CATCH catch (Standard_Failure &e)                      \
-    {                                                               \
-        std::string str;                                            \
-        Standard_CString msg = e.GetMessageString();                \
-        str += typeid(e).name();                                    \
-        str += " ";                                                 \
-        if (msg) {str += msg;}                                      \
-        else     {str += "No OCCT Exception Message";}              \
-        Base::Console().Error(str.c_str());                         \
-        PyErr_SetString(Part::PartExceptionOCCError,str.c_str());   \
-    }                                                               \
-    catch(Base::Exception &e)                                       \
-    {                                                               \
-        std::string str;                                            \
-        str += "FreeCAD exception thrown (";                        \
-        str += e.what();                                            \
-        str += ")";                                                 \
-        e.ReportException();                                        \
-        PyErr_SetString(Base::BaseExceptionFreeCADError,str.c_str());\
-    }                                                               \
-    catch(std::exception &e)                                        \
-    {                                                               \
-        std::string str;                                            \
-        str += "STL exception thrown (";                            \
-        str += e.what();                                            \
-        str += ")";                                                 \
-        Base::Console().Error(str.c_str());                         \
-        PyErr_SetString(Base::BaseExceptionFreeCADError,str.c_str());\
-    }                                                               \
-    catch(const char *e)                                            \
-    {                                                               \
-        PyErr_SetString(Base::BaseExceptionFreeCADError,e);         \
-    } throw Py::Exception();
+#define PATH_CATCH _PY_CATCH_OCC(throw Py::Exception())
 
 namespace Path {
 class Module : public Py::ExtensionModule<Module>
@@ -131,6 +101,11 @@ public:
             "\n* start (Vector()): optional start position.\n"
             PARAM_PY_DOC(ARG, AREA_PARAMS_ARC_PLANE)
             PARAM_PY_DOC(ARG, AREA_PARAMS_SORT)
+        );
+        add_varargs_method("shapeFromPath",&Module::shapeFromPath,
+            "shapeFromPath(path : Path.Path, filter=[] : List[Int]): Returns a shape generated from a given path\n\n"
+            "path: input path object\n"
+            "filter: optional filter of indices of the g-code command in the path to skip"
         );
         initialize("This module is the Path module."); // register with Python
     }
@@ -424,6 +399,35 @@ private:
                 ret.setItem(2, Py::Long(arc_plane));
 
             return ret;
+        } PATH_CATCH
+    }
+
+    Py::Object shapeFromPath(const Py::Tuple& args)
+    {
+        PyObject *pyPath;
+        PyObject *pyFilter = Py_None;
+        if (!PyArg_ParseTuple(args.ptr(), "O!|O", &Path::PathPy::Type, &pyPath, &pyFilter))
+            throw Py::Exception();
+
+        std::set<int> filter;
+        if (pyFilter != Py_None) {
+            const char *err = "Expects the second argument to be a list of intenger";
+            if (!PySequence_Check(pyFilter))
+                throw Py::TypeError(err);
+            Py::Sequence shapeSeq(pyFilter);
+            for (Py::Sequence::iterator it = shapeSeq.begin(); it != shapeSeq.end(); ++it) {
+                PyObject *idx = PyNumber_Long((*it).ptr());
+                if (!idx) {
+                    PyErr_Clear();
+                    throw Py::TypeError(err);
+                }
+                filter.insert(Py::Int(Py::asObject(idx)));
+            }
+        }
+        try {
+            Part::TopoShape s = Path::shapeFromPath(
+                    *static_cast<Path::PathPy*>(pyPath)->getToolpathPtr(), filter);
+            return Part::shape2pyshape(s);
         } PATH_CATCH
     }
 };

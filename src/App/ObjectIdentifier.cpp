@@ -39,6 +39,7 @@
 #include <Base/QuantityPy.h>
 #include <Base/Console.h>
 #include <App/DocumentObjectPy.h>
+#include "DocumentObserver.h"
 #include "ComplexGeoData.h"
 #include "Property.h"
 #include "Application.h"
@@ -221,6 +222,31 @@ ObjectIdentifier::ObjectIdentifier(const Property &prop, int index)
     , _hash(0)
 {
     DocumentObject * docObj = freecad_dynamic_cast<DocumentObject>(prop.getContainer());
+    if (docObj)
+        addComponent(SimpleComponent(prop.getName()));
+    else {
+        App::DocumentObjectT objT(&prop);
+        docObj = objT.getObject();
+        if (docObj) {
+            const char *prop = objT.getPropertyName().c_str();
+            const char *dot = strchr(prop, '.');
+            std::string _name;
+            for (;;) {
+                const char *name;
+                if (dot) {
+                    _name = std::string(prop, dot);
+                    name = _name.c_str();
+                }
+                else
+                    name = prop;
+                addComponent(SimpleComponent(name));
+                if(!dot)
+                    break;
+                prop = dot+1;
+                dot = strchr(prop, '.');
+            }
+        }
+    }
 
     if (!docObj)
         FC_THROWM(Base::TypeError, "Property must be owned by a document object.");
@@ -231,7 +257,6 @@ ObjectIdentifier::ObjectIdentifier(const Property &prop, int index)
 
     setDocumentObjectName(docObj);
 
-    addComponent(SimpleComponent(prop.getName()));
     if(index!=INT_MAX)
         addComponent(ArrayComponent(index));
 }
@@ -675,7 +700,7 @@ std::string ObjectIdentifier::getSubPathStr(bool toPython, bool prefix) const {
 
 ObjectIdentifier::Component::Component(const String &_name,
         ObjectIdentifier::Component::typeEnum _type, int _begin, int _end, int _step)
-    : name(_name)
+    : name(_type!=MAP || _name.isRealString() ? _name : String(_name.getString(), true))
     , type(_type)
     , begin(_begin)
     , end(_end)
@@ -685,7 +710,7 @@ ObjectIdentifier::Component::Component(const String &_name,
 
 ObjectIdentifier::Component::Component(String &&_name,
         ObjectIdentifier::Component::typeEnum _type, int _begin, int _end, int _step)
-    : name(std::move(_name))
+    : name(_type!=MAP || _name.isRealString() ? std::move(_name) : String(_name.getString(), true))
     , type(_type)
     , begin(_begin)
     , end(_end)
@@ -971,6 +996,8 @@ App::DocumentObject * ObjectIdentifier::getDocumentObject(const App::Document * 
         objectById = doc->getObject(static_cast<const char*>(name));
 
         if (objectById) {
+            if (objectById->testStatus(ObjectStatus::Remove))
+                return nullptr;
             flags.set(ResolveByIdentifier);
             return objectById;
         }
@@ -1157,6 +1184,8 @@ void ObjectIdentifier::resolve(ResolveResults &results) const
                 results.resolvedDocumentName = String(results.resolvedDocument->getName(), false, true);
                 results.resolvedDocumentObjectName = String(owner->getNameInDocument(), false, true);
                 results.resolvedDocumentObject = owner->getDocument()->getObject(owner->getNameInDocument());
+                if (results.resolvedDocumentObject && results.resolvedDocumentObject->testStatus(ObjectStatus::Remove))
+                    results.resolvedDocumentObject = nullptr;
                 results.propertyIndex = 0;
                 results.getProperty(*this);
             }
@@ -1267,10 +1296,11 @@ void ObjectIdentifier::getDep(
     if(!result.resolvedDocumentObject)
        return;
 
-    if(!needProps) {
-        deps[result.resolvedDocumentObject];
-        return;
-    }
+    (void)needProps;
+    // if(!needProps) {
+    //     deps[result.resolvedDocumentObject];
+    //     return;
+    // }
 
     if(!result.resolvedProperty) {
         if(result.propertyName.size())
@@ -1622,6 +1652,9 @@ Property *ObjectIdentifier::resolveProperty(const App::DocumentObject *obj,
                                             App::DocumentObject *&sobj,
                                             int &ptype) const 
 {
+    if (!obj)
+        return nullptr;
+
     std::string &subname = _subname.str;
     sobj = nullptr;
 
@@ -1636,7 +1669,10 @@ Property *ObjectIdentifier::resolveProperty(const App::DocumentObject *obj,
             return nullptr;
         if(s && s[0] == '.')
             ++s;
-        return obj->getSubObject(s);
+        auto sobj = obj->getSubObject(s);
+        if (sobj && sobj->testStatus(ObjectStatus::Remove))
+            sobj = nullptr;
+        return sobj;
     };
 
     App::Property *prop = 0;
@@ -1708,6 +1744,9 @@ Property *ObjectIdentifier::resolveProperty(const App::DocumentObject *obj,
             ptype = PseudoNone;
             return prop;
         }
+
+        if (propertyIndex==0 &&  !this->localProperty)
+            return nullptr;
 
         sub = name;
         if(!boost::ends_with(name,"."))
@@ -1953,7 +1992,7 @@ void ObjectIdentifier::String::checkImport(const App::DocumentObject *owner,
             str.resize(str.size()-1);
             auto mapped = reader->getName(str.c_str());
             auto objForMapped = owner->getDocument()->getObject(mapped);
-            if (!objForMapped) {
+            if (!objForMapped || objForMapped->testStatus(ObjectStatus::Remove)) {
                 FC_ERR("Cannot find object " << str);
             }
             else {
@@ -1963,6 +2002,49 @@ void ObjectIdentifier::String::checkImport(const App::DocumentObject *owner,
             }
         }
     }
+}
+
+namespace {
+
+// PropertyContainer attribute change notification is disabled for some reason.
+// This class is to make sure it is enabled when setting a long chain of attributes.
+class ContainerNotifierEnabler
+{
+public:
+    ContainerNotifierEnabler(PyObject *pyObj)
+    {
+        attach(pyObj);
+    }
+
+    ~ContainerNotifierEnabler()
+    {
+        detach();
+    }
+
+    void detach()
+    {
+        if (pyBase) {
+            pyBase->setShouldNotify(shouldNotify);
+            Py_DECREF(pyBase);
+            pyBase = nullptr;
+        }
+    }
+
+    void attach(PyObject *pyObj)
+    {
+        if(pyObj && pyObj != pyBase && PyObject_TypeCheck(pyObj, &PropertyContainerPy::Type)) {
+            detach();
+            pyBase = static_cast<PyObjectBase*>(pyObj);
+            Py_INCREF(pyBase);
+            shouldNotify = pyBase->shouldNotify();
+            pyBase->setShouldNotify(true);
+        }
+    }
+
+public:
+    PyObjectBase *pyBase = nullptr;
+    bool shouldNotify;
+};
 }
 
 Py::Object ObjectIdentifier::access(const ResolveResults &result,
@@ -2175,6 +2257,8 @@ Py::Object ObjectIdentifier::access(const ResolveResults &result,
     size_t count = components.size();
     if(value) --count;
 
+    ContainerNotifierEnabler notificationEnabler(pyobj.ptr());
+
     for(;idx<count;++idx)  {
         if(PyObject_TypeCheck(*pyobj, &DocumentObjectPy::Type))
             lastObj = static_cast<DocumentObjectPy*>(*pyobj)->getDocumentObjectPtr();
@@ -2193,6 +2277,8 @@ Py::Object ObjectIdentifier::access(const ResolveResults &result,
             }
             lastObj = 0;
         }
+
+        notificationEnabler.attach(pyobj.ptr());
         pyobj = components[idx].get(pyobj);
     }
     if(value) {
@@ -2296,13 +2382,15 @@ void ObjectIdentifier::setValue(const App::any &value) const
 void ObjectIdentifier::setPyValue(Py::Object value) const
 {
     ResolveResults rs(*this);
-    if(rs.propertyType && rs.propertyIndex+1 == (int)components.size())
-        FC_THROWM(Base::RuntimeError,"Cannot set pseudo property " << toString());
     if(!rs.resolvedProperty)
         FC_THROWM(Base::RuntimeError,"Property not found " << toString());
-    if(rs.resolvedProperty->testStatus(Property::Immutable)
-            || rs.resolvedProperty->testStatus(Property::PropReadOnly))
-        FC_THROWM(Base::RuntimeError,"Cannot set read-only property: " << toString());
+    if(rs.propertyIndex+1 == (int)components.size()) {
+        if (rs.propertyType)
+            FC_THROWM(Base::RuntimeError,"Cannot set pseudo property " << toString());
+        if(rs.resolvedProperty->testStatus(Property::Immutable)
+                || rs.resolvedProperty->testStatus(Property::PropReadOnly))
+            FC_THROWM(Base::RuntimeError,"Cannot set read-only property: " << toString());
+    }
 
     try {
         access(rs,&value);
@@ -2331,7 +2419,7 @@ void ObjectIdentifier::importSubNames(const ObjectIdentifier::SubNameMap &subNam
     auto it = subNameMap.find(std::make_pair(result.resolvedDocumentObject,std::string()));
     if(it!=subNameMap.end()) {
         auto obj = owner->getDocument()->getObject(it->second.c_str());
-        if(!obj) {
+        if(!obj || obj->testStatus(ObjectStatus::Remove)) {
             FC_ERR("Failed to find import object " << it->second << " from "
                     << result.resolvedDocumentObject->getFullName());
             return;
@@ -2438,7 +2526,7 @@ void ObjectIdentifier::resolveAmbiguity(ResolveResults &result) {
 
     std::string s = result.subObjectName;
     // We will support leading and (any consecutive) dots in the subname path.
-    // So no need to remove it. In fact, we delibrately add a leading dot (by
+    // So no need to remove it. In fact, we deliberately add a leading dot (by
     // ExpressionCompleter) to disambiguate element name from label reference
     // in subname path.
     //

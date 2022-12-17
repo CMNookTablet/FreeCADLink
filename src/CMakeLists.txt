@@ -1,3 +1,6 @@
+
+include_directories(before system ${CMAKE_CURRENT_SOURCE_DIR}/3rdParty/boost_fix)
+
 add_subdirectory(Build)
 add_subdirectory(3rdParty)
 add_subdirectory(Base)

@@ -1435,3 +1435,15 @@ bool PropertyComplexGeoData::isSame(const Property &_other) const
         return false;
     return data->isSame(*other);
 }
+
+void PropertyComplexGeoData::afterRestore()
+{
+    auto data = getComplexData();
+    if (data && data->isRestoreFailed()) {
+        data->resetRestoreFailure();
+        auto owner = Base::freecad_dynamic_cast<DocumentObject>(getContainer());
+        if (owner && owner->getDocument() && !owner->getDocument()->testStatus(App::Document::PartialDoc))
+            owner->getDocument()->addRecomputeObject(owner);
+    }
+    PropertyGeometry::afterRestore();
+}

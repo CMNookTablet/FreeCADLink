@@ -41,6 +41,7 @@
 
 #include <Base/Tools.h>
 #include <App/Application.h>
+#include "InventorBase.h"
 #include "NavigationStyle.h"
 #include "View3DInventorViewer.h"
 #include "SelectionView.h"
@@ -423,7 +424,7 @@ void NavigationStyle::setCameraOrientation(const SbRotation& rot, SbBool moveToC
         SoGetBoundingBoxAction action(viewer->getSoRenderManager()->getViewportRegion());
         action.apply(viewer->getSceneGraph());
         SbBox3f box = action.getBoundingBox();
-        if (!box.isEmpty()) {
+        if (isValidBBox(box)) {
             rot.multVec(SbVec3f(0, 0, -1), direction);
             //float s = (this->focal1 - box.getCenter()).dot(direction);
             //this->focal2 = box.getCenter() + s * direction;
@@ -557,7 +558,7 @@ void NavigationStyle::viewAll()
     SoGetBoundingBoxAction action(viewer->getSoRenderManager()->getViewportRegion());
     action.apply(viewer->getSceneGraph());
     SbBox3f box = action.getBoundingBox();
-    if (box.isEmpty()) return;
+    if (!isValidBBox(box)) return;
 
 #if 0
     // check whether the box is very wide or tall, if not do nothing

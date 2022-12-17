@@ -163,21 +163,21 @@ App::DocumentObjectExecReturn *Boolean::execute(void)
 
     const char *op = 0;
     if (type == "Fuse")
-        op = TOPOP_FUSE;
+        op = Part::OpCodes::Fuse;
     else if(type == "Cut")
-        op = TOPOP_CUT;
+        op = Part::OpCodes::Cut;
     else if(type == "Common")
-        op = TOPOP_COMMON;
+        op = Part::OpCodes::Common;
     else if(type == "Compound")
-        op = TOPOP_COMPOUND;
+        op = Part::OpCodes::Compound;
     else if(type == "Section")
-        op = TOPOP_SECTION;
+        op = Part::OpCodes::Section;
     else
         return new App::DocumentObjectExecReturn("Unsupported boolean operation");
 
     TopoShape result(0,getDocument()->getStringHasher());
     try {
-        result.makEShape(op, shapes);
+        result.makEBoolean(op, shapes);
     } catch (Standard_Failure &e) {
         FC_ERR("Boolean operation failed: " << e.GetMessageString());
         return new App::DocumentObjectExecReturn("Boolean operation failed");

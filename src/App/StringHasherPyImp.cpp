@@ -32,7 +32,9 @@ using namespace App;
 // returns a string which represent the object e.g. when printed in python
 std::string StringHasherPy::representation(void) const
 {
-    return std::string("<StringHasher>");
+    std::ostringstream str;
+    str << "<StringHasher at " << getStringHasherPtr() << ">";
+    return str.str();
 }
 
 PyObject *StringHasherPy::PyMake(struct _typeobject *, PyObject *, PyObject *)  // Python wrapper

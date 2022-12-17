@@ -100,6 +100,10 @@ class CommandEditAttachment:
 
 if App.GuiUp:
     import FreeCADGui as Gui
-    command_instance = CommandEditAttachment()
-    Gui.addCommand('Part_EditAttachment', command_instance)
+
+    # Deprecate Python AttachmentEditor in favor of C++ one, so that we don't
+    # need to maintain two task editor with the same functionality
+    #
+    #  command_instance = CommandEditAttachment()
+    #  Gui.addCommand('Part_EditAttachment', command_instance)
 

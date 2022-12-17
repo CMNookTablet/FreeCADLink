@@ -47,6 +47,7 @@ public:
     virtual ~ViewProviderPlaneParametric();
 
     std::vector<std::string> getDisplayModes(void) const;
+    virtual bool canReplaceObject(App::DocumentObject*, App::DocumentObject*) {return true;}
 
 protected:
 

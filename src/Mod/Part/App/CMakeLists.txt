@@ -203,6 +203,8 @@ SET(Properties_SRCS
     PropertyTopoShape.h
     PropertyGeometryList.cpp
     PropertyGeometryList.h
+    PropertyDressUp.cpp
+    PropertyDressUp.h
 )
 SOURCE_GROUP("Properties" FILES ${Properties_SRCS})
 
@@ -445,6 +447,8 @@ SET(Part_SRCS
     FaceMakerCheese.h
     FaceMakerBullseye.cpp
     FaceMakerBullseye.h
+    WireJoiner.cpp
+    WireJoiner.h
 )
 
 if(FREECAD_USE_PCH)

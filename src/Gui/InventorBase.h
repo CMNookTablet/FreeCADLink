@@ -43,6 +43,7 @@
 #endif
 
 class SoGroup;
+class SbBox3f;
 
 namespace Gui {
 
@@ -73,6 +74,9 @@ public:
  * @sa https://bitbucket.org/Coin3D/coin/pull-requests/119/fix-sochildlist-auditing/diff
  */
 void GuiExport coinRemoveAllChildren(SoGroup *node);
+
+/// Check if the bounding box is valid
+bool GuiExport isValidBBox(const SbBox3f &bbox);
 
 }
 

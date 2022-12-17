@@ -439,6 +439,10 @@ void StdCmdDlgCustomize::activated(int iMsg)
         dlg = new Gui::Dialog::DlgCustomizeImp(getMainWindow());
     dlg->setAttribute(Qt::WA_DeleteOnClose);
     dlg->show();
+    // Even though customize dialog is a child widget of the main window, we
+    // still need to call raise because on MacOS, the dialog can be put below
+    // its parent window for some reason.
+    dlg->raise();
 
     if (iMsg == 1) {
         auto tdlg = dlg->findChild<Gui::Dialog::DlgCustomToolbarsImp*>();

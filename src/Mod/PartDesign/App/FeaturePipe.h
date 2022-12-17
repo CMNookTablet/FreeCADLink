@@ -48,7 +48,9 @@ public:
     App::PropertyVector      Binormal;
     App::PropertyEnumeration Transition;
     App::PropertyEnumeration Transformation;
-    App::PropertyLinkList    Sections;
+    App::PropertyLinkSubList Sections;
+    App::PropertyBool        MoveProfile;
+    App::PropertyBool        RotateProfile;
 
     App::DocumentObjectExecReturn *execute(void);
     short mustExecute() const;
@@ -68,7 +70,9 @@ public:
                                                    int mode = 2,
                                                    const Base::Vector3d &binormalVector = Base::Vector3d(),
                                                    int transformation = 0,
-                                                   const std::vector<App::DocumentObject*> &multisections = {});
+                                                   const std::vector<App::PropertyLinkSubList::SubSet> &multisections = {},
+                                                   bool moveProfile = false,
+                                                   bool rotateProfile = false);
 protected:
     ///get the given edges and all their tangent ones
     void getContinuousEdges(Part::TopoShape TopShape, std::vector< std::string >& SubNames);
@@ -79,6 +83,8 @@ protected:
                                int transition,
                                const TopoShape& auxshape,
                                bool auxCurveLinear);
+    // handle changed property
+    virtual void handleChangedPropertyType(Base::XMLReader& reader, const char* TypeName, App::Property* prop);
 
 private:
     static const char* TypeEnums[];

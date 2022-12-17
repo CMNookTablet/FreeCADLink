@@ -387,7 +387,7 @@ void ImportOCAF::createShape(const TDF_Label& label, const TopLoc_Location& loc,
                 pl.fromMatrix(mtrx);
                 part->Placement.setValue(pl);
                 if (!loc.IsIdentity())
-                    part->Shape.setValue(comp.Moved(loc));
+                    part->Shape.setValue(Part::TopoShape::moved(comp,loc));
                 else
                     part->Shape.setValue(comp);
                 part->Label.setValue(name);
@@ -444,7 +444,7 @@ void ImportOCAF::createShape(const TopoDS_Shape& aShape, const TopLoc_Location& 
 
     if (!loc.IsIdentity())
         // part->Shape.setValue(aShape.Moved(TopLoc_Location(loc.FirstDatum())));
-        part->Shape.setValue(aShape.Moved(loc));
+        part->Shape.setValue(Part::TopoShape::moved(aShape,loc));
     else
         part->Shape.setValue(aShape);
 

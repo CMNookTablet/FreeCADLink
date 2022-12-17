@@ -27,6 +27,7 @@ grade: devel
 confinement: strict
 compression: lzo
 license: LGPL-2.0-or-later
+assumes: [snapd2.55.3] # for cups interface & private shared memory
 
 layout:
   /usr/share/libdrm/amdgpu.ids:
@@ -49,6 +50,24 @@ layout:
     symlink: $SNAP/usr/share/matplotlib
   /usr/share/qt5:
     symlink: $SNAP/kf5/usr/share/qt5
+  /usr/bin/dot: # Graphviz for dependency graph
+    symlink: $SNAP/usr/bin/dot
+  /usr/bin/unflatten: # Graphviz for dependency graph
+    symlink: $SNAP/usr/bin/unflatten
+  /usr/share/povray-3.7: # Raytracing
+    symlink: $SNAP/usr/share/povray-3.7
+    
+plugs:
+  # this is not used or needed for anything other than to trigger automatic
+  # installation of the cups snap via "default-provider: cups"
+  foo-install-cups:
+    interface: content
+    content: foo
+    default-provider: cups
+    target: $SNAP_DATA/foo
+  # Necessary to enable semaphores for numba, OpenMP etc.
+  shared-memory:
+    private: true
 
 environment:
   LD_LIBRARY_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/blas:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/lapack # numpy
@@ -65,6 +84,7 @@ environment:
   PYTHONPATH: &pypath $PYTHONUSERBASE/lib/python3.8/site-packages:$SNAP/lib/python3.8/site-packages:$SNAP/usr/lib/python3/dist-packages
   SNAP_PYTHONPATH: *pypath
   QT_QPA_PLATFORM: xcb # Coin3D cannot run on Wayland
+  POVINI: $SNAP/etc/povray/3.7/povray.ini # Raytracing
 
 apps:
   freecad-realthunder:
@@ -80,6 +100,8 @@ apps:
       - network      
       - browser-support
       - unity7
+      - cups
+      - shared-memory
   cmd:
     command: usr/bin/FreeCADCmd
     extensions: [kde-neon]
@@ -93,6 +115,14 @@ package-repositories:
     ppa: elmer-csc-ubuntu/elmer-csc-ppa
   - type: apt
     ppa: openscad/releases
+  - type: apt
+    components:
+      - main
+    suites:
+      - focal
+    key-id: 444DABCF3667D0283F894EDDE6D4736255751E5D
+    url: http://origin.archive.neon.kde.org/user
+    key-server: keyserver.ubuntu.com
 
 parts:
   stub-chown:
@@ -128,7 +158,7 @@ parts:
       # let's do an in-source build  instead
       cd $SNAPCRAFT_PART_SRC
       cmake \
-        -DCMAKE_FIND_ROOT_PATH=/snap/kde-frameworks-5-qt-5-15-3-core20-sdk/current \
+        -DCMAKE_FIND_ROOT_PATH=/snap/kde-frameworks-5-qt-5-15-5-core20-sdk/current \
         -DCMAKE_PREFIX_PATH="$SNAPCRAFT_STAGE" \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
@@ -196,6 +226,7 @@ parts:
       - libmed11
       - libopenexr24
       - libopenmpi3
+      - libpsm-infinipath1
       - libpython3.8
       - libpython3.8-minimal
       - libpython3.8-stdlib
@@ -206,6 +237,8 @@ parts:
       - libzipios++0v5
       - python3-tk # FEM
       - python3-yaml # FEM
+      - python3-numba # FEM (fcFEM)
+      - python3-scipy # FEM
       - python3-numpy
       - python3-matplotlib
       - python3-six
@@ -221,17 +254,22 @@ parts:
       - python3-pyside2.qtsvg
       - python3-pyside2.qtwidgets
       - python3-pyside2.qtnetwork
-      - graphviz
+      - python3-pyside2.qtuitools
+      - python3-qtpy # Nodes addon
       - calculix-ccx # FEM
       - libfreeimage3
       - libtbb2
       - libvtk7.1p
       - elmerfem-csc # FEM
       - openscad  # OpenSCAD
+      - povray # Raytracing
+      - povray-includes # Raytracing
     override-build: |
-      kde_sdk_dir="/snap/kde-frameworks-5-91-qt-5-15-3-core20-sdk/current"
+      kde_sdk_dir="/snap/kde-frameworks-5-96-qt-5-15-5-core20-sdk/current"
       mkdir -p /etc/xdg/qtchooser
       cp "$kde_sdk_dir/etc/xdg/qtchooser/default.conf" "/etc/xdg/qtchooser/default.conf"
+      mkdir -p /workspace/usr/bin
+      ln -s /usr/bin/shiboken2 /workspace/usr/bin/shiboken2
       snapcraftctl build
       cd $SNAPCRAFT_PART_SRC
       iso_date=$(date -I)
@@ -245,7 +283,7 @@ parts:
     source: https://github.com/realthunder/FreeCADMakeImage.git
     override-prime: |
       export FMK_BUILD_DATE=$(date +%Y%m%d)
-      branding_path=$SNAPCRAFT_PART_SRC/conda/branding/asm3-daily
+      branding_path=$SNAPCRAFT_PART_SRC/conda/branding/asm3-snap
       $branding_path/install.sh $branding_path $SNAPCRAFT_PRIME/usr
       sed -i -E \
         "s|^Icon=(.*)|Icon=\${SNAP}/usr/share/icons/hicolor/scalable/apps/freecad_link.svg|g" \
@@ -257,22 +295,45 @@ parts:
     organize:
       "*": usr/Mod/Assembly3/
 
-  pip:
+  python-packages:
     plugin: python
+    build-packages:
+      - libsuitesparse-dev
+    stage-packages:
+      - python3-distutils # pip
+      - libamd2 # scikit-sparse
+      - libcamd2 # scikit-sparse
+      - libccolamd2 # scikit-sparse
+      - libcholmod3 # scikit-sparse
+      - libcolamd2 # scikit-sparse
+      - libsuitesparseconfig5 # scikit-sparse
     python-packages:
       - pip
-    stage-packages:
-      - python3-distutils
+      - scikit-sparse
     stage:
       - -pyvenv.cfg
+      - -lib/python3.8/site-packages/scipy*
+      - -lib/python3.8/site-packages/numpy*
+
+  graphviz:
+    plugin: nil
+    build-packages:
+      - graphviz
+    stage-packages:
+      - graphviz
+    override-build: |
+      dot -c
+      cp \
+        /usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/graphviz/config* \
+        ${SNAPCRAFT_PART_INSTALL}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/graphviz/
 
   cleanup:
-    after: [stub-chown, freecad, pip, assembly3, snap-setup-mod, coin3d, pivy, branding]
+    after: [stub-chown, freecad, python-packages, assembly3, snap-setup-mod, graphviz, coin3d, pivy, branding]
     plugin: nil
-    build-snaps: [kde-frameworks-5-91-qt-5-15-3-core20]
+    build-snaps: [kde-frameworks-5-96-qt-5-15-5-core20]
     override-prime: |
       set -eux
-      for snap in "kde-frameworks-5-91-qt-5-15-3-core20"; do  # List all content-snaps you're using here
+      for snap in "kde-frameworks-5-96-qt-5-15-5-core20"; do  # List all content-snaps you're using here
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" "$SNAPCRAFT_PRIME/usr/{}" \;
       done
       for cruft in bug lintian man; do
@@ -280,3 +341,6 @@ parts:
       done
       find $SNAPCRAFT_PRIME/usr/share/doc/ -type f -not -name 'copyright' -delete
       find $SNAPCRAFT_PRIME/usr/share -type d -empty -delete
+      find $SNAPCRAFT_PRIME/usr/lib -type f,l \
+        -name 'libQt*.so*' `# remove all Qt libs pulled in from Ubuntu repos` \
+        -not -name 'libQt5Gamepad.so*' -delete `# for OpenSCAD`

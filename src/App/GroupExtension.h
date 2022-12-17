@@ -138,6 +138,8 @@ public:
 
     virtual void onExtendedSetupObject() override;
 
+    virtual std::vector<App::DocumentObject *> getFullModel () const {return Group.getValues();}
+
     std::vector<DocumentObject*> getAllChildren() const;
     void getAllChildren(std::vector<DocumentObject*> &, std::set<DocumentObject*> &) const;
 

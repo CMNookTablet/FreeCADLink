@@ -24,6 +24,7 @@
 #ifndef GUI_VIEWPROVIDER_DRAGGER_H
 #define GUI_VIEWPROVIDER_DRAGGER_H
 
+#include <App/DocumentObserver.h>
 #include "ViewProviderDocumentObject.h"
 
 class SoDragger;
@@ -90,6 +91,9 @@ private:
 
     ViewProvider *_linkDragger = nullptr;
     Base::Matrix4D dragOffset;
+
+    App::DocumentObjectT _linkArray;
+    int _linkArrayIndex = -1;
 };
 
 } // namespace Gui

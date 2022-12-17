@@ -374,6 +374,10 @@ public:
     bool next(bool canAbort = false);
     void setProgress(size_t);
     bool wasCanceled() const;
+private:
+    std::string strText;
+    size_t nProgress = 0;
+    size_t nTotalSteps = 0;
 };
 
 /** Access to the only SequencerBase instance */

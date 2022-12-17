@@ -89,6 +89,20 @@ void coinRemoveAllChildren(SoGroup *group) {
     group->touch();
 }
 
+bool isValidBBox(const SbBox3f &bbox)
+{
+    const auto &maxPt = bbox.getMax();
+    const auto &minPt = bbox.getMin();
+    if (maxPt[0] < minPt[0])
+        return false;
+    return !std::isnan(maxPt[0])
+        && !std::isnan(maxPt[1])
+        && !std::isnan(maxPt[2])
+        && !std::isnan(minPt[0])
+        && !std::isnan(minPt[1])
+        && !std::isnan(minPt[2]);
+}
+
 } // namespace Gui
 
 //**************************************************************************

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>321</width>
-    <height>509</height>
+    <height>402</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,7 +39,22 @@
     </layout>
    </item>
    <item>
-    <widget class="QListWidget" name="listWidgetReferences"/>
+    <widget class="QTreeWidget" name="treeWidgetReferences">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>150</height>
+      </size>
+     </property>
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
+    </widget>
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_2">
@@ -151,7 +166,7 @@
   <tabstop>checkIntersection</tabstop>
   <tabstop>checkReverse</tabstop>
   <tabstop>buttonRefAdd</tabstop>
-  <tabstop>listWidgetReferences</tabstop>
+  <tabstop>treeWidgetReferences</tabstop>
  </tabstops>
  <resources/>
  <connections/>

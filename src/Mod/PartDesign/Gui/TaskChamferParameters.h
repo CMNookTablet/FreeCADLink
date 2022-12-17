@@ -24,8 +24,12 @@
 #ifndef GUI_TASKVIEW_TaskChamferParameters_H
 #define GUI_TASKVIEW_TaskChamferParameters_H
 
+#include <QStandardItemModel>
+#include <QItemDelegate>
+
 #include "TaskDressUpParameters.h"
 #include "ViewProviderChamfer.h"
+#include <Gui/ExpressionBinding.h>
 
 class Ui_TaskChamferParameters;
 namespace PartDesign {
@@ -34,15 +38,32 @@ class Chamfer;
 
 namespace PartDesignGui {
 
+class ChamferInfoDelegate : public QItemDelegate
+{
+    Q_OBJECT
+
+public:
+    ChamferInfoDelegate(QObject *parent = 0);
+
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                          const QModelIndex &index) const;
+
+    void setEditorData(QWidget *editor, const QModelIndex &index) const;
+    void setModelData(QWidget *editor, QAbstractItemModel *model,
+                      const QModelIndex &index) const;
+};
+
 class TaskChamferParameters : public TaskDressUpParameters
 {
     Q_OBJECT
+    friend class ChamferInfoDelegate;
 
 public:
     TaskChamferParameters(ViewProviderDressUp *DressUpView, QWidget *parent=0);
     ~TaskChamferParameters();
 
     virtual void apply();
+    void setBinding(Gui::ExpressionBinding *binding, const QModelIndex &index);
 
 private Q_SLOTS:
     void onTypeChanged(int);
@@ -55,11 +76,22 @@ protected:
     void changeEvent(QEvent *e);
     virtual void refresh();
 
+    void removeItems();
+    void clearItems();
+    void updateItems(QTreeWidgetItem *);
+    void updateItem(QTreeWidgetItem *, int column);
+    void updateItem(QTreeWidgetItem *);
+    void setItem(QTreeWidgetItem *item, const Part::TopoShape::ChamferInfo &);
+
+    Part::TopoShape::ChamferInfo getChamferInfo(QTreeWidgetItem *);
+
     int getType(void) const;
     double getSize(void) const;
     double getSize2(void) const;
     double getAngle(void) const;
     bool getFlipDirection(void) const;
+    void onNewItem(QTreeWidgetItem *item);
+    
 
 private:
     void setUpUI(PartDesign::Chamfer* pcChamfer);

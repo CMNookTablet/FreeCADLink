@@ -38,7 +38,9 @@ class GuiExport DlgAddProperty : public QDialog
     Q_OBJECT
 
 public:
-    DlgAddProperty(QWidget *parent, std::unordered_set<App::PropertyContainer*> &&);
+    DlgAddProperty(QWidget *parent,
+                   std::unordered_set<App::PropertyContainer*> &&,
+                   const std::vector<Base::Type> &filters = {});
     ~DlgAddProperty();
 
     virtual void accept() override;

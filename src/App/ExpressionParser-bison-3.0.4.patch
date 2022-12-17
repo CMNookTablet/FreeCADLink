@@ -1,5 +1,5 @@
---- data/variant.hh     2015-08-05 09:05:30.000000000 +0200
-+++ ./variant.hh        2018-03-03 21:17:13.880113143 +0100
+--- a/data/variant.hh     2015-08-05 09:05:30.000000000 +0200
++++ b/data/variant.hh     2018-03-03 21:17:13.880113143 +0100
 @@ -100,11 +100,11 @@
  
      /// Construct and fill.
@@ -142,8 +142,8 @@
      , location (l)])[
    {}
  ]])
---- orig/c++.m4 2015-08-05 09:05:30.000000000 +0200
-+++ ./c++.m4    2018-03-03 21:08:36.253716197 +0100
+--- a/data/c++.m4   2015-08-05 09:05:30.000000000 +0200
++++ b/data/c++.m4   2018-03-03 21:08:36.253716197 +0100
 @@ -198,8 +198,9 @@
        /// Default constructor.
        basic_symbol ();
@@ -221,8 +221,8 @@
  
  ]b4_variant_if([[
    // Implementation of basic_symbol constructor for each type.
---- data/stack.hh	2018-10-29 12:51:51.009447676 +0800
-+++ ./stack.hh	2018-10-29 13:05:30.270269257 +0800
+--- a/data/stack.hh	2018-10-29 12:51:51.009447676 +0800
++++ b/data/stack.hh	2018-10-29 13:05:30.270269257 +0800
 @@ -18,10 +18,15 @@
  m4_pushdef([b4_copyright_years],
             [2002-2015])
@@ -258,8 +258,8 @@
        operator[](0).move (t);
      }
  
---- lalr1.cc.orig	2015-01-23 14:52:50.000000000 +0800
-+++ lalr1.cc	2018-11-05 20:18:45.958460451 +0800
+--- a/data/lalr1.cc	2015-01-23 14:52:50.000000000 +0800
++++ b/data/lalr1.cc	2018-11-05 20:18:45.958460451 +0800
 @@ -274,6 +274,7 @@
      void yy_destroy_ (const char* yymsg, basic_symbol<Base>& yysym) const;
  
@@ -304,3 +304,36 @@
  
  
    template <typename Base>
+Subject: Workaround change in glibc
+
+Temporary workaround to compile with glibc 2.28, which
+deprecated some constants
+
+Based on the workaround made for the tools/m4 package
+
+--- a/lib/stdio-impl.h
++++ b/lib/stdio-impl.h
+@@ -18,6 +18,12 @@
+    the same implementation of stdio extension API, except that some fields
+    have different naming conventions, or their access requires some casts.  */
+ 
++/* Glibc 2.28 made _IO_IN_BACKUP private.  For now, work around this
++   problem by defining it ourselves.  FIXME: Do not rely on glibc
++   internals.  */
++#if !defined _IO_IN_BACKUP && defined _IO_EOF_SEEN
++# define _IO_IN_BACKUP 0x100
++#endif
+ 
+ /* BSD stdio derived implementations.  */
+ 
+--- a/lib/fseterr.c
++++ b/lib/fseterr.c
+@@ -29,7 +29,7 @@
+   /* Most systems provide FILE as a struct and the necessary bitmask in
+      <stdio.h>, because they need it for implementing getc() and putc() as
+      fast macros.  */
+-#if defined _IO_ftrylockfile || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */
++#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */
+   fp->_flags |= _IO_ERR_SEEN;
+ #elif defined __sferror || defined __DragonFly__ /* FreeBSD, NetBSD, OpenBSD, DragonFly, Mac OS X, Cygwin */
+   fp_->_flags |= __SERR;

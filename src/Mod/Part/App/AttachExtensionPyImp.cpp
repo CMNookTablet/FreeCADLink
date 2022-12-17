@@ -71,6 +71,16 @@ Py::Object AttachExtensionPy::getAttacher(void) const
 
 }
 
+PyObject *AttachExtensionPy::initBaseProperties(PyObject *args)
+{
+    if (!PyArg_ParseTuple(args, ""))
+        return nullptr;
+    try {
+        getAttachExtensionPtr()->getInitedProperties(/*base*/true);
+    } PY_CATCH;
+    Py_Return;
+}
+
 PyObject *AttachExtensionPy::getCustomAttributes(const char* /*attr*/) const
 {
     return 0;

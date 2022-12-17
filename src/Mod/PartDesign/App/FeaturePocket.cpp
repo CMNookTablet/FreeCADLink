@@ -83,9 +83,11 @@ Pocket::Pocket()
 
     ADD_PROPERTY_TYPE(TaperAngle,(0.0), "Pocket", App::Prop_None, "Sets the angle of slope (draft) to apply to the sides. The angle is for outward taper; negative value yields inward tapering.");
     ADD_PROPERTY_TYPE(TaperAngleRev,(0.0), "Pocket", App::Prop_None, "Taper angle of reverse part of pocketing.");
-    ADD_PROPERTY_TYPE(InnerTaperAngle,(0.0), "Pocket", App::Prop_None, "Taper angle of inner holes.");
-    ADD_PROPERTY_TYPE(InnerTaperAngleRev,(0.0), "Pocket", App::Prop_None, "Taper angle of the reverse part for inner holes.");
-
+    ADD_PROPERTY_TYPE(TaperInnerAngle,(0.0), "Pocket", App::Prop_None, "Taper angle of inner holes.");
+    ADD_PROPERTY_TYPE(TaperInnerAngleRev,(0.0), "Pocket", App::Prop_None, "Taper angle of the reverse part for inner holes.");
+    ADD_PROPERTY_TYPE(AutoTaperInnerAngle,(true), "Pocket", App::Prop_None,
+            "Automatically set inner taper angle to the negative of (outer) taper angle.\n"
+            "If false, then inner taper angle can be set independent of taper angle.");
     ADD_PROPERTY_TYPE(UsePipeForDraft,(false), "Pocket", App::Prop_None, "Use pipe (i.e. sweep) operation to create draft angles.");
     ADD_PROPERTY_TYPE(CheckUpToFaceLimits,(true), "Pocket", App::Prop_None,
             "When using 'UpToXXXX' method, check whether the sketch shape is within\n"
@@ -149,8 +151,7 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
     SketchVector *= -1;
 
     try {
-        this->positionByPrevious();
-        TopLoc_Location invObjLoc = this->getLocation().Inverted();
+        auto invObjLoc = this->positionByPrevious();
 
         base.move(invObjLoc);
 
@@ -164,8 +165,9 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
         TopoShape prism(0,getDocument()->getStringHasher());
 
         if (method == "UpToFirst" || method == "UpToFace") {
-            if (base.isNull())
-                return new App::DocumentObjectExecReturn("Pocket: Extruding up to a face is only possible if the sketch is located on a face");
+            TopoShape sketchBase(base);
+            if (sketchBase.isNull())
+                sketchBase = getBaseShape(true, true);
 
             // Note: This will return an unlimited planar face if support is a datum plane
             TopoShape supportface = getSupportFace();
@@ -180,7 +182,7 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
                 getUpToFaceFromLinkSub(upToFace, UpToFace);
                 upToFace.move(invObjLoc);
             }
-            getUpToFace(upToFace, base, supportface, profileshape, method, dir);
+            getUpToFace(upToFace, sketchBase, supportface, profileshape, method, dir);
             addOffsetToFace(upToFace, dir, Offset.getValue());
 
             // BRepFeat_MakePrism(..., 2, 1) in combination with PerForm(upToFace) is buggy when the
@@ -195,8 +197,9 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
             profileshape.reTagElementMap(-getID(), getDocument()->getStringHasher());
 
             if (_Version.getValue() < 1) {
-                auto mode = TopoShape::PrismMode::CutFromBase;
-                prism = base.makEPrism(profileshape, supportface, upToFace,
+                auto mode = base.isNull() ? TopoShape::PrismMode::None
+                                          : TopoShape::PrismMode::CutFromBase;
+                prism = sketchBase.makEPrismUntil(profileshape, supportface, upToFace,
                         dir, mode, CheckUpToFaceLimits.getValue());
                 // DO NOT assign id to the generated prism, because this prism is
                 // actually the final result. We obtain the subtracted shape by cut
@@ -209,8 +212,10 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
                 // And the really expensive way to get the SubShape...
                 try {
                     TopoShape result(0,getDocument()->getStringHasher());
-                    result.makECut({base,prism});
-                    // FIXME: In some cases this affects the Shape property: It is set to the same shape as the SubShape!!!!
+                    if (base.isNull())
+                        result = prism;
+                    else
+                        result.makECut({sketchBase,prism});
                     result = refineShapeIfActive(result);
                     this->AddSubShape.setValue(result);
                 }catch(Standard_Failure &) {
@@ -220,9 +225,9 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
                 if (NewSolid.getValue())
                     prism = this->AddSubShape.getShape();
                 else if (getAddSubType() == Intersecting)
-                    prism.makEShape(TOPOP_COMMON, {base, this->AddSubShape.getShape()});
+                    prism.makEBoolean(Part::OpCodes::Common, {sketchBase, this->AddSubShape.getShape()});
                 else if (getAddSubType() == Additive)
-                    prism = base.makEFuse(this->AddSubShape.getShape());
+                    prism = sketchBase.makEFuse(this->AddSubShape.getShape());
                 else
                     prism = refineShapeIfActive(prism);
 
@@ -230,7 +235,7 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
                 return App::DocumentObject::StdReturn;
             }
 
-            prism = base.makEPrism(profileshape, supportface, upToFace,
+            prism = sketchBase.makEPrismUntil(profileshape, supportface, upToFace,
                     dir, TopoShape::PrismMode::None, CheckUpToFaceLimits.getValue());
 
         } else {
@@ -239,8 +244,8 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
             params.solid = true;
             params.taperAngleFwd = this->TaperAngle.getValue() * M_PI / 180.0;
             params.taperAngleRev = this->TaperAngleRev.getValue() * M_PI / 180.0;
-            params.innerTaperAngleFwd = this->InnerTaperAngle.getValue() * M_PI / 180.0;
-            params.innerTaperAngleRev = this->InnerTaperAngleRev.getValue() * M_PI / 180.0;
+            params.innerTaperAngleFwd = this->TaperInnerAngle.getValue() * M_PI / 180.0;
+            params.innerTaperAngleRev = this->TaperInnerAngleRev.getValue() * M_PI / 180.0;
             if (L2 == 0.0 && Midplane.getValue()) {
                 params.lengthFwd = L/2;
                 params.lengthRev = L/2;
@@ -295,15 +300,15 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
                 const char *maker;
                 switch (getAddSubType()) {
                 case Additive:
-                    maker = TOPOP_FUSE;
+                    maker = Part::OpCodes::Fuse;
                     break;
                 case Intersecting:
-                    maker = TOPOP_COMMON;
+                    maker = Part::OpCodes::Common;
                     break;
                 default:
-                    maker = TOPOP_CUT;
+                    maker = Part::OpCodes::Cut;
                 }
-                result.makEShape(maker, {base,prism});
+                result.makEBoolean(maker, {base,prism});
             }
         }catch(Standard_Failure &){
             return new App::DocumentObjectExecReturn("Pocket: Cut out of base feature failed");
@@ -337,7 +342,7 @@ App::DocumentObjectExecReturn *Pocket::execute(void)
 void Pocket::setupObject()
 {
     ProfileBased::setupObject();
-    UsePipeForDraft.setValue(Part::PartParams::UsePipeForExtrusionDraft());
+    UsePipeForDraft.setValue(Part::PartParams::getUsePipeForExtrusionDraft());
     _Version.setValue(1);
 }
 
@@ -348,3 +353,40 @@ void Pocket::setPauseRecompute(bool enable)
         return;
     ProfileBased::setPauseRecompute(enable);
 }
+
+void Pocket::handleChangedPropertyName(Base::XMLReader &reader, const char * TypeName, const char *Name)
+{
+    if (strcmp(TypeName, App::PropertyAngle::getClassTypeId().getName()) == 0) {
+        // Deliberately change 'InnerTaperAngle' to TaperAngleInner to identify
+        // document from Link branch
+        if (strcmp(Name, "InnerTaperAngle")) {
+            AutoTaperInnerAngle.setValue(false);
+            TaperInnerAngle.Restore(reader);
+        } else if (strcmp(Name, "InnerTaperAngleRev")) {
+            AutoTaperInnerAngle.setValue(false);
+            TaperInnerAngleRev.Restore(reader);
+        }
+    }
+    ProfileBased::handleChangedPropertyName(reader, TypeName, Name);
+}
+
+void Pocket::onChanged(const App::Property *prop)
+{
+    if (prop == &TaperAngle
+            || prop == &TaperAngleRev
+            || prop == &AutoTaperInnerAngle)
+    {
+        if (AutoTaperInnerAngle.getValue()) {
+            TaperAngleRev.setStatus(App::Property::ReadOnly, true);
+            TaperAngle.setStatus(App::Property::ReadOnly, true);
+            TaperInnerAngle.setValue(-TaperAngle.getValue());
+            TaperInnerAngleRev.setValue(-TaperAngleRev.getValue());
+        }
+        else {
+            TaperAngleRev.setStatus(App::Property::ReadOnly, false);
+            TaperAngle.setStatus(App::Property::ReadOnly, false);
+        }
+    }
+    ProfileBased::onChanged(prop);
+}
+

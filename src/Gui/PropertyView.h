@@ -85,15 +85,15 @@ protected:
 private:
     void onSelectionChanged(const SelectionChanges& msg) override;
     void slotChangePropertyData(const App::Property&);
-    void slotChangePropertyView(const Gui::ViewProvider&, const App::Property&);
+    void slotChangePropertyView(const App::Property&);
     void slotAppendDynamicProperty(const App::Property&);
     void slotRemoveDynamicProperty(const App::Property&);
     void slotChangePropertyEditor(const App::Document&, const App::Property&);
     void slotRollback();
     void slotActiveDocument(const Gui::Document&);
+    void slotActivateView(const Gui::MDIView*);
     void slotDeleteDocument(const Gui::Document&);
-    void slotDeletedViewObject(const Gui::ViewProvider&);
-    void slotDeletedObject(const App::DocumentObject&);
+    void slotDeletedContainer(const App::PropertyContainer&);
 
     void checkEnable(const char *doc = 0);
     void applyParams();
@@ -115,6 +115,9 @@ private:
     Connection connectDelViewObject;
     Connection connectBeforeRecompute;
     Connection connectChangedDocument;
+    Connection connectActivateView;
+    Connection connectChangedView;
+    Connection connectDetachView;
     Connection connectParamChange;
     ParameterGrp::handle hParam;
 

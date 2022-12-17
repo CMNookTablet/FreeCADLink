@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>323</width>
-    <height>642</height>
+    <height>614</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="1" column="1">
@@ -320,125 +320,131 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</stri
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_8">
-     <item>
-      <widget class="QLabel" name="labelTaperAngle">
-       <property name="text">
-        <string>Taper angle</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="Gui::PrefQuantitySpinBox" name="taperAngleEdit" native="true">
-       <property name="keyboardTracking" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="unit" stdset="0">
-        <string>deg</string>
-       </property>
-       <property name="maximum" stdset="0">
-        <double>360.000000000000000</double>
-       </property>
-       <property name="singleStep" stdset="0">
-        <double>10.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_9">
-     <item>
-      <widget class="QLabel" name="labelTaperAngle2">
-       <property name="text">
-        <string>2nd taper angle</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="Gui::PrefQuantitySpinBox" name="taperAngleEdit2" native="true">
-       <property name="keyboardTracking" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="unit" stdset="0">
-        <string>deg</string>
-       </property>
-       <property name="maximum" stdset="0">
-        <double>360.000000000000000</double>
-       </property>
-       <property name="singleStep" stdset="0">
-        <double>10.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_13">
-     <item>
-      <widget class="QLabel" name="labelInnerTaperAngle">
-       <property name="text">
-        <string>Inner taper angle</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="Gui::PrefQuantitySpinBox" name="innerTaperAngleEdit" native="true">
-       <property name="keyboardTracking" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="unit" stdset="0">
-        <string>deg</string>
-       </property>
-       <property name="maximum" stdset="0">
-        <double>360.000000000000000</double>
-       </property>
-       <property name="singleStep" stdset="0">
-        <double>10.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_12">
-     <item>
-      <widget class="QLabel" name="labelInnerTaperAngle2">
-       <property name="text">
-        <string>2nd inner taper angle</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="Gui::PrefQuantitySpinBox" name="innerTaperAngleEdit2" native="true">
-       <property name="keyboardTracking" stdset="0">
-        <bool>false</bool>
-       </property>
-       <property name="unit" stdset="0">
-        <string>deg</string>
-       </property>
-       <property name="maximum" stdset="0">
-        <double>360.000000000000000</double>
-       </property>
-       <property name="singleStep" stdset="0">
-        <double>10.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Taper</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QLabel" name="labelTaperAngle">
+          <property name="text">
+           <string>Angle</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Gui::PrefQuantitySpinBox" name="taperAngleEdit" native="true">
+          <property name="keyboardTracking" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="unit" stdset="0">
+           <string>deg</string>
+          </property>
+          <property name="maximum" stdset="0">
+           <double>360.000000000000000</double>
+          </property>
+          <property name="singleStep" stdset="0">
+           <double>10.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <widget class="QLabel" name="labelTaperAngle2">
+          <property name="text">
+           <string>2nd Angle</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Gui::PrefQuantitySpinBox" name="taperAngleEdit2" native="true">
+          <property name="keyboardTracking" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="unit" stdset="0">
+           <string>deg</string>
+          </property>
+          <property name="maximum" stdset="0">
+           <double>360.000000000000000</double>
+          </property>
+          <property name="singleStep" stdset="0">
+           <double>10.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="autoInnerTaperAngle">
+        <property name="text">
+         <string>Auto inner angle</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_13">
+        <item>
+         <widget class="QLabel" name="labelInnerTaperAngle">
+          <property name="text">
+           <string>Inner angle</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Gui::PrefQuantitySpinBox" name="innerTaperAngleEdit" native="true">
+          <property name="keyboardTracking" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="unit" stdset="0">
+           <string>deg</string>
+          </property>
+          <property name="maximum" stdset="0">
+           <double>360.000000000000000</double>
+          </property>
+          <property name="singleStep" stdset="0">
+           <double>10.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <item>
+         <widget class="QLabel" name="labelInnerTaperAngle2">
+          <property name="text">
+           <string>2nd inner angle</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Gui::PrefQuantitySpinBox" name="innerTaperAngleEdit2" native="true">
+          <property name="keyboardTracking" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="unit" stdset="0">
+           <string>deg</string>
+          </property>
+          <property name="maximum" stdset="0">
+           <double>360.000000000000000</double>
+          </property>
+          <property name="singleStep" stdset="0">
+           <double>10.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>

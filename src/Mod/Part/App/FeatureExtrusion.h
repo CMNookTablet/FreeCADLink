@@ -52,8 +52,9 @@ public:
     App::PropertyBool Symmetric;
     App::PropertyAngle TaperAngle;
     App::PropertyAngle TaperAngleRev;
-    App::PropertyAngle InnerTaperAngle;
-    App::PropertyAngle InnerTaperAngleRev;
+    App::PropertyAngle TaperInnerAngle;
+    App::PropertyAngle TaperInnerAngleRev;
+    App::PropertyBool AutoTaperInnerAngle;
     App::PropertyString FaceMakerClass;
     App::PropertyBool UsePipeForDraft;
     App::PropertyBool Linearize;
@@ -88,6 +89,8 @@ public:
     const char* getViewProviderName(void) const override {
         return "PartGui::ViewProviderExtrusion";
     }
+    void handleChangedPropertyName(Base::XMLReader &reader, const char * TypeName, const char *Name) override;
+    void onChanged(const App::Property *) override;
     //@}
 
     /**

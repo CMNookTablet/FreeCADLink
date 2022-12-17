@@ -80,9 +80,6 @@ public:
     ///unify children visuals
     virtual void onChanged(const App::Property* prop) override;
 
-    /// Update the sizes of origin and datums
-    virtual void updateOriginSize () override;
-    
     /**
      * Return the bounding box of visible features
      * @note datums are counted as their base point only

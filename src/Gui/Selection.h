@@ -31,8 +31,15 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <set>
 #include <deque>
 #include <boost_signals2.hpp>
+
+#include <boost/multi_index_container.hpp>
+#include <boost/multi_index/ordered_index.hpp>
+#include <boost/multi_index/sequenced_index.hpp>
+#include <boost/multi_index/member.hpp>
+
 #include <CXX/Objects.hxx>
 
 #include <Base/Observer.h>
@@ -51,6 +58,7 @@ namespace App
 
 namespace Gui
 {
+    namespace bmi = boost::multi_index;
 
     class SelectionFilter;
 
@@ -398,7 +406,9 @@ public:
     /// Add to selection
     bool addSelection(const SelectionObject&, bool clearPreSelect=true);
     /// Add to selection with several sub-elements
-    bool addSelections(const char* pDocName, const char* pObjectName, const std::vector<std::string>& pSubNames);
+    int addSelections(const char* pDocName, const char* pObjectName, const std::vector<std::string>& pSubNames);
+    /// Add multiple selections
+    int addSelections(const std::vector<App::SubObjectT> &objs);
     /// Update a selection
     bool updateSelection(bool show, const char* pDocName, const char* pObjectName=0, const char* pSubName=0);
     /// Remove from selection
@@ -412,7 +422,7 @@ public:
                             objT.getSubName().c_str());
     }
     /// Set the selection for a document
-    void setSelection(const char* pDocName, const std::vector<App::DocumentObject*>&);
+    void setSelection(const std::vector<App::DocumentObject*>&);
     /// Clear the selection of document \a pDocName. If the document name is not given the selection of the active document is cleared.
     void clearSelection(const char* pDocName=0, bool clearPreSelect=true);
     /// Clear the selection of all documents
@@ -471,7 +481,7 @@ public:
     int setPreselect(const char* pDocName, const char* pObjectName, const char* pSubName,
                      float x=0.f, float y=0.f, float z=0.f, int signal=0, bool msg=false);
     /// remove the present preselection
-    void rmvPreselect();
+    void rmvPreselect(bool restoreCursor = true);
     /// sets different coords for the preselection
     void setPreselectCoord(float x, float y, float z);
     /// returns the present preselection
@@ -480,6 +490,7 @@ public:
     void addSelectionGate(Gui::SelectionGate *gate, int resolve = 1);
     /// remove the active SelectionGate
     void rmvSelectionGate(void);
+    SelectionGate *currentSelectionGate() const {return ActiveGate;}
 
     int disableCommandLog();
     int enableCommandLog(bool silent=false);
@@ -732,6 +743,8 @@ public:
     const std::string &getPreselectionText() const;
     void setPreselectionText(const std::string &msg);
 
+    void flushNotifications();
+
     // Check if obj can be considered as a top level object
     static void checkTopParent(App::DocumentObject *&obj, std::string &subname);
 
@@ -744,6 +757,7 @@ public:
 
 protected:
     static PyObject *sAddSelection        (PyObject *self,PyObject *args);
+    static PyObject *sAddSelections       (PyObject *self,PyObject *args);
     static PyObject *sUpdateSelection     (PyObject *self,PyObject *args);
     static PyObject *sRemoveSelection     (PyObject *self,PyObject *args);
     static PyObject *sClearSelection      (PyObject *self,PyObject *args);
@@ -796,6 +810,8 @@ protected:
 
     std::deque<SelectionChanges> NotificationQueue;
     bool Notifying = false;
+    int PendingAddSelection = 0;
+    int NotificationRecursion = 0;
 
     void notify(SelectionChanges &&Chng);
     void notify(const SelectionChanges &Chng) { notify(SelectionChanges(Chng)); }
@@ -812,28 +828,54 @@ protected:
         float x = 0.0f;
         float y = 0.0f;
         float z = 0.0f;
-        bool logged = false;
+        mutable bool logged = false;
 
         std::pair<std::string,std::string> elementName;
         App::DocumentObject* pResolvedObject = 0;
 
-        void log(bool remove=false, bool clearPreselect=true);
-    };
-    mutable std::list<_SelObj> _SelList;
+        void log(bool remove=false, bool clearPreselect=true) const;
 
-    mutable std::list<_SelObj> _PickedList;
+        bool operator<(const _SelObj &other) const {
+            if (this->pObject < other.pObject)
+                return true;
+            if (this->pObject > other.pObject)
+                return false;
+            return SubName < other.SubName;
+        }
+    };
+
+    typedef bmi::multi_index_container<
+        _SelObj,
+        bmi::indexed_by<
+            bmi::sequenced<>,
+            bmi::ordered_unique<bmi::identity<_SelObj>>,
+            bmi::ordered_non_unique<
+                bmi::member<_SelObj, App::DocumentObject*, &_SelObj::pResolvedObject>>,
+            bmi::ordered_non_unique<
+                bmi::member<_SelObj, App::DocumentObject*, &_SelObj::pObject>>
+        >
+    > SelContainer;
+
+    mutable SelContainer _SelList;
+
+    mutable std::vector<_SelObj> _PickedList;
     bool _needPickedList = false;
 
-    typedef std::set<App::SubObjectT> SelStackItem;
+    typedef std::vector<App::SubObjectT> SelStackItem;
     std::deque<SelStackItem> _SelStackBack;
     std::deque<SelStackItem> _SelStackForward;
 
     int checkSelection(const char *pDocName, const char *pObjectName,
-            const char *pSubName,int resolve, _SelObj &sel, const std::list<_SelObj> *selList=0) const;
+            const char *pSubName,int resolve, _SelObj &sel, const SelContainer *selList=0) const;
 
-    std::vector<Gui::SelectionObject> getObjectList(const char* pDocName,Base::Type typeId, std::list<_SelObj> &objs, int resolve, bool single=false) const;
+    template<class T>
+    std::vector<SelectionObject> getObjectList(const char* pDocName,
+                                               Base::Type typeId,
+                                               T &objList,
+                                               int resolve,
+                                               bool single=false) const;
 
-    static App::DocumentObject *getObjectOfType(_SelObj &sel, Base::Type type,
+    static App::DocumentObject *getObjectOfType(const _SelObj &sel, Base::Type type,
             int resolve, const char **subelement=0);
 
     static SelectionSingleton* _pcSingleton;
@@ -893,6 +935,20 @@ class GuiExport SelectionNoTopParentCheck {
 public:
     SelectionNoTopParentCheck();
     ~SelectionNoTopParentCheck();
+    static bool enabled();
+};
+
+/** Helper class to pause selection notification
+ *
+ * The notification will get accumulated up to a limit controlled by parameter
+ * Preferences/View/MaxSelectionNotification. Those that exceeds the limit will
+ * be replaced by a single notification of type SelectionChanges::SetSelection
+ * per document.
+ */
+class GuiExport SelectionPauseNotification {
+public:
+    SelectionPauseNotification();
+    ~SelectionPauseNotification();
     static bool enabled();
 };
 

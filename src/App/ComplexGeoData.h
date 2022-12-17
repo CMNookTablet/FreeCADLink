@@ -437,6 +437,8 @@ public:
     unsigned int getMemSize (void) const;
     void setPersistenceFileName(const char *name) const;
     virtual void beforeSave() const;
+    bool isRestoreFailed() const { return _restoreFailed; }
+    void resetRestoreFailure() const { _restoreFailed = true; }
     //@}
 
     virtual bool isSame(const ComplexGeoData &other) const = 0;
@@ -476,6 +478,7 @@ protected:
 
 protected:
     mutable std::string _PersistenceName;
+    mutable bool _restoreFailed = false;
 
 private:
     ElementMapPtr _ElementMap;

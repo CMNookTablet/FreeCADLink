@@ -27,12 +27,12 @@
 # include <QAction>
 # include <QFontMetrics>
 # include <QKeyEvent>
-# include <QListWidget>
 # include <QMessageBox>
 #endif
 
 #include "ui_TaskChamferParameters.h"
 #include "TaskChamferParameters.h"
+#include "Utils.h"
 #include <App/Application.h>
 #include <App/Document.h>
 #include <Gui/Application.h>
@@ -54,6 +54,93 @@
 using namespace PartDesignGui;
 using namespace Gui;
 
+ChamferInfoDelegate::ChamferInfoDelegate(QObject *parent) : QItemDelegate(parent)
+{
+}
+
+QWidget *ChamferInfoDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &/* option */,
+                                             const QModelIndex & index) const
+{
+    if (index.column() < 1 || index.column() > 4)
+        return nullptr;
+    auto owner = qobject_cast<TaskChamferParameters*>(this->parent());
+    if (!owner)
+        return nullptr;
+
+    if (index.column() == 4) {
+        auto editor = new QCheckBox(parent);
+        QObject::connect(editor, &QCheckBox::toggled, this,
+                [&](bool) {const_cast<ChamferInfoDelegate*>(this)->commitData(editor);});
+        return editor;
+    }
+    Gui::QuantitySpinBox *editor = new Gui::QuantitySpinBox(parent);
+    editor->setMinimum(0.0);
+    if (index.column() < 3) {
+        editor->setUnit(Base::Unit::Length);
+        editor->setMaximum(INT_MAX);
+        editor->setSingleStep(0.1);
+    }
+    else if (index.column() == 3) {
+        editor->setUnit(Base::Unit::Angle);
+        editor->setSingleStep(1.0);
+        editor->setMaximum(180.0);
+    }
+
+    owner->setBinding(editor, index);
+    return editor;
+}
+
+void ChamferInfoDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
+{
+    auto owner = qobject_cast<TaskChamferParameters*>(this->parent());
+    if (!owner)
+        return;
+
+    auto data = index.model()->data(index, Qt::UserRole);
+
+    if (index.column() == 4) {
+        QCheckBox *checkBox = static_cast<QCheckBox*>(editor);
+        QSignalBlocker blocker(checkBox);
+        checkBox->setChecked(data.isValid() ? data.toBool() : owner->getFlipDirection());
+        return;
+    }
+
+    double value;
+    if (data.isValid())
+        value = data.toDouble();
+    else {
+        switch(index.column()) {
+        case 1:
+            value = owner->getSize();
+            break;
+        case 2:
+            value = owner->getType() == 1 ? owner->getSize2() : 0.0;
+            break;
+        case 3:
+            value = owner->getType() == 2 ? owner->getAngle() : 0.0;
+            break;
+        }
+    }
+
+    Gui::QuantitySpinBox *spinBox = static_cast<Gui::QuantitySpinBox*>(editor);
+    spinBox->setValue(value);
+}
+
+void ChamferInfoDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
+                                        const QModelIndex &index) const
+{
+    if (index.column() == 4) {
+        model->setData(index, static_cast<QCheckBox*>(editor)->isChecked(), Qt::UserRole);
+        return;
+    }
+    Gui::QuantitySpinBox *spinBox = static_cast<Gui::QuantitySpinBox*>(editor);
+    spinBox->interpretText();
+    Base::Quantity value = spinBox->value();
+    model->setData(index, value.getUserString(), Qt::DisplayRole);
+    model->setData(index, value.getValue(), Qt::UserRole);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
 /* TRANSLATOR PartDesignGui::TaskChamferParameters */
 
 TaskChamferParameters::TaskChamferParameters(ViewProviderDressUp *DressUpView,QWidget *parent)
@@ -83,7 +170,31 @@ TaskChamferParameters::TaskChamferParameters(ViewProviderDressUp *DressUpView,QW
     connect(ui->flipDirection, SIGNAL(toggled(bool)),
         this, SLOT(onFlipDirection(bool)));
 
-    setup(ui->message, ui->listWidgetReferences, ui->buttonRefAdd);
+    setup(ui->message, ui->treeWidgetReferences, ui->buttonRefAdd);
+
+    ui->treeWidgetReferences->setItemDelegate(new ChamferInfoDelegate(this));
+
+    QObject::connect(ui->btnClear, &QPushButton::clicked, [this](){clearItems();});
+    QObject::connect(ui->treeWidgetReferences, &QTreeWidget::itemChanged,
+        [this](QTreeWidgetItem *item, int column) { updateItem(item, column); });
+
+    static const char *_ParamPath = "User parameter:BaseApp/Preferences/General/Widgets/TaskChamferParameters";
+    auto hParam = App::GetApplication().GetParameterGroupByPath(_ParamPath);
+    for (int i=0; i<ui->treeWidgetReferences->header()->count(); ++i) {
+        std::string key("ColumnSize");
+        key += std::to_string(i+1);
+        if (auto size = hParam->GetUnsigned(key.c_str(),0))
+            ui->treeWidgetReferences->header()->resizeSection(i, size);
+    }
+
+    QObject::connect(ui->treeWidgetReferences->header(), &QHeaderView::sectionResized,
+        [hParam](int idx, int, int newSize) {
+            std::string key("ColumnSize");
+            key += std::to_string(idx+1);
+            hParam->SetUnsigned(key.c_str(), newSize);
+        });
+
+    refresh();
 }
 
 void TaskChamferParameters::setUpUI(PartDesign::Chamfer* pcChamfer)
@@ -125,6 +236,23 @@ void TaskChamferParameters::setUpUI(PartDesign::Chamfer* pcChamfer)
     ui->angleLabel->setMinimumWidth(minWidth);
 }
 
+void TaskChamferParameters::setBinding(Gui::ExpressionBinding *binding,
+                                      const QModelIndex &index)
+{
+    if (!DressUpView || !index.isValid())
+        return;
+    auto item = static_cast<QTreeWidgetItem*>(index.internalPointer());
+    if (!item)
+        return;
+    PartDesign::Chamfer* pcChamfer = static_cast<PartDesign::Chamfer*>(DressUpView->getObject());
+    App::ObjectIdentifier path(pcChamfer->ChamferInfo);
+    path << App::ObjectIdentifier::SimpleComponent(std::string(getGeometryItemText(item).constData()))
+         << App::ObjectIdentifier::SimpleComponent(index.column()==1 ? "Size" : 
+                                                   (index.column()==2 ? "Size2" : 
+                                                    (index.column()==3 ? "Angle" : "Flip")));
+    binding->bind(path);
+}
+
 void TaskChamferParameters::refresh()
 {
     if(!DressUpView)
@@ -159,6 +287,132 @@ void TaskChamferParameters::refresh()
         QSignalBlocker blocker(ui->chamferAngle);
         ui->chamferAngle->setValue(pcChamfer->Angle.getValue());
     }
+
+    QSignalBlocker blocker(ui->treeWidgetReferences);
+    for (int i=0; i<ui->treeWidgetReferences->topLevelItemCount(); ++i) {
+        auto item = ui->treeWidgetReferences->topLevelItem(i);
+        Part::TopoShape::ChamferInfo info;
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
+        if (pcChamfer->ChamferInfo.getValue(getGeometryItemText(item).constData(), info)) {
+            setItem(item, info);
+        }
+    }
+}
+
+void TaskChamferParameters::onNewItem(QTreeWidgetItem *item)
+{
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
+}
+
+Part::TopoShape::ChamferInfo TaskChamferParameters::getChamferInfo(QTreeWidgetItem *item)
+{
+    Part::TopoShape::ChamferInfo info;
+    QVariant data = item->data(1, Qt::UserRole);
+    info.size = data.isValid() ? data.toDouble() : getSize();
+    data = item->data(2, Qt::UserRole);
+    info.size2 = data.isValid() ? data.toDouble() : (getType()==1 ? getSize2() : 0.0);
+    data = item->data(3, Qt::UserRole);
+    info.angle = data.isValid() ? data.toDouble() : (getType()==2 ? getAngle() : 0.0);
+    data = item->data(4, Qt::UserRole);
+    info.flip = data.isValid() ? data.toBool() : getFlipDirection();
+    return info;
+}
+
+void TaskChamferParameters::updateItem(QTreeWidgetItem *item, int column)
+{
+    if (column<1 || column>4)
+        return;
+    QSignalBlocker blocker(ui->treeWidgetReferences);
+    auto info = getChamferInfo(item);
+    if (column == 3 && info.angle > 0.0) {
+        if (info.size2 != 0.0) {
+            info.size2 = 0.0;
+            QSignalBlocker block(ui->treeWidgetReferences);
+            item->setData(2, Qt::UserRole, 0.0);
+        }
+    } else if (column == 2 && info.size2 > 0.0) {
+        if (info.angle != 0.0) {
+            info.angle = 0.0;
+            QSignalBlocker block(ui->treeWidgetReferences);
+            item->setData(3, Qt::UserRole, 0.0);
+        }
+    }
+    setItem(item, info);
+    updateItem(item);
+}
+
+void TaskChamferParameters::updateItem(QTreeWidgetItem *item)
+{
+    if(!DressUpView)
+        return;
+    setupTransaction();
+    PartDesign::Chamfer* pcChamfer = static_cast<PartDesign::Chamfer*>(DressUpView->getObject());
+    if (item->data(1, Qt::UserRole).isValid()) {
+        Part::TopoShape::ChamferInfo info;
+        info.size = item->data(1, Qt::UserRole).toDouble(),
+        info.size2 = item->data(2, Qt::UserRole).toDouble(),
+        info.angle = item->data(3, Qt::UserRole).toDouble(),
+        info.flip = item->data(4, Qt::UserRole).toBool();
+        pcChamfer->ChamferInfo.setValue(getGeometryItemText(item).constData(), info);
+    }
+    else
+        pcChamfer->ChamferInfo.removeValue(getGeometryItemText(item).constData());
+    recompute();
+}
+
+void TaskChamferParameters::clearItems()
+{
+    if(!DressUpView)
+        return;
+    setupTransaction();
+    auto items = ui->treeWidgetReferences->selectedItems();
+    if (items.isEmpty()) {
+        for (int i=0; i<ui->treeWidgetReferences->topLevelItemCount(); ++i)
+            items.append(ui->treeWidgetReferences->topLevelItem(i));
+    }
+    PartDesign::Chamfer* pcChamfer = static_cast<PartDesign::Chamfer*>(DressUpView->getObject());
+    for (auto item : ui->treeWidgetReferences->selectedItems()) {
+        for (int i=1; i<=4; ++i) {
+            ui->treeWidgetReferences->closePersistentEditor(item, 4);
+            item->setData(i, Qt::UserRole, QVariant());
+            item->setText(i, QString());
+        }
+    }
+    pcChamfer->ChamferInfo.setValue();
+    recompute();
+}
+
+void TaskChamferParameters::setItem(QTreeWidgetItem *item, const Part::TopoShape::ChamferInfo &info)
+{
+    if (!DressUpView)
+        return;
+    PartDesign::Chamfer* pcChamfer = static_cast<PartDesign::Chamfer*>(DressUpView->getObject());
+    QSignalBlocker blocker(ui->treeWidgetReferences);
+
+    App::ObjectIdentifier path(pcChamfer->ChamferInfo);
+    path << App::ObjectIdentifier::SimpleComponent(std::string(getGeometryItemText(item).constData()));
+    auto linkColor = QVariant::fromValue(QApplication::palette().color(QPalette::Link));
+
+    auto setupItem = [&](const char *key, int index, const Base::Quantity &q, bool noText) {
+        if (auto expr = pcChamfer->getExpression(App::ObjectIdentifier(path)
+                    << App::ObjectIdentifier::SimpleComponent(key)).expression) {
+            item->setData(index, Qt::ToolTipRole, QString::fromUtf8(expr->toString().c_str()));
+            item->setData(index, Qt::ForegroundRole, linkColor);
+        }
+        else {
+            item->setData(index, Qt::ForegroundRole, QVariant());
+            item->setData(index, Qt::ToolTipRole, QVariant());
+        }
+        item->setData(index, Qt::UserRole, q.getValue());
+        item->setText(index, noText ? QString() : q.getUserString());
+    };
+    setupItem("Size", 1, Base::Quantity(info.size, Base::Unit::Length), false);
+    setupItem("Size2", 2, Base::Quantity(info.size2, Base::Unit::Length), info.size2==0.0);
+    setupItem("Angle", 3, Base::Quantity(info.angle, Base::Unit::Angle), info.angle==0.0);
+    item->setData(4, Qt::UserRole, info.flip);
+
+    if (!ui->treeWidgetReferences->isPersistentEditorOpen(item, 4))
+        ui->treeWidgetReferences->openPersistentEditor(item, 4);
 }
 
 void TaskChamferParameters::onTypeChanged(int index)

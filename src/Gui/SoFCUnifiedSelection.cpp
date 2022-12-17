@@ -215,6 +215,8 @@ public:
         return master->colorSelection.getValue().getPackedValue(t);
     }
 
+    bool checkSelection(SelectionChanges::MsgType selType, const App::SubObjectT &);
+
     void clearHighlight() {
         if(preselTimer.isScheduled())
             preselTimer.unschedule();
@@ -568,7 +570,6 @@ SoFCUnifiedSelection::Private::getPickedInfoOnTop(std::vector<PickedInfo> &ret,
     tmpPath.ref();
     tmpPath.truncate(0);
     if (useRenderer()) {
-        const auto & paths = this->manager.getSelectionPaths();
         tmpPath.append(pcViewer->getRootPath());
         tmpPath.append(master);
         int pathLength = tmpPath.getLength();
@@ -585,6 +586,7 @@ SoFCUnifiedSelection::Private::getPickedInfoOnTop(std::vector<PickedInfo> &ret,
                 tmpPath.truncate(pathLength);
             }
         }
+        const auto & paths = this->manager.getSelectionPaths();
         for (auto it=paths.lower_bound(1); it!=paths.end(); ++it) {
             if (!it->second || !it->second->getLength())
                 continue;
@@ -643,7 +645,8 @@ SoFCUnifiedSelection::Private::getPickedList(const SbVec2s &pos,
     SoPickStyleElement::set(this->rayPickAction.getState(),
             (!this->rayPickAction.pickBackFace() && singlePick) ?
                 SoPickStyleElement::SHAPE_FRONTFACES : SoPickStyleElement::SHAPE);
-    SoOverrideElement::setPickStyleOverride(this->rayPickAction.getState(),0,true);
+    if (!useRenderer())
+        SoOverrideElement::setPickStyleOverride(this->rayPickAction.getState(),0,true);
 
     SoFCDisplayModeElement::set(this->rayPickAction.getState(),0,SbName::empty(),false);
 
@@ -867,14 +870,17 @@ void SoFCUnifiedSelection::Private::applyOverrideMode(SoState * state) const
         else if (mode == DisplayModeHiddenLine) {
             hiddenline = true;
             mode = DisplayModeFlatLines;
-            shading = ViewParams::getHiddenLineShaded();
-            if (ViewParams::getHiddenLineWidth() >= 1.0) {
-                SoLineWidthElement::set(state, master, ViewParams::getHiddenLineWidth());
-                SoOverrideElement::setLineWidthOverride(state, master, TRUE);
-            }
-            if (ViewParams::getHiddenLinePointSize() >= 1.0) {
-                SoPointSizeElement::set(state, master, ViewParams::getHiddenLinePointSize());
-                SoOverrideElement::setPointSizeOverride(state, master, TRUE);
+            if (pcViewer) {
+                const auto &config = pcViewer->getHiddenLineConfig();
+                shading = config.shaded;
+                if (config.lineWidth >= 1.0) {
+                    SoLineWidthElement::set(state, master, config.lineWidth);
+                    SoOverrideElement::setLineWidthOverride(state, master, TRUE);
+                }
+                if (config.pointSize >= 1.0) {
+                    SoPointSizeElement::set(state, master, config.pointSize);
+                    SoOverrideElement::setPointSizeOverride(state, master, TRUE);
+                }
             }
         }
         else if (mode == DisplayModeNoShading) {
@@ -884,13 +890,102 @@ void SoFCUnifiedSelection::Private::applyOverrideMode(SoState * state) const
         else if (mode == DisplayModeAsIs)
             mode = SbName::empty();
 
-        SoFCDisplayModeElement::set(state, master, mode, hiddenline, ViewParams::getHiddenLineShowOutline());
+        SoFCDisplayModeElement::set(state, master, mode, hiddenline,
+                pcViewer ? &pcViewer->getHiddenLineConfig() : nullptr);
     }
 
     if (!shading && state->isElementEnabled(SoLightModelElement::getClassStackIndex())) {
         SoOverrideElement::setLightModelOverride(state, master, TRUE);
         SoLightModelElement::set(state, SoLightModelElement::BASE_COLOR);
     }
+}
+
+bool SoFCUnifiedSelection::Private::checkSelection(SelectionChanges::MsgType selType, const App::SubObjectT &objT)
+{
+    if (useRenderer() && selType == SelectionChanges::RmvSelection) {
+        // Selection notification maybe delayed, so the view provider may
+        // already be deleted at the calling time. However,
+        // SoFCRenderCacheManager uses string key to register selection, so no
+        // need to check for view provider.
+        manager.removeSelection(objT.getSubNameNoElement(true),
+                                objT.getOldElementName());
+        touch();
+        return false;
+    }
+    ViewProvider* vp = Application::Instance->getViewProvider(objT.getObject());
+    if (vp && (master->useNewSelection.getValue()||vp->useNewSelectionModel())
+            && (vp->isSelectable() || ViewParams::getOverrideSelectability()))
+    {
+        SoDetail *detail = nullptr;
+        detailPath->truncate(0);
+        if (useRenderer()) {
+            if (!pcViewer || !pcViewer->hasViewProvider(vp))
+                return false;
+            detailPath->append(master);
+        }
+        if(vp->getDetailPath(objT.getSubName().c_str(),detailPath,true,detail)) {
+            SoSelectionElementAction::Type type = SoSelectionElementAction::None;
+            if (selType == SelectionChanges::AddSelection) {
+                if (detail)
+                    type = SoSelectionElementAction::Append;
+                else
+                    type = SoSelectionElementAction::All;
+            }
+            else {
+                if (detail)
+                    type = SoSelectionElementAction::Remove;
+                else
+                    type = SoSelectionElementAction::None;
+            }
+
+            if (useRenderer()) {
+                if(detailPath->getLength()) {
+                    CoinPtr<SoPath> nodePath = detailPath;
+                    if (ViewParams::getShowSelectionOnTop()) {
+                        // The render manager requires a path without
+                        // sub-element detail to bring the whole object
+                        // on top if any of its sub element is
+                        // selected.
+                        nodePath = new SoPath(detailPath->getLength());
+                        nodePath->append(master);
+                        SoDetail *tmp = nullptr;
+                        std::string sub = objT.getSubNameNoElement();
+                        vp->getDetailPath(sub.c_str(),
+                                            static_cast<SoFullPath*>(nodePath.get()),
+                                            true,
+                                            tmp);
+                        delete tmp;
+                    }
+                    manager.addSelection(objT.getSubNameNoElement(true),
+                                            objT.getOldElementName(),
+                                            nodePath,
+                                            detailPath,
+                                            detail,
+                                            getSelectionColor(),
+                                            ViewParams::getShowSelectionOnTop()); 
+                } else
+                    manager.addSelection(objT.getSubNameNoElement(true),
+                                            objT.getOldElementName(),
+                                            vp->getRoot(),
+                                            getSelectionColor(),
+                                            ViewParams::getShowSelectionOnTop()); 
+                touch();
+            }
+            else {
+                slaction.setType(type);
+                slaction.setColor(master->colorSelection.getValue());
+                slaction.setElement(detail);
+                if(detailPath->getLength())
+                    slaction.apply(detailPath);
+                else
+                    slaction.apply(vp->getRoot());
+                slaction.setElement(nullptr);
+            }
+        }
+        detailPath->truncate(0);
+        delete detail;
+    }
+    return true;
 }
 
 bool SoFCUnifiedSelection::Private::doAction(SoAction * action)
@@ -971,88 +1066,13 @@ bool SoFCUnifiedSelection::Private::doAction(SoAction * action)
                 || selaction->SelChange->Type == SelectionChanges::RmvSelection))
         {
             // selection changes inside the 3d view are handled in handleEvent()
-            App::Document* doc = App::GetApplication().getDocument(selaction->SelChange->pDocName);
-            App::DocumentObject* obj = doc->getObject(selaction->SelChange->pObjectName);
-            ViewProvider*vp = Application::Instance->getViewProvider(obj);
-            if (vp && (master->useNewSelection.getValue()||vp->useNewSelectionModel())
-                   && (vp->isSelectable() || ViewParams::getOverrideSelectability()))
-            {
-                SoDetail *detail = nullptr;
-                detailPath->truncate(0);
-                if (useRenderer()) {
-                    if (!pcViewer || !pcViewer->hasViewProvider(vp))
-                        return false;
-                    detailPath->append(master);
-                    if (selaction->SelChange->Type != SelectionChanges::AddSelection) {
-                        manager.removeSelection(selaction->SelChange->Object.getSubNameNoElement(true),
-                                                selaction->SelChange->Object.getOldElementName());
-                        touch();
-                        return false;
-                    }
-                }
-                if(vp->getDetailPath(selaction->SelChange->pSubName,detailPath,true,detail)) {
-                    SoSelectionElementAction::Type type = SoSelectionElementAction::None;
-                    if (selaction->SelChange->Type == SelectionChanges::AddSelection) {
-                        if (detail)
-                            type = SoSelectionElementAction::Append;
-                        else
-                            type = SoSelectionElementAction::All;
-                    }
-                    else {
-                        if (detail)
-                            type = SoSelectionElementAction::Remove;
-                        else
-                            type = SoSelectionElementAction::None;
-                    }
-
-                    if (useRenderer()) {
-                        if(detailPath->getLength()) {
-                            CoinPtr<SoPath> nodePath = detailPath;
-                            if (ViewParams::getShowSelectionOnTop()) {
-                                // The render manager requires a path without
-                                // sub-element detail to bring the whole object
-                                // on top if any of its sub element is
-                                // selected.
-                                nodePath = new SoPath(detailPath->getLength());
-                                nodePath->append(master);
-                                SoDetail *tmp = nullptr;
-                                std::string sub = selaction->SelChange->Object.getSubNameNoElement();
-                                vp->getDetailPath(sub.c_str(),
-                                                  static_cast<SoFullPath*>(nodePath.get()),
-                                                  true,
-                                                  tmp);
-                                delete tmp;
-                            }
-                            manager.addSelection(selaction->SelChange->Object.getSubNameNoElement(true),
-                                                 selaction->SelChange->Object.getOldElementName(),
-                                                 nodePath,
-                                                 detailPath,
-                                                 detail,
-                                                 getSelectionColor(),
-                                                 ViewParams::getShowSelectionOnTop()); 
-                        } else
-                            manager.addSelection(selaction->SelChange->Object.getSubNameNoElement(true),
-                                                 selaction->SelChange->Object.getOldElementName(),
-                                                 vp->getRoot(),
-                                                 getSelectionColor(),
-                                                 ViewParams::getShowSelectionOnTop()); 
-                        touch();
-                    }
-                    else {
-                        slaction.setType(type);
-                        slaction.setColor(master->colorSelection.getValue());
-                        slaction.setElement(detail);
-                        if(detailPath->getLength())
-                            slaction.apply(detailPath);
-                        else
-                            slaction.apply(vp->getRoot());
-                        slaction.setElement(nullptr);
-                    }
-                }
-                detailPath->truncate(0);
-                delete detail;
-            }
-        }else if (selaction->SelChange->Type == SelectionChanges::ClrSelection) {
+            if (!checkSelection(selaction->SelChange->Type, selaction->SelChange->Object))
+                return false;
+        }else if (selaction->SelChange->Type == SelectionChanges::ClrSelection
+                || (master->selectionMode.getValue() == ON 
+                    && selaction->SelChange->Type == SelectionChanges::SetSelection))
+        {
+            master->setSelectAll(false);
             if (useRenderer()) {
                 manager.clearSelection();
                 touch();
@@ -1062,37 +1082,11 @@ bool SoFCUnifiedSelection::Private::doAction(SoAction * action)
                 for(int i=0;i<master->getNumChildren();++i)
                     slaction.apply(master->getChild(i));
             }
-        }else if(master->selectionMode.getValue() == ON 
-                    && selaction->SelChange->Type == SelectionChanges::SetSelection) {
-            std::vector<ViewProvider*> vps;
-            if (this->pcDocument)
-                vps = this->pcDocument->getViewProvidersOfType(ViewProviderDocumentObject::getClassTypeId());
-            for (std::vector<ViewProvider*>::iterator it = vps.begin(); it != vps.end(); ++it) {
-                ViewProviderDocumentObject* vpd = static_cast<ViewProviderDocumentObject*>(*it);
-                if (master->useNewSelection.getValue() || vpd->useNewSelectionModel()) {
-                    SoSelectionElementAction::Type type;
-                    if(Selection().isSelected(vpd->getObject())
-                            && (vpd->isSelectable() || ViewParams::getOverrideSelectability()))
-                        type = SoSelectionElementAction::All;
-                    else
-                        type = SoSelectionElementAction::None;
-
-                    if (useRenderer()) {
-                        if (type == SoSelectionElementAction::All) {
-                            manager.addSelection(selaction->SelChange->Object.getSubNameNoElement(true), 
-                                                 selaction->SelChange->Object.getOldElementName(),
-                                                 vpd->getRoot(),
-                                                 getSelectionColor(),
-                                                 ViewParams::getShowSelectionOnTop());
-                            touch();
-                        }
-                    }
-                    else {
-                        slaction.setType(type);
-                        slaction.setColor(master->colorSelection.getValue());
-                        slaction.apply(vpd->getRoot());
-                    }
-                }
+            if (selaction->SelChange->Type == SelectionChanges::SetSelection && this->pcDocument) {
+                auto sels = Selection().getSelectionT(this->pcDocument->getDocument()->getName(), 0);
+                master->setSelectAll((int)sels.size() > ViewParams::getMaxOnTopSelections());
+                for (const auto &sel : sels)
+                    checkSelection(SelectionChanges::AddSelection, sel);
             }
         }
         if(master->useNewSelection.getValue())
@@ -1937,6 +1931,11 @@ void SoFCSeparator::GLRenderBelowPath(SoGLRenderAction * action) {
     inherited::GLRenderBelowPath(action);
 }
 
+void SoFCSeparator::GLRenderInPath(SoGLRenderAction *action)
+{
+    _GLRenderInPath(this, action);
+}
+
 void SoFCSeparator::initClass(void)
 {
     SO_NODE_INIT_CLASS(SoFCSeparator,SoSeparator,"FCSeparator");
@@ -2484,7 +2483,7 @@ struct SelectionRootPathCode {
     int &code;
 };
 
-static void _GLRenderInPath(SoNode *node, SoGLRenderAction * action)
+void SoFCSeparator::_GLRenderInPath(SoNode *node, SoGLRenderAction * action)
 {
     int numindices;
     const int * indices;
@@ -3063,7 +3062,10 @@ bool SoFCSelectionRoot::handleSelectionAction(SoAction *action,
             ctx->highlightColor = hlaction->getColor();
             node->touch();
         } else if (detail->isOfType(SoFCDetail::getClassTypeId())) {
-            const auto &indices = static_cast<const SoFCDetail*>(detail)->getIndices(detailType);
+            void *dctx = nullptr;
+            const auto &indices = static_cast<const SoFCDetail*>(detail)->getIndices(detailType, &dctx);
+            if (dctx && dctx != node)
+                return false;
 
             auto ctx = getActionContext(action,node,selContext,!indices.empty());
 
@@ -3074,22 +3076,34 @@ bool SoFCSelectionRoot::handleSelectionAction(SoAction *action,
             }
         } else {
             int index = -1;
+            void *dctx = nullptr;
             switch(detailType) {
             case SoFCDetail::Face:
-                if (detail->isOfType(SoFaceDetail::getClassTypeId()))
+                if (detail->isOfType(SoFaceDetail::getClassTypeId())) {
                     index = static_cast<const SoFaceDetail*>(detail)->getPartIndex();
+                    if (detail->isOfType(SoFCFaceDetail::getClassTypeId()))
+                        dctx = static_cast<const SoFCFaceDetail*>(detail)->getContext();
+                }
                 break;
             case SoFCDetail::Edge:
-                if (detail->isOfType(SoLineDetail::getClassTypeId()))
+                if (detail->isOfType(SoLineDetail::getClassTypeId())) {
                     index = static_cast<const SoLineDetail*>(detail)->getLineIndex();
+                    if (detail->isOfType(SoFCLineDetail::getClassTypeId()))
+                        dctx = static_cast<const SoFCLineDetail*>(detail)->getContext();
+                }
                 break;
             case SoFCDetail::Vertex:
-                if (detail->isOfType(SoPointDetail::getClassTypeId()))
+                if (detail->isOfType(SoPointDetail::getClassTypeId())) {
                     index = static_cast<const SoPointDetail*>(detail)->getCoordinateIndex();
+                    if (detail->isOfType(SoFCPointDetail::getClassTypeId()))
+                        dctx = static_cast<const SoFCPointDetail*>(detail)->getContext();
+                }
                 break;
             default:
                 break;
             }
+            if (dctx && dctx != node)
+                return false;
             if(index>=0) {
                 auto ctx = getActionContext(action,node,selContext);
                 ctx->highlightColor = hlaction->getColor();
@@ -3172,7 +3186,10 @@ bool SoFCSelectionRoot::handleSelectionAction(SoAction *action,
     case SoSelectionElementAction::Append: {
         const SoDetail* detail = selaction->getElement();
         if (detail && detail->isOfType(SoFCDetail::getClassTypeId())) {
-            const auto &indices = static_cast<const SoFCDetail*>(detail)->getIndices(detailType);
+            void *dctx = nullptr;
+            const auto &indices = static_cast<const SoFCDetail*>(detail)->getIndices(detailType, &dctx);
+            if (dctx && dctx != node)
+                return false;
             if(indices.size()) {
                 bool touched = false;
                 if (selaction->getType() == SoSelectionElementAction::Append) {
@@ -3203,23 +3220,35 @@ bool SoFCSelectionRoot::handleSelectionAction(SoAction *action,
             // comments below.
 
         } else if(detail) {
+            void *dctx = nullptr;
             int index = -1;
             switch(detailType) {
             case SoFCDetail::Face:
-                if (detail->isOfType(SoFaceDetail::getClassTypeId()))
+                if (detail->isOfType(SoFaceDetail::getClassTypeId())) {
                     index = static_cast<const SoFaceDetail*>(detail)->getPartIndex();
+                    if (detail->isOfType(SoFCFaceDetail::getClassTypeId()))
+                        dctx = static_cast<const SoFCFaceDetail*>(detail)->getContext();
+                }
                 break;
             case SoFCDetail::Edge:
-                if (detail->isOfType(SoLineDetail::getClassTypeId()))
+                if (detail->isOfType(SoLineDetail::getClassTypeId())) {
                     index = static_cast<const SoLineDetail*>(detail)->getLineIndex();
+                    if (detail->isOfType(SoFCLineDetail::getClassTypeId()))
+                        dctx = static_cast<const SoFCLineDetail*>(detail)->getContext();
+                }
                 break;
             case SoFCDetail::Vertex:
-                if (detail->isOfType(SoPointDetail::getClassTypeId()))
+                if (detail->isOfType(SoPointDetail::getClassTypeId())) {
                     index = static_cast<const SoPointDetail*>(detail)->getCoordinateIndex();
+                    if (detail->isOfType(SoFCPointDetail::getClassTypeId()))
+                        dctx = static_cast<const SoFCPointDetail*>(detail)->getContext();
+                }
                 break;
             default:
                 break;
             }
+            if (dctx && dctx != node)
+                return false;
             if(index >= 0) {
                 if (selaction->getType() == SoSelectionElementAction::Append) {
                     auto ctx = getActionContext(action,node,selContext);

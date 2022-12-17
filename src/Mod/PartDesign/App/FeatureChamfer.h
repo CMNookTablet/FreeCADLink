@@ -24,10 +24,12 @@
 #ifndef PARTDESIGN_FEATURECHAMFER_H
 #define PARTDESIGN_FEATURECHAMFER_H
 
+#include "FeatureDressUp.h"
+
 #include <App/PropertyStandard.h>
 #include <App/PropertyUnits.h>
 #include <App/PropertyLinks.h>
-#include "FeatureDressUp.h"
+#include <Mod/Part/App/PropertyDressUp.h>
 
 namespace PartDesign
 {
@@ -44,6 +46,8 @@ public:
     App::PropertyQuantityConstraint Size2;
     App::PropertyAngle Angle;
     App::PropertyBool FlipDirection;
+
+    Part::PropertyChamferEdges ChamferInfo;
 
     /** @name methods override feature */
     //@{
@@ -64,6 +68,9 @@ protected:
     void handleChangedPropertyType(Base::XMLReader &reader, const char * TypeName, App::Property * prop) override;
     static const App::PropertyQuantityConstraint::Constraints floatSize;
     static const App::PropertyAngle::Constraints floatAngle;
+
+private:
+    std::vector<int> edgeIndices;
 };
 
 } //namespace Part

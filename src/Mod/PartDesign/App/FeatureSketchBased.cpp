@@ -131,12 +131,15 @@ void ProfileBased::setupObject()
 {
     FeatureAddSub::setupObject();
     AllowMultiFace.setValue(true);
-    Linearize.setValue(Part::PartParams::LinearizeExtrusionDraft());
+    Linearize.setValue(Part::PartParams::getLinearizeExtrusionDraft());
     _ProfileBasedVersion.setValue(1);
 }
 
-void ProfileBased::positionByPrevious(void)
+TopLoc_Location ProfileBased::positionByPrevious(void)
 {
+#if 1
+    return TopLoc_Location();
+#else
     Part::Feature* feat = getBaseObject(/* silent = */ true);
     if (feat) {
         this->Placement.setValue(feat->Placement.getValue());
@@ -150,6 +153,13 @@ void ProfileBased::positionByPrevious(void)
             this->Placement.setValue( sketch->Placement.getValue() );
         }
     }
+    return getLoation().Inverted();
+#endif
+}
+
+bool ProfileBased::shouldApplyPlacement()
+{
+    return false;
 }
 
 void ProfileBased::transformPlacement(const Base::Placement &transform)
@@ -204,7 +214,7 @@ Part::Feature* ProfileBased::getVerifiedObject(bool silent) const {
 }
 
 TopoShape ProfileBased::getVerifiedFace(bool silent,
-                                        bool dofit,
+                                        bool doFit,
                                         bool allowOpen,
                                         const App::DocumentObject *profile,
                                         const std::vector<std::string> &_subs) const
@@ -215,15 +225,22 @@ TopoShape ProfileBased::getVerifiedFace(bool silent,
             return TopoShape();
         throw Base::ValueError("No profile linked");
     }
-    auto &subs = profile ? _subs : Profile.getSubValues(true);
+    const auto &subs = profile ? _subs : Profile.getSubValues();
     try {
         TopoShape shape;
         if(AllowMultiFace.getValue()) {
-            shape = Part::Feature::getTopoShape(obj);
-            if (!shape.isNull() && subs.size()) {
+            if (subs.empty())
+                shape = Part::Feature::getTopoShape(obj);
+            else {
                 std::vector<TopoShape> shapes;
-                for (auto &sub : subs)
-                    shapes.push_back(shape.getSubTopoShape(sub.c_str()));
+                for (auto &sub : subs) {
+                    auto subshape = Part::Feature::getTopoShape(
+                            obj, sub.c_str(), /*needSubElement*/true);
+                    if (subshape.isNull())
+                        FC_THROWM(Base::CADKernelError, "Sub shape not found: " <<
+                                obj->getFullName() << "." << sub);
+                    shapes.push_back(subshape);
+                }
                 shape.makECompound(shapes);
             }
         } else {
@@ -287,14 +304,14 @@ TopoShape ProfileBased::getVerifiedFace(bool silent,
             throw Base::CADKernelError("Cannot make face from profile");
         }
 
-        if (dofit && (std::abs(Fit.getValue()) > Precision::Confusion()
+        if (doFit && (std::abs(Fit.getValue()) > Precision::Confusion()
                       || std::abs(InnerFit.getValue()) > Precision::Confusion())) {
 
             if (!shape.isNull())
                 shape = shape.makEOffsetFace(Fit.getValue(),
                                             InnerFit.getValue(),
-                                            static_cast<short>(FitJoin.getValue()),
-                                            static_cast<short>(InnerFitJoin.getValue()));
+                                            static_cast<Part::TopoShape::JoinType>(FitJoin.getValue()),
+                                            static_cast<Part::TopoShape::JoinType>(InnerFitJoin.getValue()));
             if (!openshape.isNull())
                 openshape.makEOffset2D(Fit.getValue());
         }
@@ -400,11 +417,16 @@ TopoDS_Shape ProfileBased::getVerifiedFaceOld(bool silent) const {
 
 
 TopoShape ProfileBased::getProfileShape() const {
-    auto shape = getTopoShape(Profile.getValue());
-    if(!shape.isNull() && Profile.getSubValues().size()) {
+    TopoShape shape;
+    const auto &subs = Profile.getSubValues();
+    auto profile = Profile.getValue();
+    if (subs.empty())
+        shape = Part::Feature::getTopoShape(profile);
+    else {
         std::vector<TopoShape> shapes;
-        for(auto &sub : Profile.getSubValues(true))
-            shapes.push_back(shape.getSubTopoShape(sub.c_str()));
+        for(auto &sub : subs)
+            shapes.push_back(Part::Feature::getTopoShape(
+                        profile, sub.c_str(), /* needSubElement */true));
         shape = TopoShape(shape.Tag).makECompound(shapes);
     }
     if(shape.isNull())
@@ -433,7 +455,7 @@ std::vector<TopoDS_Wire> ProfileBased::getProfileWiresOld() const {
 
     // this is a workaround for an obscure OCC bug which leads to empty tessellations
     // for some faces. Making an explicit copy of the linked shape seems to fix it.
-    // The error almost happens when re-computing the shape but sometimes also for the
+    // The error mostly happens when re-computing the shape but sometimes also for the
     // first time
     BRepBuilderAPI_Copy copy(shape);
     shape = copy.Shape();
@@ -453,7 +475,7 @@ std::vector<TopoDS_Wire> ProfileBased::getProfileWiresOld() const {
 std::vector<TopoShape> ProfileBased::getProfileWires() const {
     // shape copy is a workaround for an obscure OCC bug which leads to empty
     // tessellations for some faces. Making an explicit copy of the linked
-    // shape seems to fix it.  The error almost happens when re-computing the
+    // shape seems to fix it.  The error mostly happens when re-computing the
     // shape but sometimes also for the first time
     auto shape = getProfileShape().makECopy();
 
@@ -748,7 +770,7 @@ bool ProfileBased::checkLineCrossesFace(const gp_Lin &line, const TopoDS_Face &f
                 BRepAdaptor_Curve adapt(edge);
                 // create a plane (pnt,dir) that goes through the intersection point and is built of
                 // the vectors of the sketch normal and the rotation axis
-                const gp_Dir& normal = BRepAdaptor_Surface(face).Plane().Axis().Direction();
+                gp_Dir normal = BRepAdaptor_Surface(face).Plane().Axis().Direction();
                 gp_Dir dir = line.Direction().Crossed(normal);
                 gp_Pnt pnt = distss.PointOnShape1(i);
 
@@ -775,7 +797,7 @@ bool ProfileBased::checkLineCrossesFace(const gp_Lin &line, const TopoDS_Face &f
                     // create a plane (pnt,dir) that goes through the intersection point and is built of
                     // the vectors of the sketch normal and the rotation axis
                     BRepAdaptor_Surface adapt(face);
-                    const gp_Dir& normal = adapt.Plane().Axis().Direction();
+                    gp_Dir normal = adapt.Plane().Axis().Direction();
                     gp_Dir dir = line.Direction().Crossed(normal);
                     gp_Pnt pnt = distss.PointOnShape1(i);
 

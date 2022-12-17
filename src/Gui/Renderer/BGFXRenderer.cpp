@@ -232,7 +232,11 @@ public:
                 // d->offscreenWindow->setFormat(d->requestedFormat);
                 window->setGeometry(0, 0, widget->width(), widget->height());
                 window->create();
-                init.platformData.nwh = (void*)window->winId();
+#if BX_PLATFORM_OSX
+                init.platformData.nwh = get_nswindow_from_nsview(reinterpret_cast<void*>(window->winId()));
+#else
+                init.platformData.nwh = reinterpret_cast<void*>(window->winId());
+#endif
             }
             init.resolution.width = widget->width();
             init.resolution.height = widget->height();

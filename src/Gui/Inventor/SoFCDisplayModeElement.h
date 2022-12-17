@@ -38,14 +38,35 @@ protected:
 public:
     virtual void init(SoState *state);
 
-    static void set(SoState * const state, SoNode * const node,
-            const SbName &mode, SbBool hiddenLine, SbBool outline = FALSE);
+    struct HiddenLineConfig {
+      SbBool shaded;
+      float lineWidth;
+      float pointSize;
+      SbBool outline;
+      SbBool perFaceOutline;
+      SbBool hideVertex;
+      SbBool hideFace;
+      SbBool hideSeam;
+      SbBool sceneOutline;
+      float outlineWidth;
+      SbBool hasFaceColor;
+      uint32_t faceColor;
+      SbBool hasLineColor;
+      uint32_t lineColor;
+      SbBool hasTransparency;
+      float transparency;
 
-    static void setColors(SoState * const state, SoNode * const node,
-            const SbColor *faceColor, const SbColor *lineColor, float transp);
+      void reset();
+    };
+
+    static void set(SoState * const state, SoNode * const node,
+            const SbName &mode, SbBool hiddenLines, const HiddenLineConfig *config=nullptr);
 
     static const SbName &get(SoState * const state);
-    static SbBool showHiddenLines(SoState * const state, SbBool *outline = nullptr);
+    static SbBool showHiddenLines(SoState * const state, HiddenLineConfig *config=nullptr);
+    static void setColors(SoState * const state, SoNode * const node,
+            const SbColor *faceColor, const SbColor *lineColor, float transp);
+    static SbBool showHiddenLines(SoState * const state, SbBool *outline);
     static const SbColor *getFaceColor(SoState * const state);
     static const SbColor *getLineColor(SoState * const state);
     static float getTransparency(SoState * const state);
@@ -53,8 +74,10 @@ public:
     static SoFCDisplayModeElement * getInstance(SoState *state);
 
     const SbName &get() const;
+
     SbBool showHiddenLines() const;
-    SbBool showOutline() const;
+    const HiddenLineConfig &getHiddenLineConfig() const;
+
     const SbColor *getFaceColor() const;
     const SbColor *getLineColor() const;
     float getTransparency() const;
@@ -65,12 +88,9 @@ public:
 protected:
     SbName displayMode;
     SbBool hiddenLines;
-    SbBool hasFaceColor;
-    SbBool hasLineColor;
-    SbBool outline;
-    SbColor faceColor;
     SbColor lineColor;
-    float transp;
+    SbColor faceColor;
+    HiddenLineConfig hiddenLineConfig;
 };
 
 #endif // FC_SOFCDISPLAYMODEELEMENT_H

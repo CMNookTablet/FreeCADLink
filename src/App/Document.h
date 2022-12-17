@@ -197,7 +197,6 @@ public:
     //@}
     boost::signals2::signal<void (std::string)> signalLinkXsetValue;
 
-
     void clearDocument();
 
     /** @name File handling of the document */
@@ -289,6 +288,18 @@ public:
     std::vector<DocumentObject *>addObjects(const char* sType, const std::vector<std::string>& objectNames, bool isNew=true);
     /// Remove a feature out of the document
     void removeObject(const char* sName);
+
+    /// Batch remove a number of objects
+    void removeObjects(const std::vector<std::string> &objs);
+    /** Query if the document is removing so as to delay property change notification
+     *
+     * The function will also queue the input property to notify change after all objects are moved by removeObjects()
+     */
+    static bool isRemoving(Property *);
+    /** Query if the document is removing so as to delay property change notification
+     */
+    static void removePendingProperty(Property *);
+
     /** Add an existing feature with sName (ASCII) to this document and set it active.
      * Unicode names are set through the Label property.
      * This is an overloaded function of the function above and can be used to create
@@ -569,6 +580,9 @@ public:
 
     /// Indicate if there is any document restoring/importing
     static bool isAnyRestoring();
+
+    /// Indicate if there is any document recomputing
+    static bool isAnyRecomputing();
 
     long getLastObjectId() const;
     void setLastObjectId(long id); 

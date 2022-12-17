@@ -59,6 +59,7 @@
 #include <Base/Exception.h>
 #include <Base/FileInfo.h>
 #include <Base/Stream.h>
+#include <Base/QuantityPy.h>
 #include <App/Application.h>
 #include <App/Document.h>
 #include <App/DocumentObject.h>
@@ -76,6 +77,7 @@
 #include "TopoShapeShellPy.h"
 #include "TopoShapeCompSolidPy.h"
 #include "TopoShapeCompoundPy.h"
+#include "PartFeature.h"
 #include "PartParams.h"
 
 namespace bp = boost::placeholders;
@@ -135,9 +137,10 @@ TopoShape PropertyPartShape::getShape() const
 {
     _Shape.initCache(-1);
     auto res = _Shape;
-    if(!res.Tag) {
-        auto parent = Base::freecad_dynamic_cast<App::DocumentObject>(getContainer());
-        if(parent)
+    if (Feature::isElementMappingDisabled(getContainer()))
+        res.Tag = -1;
+    else if (!res.Tag) {
+        if (auto parent = Base::freecad_dynamic_cast<App::DocumentObject>(getContainer()))
             res.Tag = parent->getID();
     }
     return res;
@@ -184,7 +187,7 @@ void PropertyPartShape::transformGeometry(const Base::Matrix4D &rclTrf)
 
 PyObject *PropertyPartShape::getPyObject(void)
 {
-    Base::PyObjectBase* prop = static_cast<Base::PyObjectBase*>(_Shape.getPyObject());
+    Base::PyObjectBase* prop = static_cast<Base::PyObjectBase*>(getShape().getPyObject());
     if (prop)
         prop->setConst();
     return prop;
@@ -220,7 +223,7 @@ App::Property *PropertyPartShape::Copy(void) const
 {
     PropertyPartShape *prop = new PropertyPartShape();
 
-    if (PartParams::ShapePropertyCopy()) {
+    if (PartParams::getShapePropertyCopy()) {
         // makECopy() consume too much memory for complex geometry.
         prop->_Shape = this->_Shape.makECopy();
     } else
@@ -266,7 +269,7 @@ void PropertyPartShape::beforeSave() const
     _HasherIndex = 0;
     _SaveHasher = false;
     auto owner = Base::freecad_dynamic_cast<App::DocumentObject>(getContainer());
-    if(owner && !_Shape.isNull()) {
+    if(owner && !_Shape.isNull() && _Shape.getElementMapSize()>0) {
         auto ret = owner->getDocument()->addStringHasher(_Shape.Hasher);
         _HasherIndex = ret.second;
         _SaveHasher = ret.first;
@@ -279,7 +282,9 @@ void PropertyPartShape::Save (Base::Writer &writer) const
     //See SaveDocFile(), RestoreDocFile()
     writer.Stream() << writer.ind() << "<Part";
     auto owner = dynamic_cast<App::DocumentObject*>(getContainer());
-    if(owner && !_Shape.isNull() && !_Shape.Hasher.isNull()) {
+    if(owner && !_Shape.isNull()
+             && _Shape.getElementMapSize()>0
+             && !_Shape.Hasher.isNull()) {
         writer.Stream() << " HasherIndex=\"" << _HasherIndex << '"';
         if(_SaveHasher)
             writer.Stream() << " SaveHasher=\"1\"";
@@ -372,6 +377,9 @@ void PropertyPartShape::Restore(Base::XMLReader &reader)
     }
 
     if(has_ver) {
+        // The file name here is not used for restore, but just a way to get
+        // more useful error message if something wrong when restoring
+        _Shape.setPersistenceFileName(getFileName().c_str());
         if(owner && owner->getDocument()->testStatus(App::Document::PartialDoc))
             _Shape.Restore(reader);
         else if(_Ver == "?" || _Ver.empty()) {
@@ -423,7 +431,20 @@ void PropertyPartShape::Restore(Base::XMLReader &reader)
     }
 }
 
-// The following function is copied from OCCT BRepTools.cxx and modified
+void PropertyPartShape::afterRestore()
+{
+    if (_Shape.isRestoreFailed()) {
+        // this cause GeoFeature::updateElementReference() to call
+        // PropertyLinkBase::updateElementReferences() with reverse = true, in
+        // order to try to regenerate the element map
+        _Ver = "?"; 
+    }
+    else if (_Shape.getElementMapSize() == 0)
+        _Shape.Hasher.reset();
+    PropertyComplexGeoData::afterRestore();
+}
+
+// The following two functions are copied from OCCT BRepTools.cxx and modified
 // to disable saving of triangulation
 //
 
@@ -817,7 +838,7 @@ void PropertyFilletEdges::restoreXML(Base::XMLReader &reader)
     for(auto &v : values) 
         s >> v.edgeid >> v.radius1 >> v.radius2;
     reader.endCharStream();
-    setValues(std::move(values));
+    setValue(std::move(values));
 }
 
 void PropertyFilletEdges::saveStream(Base::OutputStream &str) const
@@ -833,7 +854,7 @@ void PropertyFilletEdges::restoreStream(Base::InputStream &str, unsigned uCt)
     for (std::vector<FilletElement>::iterator it = values.begin(); it != values.end(); ++it) {
         str >> it->edgeid >> it->radius1 >> it->radius2;
     }
-    setValues(std::move(values));
+    setValue(std::move(values));
 }
 
 App::Property *PropertyFilletEdges::Copy(void) const
@@ -845,7 +866,7 @@ App::Property *PropertyFilletEdges::Copy(void) const
 
 void PropertyFilletEdges::Paste(const Property &from)
 {
-    setValues(dynamic_cast<const PropertyFilletEdges&>(from)._lValueList);
+    setValue(dynamic_cast<const PropertyFilletEdges&>(from)._lValueList);
 }
 
 // -------------------------------------------------------------------------
@@ -910,7 +931,7 @@ PropertyShapeCache *PropertyShapeCache::get(const App::DocumentObject *obj, bool
 }
 
 bool PropertyShapeCache::getShape(const App::DocumentObject *obj, TopoShape &shape, const char *subname) {
-    if (PartParams::DisableShapeCache())
+    if (PartParams::getDisableShapeCache())
         return false;
     auto prop = get(obj,false);
     if(!prop)
@@ -927,7 +948,7 @@ bool PropertyShapeCache::getShape(const App::DocumentObject *obj, TopoShape &sha
 void PropertyShapeCache::setShape(
         const App::DocumentObject *obj, const TopoShape &shape, const char *subname) 
 {
-    if (PartParams::DisableShapeCache())
+    if (PartParams::getDisableShapeCache())
         return;
     auto prop = get(obj,true);
     if(!prop)

@@ -157,7 +157,7 @@ App::DocumentObjectExecReturn *Revolution::execute(void)
             gp_Trsf mov;
             mov.SetRotation(revAx, angle * (-0.5));
             TopLoc_Location loc(mov);
-            sourceShape.setShape(sourceShape.getShape().Moved(loc),false);
+            sourceShape.setShape(TopoShape::moved(sourceShape.getShape(),loc),false);
         }
 
 #ifdef FC_NO_ELEMENT_MAP

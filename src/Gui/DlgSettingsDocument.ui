@@ -20,7 +20,16 @@
       <string>General</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>9</number>
+      </property>
+      <property name="topMargin">
+       <number>9</number>
+      </property>
+      <property name="rightMargin">
+       <number>9</number>
+      </property>
+      <property name="bottomMargin">
        <number>9</number>
       </property>
       <property name="spacing">
@@ -81,7 +90,16 @@ This feature may slightly increase recomputation time.</string>
         <property name="spacing">
          <number>6</number>
         </property>
-        <property name="margin">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
          <number>0</number>
         </property>
         <item>
@@ -154,7 +172,16 @@ This feature may slightly increase recomputation time.</string>
         <property name="spacing">
          <number>6</number>
         </property>
-        <property name="margin">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
          <number>0</number>
         </property>
         <item>
@@ -216,7 +243,16 @@ This feature may slightly increase recomputation time.</string>
         <property name="spacing">
          <number>6</number>
         </property>
-        <property name="margin">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
          <number>0</number>
         </property>
         <item>
@@ -298,7 +334,16 @@ get date suffix according to the specified format</string>
         <property name="spacing">
          <number>6</number>
         </property>
-        <property name="margin">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
          <number>0</number>
         </property>
         <item>
@@ -411,7 +456,7 @@ Common sizes are 128, 256 and 512</string>
            <number>64</number>
           </property>
           <property name="maximum">
-           <number>512</number>
+           <number>10000</number>
           </property>
           <property name="value">
            <number>128</number>

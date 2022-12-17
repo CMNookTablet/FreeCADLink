@@ -45,6 +45,7 @@
 #include <Gui/Selection.h>
 #include <Gui/Namespace.h>
 #include <Gui/InventorBase.h>
+#include "Inventor/SoFCDisplayModeElement.h"
 
 class SoTranslation;
 class SoTransform;
@@ -160,6 +161,7 @@ public:
     /// Observer message from the Selection
     virtual void onSelectionChanged(const SelectionChanges &Reason);
     void checkGroupOnTop(const SelectionChanges &Reason, bool alt=false);
+    void refreshGroupOnTop();
     void clearGroupOnTop(bool alt=false);
 
     bool isInGroupOnTop(const App::SubObjectT &objT, bool altOnly=true) const;
@@ -246,6 +248,7 @@ public:
     void setOverrideMode(const std::string &mode);
     void applyOverrideMode();
     std::string getOverrideMode() const {return overrideMode;}
+    const SoFCDisplayModeElement::HiddenLineConfig &getHiddenLineConfig() const;
     //@}
 
     /** @name Making pictures */
@@ -441,6 +444,7 @@ public:
     void setRendererType(const std::string &);
 
     void updateHatchTexture();
+    void refreshRenderCache();
 
     NavigationStyle* navigationStyle() const;
 
@@ -464,6 +468,8 @@ public:
 
     void onGetBoundingBox(SoGetBoundingBoxAction *);
 
+    void onViewPropertyChanged(const App::Property &);
+
     struct Private;
     friend struct Private;
 
@@ -484,7 +490,6 @@ protected:
     SbBool processSoEventBase(const SoEvent * const ev);
     void printDimension();
     void selectAll();
-    void slotChangeDocument(const App::Document &, const App::Property &);
 
 private:
     static void setViewportCB(void * userdata, SoAction * action);

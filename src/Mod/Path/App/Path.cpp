@@ -487,13 +487,18 @@ void Toolpath::SaveDocFile (Base::Writer &writer) const
 
 void Toolpath::Restore(XMLReader &reader)
 {
+    _Restore(reader, this);
+}
+
+void Toolpath::_Restore(XMLReader &reader, Base::Persistence *owner)
+{
     reader.readElement("Path");
 
     if(reader.hasAttribute("file")) {
         std::string file (reader.getAttribute("file") );
         if (!file.empty()) {
             // initiate a file read
-            reader.addFile(file.c_str(),this);
+            reader.addFile(file.c_str(),owner);
         }
     }
     unsigned count = reader.getAttributeAsUnsigned("count","0");

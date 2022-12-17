@@ -77,7 +77,7 @@ public:
      * this one is made from: either from Base, if there is one, or from sketch,
      * if there is no base.
      */
-    void positionByPrevious(void);
+    TopLoc_Location positionByPrevious(void);
 
     /** applies a transform on the Placement of the Sketch or its
      *  support if it has one
@@ -102,7 +102,7 @@ public:
 
     /**
      * Verifies the linked Object and returns the shape used as profile
-     * @param silent: if profirle property is malformed and the parameter is true
+     * @param silent: if profile property is malformed and the parameter is true
      *                silently returns nullptr, otherwise throw a Base::Exception.
      *                Default is false.
      * @param doFit: Whether to fitting according to the 'Fit' property
@@ -144,6 +144,8 @@ public:
 
 protected:
     void remapSupportShape(const TopoDS_Shape&);
+
+    virtual bool shouldApplyPlacement();
 
     /// Extract a face from a given LinkSub
     static void getUpToFaceFromLinkSub(TopoShape& upToFace,

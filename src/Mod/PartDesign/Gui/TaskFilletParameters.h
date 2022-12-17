@@ -24,12 +24,34 @@
 #ifndef GUI_TASKVIEW_TaskFilletParameters_H
 #define GUI_TASKVIEW_TaskFilletParameters_H
 
+#include <QStandardItemModel>
+#include <QItemDelegate>
+
 #include "TaskDressUpParameters.h"
 #include "ViewProviderFillet.h"
 
 class Ui_TaskFilletParameters;
 
+namespace Gui {
+class ExpressionBinding;
+}
+
 namespace PartDesignGui {
+
+class FilletSegmentDelegate : public QItemDelegate
+{
+    Q_OBJECT
+
+public:
+    FilletSegmentDelegate(QObject *parent = 0);
+
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                          const QModelIndex &index) const;
+
+    void setEditorData(QWidget *editor, const QModelIndex &index) const;
+    void setModelData(QWidget *editor, QAbstractItemModel *model,
+                      const QModelIndex &index) const;
+};
 
 class TaskFilletParameters : public TaskDressUpParameters
 {
@@ -40,14 +62,25 @@ public:
     ~TaskFilletParameters();
 
     virtual void apply();
+    void setBinding(Gui::ExpressionBinding *binding, const QModelIndex &index);
 
 private Q_SLOTS:
     void onLengthChanged(double);
 
 protected:
-    double getLength(void) const;
+    double getRadius() const;
     void changeEvent(QEvent *e);
     virtual void refresh();
+    void removeSegments();
+    void clearSegments();
+    void newSegment(int editColumn=0);
+    void updateSegments(QTreeWidgetItem *);
+    void updateSegment(QTreeWidgetItem *, int column);
+    void setSegment(QTreeWidgetItem *item, double param, double radius, double length=0.0);
+    void onNewItem(QTreeWidgetItem *item);
+    virtual void onRefDeleted();
+
+    friend class FilletSegmentDelegate;
 
 private:
     std::unique_ptr<Ui_TaskFilletParameters> ui;

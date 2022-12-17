@@ -203,7 +203,7 @@ void CrossSection::connectWires (const TopTools_IndexedMapOfShape& wireMap, std:
 
 ///////////////////////////////////////////////////////////////////////////
 TopoCrossSection::TopoCrossSection(double a, double b, double c, const TopoShape& s, const char *op)
-  : a(a), b(b), c(c), shape(s), op(op?op:TOPOP_SLICE)
+  : a(a), b(b), c(c), shape(s), op(op?op:Part::OpCodes::Slice)
 {
 }
 

@@ -42,6 +42,7 @@
 #include "Sketch.h"
 
 #include "SketchGeometryExtension.h"
+#include "ExternalGeometryExtension.h"
 
 namespace Sketcher
 {
@@ -58,6 +59,7 @@ class SketchAnalysis;
 
 class SketcherExport SketchObject : public Part::Part2DObject
 {
+    typedef Part::Part2DObject inherited;
     PROPERTY_HEADER_WITH_OVERRIDE(Sketcher::SketchObject);
 
 public:
@@ -79,6 +81,12 @@ public:
     App     ::PropertyLinkListHidden Exports;
     Part    ::PropertyGeometryList   ExternalGeo;
     App     ::PropertyBool           FullyConstrained;
+    App     ::PropertyPrecision      ArcFitTolerance;
+    App     ::PropertyInteger        ExternalBSplineMaxDegree;
+    App     ::PropertyPrecision      ExternalBSplineTolerance;
+    Part    ::PropertyPartShape      InternalShape;
+    App     ::PropertyPrecision      InternalTolerance;
+    App     ::PropertyBool           MakeInternals;
     /** @name methods override Feature */
     //@{
     short mustExecute() const override;
@@ -89,6 +97,7 @@ public:
     const char* getViewProviderName(void) const override {
         return "SketcherGui::ViewProviderSketch";
     }
+    void setupObject() override;
     //@}
 
     /** SketchObject can work in two modes: Recompute Mode and noRecomputes Mode
@@ -166,12 +175,14 @@ public:
     /// Carbon copy another sketch geometry and constraints
     int carbonCopy(App::DocumentObject * pObj, bool construction = true);
     /// add an external geometry reference
-    int addExternal(App::DocumentObject *Obj, const char* SubName, bool defining=false);
+    int addExternal(App::DocumentObject *Obj, const char* SubName,
+                    bool defining=false, bool intersection=false);
     /** delete external
      *  ExtGeoId >= 0 with 0 corresponding to the first user defined
      *  external geometry
      */
     int delExternal(int ExtGeoId);
+    int delExternal(const std::vector<int> &ExtGeoIds);
     /// attach a link reference to an external geometry
     int attachExternal(const std::vector<int> &geoIds, App::DocumentObject *Obj, const char* SubName);
     int detachExternal(const std::vector<int> &geoIds);
@@ -208,7 +219,7 @@ public:
     /// returns a list of projected external geometries
     const std::vector<Part::Geometry *> &getExternalGeometry(void) const { return ExternalGeo.getValues(); }
     /// rebuilds external geometry (projection onto the sketch plane)
-    void rebuildExternalGeometry(bool defining=false);
+    void rebuildExternalGeometry(bool defining=false, bool intersection=false);
     /// returns the number of external Geometry entities
     int getExternalGeometryCount(void) const { return ExternalGeo.getSize(); }
     /// auto fix external geometry references
@@ -279,6 +290,7 @@ public:
     int setConstruction(int GeoId, bool on);
 
     int toggleFreeze(const std::vector<int> &);
+    int toggleIntersection(const std::vector<int> &, bool defining=false);
 
     /*!
      \brief Create a sketch fillet from the point at the intersection of two lines
@@ -539,6 +551,9 @@ public:
         return convertSubName(subname.c_str(), postfix);
     }
 
+    static const std::string &internalPrefix();
+    static const char *convertInternalName(const char *name);
+
     std::string convertSubName(const Data::IndexedName &, bool postfix=true) const;
 
     Data::IndexedName shapeTypeFromGeoId(int GeoId, PointPos pos=Sketcher::none ) const;
@@ -594,12 +609,19 @@ public:
 
     // Signaled when solver has done update
     boost::signals2::signal<void ()> signalSolverUpdate;
+    boost::signals2::signal<void ()> signalElementsChanged;
+
+    Part::TopoShape buildInternals(const Part::TopoShape &edges) const;
 
 public: // geometry extension functionalities for single element sketch object user convenience
     int setGeometryId(int GeoId, long id);
     int getGeometryId(int GeoId, long &id) const;
 
 protected:
+
+    // Only the first flag is toggled, the rest of the flags is set or cleared following the first flag.
+    int toggleExternalGeometryFlag(const std::vector<int> &geoIds,
+                                   const std::vector<ExternalGeometryExtension::Flag> &flags);
 
     void buildShape();
     /// get called by the container when a property has changed

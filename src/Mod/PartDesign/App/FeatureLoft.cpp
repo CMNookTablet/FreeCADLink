@@ -42,6 +42,7 @@
 #include <Base/Console.h>
 #include <Base/Reader.h>
 #include <App/Document.h>
+#include <App/DocumentObserver.h>
 #include <Mod/Part/App/FaceMakerCheese.h>
 #include <Mod/Part/App/TopoShapeOpCode.h>
 
@@ -76,14 +77,56 @@ short Loft::mustExecute() const
     return ProfileBased::mustExecute();
 }
 
+std::vector<Part::TopoShape>
+Loft::getSectionShape(const char *name,
+                      App::DocumentObject *obj,
+                      const std::vector<std::string> &subs,
+                      size_t expected_size)
+{
+    std::vector<TopoShape> shapes;
+    if (subs.empty() || std::find(subs.begin(), subs.end(), std::string()) != subs.end()) {
+        shapes.push_back(Part::Feature::getTopoShape(obj));
+        if (shapes.back().isNull())
+            FC_THROWM(Part::NullShapeException, "Failed to get shape of "
+                    << name << " " << App::SubObjectT(obj, "").getSubObjectFullName(obj->getDocument()->getName()));
+    } else {
+        for (const auto &sub : subs) {
+            shapes.push_back(Part::Feature::getTopoShape(obj, sub.c_str(), /*needSubElement*/true));
+            if (shapes.back().isNull())
+                FC_THROWM(Part::NullShapeException, "Failed to get shape of " << name << " "
+                        << App::SubObjectT(obj, sub.c_str()).getSubObjectFullName(obj->getDocument()->getName()));
+        }
+    }
+    auto compound = TopoShape().makECompound(shapes, "", false);
+    auto wires = compound.getSubTopoShapes(TopAbs_WIRE);
+    auto edges = compound.getSubTopoShapes(TopAbs_EDGE, TopAbs_WIRE); // get free edges and make wires from it
+    if (edges.size()) {
+        auto extra = TopoShape().makEWires(edges).getSubTopoShapes(TopAbs_WIRE);
+        wires.insert(wires.end(), extra.begin(), extra.end());
+    }
+    const char *msg = "Sections need to have the same amount of wires or vertices as the base section";
+    if (!wires.empty()) {
+        if (expected_size && expected_size != wires.size())
+            FC_THROWM(Base::CADKernelError, msg);
+        return wires;
+    }
+    auto vertices = compound.getSubTopoShapes(TopAbs_VERTEX);
+    if (vertices.empty())
+        FC_THROWM(Base::CADKernelError, "Invalid " << name << " shape, expecting either wires or vertices");
+    if (expected_size && expected_size != vertices.size())
+        FC_THROWM(Base::CADKernelError, msg);
+    return vertices;
+}
+
 App::DocumentObjectExecReturn *Loft::execute(void)
 {
     std::vector<TopoShape> wires;
     try {
-        wires = getProfileWires();
+        wires = getSectionShape("Profile", Profile.getValue(), Profile.getSubValues());
     } catch (const Base::Exception& e) {
         return new App::DocumentObjectExecReturn(e.what());
     }
+
     // if the Base property has a valid shape, fuse the pipe into it
     TopoShape base;
     try {
@@ -95,13 +138,12 @@ App::DocumentObjectExecReturn *Loft::execute(void)
  
     try {
         //setup the location
-        this->positionByPrevious();
-        auto invObjLoc = this->getLocation().Inverted(); 
+        auto invObjLoc = this->positionByPrevious();
         if(!base.isNull())
             base.move(invObjLoc);
              
         //build up multisections
-        auto multisections = Sections.getValues();
+        auto multisections = Sections.getSubListValues();
         if(multisections.empty())
             return new App::DocumentObjectExecReturn("Loft: At least one section is needed");
         
@@ -110,15 +152,10 @@ App::DocumentObjectExecReturn *Loft::execute(void)
         for(auto& wire : wires)
             wiresections.emplace_back(1, wire);
                 
-        for(App::DocumentObject* obj : multisections) {
-            auto shape = getTopoShape(obj);
-            if(shape.isNull()) 
-                return  new App::DocumentObjectExecReturn("Loft: invalid linked feature");
-            if(shape.countSubShapes(TopAbs_WIRE)!=wiresections.size())
-                return new App::DocumentObjectExecReturn("Loft: Sections need to have the same amount of inner wires as the base section");
+        for (const auto &subSet : multisections) {
             int i=0;
-            for(auto &wire : shape.getSubTopoShapes(TopAbs_WIRE))
-                wiresections[i++].push_back(wire);
+            for (const auto &s : getSectionShape("Section", subSet.first, subSet.second, wiresections.size()))
+                wiresections[i++].push_back(s);
         }
 
         TopoShape result(0,hasher);
@@ -135,45 +172,49 @@ App::DocumentObjectExecReturn *Loft::execute(void)
         } else {
             //build all shells
             std::vector<TopoShape> shells;
-            for(auto& wires : wiresections) {
-                
-                BRepOffsetAPI_ThruSections mkTS(false, Ruled.getValue(), Precision::Confusion());
-
-                for(auto& wire : wires)   {
+            for (auto &wires : wiresections) {
+                for(auto& wire : wires)
                     wire.move(invObjLoc);
-                    mkTS.AddWire(TopoDS::Wire(wire.getShape()));
-                }
-
-                mkTS.Build();
-                if (!mkTS.IsDone())
-                    return new App::DocumentObjectExecReturn("Loft could not be built");
-
-                shells.push_back(TopoShape(0,hasher).makEShape(mkTS,wires));
+                shells.push_back(TopoShape(0, hasher).makELoft(
+                            wires, false, Ruled.getValue(), Closed.getValue()));
             }
 
             //build the top and bottom face, sew the shell and build the final solid
-            auto front = getVerifiedFace();
-            if (front.isNull())
-                return new App::DocumentObjectExecReturn("Loft: Creating a face from sketch failed");
-            front.move(invObjLoc);
-            std::vector<TopoShape> backwires;
-            for(auto& wires : wiresections)
-                backwires.push_back(wires.back());
-            
-            auto back = TopoShape(0,hasher).makEFace(backwires,0,"Part::FaceMakerCheese");
-            
-            BRepBuilderAPI_Sewing sewer;
-            sewer.SetTolerance(Precision::Confusion());
-            sewer.Add(front.getShape());
-            sewer.Add(back.getShape());
-            for(auto& s : shells)
-                sewer.Add(s.getShape());      
-            
-            sewer.Perform();
+            TopoShape front;
+            if (wiresections[0].front().shapeType() != TopAbs_VERTEX) {
+                front = getVerifiedFace();
+                if (front.isNull())
+                    return new App::DocumentObjectExecReturn("Loft: Creating a face from sketch failed");
+                front.move(invObjLoc);
+            }
 
-            shells.push_back(front);
-            shells.push_back(back);
-            result = result.makEShape(sewer,shells);
+            TopoShape back;
+            if (wiresections[0].back().shapeType() != TopAbs_VERTEX) {
+                std::vector<TopoShape> backwires;
+                for(auto& wires : wiresections)
+                    backwires.push_back(wires.back());
+                back = TopoShape(0,hasher).makEFace(backwires);
+            }
+            
+            if (!front.isNull() || !back.isNull()) {
+                BRepBuilderAPI_Sewing sewer;
+                sewer.SetTolerance(Precision::Confusion());
+                if (!front.isNull())
+                    sewer.Add(front.getShape());
+                if (!back.isNull())
+                    sewer.Add(back.getShape());
+                for(auto& s : shells)
+                    sewer.Add(s.getShape());      
+                
+                sewer.Perform();
+
+                if (!front.isNull())
+                    shells.push_back(front);
+                if (!back.isNull())
+                    shells.push_back(back);
+                result = result.makEShape(sewer,shells);
+            }
+
             if(!result.countSubShapes(TopAbs_SHELL))
                 return new App::DocumentObjectExecReturn("Loft: Failed to create shell");
             shapes = result.getSubTopoShapes(TopAbs_SHELL);
@@ -210,19 +251,19 @@ App::DocumentObjectExecReturn *Loft::execute(void)
         const char *maker;
         switch(getAddSubType()) {
         case Additive:
-            maker = TOPOP_FUSE;
+            maker = Part::OpCodes::Fuse;
             break;
         case Subtractive:
-            maker = TOPOP_CUT;
+            maker = Part::OpCodes::Cut;
             break;
         case Intersecting:
-            maker = TOPOP_COMMON;
+            maker = Part::OpCodes::Common;
             break;
         default:
             return new App::DocumentObjectExecReturn("Unknown operation type");
         }
         try {
-            boolOp.makEShape(maker, {base,result});
+            boolOp.makEBoolean(maker, {base,result});
         }catch(Standard_Failure &e) {
             return new App::DocumentObjectExecReturn("Failed to perform boolean operation");
         }
@@ -252,4 +293,15 @@ AdditiveLoft::AdditiveLoft() {
 PROPERTY_SOURCE(PartDesign::SubtractiveLoft, PartDesign::Loft)
 SubtractiveLoft::SubtractiveLoft() {
     initAddSubType(Subtractive);
+}
+
+void Loft::handleChangedPropertyType(Base::XMLReader& reader, const char* TypeName, App::Property* prop)
+{
+    // property Sections had the App::PropertyLinkList and was changed to App::PropertyXLinkSubList
+    if (prop == &Sections && strcmp(TypeName, "App::PropertyLinkList") == 0) {
+        Sections.upgrade(reader, TypeName);
+    }
+    else {
+        ProfileBased::handleChangedPropertyType(reader, TypeName, prop);
+    }
 }

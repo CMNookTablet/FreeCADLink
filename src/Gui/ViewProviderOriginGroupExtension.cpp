@@ -23,14 +23,17 @@
 
 
 #include "PreCompiled.h"
+#include <memory>
 
 #ifndef _PreComp_
 #include <boost_bind_bind.hpp>
 #include <Inventor/actions/SoGetBoundingBoxAction.h>
 #include <Inventor/nodes/SoSeparator.h>
+#include <QTimer>
 #endif
 
 #include "ViewProviderOriginGroupExtension.h"
+#include "ViewProviderDatum.h"
 #include "Application.h"
 #include "Document.h"
 #include "ViewProviderOriginFeature.h"
@@ -40,17 +43,62 @@
 #include "Command.h"
 #include <App/OriginGroupExtension.h>
 #include <App/Document.h>
+#include <App/DocumentObserver.h>
 #include <App/Origin.h>
 #include <Base/Console.h>
 
 using namespace Gui;
 namespace bp = boost::placeholders;
 
-
 EXTENSION_PROPERTY_SOURCE(Gui::ViewProviderOriginGroupExtension, Gui::ViewProviderGeoFeatureGroupExtension)
+
+class ViewProviderOriginGroupExtension::Private
+    : public std::enable_shared_from_this<ViewProviderOriginGroupExtension::Private>
+{
+public:
+    Private()
+    {
+        timer.setSingleShot(true);
+
+        QObject::connect(&timer, &QTimer::timeout, [this](){
+            if (App::Document::isAnyRestoring()
+                    || App::Document::isAnyRecomputing()) {
+                timer.start(300);
+                return;
+            }
+            for (auto obj : objs) {
+                if (auto vp = Application::Instance->getViewProvider(obj)) {
+                    if (auto ext = vp->getExtensionByType<ViewProviderOriginGroupExtension>(true))
+                        ext->updateOriginSize();
+                }
+            }
+        });
+    }
+
+    void schedule(ViewProviderDocumentObject *vp)
+    {
+        objs.insert(vp->getObject());
+        timer.start(300);
+    }
+
+    static std::shared_ptr<ViewProviderOriginGroupExtension::Private> instance()
+    {
+        static std::weak_ptr<ViewProviderOriginGroupExtension::Private> self;
+        auto res = self.lock();
+        if (!res) {
+            res = std::make_shared<ViewProviderOriginGroupExtension::Private>();
+            self = res;
+        }
+        return res;
+    };
+
+    std::set<App::DocumentObject*> objs;
+    QTimer timer;
+};
 
 ViewProviderOriginGroupExtension::ViewProviderOriginGroupExtension()
 {
+    pimpl = Private::instance();
     initExtensionType(ViewProviderOriginGroupExtension::getExtensionClassTypeId());
 }
 
@@ -92,61 +140,83 @@ void ViewProviderOriginGroupExtension::extensionUpdateData( const App::Property*
     if(propName && (strcmp(propName,"_GroupTouched")==0
                 || strcmp(propName,"Group")==0
                 || strcmp(propName,"Shape")==0))
-        updateOriginSize();
+    {
+        auto owner = getExtendedViewProvider()->getObject();
+        if(!App::GetApplication().isRestoring()
+                && owner
+                && owner->getDocument()
+                && !owner->testStatus(App::ObjectStatus::Remove)
+                && !owner->getDocument()->isPerformingTransaction())
+        {
+            pimpl->schedule(getExtendedViewProvider());
+        }
+    }
 
     ViewProviderGeoFeatureGroupExtension::extensionUpdateData ( prop );
 }
 
 void ViewProviderOriginGroupExtension::updateOriginSize () {
     auto owner = getExtendedViewProvider()->getObject();
-
-    if(!owner->getNameInDocument() ||
-       owner->isRemoving() ||
-       owner->getDocument()->testStatus(App::Document::Restoring))
+    if(!owner || !owner->getDocument()
+              || owner->testStatus(App::ObjectStatus::Remove)
+              || owner->getDocument()->isPerformingTransaction())
         return;
 
     auto* group = owner->getExtensionByType<App::OriginGroupExtension>();
     if(!group)
         return;
 
+    const auto & model = group->getFullModel ();
+
+    // BBox for Datums is calculated from all visible objects but treating datums as their basepoints only
+    SbBox3f bboxDatums = ViewProviderDatum::getRelevantBoundBox ( model );
+    // BBox for origin should take into account datums size also
+    SbBox3f bboxOrigins(0,0,0,0,0,0);
+    bool isDatumEmpty = bboxDatums.isEmpty();
+    if(!isDatumEmpty)
+        bboxOrigins.extendBy(bboxDatums);
+
+    for(App::DocumentObject* obj : model) {
+        if (auto vp = Base::freecad_dynamic_cast<ViewProviderDatum>(
+                                        Gui::Application::Instance->getViewProvider(obj)))
+        {
+            if (!vp || !vp->isVisible()) { continue; }
+
+            if(!isDatumEmpty)
+                vp->setExtents ( bboxDatums );
+
+            // Why is the following necessary?
+            //
+            // if(App::GroupExtension::getGroupOfObject(obj))
+            //     continue;
+
+            auto bbox = vp->getBoundingBox();
+            if(bbox.IsValid())
+                bboxOrigins.extendBy ( SbBox3f(bbox.MinX,bbox.MinY,bbox.MinZ,bbox.MaxX,bbox.MaxY,bbox.MaxZ) );
+        }
+    }
+
+    // get the bounding box values
+    SbVec3f max = bboxOrigins.getMax();
+    SbVec3f min = bboxOrigins.getMin();
+
     // obtain an Origin and it's ViewProvider
-    App::Origin* origin = 0;
     Gui::ViewProviderOrigin* vpOrigin = 0;
     try {
-        origin = group->getOrigin ();
-        assert (origin);
-        if (origin->OriginFeatures.getSize() == 0)
-            return;
-
-        Gui::ViewProvider *vp = Gui::Application::Instance->getViewProvider(origin);
-        if (!vp) {
-            Base::Console().Error ("No view provider linked to the Origin\n");
-            return;
-        }
-        assert ( vp->isDerivedFrom ( Gui::ViewProviderOrigin::getClassTypeId () ) );
-        vpOrigin = static_cast <Gui::ViewProviderOrigin *> ( vp );
-    } catch (const Base::Exception &ex) {
-        Base::Console().Error ("%s\n", ex.what() );
+        vpOrigin = Base::freecad_dynamic_cast<ViewProviderOrigin>(
+                Application::Instance->getViewProvider(group->getOrigin()));
+    } catch (const Base::Exception &e) {
+        e.ReportException();
         return;
     }
 
-    // calculate the bounding box for out content
-    Base::BoundBox3d bbox(0,0,0,0,0,0);
-    for(App::DocumentObject* obj : group->Group.getValues()) {
-        ViewProvider *vp = Gui::Application::Instance->getViewProvider(obj);
-        if (!vp || !vp->isVisible()) {
-            continue;
-        }
-        bbox.Add ( vp->getBoundingBox() );
-    };
-
-    Base::Vector3d size(std::max(std::abs(bbox.MinX),std::abs(bbox.MaxX)),
-                        std::max(std::abs(bbox.MinY),std::abs(bbox.MaxY)),
-                        std::max(std::abs(bbox.MinZ),std::abs(bbox.MaxZ)));
+    // calculate the desired origin size
+    Base::Vector3d size;
 
     for (uint_fast8_t i=0; i<3; i++) {
-        if (size[i] < 1e-7) { // TODO replace the magic values (2015-08-31, Fat-Zer)
-            size[i] = ViewProviderOrigin::defaultSize();
+        size[i] = std::max ( fabs ( max[i] ), fabs ( min[i] ) );
+        if (min[i]>max[i] || size[i] < 1e-7 ) {
+            size[i] = Gui::ViewProviderOrigin::defaultSize();
         }
     }
 

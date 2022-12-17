@@ -529,80 +529,6 @@ void ViewProviderBody::updateData(const App::Property* prop)
     PartGui::ViewProviderPart::updateData(prop);
 }
 
-
-void ViewProviderBody::updateOriginSize () {
-    if(App::GetApplication().isRestoring()
-            || !getObject()
-            || !getObject()->getDocument()
-            || getObject()->testStatus(App::ObjectStatus::Remove)
-            || getObject()->getDocument()->isPerformingTransaction())
-        return;
-
-    PartDesign::Body *body = static_cast<PartDesign::Body *> ( getObject() );
-
-    const auto & model = body->getFullModel ();
-
-    // BBox for Datums is calculated from all visible objects but treating datums as their basepoints only
-    SbBox3f bboxDatums = ViewProviderDatum::getRelevantBoundBox ( model );
-    // BBox for origin should take into account datums size also
-    SbBox3f bboxOrigins(0,0,0,0,0,0);
-    bool isDatumEmpty = bboxDatums.isEmpty();
-    if(!isDatumEmpty)
-        bboxOrigins.extendBy(bboxDatums);
-
-    for(App::DocumentObject* obj : model) {
-        if ( obj->isDerivedFrom ( Part::Datum::getClassTypeId () ) ) {
-            ViewProvider *vp = Gui::Application::Instance->getViewProvider(obj);
-            if (!vp || !vp->isVisible()) { continue; }
-
-            ViewProviderDatum *vpDatum = static_cast <ViewProviderDatum *> (vp) ;
-
-            if(!isDatumEmpty)
-                vpDatum->setExtents ( bboxDatums );
-
-            if(App::GroupExtension::getGroupOfObject(obj))
-                continue;
-            auto bbox = vp->getBoundingBox();
-            if(bbox.IsValid())
-                bboxOrigins.extendBy ( SbBox3f(bbox.MinX,bbox.MinY,bbox.MinZ,bbox.MaxX,bbox.MaxY,bbox.MaxZ) );
-        }
-    }
-
-    // get the bounding box values
-    SbVec3f max = bboxOrigins.getMax();
-    SbVec3f min = bboxOrigins.getMin();
-
-    // obtain an Origin and it's ViewProvider
-    App::Origin* origin = 0;
-    Gui::ViewProviderOrigin* vpOrigin = 0;
-    try {
-        origin = body->getOrigin ();
-        assert (origin);
-
-        Gui::ViewProvider *vp = Gui::Application::Instance->getViewProvider(origin);
-        if (!vp) {
-            throw Base::ValueError ("No view provider linked to the Origin");
-        }
-        assert ( vp->isDerivedFrom ( Gui::ViewProviderOrigin::getClassTypeId () ) );
-        vpOrigin = static_cast <Gui::ViewProviderOrigin *> ( vp );
-    } catch (const Base::Exception &e) {
-        e.ReportException();
-        return;
-    }
-
-    // calculate the desired origin size
-    Base::Vector3d size;
-
-    for (uint_fast8_t i=0; i<3; i++) {
-        size[i] = std::max ( fabs ( max[i] ), fabs ( min[i] ) );
-        if (min[i]>max[i] || size[i] < Precision::Confusion() ) {
-            size[i] = Gui::ViewProviderOrigin::defaultSize();
-        }
-    }
-
-    vpOrigin->Size.setValue ( size );
-}
-
 void ViewProviderBody::onChanged(const App::Property* prop) {
 
     if (prop == &DisplayModeBody) {
@@ -785,6 +711,13 @@ bool ViewProviderBody::canDragAndDropObject(App::DocumentObject * obj) const
                 && group->getGroupType() == PartDesign::AuxGroup::OtherGroup)
             return true;
     }
+
+    auto type = obj->getTypeId();
+    if (type.isDerivedFrom(Part::Datum::getClassTypeId())   ||
+        type.isDerivedFrom(Part::Part2DObject::getClassTypeId()) ||
+        type.isDerivedFrom(PartDesign::ShapeBinder::getClassTypeId()) ||
+        type.isDerivedFrom(Part::SubShapeBinder::getClassTypeId()))
+        return true;
     
     if (!body->getPrevSolidFeature()
              && !body->BaseFeature.getValue()
@@ -1005,12 +938,15 @@ bool ViewProviderBody::_reorderObject(PartDesign::Body *body,
             || !body->Group.find(newObj->getNameInDocument(), &j))
         return false;
 
+    if (i-1 == j)
+        return true;
+
     auto secondFeat = Base::freecad_dynamic_cast<PartDesign::Feature>(oldObj);
     auto firstFeat = Base::freecad_dynamic_cast<PartDesign::Feature>(newObj);
 
     // In case the old object has self sibling group, repoint the old object to
     // the earliest sibling
-    if (i < j && secondFeat && secondFeat->_Siblings.getSize()) {
+    if (i > j && secondFeat && secondFeat->_Siblings.getSize()) {
         const auto & siblings = secondFeat->_Siblings.getValues();
         for (auto rit=siblings.rbegin(); rit!=siblings.rend(); ++rit) {
             auto feat = Base::freecad_dynamic_cast<PartDesign::Feature>(*rit);
@@ -1043,12 +979,14 @@ bool ViewProviderBody::_reorderObject(PartDesign::Body *body,
         Base::ObjectStatusLocker<App::Property::Status,App::Property>
             guard2(App::Property::User3, &secondFeat->BaseFeature);
 
-        if (secondFeat->NewSolid.getValue()) {
-            secondFeat->NewSolid.setValue(false);
-            firstFeat->NewSolid.setValue(true);
-        }
+        // Must change BaseFeature before NewSolid, because changing NewSolid
+        // will auto adjust BaseFeature
         firstFeat->BaseFeature.setValue(secondFeat->BaseFeature.getValue());
         secondFeat->BaseFeature.setValue(firstFeat);
+        if (secondFeat->NewSolid.getValue()) {
+            firstFeat->NewSolid.setValue(true);
+            secondFeat->NewSolid.setValue(false);
+        }
         for (auto obj : objs) {
             if (obj == secondFeat
                     || !body->isSolidFeature(obj)

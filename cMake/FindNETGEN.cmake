@@ -108,7 +108,7 @@ else(Netgen_FOUND)
 
   IF(NOT NGLIB_INCLUDE_DIR AND NOT NETGEN_DIR_include)
       MESSAGE(STATUS "Cannot find NETGEN header files.")
-  ELSEIF(NOT NETGEN_VERSION)
+  ELSEIF(NOT NETGEN_VERSION AND NETGEN_DIR_include)
       file(STRINGS ${NETGEN_DIR_include}/mydefs.hpp NETGEN_VERSION
           REGEX "#define PACKAGE_VERSION.*"
       )

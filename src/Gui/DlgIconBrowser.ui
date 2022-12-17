@@ -125,7 +125,7 @@ can manually copy the content and append to your existing icon set configuration
 
 Note, tree view, toolbar, and workbench tab bar support non-square icons. The
 size can be specified by adding an extra field as follow. Only SVG icon requires
-explicit setting of dimention.
+explicit setting of dimension.
 
 TreeItemInvisible, iconset:MyIcons/TreeItemInvisible.svg, 128x64</string>
       </property>
@@ -155,6 +155,16 @@ in your application user directory.</string>
        </property>
        <property name="prefPath" stdset="0">
         <cstring>View</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnBrowse">
+       <property name="toolTip">
+        <string>Browser the icon directory</string>
+       </property>
+       <property name="text">
+        <string>Browse</string>
        </property>
       </widget>
      </item>

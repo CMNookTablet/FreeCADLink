@@ -47,7 +47,7 @@
 // inclusion of the generated files (generated out of ViewProviderPy2.xml)
 #include <Gui/ViewProviderPy.h>
 #include <Gui/ViewProviderPy.cpp>
-#include <Gui/View3DPy.h>
+#include <Gui/View3DInventorPy.h>
 #include <Gui/View3DInventor.h>
 #include <Base/Interpreter.h>
 #include <Base/Matrix.h>
@@ -607,13 +607,13 @@ PyObject *ViewProviderPy::getBoundingBox(PyObject *args, PyObject *kwd) {
     int depth=0;
     static char *kwlist[] = {"subname","transform","view","mat","depth", NULL};
     if (!PyArg_ParseTupleAndKeywords(args, kwd, "|sOO!O!i", kwlist,
-                &transform, View3DInventorPy::type_object(), &pyView,
+                &subname, &transform, &View3DInventorPy::Type, &pyView,
                 &subname,&Base::MatrixPy::Type, &pyMat, &depth))
         return NULL;
     PY_TRY {
         View3DInventorViewer *viewer = 0;
         if(pyView)
-            viewer = static_cast<View3DInventorPy*>(pyView)->getView3DIventorPtr()->getViewer();
+            viewer = static_cast<View3DInventorPy*>(pyView)->getView3DInventorPtr()->getViewer();
         const Base::Matrix4D *mat = 0;
         if(pyMat)
             mat = static_cast<Base::MatrixPy*>(pyMat)->getMatrixPtr();

@@ -510,6 +510,11 @@ Returns: result of offsetting (wire or face or compound of those). Compounding
 structure follows that of source shape.</UserDocu>
       </Documentation>
     </Methode>
+    <Methode Name="makeEvolved" Const="true" Keyword="true">
+        <Documentation>
+            <UserDocu>Profile along the spine</UserDocu>
+        </Documentation>
+    </Methode>
     <Methode Name="makeWires">
       <Documentation>
         <UserDocu>make wire(s) using the edges of this shape

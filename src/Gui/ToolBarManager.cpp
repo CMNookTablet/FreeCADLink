@@ -428,6 +428,13 @@ static bool isToolBarAllowed(QToolBar *toolbar, Qt::ToolBarArea area)
     return true;
 }
 
+static bool isToolBarEmpty(QToolBar *toolbar)
+{
+    // Every QToolBar has a default tool button of private class type
+    // QToolBarExtension, hence <= 1 here.
+    return toolbar->findChildren<QWidget*>().size() <= 1;
+}
+
 void ToolBarManager::onTimer()
 {
     std::string defarea = hMainWindow->GetASCII("DefaultToolBarArea");
@@ -635,7 +642,7 @@ void ToolBarManager::setup(ToolBarItem* toolBarItems)
 
         // setup the toolbar
         setup(item, toolbar);
-        if (toolbar->actions().isEmpty()) {
+        if (isToolBarEmpty(toolbar)) {
             FC_LOG("Empty toolbar " << name.toUtf8().constData());
             continue;
         }
@@ -779,7 +786,7 @@ void ToolBarManager::restoreState()
         if (!toolbar)
             continue;
         QByteArray toolbarName = toolbar->objectName().toUtf8();
-        if (toolbar->windowTitle().isEmpty() && toolbar->actions().isEmpty()) {
+        if (toolbar->windowTitle().isEmpty() && isToolBarEmpty(toolbar)) {
             toolbar->toggleViewAction()->setVisible(false);
             setToolBarVisible(toolbar, false);
         }
@@ -865,9 +872,9 @@ std::map<QString, QPointer<QToolBar>> ToolBarManager::toolBars()
             // other that has a title.
 
             QToolBar *a = p, *b = tb;
-            if (a->windowTitle().isEmpty() && a->actions().isEmpty())
+            if (a->windowTitle().isEmpty() && isToolBarEmpty(a))
                 std::swap(a, b);
-            if (!a->windowTitle().isEmpty() || !a->actions().isEmpty()) {
+            if (!a->windowTitle().isEmpty() || !isToolBarEmpty(a)) {
                 // replace toolbar and insert it at the same location
                 FC_LOG("replacing " << name.toUtf8().constData() << ' ' << b << " -> " << a);
                 getMainWindow()->insertToolBar(b, a);
@@ -892,7 +899,7 @@ void ToolBarManager::onToggleToolBar(bool visible)
     auto toolbar = qobject_cast<QToolBar*>(sender());
     if (!toolbar)
         return;
-    if (visible && toolbar->windowTitle().isEmpty() && toolbar->actions().isEmpty()) {
+    if (visible && toolbar->windowTitle().isEmpty() && isToolBarEmpty(toolbar)) {
         setToolBarVisible(toolbar, false);
         return;
     }
@@ -919,12 +926,25 @@ void ToolBarManager::onToggleStatusBarWidget(QWidget *w, bool visible)
 
 void ToolBarManager::onMovableChanged(bool movable)
 {
-    if (!restored)
-        return;
     auto toolbar = qobject_cast<QToolBar*>(sender());
-    if (toolbar) {
+    if (!toolbar)
+        return;
+    if (restored && !toolbar->objectName().isEmpty()) {
         Base::ConnectionBlocker block(connParam);
         hMovable->SetBool(toolbar->objectName().toUtf8(), movable);
+    }
+    QString name = QStringLiteral("_fc_toolbar_sep_");
+    auto sep = toolbar->findChild<QAction*>(name);
+    if (sep) {
+        toolbar->removeAction(sep);
+        sep->deleteLater();
+    }
+    if (!movable) {
+        auto actions = toolbar->actions();
+        if (actions.size()) {
+            sep = toolbar->insertSeparator(actions[0]);
+            sep->setObjectName(name);
+        }
     }
 }
 

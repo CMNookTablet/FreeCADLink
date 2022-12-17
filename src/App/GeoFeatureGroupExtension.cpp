@@ -89,13 +89,14 @@ void GeoFeatureGroupExtension::transformPlacement(const Base::Placement &transfo
     this->placement().setValue(plm);
 }
 
-DocumentObject* GeoFeatureGroupExtension::getGroupOfObject(const DocumentObject* obj)
+DocumentObject* GeoFeatureGroupExtension::getGroupOfObject(const DocumentObject* obj,
+                                                           bool checkOrigin)
 {
     if(!obj)
         return nullptr;
     
     //we will find origins, but not origin features
-    if(obj->isDerivedFrom(App::OriginFeature::getClassTypeId())) 
+    if(checkOrigin && obj->isDerivedFrom(App::OriginFeature::getClassTypeId())) 
         return OriginGroupExtension::getGroupOfObject(obj);
     
     //compared to GroupExtension we do return here all GeoFeatureGroups including all extensions derived from it
@@ -135,6 +136,12 @@ Base::Placement GeoFeatureGroupExtension::recursiveGroupPlacement(GeoFeatureGrou
     }
     
     return group->placement().getValue();
+}
+
+std::vector<DocumentObject*>
+GeoFeatureGroupExtension::addObject(DocumentObject* obj)
+{
+    return addObjects({obj});
 }
 
 std::vector<DocumentObject*>
@@ -305,7 +312,7 @@ void GeoFeatureGroupExtension::extensionOnChanged(const Property* p) {
                         auto iter = objMap.find(link);
                         if(iter == objMap.end() || !iter->second) {
                             const char *action;
-                            if (GroupParams::getGeoGroupAllowCrossLink())
+                            if (GroupParams::getGeoGroupAllowCrossLink() || !canRemoveChild(obj))
                                 action = "Invalid child ";
                             else {
                                 action = "Remove ";

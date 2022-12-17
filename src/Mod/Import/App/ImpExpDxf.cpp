@@ -59,6 +59,8 @@
 #include <BRepAdaptor_HCurve.hxx>
 #endif
 
+#include <boost/algorithm/string/predicate.hpp>
+
 #include <Base/Console.h>
 #include <Base/Parameter.h>
 #include <Base/Matrix.h>
@@ -88,6 +90,7 @@ ImpExpDxfRead::ImpExpDxfRead(std::string filepath, App::Document *pcDoc) : CDxfR
 void ImpExpDxfRead::setOptions(void)
 {
     ParameterGrp::handle hGrp = App::GetApplication().GetParameterGroupByPath(getOptionSource().c_str());
+    optionConnectEdges = hGrp->GetBool("connectEdges",false);
     optionGroupLayers = hGrp->GetBool("groupLayers",false);
     optionImportAnnotations = hGrp->GetBool("dxftext",false);
     optionScaling = hGrp->GetFloat("dxfScaling",1.0);
@@ -113,16 +116,14 @@ void ImpExpDxfRead::OnReadLine(const double* s, const double* e, bool /*hidden*/
     if (p0.IsEqual(p1,0.00000001))
         return;
     BRepBuilderAPI_MakeEdge makeEdge(p0, p1);
-    TopoDS_Edge edge = makeEdge.Edge();
-    AddObject(new Part::TopoShape(edge));
+    AddObject(makeEdge.Edge());
 }
 
 
 void ImpExpDxfRead::OnReadPoint(const double* s)
 {
     BRepBuilderAPI_MakeVertex makeVertex(makePoint(s));
-    TopoDS_Vertex vertex = makeVertex.Vertex();
-    AddObject(new Part::TopoShape(vertex));
+    AddObject(makeVertex.Vertex());
 }
 
 
@@ -137,8 +138,7 @@ void ImpExpDxfRead::OnReadArc(const double* s, const double* e, const double* c,
     gp_Circ circle(gp_Ax2(pc, up), p0.Distance(pc));
     if (circle.Radius() > 0) {
         BRepBuilderAPI_MakeEdge makeEdge(circle, p0, p1);
-        TopoDS_Edge edge = makeEdge.Edge();
-        AddObject(new Part::TopoShape(edge));
+        AddObject(makeEdge.Edge());
     }
     else {
         Base::Console().Warning("ImpExpDxf - ignore degenerate arc of circle\n");
@@ -156,8 +156,7 @@ void ImpExpDxfRead::OnReadCircle(const double* s, const double* c, bool dir, boo
     gp_Circ circle(gp_Ax2(pc, up), p0.Distance(pc));
     if (circle.Radius() > 0) {
         BRepBuilderAPI_MakeEdge makeEdge(circle);
-        TopoDS_Edge edge = makeEdge.Edge();
-        AddObject(new Part::TopoShape(edge));
+        AddObject(makeEdge.Edge());
     }
     else {
         Base::Console().Warning("ImpExpDxf - ignore degenerate circle\n");
@@ -272,8 +271,7 @@ void ImpExpDxfRead::OnReadSpline(struct SplineData& sd)
             throw Standard_Failure();
 
         BRepBuilderAPI_MakeEdge makeEdge(geom);
-        TopoDS_Edge edge = makeEdge.Edge();
-        AddObject(new Part::TopoShape(edge));
+        AddObject(makeEdge.Edge());
     }
     catch (const Standard_Failure&) {
         Base::Console().Warning("ImpExpDxf - failed to create bspline\n");
@@ -294,7 +292,7 @@ void ImpExpDxfRead::OnReadEllipse(const double* c, double major_radius, double m
         gp_Trsf trsf;
         trsf.SetRotation(gp_Ax1(pc,up),rotation);
         edge.Location(trsf);
-        AddObject(new Part::TopoShape(edge));
+        AddObject(edge);
     }
     else {
         Base::Console().Warning("ImpExpDxf - ignore degenerate ellipse\n");
@@ -322,27 +320,15 @@ void ImpExpDxfRead::OnReadInsert(const double* point, const double* scale, const
     std::string prefix = "BLOCKS ";
     prefix += name;
     prefix += " ";
-    for(std::map<std::string,std::vector<Part::TopoShape*> > ::const_iterator i = layers.begin(); i != layers.end(); ++i) {
-        std::string k = i->first;
-        if(k.substr(0, prefix.size()) == prefix) {
-            BRep_Builder builder;
-            TopoDS_Compound comp;
-            builder.MakeCompound(comp);
-            std::vector<Part::TopoShape*> v = i->second;
-            for(std::vector<Part::TopoShape*>::const_iterator j = v.begin(); j != v.end(); ++j) { 
-                const TopoDS_Shape& sh = (*j)->getShape();
-                if (!sh.IsNull())
-                    builder.Add(comp, sh);
-            }
-            if (!comp.IsNull()) {
-                Part::TopoShape* pcomp = new Part::TopoShape(comp);
-                Base::Matrix4D mat;
-                mat.scale(scale[0],scale[1],scale[2]);
-                mat.rotZ(rotation);
-                mat.move(point[0]*optionScaling,point[1]*optionScaling,point[2]*optionScaling);
-                pcomp->transformShape(mat,true);
-                AddObject(pcomp);
-            }
+    for(auto &v : layers) {
+        if (boost::starts_with(v.first, prefix)) {
+            v.second.flushPolyLine();
+            Base::Matrix4D mat;
+            mat.scale(scale[0],scale[1],scale[2]);
+            mat.rotZ(rotation);
+            mat.move(point[0]*optionScaling,point[1]*optionScaling,point[2]*optionScaling);
+            AddObject(Part::TopoShape().makECompound(
+                        v.second.shapes, "", false).makETransform(mat).getShape());
         }
     } 
 }
@@ -360,18 +346,20 @@ void ImpExpDxfRead::OnReadDimension(const double* s, const double* e, const doub
 }
 
 
-void ImpExpDxfRead::AddObject(Part::TopoShape *shape)
+void ImpExpDxfRead::AddObject(const TopoDS_Shape &shape)
 {
     //std::cout << "layer:" << LayerName() << std::endl;
-    std::vector <Part::TopoShape*> vec;
-    if (layers.count(LayerName()))
-        vec = layers[LayerName()];
-    vec.push_back(shape);
-    layers[LayerName()] = vec;
+    auto &info = layers[LayerName()];
+    Part::TopoShape s(shape);
+    s.Tag = -1; // To skip topo naming processing
+    if (shape.ShapeType() == TopAbs_EDGE)
+        info.edges.push_back(s);
+    else
+        info.shapes.push_back(s);
     if (!optionGroupLayers) {
         if(LayerName().substr(0, 6) != "BLOCKS") {
             Part::Feature *pcFeature = (Part::Feature *)document->addObject("Part::Feature", "Shape");
-            pcFeature->Shape.setValue(shape->getShape());
+            pcFeature->Shape.setValue(shape);
         }
     }
 }
@@ -416,29 +404,40 @@ std::string ImpExpDxfRead::Deformat(const char* text)
 }
 
 
-void ImpExpDxfRead::AddGraphics() const
+void ImpExpDxfRead::AddGraphics()
 {
     if (optionGroupLayers) {
-        for(std::map<std::string,std::vector<Part::TopoShape*> > ::const_iterator i = layers.begin(); i != layers.end(); ++i) {
-            BRep_Builder builder;
-            TopoDS_Compound comp;
-            builder.MakeCompound(comp);
-            std::string k = i->first;
-            if (k == "0") // FreeCAD doesn't like an object name being '0'...
-                k = "LAYER_0";
-            std::vector<Part::TopoShape*> v = i->second;
-            if(k.substr(0, 6) != "BLOCKS") {
-                for(std::vector<Part::TopoShape*>::const_iterator j = v.begin(); j != v.end(); ++j) { 
-                    const TopoDS_Shape& sh = (*j)->getShape();
-                    if (!sh.IsNull())
-                        builder.Add(comp, sh);
-                }
-                if (!comp.IsNull()) {
-                    Part::Feature *pcFeature = (Part::Feature *)document->addObject("Part::Feature", k.c_str());
-                    pcFeature->Shape.setValue(comp);
-                } 
+        for (auto &v : layers) {
+            if (boost::starts_with(v.first, "BLOCKS"))
+                continue;
+            v.second.flushPolyLine();
+            const char *name = v.first.c_str();
+            std::string _name;
+            if (std::isdigit((int)name[0])) {
+                _name = "LAYER_";
+                _name += name;
+                name = _name.c_str();
             }
+            Part::Feature *pcFeature = (Part::Feature *)document->addObject("Part::Feature", name);
+            pcFeature->Shape.setValue(Part::TopoShape().makECompound(v.second.shapes, "", false));
         }
+    }
+}
+
+void ImpExpDxfRead::OnPolyLineStart()
+{
+    if (!optionConnectEdges)
+        return;
+    auto it = layers.find(LayerName());
+    if (it != layers.end())
+        it->second.flushPolyLine();
+}
+
+void ImpExpDxfRead::LayerInfo::flushPolyLine()
+{
+    if (!edges.empty()) {
+        shapes.push_back(Part::TopoShape(-1).makEWires(edges));
+        edges.clear();
     }
 }
 

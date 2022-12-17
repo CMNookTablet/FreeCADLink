@@ -43,6 +43,8 @@ public:
     InteractiveInterpreter();
     ~InteractiveInterpreter();
 
+    bool hasPending() const;
+    bool push(const QString &line);
     bool push(const char*);
     int compileCommand(const char*) const;
     bool hasPendingInput( void ) const;

@@ -53,6 +53,10 @@ public:
     virtual ~PropertyPythonObject();
 
     void setValue(Py::Object);
+
+    // Dummy set value for ADD_PROPERTY
+    void setValue() {}
+
     Py::Object getValue() const;
 
     virtual PyObject *getPyObject(void);

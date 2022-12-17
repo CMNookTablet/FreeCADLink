@@ -24,7 +24,6 @@
 #include <Inventor/actions/SoActions.h>
 #include "../SoFCUnifiedSelection.h"
 #include "../SoFCSelectionAction.h"
-#include "../ViewParams.h"
 #include "SoFCDisplayModeElement.h"
 
 using namespace Gui;
@@ -66,35 +65,30 @@ SoFCDisplayModeElement::~SoFCDisplayModeElement()
 }
 
 void
+SoFCDisplayModeElement::HiddenLineConfig::reset()
+{
+  memset(this, 0, sizeof(HiddenLineConfig));
+}
+
+void
 SoFCDisplayModeElement::set(SoState * const state,
                             SoNode * const node,
                             const SbName &mode,
                             SbBool hiddenLines,
-                            SbBool outline)
+                            const HiddenLineConfig *pConfig)
 {
   auto element = static_cast<SoFCDisplayModeElement*>(
       inherited::getElement(state, classStackIndex, node));
 
   if (element) {
     element->displayMode = mode;
-    if((element->hiddenLines = hiddenLines)) {
-      float f;
-      if((element->hasFaceColor = ViewParams::getHiddenLineOverrideFaceColor()))
-        element->faceColor.setPackedValue(ViewParams::getHiddenLineFaceColor(),f);
-      if((element->hasLineColor = ViewParams::getHiddenLineOverrideColor()))
-        element->lineColor.setPackedValue(ViewParams::getHiddenLineColor(),f);
-      if (ViewParams::getHiddenLineOverrideTransparency())
-        element->transp = ViewParams::getHiddenLineTransparency();
-      else
-        element->transp = -1.0f;
-      element->outline = outline;
-    }
-    else {
-      element->hasFaceColor = false;
-      element->hasLineColor = false;
-      element->transp = -1.0f;
-      element->outline = false;
-    }
+    if ((element->hiddenLines = hiddenLines) && pConfig) {
+      element->hiddenLineConfig = *pConfig;
+    } else
+      element->hiddenLineConfig.reset();
+    float tmp;
+    element->faceColor.setPackedValue(element->hiddenLineConfig.faceColor, tmp);
+    element->lineColor.setPackedValue(element->hiddenLineConfig.lineColor, tmp);
   }
 }
 
@@ -116,15 +110,20 @@ SoFCDisplayModeElement::setColors(SoState * const state,
       inherited::getElement(state, classStackIndex, node));
 
   if (element) {
-    if ((element->hasFaceColor = (faceColor != nullptr)))
+    if ((element->hiddenLineConfig.hasFaceColor = (faceColor != nullptr))) {
+      element->hiddenLineConfig.faceColor = faceColor->getPackedValue(1.0);
       element->faceColor = *faceColor;
-    if ((element->hasLineColor = (lineColor != nullptr)))
+    }
+    if ((element->hiddenLineConfig.hasLineColor = (lineColor != nullptr))) {
+      element->hiddenLineConfig.lineColor = lineColor->getPackedValue(1.0);
       element->lineColor = *lineColor;
-    element->transp = transp;
+    }
+    if ((element->hiddenLineConfig.hasTransparency = transp>0.0))
+      element->hiddenLineConfig.transparency = transp;
   }
 }
 
-  const SbName &
+const SbName &
 SoFCDisplayModeElement::get(SoState * const state)
 {
   auto element = static_cast<const SoFCDisplayModeElement*>(
@@ -139,11 +138,21 @@ SoFCDisplayModeElement::get() const
 }
 
 SbBool
+SoFCDisplayModeElement::showHiddenLines(SoState * const state, HiddenLineConfig *config)
+{
+  auto element = static_cast<const SoFCDisplayModeElement*>(
+      inherited::getConstElement(state, classStackIndex));
+  if (config)
+    *config = element->hiddenLineConfig;
+  return element->hiddenLines;
+}
+
+SbBool
 SoFCDisplayModeElement::showHiddenLines(SoState * const state, SbBool *outline)
 {
   auto element = static_cast<const SoFCDisplayModeElement*>(
       inherited::getConstElement(state, classStackIndex));
-  if (outline) *outline = element->outline;
+  if (outline) *outline = element->hiddenLineConfig.outline;
   return element->hiddenLines;
 }
 
@@ -153,10 +162,10 @@ SoFCDisplayModeElement::showHiddenLines() const
   return hiddenLines;
 }
 
-SbBool
-SoFCDisplayModeElement::showOutline() const
+const SoFCDisplayModeElement::HiddenLineConfig &
+SoFCDisplayModeElement::getHiddenLineConfig() const
 {
-  return outline;
+  return hiddenLineConfig;
 }
 
 const SbColor *
@@ -170,7 +179,7 @@ SoFCDisplayModeElement::getFaceColor(SoState * const state)
 const SbColor *
 SoFCDisplayModeElement::getFaceColor() const
 {
-  return hasFaceColor ? &faceColor : nullptr;
+  return hiddenLineConfig.hasFaceColor ? &faceColor : nullptr;
 }
 
 const SbColor *
@@ -184,7 +193,7 @@ SoFCDisplayModeElement::getLineColor(SoState * const state)
 const SbColor *
 SoFCDisplayModeElement::getLineColor() const
 {
-  return hasLineColor ? &lineColor : nullptr;
+  return hiddenLineConfig.hasLineColor ? &lineColor : nullptr;
 }
 
 float
@@ -198,7 +207,9 @@ SoFCDisplayModeElement::getTransparency(SoState * const state)
 float
 SoFCDisplayModeElement::getTransparency() const
 {
-  return transp;
+  if (hiddenLineConfig.hasTransparency)
+    return hiddenLineConfig.transparency;
+  return -1.0f;
 }
 
 SbBool
@@ -211,14 +222,9 @@ SoFCDisplayModeElement::matches(const SoElement * element) const
   auto other = static_cast<const SoFCDisplayModeElement *>(element);
   if (this->displayMode != other->displayMode
       || this->hiddenLines != other->hiddenLines
-      || this->outline != other->outline)
-    return FALSE;
-  if(this->hasFaceColor != other->hasFaceColor
-      || this->hasLineColor != other->hasLineColor
-      || this->transp != other->transp)
-    return FALSE;
-  if((this->hasFaceColor && this->faceColor != other->faceColor)
-      || (this->hasLineColor && this->lineColor != other->lineColor))
+      || this->faceColor != other->lineColor
+      || this->lineColor != other->lineColor
+      || memcmp(&this->hiddenLineConfig, &other->hiddenLineConfig, sizeof(HiddenLineConfig))!=0)
     return FALSE;
   return TRUE;
 }
@@ -231,14 +237,9 @@ SoFCDisplayModeElement::copyMatchInfo(void) const
 
   element->displayMode = this->displayMode;
   element->hiddenLines = this->hiddenLines;
-  element->outline = this->outline;
-  element->hasFaceColor = this->hasFaceColor;
-  element->hasLineColor = this->hasLineColor;
-  element->transp = this->transp;
-  if(this->hasFaceColor)
-    element->faceColor = this->faceColor;
-  if(this->hasLineColor)
-    element->lineColor = this->lineColor;
+  element->hiddenLineConfig = this->hiddenLineConfig;
+  element->faceColor = this->faceColor;
+  element->lineColor = this->lineColor;
   element->nodeId = this->nodeId;
   return element;
 }
@@ -249,10 +250,7 @@ SoFCDisplayModeElement::init(SoState * state)
   inherited::init(state);
   this->displayMode = SbName::empty();
   this->hiddenLines = FALSE;
-  this->outline = FALSE;
-  this->hasFaceColor = FALSE;
-  this->hasLineColor = FALSE;
-  this->transp = -1.0f;
+  this->hiddenLineConfig.reset();
 }
 
 // vim: noai:ts=2:sw=2

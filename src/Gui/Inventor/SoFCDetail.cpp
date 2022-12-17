@@ -26,7 +26,7 @@
 
 SO_DETAIL_SOURCE(SoFCDetail);
 
-SoFCDetail::SoFCDetail(void)
+SoFCDetail::SoFCDetail()
 {
 }
 
@@ -35,16 +35,17 @@ SoFCDetail::~SoFCDetail()
 }
 
 void
-SoFCDetail::initClass(void)
+SoFCDetail::initClass()
 {
   SO_DETAIL_INIT_CLASS(SoFCDetail, SoDetail);
 }
 
 SoDetail *
-SoFCDetail::copy(void) const
+SoFCDetail::copy() const
 {
   SoFCDetail *copy = new SoFCDetail();
   copy->indexArray = this->indexArray;
+  copy->ctx = this->ctx;
   return copy;
 }
 
@@ -72,13 +73,109 @@ SoFCDetail::removeIndex(Type type, int index)
 }
 
 const std::set<int> &
-SoFCDetail::getIndices(Type type) const
+SoFCDetail::getIndices(Type type, void **ctx) const
 {
   if(type < 0 || type >= TypeMax) {
     static std::set<int> none;
     return none;
   }
+  if (ctx)
+    *ctx = this->ctx[type];
   return indexArray[type];
 }
 
+void *
+SoFCDetail::getContext(Type type) const
+{
+  if(type >= 0 && type < TypeMax)
+    return this->ctx[type];
+  return nullptr;
+}
+
+void
+SoFCDetail::setContext(Type type, void *ctx)
+{
+  if(type >= 0 && type < TypeMax)
+    this->ctx[type] = ctx;
+}
+
+//////////////////////////////////////////////////////////////
+
+SO_DETAIL_SOURCE(SoFCFaceDetail);
+
+void
+SoFCFaceDetail::initClass()
+{
+  SO_DETAIL_INIT_CLASS(SoFCFaceDetail, SoFaceDetail);
+}
+
+SoDetail *
+SoFCFaceDetail::copy() const
+{
+  SoFCFaceDetail *copy = new SoFCFaceDetail();
+  if (this->getNumPoints()) {
+    copy->setNumPoints(this->getNumPoints());
+    for (int i = 0; i < this->getNumPoints(); i++) {
+      copy->setPoint(i, this->getPoint(i));
+    }
+  }
+  copy->setFaceIndex(this->getFaceIndex());
+  copy->setPartIndex(this->getPartIndex());
+  copy->setContext(this->getContext());
+  return copy;
+}
+
+void
+SoFCFaceDetail::setContext(void *ctx)
+{
+  this->ctx = ctx;
+}
+
+//////////////////////////////////////////////////////////////
+
+SO_DETAIL_SOURCE(SoFCLineDetail);
+
+void
+SoFCLineDetail::initClass()
+{
+  SO_DETAIL_INIT_CLASS(SoFCLineDetail, SoLineDetail);
+}
+
+SoDetail *
+SoFCLineDetail::copy() const
+{
+  SoFCLineDetail *copy = new SoFCLineDetail();
+  *copy = *this;
+  return copy;
+}
+
+void
+SoFCLineDetail::setContext(void *ctx)
+{
+  this->ctx = ctx;
+}
+
+//////////////////////////////////////////////////////////////
+
+SO_DETAIL_SOURCE(SoFCPointDetail);
+
+void
+SoFCPointDetail::initClass()
+{
+  SO_DETAIL_INIT_CLASS(SoFCPointDetail, SoPointDetail);
+}
+
+SoDetail *
+SoFCPointDetail::copy() const
+{
+  SoFCPointDetail *copy = new SoFCPointDetail();
+  *copy = *this;
+  return copy;
+}
+
+void
+SoFCPointDetail::setContext(void *ctx)
+{
+  this->ctx = ctx;
+}
 // vim: noai:ts=2:sw=2

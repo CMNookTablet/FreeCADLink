@@ -31,20 +31,23 @@
 
 namespace Part {
 
-#if OCC_VERSION_HEX < 0x070500
 class PartExport ProgressIndicator : public Message_ProgressIndicator
 {
 public:
     ProgressIndicator (int theMaxVal = 100);
     virtual ~ProgressIndicator ();
 
-    virtual Standard_Boolean Show (const Standard_Boolean theForce = Standard_True);
-    virtual Standard_Boolean UserBreak();
+#if OCC_VERSION_HEX < 0x070500
+    virtual Standard_Boolean Show (const Standard_Boolean theForce = Standard_True) override;
+#else
+    virtual void Show (const Message_ProgressScope& theScope, const Standard_Boolean theForce) override;
+#endif
+    virtual Standard_Boolean UserBreak() override;
 
 private:
     std::unique_ptr<Base::SequencerLauncher> myProgress;
+    const void *prevText = nullptr;
 };
-#endif
 
 }
 

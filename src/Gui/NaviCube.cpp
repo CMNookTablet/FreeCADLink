@@ -108,7 +108,6 @@
 #include "MDIView.h"
 #include "Command.h"
 #include "Document.h"
-#include "ViewParams.h"
 #include "Action.h"
 #include "Widgets.h"
 
@@ -309,6 +308,8 @@ public:
 
 public:
 	static int m_CubeWidgetSize;
+    static long m_StepByTurn;
+    static bool m_RotateToNearest;
 
     // With QPainter render hints, over sample is not really need. Resizing
     // texture just make it look worse.
@@ -373,6 +374,8 @@ public:
 };
 
 int NaviCubeShared::m_CubeWidgetSize;
+long NaviCubeShared::m_StepByTurn;
+bool NaviCubeShared::m_RotateToNearest;
 double NaviCubeShared::m_BorderWidth = 1.5;
 bool NaviCubeShared::m_ShowCS;
 bool NaviCubeShared::m_AutoHideCube;
@@ -485,6 +488,8 @@ void NaviCubeShared::getParams()
     for (auto &info : m_colors)
         info.color = QColor::fromRgba(m_hGrp->GetUnsigned(info.name, info.def.rgba()));
     m_CubeWidgetSize = m_hGrp->GetInt("CubeSize", 132);
+    m_RotateToNearest = m_hGrp->GetBool("NaviRotateToNearest", true);
+    m_StepByTurn = m_hGrp->GetInt("NaviStepByTurn", 8);
     m_ShowCS = m_hGrp->GetBool("ShowCS", true);
     m_BorderWidth = m_hGrp->GetFloat("BorderWidth", 1.5);
     m_AutoHideCube = m_hGrp->GetBool("AutoHideCube", false);
@@ -495,9 +500,9 @@ void NaviCubeShared::getParams()
 
 void NaviCubeShared::deinit(QOpenGLContext *ctx)
 {
-    // QOpenGLTexture insists on being destoryed only under the original
+    // QOpenGLTexture insists on being destroyed only under the original
     // context that created itself, or else just refuse to delete even if the
-    // context is being destoryed (which is kind of absurd IMO). So we'll have
+    // context is being destroyed (which is kind of absurd IMO). So we'll have
     // to remember the original context, and deinit it here and let it be
     // recreated in another context.
     if (ctx && ctx != m_Context)
@@ -871,7 +876,7 @@ bool NaviCubeShared::initNaviCube() {
 
 	// first create front and backside of faces
 	float gap = 0.12f;
-	m_Textures[TEX_FRONT_FACE] = createCubeFaceTex(gap, NULL, SHAPE_SQUARE);
+	m_Textures[TEX_FRONT_FACE] = createCubeFaceTex(gap, nullptr, SHAPE_SQUARE);
 
     vector<string> labels;
 	for (auto &info : m_labels)
@@ -924,7 +929,7 @@ bool NaviCubeShared::initNaviCube() {
 	addFace(gap, x, z, TEX_BOTTOM, TEX_FRONT_FACE, TEX_BOTTOM, true);
 
 	// add corner faces
-	m_Textures[TEX_CORNER_FACE] = createCubeFaceTex(gap, NULL, SHAPE_CORNER);
+	m_Textures[TEX_CORNER_FACE] = createCubeFaceTex(gap, nullptr, SHAPE_CORNER);
 	// we need to rotate to the edge, thus matrix for rotation angle of 54.7 deg
 	cs = cos(atan(sqrt(2.0)));
 	sn = sin(atan(sqrt(2.0)));
@@ -961,7 +966,7 @@ bool NaviCubeShared::initNaviCube() {
 	addFace(gap, x, z, TEX_CORNER_FACE, TEX_CORNER_FACE, TEX_TOP_REAR_RIGHT);
 
 	// add edge faces
-	m_Textures[TEX_EDGE_FACE] = createCubeFaceTex(gap, NULL, SHAPE_EDGE);
+	m_Textures[TEX_EDGE_FACE] = createCubeFaceTex(gap, nullptr, SHAPE_EDGE);
 	// first back to top side
 	x[0] = 1; x[1] = 0; x[2] = 0;
 	z[0] = 0; z[1] = 0; z[2] = 1;
@@ -1228,38 +1233,31 @@ bool NaviCubeShared::drawNaviCube(SoCamera *cam, bool pickMode, int hiliteId, bo
 	else if (hit || !m_AutoHideCube) {
 		for (int pass = 0; pass < 3 ; pass++) {
             for (auto &f : m_Faces) {
-                if (pass != f.m_RenderPass)
+                if (pass != f.m_RenderPass || f.m_TextureId != f.m_PickTextureId)
                     continue;
 
                 QColor& c = (hiliteId == f.m_PickId) && (pass < 2) ? m_HiliteColor : f.m_Color;
                 glColor4f(c.redF(), c.greenF(), c.blueF(),c.alphaF());
                 glBindTexture(GL_TEXTURE_2D, f.m_TextureId);
                 
-                if (f.m_TextureId == f.m_PickTextureId) {
-                    glDrawElements(GL_TRIANGLE_FAN, f.m_VertexCount, GL_UNSIGNED_BYTE, (void*) &m_IndexArray[f.m_FirstVertex]);
+                glDrawElements(GL_TRIANGLE_FAN, f.m_VertexCount, GL_UNSIGNED_BYTE, (void*) &m_IndexArray[f.m_FirstVertex]);
+            }
+        }
+    }
 
-                    if (f.m_PickTexId == TEX_FRONT_FACE && m_BorderWidth >= 1.0) {
-                        int idx = f.m_FirstVertex;
-                        const Vector3f &mv1 = m_VertexArray2[m_IndexArray[idx]];
-                        const Vector3f &mv2 = m_VertexArray2[m_IndexArray[idx+1]];
-                        const Vector3f &mv3 = m_VertexArray2[m_IndexArray[idx+2]];
-                        const Vector3f &mv4 = m_VertexArray2[m_IndexArray[idx+3]];
-                        auto &c = m_BorderColor;
-                        glColor4f(c.redF(), c.greenF(), c.blueF(), c.alphaF());
-			            glDisable(GL_TEXTURE_2D);
-	                    glLineWidth(m_BorderWidth);
-                        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		                glBegin(GL_QUADS);
-                        glVertex3f(mv1[0], mv1[1], mv1[2]);
-                        glVertex3f(mv2[0], mv2[1], mv2[2]);
-                        glVertex3f(mv3[0], mv3[1], mv3[2]);
-                        glVertex3f(mv4[0], mv4[1], mv4[2]);
-                        glEnd();
-                        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-			            glEnable(GL_TEXTURE_2D);
-                    }
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+
+	if (!pickMode && (hit || !m_AutoHideCube)) {
+		for (int pass = 0; pass < 3 ; pass++) {
+            for (auto &f : m_Faces) {
+                if (pass != f.m_RenderPass || f.m_TextureId == f.m_PickTextureId)
                     continue;
-                }
+
+                QColor& c = (hiliteId == f.m_PickId) && (pass < 2) ? m_HiliteColor : f.m_Color;
+                glColor4f(c.redF(), c.greenF(), c.blueF(),c.alphaF());
+                glBindTexture(GL_TEXTURE_2D, f.m_TextureId);
 
                 // We are rendering a text label here. Checks the orientation
                 // and flip the texture to make it more readable.
@@ -1303,11 +1301,40 @@ bool NaviCubeShared::drawNaviCube(SoCamera *cam, bool pickMode, int hiliteId, bo
                 glTexCoord2f(uv*t4[0], uv*t4[1]); glVertex3f(mv4[0], mv4[1], mv4[2]);
                 glEnd();
 			}
-		}
-	}
+        }
 
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        if (m_BorderWidth >= 1.0f) {
+	        glDisable(GL_DEPTH_TEST);
+			glDisable(GL_TEXTURE_2D);
+            const auto &c = m_BorderColor;
+            glColor4f(c.redF(), c.greenF(), c.blueF(), c.alphaF());
+            glLineWidth(m_BorderWidth);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            glBegin(GL_QUADS);
+            for (int pass = 0; pass < 3 ; pass++) {
+                for (auto &f : m_Faces) {
+                    if (pass != f.m_RenderPass)
+                        continue;
+                    if (f.m_TextureId == f.m_PickTextureId) {
+                        if (f.m_PickTexId == TEX_FRONT_FACE) {
+                            int idx = f.m_FirstVertex;
+                            const Vector3f &mv1 = m_VertexArray2[m_IndexArray[idx]];
+                            const Vector3f &mv2 = m_VertexArray2[m_IndexArray[idx+1]];
+                            const Vector3f &mv3 = m_VertexArray2[m_IndexArray[idx+2]];
+                            const Vector3f &mv4 = m_VertexArray2[m_IndexArray[idx+3]];
+                            glVertex3f(mv1[0], mv1[1], mv1[2]);
+                            glVertex3f(mv2[0], mv2[1], mv2[2]);
+                            glVertex3f(mv3[0], mv3[1], mv3[2]);
+                            glVertex3f(mv4[0], mv4[1], mv4[2]);
+                        }
+                    }
+                }
+            }
+            glEnd();
+			glEnable(GL_TEXTURE_2D);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
+	}
 
     if (hit || (!m_AutoHideButton && !m_AutoHideCube)) {
         // Draw the rotate buttons
@@ -1501,7 +1528,7 @@ bool NaviCubeImplementation::mouseReleased(short x, short y) {
         m_hGrp->SetInt("OffsetX", m_CubeWidgetOffsetX);
         m_hGrp->SetInt("OffsetY", m_CubeWidgetOffsetY);
     } else {
-        // get the curent view
+        // get the current view
         SbMatrix ViewRotMatrix;
         SbRotation CurrentViewRot = m_View3DInventorViewer->getCameraOrientation();
         CurrentViewRot.getValue(ViewRotMatrix);
@@ -1510,9 +1537,9 @@ bool NaviCubeImplementation::mouseReleased(short x, short y) {
 		float tilt = 90 - Base::toDegrees(atan(sqrt(2.0)));
 		int pick = pickFace(x, y);
 
-		long step = Base::clamp(ViewParams::getNaviStepByTurn(), (long)4, (long)36);
+		long step = Base::clamp(NaviCubeShared::m_StepByTurn, (long)4, (long)36);
 		float rotStepAngle = 360.0f / step;
-		bool toNearest = ViewParams::getNaviRotateToNearest();
+		bool toNearest = NaviCubeShared::m_RotateToNearest;
 
 		SbRotation viewRot = CurrentViewRot;
 
@@ -1748,9 +1775,9 @@ bool NaviCubeImplementation::mouseReleased(short x, short y) {
 		case TEX_BOTTOM_LEFT_FRONT:
 			viewRot = setView(rot - 90, 90 + tilt);
 			// we have 3 possible end states:
-			// - z-axis is not rotated larger than 120 ° from (0, 1, 0) -> we are already there
-			// - y-axis is not rotated larger than 120 ° from (0, 1, 0)
-			// - x-axis is not rotated larger than 120 ° from (0, 1, 0)
+			// - z-axis is not rotated larger than 120 deg from (0, 1, 0) -> we are already there
+			// - y-axis is not rotated larger than 120 deg from (0, 1, 0)
+			// - x-axis is not rotated larger than 120 deg from (0, 1, 0)
 			if (toNearest) {
 				if (ViewRotMatrix[1][0] > 0.4823)
 					viewRot = rotateView(viewRot, 0, -120, SbVec3f(1, 1, 1));
@@ -1843,7 +1870,7 @@ bool NaviCubeImplementation::mouseReleased(short x, short y) {
 			viewRot = rotateView(viewRot, 0, 180);
 			break;
 		case TEX_VIEW_MENU_FACE :
-            m_Hit = false;
+			m_Hit = true;
 			m_Shared->handleMenu(m_View3DInventorViewer->parentWidget());
 			break;
 		}
@@ -1950,7 +1977,7 @@ void NaviCubeShared::handleMenu(QWidget *parent) {
     };
     for (auto command : commands) {
         if (!command) {
-        m_Menu.addSeparator();
+            m_Menu.addSeparator();
         }
         else {
             Command* cmd = rcCmdMgr.getCommandByName(command);
@@ -1964,12 +1991,12 @@ void NaviCubeShared::handleMenu(QWidget *parent) {
     auto action = Gui::Action::addCheckBox(
                                 &m_Menu,
                                 QObject::tr("Rotate to nearest"),
-                                QObject::tr(ViewParams::docNaviRotateToNearest()),
+                                QObject::tr("Rotates to nearest possible state when clicking a cube face"),
                                 QIcon(),
-                                ViewParams::getNaviRotateToNearest(),
+                                m_RotateToNearest,
                                 &checkboxRotate);
-    QObject::connect(action, &QAction::toggled, [](bool checked) {
-        ViewParams::setNaviRotateToNearest(checked);
+    QObject::connect(action, &QAction::toggled, [this](bool checked) {
+        m_hGrp->SetBool("NaviRotateToNearest", checked);
     });
 
     auto subMenu = m_Menu.addMenu(QObject::tr("Auto hide"));
@@ -2035,11 +2062,13 @@ void NaviCubeShared::handleMenu(QWidget *parent) {
     auto spinBoxSteps = new QSpinBox;
     spinBoxSteps->setMinimum(4);
     spinBoxSteps->setMaximum(36);
-    spinBoxSteps->setValue(ViewParams::getNaviStepByTurn());
+    spinBoxSteps->setValue(m_StepByTurn);
     Gui::Action::addWidget(&m_Menu, QObject::tr("Steps by turn"),
-            QObject::tr(ViewParams::docNaviStepByTurn()), spinBoxSteps);
+            QObject::tr("Number of steps by turn when using arrows (default = 8 : step angle = 360/8 = 45 deg)"),
+            spinBoxSteps);
     QObject::connect(spinBoxSteps, QOverload<int>::of(&QSpinBox::valueChanged), [this](int value) {
-        ViewParams::setNaviStepByTurn(value);
+
+        m_hGrp->SetInt("NaviStepByTurn", value);
     });
 
     auto spinBoxWidth = new QDoubleSpinBox;
@@ -2056,13 +2085,13 @@ void NaviCubeShared::handleMenu(QWidget *parent) {
 
     QObject::connect(&m_Menu, &QMenu::aboutToShow,
     [=](){
-        { QSignalBlocker blocker(checkboxRotate); checkboxRotate->setChecked(ViewParams::getNaviRotateToNearest()); }
+        { QSignalBlocker blocker(checkboxRotate); checkboxRotate->setChecked(m_RotateToNearest); }
         { QSignalBlocker blocker(checkboxAutoHideCube); checkboxAutoHideCube->setChecked(m_AutoHideCube); }
         { QSignalBlocker blocker(checkboxAutoHideButton); checkboxAutoHideButton->setChecked(m_AutoHideButton); }
         { QSignalBlocker blocker(spinBoxAutoHide); spinBoxAutoHide->setValue(m_AutoHideTimeout); }
         { QSignalBlocker blocker(checkboxShowCS); checkboxShowCS->setChecked(m_ShowCS); }
         { QSignalBlocker blocker(spinBoxSize); spinBoxSize->setValue(m_CubeWidgetSize); }
-        { QSignalBlocker blocker(spinBoxSteps); spinBoxSteps->setValue(ViewParams::getNaviStepByTurn()); }
+        { QSignalBlocker blocker(spinBoxSteps); spinBoxSteps->setValue(m_StepByTurn); }
         { QSignalBlocker blocker(spinBoxWidth); spinBoxWidth->setValue(m_BorderWidth); }
     });
 

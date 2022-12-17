@@ -1282,7 +1282,9 @@ PyObject* Application::sAddIcon(PyObject * /*self*/, PyObject *args)
     QByteArray ary(contentStr, content.len);
     icon.loadFromData(ary, format);
 
+    const char *filepath = nullptr;
     if (icon.isNull()){
+        filepath = contentStr;
         QString file = QString::fromUtf8(contentStr, content.len);
         icon.load(file);
     }
@@ -1294,7 +1296,7 @@ PyObject* Application::sAddIcon(PyObject * /*self*/, PyObject *args)
         return NULL;
     }
 
-    BitmapFactory().addPixmapToCache(iconName, icon);
+    BitmapFactory().addPixmapToCache(iconName, icon, filepath);
 
     Py_INCREF(Py_None);
     return Py_None;

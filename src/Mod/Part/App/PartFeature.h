@@ -59,6 +59,7 @@ class PartFeaturePy;
  */
 class PartExport Feature : public App::GeoFeature
 {
+    typedef App::GeoFeature inherited;
     PROPERTY_HEADER_WITH_OVERRIDE(Part::Feature);
 
 public:
@@ -151,12 +152,35 @@ public:
         return owner && owner->isDerivedFrom(getClassTypeId());
     }
 
+    static void disableElementMapping(App::PropertyContainer *container, bool disable=true);
+    static bool isElementMappingDisabled(App::PropertyContainer *container);
+
     virtual const std::vector<std::string>& searchElementCache(const std::string &element,
                                                                bool checkGeometry = true,
                                                                double tol = 1e-7,
                                                                double atol = 1e-10) const override;
 
     virtual const std::vector<const char*>& getElementTypes(bool all=false) const override;
+
+    virtual void beforeSave() const override;
+
+    void expandShapeContents();
+    void mergeShapeContents();
+    void collapseShapeContents(bool removeProperty=false);
+
+    /*[[[cog
+    import PartParams
+    PartParams.declare_properties()
+    ]]]*/
+
+    // Auto generated code (Tools/params_utils.py:1012)
+    App::PropertyLinkList *getShapeContentsProperty(bool force=false);
+    App::PropertyBool *getShapeContentSuppressedProperty(bool force=false);
+    App::PropertyLinkHidden *getShapeContentReplacementProperty(bool force=false);
+    App::PropertyBool *getShapeContentReplacementSuppressedProperty(bool force=false);
+    App::PropertyBool *getShapeContentDetachedProperty(bool force=false);
+    App::PropertyLinkHidden *get_ShapeContentOwnerProperty(bool force=false);
+    //[[[end]]]
 
     boost::signals2::signal<void (App::Document *)> signalMapShapeColors;
 
@@ -171,10 +195,29 @@ protected:
     virtual App::DocumentObjectExecReturn *execute() override;
     virtual void onBeforeChange(const App::Property* prop) override;
     virtual void onChanged(const App::Property* prop) override;
+    virtual void unsetupObject() override;
+    virtual void onDocumentRestored() override;
+
+    // Return true if need to apply the shape placement to the Placement property
+    virtual bool shouldApplyPlacement();
+
+    void registerElementCache(const std::string &prefix, PropertyPartShape *prop);
+
+    /** Helper function to obtain mapped and indexed element name from a shape
+     * @params shape: source shape
+     * @param name: the input name, can be either mapped or indexed name
+     * @return Returns both the indexed and mapped name
+     *
+     * If the 'name' referencing a non-primary shape type, i.e. not
+     * Vertex/Edge/Face, this function will auto generate a name from primary
+     * sub-shapes.
+     */
+    std::pair<std::string,std::string> getExportElementName(TopoShape shape, const char *name) const;
 
 private:
     struct ElementCache;
     boost::container::map<std::string, ElementCache> _elementCache;
+    std::vector<std::pair<std::string, PropertyPartShape*>> _elementCachePrefixMap;
 };
 
 class FilletBase : public Part::Feature
@@ -248,4 +291,3 @@ bool checkIntersection(const TopoDS_Shape& first, const TopoDS_Shape& second,
 
 
 #endif // PART_FEATURE_H
-

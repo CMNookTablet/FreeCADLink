@@ -37,6 +37,7 @@
 #include "FeatureFilling.h"
 #include <Base/Tools.h>
 #include <Base/Exception.h>
+#include <App/Document.h>
 #include <string>
 
 using namespace Surface;
@@ -48,11 +49,11 @@ PROPERTY_SOURCE(Surface::Filling, Part::Spline)
 Filling::Filling()
 {
     ADD_PROPERTY_TYPE(BoundaryEdges,(0,""), "Filling", App::Prop_None, "Boundary Edges (C0 is required for edges without a corresponding face)");
-    ADD_PROPERTY_TYPE(BoundaryFaces,(""), "Filling", App::Prop_None, "Boundary Faces");
+    ADD_PROPERTY_TYPE(BoundaryFaces,(0,""), "Filling", App::Prop_None, "Boundary Faces");
     ADD_PROPERTY_TYPE(BoundaryOrder,(-1), "Filling", App::Prop_None, "Order of constraint on boundary faces (C0, G1 and G2 are possible)");
 
     ADD_PROPERTY_TYPE(UnboundEdges,(0,""), "Filling", App::Prop_None, "Unbound constraint edges (C0 is required for edges without a corresponding face)");
-    ADD_PROPERTY_TYPE(UnboundFaces,(""), "Filling", App::Prop_None, "Unbound constraint faces");
+    ADD_PROPERTY_TYPE(UnboundFaces,(0,""), "Filling", App::Prop_None, "Unbound constraint faces");
     ADD_PROPERTY_TYPE(UnboundOrder,(-1), "Filling", App::Prop_None, "Order of constraint on curve faces (C0, G1 and G2 are possible)");
 
     ADD_PROPERTY_TYPE(FreeFaces,(0,""), "Filling", App::Prop_None, "Free constraint on a face");
@@ -117,13 +118,13 @@ short Filling::mustExecute() const
 
 void Filling::addConstraints(BRepFill_Filling& builder,
                              const App::PropertyLinkSubList& edges,
-                             const App::PropertyStringList& faces,
+                             const App::PropertyLinkSubList& faces,
                              const App::PropertyIntegerList& orders,
                              Standard_Boolean bnd)
 {
     auto edge_obj = edges.getValues();
     auto edge_sub = edges.getSubValues();
-    auto face_sub = faces.getValues();
+    auto face_sub = faces.getSubValues();
     auto contvals = orders.getValues();
 
     // if the number of continuities doesn't match then fall back to C0
@@ -276,26 +277,96 @@ App::DocumentObjectExecReturn *Filling::execute(void)
     unsigned int maxseg = MaximumSegments.getValue();
 
     try {
-        BRepFill_Filling builder(degree, ptsoncurve, numIter, anisotropy, tol2d,
-                                 tol3d, tolG1, tolG2, maxdeg, maxseg);
-
         if ((BoundaryEdges.getSize()) < 1) {
             return new App::DocumentObjectExecReturn("Border must have at least one curve defined.");
         }
 
-        // Load the initial surface if set
-        App::DocumentObject* initFace = InitialFace.getValue();
-        if (initFace && initFace->getTypeId().isDerivedFrom(Part::Feature::getClassTypeId())) {
-            const Part::TopoShape& shape = static_cast<Part::Feature*>(initFace)->Shape.getShape();
-            std::vector<std::string> subNames = InitialFace.getSubValues();
-            for (auto it : subNames) {
-                TopoDS_Shape subShape = shape.getSubShape(it.c_str());
-                if (!subShape.IsNull() && subShape.ShapeType() == TopAbs_FACE) {
-                    builder.LoadInitSurface(TopoDS::Face(subShape));
-                    break;
-                }
-            }
+        Part::TopoShape initSurface;
+        for (const auto &sub : InitialFace.getSubValues()) {
+            initSurface = Part::Feature::getTopoShape(InitialFace.getValue(), sub.c_str(), /*needSubElement*/true);
+            if (initSurface.shapeType(true) == TopAbs_FACE)
+                break;
         }
+
+#ifndef FC_NO_ELEMENT_MAP
+        Part::TopoShape::BRepFillingParams params;
+        params.degree = degree;
+        params.ptsoncurve = ptsoncurve;
+        params.numiter = numIter;
+        params.anisotropy = anisotropy;
+        params.tol2d = tol2d;
+        params.tol3d = tol3d;
+        params.tolG1 = tolG1;
+        params.tolG2 = tolG2;
+        params.maxdeg = maxdeg;
+        params.maxseg = maxseg;
+        params.surface = initSurface;
+
+        std::vector<Part::TopoShape> shapes;
+        auto populateParams = [&](const std::vector<App::DocumentObject*> &objs,
+                                  const std::vector<std::string> &subs,
+                                  const std::vector<App::DocumentObject*> &supports,
+                                  const std::vector<std::string> &supportSubs,
+                                  const std::vector<long> &orders,
+                                  TopAbs_ShapeEnum type)
+        {
+            size_t i = -1;
+            for (const auto obj : objs) {
+                ++i;
+                if (i >= subs.size())
+                    break;
+                auto subShape = Part::Feature::getTopoShape(obj, subs[i].c_str(), /*needSubElement*/true);
+                if (subShape.shapeType(true) == type)
+                    shapes.push_back(subShape);
+                if (i < supports.size() && i < supportSubs.size() && supportSubs[i].size()) {
+                    auto support = Part::Feature::getTopoShape(
+                            supports[i], supportSubs[i].c_str(), /*needSubElement*/true);
+                    if (support.shapeType(true) == TopAbs_FACE)
+                        params.supports[subShape.getShape()] = support.getShape();
+                    else
+                        Standard_Failure::Raise("Invalid sub-shape type");
+                }
+                if (i < orders.size())
+                    params.orders[subShape.getShape()] = static_cast<Part::TopoShape::Continuity>(orders[i]);
+            }
+        };
+
+        populateParams(BoundaryEdges.getValues(),
+                       BoundaryEdges.getSubValues(),
+                       BoundaryFaces.getValues(),
+                       BoundaryFaces.getSubValues(),
+                       BoundaryOrder.getValues(),
+                       TopAbs_EDGE);
+        params.boundary_begin = 0;
+        params.boundary_end = (int)shapes.size();
+        populateParams(UnboundEdges.getValues(),
+                       UnboundEdges.getSubValues(),
+                       UnboundFaces.getValues(),
+                       UnboundFaces.getSubValues(),
+                       UnboundOrder.getValues(),
+                       TopAbs_EDGE);
+        populateParams(FreeFaces.getValues(),
+                       FreeFaces.getSubValues(),
+                       {}, {},
+                       FreeOrder.getValues(),
+                       TopAbs_FACE);
+        populateParams(Points.getValues(),
+                       Points.getSubValues(),
+                       {}, {}, {},
+                       TopAbs_VERTEX);
+
+        Part::TopoShape result(0,getDocument()->getStringHasher());
+        result.makEFilledFace(shapes, params);
+        this->Shape.setValue(result);
+        return App::DocumentObject::StdReturn;
+
+#else
+
+        BRepFill_Filling builder(degree, ptsoncurve, numIter, anisotropy, tol2d,
+                                 tol3d, tolG1, tolG2, maxdeg, maxseg);
+
+        if (!initSurface.isNull())
+            builder.LoadInitSurface(TopoDS::Face(initSurface.getShape()));
 
         // Add the constraints of border curves/faces (bound)
         int numBoundaries = BoundaryEdges.getSize();
@@ -327,8 +398,36 @@ App::DocumentObjectExecReturn *Filling::execute(void)
         TopoDS_Face aFace = builder.Face();
         this->Shape.setValue(aFace);
         return App::DocumentObject::StdReturn;
+#endif
     }
     catch (Standard_Failure& e) {
         return new App::DocumentObjectExecReturn(e.GetMessageString());
+    }
+}
+
+void Filling::handleChangedPropertyType(Base::XMLReader &reader,
+                                        const char * TypeName,
+                                        App::Property * prop)
+{
+    if (TypeName && strcmp(TypeName, "App::PropertyStringList") == 0) {
+        App::PropertyStringList propTmp;
+        if (prop == &BoundaryFaces) {
+            propTmp.Restore(reader);
+            auto values = BoundaryEdges.getValues();
+            auto subs = propTmp.getValues();
+            size_t len = std::min(values.size(), subs.size());
+            values.resize(len);
+            subs.resize(len);
+            BoundaryFaces.setValues(values, subs);
+        }
+        else if (prop == &UnboundFaces) {
+            propTmp.Restore(reader);
+            auto values = UnboundEdges.getValues();
+            auto subs = propTmp.getValues();
+            size_t len = std::min(values.size(), subs.size());
+            values.resize(len);
+            subs.resize(len);
+            UnboundFaces.setValues(values, subs);
+        }
     }
 }

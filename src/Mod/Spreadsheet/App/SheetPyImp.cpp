@@ -969,7 +969,7 @@ PyObject* SheetPy::getEditMode(PyObject *args)
 
 PyObject* SheetPy::setEditMode(PyObject *args)
 {
-    char *mode;
+    const char *mode;
     char *strAddress;
     PyObject *notify = Py_True;
     CellAddress address;

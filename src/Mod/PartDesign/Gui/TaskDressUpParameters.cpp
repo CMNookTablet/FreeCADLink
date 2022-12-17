@@ -26,8 +26,6 @@
 
 #ifndef _PreComp_
 # include <QApplication>
-# include <QListWidget>
-# include <QListWidgetItem>
 # include <QAction>
 # include <QKeyEvent>
 # include <QPushButton>
@@ -92,6 +90,12 @@ TaskDressUpParameters::TaskDressUpParameters(ViewProviderDressUp *DressUpView, b
                 this->DressUpView = nullptr;
         });
 
+    connDeleteDoc = Gui::Application::Instance->signalDeleteDocument.connect(
+        [this](const Gui::Document &Doc) {
+            if(this->DressUpView && this->DressUpView->getDocument() == &Doc)
+                this->DressUpView = nullptr;
+        });
+
     timer = new QTimer(this);
     timer->setSingleShot(true);
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimer()));
@@ -107,6 +111,22 @@ TaskDressUpParameters::~TaskDressUpParameters()
 
     clearButtons(none);
     exitSelectionMode();
+}
+
+QTreeWidgetItem *TaskDressUpParameters::getCurrentItem() const
+{
+    if(!DressUpView)
+        return nullptr;
+    QTreeWidgetItem *current = nullptr;
+    auto sels = treeWidget->selectedItems();
+    if (sels.size())
+        current = sels[sels.size()-1];
+    else {
+        current = treeWidget->currentItem();
+        if (!current)
+            current = treeWidget->itemAt(QPoint(0,0));
+    }
+    return current;
 }
 
 void TaskDressUpParameters::setupTransaction() {
@@ -127,7 +147,7 @@ void TaskDressUpParameters::setupTransaction() {
         transactionID = tid;
 }
 
-void TaskDressUpParameters::setup(QLabel *label, QListWidget *widget, QCheckBox *_btnAdd, bool touched)
+void TaskDressUpParameters::setup(QLabel *label, QTreeWidget *widget, QCheckBox *_btnAdd, bool touched)
 {
     if(!DressUpView)
         return;
@@ -147,15 +167,16 @@ void TaskDressUpParameters::setup(QLabel *label, QListWidget *widget, QCheckBox 
     btnAdd = _btnAdd;
     connect(btnAdd, SIGNAL(toggled(bool)), this, SLOT(onButtonRefAdd(bool)));
 
-    listWidget = widget;
-    listWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    listWidget->setMouseTracking(true);
-    listWidget->installEventFilter(this);
+    treeWidget = widget;
+    treeWidget->setRootIsDecorated(false);
+    treeWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    treeWidget->setMouseTracking(true);
+    treeWidget->installEventFilter(this);
 
-    connect(listWidget, SIGNAL(itemSelectionChanged()),
+    connect(treeWidget, SIGNAL(itemSelectionChanged()),
         this, SLOT(onItemSelectionChanged()));
-    connect(listWidget, SIGNAL(itemEntered(QListWidgetItem*)),
-        this, SLOT(onItemEntered(QListWidgetItem*)));
+    connect(treeWidget, SIGNAL(itemEntered(QTreeWidgetItem*,int)),
+        this, SLOT(onItemEntered(QTreeWidgetItem*,int)));
 
     if(!deleteAction) {
         // Create context menu
@@ -183,17 +204,17 @@ void TaskDressUpParameters::refresh()
 
 bool TaskDressUpParameters::populate(bool refresh)
 {
-    if(!listWidget || !DressUpView)
+    if(!treeWidget || !DressUpView)
         return false;
 
     auto* pcDressUp = static_cast<PartDesign::DressUp*>(DressUpView->getObject());
     if(!pcDressUp || !pcDressUp->Base.getValue())
         return false;
 
-    QSignalBlocker blocker(listWidget);
+    Base::StateLocker guard(busy);
     if (!refresh)
         setupTransaction();
-    return PartDesignGui::populateGeometryReferences(listWidget, pcDressUp->Base, refresh);
+    return PartDesignGui::populateGeometryReferences(treeWidget, pcDressUp->Base, refresh);
 }
 
 bool TaskDressUpParameters::showOnTop(bool enable,
@@ -253,15 +274,15 @@ void TaskDressUpParameters::clearButtons(const selectionModes notThis)
 
 void TaskDressUpParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
 {
-    if(!listWidget || !DressUpView)
+    if(!treeWidget || !DressUpView)
         return;
 
     bool addSel = false;
     switch(msg.Type) {
     case Gui::SelectionChanges::ClrSelection: {
         showMessage();
-        QSignalBlocker blocker(listWidget);
-        listWidget->selectionModel()->clearSelection();
+        Base::StateLocker guard(busy);
+        treeWidget->selectionModel()->clearSelection();
         break;
     }
     case Gui::SelectionChanges::RmvSelection:
@@ -290,7 +311,7 @@ void TaskDressUpParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
                 continue;
 
             char type = pcDressUp->Shape.getShape().elementType(hist.element);
-            if ((!allowFaces && type == 'F') || (!allowEdges && type == 'E'))
+            if ((!allowFaces && (type == 'F' || type == 'W')) || (!allowEdges && type == 'E'))
                 continue;
             if(element) {
                 showMessage("Ambiguous selection");
@@ -302,14 +323,14 @@ void TaskDressUpParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
             std::vector<App::SubObjectT> sels;
             sels.emplace_back(base, element);
 
-            // base element found, check if it is already in the list widget
-            auto items = listWidget->findItems(
+            // base element found, check if it is already in the widget
+            auto items = treeWidget->findItems(
                     QString::fromUtf8(sels.back().getOldElementName().c_str()), Qt::MatchExactly);
 
             if(items.size()) {
                 if(selectionMode != refToggle) {
                     // element found, but we are not toggling, select and exit
-                    QSignalBlocker blocker(listWidget);
+                    Base::StateLocker guard(busy);
                     for(auto item : items)
                         item->setSelected(true);
                     return;
@@ -335,7 +356,7 @@ void TaskDressUpParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
             if(onTopObjs.empty()) {
                 // If no on top display at the moment, just sync the reference
                 // selection.
-                syncItems(sels, false);
+                syncItems(sels);
             } else {
                 // If there is on top display, replace the current selection
                 // with the base element selection, and let it trigger an
@@ -359,9 +380,9 @@ void TaskDressUpParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
         return;
 
     bool check = true;
-    auto items = listWidget->findItems(QString::fromUtf8(msg.pSubName), Qt::MatchExactly);
+    auto items = treeWidget->findItems(QString::fromUtf8(msg.pSubName), Qt::MatchExactly);
     if(items.size()) {
-        QSignalBlocker blocker(listWidget);
+        Base::StateLocker guard(busy);
         if(selectionMode == refToggle && addSel) {
             check = false;
             for(auto item : items)
@@ -401,9 +422,9 @@ void TaskDressUpParameters::onButtonRefAdd(bool checked)
     auto obj = getInEdit(subname);
     if(obj) {
         blockConnection(true);
-        QSignalBlocker blocker(listWidget);
-        for(auto item : listWidget->selectedItems()) {
-            std::string sub = subname + item->text().toStdString();
+        Base::StateLocker guard(busy);
+        for(auto item : treeWidget->selectedItems()) {
+            std::string sub = subname + getGeometryItemText(item).constData();
             Gui::Selection().rmvSelection(obj->getDocument()->getName(),
                     obj->getNameInDocument(), sub.c_str());
             delete item;
@@ -415,30 +436,32 @@ void TaskDressUpParameters::onButtonRefAdd(bool checked)
     selectionMode = refToggle;
     clearButtons(refToggle);
     Gui::Selection().clearSelection();
-    Gui::Selection().addSelectionGate(
-            new ReferenceSelection(this->getBase(), allowEdges, allowFaces, false));
+    ReferenceSelection::Config conf;
+    conf.edge = allowEdges;
+    conf.plane = allowFaces;
+    conf.planar = false;
+    Gui::Selection().addSelectionGate(new ReferenceSelection(this->getBase(), conf));
 }
 
 void TaskDressUpParameters::onRefDeleted() {
-    if(!listWidget || !DressUpView)
+    if(!treeWidget || !DressUpView)
         return;
 
-    QSignalBlocker blocker(listWidget);
-    for(auto item : listWidget->selectedItems())
+    Base::StateLocker guard(busy);
+    for(auto item : treeWidget->selectedItems())
         delete item;
 
-    DressUpView->highlightReferences(false);
     syncItems();
 }
 
-bool TaskDressUpParameters::syncItems(const std::vector<App::SubObjectT> &sels, bool select) {
+bool TaskDressUpParameters::syncItems(const std::vector<App::SubObjectT> &sels) {
     if(!DressUpView)
         return false;
 
     std::set<std::string> subset;
     std::vector<std::string> subs;
-    for(int i=0, count=listWidget->count();i<count;++i) {
-        std::string s = listWidget->item(i)->text().toStdString();
+    for(int i=0, count=treeWidget->topLevelItemCount();i<count;++i) {
+        std::string s = treeWidget->topLevelItem(i)->text(0).toStdString();
         if(subset.insert(s).second)
             subs.push_back(std::move(s));
     }
@@ -447,7 +470,7 @@ bool TaskDressUpParameters::syncItems(const std::vector<App::SubObjectT> &sels, 
     App::DocumentObject* base = pcDressUp->Base.getValue();
 
     if(sels.size()) {
-        QSignalBlocker blocker(listWidget);
+        Base::StateLocker guard(busy);
         for(auto &sel : sels) {
             if(sel.getObject() != base)
                 continue;
@@ -455,13 +478,16 @@ bool TaskDressUpParameters::syncItems(const std::vector<App::SubObjectT> &sels, 
             if(subset.count(element))
                 continue;
             if((allowEdges && boost::starts_with(element,"Edge"))
-                    || (allowFaces && boost::starts_with(element,"Face")))
+                    || (allowFaces && (boost::starts_with(element,"Face")
+                                       || boost::starts_with(element, "Wire"))))
             {
                 subset.insert(element);
-                auto item = new QListWidgetItem(QString::fromUtf8(element.c_str()), listWidget);
-                if(select)
-                    item->setSelected(true);
+                auto item = new QTreeWidgetItem(treeWidget);
+                item->setText(0, QString::fromUtf8(element.c_str()));
+                setGeometryItemText(item, element.c_str());
+                item->setSelected(true);
                 subs.push_back(std::move(element));
+                onNewItem(item);
             }
         }
     }
@@ -504,7 +530,7 @@ void TaskDressUpParameters::showMessage(const char *msg) {
 
 void TaskDressUpParameters::onItemSelectionChanged()
 {
-    if(!listWidget)
+    if(!treeWidget || busy)
         return;
 
     if(selectionMode == refToggle) {
@@ -517,10 +543,15 @@ void TaskDressUpParameters::onItemSelectionChanged()
     if(!obj)
         return;
 
+    std::set<QTreeWidgetItem*> itemSet;
     std::vector<std::string> subs;
-    for(auto item : listWidget->selectedItems()) {
-        if (item->data(Qt::UserRole).toByteArray().isEmpty())
-            subs.push_back(subname + item->text().toStdString());
+    for(auto item : treeWidget->selectedItems()) {
+        if (auto parent = item->parent())
+            item = parent;
+        if (itemSet.insert(item).second) {
+            if (getGeometryItemReference(item).isEmpty())
+                subs.push_back(subname + getGeometryItemText(item).constData());
+        }
     }
 
     blockConnection(true);
@@ -587,18 +618,20 @@ App::DocumentObject *TaskDressUpParameters::getInEdit(std::string &subname, App:
     return sobjs.size()?sobjs.front():base;
 }
 
-void TaskDressUpParameters::onItemEntered(QListWidgetItem *)
+void TaskDressUpParameters::onItemEntered(QTreeWidgetItem *, int)
 {
-    enteredObject = listWidget;
+    enteredObject = treeWidget;
     timer->start(100);
 }
 
-bool TaskDressUpParameters::getItemElement(QListWidgetItem *item, std::string &subname)
+bool TaskDressUpParameters::getItemElement(QTreeWidgetItem *item, std::string &subname)
 {
-    QByteArray _ref = item->data(Qt::UserRole).toByteArray();
+    if (auto parent = item->parent())
+        item = parent;
+    QByteArray _ref = getGeometryItemReference(item);
     const char *ref = Data::ComplexGeoData::isMappedElement(_ref.constData());
     if (!ref) {
-        subname += item->text().toStdString();
+        subname += getGeometryItemText(item).constData();
         return true;
     }
     PartDesign::DressUp* pcDressUp = static_cast<PartDesign::DressUp*>(DressUpView->getObject());
@@ -637,10 +670,10 @@ bool TaskDressUpParameters::getItemElement(QListWidgetItem *item, std::string &s
 }
 
 void TaskDressUpParameters::onTimer() {
-    if(enteredObject != listWidget || !listWidget)
+    if(enteredObject != treeWidget || !treeWidget)
         return;
 
-    auto item = listWidget->itemAt(listWidget->viewport()->mapFromGlobal(QCursor::pos()));
+    auto item = treeWidget->itemAt(treeWidget->viewport()->mapFromGlobal(QCursor::pos()));
     if(!item) {
         Gui::Selection().rmvPreselect();
         return;
@@ -713,7 +746,7 @@ bool TaskDressUpParameters::event(QEvent *e)
 
 bool TaskDressUpParameters::eventFilter(QObject *o, QEvent *e)
 {
-    if(listWidget && o == listWidget) {
+    if(treeWidget && o == treeWidget) {
         switch(e->type()) {
         case QEvent::Leave:
             enteredObject = nullptr;
@@ -738,7 +771,6 @@ bool TaskDressUpParameters::eventFilter(QObject *o, QEvent *e)
     }
     return Gui::TaskView::TaskBox::eventFilter(o,e);
 }
-
 
 //**************************************************************************
 //**************************************************************************

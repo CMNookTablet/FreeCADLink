@@ -156,9 +156,9 @@ void ViewProviderTransformed::checkAddSubColor()
         else if (v.second == FeatureAddSub::Intersecting)
             ++intersectCount;
     }
-    App::Color addcolor((uint32_t)PartGui::PartParams::PreviewAddColor());
-    App::Color subcolor((uint32_t)PartGui::PartParams::PreviewSubColor());
-    App::Color intersectcolor((uint32_t)PartGui::PartParams::PreviewIntersectColor());
+    App::Color addcolor((uint32_t)PartGui::PartParams::getPreviewAddColor());
+    App::Color subcolor((uint32_t)PartGui::PartParams::getPreviewSubColor());
+    App::Color intersectcolor((uint32_t)PartGui::PartParams::getPreviewIntersectColor());
     if (!addCount) {
         if (!intersectCount)
             addcolor = subcolor;
@@ -167,7 +167,7 @@ void ViewProviderTransformed::checkAddSubColor()
     }
     // clamp transparency between 0.1 ~ 0.8
     float t = std::max(0.1f, std::min(0.8f, 1.0f - addcolor.a));
-    if (!PartGui::PartParams::PreviewWithTransparency()) {
+    if (!PartGui::PartParams::getPreviewWithTransparency()) {
         t = 0.0f;
         previewGroup->priority = 0;
     } else

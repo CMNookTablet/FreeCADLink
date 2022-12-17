@@ -161,6 +161,7 @@ public:
 
     void setReadOnly(bool);
     bool isReadOnly() const;
+    virtual void disableEditor(QWidget*);
     bool testStatus(App::Property::Status pos) const;
     void setDecimals(int);
     int decimals() const;
@@ -186,6 +187,7 @@ public:
     void reset();
 
     bool hasAnyExpression() const;
+    bool hasAnyChildExpression() const;
 
     virtual QVariant toString(const QVariant&) const;
 
@@ -1145,6 +1147,9 @@ public:
     virtual ~LinkLabel();
     void updatePropertyLink();
     QVariant propertyLink() const;
+    void disableButton(bool disable) {
+        editButton->setDisabled(disable);
+    }
 
 protected:
     void resizeEvent(QResizeEvent*);
@@ -1179,6 +1184,7 @@ class GuiExport PropertyLinkItem: public PropertyItem
     virtual QWidget* createEditor(QWidget* parent, const QObject* receiver, const char* method) const override;
     virtual void setEditorData(QWidget *editor, const QVariant& data) const override;
     virtual QVariant editorData(QWidget *editor) const override;
+    virtual void disableEditor(QWidget *editor) override;
 
 protected:
     virtual QVariant toString(const QVariant&) const override;

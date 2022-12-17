@@ -72,6 +72,7 @@
 #include <Gui/ViewProvider.h>
 #include <Gui/WaitCursor.h>
 #include <Gui/MainWindow.h>
+#include <Gui/ViewParams.h>
 #include "TaskCheckGeometry.h"
 
 using namespace PartGui;
@@ -445,8 +446,8 @@ void TaskCheckGeometryResults::goCheck()
             continue;
         QString baseName;
         QTextStream baseStream(&baseName);
-        baseStream << sel.DocName;
-        baseStream << "." << sel.FeatName;
+        baseStream << QString::fromUtf8(sel.DocName);
+        baseStream << "." << QString::fromUtf8(sel.FeatName);
         checkedCount++;
         checkedMap.Clear();
 
@@ -989,11 +990,14 @@ void PartGui::goSetupResultBoundingBox(ResultEntry *entry)
       position->translation.setValue(boundCenter);
       group->addChild(position);
 
-      SoCube *cube = new SoCube();
-      cube->width.setValue(xmax - xmin);
-      cube->height.setValue(ymax - ymin);
-      cube->depth.setValue(zmax - zmin);
-      group->addChild(cube);
+      // Experiemental render cache do not support SoCube with SoDrawStyle::LINES
+      if (Gui::ViewParams::getRenderCache() != 3) {
+        SoCube *cube = new SoCube();
+        cube->width.setValue(xmax - xmin);
+        cube->height.setValue(ymax - ymin);
+        cube->depth.setValue(zmax - zmin);
+        group->addChild(cube);
+      }
     }
     catch (const Standard_Failure &){}
 }

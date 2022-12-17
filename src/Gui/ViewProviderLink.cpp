@@ -21,6 +21,7 @@
  ****************************************************************************/
 
 #include "PreCompiled.h"
+#include "ViewProviderDocumentObject.h"
 
 #ifndef _PreComp_
 # include <Inventor/nodes/SoSeparator.h>
@@ -44,6 +45,7 @@
 # include <QApplication>
 # include <QMouseEvent>
 # include <QCheckBox>
+# include <QPointer>
 #endif
 #include <QFileInfo>
 #include <cctype>
@@ -284,7 +286,10 @@ public:
             if(node) {
                 coinRemoveAllChildren(node);
                 _registerLinkNode(node);
-                node.reset();
+                // Do not reset snapshoot root so that redo/undo can work with
+                // calling update()
+                //
+                // node.reset();
             }
         }
         for(auto &node : pcSwitches) {
@@ -432,15 +437,17 @@ public:
         auto &pcSnapshot = pcSnapshots[type];
         auto &pcModeSwitch = pcSwitches[type];
         auto &pcTransform = pcTransforms[type];
-        if(pcSnapshot) {
+        if(pcSnapshot && pcModeSwitch) {
             if(!update) return pcSnapshot;
         }else{
-            if(ViewParams::getUseSelectionRoot())
-                pcSnapshot = new SoFCSelectionRoot(true);
-            else {
-                pcSnapshot = new SoSeparator;
-                // pcSnapshot->boundingBoxCaching = SoSeparator::OFF;
-                pcSnapshot->renderCaching = SoSeparator::OFF;
+            if (!pcSnapshot) {
+                if(ViewParams::getUseSelectionRoot())
+                    pcSnapshot = new SoFCSelectionRoot(true);
+                else {
+                    pcSnapshot = new SoSeparator;
+                    // pcSnapshot->boundingBoxCaching = SoSeparator::OFF;
+                    pcSnapshot->renderCaching = SoSeparator::OFF;
+                }
             }
             _registerLinkNode(pcSnapshot, pcLinked);
             pcModeSwitch = new SoFCSwitch;
@@ -1291,11 +1298,102 @@ void LinkView::setChildren(const std::vector<App::DocumentObject*> &children,
     if(type<0 || type>SnapshotMax)
         LINK_THROW(Base::ValueError,"invalid children type");
 
-    resetRoot();
-
     if(childType<0 || childType!=type) {
         nodeArray.clear();
+    } else {
+        // checking for shortcut of adding or removing exactly one element This
+        // has potential of huge slow down in operations batch calling of
+        // add/removeObject()
+
+        int idx = -1;
+        if (children.size() + 1 == nodeArray.size()) {
+            // removing an object
+            int i = -1;
+            for (const auto obj : children) {
+                auto &info = *nodeArray[++i];
+                if(!info.isLinked()) {
+                    idx = -1; // not linked, so no pcRoot and thus must reset
+                    break;
+                }
+                else if (info.linkInfo->pcLinked->getObject() != obj) {
+                    if (idx >= 0) {
+                        idx = -1;
+                        break;
+                    }
+                    if (!nodeArray[i+1]->isLinked()
+                            || nodeArray[i+1]->linkInfo->pcLinked->getObject() != obj)
+                        break;
+                    idx = i++;
+                }
+            }
+            if (idx >= 0) {
+                auto &info = *nodeArray[idx];
+                auto node = info.getTopNode();
+                nameMap.clear();
+                nodeMap.erase(node);
+                int nidx = pcLinkRoot->findChild(node);
+                if (nidx >= 0)
+                    pcLinkRoot->removeChild(nidx);
+                nodeArray.erase(nodeArray.begin() + nidx);
+            }
+        }
+        else if (children.size() == nodeArray.size() + 1) {
+            // Adding an object
+            int i = -1;
+            int idx = (int)children.size()-1;
+            for (const auto &pinfo : nodeArray) {
+                auto &info = *pinfo;
+                if (!info.isLinked()) {
+                    idx = -1;
+                    break;
+                }
+                auto obj = children[++i];
+                if (info.linkInfo->pcLinked->getObject() != obj) {
+                    if (idx >= 0) {
+                        idx = -1;
+                        break;
+                    }
+                    idx = i++;
+                    if (info.linkInfo->pcLinked->getObject() != children[i]) {
+                        idx = -1;
+                        break;
+                    }
+                }
+            }
+            if (idx >= 0) {
+                auto obj = children[idx];
+                if (!App::GeoFeatureGroupExtension::isNonGeoGroup(obj)) {
+                    nodeArray.emplace(nodeArray.begin()+idx, new Element(*this));
+                    auto &info = *nodeArray[idx];
+                    info.groupIndex = -1;
+                    info.link(obj);
+                    auto node = info.getTopNode();
+                    for (auto it = nodeArray.begin()+idx; it != nodeArray.end(); ++it) {
+                        nodeMap[(*it)->getTopNode()] = it - nodeArray.begin();
+                    }
+                    pcLinkRoot->insertChild(node, idx);
+                }
+            }
+        }
+        if (idx >= 0) {
+            int i = -1;
+            for (const auto &pinfo : nodeArray) {
+                ++i;
+                auto &info = *pinfo;
+                if(info.pcSwitch && childType!=SnapshotChild) {
+                    int which = ((int)vis.size()<=i||vis[i])?0:-1;
+                    if (info.pcSwitch->whichChild.getValue() != which)
+                        info.pcSwitch->whichChild = which;
+                }
+                if (i >= idx)
+                    nodeMap[info.getTopNode()] = i;
+            }
+            return;
+        }
     }
+
+    resetRoot();
+
     nameMap.clear();
     nodeMap.clear();
     childType = type;
@@ -1313,8 +1411,11 @@ void LinkView::setChildren(const std::vector<App::DocumentObject*> &children,
         auto &info = *nodeArray[i];
         info.groupIndex = -1;
         info.link(obj);
-        if(info.pcSwitch && childType!=SnapshotChild)
-            info.pcSwitch->whichChild = (vis.size()<=i||vis[i])?0:-1;
+        if(info.pcSwitch && childType!=SnapshotChild) {
+            int which = (vis.size()<=i||vis[i])?0:-1;
+            if (info.pcSwitch->whichChild.getValue() != which)
+                info.pcSwitch->whichChild = which;
+        }
         if(info.isGroup>0) {
             auto node = info.initGroup();
             if(node)
@@ -1678,7 +1779,7 @@ bool LinkView::linkGetDetailPath(const char *subname, SoFullPath *path, SoDetail
                         idx = it->second;
                 }
 
-                if(idx<0)
+                if(idx < 0 || idx >= (int)nodeArray.size())
                     return false;
 
                 subname = dot+1;
@@ -1958,6 +2059,8 @@ QPixmap ViewProviderLink::getOverlayPixmap() const {
 }
 
 void ViewProviderLink::onChanged(const App::Property* prop) {
+    Gui::ColorUpdater colorUpdater;
+
     if(prop==&ChildViewProvider) {
         childVp = freecad_dynamic_cast<ViewProviderDocumentObject>(ChildViewProvider.getObject().get());
         if(childVp && getObject()) {
@@ -1998,8 +2101,10 @@ void ViewProviderLink::onChanged(const App::Property* prop) {
             prop == &MaterialList || prop == &OverrideMaterialList)
         {
             applyMaterial();
+            Gui::ColorUpdater::addObject(getObject());
         }else if(prop == &OverrideColorList) {
             applyColors();
+            Gui::ColorUpdater::addObject(getObject());
         }else if(prop==&DrawStyle || prop==&PointSize || prop==&LineWidth) {
             if(!DrawStyle.getValue())
                 linkView->setDrawStyle(0);
@@ -2143,7 +2248,7 @@ void ViewProviderLink::updateDataPrivate(App::LinkBaseExtension *ext, const App:
             if(canScale(v))
                 pcTransform->scaleFactor.setValue(v.x,v.y,v.z);
             SbMatrix matrix = convert(ext->getTransform(false));
-            linkView->renderDoubleSide(matrix.det3() < 0);
+            linkView->renderDoubleSide(matrix.det3() < 1e-7);
         }
     }else if(prop == ext->getMatrixProperty()) {
         if(!prop->testStatus(App::Property::User3)) {
@@ -2154,7 +2259,7 @@ void ViewProviderLink::updateDataPrivate(App::LinkBaseExtension *ext, const App:
             }
             pcMatrixTransform->matrix = convert(ext->getMatrixValue());
             SbMatrix matrix = convert(ext->getTransform(false));
-            linkView->renderDoubleSide(matrix.det3() < 0);
+            linkView->renderDoubleSide(matrix.det3() < 1e-7);
         }
     }else if(prop == ext->getPlacementProperty() || prop == ext->getLinkPlacementProperty()) {
         auto propLinkPlacement = ext->getLinkPlacementProperty();
@@ -2322,8 +2427,7 @@ void ViewProviderLink::updateDataPrivate(App::LinkBaseExtension *ext, const App:
                 linkView->setElementVisible(i,true);
         }
     }else if(prop == ext->_getElementListProperty()) {
-        if(ext->_getShowElementValue())
-            updateElementList(ext);
+        updateElementList(ext);
     }else if(prop == ext->getSyncGroupVisibilityProperty()) {
         updateElementList(ext);
     }
@@ -2801,7 +2905,7 @@ void ViewProviderLink::setupContextMenu(QMenu* menu, QObject* receiver, const ch
                 auto sels = dlg.getSelections(true, true);
                 for (auto it=excludes.begin(); it!=excludes.end(); ++it) {
                     auto iter = std::lower_bound(sels.begin(), sels.end(), *it);
-                    if (iter == objs.end() || *iter != *it) {
+                    if (iter == sels.end() || *iter != *it) {
                         ext->setOnChangeCopyObject(*it, false, applyAll);
                     } else
                         sels.erase(iter);
@@ -3079,13 +3183,49 @@ bool ViewProviderLink::initDraggingPlacement(int mode) {
         // (obtained using ViewProviderDragger::getDragOffset()).
         dragCtx->initialPlacement = pla.toMatrix() * offset;
 
+        if (dragPlacementIndex >= 0) {
+            if (auto plaList = ext->getPlacementListProperty()) {
+                if (dragPlacementIndex < plaList->getSize()) {
+                    auto mat = plaList->getValue()[dragPlacementIndex].toMatrix();
+                    auto scaleMat = ext->getTransform(false);
+                    mat = scaleMat * mat;
+                    mat.inverseGauss();
+                    offset = mat * offset;
+                    dragCtx->plaInverse = ext->getTransform(true);
+                    dragCtx->plaInverse.inverseGauss();
+                }
+            }
+        }
+
         // dragCtx->mat is to transform the dragger placement to our own placement.
         // So inverse the transform
         dragCtx->mat = offset;
-        dragCtx->mat.inverse();
+        dragCtx->mat.inverseGauss();
     }
 
     return true;
+}
+
+bool ViewProviderLink::startDragArrayElement(int mode, int idx)
+{
+    if (mode != ViewProvider::Transform
+            && mode != ViewProvider::TransformAt
+            && mode != ViewProvider::Default)
+        return false;
+    if (mode != ViewProvider::TransformAt)
+        dragPlacementIndex = idx;
+    else
+        dragPlacementIndex = -1;
+    if (!startEditing(ViewProvider::TransformAt)) {
+        dragPlacementIndex = -1;
+        return false;
+    }
+    return true;
+}
+
+void ViewProviderLink::endDragArrayElement()
+{
+    dragPlacementIndex = -1;
 }
 
 ViewProvider *ViewProviderLink::startEditing(int mode) {
@@ -3101,8 +3241,8 @@ ViewProvider *ViewProviderLink::startEditing(int mode) {
         return inherited::startEditing(mode);
     }
 
-    static thread_local bool _pendingTransform;
-    static thread_local Base::Matrix4D  _editingTransform;
+    FC_STATIC bool _pendingTransform;
+    FC_STATIC Base::Matrix4D  _editingTransform;
 
     auto doc = Application::Instance->editDocument();
 
@@ -3179,6 +3319,8 @@ bool ViewProviderLink::setEdit(int ModNum)
     return inherited::setEdit(ModNum);
 }
 
+static QPointer<TaskCSysDragger> _TaskDragger;
+
 void ViewProviderLink::setEditViewer(Gui::View3DInventorViewer* viewer, int ModNum)
 {
     if (ModNum == ViewProvider::Color) {
@@ -3233,14 +3375,15 @@ void ViewProviderLink::setEditViewer(Gui::View3DInventorViewer* viewer, int ModN
             dragger->setUpAutoScale(viewer->getSoRenderManager()->getCamera());
             viewer->setupEditingRoot(pcDragger,&dragCtx->preTransform);
 
-            TaskCSysDragger *task = new TaskCSysDragger(this, dragger);
-            Gui::Control().showDialog(task);
+            _TaskDragger = new TaskCSysDragger(this, dragger);
+            Gui::Control().showDialog(_TaskDragger);
         }
     }
 }
 
 void ViewProviderLink::unsetEditViewer(Gui::View3DInventorViewer* viewer)
 {
+    dragPlacementIndex = -1;
     SoNode *child = static_cast<SoFCUnifiedSelection*>(viewer->getSceneGraph())->getChild(0);
     if (child && child->isOfType(SoPickStyle::getClassTypeId()))
         static_cast<SoFCUnifiedSelection*>(viewer->getSceneGraph())->removeChild(child);
@@ -3323,13 +3466,21 @@ bool ViewProviderLink::callDraggerProxy(const char *fname, bool update) {
         auto ext = getLinkExtension();
         if(ext) {
             const auto &pla = currentDraggingPlacement();
-            auto prop = ext->getLinkPlacementProperty();
-            if(!prop)
-                prop = ext->getPlacementProperty();
-            if(prop) {
-                auto plaNew = pla * Base::Placement(dragCtx->mat);
-                if(prop->getValue()!=plaNew)
+            if (dragPlacementIndex >= 0) {
+                if (auto plaList = ext->getPlacementListProperty()) {
+                    if (dragPlacementIndex < plaList->getSize()) {
+                        auto plaNew = dragCtx->plaInverse * pla.toMatrix() * dragCtx->mat;
+                        plaList->set1Value(dragPlacementIndex, plaNew);
+                    }
+                }
+            } else {
+                auto prop = ext->getLinkPlacementProperty();
+                if(!prop)
+                    prop = ext->getPlacementProperty();
+                if(prop) {
+                    auto plaNew = pla * Base::Placement(dragCtx->mat);
                     prop->setValue(plaNew);
+                }
             }
             updateDraggingPlacement(pla);
         }
@@ -3353,8 +3504,11 @@ void ViewProviderLink::dragFinishCallback(void *data, SoDragger *) {
     if(me->dragCtx->cmdPending) {
         if(me->currentDraggingPlacement() == me->dragCtx->initialPlacement)
             me->getDocument()->abortCommand();
-        else
+        else {
+            if (_TaskDragger)
+                _TaskDragger->onEndMove();
             me->getDocument()->commitCommand();
+        }
     }
 }
 
@@ -3690,7 +3844,7 @@ void ViewProviderLink::applyColors() {
 
 bool ViewProviderLink::applyColorsTo(ViewProviderDocumentObject &vp, bool prevOverride) {
     auto obj = vp.getObject();
-    if (!obj || !obj->getDocument() || obj->getDocument()->testStatus(App::Document::Restoring))
+    if (!obj || obj->isRestoring() || vp.isRestoring())
         return prevOverride;
     auto node = vp.getModeSwitch();
     if(!obj || !node)

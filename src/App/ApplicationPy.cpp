@@ -186,7 +186,9 @@ PyMethodDef Application::Methods[] = {
      "This only works if there is an active sequencer (or ProgressIndicator in Python).\n"
      "There is an active sequencer during document restore and recomputation. User may\n"
      "abort the operation by pressing the ESC key. Once detected, this function will\n"
-     "trigger a BaseExceptionFreeCADAbort exception."},
+     "trigger a RuntimeError exception."},
+    {"silenceSequencer", (PyCFunction) Application::sSilenceSequencer, METH_VARARGS,
+     "silenceSequencer(enable = True : Bool) -- suppress progress sequencer output"},
     {NULL, NULL, 0, NULL}		/* Sentinel */
 };
 
@@ -702,8 +704,12 @@ PyObject* Application::sListDocuments(PyObject * /*self*/, PyObject *args)
         Base::PyObjectBase* pValue;
 
         std::vector<Document*> docs = GetApplication().getDocuments();;
-        if(PyObject_IsTrue(sort))
-            docs = Document::getDependentDocuments(docs,true);
+        if(PyObject_IsTrue(sort)) {
+            Py::List res;
+            for (auto doc : Document::getDependentDocuments(docs,true))
+                res.append(Py::asObject(doc->getPyObject()));
+            return Py::new_reference_to(res);
+        }
 
         for (auto doc : docs) {
             pKey   = PyUnicode_FromString(doc->getName());
@@ -748,6 +754,11 @@ PyObject *Application::sSetLogLevel(PyObject * /*self*/, PyObject *args)
         return NULL;
     PY_TRY{
         int l;
+        auto hParam = GetApplication().GetParameterGroupByPath("User parameter:BaseApp/LogLevels");
+        if (pcObj == Py_None) {
+            hParam->RemoveInt(tag);
+            Py_Return;
+        }
         if (PyUnicode_Check(pcObj)) {
             const char *pstr = PyUnicode_AsUTF8(pcObj);
             if(strcmp(pstr,"Log") == 0)
@@ -769,7 +780,7 @@ PyObject *Application::sSetLogLevel(PyObject * /*self*/, PyObject *args)
             }
         }else
             l = PyLong_AsLong(pcObj);
-        GetApplication().GetParameterGroupByPath("User parameter:BaseApp/LogLevels")->SetInt(tag,l);
+        hParam->SetInt(tag,l);
         if(strcmp(tag,"Default") == 0) {
 #ifndef FC_DEBUG
             if(l>=0) Base::Console().SetDefaultLogLevel(l);
@@ -946,9 +957,29 @@ PyObject *Application::sCheckAbort(PyObject * /*self*/, PyObject *args)
         return 0;
 
     PY_TRY {
-        Base::Sequencer().checkAbort();
+        try {
+            Base::Sequencer().checkAbort();
+        } catch (Base::AbortException &) {
+            throw Py::RuntimeError("user abort");
+        }
         Py_Return;
     }PY_CATCH
+}
+
+PyObject *Application::sSilenceSequencer(PyObject * /*self*/, PyObject *args)
+{
+    PyObject *enable = Py_True;
+    if (!PyArg_ParseTuple(args, "|O", &enable))
+        return 0;
+    static Base::EmptySequencer *emptySequencer;
+    if (PyObject_IsTrue(enable)) {
+        if (!emptySequencer)
+            emptySequencer = new Base::EmptySequencer;
+    } else if (emptySequencer) {
+        delete emptySequencer;
+        emptySequencer = nullptr;
+    }
+    Py_Return;
 }
 
 PyObject *Application::sDumpSWIG(PyObject * /*self*/, PyObject *args)

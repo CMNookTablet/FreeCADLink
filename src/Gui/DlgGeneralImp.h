@@ -63,6 +63,7 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
+    void updateLanguage();
 
 private:
     void setRecentFileSize();

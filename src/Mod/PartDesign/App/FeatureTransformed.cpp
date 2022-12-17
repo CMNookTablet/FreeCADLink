@@ -532,7 +532,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
                             if (intsectShapes.size() > 1) {
                                 intsectShapes[0] = support;
                                 if (!isRecomputePaused())
-                                    result.makEShape(TOPOP_COMMON, intsectShapes);
+                                    result.makEBoolean(Part::OpCodes::Common, intsectShapes);
                                 support = result;
                                 intsectShapes.erase(intsectShapes.begin());
                                 addsub.emplace_back(TopoShape().makECompound(
@@ -693,18 +693,18 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
                 const char *maker;
                 switch(op) {
                 case Additive:
-                    maker = TOPOP_FUSE;
+                    maker = Part::OpCodes::Fuse;
                     break;
                 case Subtractive:
-                    maker = TOPOP_CUT;
+                    maker = Part::OpCodes::Cut;
                     break;
                 case Intersecting:
-                    maker = TOPOP_COMMON;
+                    maker = Part::OpCodes::Common;
                     break;
                 default:
                     return new App::DocumentObjectExecReturn("Unknown operation type");
                 }
-                result.makEShape(maker, {support, shapeCopy});
+                result.makEBoolean(maker, {support, shapeCopy});
 
                 // Do not call getSolid() as we need the compound to hide the
                 // placement

@@ -324,8 +324,8 @@ static QPixmap getPixmapFromPython(Py::Object pyobj)
 {
     if(pyobj.isString()) {
         std::string content = Py::String(pyobj).as_std_string("utf-8");
-        QPixmap icon;
-        if (BitmapFactory().findPixmapInCache(content.c_str(), icon))
+        QPixmap icon = BitmapFactory().pixmap(content.c_str(), true);
+        if (!icon.isNull())
             return icon;
 
         // Check if the passed string is a filename, otherwise treat as xpm data

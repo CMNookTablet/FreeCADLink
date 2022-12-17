@@ -55,13 +55,18 @@ const App::PropertyQuantityConstraint::Constraints floatRadius = {0.0,FLT_MAX,0.
 Fillet::Fillet()
 {
     ADD_PROPERTY(Radius,(1.0));
+    ADD_PROPERTY(Segments,());
     Radius.setUnit(Base::Unit::Length);
     Radius.setConstraints(&floatRadius);
+
+    Segments.connectLinkProperty(Base);
 }
 
 short Fillet::mustExecute() const
 {
-    if (Placement.isTouched() || Radius.isTouched())
+    if (Placement.isTouched()
+            || Radius.isTouched()
+            || Segments.isTouched())
         return 1;
     return DressUp::mustExecute();
 }
@@ -89,7 +94,23 @@ App::DocumentObjectExecReturn *Fillet::execute(void)
 
     try {
         TopoShape shape(0,getDocument()->getStringHasher());
-        shape.makEFillet(baseShape,edges,radius,radius);
+
+        std::vector<TopoShape::FilletSegments> segmentList;
+        std::string sub;
+        for (const auto &e : edges) {
+            int index = baseShape.findShape(e.getShape());
+            segmentList.emplace_back();
+            auto &conf = segmentList.back();
+            if (index == 0)
+                continue;
+            sub = "Edge";
+            sub += std::to_string(index);
+            const auto &segments = Segments.getValue(sub);
+            for (const auto &segment : segments)
+                conf.emplace_back(segment.param, segment.radius, segment.length);
+        }
+
+        shape.makEFillet(baseShape,edges,segmentList,Radius.getValue());
         if (shape.isNull())
             return new App::DocumentObjectExecReturn("Resulting shape is null");
 
@@ -99,9 +120,7 @@ App::DocumentObjectExecReturn *Fillet::execute(void)
         if (!BRepAlgo::IsValid(aLarg, shape.getShape(), Standard_False, Standard_False)) {
             ShapeFix_ShapeTolerance aSFT;
             aSFT.LimitTolerance(shape.getShape(), Precision::Confusion(), Precision::Confusion(), TopAbs_SHAPE);
-            Handle(ShapeFix_Shape) aSfs = new ShapeFix_Shape(shape.getShape());
-            aSfs->Perform();
-            shape.setShape(aSfs->Shape(),false);
+            shape.fix();
             if (!BRepAlgo::IsValid(aLarg, shape.getShape(), Standard_False, Standard_False))
                 failed = true;
         }

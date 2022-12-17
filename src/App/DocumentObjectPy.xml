@@ -189,7 +189,7 @@ Args:
 Returns:
   A tuple of the top level object and a subname path. The top level object will be this
   object, unless flatten is enabled and this object belongs to the same geo feature group
-  of the next sub-object, in which case the last consequtive sub-object in the same group
+  of the next sub-object, in which case the last consecutive sub-object in the same group
   will be returned.
                 </UserDocu>
             </Documentation>
@@ -361,13 +361,6 @@ getElementMapVersion(property_name): return element map version of a given geome
 				<UserDocu>State of the object in the document</UserDocu>
 			</Documentation>
 			<Parameter Name="State" Type="List"/>
-		</Attribute>
-		<Attribute Name="ViewObject" ReadOnly="true">
-			<Documentation>
-				<UserDocu>If the GUI is loaded the associated view provider is returned
-or None if the GUI is not up</UserDocu>
-			</Documentation>
-			<Parameter Name="ViewObject" Type="Object"/>
 		</Attribute>
 		<CustomAttributes />
 		<Attribute Name="MustExecute" ReadOnly="true">

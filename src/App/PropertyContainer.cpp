@@ -295,16 +295,21 @@ void PropertyContainer::beforeSave() const
 
     dynamicProps.beforeSave();
 
-    getPropertyMap(Map);
+    FC_STATIC std::vector<App::Property*> props;
+    props.clear();
+    getPropertyList(props);
+    for (auto prop : props) {
+        if (!prop->getName()
+                || prop->getContainer() != this
+                || prop->testStatus(Property::PropNoPersist))
+            continue;
+        auto res = Map.emplace(prop->getName(), prop);
+        if (!res.second && FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG))
+            FC_WARN("Ignore duplicate property: " << prop->getFullName());
+    }
 
     for(auto it=Map.begin();it!=Map.end();) {
         auto prop = it->second;
-        if (prop->getContainer() != this
-                || prop->testStatus(Property::PropNoPersist))
-        {
-            it = Map.erase(it);
-            continue;
-        }
         if(!prop->testStatus(Property::PropDynamic)
                 && (prop->testStatus(Property::Transient) ||
                     getPropertyType(prop) & Prop_Transient))

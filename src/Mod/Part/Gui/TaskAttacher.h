@@ -48,6 +48,7 @@ class ViewProvider;
 namespace PartGui { 
 
 class Ui_TaskAttacher;
+class TaskDlgAttacher;
 
 class PartGuiExport TaskAttacher : public Gui::TaskView::TaskBox, public Gui::SelectionObserver
 {
@@ -60,9 +61,10 @@ public:
     typedef boost::function<void (bool, const std::string &, Gui::ViewProviderDocumentObject*,
                                   App::DocumentObject *, const std::string&)>  VisibilityFunction;
 
-    TaskAttacher(Gui::ViewProviderDocumentObject *ViewProvider, QWidget *parent = 0,
+    TaskAttacher(Gui::ViewProviderDocumentObject *ViewProvider, QWidget *parent = nullptr,
                  QString picture = QString(),
-                 QString text = QStringLiteral("Attachment"), VisibilityFunction func = 0);
+                 QString text = QStringLiteral("Attachment"), VisibilityFunction func = VisibilityFunction(),
+                 bool isBase = false);
     ~TaskAttacher();
 
     void editAfterClose(bool enable = true) {editOnClose = enable;}
@@ -78,6 +80,7 @@ public:
     Attacher::eMapMode getActiveMapMode();
 
     bool isCompleted() const { return completed; }
+    bool isTouched() const { return touched; }
 
     void setupTransaction();
 
@@ -86,6 +89,11 @@ public:
 
     QColor errorColor() const {return errColor;};
     void setErrorColor(const QColor &);
+
+    TaskAttacher *getPartner() {return partner;}
+
+Q_SIGNALS:
+    void activateSelectionMode();
 
 private Q_SLOTS:
     void onAttachmentOffsetChanged(double, int idx);
@@ -117,9 +125,9 @@ private:
 
     /**
      * @brief updatePreview: calculate attachment, update 3d view, update status message
-     * @return true if attachment calculation was successful, false otherwise
      */
-    bool updatePreview();
+    void updatePreview();
+    void updateStyle();
 
     void makeRefStrings(std::vector<QString>& refstrings, std::vector<std::string>& refnames);
     QLineEdit* getLine(unsigned idx);
@@ -127,6 +135,7 @@ private:
     void onRefName(const QString& text, unsigned idx);
     void updateRefButton(int idx);
     void updateAttachmentOffsetUI();
+    void init();
 
     /**
      * @brief updateListOfModes Fills the mode list with modes that apply to
@@ -148,10 +157,14 @@ protected:
     std::string ObjectName;
 
 private:
+    bool isBase = false;
+    TaskAttacher *partner = nullptr;
     QWidget* proxy;
     std::unique_ptr<Ui_TaskAttacher> ui;
     VisibilityFunction visibilityFunc;
     int transactionID = 0;
+    QString errMessage;
+    Gui::SelectionGate *selectionGate = nullptr;
 
     // TODO fix documentation here (2015-11-10, Fat-Zer)
     int iActiveRef; //what reference is being picked in 3d view now? -1 means no one, 0-3 means a reference is being picked.
@@ -160,6 +173,7 @@ private:
     Attacher::SuggestResult lastSuggestResult;
     bool completed;
     bool editOnClose = false;
+    bool touched = false;
 
     typedef boost::signals2::connection Connection;
     Connection connectDelObject;
@@ -177,6 +191,7 @@ private:
     bool hasMsgColor = false;
 
     QTimer updateTimer;
+    QTimer styleTimer;
 };
 
 /// simulation dialog for the TaskView

@@ -132,6 +132,12 @@ public:
     boost::signals2::signal<void (const Gui::Document&)> signalShowHidden;
     /// signal on activating view
     boost::signals2::signal<void (const Gui::MDIView*)> signalActivateView;
+    /// signal on attaching new view
+    mutable boost::signals2::signal<void (const Gui::BaseView &, bool passive)> signalAttachView;
+    /// signal on detaching view
+    mutable boost::signals2::signal<void (const Gui::BaseView &, bool passive)> signalDetachView;
+    /// signal on changed view property
+    mutable boost::signals2::signal<void (const Gui::BaseView &, const App::Property &)> signalChangedView;
     /// signal on view override mode change
     boost::signals2::signal<void (const Gui::MDIView*)> signalViewModeChanged;
     /// signal on entering in edit mode
@@ -213,7 +219,7 @@ public:
     bool activateWorkbench(const char* name);
     bool initializeWorkbench(const char *name);
     const char *initializingWorkbench() const;
-    QPixmap workbenchIcon(const QString&) const;
+    QPixmap workbenchIcon(const QString&, QString *iconPath=nullptr) const;
     QString workbenchToolTip(const QString&) const;
     QString workbenchMenuText(const QString&) const;
     QStringList workbenches(void) const;

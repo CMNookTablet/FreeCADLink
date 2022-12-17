@@ -1607,7 +1607,7 @@ void PropertyString::setValue(const char* newLabel)
         // allow object to control label change
 
         App::Document* doc = obj->getDocument();
-        if(doc && !DocumentParams::DuplicateLabels() && !obj->allowDuplicateLabel()) {
+        if(doc && !DocumentParams::getDuplicateLabels() && !obj->allowDuplicateLabel()) {
             std::vector<std::string> objectLabels;
             std::vector<App::DocumentObject*>::const_iterator it;
             std::vector<App::DocumentObject*> objs = doc->getObjects();
@@ -2757,7 +2757,7 @@ TYPESYSTEM_SOURCE(App::PropertyMaterial , App::Property)
 
 PropertyMaterial::PropertyMaterial()
 {
-    if (DocumentParams::EnableMaterialEdit())
+    if (DocumentParams::getEnableMaterialEdit())
         setStatus(MaterialEdit, true);
 
 }

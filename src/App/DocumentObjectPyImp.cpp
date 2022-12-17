@@ -217,54 +217,6 @@ Py::List DocumentObjectPy::getState(void) const
     return list;
 }
 
-Py::Object DocumentObjectPy::getViewObject(void) const
-{
-    try {
-        PyObject *dict = PySys_GetObject("modules");
-        if (!dict) {
-            return Py::None();
-        }
-
-        // check if the FreeCADGui module is already loaded, if not then don't try to load it
-        Py::Dict sysmod(dict);
-        if (!sysmod.hasKey("FreeCADGui")) {
-            return Py::None();
-        }
-
-        // double-check that the module doesn't have a null pointer
-        Py::Module module(PyImport_ImportModule("FreeCADGui"),true);
-        if (module.isNull() || !module.hasAttr("getDocument")) {
-            // in v0.14+, the GUI module can be loaded in console mode (but doesn't have all its document methods)
-            return Py::None();
-        }
-        if(!getDocumentObjectPtr()->getDocument()) {
-            throw Py::RuntimeError("Object has no document");
-        }
-        const char* internalName = getDocumentObjectPtr()->getNameInDocument();
-        if (!internalName) {
-            throw Py::RuntimeError("Object has been removed from document");
-        }
-
-        Py::Callable method(module.getAttr("getDocument"));
-        Py::Tuple arg(1);
-        arg.setItem(0, Py::String(getDocumentObjectPtr()->getDocument()->getName()));
-        Py::Object doc = method.apply(arg);
-        method = doc.getAttr("getObject");
-        arg.setItem(0, Py::String(internalName));
-        Py::Object obj = method.apply(arg);
-        return obj;
-    }
-    catch (Py::Exception& e) {
-        if (PyErr_ExceptionMatches(PyExc_ImportError)) {
-            // the GUI is not up, hence None is returned
-            e.clear();
-            return Py::None();
-        }
-        // FreeCADGui is loaded, so there must be wrong something else
-        throw; // re-throw
-    }
-}
-
 Py::List DocumentObjectPy::getInList(void) const
 {
     Py::List ret;
@@ -716,8 +668,10 @@ PyObject*  DocumentObjectPy::normalizeSubName(PyObject *args) {
         SubObjectT sobjT(getDocumentObjectPtr(), subname);
         sobjT.normalize(ops);
         auto obj = sobjT.getObject();
-        if (!obj)
+        if (!obj) {
             PyErr_SetString(PyExc_RuntimeError, "failed to normalize subname path");
+            return nullptr;
+        }
         return Py::new_reference_to(
                 Py::TupleN(Py::asObject(obj->getPyObject()),
                            Py::String(sobjT.getSubName())));

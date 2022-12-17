@@ -109,44 +109,43 @@ Part::Feature *DressUp::getBaseObject(bool silent) const
 
 std::vector<TopoShape> DressUp::getContinuousEdges(const TopoShape &shape) {
     std::vector<TopoShape> ret;
-    TopTools_IndexedDataMapOfShapeListOfShape mapEdgeFace;
-    TopExp::MapShapesAndAncestors(shape.getShape(), TopAbs_EDGE, TopAbs_FACE, mapEdgeFace);
+    std::unordered_set<TopoDS_Shape, Part::ShapeHasher, Part::ShapeHasher> shapeSet;
 
-    for(auto &v : Base.getShadowSubs()) {
-        TopoDS_Shape subshape;
-        auto &ref = v.first.size()?v.first:v.second;
-        try {
-            subshape = shape.getSubShape(ref.c_str());
-        }catch(...){}
-        if(subshape.IsNull()) {
-            FC_THROWM(Base::CADKernelError, "Invalid edge link: " << v.second);
+    auto addEdge = [&](const TopoDS_Shape &subshape, const std::string &ref) {
+        if (!shapeSet.insert(subshape).second)
+            return;
+
+        auto faces = shape.findAncestorsShapes(subshape, TopAbs_FACE);
+        if(faces.size() != 2) {
+            FC_WARN(getFullName() << ": skip edge " 
+                    << ref << " with less two attaching faces");
+            return;
         }
+        const TopoDS_Shape& face1 = faces.front();
+        const TopoDS_Shape& face2 = faces.back();
+        GeomAbs_Shape cont = BRep_Tool::Continuity(TopoDS::Edge(subshape),
+                                                    TopoDS::Face(face1),
+                                                    TopoDS::Face(face2));
+        if (cont != GeomAbs_C0) {
+            FC_WARN(getFullName() << ": skip edge "
+                    << ref << " that is not C0 continuous");
+            return;
+        }
+        ret.push_back(subshape);
+    };
 
-        if (subshape.ShapeType() == TopAbs_EDGE) {
-            TopoDS_Edge edge = TopoDS::Edge(subshape);
-            const TopTools_ListOfShape& los = mapEdgeFace.FindFromKey(edge);
+    for(const auto &v : Base.getShadowSubs()) {
+        TopoDS_Shape subshape;
+        const auto &ref = v.first.size()?v.first:v.second;
+        subshape = shape.getSubShape(ref.c_str(), true);
+        if(subshape.IsNull())
+            FC_THROWM(Base::CADKernelError, "Invalid edge link: " << v.second);
 
-            if(los.Extent() != 2) {
-                FC_WARN(getFullName() << ": skip edge '" 
-                        << ref << "' with less two attaching faces");
-                continue;
-            }
-
-            const TopoDS_Shape& face1 = los.First();
-            const TopoDS_Shape& face2 = los.Last();
-            GeomAbs_Shape cont = BRep_Tool::Continuity(TopoDS::Edge(edge),
-                                                       TopoDS::Face(face1),
-                                                       TopoDS::Face(face2));
-            if (cont != GeomAbs_C0) {
-                FC_WARN(getFullName() << ": skip edge '"
-                       << ref << "' that is not C0 continuous");
-                continue;
-            }
-            ret.push_back(subshape);
-
-        } else if(subshape.ShapeType() == TopAbs_FACE) {
+        if (subshape.ShapeType() == TopAbs_EDGE)
+            addEdge(subshape, ref);
+        else if(subshape.ShapeType() == TopAbs_FACE || subshape.ShapeType() == TopAbs_WIRE) {
             for(TopExp_Explorer exp(subshape,TopAbs_EDGE);exp.More();exp.Next())
-                ret.push_back(exp.Current());
+                addEdge(exp.Current(), std::string());
         } else
             FC_WARN(getFullName() << ": skip invalid shape '"
                     << ref << "' with type " << TopoShape::shapeName(subshape.ShapeType()));

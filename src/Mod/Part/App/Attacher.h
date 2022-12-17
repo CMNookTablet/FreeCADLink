@@ -50,7 +50,7 @@ namespace Attacher
 
 class AttachEngine;
 
-//Attention! The numbers assiciated to the modes are permanent, because they are what get written into files.
+//Attention! The numbers associated to the modes are permanent, because they are what get written into files.
 enum eMapMode {
     mmDeactivated,
     mmTranslate,
@@ -221,13 +221,16 @@ class PartExport AttachEngine : public Base::BaseClass
     TYPESYSTEM_HEADER();
 public: //methods
     AttachEngine();
-    virtual void setUp(const App::PropertyLinkSubList &references,
-                      eMapMode mapMode = mmDeactivated,
-                      bool mapReverse = false,
-                      double attachParameter = 0.0,
-                      double surfU = 0.0, double surfV = 0.0,
-                      const Base::Placement &attachmentOffset = Base::Placement());
-    virtual void setUp(const AttachEngine &another);
+    void setUp(const App::PropertyLinkSubList &references,
+              eMapMode mapMode = mmDeactivated,
+              bool mapReverse = false,
+              double attachParameter = 0.0,
+              double surfU = 0.0, double surfV = 0.0,
+              const Base::Placement &attachmentOffset = Base::Placement());
+    void setUp(const AttachEngine &another);
+
+    void setOffset(const Base::Placement &offset);
+
     virtual AttachEngine* copy() const = 0;
 
     Base::Placement calculateAttachedPlacement(

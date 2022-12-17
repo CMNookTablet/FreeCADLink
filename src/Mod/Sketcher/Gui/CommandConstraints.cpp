@@ -5855,10 +5855,12 @@ void CmdSketcherConstrainRadiam::updateAction(int mode)
 
 // ======================================================================================
 
-DEF_STD_CMD_ACLU(CmdSketcherCompConstrainRadDia)
+DEF_STD_CMD_GC(CmdSketcherCompConstrainRadDia)
 
 CmdSketcherCompConstrainRadDia::CmdSketcherCompConstrainRadDia()
-: Command("Sketcher_CompConstrainRadDia")
+: inherited("Sketcher_CompConstrainRadDia", 2, 
+            "User parameter:BaseApp/Preferences/Mod/Sketcher"
+            "CurRadDiaCons")
 {
     sAppModule      = "Sketcher";
     sGroup          = "Sketcher";
@@ -5870,120 +5872,12 @@ CmdSketcherCompConstrainRadDia::CmdSketcherCompConstrainRadDia()
     eType           = ForEdit;
 }
 
-void CmdSketcherCompConstrainRadDia::activated(int iMsg)
-{
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-    if (iMsg==0) {
-        rcCmdMgr.runCommandByName("Sketcher_ConstrainRadius");
-    }
-    else if (iMsg==1) {
-        rcCmdMgr.runCommandByName("Sketcher_ConstrainDiameter");
-    }
-    else if (iMsg==2) {
-        rcCmdMgr.runCommandByName("Sketcher_ConstrainRadiam");
-    }
-    else
-        return;
-
-    //Save new choice as default
-    ParameterGrp::handle hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/Mod/Sketcher");
-    hGrp->SetInt("CurRadDiaCons", iMsg);
-
-    // Since the default icon is reset when enabling/disabling the command we have
-    // to explicitly set the icon of the used command.
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    assert(iMsg < a.size());
-    pcAction->setIcon(a[iMsg]->icon());
-}
-
 Gui::Action * CmdSketcherCompConstrainRadDia::createAction(void)
 {
-    Gui::ActionGroup* pcAction = new Gui::ActionGroup(this, Gui::getMainWindow());
-    pcAction->setDropDownMenu(true);
-    applyCommandData(this->className(), pcAction);
-
-    QAction* arc1 = pcAction->addAction(QString());
-    arc1->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Radius"));
-    QAction* arc2 = pcAction->addAction(QString());
-    arc2->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Diameter"));
-    QAction* arc3 = pcAction->addAction(QString());
-    arc3->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Radiam"));
-
-    _pcAction = pcAction;
-    languageChange();
-
-    ParameterGrp::handle hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/Mod/Sketcher");
-    int curRadDiaCons = hGrp->GetInt("CurRadDiaCons", 2);
-
-    switch (curRadDiaCons) {
-        case 0:
-            pcAction->setIcon(arc1->icon());
-            break;
-        case 1:
-            pcAction->setIcon(arc2->icon());
-            break;
-        default:
-            pcAction->setIcon(arc3->icon());
-            curRadDiaCons = 2;
-    }
-    pcAction->setProperty("defaultAction", QVariant(curRadDiaCons));
-    pcAction->setShortcut(QString::fromUtf8(getAccel()));
-
-    return pcAction;
-}
-
-void CmdSketcherCompConstrainRadDia::updateAction(int mode)
-{
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(getAction());
-    if (!pcAction)
-        return;
-
-    QList<QAction*> a = pcAction->actions();
-    int index = pcAction->property("defaultAction").toInt();
-    switch (mode) {
-        case Reference:
-            a[0]->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Radius_Driven"));
-            a[1]->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Diameter_Driven"));
-            a[2]->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Radiam_Driven"));
-            getAction()->setIcon(a[index]->icon());
-            break;
-        case Driving:
-            a[0]->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Radius"));
-            a[1]->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Diameter"));
-            a[2]->setIcon(Gui::BitmapFactory().iconFromTheme("Constraint_Radiam"));
-            getAction()->setIcon(a[index]->icon());
-            break;
-    }
-}
-
-void CmdSketcherCompConstrainRadDia::languageChange()
-{
-    Command::languageChange();
-
-    if (!_pcAction)
-        return;
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    QAction* arc1 = a[0];
-    arc1->setText(QApplication::translate("CmdSketcherCompConstrainRadDia", "Constrain radius"));
-    arc1->setToolTip(QApplication::translate("Sketcher_ConstrainRadius", "Fix the radius of a circle or an arc"));
-    arc1->setStatusTip(QApplication::translate("Sketcher_ConstrainRadius", "Fix the radius of a circle or an arc"));
-    QAction* arc2 = a[1];
-    arc2->setText(QApplication::translate("CmdSketcherCompConstrainRadDia", "Constrain diameter"));
-    arc2->setToolTip(QApplication::translate("Sketcher_ConstrainDiameter", "Fix the diameter of a circle or an arc"));
-    arc2->setStatusTip(QApplication::translate("Sketcher_ConstrainDiameter", "Fix the diameter of a circle or an arc"));
-    QAction* arc3 = a[2];
-    arc3->setText(QApplication::translate("CmdSketcherCompConstrainRadDia", "Constrain auto radius/diameter"));
-    arc3->setToolTip(QApplication::translate("Sketcher_ConstraintRadiam", "Fix the radius/diameter of a circle or an arc"));
-    arc3->setStatusTip(QApplication::translate("Sketcher_ConstrainRadiam", "Fix the radius/diameter of a circle or an arc"));
-}
-
-bool CmdSketcherCompConstrainRadDia::isActive(void)
-{
-    return isCreateGeoActive(getActiveGuiDocument());
+    addCommand("Sketcher_ConstrainRadius");
+    addCommand("Sketcher_ConstrainDiameter");
+    addCommand("Sketcher_ConstrainRadiam");
+    return inherited::createAction();
 }
 
 // ======================================================================================

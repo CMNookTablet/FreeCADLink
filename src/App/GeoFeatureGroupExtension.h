@@ -76,10 +76,13 @@ public:
 
     /** Returns the geo feature group which contains this object.
      * In case this object is not part of any geoFeatureGroup 0 is returned.
-     * Unlike DocumentObjectGroup::getGroupOfObject serches only for GeoFeatureGroups
-     * @param obj       the object to search for
+     * Unlike DocumentObjectGroup::getGroupOfObject searches only for GeoFeatureGroups
+     * @param obj: the object to search for
+     * @param checkOrigin: whether to include origin features that by right should
+     *                     belong to some App::Origin object.
      */
-    static DocumentObject* getGroupOfObject(const DocumentObject* obj);
+    static DocumentObject* getGroupOfObject(const DocumentObject* obj,
+                                            bool checkOrigin=true);
     
     /**
      * @brief Calculates the global placement of this group
@@ -112,8 +115,12 @@ public:
 
     virtual int extensionIsElementVisible(const char *element) const override;
 
+    virtual std::vector<DocumentObject*> addObject(DocumentObject* obj) override;
+
     virtual std::vector< DocumentObject* > addObjects(std::vector< DocumentObject* > obj) override;
     virtual std::vector< DocumentObject* > removeObjects(std::vector< DocumentObject* > obj) override;
+
+    virtual bool canRemoveChild(App::DocumentObject *) const {return true;}
     
     /// Collects all links that are relevant for the coordinate system, meaning all recursive links to 
     /// obj and from obj excluding expressions and stopping the recursion at other geofeaturegroups. 

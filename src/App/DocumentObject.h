@@ -25,10 +25,12 @@
 #ifndef APP_DOCUMENTOBJECT_H
 #define APP_DOCUMENTOBJECT_H
 
+#include <QFlags>
 #include <App/TransactionalObject.h>
 #include <App/PropertyStandard.h>
 #include <App/PropertyLinks.h>
 #include <App/PropertyExpressionEngine.h>
+#include <App/PropertyPythonObject.h>
 
 #include <Base/TimeInfo.h>
 #include <Base/Matrix.h>
@@ -36,6 +38,7 @@
 
 #include <unordered_map>
 #include <bitset>
+#include <functional>
 #include <boost_signals2.hpp>
 
 namespace App
@@ -66,7 +69,6 @@ enum ObjectStatus {
     RecomputeExtension = 19, // mark the object to recompute its extensions
     ViewProviderAttached = 20, // indicate if a view provider is attached to this object
     ObjEditing = 21, // indicate the object is current being edited
-    TouchOnColorChange = 22, // inform view provider touch object on color change
 };
 
 /** Return object for feature execution
@@ -101,6 +103,7 @@ public:
 
     PropertyString Label;
     PropertyString Label2;
+    PropertyPythonObject ViewObject;
     PropertyExpressionEngine ExpressionEngine;
 
     /// Allow control visibility status in App name space
@@ -267,13 +270,18 @@ public:
      * @param recursive [in]: whether to obtain recursive in list
      * @param inList [in, out]: optional pointer to a vector holding the output
      * objects, with the furthest linking object ordered last.
+     * @param filter : optional callback function to filter out object
      */
     void getInListEx(std::set<App::DocumentObject*> &inSet,
-            bool recursive, std::vector<App::DocumentObject*> *inList=0) const;
+            bool recursive,
+            std::vector<App::DocumentObject*> *inList=nullptr,
+            std::function<bool(App::DocumentObject*)> filter = {}) const;
     /** Return a set of all objects linking to this object, including possible external parent objects
      * @param recursive [in]: whether to obtain recursive in list
+     * @param filter : optional callback function to filter out object
      */
-    std::set<App::DocumentObject*> getInListEx(bool recursive) const;
+    std::set<App::DocumentObject*> getInListEx(bool recursive,
+            std::function<bool(App::DocumentObject*)> filter = {}) const;
 
     /// get group if object is part of a group, otherwise 0 is returned
     DocumentObjectGroup* getGroup() const;
@@ -509,6 +517,21 @@ public:
         std::string *childName=0, const char **subElement=0,
         PyObject **pyObj=0, Base::Matrix4D *mat=0, bool transform=true, int depth=0) const;
 
+    /// Option for resolveRelativeLink()
+    enum RelativeLinkOption {
+        /* Whether to flatten the object hierarchies that belong to the same geo
+         * feature group before resolving.  e.g. (Part.Fusion.Box -> Part.Box)
+         */
+        Flatten = 1,
+
+        /* If the link and the object shares no comment parent, return the top
+         * parent of the object. If this option is not set, then return the
+         * immediate parent of the object.
+         */
+        TopParent = 2,
+    };
+    Q_DECLARE_FLAGS(RelativeLinkOptions, RelativeLinkOption);
+
     /** Resolve a link reference that is relative to this object reference
      *
      * @param subname: on input, this is the subname reference to the object
@@ -519,12 +542,13 @@ public:
      * parent.
      * @param linkSub: on input, this the subname of the link reference. On
      * output, it may be offset to be rid off any common parent.
-     * @param flatten: whether to flatten the object hierarchies that belong to
-     *                 the same geo feature group before resolving.
-     *                 e.g. (Part.Fusion.Box -> Part.Box)
+     * @param options: commbined options from RelativeLinkOption
      *
      * @return The corrected top parent of the object that is to be assigned the
      * link. If the output 'subname' is empty, then return the object itself.
+     * In case the object has no shared parent with the link, then return the
+     * immediate parent of the object, or if RelativeLinkOption::TopParent is
+     * set in \c options, then return the top parent of the object
      *
      * To avoid any cyclic reference, an object must not be assign a link to any
      * of the object in its parent. This function can be used to resolve any
@@ -557,7 +581,8 @@ public:
      * The common parent 'Group' is removed.
      */
     App::DocumentObject *resolveRelativeLink(std::string &subname,
-            App::DocumentObject *&link, std::string &linkSub, bool flatten = false) const;
+            App::DocumentObject *&link, std::string &linkSub,
+            RelativeLinkOptions options = RelativeLinkOptions()) const;
 
     /** Called to adjust link properties to avoid cyclic links
      *
@@ -710,5 +735,7 @@ private:
 };
 
 } //namespace App
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(App::DocumentObject::RelativeLinkOptions);
 
 #endif // APP_DOCUMENTOBJECT_H

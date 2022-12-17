@@ -359,7 +359,12 @@ void PropertyModel::buildUp(const PropertyModel::PropertyList& props)
             _name.resize(_name.size()-1);
             propName = _name.c_str();
         }
-        setPropertyItemName(item, propName, groupInfo.groupItem->propertyName());
+
+        // propertyName() returns a name with inserted space. objectName() gives
+        // the original name.
+        //
+        // setPropertyItemName(item, propName, groupInfo.groupItem->propertyName());
+        setPropertyItemName(item, propName, groupInfo.groupItem->objectName());
 
         if (jt->second != item->getPropertyData()) {
             for (auto prop : item->getPropertyData())

@@ -224,7 +224,7 @@ class Wire(DraftObject):
                         v = DraftVecUtils.scaleTo(v,obj.Length.Value)
                         obj.Points = [obj.Points[0],obj.Points[0].add(v)]
 
-        elif prop == "Placement":
+        elif prop == "Placement" or prop == 'Points':
             pl = App.Placement(obj.Placement)
             if len(obj.Points) >= 2:
                 displayfpstart = pl.multVec(obj.Points[0])

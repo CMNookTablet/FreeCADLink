@@ -50,8 +50,9 @@ public:
     App::PropertyLinkSub     ReferenceAxis;
     App::PropertyAngle       TaperAngle;
     App::PropertyAngle       TaperAngleRev;
-    App::PropertyAngle       InnerTaperAngle;
-    App::PropertyAngle       InnerTaperAngleRev;
+    App::PropertyAngle       TaperInnerAngle;
+    App::PropertyAngle       TaperInnerAngleRev;
+    App::PropertyBool        AutoTaperInnerAngle;
     App::PropertyBool        UsePipeForDraft;
     App::PropertyBool        CheckUpToFaceLimits;
 
@@ -77,6 +78,8 @@ public:
     const char* getViewProviderName(void) const {
         return "PartDesignGui::ViewProviderPad";
     }
+    void handleChangedPropertyName(Base::XMLReader &reader, const char * TypeName, const char *Name);
+    void onChanged(const App::Property *);
     //@}
 
 protected:

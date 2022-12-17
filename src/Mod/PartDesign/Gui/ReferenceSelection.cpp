@@ -33,6 +33,8 @@
 # include <gp_Pln.hxx>
 #endif
 
+#include <boost/algorithm/string/find.hpp>
+
 #include <App/OriginFeature.h>
 #include <App/GeoFeatureGroupExtension.h>
 #include <App/Origin.h>
@@ -95,9 +97,9 @@ bool ReferenceSelection::allow(App::Document* pDoc, App::DocumentObject* pObj, c
     // Enable selection from origin of current part/
     if ( pObj->getTypeId().isDerivedFrom(App::OriginFeature::getClassTypeId()) ) {
         bool fits = false;
-        if ( plane && pObj->getTypeId().isDerivedFrom(App::Plane::getClassTypeId()) ) {
+        if ( _conf.plane && pObj->getTypeId().isDerivedFrom(App::Plane::getClassTypeId()) ) {
             fits = true;
-        } else if ( edge && pObj->getTypeId().isDerivedFrom(App::Line::getClassTypeId()) ) {
+        } else if ( _conf.edge && pObj->getTypeId().isDerivedFrom(App::Line::getClassTypeId()) ) {
             fits = true;
         }
 
@@ -122,21 +124,21 @@ bool ReferenceSelection::allow(App::Document* pDoc, App::DocumentObject* pObj, c
 
         if (!body) { // Allow selecting Part::Datum features from the active Body
             return false;
-        } else if (!allowOtherBody && !body->hasObject(pObj)) {
+        } else if (!_conf.allowOtherBody && !body->hasObject(pObj)) {
             return false;
         }
 
-        if (plane && (pObj->getTypeId().isDerivedFrom(PartDesign::Plane::getClassTypeId())))
+        if (_conf.plane && (pObj->getTypeId().isDerivedFrom(PartDesign::Plane::getClassTypeId())))
             return true;
-        if (edge && (pObj->getTypeId().isDerivedFrom(PartDesign::Line::getClassTypeId())))
+        if (_conf.edge && (pObj->getTypeId().isDerivedFrom(PartDesign::Line::getClassTypeId())))
             return true;
-        if (point && (pObj->getTypeId().isDerivedFrom(PartDesign::Point::getClassTypeId())))
+        if (_conf.point && (pObj->getTypeId().isDerivedFrom(PartDesign::Point::getClassTypeId())))
             return true;
 
         return false;
     }
 
-    if (!allowOtherBody) {
+    if (!_conf.allowOtherBody) {
         if (support == NULL)
             return false;
         if (pObj != support)
@@ -144,47 +146,46 @@ bool ReferenceSelection::allow(App::Document* pDoc, App::DocumentObject* pObj, c
     }
     // Handle selection of geometry elements
     if (!sSubName || sSubName[0] == '\0')
-        return whole;
-    std::string subName(sSubName);
-    if (edge && subName.size() > 4 && subName.substr(0,4) == "Edge") {
-        const Part::TopoShape &shape = static_cast<const Part::Feature*>(pObj)->Shape.getValue();
-        TopoDS_Shape sh = shape.getSubShape(subName.c_str());
-        const TopoDS_Edge& edgeShape = TopoDS::Edge(sh);
-        if (!edgeShape.IsNull()) {
-            if (planar) {
-                return Part::TopoShape(edgeShape).isLinearEdge();
-            } else {
+        return _conf.whole;
+    if (_conf.edge && boost::ifind_first(sSubName, "edge")) {
+        auto shape = Part::Feature::getShape(pObj, sSubName, /*needSubElement*/true);
+        if (!shape.IsNull() && shape.ShapeType() == TopAbs_EDGE) {
+            if (_conf.planar)
+                return Part::TopoShape(shape).isLinearEdge();
+            else
                 return true;
-            }
         }
     }
-    if (plane && subName.size() > 4 && subName.substr(0,4) == "Face") {
-        const Part::TopoShape &shape = static_cast<const Part::Feature*>(pObj)->Shape.getValue();
-        TopoDS_Shape sh = shape.getSubShape(subName.c_str());
-        const TopoDS_Face& face = TopoDS::Face(sh);
-        if (!face.IsNull()) {
-            if (planar) {
-                return Part::TopoShape(face).isPlanarFace();
-            } else {
+    if (_conf.plane && boost::ifind_first(sSubName, "face")) {
+        auto shape = Part::Feature::getShape(pObj, sSubName, /*needSubElement*/true);
+        if (!shape.IsNull() && shape.ShapeType() == TopAbs_FACE) {
+            if (_conf.planar)
+                return Part::TopoShape(shape).isPlanarFace();
+            else
                 return true;
-            }
         }
     }
-    if (point && subName.size() > 6 && subName.substr(0,6) == "Vertex") {
+    if (_conf.point && boost::ifind_first(sSubName, "vertex")) {
         return true;
     }
-    if (circle && subName.size() > 4 && subName.substr(0,4) == "Edge") {
-        const Part::TopoShape &shape = static_cast<const Part::Feature*>(pObj)->Shape.getValue();
-        gp_Pln pln;
-        if (planar)
-            return shape.findPlane(pln);
-        TopoDS_Shape sh = shape.getSubShape(subName.c_str());
-        const TopoDS_Edge& edgeShape = TopoDS::Edge(sh);
-        BRepAdaptor_Curve adapt(edgeShape);
-        if (adapt.GetType() == GeomAbs_Circle) {
-            return true;
+    if (!_conf.edge && _conf.circle && boost::ifind_first(sSubName, "edge")) {
+        auto shape = Part::Feature::getShape(pObj, sSubName, /*needSubElement*/true);
+        if (!shape.IsNull() && shape.ShapeType() == TopAbs_EDGE) {
+            BRepAdaptor_Curve adapt(TopoDS::Edge(shape));
+            return adapt.GetType() == GeomAbs_Circle;
         }
     }
+    if (_conf.wire && boost::ifind_first(sSubName, "wire")) {
+        auto shape = Part::Feature::getShape(pObj, sSubName, /*needSubElement*/true);
+        if (!shape.IsNull() && shape.ShapeType() == TopAbs_WIRE) {
+            if (_conf.planar) {
+                gp_Pln pln;
+                return Part::TopoShape(shape).findPlane(pln);
+            } else
+                return true;
+        }
+    }
+
     return false;
 }
 

@@ -200,6 +200,18 @@ void CmdSketcherNewSketch::activated(int iMsg)
         //Gui::SelectionObject &sel_support = objects[0];
         App::PropertyLinkSubList support;
         Gui::Selection().getAsPropertyLinkSubList(support);
+
+        App::DocumentObject* activeContainer = nullptr;
+        App::DocumentObject* activeGroup = nullptr;
+        for (auto obj : support.getValues()) {
+            if ((activeContainer = App::GeoFeatureGroupExtension::getGroupOfObject(obj)))
+                break;
+            if (!activeGroup)
+                activeGroup = App::GroupExtension::getGroupOfObject(obj);
+        }
+        if (!activeContainer)
+            activeContainer = activeGroup;
+
         std::string supportString = support.getPyReprString();
 
         // create Sketch on Face
@@ -207,6 +219,9 @@ void CmdSketcherNewSketch::activated(int iMsg)
 
         openCommand(QT_TRANSLATE_NOOP("Command", "Create a new sketch on a face"));
         doCommand(Doc,"App.activeDocument().addObject('Sketcher::SketchObject', '%s')", FeatName.c_str());
+        if (activeContainer)
+            Gui::cmdAppObject(activeContainer, std::ostringstream()
+                    << "addObject(App.activeDocument()." << FeatName << ")"); 
         if (mapmode < Attacher::mmDummy_NumberOfModes)
             doCommand(Gui,"App.activeDocument().%s.MapMode = \"%s\"",FeatName.c_str(),AttachEngine::getModeName(mapmode).c_str());
         else
@@ -214,16 +229,6 @@ void CmdSketcherNewSketch::activated(int iMsg)
         doCommand(Gui,"App.activeDocument().%s.Support = %s", FeatName.c_str(), supportString.c_str());
         doCommand(Gui,"App.activeDocument().recompute()");  // recompute the sketch placement based on its support
         doCommand(Gui,"Gui.activeDocument().setEdit('%s')", FeatName.c_str());
-
-        Part::Feature *part = static_cast<Part::Feature*>(support.getValue());  // if multi-part support, this will return 0
-        if (part){
-            App::DocumentObjectGroup* grp = part->getGroup();
-            if (grp) {
-                doCommand(Doc,
-                          "App.activeDocument().%s.addObject(App.activeDocument().%s)",
-                          grp->getNameInDocument(), FeatName.c_str());
-            }
-        }
     }
     else {
         // ask user for orientation
@@ -691,9 +696,7 @@ CmdSketcherViewSketch::CmdSketcherViewSketch()
 void CmdSketcherViewSketch::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
-    Gui::Document *doc = getActiveGuiDocument();
-    SketcherGui::ViewProviderSketch* vp = dynamic_cast<SketcherGui::ViewProviderSketch*>(doc->getInEdit());
-    if (vp) {
+    if (auto vp = ViewProviderSketch::getEditingViewProvider()) {
         vp->setViewBottomOnEdit(false);
         runCommand(Gui,"Gui.ActiveDocument.ActiveView.setCameraOrientation("
                 "Gui.editDocument().EditingTransform.getTransform()[1].Q)");
@@ -732,9 +735,7 @@ CmdSketcherViewSketchBottom::CmdSketcherViewSketchBottom()
 void CmdSketcherViewSketchBottom::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
-    Gui::Document *doc = getActiveGuiDocument();
-    SketcherGui::ViewProviderSketch* vp = dynamic_cast<SketcherGui::ViewProviderSketch*>(doc->getInEdit());
-    if (vp) {
+    if (auto vp = ViewProviderSketch::getEditingViewProvider()) {
         vp->setViewBottomOnEdit(true);
         runCommand(Gui,"Gui.ActiveDocument.ActiveView.setCameraOrientation("
                 "(Gui.editDocument().EditingTransform.getTransform()[1] * App.Rotation(App.Vector(0,1,0), 180)).Q)");
@@ -743,14 +744,7 @@ void CmdSketcherViewSketchBottom::activated(int iMsg)
 
 bool CmdSketcherViewSketchBottom::isActive(void)
 {
-    Gui::Document *doc = getActiveGuiDocument();
-    if (doc) {
-        // checks if a Sketch Viewprovider is in Edit and is in no special mode
-        SketcherGui::ViewProviderSketch* vp = dynamic_cast<SketcherGui::ViewProviderSketch*>(doc->getInEdit());
-        if (vp /*&& vp->getSketchMode() == ViewProviderSketch::STATUS_NONE*/)
-            return true;
-    }
-    return false;
+    return true;
 }
 
 class CmdSketcherViewSketchGroup: public Gui::GroupCommand
@@ -773,14 +767,18 @@ public:
         addCommand(new CmdSketcherViewSketchBottom);
     }
 
-    virtual Gui::Action * createAction(void) override
+    virtual bool isActive(void) override
     {
-        auto action = GroupCommand::createAction();
-        if (action && ViewProviderSketch::viewBottomOnEdit()) {
-            action->setProperty("defaultAction", QVariant((int)1));
-            setup(action);
+        bool res = Gui::GroupCommand::isActive();
+        if (getAction() && res) {
+            auto action = getAction();
+            int idx = ViewProviderSketch::viewBottomOnEdit() ? 1 : 0;
+            if (action->property("defaultAction").toInt() != idx) {
+                action->setProperty("defaultAction", QVariant(idx));
+                setup(action);
+            }
         }
-        return action;
+        return res;
     }
 
     virtual const char* className() const override {return "CmdSketcherViewSketch";}
@@ -1035,19 +1033,13 @@ CmdSketcherViewSection::CmdSketcherViewSection()
 void CmdSketcherViewSection::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
-    doCommand(Doc,"ActiveSketch.ViewObject.TempoVis.sketchClipPlane(ActiveSketch)");
+    if (auto vp = ViewProviderSketch::getEditingViewProvider())
+        vp->toggleViewSection();
 }
 
 bool CmdSketcherViewSection::isActive(void)
 {
-    Gui::Document *doc = getActiveGuiDocument();
-    if (doc) {
-        // checks if a Sketch Viewprovider is in Edit and is in no special mode
-        SketcherGui::ViewProviderSketch* vp = dynamic_cast<SketcherGui::ViewProviderSketch*>(doc->getInEdit());
-        if (vp /*&& vp->getSketchMode() == ViewProviderSketch::STATUS_NONE*/)
-            return true;
-    }
-    return false;
+    return true;
 }
 
 void CreateSketcherCommands(void)

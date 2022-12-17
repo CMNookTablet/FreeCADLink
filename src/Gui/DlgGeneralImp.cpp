@@ -179,6 +179,7 @@ void DlgGeneralImp::saveSettings()
     ui->OverlayStyleSheets->onSave();
     ui->MenuStyleSheets->onSave();
     ui->checkboxTaskList->onSave();
+    ui->toolTipIconSize->onSave();
     saveTreeMode(ui->treeMode->currentIndex());
 }
 
@@ -361,13 +362,24 @@ void DlgGeneralImp::loadSettings()
     ui->checkPopUpWindow->onRestore();
 
     ui->workbenchTabIconSize->onRestore();
+
+    ui->toolTipIconSize->onRestore();
+
+    updateLanguage();
+}
+
+void DlgGeneralImp::updateLanguage()
+{
+    ui->retranslateUi(this);
+    ui->toolTipIconSize->setToolTip(QApplication::translate("ViewParams",
+                ViewParams::docToolTipIconSize()));
+    setupToolBarIconSize(ui->toolbarIconSize);
 }
 
 void DlgGeneralImp::changeEvent(QEvent *e)
 {
     if (e->type() == QEvent::LanguageChange) {
-        ui->retranslateUi(this);
-        setupToolBarIconSize(ui->toolbarIconSize);
+        updateLanguage();
     }
     else {
         QWidget::changeEvent(e);
@@ -384,6 +396,14 @@ bool applyStyleSheet(bool delayTrigger, ParameterGrp *hGrp)
     auto sheet = hGrp->GetASCII("StyleSheet");
     bool tiledBG = hGrp->GetBool("TiledBackground", false);
     Application::Instance->setStyleSheet(QString::fromUtf8(sheet.c_str()), tiledBG);
+    return false;
+}
+
+bool applyToolTipIconSize(bool delayTrigger, ParameterGrp *)
+{
+    if (!delayTrigger)
+        return true;
+    Application::Instance->commandManager().refreshIcons();
     return false;
 }
 
@@ -461,6 +481,7 @@ struct ParamHandlers {
     void attach() {
         handlers[ParamKey("BaseApp/Preferences/MainWindow", "StyleSheet")] = applyStyleSheet;
         handlers[ParamKey("BaseApp/Preferences/MainWindow", "IconSet")] = applyStyleSheet;
+        handlers[ParamKey("BaseApp/Preferences/View", "ToolTipIconSize")] = applyToolTipIconSize;
 
         auto hGrp = App::GetApplication().GetParameterGroupByPath(
                 "User parameter:BaseApp/Preferences/DockWindows");

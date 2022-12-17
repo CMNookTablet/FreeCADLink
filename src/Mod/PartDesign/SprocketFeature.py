@@ -273,5 +273,5 @@ class SprocketTaskPanel:
         FreeCAD.ActiveDocument.abortTransaction()
 
 
-if FreeCAD.GuiUp:
+if FreeCAD.GuiUp and not FreeCADGui.Command.get('PartDesign_Sprocket'):
     FreeCADGui.addCommand('PartDesign_Sprocket', CommandSprocket())

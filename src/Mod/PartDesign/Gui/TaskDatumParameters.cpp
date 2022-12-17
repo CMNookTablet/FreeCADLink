@@ -95,6 +95,8 @@ TaskDlgDatumParameters::TaskDlgDatumParameters(ViewProviderDatum *ViewProvider)
     assert(ViewProvider);
     parameter  = new TaskDatumParameters(ViewProvider);
     Content.push_back(parameter);
+    if (parameter->getPartner())
+        Content.push_back(parameter->getPartner());
 }
 
 TaskDlgDatumParameters::~TaskDlgDatumParameters()

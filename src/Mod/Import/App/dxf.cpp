@@ -2593,6 +2593,7 @@ static void PolyLineStart()
 bool CDxfRead::ReadLwPolyLine()
 {
     PolyLineStart();
+    OnPolyLineStart();
 
     bool x_found = false;
     bool y_found = false;
@@ -2777,6 +2778,7 @@ bool CDxfRead::ReadVertex(double *pVertex, bool *bulge_found, double *bulge)
 bool CDxfRead::ReadPolyLine()
 {
     PolyLineStart();
+    OnPolyLineStart();
 
     bool closed = false;
     int flags;
@@ -2821,6 +2823,7 @@ bool CDxfRead::ReadPolyLine()
                     }
                     first_vertex_section_found = false;
                     PolyLineStart();
+                    OnPolyLineStart();
                     return(true);
                 }
                 break;

@@ -22,6 +22,7 @@
 
 
 #include "PreCompiled.h"
+#include "ViewProviderDocumentObject.h"
 
 #ifndef _PreComp_
 # include <cfloat>
@@ -129,6 +130,8 @@ ViewProviderGeometryObject::~ViewProviderGeometryObject()
 
 void ViewProviderGeometryObject::onChanged(const App::Property* prop)
 {
+    Gui::ColorUpdater colorUpdater;
+
     // Actually, the properties 'ShapeColor' and 'Transparency' are part of the property 'ShapeMaterial'.
     // Both redundant properties are kept due to more convenience for the user. But we must keep the values
     // consistent of all these properties.
@@ -148,8 +151,6 @@ void ViewProviderGeometryObject::onChanged(const App::Property* prop)
         }
     }
     else if (prop == &ShapeMaterial) {
-        if (getObject() && getObject()->testStatus(App::ObjectStatus::TouchOnColorChange))
-            getObject()->touch(true);
         const App::Material& Mat = ShapeMaterial.getValue();
         long value = (long)(100*Mat.transparency);
         if (value != Transparency.getValue())
@@ -163,6 +164,7 @@ void ViewProviderGeometryObject::onChanged(const App::Property* prop)
         pcShapeMaterial->transparency.setValue(Mat.transparency);
         if (color != ShapeColor.getValue())
             ShapeColor.setValue(Mat.diffuseColor);
+        Gui::ColorUpdater::addObject(getObject());
     }
     else if (prop == &BoundingBox) {
         showBoundingBox(BoundingBox.getValue());

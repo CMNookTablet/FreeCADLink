@@ -48,16 +48,16 @@ DlgSettings3DViewPart::DlgSettings3DViewPart(QWidget* parent)
 {
     ui->setupUi(this);
 
-    ui->maxDeviation->setMinimum(PartParams::MinimumDeviation());
-    ui->maxDeviation->setValue(PartParams::MeshDeviation());
-    ui->maxAngularDeflection->setMinimum(PartParams::MinimumAngularDeflection());
-    ui->maxAngularDeflection->setValue(PartParams::MeshAngularDeflection());
-    ui->deviationLowerBound->setValue(PartParams::MinimumDeviation());
-    ui->angularDeflectionLowerBound->setValue(PartParams::MinimumAngularDeflection());
-    ui->checkBoxMapFaceColor->setChecked(PartParams::MapFaceColor());
-    ui->checkBoxMapLineColor->setChecked(PartParams::MapLineColor());
-    ui->checkBoxMapPointColor->setChecked(PartParams::MapPointColor());
-    ui->checkBoxMapTransparency->setChecked(PartParams::MapTransparency());
+    ui->maxDeviation->setMinimum(PartParams::getMinimumDeviation());
+    ui->maxDeviation->setValue(PartParams::getMeshDeviation());
+    ui->maxAngularDeflection->setMinimum(PartParams::getMinimumAngularDeflection());
+    ui->maxAngularDeflection->setValue(PartParams::getMeshAngularDeflection());
+    ui->deviationLowerBound->setValue(PartParams::getMinimumDeviation());
+    ui->angularDeflectionLowerBound->setValue(PartParams::getMinimumAngularDeflection());
+    ui->checkBoxMapFaceColor->setChecked(PartParams::getMapFaceColor());
+    ui->checkBoxMapLineColor->setChecked(PartParams::getMapLineColor());
+    ui->checkBoxMapPointColor->setChecked(PartParams::getMapPointColor());
+    ui->checkBoxMapTransparency->setChecked(PartParams::getMapTransparency());
 
     connect(ui->deviationLowerBound, SIGNAL(valueChanged(double)), this, SLOT(onLowerBoundChanged()));
     connect(ui->angularDeflectionLowerBound, SIGNAL(valueChanged(double)), this, SLOT(onLowerBoundChanged()));

@@ -70,6 +70,7 @@ Property::Property()
 Property::~Property()
 {
     Transaction::removePendingProperty(this);
+    Document::removePendingProperty(this);
 }
 
 const char* Property::getName() const
@@ -263,7 +264,9 @@ void Property::touch()
 
     PropertyCleaner guard(this);
     _StatusBits.set(Touched);
-    if (getName() && father && !Transaction::isApplying(this)) {
+    if (getName() && father
+                  && !Transaction::isApplying(this)
+                  && !Document::isRemoving(this)) {
         father->onEarlyChange(this);
         father->onChanged(this);
         if(!testStatus(Busy)) {
@@ -295,8 +298,9 @@ void Property::aboutToSetValue(void)
     PropertyCleaner guard(this);
     if (father) {
         if (auto doc = father->getOwnerDocument()) {
-            if(!_old && DocumentParams::OptimizeRecompute()
-                     && !doc->testStatus(Document::Restoring))
+            if(!_old && DocumentParams::getOptimizeRecompute()
+                     && !doc->testStatus(Document::Restoring)
+                     && !doc->isPerformingTransaction())
             {
                 _old.reset(copyBeforeChange());
             }

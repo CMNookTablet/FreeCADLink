@@ -37,7 +37,7 @@
 #include "Document.h"
 #include "Application.h"
 #include "NavigationStyle.h"
-#include "View3DPy.h"
+#include "View3DInventorPy.h"
 
 
 using namespace Gui;
@@ -681,7 +681,7 @@ Py::Object AbstractSplitViewPy::getViewer(const Py::Tuple& args)
     }
 }
 
-Py::Object AbstractSplitViewPy::sequence_item(ssize_t viewIndex)
+Py::Object AbstractSplitViewPy::sequence_item(Py_ssize_t viewIndex)
 {
     testExistence();
     if (viewIndex >= _view->getSize() || viewIndex < 0)

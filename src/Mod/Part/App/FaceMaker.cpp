@@ -63,9 +63,12 @@ void Part::FaceMaker::addTopoShape(const TopoShape& shape) {
         break;
         case TopAbs_WIRE:
             this->myWires.push_back(TopoDS::Wire(sh));
+            this->myTopoWires.push_back(shape);
         break;
         case TopAbs_EDGE:
             this->myWires.push_back(BRepBuilderAPI_MakeWire(TopoDS::Edge(sh)).Wire());
+            this->myTopoWires.push_back(shape);
+            this->myTopoWires.back().setShape(this->myWires.back(), false);
         break;
         case TopAbs_FACE:
             this->myInputFaces.push_back(sh);
@@ -181,8 +184,9 @@ void Part::FaceMaker::postBuild() {
     this->myTopoShape.mapSubElement(this->mySourceShapes);
     int i = 0;
     const char *op = this->MyOp;
-    if(!op) op = TOPOP_FACE;
+    if(!op) op = Part::OpCodes::Face;
     const auto &faces = this->myTopoShape.getSubTopoShapes(TopAbs_FACE);
+    std::set<Data::MappedName> namesUsed;
     // name the face using the edges of its outer wire
     for(auto &face : faces) {
         ++i;
@@ -203,22 +207,29 @@ void Part::FaceMaker::postBuild() {
 
         std::vector<Data::MappedName> names;
         Data::ElementIDRefs sids;
-#if 0
-        for (auto &e : edgeNames) {
-            names.insert(e.name);
+
+        // To avoid name collision, we keep track of any used names to make sure
+        // to use at least 'minElementNames' number of unused element names to
+        // generate the face name.
+        int nameCount = 0;
+        for (const auto &e : edgeNames) {
+            names.push_back(e.name);
             sids += e.sids;
+            if (namesUsed.insert(e.name).second) {
+                if (++nameCount >= minElementNames)
+                    break;
+            }
         }
-#else
-        // We just use the first source element name to make the face name more
-        // stable
-        names.push_back(edgeNames.begin()->name);
-        sids = edgeNames.begin()->sids;
-#endif
         this->myTopoShape.setElementComboName(
                 Data::IndexedName::fromConst("Face",i),names,op,nullptr,&sids);
     }
     this->myTopoShape.initCache(true);
     this->Done();
+}
+
+void Part::FaceMaker::setMinimumElementName(int n)
+{
+    minElementNames = n;
 }
 
 std::unique_ptr<Part::FaceMaker> Part::FaceMaker::ConstructFromType(const char* className)

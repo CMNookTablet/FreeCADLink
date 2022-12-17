@@ -54,7 +54,7 @@ class GuiExport MDIView : public QMainWindow, public BaseView
 {
     Q_OBJECT
 
-    TYPESYSTEM_HEADER();
+    PROPERTY_HEADER(Gui::MDIView);
 
 public:
     /** View constructor
@@ -67,6 +67,8 @@ public:
      * Detach the view from the document, if attached.
      */
     ~MDIView();
+
+    using QMainWindow::isHidden;
 
     /// get called when the document is updated
     virtual void onRelabel(Gui::Document *pDoc);

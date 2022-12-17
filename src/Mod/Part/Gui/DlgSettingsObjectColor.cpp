@@ -53,19 +53,19 @@ DlgSettingsObjectColor::DlgSettingsObjectColor(QWidget* parent)
 
     App::Color c;
     QColor qc;
-    c.setPackedValue(PartParams::PreviewAddColor());
+    c.setPackedValue(PartParams::getPreviewAddColor());
     qc.setRgbF(c.r, c.g, c.b, c.a);
     ui->AdditiveColor->setColor(qc);
 
-    c.setPackedValue(PartParams::PreviewSubColor());
+    c.setPackedValue(PartParams::getPreviewSubColor());
     qc.setRgbF(c.r, c.g, c.b, c.a);
     ui->SubtractiveColor->setColor(qc);
 
-    c.setPackedValue(PartParams::PreviewIntersectColor());
+    c.setPackedValue(PartParams::getPreviewIntersectColor());
     qc.setRgbF(c.r, c.g, c.b, c.a);
     ui->IntersectingColor->setColor(qc);
 
-    c.setPackedValue(PartParams::PreviewDressColor());
+    c.setPackedValue(PartParams::getPreviewDressColor());
     qc.setRgbF(c.r, c.g, c.b, c.a);
     ui->DressUpColor->setColor(qc);
 }
@@ -121,7 +121,7 @@ void DlgSettingsObjectColor::loadSettings()
     ui->IntersectingColor->onRestore();
     ui->DressUpColor->onRestore();
 
-    ui->RespectSystemDPI->setChecked(PartParams::RespectSystemDPI());
+    ui->RespectSystemDPI->setChecked(PartParams::getRespectSystemDPI());
 }
 
 /**

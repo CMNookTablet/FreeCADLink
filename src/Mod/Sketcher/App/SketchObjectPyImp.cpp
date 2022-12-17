@@ -519,20 +519,51 @@ PyObject* SketchObjectPy::addExternal(PyObject *args)
 {
     const char *ObjectName;
     const char *SubName;
-    PyObject *defining = Py_False;
+    bool defining = false;
+    bool intersection = false;
+    PyObject *mode = Py_False;
     PyObject *pyobj;
     App::SubObjectT ref;
 
-    if (PyArg_ParseTuple(args, "O|O", &pyobj, &defining)) {
+    if (PyArg_ParseTuple(args, "O|O", &pyobj, &mode)) {
         ref.setPyObject(pyobj);
         ObjectName = ref.getObjectName().c_str();
         SubName = ref.getSubName().c_str();
     } else {
         PyErr_Clear();
-        if (!PyArg_ParseTuple(args, "ss|O!:Give an object and subelement name", 
-                    &ObjectName,&SubName,&PyBool_Type,&defining))
+        if (!PyArg_ParseTuple(args, "ss|O:Give an object and subelement name", 
+                    &ObjectName,&SubName,&PyBool_Type,&mode))
             return 0;
     }
+
+    auto checkMode = [&](PyObject *mode) {
+        std::string strMode = static_cast<std::string>(Py::String(mode));
+        if (strMode.size()) {
+            if (strMode == "defining")
+                defining = true;
+            else if (strMode == "intersection")
+                intersection = true;
+            else {
+                PyErr_Format(PyExc_ValueError, "Unknown external mode '%s'", strMode.c_str());
+                return false;
+            }
+        }
+        return true;
+    };
+
+    if (PyUnicode_Check(mode)) {
+        if (!checkMode(mode))
+            return nullptr;
+    } else if (PySequence_Check(mode)) {
+        Py::Sequence seq(mode);
+        for(int i=0;i<seq.size();++i) {
+            if (!PyUnicode_Check(seq[i].ptr()))
+                PyErr_Format(PyExc_ValueError, "Invalid external mode");
+            if (!checkMode(seq[i].ptr()))
+                return nullptr;
+        }
+    } else
+        defining = PyObject_IsTrue(mode);
 
     // get the target object for the external link
     Sketcher::SketchObject* skObj = this->getSketchObjectPtr();
@@ -552,7 +583,7 @@ PyObject* SketchObjectPy::addExternal(PyObject *args)
     }
 
     // add the external
-    if (skObj->addExternal(Obj,SubName,PyObject_IsTrue(defining)) < 0) {
+    if (skObj->addExternal(Obj,SubName,defining,intersection) < 0) {
         std::stringstream str;
         str << "Not able to add external shape element";
         PyErr_SetString(PyExc_ValueError, str.str().c_str());
@@ -564,18 +595,18 @@ PyObject* SketchObjectPy::addExternal(PyObject *args)
 
 PyObject* SketchObjectPy::delExternal(PyObject *args)
 {
-    int Index;
-    if (!PyArg_ParseTuple(args, "i", &Index))
-        return 0;
+    try {
+        std::vector<int> geoIds;
+        Py::Sequence seq(args);
+        for(int i=0;i<seq.size();++i)
+            geoIds.push_back(Py::Int(seq[i].ptr()));
+        if (this->getSketchObjectPtr()->delExternal(geoIds)) {
+            PyErr_SetString(PyExc_ValueError, "Failed to delete external geometry");
+            return 0;
+        }
+        Py_Return;
+    } PY_CATCH
 
-    if (this->getSketchObjectPtr()->delExternal(Index)) {
-        std::stringstream str;
-        str << "Not able to delete an external geometry with the given index: " << Index;
-        PyErr_SetString(PyExc_ValueError, str.str().c_str());
-        return 0;
-    }
-
-    Py_Return;
 }
 
 PyObject* SketchObjectPy::attachExternal(PyObject *args)

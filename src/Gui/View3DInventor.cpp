@@ -92,7 +92,7 @@
 #include "View3DInventorExamples.h"
 #include "ViewProviderDocumentObject.h"
 #include "SoFCSelectionAction.h"
-#include "View3DPy.h"
+#include "View3DInventorPy.h"
 #include "SoFCDB.h"
 #include "NavigationStyle.h"
 #include "PropertyView.h"
@@ -112,12 +112,16 @@ void GLOverlayWidget::paintEvent(QPaintEvent*)
 
 /* TRANSLATOR Gui::View3DInventor */
 
-TYPESYSTEM_SOURCE_ABSTRACT(Gui::View3DInventor,Gui::MDIView)
+PROPERTY_SOURCE_ABSTRACT(Gui::View3DInventor,Gui::MDIView)
 
 View3DInventor::View3DInventor(Gui::Document* pcDocument, QWidget* parent,
                                const QtGLWidget* sharewidget, Qt::WindowFlags wflags)
-    : MDIView(pcDocument, parent, wflags), _viewerPy(0)
+    : MDIView(pcDocument, parent, wflags), _viewer(nullptr),_viewerPy(nullptr)
 {
+    ADD_PROPERTY(DrawStyle, ((long)0));
+    DrawStyle.setEnums(drawStyleNames());
+    ADD_PROPERTY(ShowNaviCube, ((long)0));
+
     static std::atomic<int> _nextID;
     _id = ++_nextID;
 
@@ -166,6 +170,8 @@ View3DInventor::View3DInventor(Gui::Document* pcDocument, QWidget* parent,
     // By default, the wheel events are processed by the 3d view AND the mdi area.
     //_viewer->getGLWidget()->setAttribute(Qt::WA_NoMousePropagation);
     setCentralWidget(stack);
+
+    ApplySettings applying;
 
     // apply the user settings
     OnChange(*hGrp,"EyeDistance");
@@ -248,12 +254,29 @@ View3DInventor::~View3DInventor()
     }
 
     if (_viewerPy) {
-        static_cast<View3DInventorPy*>(_viewerPy)->_view = 0;
-        Py_DECREF(_viewerPy);
+        Base::PyGILStateLocker lock;
+        _viewerPy->setInvalid();
+        _viewerPy->DecRef();
     }
 
     // here is from time to time trouble!!!
     delete _viewer;
+}
+
+static int _ApplyingSettings;
+View3DInventor::ApplySettings::ApplySettings()
+{
+    ++_ApplyingSettings;
+}
+
+View3DInventor::ApplySettings::~ApplySettings()
+{
+    --_ApplyingSettings;
+}
+
+bool View3DInventor::ApplySettings::isApplying()
+{
+    return _ApplyingSettings > 0;
 }
 
 void View3DInventor::deleteSelf()
@@ -268,7 +291,7 @@ PyObject *View3DInventor::getPyObject(void)
     if (!_viewerPy)
         _viewerPy = new View3DInventorPy(this);
 
-    Py_INCREF(_viewerPy);
+    _viewerPy->IncRef();
     return _viewerPy;
 }
 
@@ -409,7 +432,8 @@ void View3DInventor::OnChange(ParameterGrp::SubjectType &rCaller,ParameterGrp::M
         _viewer->setEnabledFPSCounter(rGrp.GetBool("ShowFPS",false));
     }
     else if (strcmp(Reason,"ShowNaviCube") == 0) {
-        _viewer->setEnabledNaviCube(rGrp.GetBool("ShowNaviCube",true));
+        if (ApplySettings::isApplying())
+            _viewer->setEnabledNaviCube(rGrp.GetBool("ShowNaviCube",true));
     }
     else if (strcmp(Reason,"CornerNaviCube") == 0) {
         _viewer->setNaviCubeCorner(rGrp.GetInt("CornerNaviCube",1));
@@ -877,8 +901,7 @@ bool View3DInventor::setCamera(const char* pCamera, int animateSteps, int animat
         size_t end = start;
         for(;pos[end] && pos[end]!='\n'; ++end);
         for(;end!=start && std::isspace((int)pos[end-1]);--end);
-        _viewer->setOverrideMode(std::string(pos+start, pos+end));
-        Application::Instance->signalViewModeChanged(this);
+        DrawStyle.setValue(std::string(pos+start, pos+end).c_str());
     }
 
     return true;
@@ -1373,5 +1396,19 @@ void View3DInventor::customEvent(QEvent * e)
     }
 }
 
+void View3DInventor::onChanged(const App::Property *prop)
+{
+    if (_viewer) {
+        if (prop == &DrawStyle) {
+            if (!DrawStyle.testStatus(App::Property::User1)) {
+                Base::ObjectStatusLocker<App::Property::Status, App::Property> guard(
+                        App::Property::User1, &DrawStyle);
+                _viewer->setOverrideMode(DrawStyle.getValueAsString());
+            }
+        }
+        _viewer->onViewPropertyChanged(*prop);
+    }
+    MDIView::onChanged(prop);
+}
 
 #include "moc_View3DInventor.cpp"

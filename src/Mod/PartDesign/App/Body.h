@@ -147,6 +147,8 @@ public:
     virtual App::DocumentObject *getSubObject(const char *subname,
         PyObject **pyObj=nullptr, Base::Matrix4D *pmat=nullptr, bool transform=false, int depth=0) const override;
 
+    virtual bool canRemoveChild(App::DocumentObject *) const override {return false;}
+
     void setShowTip(bool enable) {
         showTip = enable;
     }

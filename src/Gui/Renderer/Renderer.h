@@ -24,6 +24,14 @@
 
 #include <FCConfig.h>
 
+#ifdef FreeCADRenderer_STATIC
+#   define RendererExport
+#elif defined(FreeCADRenderer_EXPORTS)
+#   define RendererExport   FREECAD_DECL_EXPORT
+#else
+#   define RendererExport   FREECAD_DECL_IMPORT
+#endif
+
 #include <memory>
 #include <string>
 #include <vector>

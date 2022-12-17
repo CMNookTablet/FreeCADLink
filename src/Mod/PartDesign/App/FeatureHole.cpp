@@ -1604,10 +1604,8 @@ static gp_Pnt toPnt(gp_Vec dir)
 
 App::DocumentObjectExecReturn *Hole::execute(void)
 {
-    Part::Feature* profile = 0;
     TopoShape profileshape;
     try {
-        profile = getVerifiedObject();
         profileshape = getVerifiedFace();
     } catch (const Base::Exception& e) {
         return new App::DocumentObjectExecReturn(e.what());
@@ -1631,8 +1629,7 @@ App::DocumentObjectExecReturn *Hole::execute(void)
         std::string method(DepthType.getValueAsString());
         double length = 0.0;
 
-        this->positionByPrevious();
-        auto invObjLoc = this->getLocation().Inverted();
+        auto invObjLoc = this->positionByPrevious();
 
         base.move(invObjLoc);
 
@@ -2028,19 +2025,19 @@ App::DocumentObjectExecReturn *Hole::execute(void)
         const char *maker;
         switch (getAddSubType()) {
         case Additive:
-            maker = TOPOP_FUSE;
+            maker = Part::OpCodes::Fuse;
             break;
         case Intersecting:
-            maker = TOPOP_COMMON;
+            maker = Part::OpCodes::Common;
             break;
         default:
-            maker = TOPOP_CUT;
+            maker = Part::OpCodes::Cut;
         }
         try {
             if (base.isNull())
                 result = compound;
             else
-                result.makEShape(maker, {base,compound});
+                result.makEBoolean(maker, {base,compound});
             result = getSolid(result);
             retry = false;
         } catch (Standard_Failure & e) {
@@ -2056,7 +2053,7 @@ App::DocumentObjectExecReturn *Hole::execute(void)
             for (auto & hole : holes) {
                 ++i;
                 try {
-                    result.makEShape(maker, {base,hole});
+                    result.makEBoolean(maker, {base,hole});
                 } catch (Standard_Failure &) {
                     std::string msg("Boolean operation failed on profile Edge");
                     msg += std::to_string(i);

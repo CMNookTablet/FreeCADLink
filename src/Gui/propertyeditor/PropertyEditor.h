@@ -70,7 +70,7 @@ class PropertyEditor : public QTreeView
     Q_PROPERTY(QBrush itemBackground READ itemBackground WRITE setItemBackground DESIGNABLE true SCRIPTABLE true)
 
 public:
-    PropertyEditor(QWidget *parent = 0);
+    PropertyEditor(bool isViewEditor = false);
     ~PropertyEditor();
 
     /** Builds up the list view with the properties. */
@@ -128,6 +128,7 @@ private:
     QStringList selectedProperty;
     PropertyModel::PropertyList propList;
     std::unordered_set<const App::PropertyContainer*> propOwners;
+    bool isViewEditor;
     bool autoexpand;
     bool autoupdate;
     bool committing;

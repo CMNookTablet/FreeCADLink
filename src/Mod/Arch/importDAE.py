@@ -220,6 +220,7 @@ def read(filename):
     "reads a DAE file"
 
     instancing = _param.GetBool("ColladaImportInstances",False)
+    check_backface = _param.GetBool("ColladaCheckBackFace",True)
 
     col = collada.Collada(filename, ignore=[collada.DaeUnsupportedError])
     # Read the unitmeter info from dae file and compute unit to convert to mm
@@ -232,6 +233,8 @@ def read(filename):
         geommap = defaultdict(list)
     else:
         geommap = None
+
+    mesh_scales = {}
 
     for node in col.scene.nodes:
         for geomnode in node.objects('geometry'):
@@ -266,6 +269,13 @@ def read(filename):
                 obj.Label = geomnode.original.xmlnode.get('name', obj.Name)
                 mesh = Mesh.Mesh()
 
+            matrix = _get_matrix(geomnode.matrix)
+            t,r,s,_ = matrix.getTransform()
+            if FreeCAD.Vector(s).isEqual(FreeCAD.Vector(1.0,1.0,1.0), 1e-7):
+                s = None
+            elif mesh:
+                mesh_scales[obj] = s
+
             segments = []
             skip = 0
             unsupported = defaultdict(list)
@@ -276,12 +286,29 @@ def read(filename):
                         cnt.append(1)
                     else:
                         cnt[0] += 1
+                    continue
                 start = mesh.CountFacets
                 facets = []
+                triangle = []
                 for tri in prim:
                     for v in tri.vertices:
                         v = [x * unit for x in v]
-                        facets.append([v[0],v[1],v[2]])
+                        if s:
+                            v[0] *= s[0]
+                            v[1] *= s[1]
+                            v[2] *= s[2]
+                        if not check_backface:
+                            facets.append([v[0],v[1],v[2]])
+                            continue
+                        triangle.append([v[0],v[1],v[2]])
+                        if len(triangle) == 3:
+                            # Some dae file (e.g. those exported by SketchUp)
+                            # produce mesh file with duplicated faces of
+                            # different winding (i.e. CW vs. CCW. Backface?) for
+                            # some unknown reason.
+                            if not facets or any(t not in triangle for t in facets[-3:]):
+                                facets += triangle
+                            del triangle[:]
                 if not facets:
                     skip += 1
                     continue
@@ -321,16 +348,15 @@ def read(filename):
             if geommap is None:
                 continue
 
-            matrix = _get_matrix(geomnode.matrix)
-            t,r,s,_ = matrix.getTransform()
             t *= unit
-            if mesh and FreeCAD.Vector(s).isEqual(FreeCAD.Vector(1.0,1.0,1.0), 1e-7):
+            if mesh:
                 obj.Placement = FreeCAD.Placement(t,r)
                 if geommap is not None:
                     geommap[geomnode.original] = obj
                 obj.recompute(True)
                 continue
 
+            linked.add(obj)
             link = FreeCAD.ActiveDocument.addObject("App::Link","Link")
             if mesh:
                 obj.Visibility = False
@@ -339,6 +365,11 @@ def read(filename):
                 mat = None
             link.LinkedObject = obj
             link.Placement = FreeCAD.Placement(t,r)
+            mesh_scale = mesh_scales.get(obj, None)
+            if mesh_scale:
+                s[0] /= mesh_scale[0]
+                s[1] /= mesh_scale[1]
+                s[2] /= mesh_scale[2]
             link.ScaleVector = s
             link.Label = geomnode.original.xmlnode.get('name', obj.Label)
             if mat:

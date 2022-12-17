@@ -1349,7 +1349,7 @@ void ParameterGrp::Clear(bool notify)
         }
     }
 
-    // Remove the reset of non-group nodes;
+    // Remove the rest of non-group nodes;
     std::vector<std::pair<ParamType, std::string>> params;
     for (DOMNode *child = _pGroupNode->getFirstChild(), *next = child; child != 0;  child = next) {
         next = next->getNextSibling();
@@ -1378,7 +1378,7 @@ bool ParameterGrp::ShouldRemove() const
 {
     if (this->getRefCount() > 1)
         return false;
-    for (auto it : _GroupMap) {
+    for (const auto &it : _GroupMap) {
         bool ok = it.second->ShouldRemove();
         if (!ok)
             return false;
@@ -1399,7 +1399,8 @@ XERCES_CPP_NAMESPACE_QUALIFIER DOMElement *ParameterGrp::FindElement(XERCES_CPP_
             if (!strcmp(Type,StrX(clChild->getNodeName()).c_str())) {
                 if (clChild->getAttributes()->getLength() > 0) {
                     if (Name) {
-                        if (!strcmp(Name,StrX(clChild->getAttributes()->getNamedItem(XStr("Name").unicodeForm())->getNodeValue()).c_str()))
+                        DOMNode* attr = FindAttribute(clChild, "Name");
+                        if (attr && !strcmp(Name,StrX(attr->getNodeValue()).c_str()))
                             return static_cast<DOMElement*>(clChild);
                     }
                     else
@@ -1443,6 +1444,15 @@ XERCES_CPP_NAMESPACE_QUALIFIER DOMElement *ParameterGrp::FindOrCreateElement(XER
         return pcElem;
 
     return CreateElement(Start,Type,Name);
+}
+
+XERCES_CPP_NAMESPACE_QUALIFIER DOMNode *ParameterGrp::FindAttribute(XERCES_CPP_NAMESPACE_QUALIFIER DOMNode *Node, const char* Name) const
+{
+    DOMNamedNodeMap* attr = Node->getAttributes();
+    if (attr) {
+        return attr->getNamedItem(XStr(Name).unicodeForm());
+    }
+    return nullptr;
 }
 
 std::vector<std::pair<ParameterGrp::ParamType,std::string> >

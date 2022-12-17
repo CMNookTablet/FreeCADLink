@@ -65,7 +65,7 @@ Split::Split()
 
     ADD_PROPERTY_TYPE(Solids, (), "Part Design",
             (App::PropertyType)(App::Prop_Hidden|App::Prop_ReadOnly), "List of solids");
-    Solids.setScope(App::LinkScope::Hidden);
+    // Solids.setScope(App::LinkScope::Hidden);
 
     ADD_PROPERTY_TYPE(_Version,(0),"Part Design",(App::PropertyType)(App::Prop_Hidden), 0);
 }
@@ -205,6 +205,7 @@ App::DocumentObjectExecReturn *Split::execute(void)
         }
         child->Parent.setValue(this);
         child->Shape.setValue(solids[i]);
+        child->purgeTouched();
     }
     if(activeShapes.empty()) {
         activeShapes.push_back(solids[0]);

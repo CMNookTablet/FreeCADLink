@@ -61,6 +61,7 @@ private:
 
     boost::signals2::scoped_connection cellUpdatedConnection;
     boost::signals2::scoped_connection rangeUpdatedConnection;
+    boost::signals2::scoped_connection tableRefreshConnection;
     Spreadsheet::Sheet * sheet;
     QColor aliasFgColor;
     QColor aliasBgColor;

@@ -53,6 +53,7 @@
 
 #include <Base/Exception.h>
 #include <Base/Tools.h>
+#include <App/Document.h>
 
 #include "FeatureGeomFillSurface.h"
 
@@ -164,6 +165,57 @@ void GeomFillSurface::onChanged(const App::Property* prop)
 
 App::DocumentObjectExecReturn *GeomFillSurface::execute(void)
 {
+#ifndef FC_NO_ELEMENT_MAP
+    Part::TopoShape result(0, getDocument()->getStringHasher());
+    std::vector<Part::TopoShape> shapes;
+    const auto &objs = BoundaryList.getValues();
+    const auto &subs = BoundaryList.getSubValues();
+    int i = -1;
+    for (auto obj : objs) {
+        ++i;
+        auto shape = Part::Feature::getTopoShape(obj, subs[i].c_str(), /*needSubElement*/true);
+        switch (shape.shapeType(true)) {
+        case TopAbs_EDGE:
+        case TopAbs_WIRE:
+            shapes.push_back(shape);
+            break;
+        default:
+            break;
+        }
+    }
+    auto wires = result.makEWires(shapes).getSubTopoShapes(TopAbs_WIRE);
+    if (wires.size() != 1)
+        return new App::DocumentObjectExecReturn("Expects the input edges forms exactly one wire");
+
+    Part::TopoShape::FillingStyle style;
+    switch (FillType.getValue()) {
+    case GeomFill_CoonsStyle:
+        style = Part::TopoShape::FillingStyle_Coons;
+        break;
+    case GeomFill_CurvedStyle:
+        style = Part::TopoShape::FillingStyle_Curved;
+        break;
+    default:
+        style = Part::TopoShape::FillingStyle_Strech;
+    }
+    try {
+        result.makEBSplineFace(wires, style, true);
+        this->Shape.setValue(result);
+    } catch (Standard_ConstructionError&) {
+        if (wires[0].isClosed()) {
+            try {
+                result.makEFace(wires);
+                this->Shape.setValue(result);
+            } catch (Base::Exception &) {
+            } catch (Standard_Failure &) {
+            }
+        }
+        return new App::DocumentObjectExecReturn("Curves are disjoint.");
+    }
+    return App::DocumentObject::StdReturn;
+
+#else
+
     TopoDS_Wire aWire;
 
     try {
@@ -194,6 +246,7 @@ App::DocumentObjectExecReturn *GeomFillSurface::execute(void)
     catch (Standard_Failure& e) {
         return new App::DocumentObjectExecReturn(e.GetMessageString());
     }
+#endif
 }
 
 GeomFill_FillingStyle GeomFillSurface::getFillingStyle()

@@ -85,7 +85,7 @@ def _ftostr(v):
     if _Decimals:
         res = '%.*f' % (_Decimals, v)
     else:
-        res = '%g' % v
+        res = '%.16g' % v
     if len(res) > 128: # probably infinite shape
         res = '?'
     return res
@@ -148,7 +148,8 @@ def showPreselectInfo():
             return
     except Exception:
         return
-    shape, _, obj = Part.getShape(sel.Object, sel.SubElementNames[0], retType=1)
+    shape, _, obj = Part.getShape(sel.Object, sel.SubElementNames[0],
+                                  needSubElement=True, retType=1)
     if shape.isNull():
         return
     _setupDecimals()
@@ -183,25 +184,20 @@ def showPreselectInfo():
             txt += path
         if elementName:
             txt += '\nElement name: %s' % elementName
-            if not mappedName:
-                mappedName = shape.getElementMappedName(elementName)
             if mappedName:
                 mappedName = '\nMapped name: %s' % mappedName
                 if len(mappedName) > maxlen:
                     mappedName = mappedName[:maxlen-5] + '...'
                 txt += mappedName
-            shape = Part.getShape(obj, elementName, needSubElement=True)
     except Exception:
-        shape = Part.getShape(sel.Object, sel.SubElementNames[0], needSubElement=True)
-
-    if shape.isNull():
-        return
+        pass
 
     txt += '\nPlacement: %s' % _pla_tostr(shape.Placement)
     tol = getattr(shape, 'Tolerance', None)
     if tol is not None:
         txt += '\nTolerance: %g' % tol
     if shape.ShapeType == 'Vertex':
+        txt += '\nPoint: %s' % _vec_tostr(shape.Point)
         FreeCADGui.Selection.setPreselectionText(txt)
         return
 
@@ -248,6 +244,12 @@ def showPreselectInfo():
                 txt += '\nCurvature: %s' % _ftostr(geo.curvature(u))
             except Exception:
                 pass
+        if isinstance(geo, Part.BSplineCurve):
+            try:
+                txt += f'\nDegree: {geo.Degree}'\
+                       f'\nPoles: {geo.NbPoles}'
+            except Exception:
+                pass
     else:
         geo = getattr(shape, 'Surface', None)
         if geo:
@@ -263,6 +265,12 @@ def showPreselectInfo():
                     t = geo.tangent(*u)
                     txt += '\nTangent: %s %s' % (_vec_tostr(t[0]), _vec_tostr(t[1]))
                     txt += '\nCurvature: %s' % _ftostr(geo.curvature(u[0], u[1],'Mean'))
+                except Exception:
+                    pass
+            if isinstance(geo, Part.BSplineSurface):
+                try:
+                    txt += f'\nDegree: ({geo.UDegree}, {geo.VDegree})' \
+                           f'\nPoles: ({geo.NbUPoles}, {geo.NbVPoles})'
                 except Exception:
                     pass
     txt = _getGeoAttributes(txt, geo,

@@ -246,10 +246,10 @@ bool CmdSketcherBSplinePoleWeight::isActive(void)
 }
 
 // Composite drop down menu for show/hide geometry information layer
-DEF_STD_CMD_ACLU(CmdSketcherCompBSplineShowHideGeometryInformation)
+DEF_STD_CMD_GC(CmdSketcherCompBSplineShowHideGeometryInformation)
 
 CmdSketcherCompBSplineShowHideGeometryInformation::CmdSketcherCompBSplineShowHideGeometryInformation()
-    : Command("Sketcher_CompBSplineShowHideGeometryInformation")
+    : inherited("Sketcher_CompBSplineShowHideGeometryInformation", 1)
 {
     sAppModule      = "Sketcher";
     sGroup          = "Sketcher";
@@ -260,118 +260,14 @@ CmdSketcherCompBSplineShowHideGeometryInformation::CmdSketcherCompBSplineShowHid
     eType           = ForEdit;
 }
 
-void CmdSketcherCompBSplineShowHideGeometryInformation::activated(int iMsg)
-{
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-    Gui::Command * cmd;
-
-    if (iMsg == 0)
-        cmd = rcCmdMgr.getCommandByName("Sketcher_BSplineDegree");
-    else if (iMsg == 1)
-        cmd = rcCmdMgr.getCommandByName("Sketcher_BSplinePolygon");
-    else if (iMsg == 2)
-        cmd = rcCmdMgr.getCommandByName("Sketcher_BSplineComb");
-    else if (iMsg == 3)
-        cmd = rcCmdMgr.getCommandByName("Sketcher_BSplineKnotMultiplicity");
-    else if (iMsg == 4)
-        cmd = rcCmdMgr.getCommandByName("Sketcher_BSplinePoleWeight");
-    else
-        return;
-
-    cmd->invoke(0);
-
-    // Since the default icon is reset when enabling/disabling the command we have
-    // to explicitly set the icon of the used command.
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    assert(iMsg < a.size());
-    pcAction->setIcon(a[iMsg]->icon());
-    // we must also set the tooltip of the used command
-    pcAction->setToolTip(a[iMsg]->toolTip());
-}
-
 Gui::Action * CmdSketcherCompBSplineShowHideGeometryInformation::createAction(void)
 {
-    Gui::ActionGroup* pcAction = new Gui::ActionGroup(this, Gui::getMainWindow());
-    pcAction->setDropDownMenu(true);
-    applyCommandData(this->className(), pcAction);
-
-    QAction* c1 = pcAction->addAction(QString());
-    c1->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_BSplineDegree"));
-    QAction* c2 = pcAction->addAction(QString());
-    c2->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_BSplinePolygon"));
-    QAction* c3 = pcAction->addAction(QString());
-    c3->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_BSplineComb"));
-    QAction* c4 = pcAction->addAction(QString());
-    c4->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_BSplineKnotMultiplicity"));
-    QAction* c5 = pcAction->addAction(QString());
-    c5->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_BSplinePoleWeight"));
-
-    _pcAction = pcAction;
-    languageChange();
-
-    pcAction->setIcon(c2->icon());
-    int defaultId = 1;
-    pcAction->setProperty("defaultAction", QVariant(defaultId));
-
-    return pcAction;
-}
-
-void CmdSketcherCompBSplineShowHideGeometryInformation::languageChange()
-{
-    Command::languageChange();
-
-    if (!_pcAction)
-        return;
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    QAction* c1 = a[0];
-    c1->setText(QApplication::translate("CmdSketcherCompBSplineShowHideGeometryInformation",
-                                        "Show/hide B-spline degree"));
-    c1->setToolTip(QApplication::translate("Sketcher_BSplineDegree",
-                                           "Switches between showing and hiding the degree for all B-splines"));
-    c1->setStatusTip(QApplication::translate("Sketcher_BSplineDegree",
-                                             "Switches between showing and hiding the degree for all B-splines"));
-    QAction* c2 = a[1];
-    c2->setText(QApplication::translate("CmdSketcherCompBSplineShowHideGeometryInformation",
-                                        "Show/hide B-spline control polygon"));
-    c2->setToolTip(QApplication::translate("Sketcher_BSplinePolygon",
-                                           "Switches between showing and hiding the control polygons for all B-splines"));
-    c2->setStatusTip(QApplication::translate("Sketcher_BSplinePolygon",
-                                             "Switches between showing and hiding the control polygons for all B-splines"));
-    QAction* c3 = a[2];
-    c3->setText(QApplication::translate("CmdSketcherCompBSplineShowHideGeometryInformation",
-                                        "Show/hide B-spline curvature comb"));
-    c3->setToolTip(QApplication::translate("Sketcher_BSplineComb",
-                                           "Switches between showing and hiding the curvature comb for all B-splines"));
-    c3->setStatusTip(QApplication::translate("Sketcher_BSplineComb",
-                                             "Switches between showing and hiding the curvature comb for all B-splines"));
-    QAction* c4 = a[3];
-    c4->setText(QApplication::translate("CmdSketcherCompBSplineShowHideGeometryInformation",
-                                        "Show/hide B-spline knot multiplicity"));
-    c4->setToolTip(QApplication::translate("Sketcher_BSplineKnotMultiplicity",
-                                           "Switches between showing and hiding the knot multiplicity for all B-splines"));
-    c4->setStatusTip(QApplication::translate("Sketcher_BSplineKnotMultiplicity",
-                                             "Switches between showing and hiding the knot multiplicity for all B-splines"));
-
-    QAction* c5 = a[4];
-    c5->setText(QApplication::translate("CmdSketcherCompBSplineShowHideGeometryInformation",
-        "Show/hide B-spline control point weight"));
-    c5->setToolTip(QApplication::translate("Sketcher_BSplinePoleWeight",
-        "Switches between showing and hiding the control point weight for all B-splines"));
-    c5->setStatusTip(QApplication::translate("Sketcher_BSplinePoleWeight",
-        "Switches between showing and hiding the control point weight for all B-splines"));
-}
-
-void CmdSketcherCompBSplineShowHideGeometryInformation::updateAction(int /*mode*/)
-{
-}
-
-bool CmdSketcherCompBSplineShowHideGeometryInformation::isActive(void)
-{
-    return isSketcherBSplineActive(getActiveGuiDocument(), false);
+    addCommand("Sketcher_BSplineDegree");
+    addCommand("Sketcher_BSplinePolygon");
+    addCommand("Sketcher_BSplineComb");
+    addCommand("Sketcher_BSplineKnotMultiplicity");
+    addCommand("Sketcher_BSplinePoleWeight");
+    return inherited::createAction();
 }
 
 // Convert to NURBS
@@ -889,10 +785,10 @@ bool CmdSketcherDecreaseKnotMultiplicity::isActive(void)
 
 
 // Composite drop down for knot increase/decrease
-DEF_STD_CMD_ACLU(CmdSketcherCompModifyKnotMultiplicity)
+DEF_STD_CMD_GC(CmdSketcherCompModifyKnotMultiplicity)
 
 CmdSketcherCompModifyKnotMultiplicity::CmdSketcherCompModifyKnotMultiplicity()
-    : Command("Sketcher_CompModifyKnotMultiplicity")
+    : inherited("Sketcher_CompModifyKnotMultiplicity")
 {
     sAppModule      = "Sketcher";
     sGroup          = "Sketcher";
@@ -903,83 +799,11 @@ CmdSketcherCompModifyKnotMultiplicity::CmdSketcherCompModifyKnotMultiplicity()
     eType           = ForEdit;
 }
 
-void CmdSketcherCompModifyKnotMultiplicity::activated(int iMsg)
-{
-
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-    Gui::Command * cmd;
-
-    if (iMsg == 0)
-        cmd = rcCmdMgr.getCommandByName("Sketcher_BSplineIncreaseKnotMultiplicity");
-    else if (iMsg == 1)
-        cmd = rcCmdMgr.getCommandByName("Sketcher_BSplineDecreaseKnotMultiplicity");
-    else
-        return;
-
-    cmd->invoke(0);
-
-    // Since the default icon is reset when enabling/disabling the command we have
-    // to explicitly set the icon of the used command.
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    assert(iMsg < a.size());
-    pcAction->setIcon(a[iMsg]->icon());
-}
-
 Gui::Action * CmdSketcherCompModifyKnotMultiplicity::createAction(void)
 {
-    Gui::ActionGroup* pcAction = new Gui::ActionGroup(this, Gui::getMainWindow());
-    pcAction->setDropDownMenu(true);
-    applyCommandData(this->className(), pcAction);
-
-    QAction* c1 = pcAction->addAction(QString());
-    c1->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_BSplineIncreaseKnotMultiplicity"));
-    QAction* c2 = pcAction->addAction(QString());
-    c2->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_BSplineDecreaseKnotMultiplicity"));
-
-    _pcAction = pcAction;
-    languageChange();
-
-    pcAction->setIcon(c1->icon());
-    int defaultId = 0;
-    pcAction->setProperty("defaultAction", QVariant(defaultId));
-
-    return pcAction;
-}
-
-void CmdSketcherCompModifyKnotMultiplicity::languageChange()
-{
-    Command::languageChange();
-
-    if (!_pcAction)
-        return;
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    QAction* c1 = a[0];
-    c1->setText(QApplication::translate("CmdSketcherCompModifyKnotMultiplicity",
-                                        "Increase knot multiplicity"));
-    c1->setToolTip(QApplication::translate("Sketcher_BSplineIncreaseKnotMultiplicity",
-                                           "Increases the multiplicity of the selected knot of a B-spline"));
-    c1->setStatusTip(QApplication::translate("Sketcher_BSplineIncreaseKnotMultiplicity",
-                                             "Increases the multiplicity of the selected knot of a B-spline"));
-    QAction* c2 = a[1];
-    c2->setText(QApplication::translate("CmdSketcherCompModifyKnotMultiplicity",
-                                        "Decrease knot multiplicity"));
-    c2->setToolTip(QApplication::translate("Sketcher_BSplineDecreaseKnotMultiplicity",
-                                           "Decreases the multiplicity of the selected knot of a B-spline"));
-    c2->setStatusTip(QApplication::translate("Sketcher_BSplineDecreaseKnotMultiplicity",
-                                             "Decreases the multiplicity of the selected knot of a B-spline"));
-}
-
-void CmdSketcherCompModifyKnotMultiplicity::updateAction(int /*mode*/)
-{
-}
-
-bool CmdSketcherCompModifyKnotMultiplicity::isActive(void)
-{
-    return isSketcherBSplineActive(getActiveGuiDocument(), false);
+    addCommand("Sketcher_BSplineIncreaseKnotMultiplicity");
+    addCommand("Sketcher_BSplineDecreaseKnotMultiplicity");
+    return inherited::createAction();
 }
 
 void CreateSketcherCommandsBSpline(void)

@@ -70,7 +70,7 @@ short Boolean::mustExecute() const
 }
 
 const char *Boolean::opCode() const {
-    return TOPOP_BOOLEAN;
+    return Part::OpCodes::Boolean;
 }
 
 App::DocumentObjectExecReturn *Boolean::execute(void)

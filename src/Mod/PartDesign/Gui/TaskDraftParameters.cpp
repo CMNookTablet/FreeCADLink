@@ -97,7 +97,7 @@ TaskDraftParameters::TaskDraftParameters(ViewProviderDressUp *DressUpView,QWidge
     ui->linePlane->installEventFilter(this);
     ui->lineLine->installEventFilter(this);
 
-    setup(ui->message, ui->listWidgetReferences, ui->buttonRefAdd, touched);
+    setup(ui->message, ui->treeWidgetReferences, ui->buttonRefAdd, touched);
 }
 
 void TaskDraftParameters::refresh() {
@@ -212,8 +212,11 @@ void TaskDraftParameters::onButton(selectionModes mode, bool checked)
     selectionMode = mode;
     Gui::Selection().clearSelection();
 
-    std::unique_ptr<Gui::SelectionFilterGate> gateRefPtr(
-            new ReferenceSelection(getBase(), true, mode==plane, true));
+    ReferenceSelection::Config conf;
+    conf.edge = true;
+    conf.plane = mode==plane;
+    conf.planar = true;
+    std::unique_ptr<Gui::SelectionFilterGate> gateRefPtr(new ReferenceSelection(getBase(), conf));
     std::unique_ptr<Gui::SelectionFilterGate> gateDepPtr(new NoDependentsSelection(pcDraft));
     Gui::Selection().addSelectionGate(new CombineSelectionFilterGates(gateRefPtr, gateDepPtr));
 

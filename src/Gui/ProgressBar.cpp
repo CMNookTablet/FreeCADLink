@@ -38,6 +38,7 @@
 #include <QWindow>
 
 
+#include <Base/Exception.h>
 #include "ProgressBar.h"
 #include "ProgressDialog.h"
 #include "MainWindow.h"
@@ -159,8 +160,10 @@ void SequencerBar::startStep()
         d->progressTime.start();
         d->checkAbortTime.start();
         d->measureTime.start();
-        d->waitCursor = new Gui::WaitCursor;
+        if (!d->waitCursor)
+            d->waitCursor = new Gui::WaitCursor;
         d->bar->enterControlEvents(d->guiThread);
+        showRemainingTime();
         d->bar->aboutToShow();
     }
 }
@@ -184,7 +187,7 @@ void SequencerBar::checkAbort()
 
     // force to abort the operation
     if ( ok ) {
-        abort();
+        throw Base::AbortException();
     } else {
         rejectCancel();
     }
@@ -245,8 +248,8 @@ void SequencerBar::setValue(int step)
     // if number of total steps is unknown then increment only by one
     if (nTotalSteps == 0) {
         int elapsed = d->progressTime.elapsed();
-        // allow an update every 100 milliseconds only
-        if (elapsed > 100) {
+        // allow an update every 200 milliseconds only
+        if (elapsed > 200) {
             d->progressTime.restart();
             if (thr != currentThread) {
                 QMetaObject::invokeMethod(d->bar, "setValueEx", Qt::/*Blocking*/QueuedConnection,
@@ -260,8 +263,8 @@ void SequencerBar::setValue(int step)
     }
     else {
         int elapsed = d->progressTime.elapsed();
-        // allow an update every 100 milliseconds only
-        if (elapsed > 100) {
+        // allow an update every 200 milliseconds only
+        if (elapsed > 200) {
             d->progressTime.restart();
             if (thr != currentThread) {
                 QMetaObject::invokeMethod(d->bar, "setValueEx", Qt::/*Blocking*/QueuedConnection,
@@ -309,6 +312,7 @@ void SequencerBar::showRemainingTime()
             }
             else {
                 getMainWindow()->showMessage(status);
+                d->bar->setToolTip(status);
             }
         }
     }
@@ -481,6 +485,7 @@ void ProgressBar::delayedShow()
 void ProgressBar::aboutToHide()
 {
     hide();
+    setToolTip(QString());
 #ifdef QT_WINEXTRAS_LIB
     setupTaskBarProgress();
     m_taskbarProgress->hide();

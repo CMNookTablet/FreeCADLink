@@ -34,6 +34,7 @@
 #include <Gui/Selection.h>
 #include <Gui/DocumentObserver.h>
 
+#include "ReferenceSelection.h"
 #include "TaskFeatureParameters.h"
 #include "TaskTransformedMessages.h"
 #include "ViewProviderTransformed.h"
@@ -203,7 +204,8 @@ protected:
 
     void kickUpdateViewTimer() const;
 
-    void addReferenceSelectionGate(bool edge, bool face, bool planar=true, bool whole=false, bool circle=false);
+    void addReferenceSelectionGate(bool edge, bool face);
+    void addReferenceSelectionGate(const ReferenceSelection::Config &conf);
 
     bool isViewUpdated() const;
     int getUpdateViewTimeout() const;

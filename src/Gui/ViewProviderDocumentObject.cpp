@@ -77,6 +77,59 @@ FC_LOG_LEVEL_INIT("Gui",true,true)
 
 using namespace Gui;
 
+///////////////////////////////////////////////////////////////////////////
+//
+static int _ColorUpdateCounter;
+static std::set<App::DocumentObjectT> _ColorChangedObjects;
+
+ColorUpdater::ColorUpdater()
+{
+    if (_ColorUpdateCounter >= 0)
+        ++_ColorUpdateCounter;
+}
+
+ColorUpdater::~ColorUpdater()
+{
+    if (_ColorUpdateCounter <= 0
+            || --_ColorUpdateCounter > 0
+            || _ColorChangedObjects.empty())
+        return;
+    // To prevent infinite recursive update
+    _ColorUpdateCounter = -1;
+    try {
+        std::set<App::DocumentObject*> inset;
+        for (const auto &objT : _ColorChangedObjects) {
+            if (auto obj = objT.getObject()) {
+                if (!obj->isRecomputing() && !obj->isTouched())
+                    obj->getInListEx(inset, true);
+            }
+        }
+        std::vector<App::DocumentObject*> objs(inset.begin(), inset.end());
+        for (auto obj : App::Document::getDependencyList(objs, App::Document::DepSort)) {
+            if (obj->isRecomputing() || obj->isTouched() || !inset.count(obj))
+                continue;
+            if (auto vp = Base::freecad_dynamic_cast<ViewProviderDocumentObject>(
+                        Gui::Application::Instance->getViewProvider(obj))) {
+                vp->checkColorUpdate();
+            }
+        }
+    } catch (Base::Exception &e) {
+        e.ReportException();
+    } catch (...)
+    {}
+    _ColorChangedObjects.clear();
+    _ColorUpdateCounter = 0;
+}
+
+void ColorUpdater::addObject(App::DocumentObject *obj)
+{
+    if (_ColorUpdateCounter && obj && !obj->isRecomputing() && !obj->isTouched())
+        _ColorChangedObjects.emplace(obj);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////
+
 PROPERTY_SOURCE(Gui::ViewProviderDocumentObject, Gui::ViewProvider)
 
 ViewProviderDocumentObject::ViewProviderDocumentObject()
@@ -130,12 +183,15 @@ void ViewProviderDocumentObject::getTaskViewContent(std::vector<Gui::TaskView::T
 
 void ViewProviderDocumentObject::startRestoring()
 {
+    _VisibilityRestored = false;
     hide();
     callExtension(&ViewProviderExtension::extensionStartRestoring);
 }
 
 void ViewProviderDocumentObject::finishRestoring()
 {
+    if (!_VisibilityRestored)
+        Visibility.setValue(getObject()->Visibility.getValue());
     callExtension(&ViewProviderExtension::extensionFinishRestoring);
 }
 
@@ -222,6 +278,8 @@ void ViewProviderDocumentObject::onChanged(const App::Property* prop)
         }
     }
     else if (prop == &Visibility) {
+        if (isRestoring())
+            _VisibilityRestored = true;
         // use this bit to check whether show() or hide() must be called
         if (Visibility.testStatus(App::Property::User2) == false) {
             Visibility.setStatus(App::Property::User2, true);
@@ -287,6 +345,8 @@ void ViewProviderDocumentObject::onChanged(const App::Property* prop)
     }
 
     ViewProvider::onChanged(prop);
+    if (pcObject)
+        pcObject->ViewObject.touch();
 }
 
 void ViewProviderDocumentObject::hide(void)
@@ -364,18 +424,31 @@ void ViewProviderDocumentObject::updateView()
     if (vis && Visibility.getValue()) ViewProvider::show();
 }
 
+void ViewProviderDocumentObject::attachDocumentObject(App::DocumentObject *pcObj)
+{
+    pcObject = pcObj;
+
+    if(pcObj && pcObj->getNameInDocument()
+             && !testStatus(SecondaryView))
+    {
+        Base::PyGILStateLocker lock;
+        pcObj->ViewObject.setValue(Py::asObject(this->getPyObject()));
+    }
+
+    attach(pcObj);
+}
+
 void ViewProviderDocumentObject::attach(App::DocumentObject *pcObj)
 {
     // save Object pointer
     pcObject = pcObj;
 
-    pcObj->setStatus(App::ObjectStatus::ViewProviderAttached,true);
-
     if(pcObj && pcObj->getNameInDocument()
-             && !testStatus(SecondaryView)
-             && Visibility.getValue()!=pcObj->Visibility.getValue())
+             && !testStatus(SecondaryView))
     {
-        pcObj->Visibility.setValue(Visibility.getValue());
+        pcObj->setStatus(App::ObjectStatus::ViewProviderAttached,true);
+        if (!pcObj->getDocument()->testStatus(App::Document::Restoring))
+            pcObj->Visibility.setValue(Visibility.getValue());
     }
 
     DisplayMode.setEnumVector(this->getDisplayModes());
@@ -402,6 +475,15 @@ void ViewProviderDocumentObject::reattach(App::DocumentObject *pcObj) {
 
 void ViewProviderDocumentObject::update(const App::Property* prop)
 {
+    // DocumentObject.ViewObject has been changed to a real property instead of
+    // a Python attribute. It is used as a bridge for expression binding of all
+    // view properties. Any view provider property change will touch ViewObject
+    // to trigger ExpressionEngine update. This may cause problem for some
+    // python extended view object initialization. For better backward
+    // compatibility, it is disabled here.
+    if (prop == &getObject()->ViewObject)
+        return;
+
     // bypass view provider update to always allow changing visibility from
     // document object
     if(prop == &getObject()->Visibility) {
@@ -1024,7 +1106,7 @@ bool ViewProviderDocumentObject::isShowable(bool refresh) {
         return showable;
 
     _Showable = showable;
-    FC_LOG((_Showable?"showable ":"not showable ") << obj->getNameInDocument());
+    FC_TRACE((_Showable?"showable ":"not showable ") << obj->getNameInDocument());
 
     // showability changed
 

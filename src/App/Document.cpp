@@ -136,7 +136,7 @@ recompute path. Also, it enables more complicated dependencies beyond trees.
 #include "GeoFeature.h"
 #include "ExpressionParser.h"
 
-FC_LOG_LEVEL_INIT("App", true, true, true)
+FC_LOG_LEVEL_INIT("App", true, 2, true)
 
 using Base::Console;
 using Base::streq;
@@ -219,7 +219,7 @@ struct DocumentP
 #ifndef FC_DEBUG
         static std::random_device _RD;
         static std::mt19937 _RGEN(_RD());
-        static std::uniform_int_distribution<> _RDIST(0,5000);
+        static std::uniform_int_distribution<> _RDIST(10,5000);
         // Set some random offset to reduce likelihood of ID collision when
         // copying shape from other document. It is probably better to randomize
         // on each object ID.
@@ -1221,7 +1221,7 @@ void Document::_checkTransaction(DocumentObject* pcDelObj, const Property *What,
                         if(What->testStatus(Property::NoModify))
                             ignore = true;
                         else if(!Base::freecad_dynamic_cast<Document>(What->getContainer())
-                                && !DocumentParams::ViewObjectTransaction()
+                                && !DocumentParams::getViewObjectTransaction()
                                 && !AutoTransaction::recordViewObjectChange()
                                 && !Base::freecad_dynamic_cast<DocumentObject>(What->getContainer()))
                             ignore = true;
@@ -1388,12 +1388,13 @@ void Document::clearDocument()
     if(this->d->objectArray.size()) {
         GetApplication().signalDeleteDocument(*this);
         this->d->objectArray.clear();
-        for(auto &v : this->d->objectMap) {
+        decltype(this->d->objectMap) map = std::move(this->d->objectMap);
+        this->d->objectMap.clear();
+        this->d->objectIdMap.clear();
+        for(auto &v : map) {
             v.second->setStatus(ObjectStatus::Destroy, true);
             delete(v.second);
         }
-        this->d->objectMap.clear();
-        this->d->objectIdMap.clear();
         GetApplication().signalNewDocument(*this,false);
     }
 
@@ -1624,8 +1625,8 @@ Document::Document(const char *name)
 #endif
 
     std::string CreationDateString = Base::TimeInfo::currentDateTimeString();
-    std::string Author = DocumentParams::prefAuthor();
-    std::string AuthorComp = DocumentParams::prefCompany();
+    std::string Author = DocumentParams::getprefAuthor();
+    std::string AuthorComp = DocumentParams::getprefCompany();
     ADD_PROPERTY_TYPE(Label,("Unnamed"),0,Prop_None,"The name of the document");
     ADD_PROPERTY_TYPE(FileName,(""),0,PropertyType(Prop_Transient|Prop_ReadOnly),"The path to the file where the document is saved to");
     ADD_PROPERTY_TYPE(CreatedBy,(Author.c_str()),0,Prop_None,"The creator of the document");
@@ -1646,7 +1647,7 @@ Document::Document(const char *name)
     ADD_PROPERTY_TYPE(LicenseURL,("http://creativecommons.org/licenses/by/3.0/"),0,Prop_None,"URL to the license text/contract");
 
     // license stuff
-    int licenseId = DocumentParams::prefLicenseType();
+    int licenseId = DocumentParams::getprefLicenseType();
     std::string license;
     std::string licenseUrl;
     switch (licenseId) {
@@ -1691,8 +1692,8 @@ Document::Document(const char *name)
             break;
     }
 
-    if(DocumentParams::prefLicenseUrl().empty())
-        licenseUrl = DocumentParams::prefLicenseUrl();
+    if(DocumentParams::getprefLicenseUrl().empty())
+        licenseUrl = DocumentParams::getprefLicenseUrl();
 
     ADD_PROPERTY_TYPE(License,(license.c_str()),0,Prop_None,"License string of the Item");
     ADD_PROPERTY_TYPE(LicenseURL,(licenseUrl.c_str()),0,Prop_None,"URL to the license text/contract");
@@ -1700,7 +1701,7 @@ Document::Document(const char *name)
                         "Whether to show hidden object items in the tree view");
     ADD_PROPERTY_TYPE(UseHasher,(true), 0,PropertyType(Prop_Hidden), 
                         "Whether to use hasher on topological naming");
-    if(!DocumentParams::UseHasher())
+    if(!DocumentParams::getUseHasher())
         UseHasher.setValue(false);
 
     // this creates and sets 'TransientDir' in onChanged()
@@ -1716,15 +1717,15 @@ Document::Document(const char *name)
             "Preference of storing data as XML.\n"
             "Higher number means stronger preference.\n"
             "Only effective when saving document in directory.");
-    ForceXML.setValue(DocumentParams::ForceXML());
+    ForceXML.setValue(DocumentParams::getForceXML());
     ADD_PROPERTY_TYPE(SplitXML,(true),"Format",Prop_None,
             "Save object data in separate XML file.\n"
             "Only effective when saving document in directory.");
-    SplitXML.setValue(DocumentParams::SplitXML());
+    SplitXML.setValue(DocumentParams::getSplitXML());
     ADD_PROPERTY_TYPE(PreferBinary,(false),"Format",Prop_None,
             "Prefer binary format when saving object data.\n"
             "This can result in smaller file but bad for version control.");
-    PreferBinary.setValue(DocumentParams::PreferBinary());
+    PreferBinary.setValue(DocumentParams::getPreferBinary());
 }
 
 Document::~Document()
@@ -1743,10 +1744,14 @@ Document::~Document()
     Console().Log("-Delete Features of %s \n",getName());
 #endif
 
+    d->activeObject = nullptr;
     d->objectArray.clear();
-    for (auto it = d->objectMap.begin(); it != d->objectMap.end(); ++it) {
-        it->second->setStatus(ObjectStatus::Destroy, true);
-        delete(it->second);
+    decltype(d->objectMap) map = std::move(d->objectMap);
+    d->objectMap.clear();
+    d->objectIdMap.clear();
+    for (auto &v : map) {
+        v.second->setStatus(ObjectStatus::Destroy, true);
+        delete(v.second);
     }
 
     // Remark: The API of Py::Object has been changed to set whether the wrapper owns the passed
@@ -2495,7 +2500,7 @@ static std::string checkFileName(const char *file) {
 
     // Append extension if missing. This option is added for security reason, so
     // that the user won't accidentally overwrite other file that may be critical.
-    if(DocumentParams::CheckExtension())
+    if(DocumentParams::getCheckExtension())
     {
         const char *ext = strrchr(file,'.');
         if(!ext || !boost::iequals(ext+1,"fcstd")) {
@@ -2551,9 +2556,9 @@ bool Document::save (void)
         std::string LastModifiedDateString = Base::TimeInfo::currentDateTimeString();
         LastModifiedDate.setValue(LastModifiedDateString.c_str());
         // set author if needed
-        bool saveAuthor = DocumentParams::prefSetAuthorOnSave();
+        bool saveAuthor = DocumentParams::getprefSetAuthorOnSave();
         if (saveAuthor) {
-            LastModifiedBy.setValue(DocumentParams::prefAuthor().c_str());
+            LastModifiedBy.setValue(DocumentParams::getprefAuthor().c_str());
         }
 
         return saveToFile(FileName.getValue());
@@ -2858,11 +2863,11 @@ bool Document::saveToFile(const char* filename) const
 
     signalStartSave(*this, filename);
 
-    int compression = DocumentParams::CompressionLevel();
+    int compression = DocumentParams::getCompressionLevel();
     compression = Base::clamp<int>(compression, Z_NO_COMPRESSION, Z_BEST_COMPRESSION);
 
     bool archive = !Base::FileInfo(filename).isDir();
-    bool policy = archive?DocumentParams::BackupPolicy():false;
+    bool policy = archive?DocumentParams::getBackupPolicy():false;
 
     std::string _realfile;
     const char *realfile = filename;
@@ -2916,13 +2921,13 @@ bool Document::saveToFile(const char* filename) const
 
     if (policy) {
         // if saving the project data succeeded rename to the actual file name
-        int count_bak = DocumentParams::CountBackupFiles();
-        bool backup = DocumentParams::CreateBackupFiles();
+        int count_bak = DocumentParams::getCountBackupFiles();
+        bool backup = DocumentParams::getCreateBackupFiles();
         if (!backup) {
             count_bak = -1;
         }
-        bool useFCBakExtension = DocumentParams::UseFCBakExtension();
-        std::string	saveBackupDateFormat = DocumentParams::SaveBackupDateFormat();
+        bool useFCBakExtension = DocumentParams::getUseFCBakExtension();
+        std::string	saveBackupDateFormat = DocumentParams::getSaveBackupDateFormat();
 
         BackupPolicy policy;
         if (useFCBakExtension) {
@@ -2959,7 +2964,7 @@ bool Document::saveToFile(const char* filename) const
 
         GetApplication().signalDocumentFilesSaved(*this, filename, files);
 
-        bool remove = DocumentParams::AutoRemoveFile();
+        bool remove = DocumentParams::getAutoRemoveFile();
         std::string path(filename);
         path += "/";
         for(auto &v : files) {
@@ -3512,20 +3517,44 @@ std::vector<App::DocumentObject*> Document::getDependencyList(
             for(size_t i=0;i<c.size();++i)
                 components[c[i]].push_back(i);
 
-            FC_ERR("Dependency cycles: ");
             std::ostringstream ss;
-            ss << '\n';
+            ss << "\nDependency cycles:";
+            std::vector<Property*> props;
+            std::vector<ObjectIdentifier> identifiers;
+            auto findProperty = [&](DocumentObject *obj, DocumentObject *link) {
+                props.clear();
+                obj->getPropertyList(props);
+                bool first = true;
+                for (const auto *prop : props) {
+                    if (!prop->getName() || prop->getContainer() != obj)
+                        continue;
+                    if (auto propLink = Base::freecad_dynamic_cast<PropertyLinkBase>(prop)) {
+                        identifiers.clear();
+                        propLink->getLinksTo(identifiers, link);
+                        for (const auto &path : identifiers) {
+                            ss << ", ";
+                            if (first) {
+                                first = false;
+                                ss << "Property: ";
+                            }
+                            ss << path.canonicalPath().toString();
+                        }
+                    }
+                }
+            };
             for(auto &v : components) {
                 if(v.second.size()==1) {
                     // For components with only one member, we still need to
-                    // check if there it is self looping.
+                    // check if there is self looping.
                     auto it = vertexMap.find(v.second[0]);
                     if(it==vertexMap.end())
                         continue;
                     // Try search the object in its own out list
                     for(auto obj : it->second->getOutList()) {
                         if(obj == it->second) {
-                            ss << '\n' << it->second->getFullName() << '\n';
+                            ss << '\n' << it->second->getFullName();
+                            findProperty(obj, obj);
+                            ss << '\n';
                             break;
                         }
                     }
@@ -3533,12 +3562,22 @@ std::vector<App::DocumentObject*> Document::getDependencyList(
                 }
                 // For components with more than one member, they form a loop together
                 ss << '\n';
+                DocumentObject *first = nullptr;
+                DocumentObject *prev = nullptr;
                 for(size_t i=0;i<v.second.size();++i) {
                     auto it = vertexMap.find(v.second[i]);
                     if(it==vertexMap.end())
                         continue;
-                    ss << App::SubObjectT(it->second, "").getObjectFullName() << '\n';
+                    if (prev) {
+                        findProperty(prev, it->second);
+                        ss << '\n';
+                    } else
+                        first = it->second;
+                    ss << App::SubObjectT(it->second, "").getObjectFullName();
+                    prev = it->second;
                 }
+                if (first != prev)
+                    findProperty(prev, first);
                 ss << '\n';
             }
             FC_ERR(ss.str());
@@ -3817,8 +3856,30 @@ int Document::recompute(const std::vector<App::DocumentObject*> &objs, bool forc
 
 #else //ifdef USE_OLD_DAG
 
+namespace {
+int _Recomputing;
+class RecomputeCounter {
+public:
+    RecomputeCounter()
+    {
+        ++_Recomputing;
+    }
+    ~RecomputeCounter()
+    {
+        --_Recomputing;
+    }
+};
+} // anonymous namespace
+
+bool Document::isAnyRecomputing()
+{
+    return _Recomputing == 0;
+}
+
 int Document::recompute(const std::vector<App::DocumentObject*> &objs, bool force, bool *hasError, int options)
 {
+    RecomputeCounter counter;
+
     if (d->undoing || d->rollback) {
         if (FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG))
             FC_WARN("Ignore document recompute on undo/redo");
@@ -3879,7 +3940,7 @@ int Document::recompute(const std::vector<App::DocumentObject*> &objs, bool forc
     for(auto obj : topoSortedObjects)
         obj->setStatus(ObjectStatus::PendingRecompute,true);
 
-    bool canAbort = DocumentParams::CanAbortRecompute();
+    bool canAbort = DocumentParams::getCanAbortRecompute();
 
     std::set<App::DocumentObject *> filter;
     size_t idx = 0;
@@ -4201,7 +4262,7 @@ int Document::_recomputeFeature(DocumentObject* Feat)
         returnCode = Feat->ExpressionEngine.execute(PropertyExpressionEngine::ExecuteNonOutput);
         if (returnCode == DocumentObject::StdReturn) {
             bool doRecompute = Feat->isError() || Feat->_enforceRecompute
-                                               || !DocumentParams::OptimizeRecompute()
+                                               || !DocumentParams::getOptimizeRecompute()
                                                || testStatus(Status::Restoring);
             if(!doRecompute) {
                 static unsigned long long mask = (1<<Property::Output)
@@ -4708,9 +4769,7 @@ void Document::_removeObject(DocumentObject* pcObject)
     // remove from map
     pcObject->setStatus(ObjectStatus::Remove, false); // Unset the bit to be on the safe side
     d->objectIdMap.erase(pcObject->_Id);
-    d->objectMap.erase(pos);
     ++d->revision;
-
     for (std::vector<DocumentObject*>::iterator it = d->objectArray.begin(); it != d->objectArray.end(); ++it) {
         if (*it == pcObject) {
             d->objectArray.erase(it);
@@ -4723,6 +4782,75 @@ void Document::_removeObject(DocumentObject* pcObject)
         pcObject->setStatus(ObjectStatus::Destroy, true);
         if (!TransactionGuard::addPendingRemove(pcObject))
             delete pcObject;
+    }
+
+    // TransactionGuard::addPendingRemove() will call
+    // DocumentObject::detachDocument() which will access its name in document.
+    // So we have to delay removing object from objectMap, because the name is
+    // stored in the map.
+    d->objectMap.erase(pos);
+}
+
+static bool _RemovingObjects;
+static int _RemovingObject;
+static std::unordered_map<Property*, int> _PendingProps;
+static int _PendingPropIndex;
+
+bool Document::isRemoving(Property *prop)
+{
+    if (!prop || _RemovingObject == 0)
+        return false;
+    if (auto obj = Base::freecad_dynamic_cast<DocumentObject>(prop->getContainer())) {
+        if (!obj->testStatus(App::Remove))
+            _PendingProps.insert(std::make_pair(prop, _PendingPropIndex++));
+    }
+    return true;
+}
+
+void Document::removePendingProperty(Property *prop)
+{
+    _PendingProps.erase(prop);
+}
+
+void Document::removeObjects(const std::vector<std::string> &objs)
+{
+    if (_RemovingObjects) {
+        FC_ERR("recursive calling of Document.removeObjects()");
+        return;
+    }
+
+    Base::StateLocker guard(_RemovingObjects);
+
+    ++_RemovingObject;
+
+    for (const auto &name : objs)
+        removeObject(name.c_str());
+
+    if (--_RemovingObject == 0) {
+        std::vector<std::pair<Property*,int> > props;
+        props.reserve(_PendingProps.size());
+        props.insert(props.end(),_PendingProps.begin(),_PendingProps.end());
+        std::sort(props.begin(), props.end(),
+            [](const std::pair<Property*,int> &a, const std::pair<Property*,int> &b) {
+                return a.second < b.second;
+            });
+
+        std::string errMsg;
+        for(auto &v : props) {
+            auto prop = v.first;
+            // double check if the property exists, because it may be removed
+            // while we are looping.
+            if(_PendingProps.count(prop)) {
+                exceptionSafeCall(errMsg, [](Property *prop){prop->touch();}, prop);
+                if(errMsg.size()) {
+                    FC_ERR("Exception on post object removal "
+                            << prop->getFullName() << ": " << errMsg);
+                    errMsg.clear();
+                }
+            }
+        }
+        _PendingProps.clear();
+        _PendingPropIndex = 0;
     }
 }
 
@@ -4932,8 +5060,7 @@ DocumentObject * Document::getObject(const char *Name) const
 
     if (pos != d->objectMap.end())
         return pos->second;
-    else
-        return 0;
+    return nullptr;
 }
 
 DocumentObject * Document::getObjectByID(long id) const
@@ -4941,7 +5068,7 @@ DocumentObject * Document::getObjectByID(long id) const
     auto it = d->objectIdMap.find(id);
     if(it!=d->objectIdMap.end())
         return it->second;
-    return 0;
+    return nullptr;
 }
 
 

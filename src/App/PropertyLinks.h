@@ -188,6 +188,19 @@ public:
     virtual void getLinks(std::vector<App::DocumentObject *> &objs,
             bool all=false, std::vector<std::string> *subs=0, bool newStyle=true) const = 0;
 
+    /** Obtain identifiers from this link property that link to a give object
+     * @param identifiers: holds the returned identifier to reference the given object
+     * @param obj: the referenced object
+     * @param subname: optional subname reference
+     * @param all: if true, then return all the references regardless of
+     *             this LinkScope. If false, then return only if the LinkScope
+     *             is not hidden.
+     */
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const = 0;
+
     /** Called to reset this link property
      *
      * @param obj: reset link property if it is linked to this object
@@ -569,6 +582,8 @@ public:
 
     void setSilentRestore(bool enable);
 
+    boost::signals2::signal<void(const std::string &, const std::string &)> signalUpdateElementReference;
+
 protected:
     virtual void hasSetValue() override;
 
@@ -646,6 +661,11 @@ public:
 
     virtual void getLinks(std::vector<App::DocumentObject *> &objs,
             bool all=false, std::vector<std::string> *subs=0, bool newStyle=true) const override;
+
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const override;
 
     virtual void breakLink(App::DocumentObject *obj, bool clear) override;
 
@@ -742,6 +762,11 @@ public:
 
     virtual void getLinks(std::vector<App::DocumentObject *> &objs,
             bool all=false, std::vector<std::string> *subs=0, bool newStyle=true) const override;
+
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const override;
 
     virtual void breakLink(App::DocumentObject *obj, bool clear) override;
 
@@ -885,6 +910,11 @@ public:
     virtual void getLinks(std::vector<App::DocumentObject *> &objs,
             bool all=false, std::vector<std::string> *subs=0, bool newStyle=true) const override;
 
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const override;
+
     virtual void breakLink(App::DocumentObject *obj, bool clear) override;
 
     virtual bool adjustLink(const std::set<App::DocumentObject *> &inList) override;
@@ -970,6 +1000,8 @@ public:
      */
     void setValue(App::DocumentObject *lValue, const std::vector<std::string> &SubList=std::vector<std::string>());
 
+    void addValue(App::DocumentObject *obj, const std::vector<std::string> &SubList={}, bool reset = false);
+
     const std::vector<DocumentObject*> &getValues(void) const {
         return _lValueList;
     }
@@ -1008,6 +1040,7 @@ public:
 
     virtual void Save (Base::Writer &writer) const override;
     virtual void Restore(Base::XMLReader &reader) override;
+    bool upgrade(Base::XMLReader &reader, const char *typeName);
 
     virtual Property *Copy(void) const override;
     virtual void Paste(const Property &from) override;
@@ -1034,6 +1067,11 @@ public:
     virtual void getLinks(std::vector<App::DocumentObject *> &objs,
             bool all=false, std::vector<std::string> *subs=0, bool newStyle=true) const override;
 
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const override;
+
     virtual void breakLink(App::DocumentObject *obj, bool clear) override;
 
     virtual bool adjustLink(const std::set<App::DocumentObject *> &inList) override;
@@ -1042,6 +1080,9 @@ public:
     virtual void purgeTouched() override;
 
     void setSyncSubObject(bool enable);
+
+private:
+    void verifyObject(App::DocumentObject *, App::DocumentObject *);
 
 private:
     //FIXME: Do not make two independent lists because this will lead to some inconsistencies!
@@ -1158,6 +1199,11 @@ public:
 
     virtual void getLinks(std::vector<App::DocumentObject *> &objs,
             bool all=false, std::vector<std::string> *subs=0, bool newStyle=true) const override;
+
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const override;
 
     virtual bool adjustLink(const std::set<App::DocumentObject *> &inList) override;
 
@@ -1327,6 +1373,11 @@ public:
 
     virtual void getLinks(std::vector<App::DocumentObject *> &objs,
             bool all=false, std::vector<std::string> *subs=0, bool newStyle=true) const override;
+
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const override;
 
     virtual void breakLink(App::DocumentObject *obj, bool clear) override;
 

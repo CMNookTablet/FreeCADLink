@@ -195,6 +195,8 @@ public:
     virtual void updateData(const App::Property*) override;
     virtual void setupContextMenu(QMenu*, QObject*, const char*) override;
 
+    virtual void checkColorUpdate() {}
+
 protected:
     virtual bool setEdit(int ModNum) override;
 
@@ -254,6 +256,10 @@ protected:
 private:
     void updateChildren(bool propagate=false);
 
+    // To be called by Gui::Document, in order to make sure the implementation
+    // will never be skipped by any derived class
+    void attachDocumentObject(App::DocumentObject*);
+
 protected:
     App::DocumentObject *pcObject;
     Gui::Document* pcDocument;
@@ -263,6 +269,7 @@ protected:
 private:
     bool _Busy = false;
     bool _Showable = true;
+    bool _VisibilityRestored = false;
 
     std::vector<App::DocumentObject*> claimedChildren;
     std::set<App::DocumentObject*> childSet;
@@ -270,6 +277,21 @@ private:
 
     friend class Document;
 };
+
+
+/** Convenient class to auto update colors for all affect objects
+ */
+class GuiExport ColorUpdater
+{
+public:
+    ColorUpdater();
+    ~ColorUpdater();
+    static void addObject(App::DocumentObject *obj);
+private:
+    /// Private new operator to prevent heap allocation
+    void* operator new(size_t size);
+};
+
 
 } // namespace Gui
 

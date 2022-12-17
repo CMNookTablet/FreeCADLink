@@ -664,6 +664,10 @@ static void linkConvert(bool unlink) {
 }
 
 static bool linkConvertible(bool unlink) {
+    // Don't waste too much time of large amount of selections
+    if (Selection().size() > 50)
+        return true;
+
     int count = 0;
     for(auto &sel : TreeWidget::getSelection()) {
         auto parent = sel.parentVp;
@@ -900,7 +904,7 @@ static App::DocumentObject *getSelectedLink(bool finalLink, std::string *subname
                     return sobj==obj?0:sobj;
                 }
                 if(subname)
-                    *subname = std::string(dot+1) + element;
+                    *subname = std::string(dot+1);
                 return obj;
             }
         }

@@ -35,8 +35,11 @@
 # include <TopTools_ListOfShape.hxx>
 # include <TopTools_ListIteratorOfListOfShape.hxx>
 # include <TopTools_MapOfShape.hxx>
+# include <Geom_Circle.hxx>
 #endif
 #include "BRepOffsetAPI_MakeOffsetFix.h"
+#include "Geometry.h"
+#include "PartFeature.h"
 
 using namespace Part;
 
@@ -45,13 +48,9 @@ BRepOffsetAPI_MakeOffsetFix::BRepOffsetAPI_MakeOffsetFix()
 }
 
 BRepOffsetAPI_MakeOffsetFix::BRepOffsetAPI_MakeOffsetFix(const GeomAbs_JoinType Join, const Standard_Boolean IsOpenResult)
+    :myJoin(Join)
+    ,myIsOpenResult(IsOpenResult)
 {
-#if OCC_VERSION_HEX >= 0x060900
-    mkOffset.Init(Join, IsOpenResult);
-#else
-    (void)IsOpenResult;
-    mkOffset.Init(Join);
-#endif
 }
 
 BRepOffsetAPI_MakeOffsetFix::~BRepOffsetAPI_MakeOffsetFix()
@@ -60,55 +59,90 @@ BRepOffsetAPI_MakeOffsetFix::~BRepOffsetAPI_MakeOffsetFix()
 
 void BRepOffsetAPI_MakeOffsetFix::AddWire(const TopoDS_Wire& Spine)
 {
-    TopoDS_Wire wire = Spine;
-    int numEdges = 0;
-    TopExp_Explorer xp(wire, TopAbs_EDGE);
-    while (xp.More()) {
-        numEdges++;
-        xp.Next();
-    }
-    if (numEdges == 1) {
-        TopLoc_Location edgeLocation;
-
-        BRepBuilderAPI_MakeWire mkWire;
-        TopExp_Explorer xp(wire, TopAbs_EDGE);
-        while (xp.More()) {
-            // The trick is to reset the placement of an edge before
-            // passing it to BRepOffsetAPI_MakeOffset because then it
-            // will create the expected result.
-            // Afterwards apply the placement again on the result shape.
-            // See the method MakeWire()
-            TopoDS_Edge edge = TopoDS::Edge(xp.Current());
-            edgeLocation = edge.Location();
-            edge.Location(TopLoc_Location());
-            mkWire.Add(edge);
-            myLocations.emplace_back(edge, edgeLocation);
-            xp.Next();
-        }
-
-        wire = mkWire.Wire();
-    }
-    mkOffset.AddWire(wire);
+    myWires.push_back(Spine);
     myResult.Nullify();
 }
 
 void BRepOffsetAPI_MakeOffsetFix::Perform (const Standard_Real Offset, const Standard_Real Alt)
 {
-    mkOffset.Perform(Offset, Alt);
+    myMap.clear();
+    myOffsetCircles.clear();
+    mkOffset.reset();
+    for (auto s : myWires) {
+        TopExp_Explorer xp(s, TopAbs_EDGE);
+        if (xp.More()) {
+            TopoDS_Edge E = TopoDS::Edge(xp.Current());
+            xp.Next();
+            if (!xp.More()) {
+                if (Offset < 0.) {
+                    // Work around on OCCT crash when shrink a circle with
+                    // radius equals to one, by manually create a new circle
+                    // with reduced radius.
+                    //
+                    // See a possible fix of this OCCT bug at
+                    // https://github.com/realthunder/OCCT/commit/e05d9f709f36e1f34c5bcac491be63c0a89b2136
+                    Standard_Real f,l;
+                    TopLoc_Location L;
+                    Handle(Geom_Curve) C =  BRep_Tool::Curve(E,L,f,l);
+                    if (C->IsKind(STANDARD_TYPE(Geom_Circle)) && BRep_Tool::IsClosed(E)) {
+                        Handle(Geom_Circle) circle = Handle(Geom_Circle)::DownCast(C);
+                        if (circle->Radius() <= -Offset)
+                            continue;
+                        if (circle->Radius() <= 1.) {
+                            GeomCircle gCircle;
+                            gp_Ax1 axis = circle->Axis();
+                            const gp_Pnt& loc = axis.Location();
+                            gCircle.setLocation(Base::Vector3d(loc.X(), loc.Y(), loc.Z()));
+                            gCircle.setRadius(circle->Radius() + Offset);
+                            myOffsetCircles.push_back(TopoDS::Edge(gCircle.toShape().Located(L)));
+                            myMap[E].Append(myOffsetCircles.back());
+                            continue;
+                        }
+                    }
+                }
+
+                // The trick is to reset the placement of an edge before
+                // passing it to BRepOffsetAPI_MakeOffset because then it
+                // will create the expected result.
+                // Afterwards apply the placement again on the result shape.
+                // See the method MakeWire()
+                auto e = TopoDS::Edge(E.Located(TopLoc_Location()));
+                myLocations.emplace_back(e, E.Location());
+                s = BRepBuilderAPI_MakeWire(e).Wire();
+            }
+        }
+        if (!mkOffset) {
+            mkOffset.reset(new BRepOffsetAPI_MakeOffset);
+#if OCC_VERSION_HEX >= 0x060900
+            mkOffset->Init(myJoin, myIsOpenResult);
+#else
+            mkOffset->Init(myJoin);
+#endif
+        }
+        mkOffset->AddWire(s);
+    }
+    if (mkOffset)
+        mkOffset->Perform(Offset, Alt);
 }
 
 void BRepOffsetAPI_MakeOffsetFix::Build()
 {
-    mkOffset.Build();
+    if (mkOffset)
+        mkOffset->Build();
 }
 
 Standard_Boolean BRepOffsetAPI_MakeOffsetFix::IsDone() const
 {
-    return mkOffset.IsDone();
+    if (mkOffset)
+        return mkOffset->IsDone();
+    return !myOffsetCircles.empty();
 }
 
 void BRepOffsetAPI_MakeOffsetFix::MakeWire(TopoDS_Shape& wire)
 {
+    if (!mkOffset)
+        return;
+
     // get the edges of the wire and check which of the stored edges
     // serve as input of the wire
     TopTools_MapOfShape aMap;
@@ -118,15 +152,17 @@ void BRepOffsetAPI_MakeOffsetFix::MakeWire(TopoDS_Shape& wire)
         xp.Next();
     }
 
+    myMap.clear();
     std::list<TopoDS_Edge> edgeList;
     for (auto itLoc : myLocations) {
-        const TopTools_ListOfShape& newShapes = mkOffset.Generated(itLoc.first);
+        const TopTools_ListOfShape& newShapes = mkOffset->Generated(itLoc.first);
+        auto &entry = myMap[itLoc.first.Located(itLoc.second)];
         for (TopTools_ListIteratorOfListOfShape it(newShapes); it.More(); it.Next()) {
             TopoDS_Shape newShape = it.Value();
-
             if (aMap.Contains(newShape)) {
-                newShape.Move(itLoc.second);
+                TopoShape::move(newShape,itLoc.second);
                 edgeList.push_back(TopoDS::Edge(newShape));
+                entry.Append(newShape);
             }
         }
     }
@@ -158,47 +194,67 @@ void BRepOffsetAPI_MakeOffsetFix::MakeWire(TopoDS_Shape& wire)
 const TopoDS_Shape& BRepOffsetAPI_MakeOffsetFix::Shape()
 {
     if (myResult.IsNull()) {
-        TopoDS_Shape result = mkOffset.Shape();
-        if (result.IsNull()) {
-            myResult = result;
-            return myResult;
+        BRep_Builder builder;
+        TopoDS_Compound comp;
+        builder.MakeCompound(comp);
+        int count = 0;
+        for (const auto &e : myOffsetCircles) {
+            builder.Add(comp, BRepBuilderAPI_MakeWire(e).Wire());
+            ++count;
         }
-
-        if (result.ShapeType() == TopAbs_WIRE) {
-            MakeWire(result);
-        }
-        else if (result.ShapeType() == TopAbs_COMPOUND) {
-            BRep_Builder builder;
-            TopoDS_Compound comp;
-            builder.MakeCompound(comp);
-
-            TopExp_Explorer xp(result, TopAbs_WIRE);
-            while (xp.More()) {
-                TopoDS_Wire wire = TopoDS::Wire(xp.Current());
-                MakeWire(wire);
-                builder.Add(comp, wire);
-                xp.Next();
+        if (!mkOffset) {
+            if (count)
+                myResult = comp;
+        } else {
+            TopoDS_Shape result = mkOffset->Shape();
+            if (!result.IsNull()) {
+                if (result.ShapeType() == TopAbs_WIRE) {
+                    MakeWire(result);
+                    if (count) {
+                        builder.Add(comp, result);
+                        ++count;
+                    }
+                }
+                else if (result.ShapeType() == TopAbs_COMPOUND) {
+                    TopExp_Explorer xp(result, TopAbs_WIRE);
+                    while (xp.More()) {
+                        TopoDS_Wire wire = TopoDS::Wire(xp.Current());
+                        MakeWire(wire);
+                        builder.Add(comp, wire);
+                        ++count;
+                        xp.Next();
+                    }
+                }
             }
-
-            result = comp;
+            myResult = count ? comp : result;
         }
-
-        myResult = result;
     }
     return myResult;
 }
 
 const TopTools_ListOfShape& BRepOffsetAPI_MakeOffsetFix::Generated(const TopoDS_Shape& S)
 {
-    return mkOffset.Generated(S);
+    static TopTools_ListOfShape dummy;
+    auto it = myMap.find(S);
+    if (it == myMap.end()) {
+        if (mkOffset)
+            return mkOffset->Generated(S);
+        return dummy;
+    }
+    return it->second;
 }
 
 const TopTools_ListOfShape& BRepOffsetAPI_MakeOffsetFix::Modified (const TopoDS_Shape& S)
 {
-    return mkOffset.Modified(S);
+    static TopTools_ListOfShape dummy;
+    if (mkOffset)
+        return mkOffset->Modified(S);
+    return dummy;
 }
 
 Standard_Boolean BRepOffsetAPI_MakeOffsetFix::IsDeleted (const TopoDS_Shape& S)
 {
-    return mkOffset.IsDeleted(S);
+    if (mkOffset)
+        return mkOffset->IsDeleted(S);
+    return Standard_False;
 }

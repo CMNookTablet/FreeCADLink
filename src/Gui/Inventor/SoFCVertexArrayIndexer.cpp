@@ -122,8 +122,11 @@ SoFCVertexArrayIndexer::init(const SoFCVertexArrayIndexer & other,
   } else {
     this->use_shorts = TRUE;
     this->indexarraylength = 0;
-    for (auto it = partindices.begin(); it != partindices.end(); ++it)
-      addIndex(getT(it));
+    for (auto it = partindices.begin(); it != partindices.end(); ++it) {
+      int i = getT(it);
+      if (i >= 0 && i < other.indexarray.getLength())
+        addIndex(other.indexarray[i]);
+    }
   }
 }
 

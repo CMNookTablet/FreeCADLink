@@ -165,6 +165,7 @@ PROPERTY_SOURCE(PartGui::ViewProviderMultiFuse,PartGui::ViewProviderPart)
 
 ViewProviderMultiFuse::ViewProviderMultiFuse()
 {
+    sPixmap = "Part_Fuse";
 }
 
 ViewProviderMultiFuse::~ViewProviderMultiFuse()
@@ -291,6 +292,7 @@ PROPERTY_SOURCE(PartGui::ViewProviderMultiCommon,PartGui::ViewProviderPart)
 
 ViewProviderMultiCommon::ViewProviderMultiCommon()
 {
+    sPixmap = "Part_Common";
 }
 
 ViewProviderMultiCommon::~ViewProviderMultiCommon()

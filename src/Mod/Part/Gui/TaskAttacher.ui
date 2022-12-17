@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Attachment</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -94,6 +94,25 @@
       <widget class="QLineEdit" name="lineRef4"/>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="Gui::PrefCheckBox" name="checkBoxRecompute">
+     <property name="toolTip">
+      <string>Enable this to auto recompute feature on changing attachment.
+If disabled, then only the feature placement is updated. Please
+note that some feature may produces different shape depending
+on its placement.</string>
+     </property>
+     <property name="text">
+      <string>Recompute object on change</string>
+     </property>
+     <property name="prefPath" stdset="0">
+      <cstring>Dialog/TaskAttacher</cstring>
+     </property>
+     <property name="prefEntry" stdset="0">
+      <cstring>AutoRecompute</cstring>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="label">
@@ -381,6 +400,11 @@ of object being attached.</string>
    <extends>Gui::QuantitySpinBox</extends>
    <header>Gui/PrefWidgets.h</header>
   </customwidget>
+  <customwidget>
+   <class>Gui::PrefCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>Gui/PrefWidgets.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>buttonRef1</tabstop>
@@ -398,7 +422,6 @@ of object being attached.</string>
   <tabstop>attachmentOffsetRoll</tabstop>
   <tabstop>attachmentOffsetPitch</tabstop>
   <tabstop>attachmentOffsetYaw</tabstop>
-  <tabstop>checkBoxFlip</tabstop>
  </tabstops>
  <resources/>
  <connections/>

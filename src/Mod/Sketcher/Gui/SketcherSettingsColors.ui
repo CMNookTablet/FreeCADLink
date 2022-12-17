@@ -140,6 +140,128 @@
       <string>Geometric element colors</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
+      <item row="2" column="0">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_45">
+          <property name="minimumSize">
+           <size>
+            <width>240</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Fully constrained Sketch</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="Gui::PrefColorButton" name="FullyConstrainedColor">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Color of fully constrained geometry in edit mode</string>
+          </property>
+          <property name="color" stdset="0">
+           <color>
+            <red>0</red>
+            <green>255</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="prefEntry" stdset="0">
+           <cstring>FullyConstrainedColor</cstring>
+          </property>
+          <property name="prefPath" stdset="0">
+           <cstring>View</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Internal Face</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="Gui::PrefColorButton" name="InternalFaceColor">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Color of geometry indicating an invalid sketch</string>
+          </property>
+          <property name="color" stdset="0">
+           <color alpha="128">
+            <red>84</red>
+            <green>171</green>
+            <blue>255</blue>
+           </color>
+          </property>
+          <property name="prefEntry" stdset="0">
+           <cstring>FaceColor</cstring>
+          </property>
+          <property name="prefPath" stdset="0">
+           <cstring>Mod/Sketcher/General</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="Gui::PrefColorButton" name="InvalidSketchColor">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Color of geometry indicating an invalid sketch</string>
+          </property>
+          <property name="color" stdset="0">
+           <color>
+            <red>255</red>
+            <green>109</green>
+            <blue>0</blue>
+           </color>
+          </property>
+          <property name="prefEntry" stdset="0">
+           <cstring>InvalidSketchColor</cstring>
+          </property>
+          <property name="prefPath" stdset="0">
+           <cstring>View</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Invalid Sketch</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
       <item row="1" column="0">
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="10" column="0">
@@ -554,95 +676,6 @@
            <cstring>View</cstring>
           </property>
          </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="2" column="0">
-       <layout class="QGridLayout" name="gridLayout_5">
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Invalid Sketch</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_45">
-          <property name="minimumSize">
-           <size>
-            <width>240</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Fully constrained Sketch</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="Gui::PrefColorButton" name="FullyConstrainedColor">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="toolTip">
-           <string>Color of fully constrained geometry in edit mode</string>
-          </property>
-          <property name="color" stdset="0">
-           <color>
-            <red>0</red>
-            <green>255</green>
-            <blue>0</blue>
-           </color>
-          </property>
-          <property name="prefEntry" stdset="0">
-           <cstring>FullyConstrainedColor</cstring>
-          </property>
-          <property name="prefPath" stdset="0">
-           <cstring>View</cstring>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="Gui::PrefColorButton" name="InvalidSketchColor">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="toolTip">
-           <string>Color of geometry indicating an invalid sketch</string>
-          </property>
-          <property name="color" stdset="0">
-           <color>
-            <red>255</red>
-            <green>109</green>
-            <blue>0</blue>
-           </color>
-          </property>
-          <property name="prefEntry" stdset="0">
-           <cstring>InvalidSketchColor</cstring>
-          </property>
-          <property name="prefPath" stdset="0">
-           <cstring>View</cstring>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <spacer name="horizontalSpacer_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </item>

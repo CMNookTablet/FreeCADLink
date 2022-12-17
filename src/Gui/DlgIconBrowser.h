@@ -47,6 +47,7 @@ public:
 public Q_SLOTS:
     void on_btnExport_clicked();
     void on_btnRefresh_clicked();
+    void on_btnBrowse_clicked();
     void on_treeWidget_itemChanged(QTreeWidgetItem *, int);
     void on_btnSave_clicked();
     void on_editPrefix_textEdited(const QString &);

@@ -131,11 +131,15 @@ public:
     /// signal on change of document's modified status
     mutable boost::signals2::signal<void (const Gui::Document& doc)> signalChangedModified;
     /// signal on attaching new view
-    mutable boost::signals2::signal<void (BaseView *, bool passive)> signalAttachView;
+    mutable boost::signals2::signal<void (const BaseView &, bool passive)> signalAttachView;
     /// signal on detaching view
-    mutable boost::signals2::signal<void (BaseView *, bool passive)> signalDetachView;
+    mutable boost::signals2::signal<void (const BaseView &, bool passive)> signalDetachView;
+    /// signal on changed view property
+    mutable boost::signals2::signal<void (const Gui::BaseView &, const App::Property &)> signalChangedView;
     /// signal on changes in show on top objects
     mutable boost::signals2::signal<void (int, const App::SubObjectT &)> signalOnTopObject;
+    /// signal on changes in accumulated editing transformation
+    mutable boost::signals2::signal<void (const Gui::Document &)> signalEditingTransformChanged;
     //@}
 
     /** @name I/O of the document */
@@ -164,7 +168,7 @@ public:
     void writeObject(Base::Writer &writer, 
             const App::DocumentObject *doc, const ViewProvider *obj) const;
     /// Add all root objects of the given array to a group
-    void addRootObjectsToGroup(const std::vector<App::DocumentObject*>&, App::DocumentObjectGroup*);
+    void addRootObjectsToGroup(const std::vector<App::DocumentObject*>&, App::DocumentObject*);
     //@}
 
     /// Observer message from the App doc

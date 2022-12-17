@@ -107,9 +107,6 @@ static void inline setRandomColor(const char *name, bool force)
                 cmdGuiObjectArgs(sel.pObject, "MapFaceColor = False");
             }
         }
-
-        if (ViewParams::getColorRecompute())
-            Command::updateActive();
     }
     catch (Base::Exception &e) {
         e.ReportException();
@@ -155,37 +152,6 @@ bool StdCmdObjectRandomColor::isActive(void)
     return (Gui::Selection().size() != 0);
 }
 
-
-//===========================================================================
-// Std_RecomputeOnColorChange
-//===========================================================================
-
-class StdCmdColorRecompute : public  Gui::CheckableCommand
-{
-public:
-    StdCmdColorRecompute();
-    virtual const char* className() const
-    { return "StdCmdColorRecompute"; }
-protected: 
-    virtual void setOption(bool checked) {
-        ViewParams::setColorRecompute(checked);
-    }
-    virtual bool getOption(void) const {
-        return ViewParams::getColorRecompute();
-    }
-};
-
-StdCmdColorRecompute::StdCmdColorRecompute()
-  : CheckableCommand("Std_ColorRecompute")
-{
-    sGroup        = "Standard-View";
-    sMenuText     = QT_TR_NOOP("Recompute on color change");
-    sToolTipText  = QT_TR_NOOP("Touch object for recompute on color change");
-    sWhatsThis    = "Std_ColorRecomputer";
-    sStatusTip    = sMenuText;
-    eType         = 0;
-}
-
 //===========================================================================
 // Std_GroupRandomColor
 //===========================================================================
@@ -206,8 +172,6 @@ public:
 
         addCommand(new StdCmdRandomColor());
         addCommand(new StdCmdObjectRandomColor());
-        addCommand();
-        addCommand(new StdCmdColorRecompute());
     };
     virtual const char* className() const {return "StdCmdGroupRandomColor";}
 };

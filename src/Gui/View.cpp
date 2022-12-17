@@ -33,7 +33,7 @@ using namespace Gui;
 // BaseView
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-TYPESYSTEM_SOURCE_ABSTRACT(Gui::BaseView,Base::BaseClass)
+PROPERTY_SOURCE_ABSTRACT(Gui::BaseView,App::PropertyContainer)
 
 
 BaseView::BaseView( Gui::Document* pcDocument)
@@ -96,4 +96,14 @@ void BaseView::setDocument(Gui::Document* pcDocument)
 App::Document* BaseView::getAppDocument() const
 {
     return _pcDocument ? _pcDocument->getDocument() : 0;
+}
+
+void BaseView::onChanged(const App::Property *prop)
+{
+    if (_pcDocument) {
+        _pcDocument->setModified(true);
+        _pcDocument->signalChangedView(*this, *prop);
+    }
+    Application::Instance->signalChangedView(*this, *prop);
+    App::PropertyContainer::onChanged(prop);
 }

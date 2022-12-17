@@ -48,6 +48,7 @@
 # include <GeomAPI_ProjectPointOnSurf.hxx>
 # include <GeomAPI_ProjectPointOnCurve.hxx>
 # include <ProjLib_Plane.hxx>
+# include <BRepAlgoAPI_Section.hxx>
 # include <BRepOffsetAPI_NormalProjection.hxx>
 # include <BRepBuilderAPI_MakeFace.hxx>
 # include <BRepBuilderAPI_MakeEdge.hxx>
@@ -55,6 +56,7 @@
 # include <GeomAPI_IntSS.hxx>
 # include <GeomLProp_CLProps.hxx>
 # include <BRepProj_Projection.hxx>
+# include <BRepTools_WireExplorer.hxx>
 # include <GeomConvert_BSplineCurveKnotSplitting.hxx>
 # include <TColStd_Array1OfInteger.hxx>
 # include <GC_MakeCircle.hxx>
@@ -66,21 +68,14 @@
 # include <TopExp.hxx>
 # include <TopTools_IndexedMapOfShape.hxx>
 # include <ElCLib.hxx>
+# include <GC_MakeArcOfCircle.hxx>
+# include <GCPnts_AbscissaPoint.hxx>
 # include <boost_bind_bind.hpp>
 //# include <QtGlobal>
 #endif
 
-#include <boost/version.hpp>
-#include <boost/config.hpp>
-#if defined(BOOST_MSVC) && (BOOST_VERSION == 105500)
-// for fixing issue https://svn.boost.org/trac/boost/ticket/9332
-#   include "boost_fix/intrusive/detail/memory_util.hpp"
-#   include "boost_fix/container/detail/memory_util.hpp"
-#endif
-#include <boost/geometry.hpp>
-#include <boost/geometry/index/rtree.hpp>
-#include <boost/geometry/geometries/geometries.hpp>
-#include <boost/geometry/geometries/register/point.hpp>
+#include <boost_geometry.hpp>
+
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -102,8 +97,10 @@
 #include <Mod/Part/App/Geometry.h>
 #include <Mod/Part/App/DatumFeature.h>
 #include <Mod/Part/App/BodyBase.h>
+#include <Mod/Part/App/PartParams.h>
 #include <Mod/Part/App/PartPyCXX.h>
 #include <Mod/Part/App/TopoShapeOpCode.h>
+#include <Mod/Part/App/WireJoiner.h>
 
 #include <Mod/Part/App/GeometryMigrationExtension.h>
 
@@ -145,8 +142,15 @@ SketchObject::SketchObject()
     ADD_PROPERTY_TYPE(ExternalGeo,    (0)  ,"Sketch",
             (App::PropertyType)(App::Prop_Hidden),"Sketch external geometry");
     ADD_PROPERTY_TYPE(FullyConstrained, (false),"Sketch",(App::PropertyType)(App::Prop_Output|App::Prop_ReadOnly |App::Prop_Hidden),"Sketch is fully constrained");
-
+    ADD_PROPERTY_TYPE(ArcFitTolerance, (0.0),"Sketch",(App::PropertyType)(App::Prop_None),
+            "Tolerance for fitting arcs of projected external geometry");
+    ADD_PROPERTY_TYPE(ExternalBSplineMaxDegree, (0), "Sketch", (App::Prop_None), "Maximum degree of imported external BSpline. Zero to disable simplification");
+    ADD_PROPERTY_TYPE(ExternalBSplineTolerance, (0.0), "Sketch", (App::Prop_None), "Tolerance for simplifying imported external BSpline");
     geoLastId = 0;
+
+    ADD_PROPERTY(InternalShape, (Part::TopoShape()));
+    ADD_PROPERTY_TYPE(MakeInternals, (false), "Internal Geometry", App::Prop_None, "Make internal geometry, e.g. split intersecting edges, face of closed wires.");
+    ADD_PROPERTY_TYPE(InternalTolerance, (1e-6), "Internal Geometry", App::Prop_None, "Tolerance used check vertex conincidents when making internal geometry");
 
     ParameterGrp::handle hGrpp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/Mod/Sketcher");
     geoHistoryLevel = hGrpp->GetInt("GeometryHistoryLevel",1);
@@ -181,11 +185,24 @@ SketchObject::SketchObject()
 
     internaltransaction=false;
     managedoperation=false;
+
+    registerElementCache(internalPrefix(), &InternalShape);
 }
 
 SketchObject::~SketchObject()
 {
     delete analyser;
+}
+
+void SketchObject::setupObject()
+{
+    ParameterGrp::handle hGrpp = App::GetApplication().GetParameterGroupByPath(
+            "User parameter:BaseApp/Preferences/Mod/Sketcher");
+    ArcFitTolerance.setValue(hGrpp->GetFloat("ArcFitTolerance", Precision::Confusion()*10.0));
+    ExternalBSplineMaxDegree.setValue(hGrpp->GetInt("ExternalBSplineMaxDegree", 5));
+    ExternalBSplineTolerance.setValue(hGrpp->GetFloat("ExternalBSplineTolerance", 1e-4));
+    MakeInternals.setValue(hGrpp->GetBool("MakeInternals", false));
+    inherited::setupObject();
 }
 
 void SketchObject::initExternalGeo() {
@@ -266,19 +283,41 @@ App::DocumentObjectExecReturn *SketchObject::execute(void)
     return App::DocumentObject::StdReturn;
 }
 
+static bool inline checkSmallEdge(const Part::TopoShape &s)
+{
+    if (s.shapeType() != TopAbs_EDGE)
+        return false;
+    BRepAdaptor_Curve adapt(TopoDS::Edge(s.getShape()));
+    return GCPnts_AbscissaPoint::Length(adapt, Precision::Confusion()) <= Precision::Confusion();
+}
+
 void SketchObject::buildShape() {
 
     // Shape.setValue(solvedSketch.toShape());
     // We use the following instead to map element names
 
     std::vector<Part::TopoShape> shapes;
+    std::vector<Part::TopoShape> vertices;
     int i=0;
     for(auto geo : getInternalGeometry()) {
         ++i;
         if(GeometryFacade::getConstruction(geo))
             continue;
-        shapes.push_back(getEdge(geo,convertSubName(
-                        Data::IndexedName::fromConst("Edge", i), false).c_str()));
+        if (geo->isDerivedFrom(Part::GeomPoint::getClassTypeId())) {
+            Part::TopoShape vertex(TopoDS::Vertex(geo->toShape()));
+            int idx = getVertexIndexGeoPos(i-1, Sketcher::start);
+            std::string name = convertSubName(Data::IndexedName::fromConst("Vertex", idx+1), false);
+            vertex.setElementName(Data::IndexedName::fromConst("Vertex", 1), 
+                                  Data::MappedName::fromRawData(name.c_str()));
+            vertices.push_back(vertex);
+            vertices.back().copyElementMap(vertex, Part::OpCodes::Sketch);
+        } else {
+            auto indexedName = Data::IndexedName::fromConst("Edge", i);
+            shapes.push_back(getEdge(geo,convertSubName(indexedName, false).c_str()));
+            if (checkSmallEdge(shapes.back())) {
+                FC_WARN("Edge too small: " << indexedName);
+            }
+        }
     }
 
     for(i=2;i<ExternalGeo.getSize();++i) {
@@ -286,17 +325,89 @@ void SketchObject::buildShape() {
         auto egf = ExternalGeometryFacade::getFacade(geo);
         if(!egf->testFlag(ExternalGeometryExtension::Defining))
             continue;
-        shapes.push_back(getEdge(geo, convertSubName(
-                        Data::IndexedName::fromConst("ExternalEdge", i-1), false).c_str()));
+        auto indexedName = Data::IndexedName::fromConst("ExternalEdge", i-1);
+        shapes.push_back(getEdge(geo, convertSubName(indexedName, false).c_str()));
+        if (checkSmallEdge(shapes.back())) {
+            FC_WARN("Edge too small: " << indexedName);
+        }
     }
-    if(shapes.empty())
+    if(shapes.empty() && vertices.empty()) {
+        InternalShape.setValue(Part::TopoShape());
         Shape.setValue(Part::TopoShape());
-    else
-        Shape.setValue(Part::TopoShape().makEWires(shapes,TOPOP_SKETCH));
+        return;
+    }
+    Part::TopoShape result(0, getDocument()->getStringHasher());
+    if (vertices.empty()) {
+        result.makEWires(shapes,Part::OpCodes::Sketch);
+    } else {
+        std::vector<Part::TopoShape> results;
+        if (!shapes.empty()) {
+            // Note, that we HAVE TO add the Part::OpCodes::Sketch op code to
+            // all geometry exposed through the Shape property, because
+            // SketchObject::getElementName() relies on this op code to
+            // differentiate geometries that are exposed with those in edit
+            // mode.
+            auto wires = Part::TopoShape().makEWires(shapes, Part::OpCodes::Sketch);
+            for (const auto &wire : wires.getSubTopoShapes(TopAbs_WIRE))
+                results.push_back(wire);
+        }
+        results.insert(results.end(), vertices.begin(), vertices.end());
+        result.makECompound(results);
+    }
+    result.Tag = getID();
+    InternalShape.setValue(buildInternals(result.located()));
+    // Must set Shape property after InternalShape so that
+    // GeoFeature::updateElementReference() can run properly on change of Shape
+    // property, because some reference may pointing to the InternalShape
+    Shape.setValue(result);
+}
+
+Part::TopoShape SketchObject::buildInternals(const Part::TopoShape &edges) const
+{
+    if (!MakeInternals.getValue())
+        return Part::TopoShape();
+
+    try {
+        Part::WireJoiner joiner;
+        joiner.setTolerance(InternalTolerance.getValue());
+        joiner.setTightBound(true);
+        joiner.setMergeEdges(true);
+        joiner.addShape(edges);
+        Part::TopoShape result(getID(), getDocument()->getStringHasher());
+        if (!joiner.Shape().IsNull()) {
+            joiner.getResultWires(result, "SKF");
+
+            // NOTE: we set minElementNames to 2 (i.e to use at least two
+            // unused edge name to construct face name) in order to reduce the
+            // chance of face jumpping.
+            result = result.makEFace(result.getSubTopoShapes(TopAbs_WIRE), 
+                                     /*op*/"",
+                                     /*maker*/"Part::FaceMakerRing",
+                                     /*pln*/nullptr,
+#if 1
+                                     /*minElementNames (revert to 1 for now, see how it fairs)*/1
+#else
+                                     /*minElementNames*/2
+#endif
+                                    );
+        }
+        Part::TopoShape openWires(getID(), getDocument()->getStringHasher());
+        joiner.getOpenWires(openWires, "SKF");
+        if (openWires.isNull())
+            return result;
+        if (result.isNull())
+            return openWires;
+        return result.makECompound({result, openWires});
+    } catch (Base::Exception &e) {
+        FC_WARN("Failed to make face for sketch: " << e.what());
+    } catch (Standard_Failure &e) {
+        FC_WARN("Failed to make face for sketch: " << e.GetMessageString());
+    }
+    return Part::TopoShape();
 }
 
 static const char *hasSketchMarker(const char *name) {
-    static std::string marker(Part::TopoShape::elementMapPrefix()+TOPOP_SKETCH);
+    static std::string marker(Part::TopoShape::elementMapPrefix()+Part::OpCodes::Sketch);
     if (!name)
         return nullptr;
     return strstr(name,marker.c_str());
@@ -1159,6 +1270,7 @@ void SketchObject::acceptGeometry()
 {
     Constraints.acceptGeometry(getCompleteGeometry());
     rebuildVertexIndex();
+    signalElementsChanged();
 }
 
 bool SketchObject::isSupportedGeometry(const Part::Geometry *geo) const
@@ -1556,9 +1668,30 @@ int SketchObject::setConstruction(int GeoId, bool on)
     return 0;
 }
 
-int SketchObject::toggleFreeze(const std::vector<int> &geoIds) {
+int SketchObject::toggleFreeze(const std::vector<int> &geoIds)
+{
+    return toggleExternalGeometryFlag(geoIds, {ExternalGeometryExtension::Frozen});
+}
+
+int SketchObject::toggleIntersection(const std::vector<int> &geoIds, bool defining)
+{
+    std::vector<ExternalGeometryExtension::Flag> flags;
+    flags.push_back(ExternalGeometryExtension::Intersection);
+    if (defining)
+        flags.push_back(ExternalGeometryExtension::Defining);
+    return toggleExternalGeometryFlag(geoIds, flags);
+}
+
+int SketchObject::toggleExternalGeometryFlag(const std::vector<int> &geoIds,
+                                             const std::vector<ExternalGeometryExtension::Flag> &flags)
+{
+    if (flags.empty())
+        return 0;
+    auto flag = flags.front();
+
     Base::StateLocker lock(managedoperation, true); // no need to check input data validity as this is an sketchobject managed operation.
 
+    bool update = false;
     bool touched = false;
     auto geos = ExternalGeo.getValues();
     std::set<int> idSet(geoIds.begin(),geoIds.end());
@@ -1571,7 +1704,7 @@ int SketchObject::toggleFreeze(const std::vector<int> &geoIds) {
         int idx = -geoId-1;
         auto &geo = geos[idx];
         auto egf = ExternalGeometryFacade::getFacade(geo);
-        bool frozen = !egf->testFlag(ExternalGeometryExtension::Frozen);
+        bool value = !egf->testFlag(flag);
         if(egf->getRef().size()) {
             for(auto gid : getRelatedGeometry(geoId)) {
                 if(gid == geoId)
@@ -1580,19 +1713,27 @@ int SketchObject::toggleFreeze(const std::vector<int> &geoIds) {
                 auto &g = geos[idx];
                 g = g->clone();
                 auto egf = ExternalGeometryFacade::getFacade(g);
-                egf->setFlag(ExternalGeometryExtension::Frozen,frozen);
+                egf->setFlag(flag, value);
+                for (size_t i=1; i<flags.size(); ++i)
+                    egf->setFlag(flags[i], value);
                 idSet.erase(gid);
             }
         }
         geo = geo->clone();
         egf->setGeometry(geo);
-        egf->setFlag(ExternalGeometryExtension::Frozen,frozen);
+        egf->setFlag(flag, value);
+        for (size_t i=1; i<flags.size(); ++i)
+            egf->setFlag(flags[i], value);
+        if (value || flag != ExternalGeometryExtension::Frozen)
+            update = true;
         touched = true;
     }
 
     if(!touched)
         return -1;
     ExternalGeo.setValues(geos);
+    if (update)
+        rebuildExternalGeometry();
     return 0;
 }
 
@@ -3761,8 +3902,27 @@ bool SketchObject::isExternalAllowed(App::Document *pDoc, App::DocumentObject *p
     }
 }
 
+static inline bool
+checkOutList(std::set<App::DocumentObject*> outSet, const App::DocumentObject *owner, App::DocumentObject *obj)
+{
+    if (obj == owner)
+        return false;
+    if (!outSet.insert(obj).second)
+        return true;
+    for (auto o : obj->getOutList())
+        if (!checkOutList(outSet, owner, o))
+            return false;
+    return true;
+}
+
 bool SketchObject::isCarbonCopyAllowed(App::Document *pDoc, App::DocumentObject *pObj, bool & xinv, bool & yinv, eReasonList* rsn) const
 {
+    if (pObj == this) {
+        if (rsn)
+            *rsn = rlCircularReference;
+        return false;
+    }
+
     if (rsn)
         *rsn = rlAllowed;
 
@@ -3784,10 +3944,26 @@ bool SketchObject::isCarbonCopyAllowed(App::Document *pDoc, App::DocumentObject 
 
     //circular reference prevention
     try {
-        if (!(this->testIfLinkDAGCompatible(pObj))){
-            if (rsn)
-                *rsn = rlCircularReference;
-            return false;
+        // testIfLinkDAGCompatible disallow pObj link to this sketch. However,
+        // carbon copy can now handle external geometry to itself (but not
+        // from any other property that links to itself).
+        //
+        // if (!(this->testIfLinkDAGCompatible(pObj)))
+        std::vector<App::Property*> props;
+        pObj->getPropertyList(props);
+        std::set<App::DocumentObject*> outSet;
+        for (auto prop : props) {
+            if (auto propLink = Base::freecad_dynamic_cast<App::PropertyLinkBase>(prop)) {
+                for (auto obj : propLink->linkedObjects()) {
+                    if (obj == this && propLink == &psObj->ExternalGeometry)
+                        continue;
+                    if (!checkOutList(outSet, this, obj)) {
+                        if (rsn)
+                            *rsn = rlCircularReference;
+                        return false;
+                    }
+                }
+            }
         }
     } catch (Base::Exception &e) {
         Base::Console().Warning("Probably, there is a circular reference in the document. Error: %s\n", e.what());
@@ -6373,8 +6549,6 @@ int SketchObject::carbonCopy(App::DocumentObject * pObj, bool construction)
 
     int nextgeoid = vals.size();
 
-    int nextextgeoid = getExternalGeometryCount();
-
     int nextcid = cvals.size();
 
     const std::vector< Part::Geometry * > &svals = psObj->getInternalGeometry();
@@ -6383,6 +6557,43 @@ int SketchObject::carbonCopy(App::DocumentObject * pObj, bool construction)
 
     newVals.reserve(vals.size()+svals.size());
     newcVals.reserve(cvals.size()+scvals.size());
+
+    std::map<int, int> extMap;
+    if (psObj->ExternalGeo.getSize() > 1) {
+        int i = -1;
+        auto geos = this->ExternalGeo.getValues();
+        std::string myName(this->getNameInDocument());
+        myName += ".";
+        for (const auto &geo : psObj->ExternalGeo.getValues()) {
+            if (++i < 2) // skip h/v axes
+                continue;
+            else {
+                auto egf = ExternalGeometryFacade::getFacade(geo);
+                const auto &ref = egf->getRef();
+                if (boost::starts_with(ref, myName)) {
+                    int geoId;
+                    PointPos posId;
+                    if (this->geoIdFromShapeType(ref.c_str()+myName.size(), geoId, posId)) {
+                        extMap[-i-1] = geoId;
+                        continue;
+                    }
+                }
+            }
+            auto copy = geo->copy();
+            auto egf = ExternalGeometryFacade::getFacade(copy);
+            egf->setId(++geoLastId);
+            if (!egf->getRef().empty()) {
+                auto &refs = this->externalGeoRefMap[egf->getRef()];
+                refs.push_back(geoLastId);
+            }
+            this->externalGeoMap[geoLastId] = (int)geos.size();
+            geos.push_back(copy);
+            extMap[-i-1] = -(int)geos.size();
+        }
+        Base::ObjectStatusLocker<App::Property::Status,App::Property>
+            guard(App::Property::User3, &this->ExternalGeo);
+        this->ExternalGeo.setValues(std::move(geos));
+    }
 
     if(psObj->ExternalGeometry.getSize()>0) {
         std::vector<DocumentObject*> Objects     = ExternalGeometry.getValues();
@@ -6397,22 +6608,25 @@ int SketchObject::carbonCopy(App::DocumentObject * pObj, bool construction)
             return -1;
         }
 
-        int si=0;
-        for (auto & sobj : sObjects) {
+        int si=-1;
+        for (const auto &sobj : sObjects) {
+            ++si;
+            if (sobj == this)
+                continue;
             int i=0;
             for (auto & obj : Objects){
                 if (obj == sobj && SubElements[i] == sSubElements[si]){
-                    Base::Console().Error("Link to %s already exists in this sketch. Delete the link and try again\n",sSubElements[si].c_str());
-                    return -1;
+                    FC_WARN("Link to %s already exists in this sketch");
+                    i = -1;
+                    break;
                 }
-
                 i++;
             }
 
-            Objects.push_back(sobj);
-            SubElements.push_back(sSubElements[si]);
-
-            si++;
+            if (i >= 0) {
+                Objects.push_back(sobj);
+                SubElements.push_back(sSubElements[si]);
+            }
         }
 
         ExternalGeometry.setValues(Objects,SubElements);
@@ -6429,23 +6643,34 @@ int SketchObject::carbonCopy(App::DocumentObject * pObj, bool construction)
         newVals.push_back(geoNew);
     }
 
-    for (std::vector< Sketcher::Constraint * >::const_iterator it= scvals.begin(); it != scvals.end(); ++it) {
-        Sketcher::Constraint *newConstr = (*it)->copy();
-        if( (*it)->First>=0 )
-            newConstr->First += nextgeoid;
-        if( (*it)->Second>=0 )
-            newConstr->Second += nextgeoid;
-        if( (*it)->Third>=0 )
-            newConstr->Third += nextgeoid;
+    auto adjustConstraint = [&](int idx, int &geoId) {
+        if (geoId >= 0)
+            geoId += nextgeoid;
+        else if (geoId < -2 && geoId != Constraint::GeoUndef) {
+            auto it = extMap.find(geoId);
+            if (it != extMap.end())
+                geoId = it->second;
+            else {
+                std::string name;
+                try {
+                    name = psObj->Constraints.createPath(idx).toString();
+                } catch (Base::Exception &e) {
+                }
+                FC_WARN("Failed to copy constraint " << name);
+                return false;
+            }
+        }
+        return true;
+    };
 
-        if( (*it)->First<-2 && (*it)->First != Constraint::GeoUndef )
-            newConstr->First -= (nextextgeoid-2);
-        if( (*it)->Second<-2 && (*it)->Second != Constraint::GeoUndef)
-            newConstr->Second -= (nextextgeoid-2);
-        if( (*it)->Third<-2 && (*it)->Third != Constraint::GeoUndef)
-            newConstr->Third -= (nextextgeoid-2);
-
-        newcVals.push_back(newConstr);
+    for (int i=0; i<(int)scvals.size(); ++i) {
+        Sketcher::Constraint *newConstr = scvals[i]->copy();
+        if (adjustConstraint(i, newConstr->First)
+                && adjustConstraint(i, newConstr->Second)
+                && adjustConstraint(i, newConstr->Third))
+            newcVals.push_back(newConstr);
+        else
+            delete newConstr;
     }
 
     // Block acceptGeometry in OnChanged to avoid unnecessary checks and updates
@@ -6473,26 +6698,33 @@ int SketchObject::carbonCopy(App::DocumentObject * pObj, bool construction)
             // (there is a plausible alternative for a slightly different use case to copy the expression of the parent if one is existing)
             if ((*it)->isDriving) {
                 App::ObjectIdentifier spath = psObj->Constraints.createPath(sourceid);
-                /*
-                 *           App::PropertyExpressionEngine::ExpressionInfo expr_info = psObj->getExpression(path);
-                 *
-                 *           if (expr_info.expression)*/
-                //App::Expression * expr = parse(this, const std::string& buffer);
-
-                std::shared_ptr<App::Expression> expr(App::Expression::parse(this, spath.getDocumentObjectName().getString() +std::string(1,'.') + spath.toString()));
-                setExpression(Constraints.createPath(nextcid), expr);
+                App::PropertyExpressionEngine::ExpressionInfo expr_info = psObj->getExpression(spath);
+                if (expr_info.expression && !expr_info.expression->getDepObjects().count(psObj))
+                    setExpression(Constraints.createPath(nextcid), expr_info.expression->copy());
+                else {
+                    auto expr = App::Expression::parse(this, spath.getDocumentObjectName().getString() +std::string(1,'.') + spath.toString());
+                    setExpression(Constraints.createPath(nextcid), std::move(expr));
+                }
             }
         }
     }
 
+    // We shall solve in all cases, because recompute may fail, and leave the
+    // sketch in an inconsistent state. A concrete example. If the copied sketch
+    // has broken external geometry, its recomputation will fail. And because we
+    // use expression for copied constraint to add dependency to the copied
+    // sketch, this sketch will not be recomputed (because its dependency fails
+    // to recompute).
+#if 0
     if (noRecomputes) // if we do not have a recompute, the sketch must be solved to update the DoF of the solver
+#endif
         solve();
 
 
     return svals.size();
 }
 
-int SketchObject::addExternal(App::DocumentObject *Obj, const char* SubName, bool defining)
+int SketchObject::addExternal(App::DocumentObject *Obj, const char* SubName, bool defining, bool intersection)
 {
     Base::StateLocker lock(managedoperation, true); // no need to check input data validity as this is an sketchobject managed operation.
 
@@ -6500,22 +6732,56 @@ int SketchObject::addExternal(App::DocumentObject *Obj, const char* SubName, boo
     if (!isExternalAllowed(Obj->getDocument(), Obj))
        return -1;
 
-    std::vector<const char *> subs;
-    if (boost::starts_with(SubName, "Wire")) {
-        auto shape = Part::Feature::getTopoShape(Obj);
-        auto wire = shape.getSubTopoShape(SubName);
-        int size = ExternalGeometry.getSize();
-        for (const auto &edge : wire.getSubShapes(TopAbs_EDGE)) {
-            int idx = shape.findShape(edge);
-            if (idx >= 0) {
-                std::string element("Edge");
-                element += std::to_string(idx);
-                addExternal(Obj, element.c_str(), defining);
-            }
+    auto wholeShape = Part::Feature::getTopoShape(Obj);
+    auto shape = wholeShape.getSubTopoShape(SubName, /*silent*/true);
+    TopAbs_ShapeEnum shapeType = TopAbs_SHAPE;
+    if (shape.shapeType(/*silent*/true) != TopAbs_FACE) {
+        if (shape.hasSubShape(TopAbs_FACE))
+            shapeType = TopAbs_FACE;
+        else if (shape.shapeType(/*silent*/true) != TopAbs_EDGE
+                && shape.hasSubShape(TopAbs_EDGE))
+            shapeType = TopAbs_EDGE;
+    }
+
+    if (shapeType != TopAbs_SHAPE) {
+        std::string element = Part::TopoShape::shapeName(shapeType);
+        std::size_t elementNameSize = element.size();
+        int geometryCount = ExternalGeometry.getSize();
+
+        gp_Pln sketchPlane;
+        if (intersection) {
+            Base::Placement Plm = Placement.getValue();
+            Base::Vector3d Pos = Plm.getPosition();
+            Base::Rotation Rot = Plm.getRotation();
+            Base::Vector3d dN(0,0,1);
+            Rot.multVec(dN,dN);
+            Base::Vector3d dX(1,0,0);
+            Rot.multVec(dX,dX);
+            gp_Ax3 sketchAx3(gp_Pnt(Pos.x,Pos.y,Pos.z),
+                            gp_Dir(dN.x,dN.y,dN.z),
+                            gp_Dir(dX.x,dX.y,dX.z));
+            sketchPlane.SetPosition(sketchAx3);
         }
-        if (ExternalGeometry.getSize() == size)
+        for (const auto &subShape : shape.getSubShapes(shapeType)) {
+            int idx = wholeShape.findShape(subShape);
+            if (idx == 0)
+                continue;
+            if (intersection) {
+                try {
+                    BRepAlgoAPI_Section maker(subShape, sketchPlane);
+                    if (!maker.IsDone() || maker.Shape().IsNull())
+                        continue;
+                } catch (Standard_Failure &) {
+                    continue;
+                }
+            }
+            element += std::to_string(idx);
+            addExternal(Obj, element.c_str(), defining, intersection);
+            element.resize(elementNameSize);
+        }
+        if (ExternalGeometry.getSize() == geometryCount)
             return -1;
-        return size;
+        return geometryCount;
     }
 
     // get the actual lists of the externals
@@ -6541,7 +6807,7 @@ int SketchObject::addExternal(App::DocumentObject *Obj, const char* SubName, boo
 
     // set the Link list.
     ExternalGeometry.setValues(Objects,SubElements);
-    rebuildExternalGeometry(defining);
+    rebuildExternalGeometry(defining, intersection);
     if(ExternalGeometry.getSize() == (int)Objects.size())
         return ExternalGeometry.getSize()-1;
     return -1;
@@ -6549,22 +6815,30 @@ int SketchObject::addExternal(App::DocumentObject *Obj, const char* SubName, boo
 
 int SketchObject::delExternal(int ExtGeoId)
 {
-    int GeoId = GeoEnum::RefExt - ExtGeoId;
-    if(GeoId > GeoEnum::RefExt || -GeoId-1 >= ExternalGeo.getSize())
-        return -1;
+    return delExternal({ExtGeoId});
+}
 
-    auto geo = getGeometry(GeoId);
-    if(!geo)
-        return -1;
-
+int SketchObject::delExternal(const std::vector<int> &ExtGeoIds)
+{
     std::set<long> geoIds;
-    auto egf = ExternalGeometryFacade::getFacade(geo);
-    geoIds.insert(egf->getId());
-    if(egf->getRef().size()) {
-        auto &refs = externalGeoRefMap[egf->getRef()];
-        geoIds.insert(refs.begin(),refs.end());
+    for (int ExtGeoId : ExtGeoIds) {
+        int GeoId = GeoEnum::RefExt - ExtGeoId;
+        if(GeoId > GeoEnum::RefExt || -GeoId-1 >= ExternalGeo.getSize())
+            return -1;
+
+        auto geo = getGeometry(GeoId);
+        if(!geo)
+            return -1;
+
+        auto egf = ExternalGeometryFacade::getFacade(geo);
+        geoIds.insert(egf->getId());
+        if(egf->getRef().size()) {
+            auto &refs = externalGeoRefMap[egf->getRef()];
+            geoIds.insert(refs.begin(),refs.end());
+        }
     }
-    delExternalPrivate(geoIds,true);
+
+    delExternalPrivate(geoIds, true);
     return 0;
 }
 
@@ -6573,7 +6847,9 @@ void SketchObject::delExternalPrivate(const std::set<long> &ids, bool removeRef)
     Base::StateLocker lock(managedoperation, true); // no need to check input data validity as this is an sketchobject managed operation.
 
     std::set<std::string> refs;
-    std::set<int> geoIds;
+    // Must sort in reverse order so as to delete geo from back to front to
+    // avoid index change
+    std::set<int, std::greater<int>> geoIds;
 
     for(auto id : ids) {
         auto it = externalGeoMap.find(id);
@@ -7050,21 +7326,34 @@ Part::Geometry* projectEdgeToLine(const TopoDS_Edge &edge,
     // Align the z axis of the edge plane to the y axis of the projection
     // plane,  so that the extreme bound will be a line in the x axis direction
     // of the projection plane.
-    gp_Trsf trsf;
     double angle = plane.Axis().Direction().Angle(gp_Dir(0, 1, 0));
-    trsf.SetRotation(gp_Ax1(gp_Pnt(), gp_Dir(0, 0, 1)), angle);
-    shape.move(trsf);
+    gp_Trsf trsf;
+    if (fabs(angle) > Precision::Angular()) {
+        trsf.SetRotation(gp_Ax1(gp_Pnt(), gp_Dir(0, 0, 1)), angle);
+        shape.move(trsf);
+    }
+
+    // Make a copy to work around OCC circular edge transformation bug
+    shape = shape.makECopy();
+
+    // Explicitly make the mesh, or else getBoundBox() will be very loosely
+    // bound.
+    shape.meshShape(Part::PartParams::getMinimumDeviation(),
+                    Part::PartParams::getMinimumAngularDeflection());
 
     // Obtain the bounding box and move the extreme points back to its original
     // location
     auto bbox = shape.getBoundBox();
     if (!bbox.IsValid())
         return nullptr;
-    trsf.SetRotation(gp_Ax1(gp_Pnt(), gp_Dir(0, 0, 1)), -angle);
-    gp_Pnt p1(bbox.MinX, 0, 0);
-    p1.Transform(trsf);
-    gp_Pnt p2(bbox.MaxX, 0, 0);
-    p2.Transform(trsf);
+
+    gp_Pnt p1(bbox.MinX, bbox.MinY, 0);
+    gp_Pnt p2(bbox.MaxX, bbox.MaxY, 0);
+    if (fabs(angle) > Precision::Angular()) {
+        trsf.SetRotation(gp_Ax1(gp_Pnt(), gp_Dir(0, 0, 1)), -angle);
+        p1.Transform(trsf);
+        p2.Transform(trsf);
+    }
 
     Base::Vector3d P1(p1.X(), p1.Y(), 0);
     Base::Vector3d P2(p2.X(), p2.Y(), 0);
@@ -7167,7 +7456,7 @@ void adjustParameterRange(const TopoDS_Edge &edge,
     pf.Transform(mov);
     pl.Transform(mov);
 
-    // Obtain the cooresponding parameters for those points in the projected curve
+    // Obtain the corresponding parameters for those points in the projected curve
     double f2 = GeomAPI_ProjectPointOnCurve(pf, curve).LowerDistanceParameter();
     double l2 = GeomAPI_ProjectPointOnCurve(pl, curve).LowerDistanceParameter();
     double m2 = GeomAPI_ProjectPointOnCurve(pm, curve).LowerDistanceParameter();
@@ -7194,7 +7483,51 @@ bool SketchObject::evaluateSupport(void)
     return true;
 }
 
-void SketchObject::rebuildExternalGeometry(bool defining)
+static Part::Geometry *fitArcs(std::vector<std::unique_ptr<Part::Geometry> > &arcs,
+                               const gp_Pnt &P1,
+                               const gp_Pnt &P2,
+                               double tol)
+{
+    double radius = 0.0;
+    double m;
+    Base::Vector3d center;
+    for (auto &geo : arcs) {
+        if (auto arc = Base::freecad_dynamic_cast<Part::GeomArcOfCircle>(geo.get())) {
+            if (radius == 0.0) {
+                radius = arc->getRadius();
+                center = arc->getCenter();
+                double f = arc->getFirstParameter();
+                double l = arc->getLastParameter();
+                m = (l-f)*0.5 + f; // middle parameter
+            } else if (std::abs(radius - arc->getRadius()) > tol)
+                return nullptr;
+        } else
+            return nullptr;
+    }
+    if (radius == 0.0)
+        return nullptr;
+    if (P1.SquareDistance(P2) < Precision::Confusion()) {
+        Part::GeomCircle* circle = new Part::GeomCircle();
+        circle->setCenter(center);
+        circle->setRadius(radius);
+        return circle;
+    }
+    else if (arcs.size() == 1) {
+        auto res = arcs.front().release();
+        arcs.clear();
+        return res;
+    }
+    else {
+        GeomLProp_CLProps prop(Handle(Geom_Curve)::DownCast(arcs.front()->handle()),m,0,Precision::Confusion());
+        gp_Pnt midPoint = prop.Value();
+        GC_MakeArcOfCircle arc(P1, midPoint, P2);
+        auto geo = new Part::GeomArcOfCircle();
+        geo->setHandle(arc.Value());
+        return geo;
+    }
+}
+
+void SketchObject::rebuildExternalGeometry(bool defining, bool addIntersection)
 {
     Base::StateLocker lock(managedoperation, true); // no need to check input data validity as this is an sketchobject managed operation.
 
@@ -7272,6 +7605,7 @@ void SketchObject::rebuildExternalGeometry(bool defining)
         // Skip frozen geometries
         bool frozen = false;
         bool sync = false;
+        bool intersection = addIntersection && (i+1 == (int)Objects.size());
         for(auto id : externalGeoRefMap[key]) {
             auto it = externalGeoMap.find(id);
             if(it != externalGeoMap.end()) {
@@ -7280,6 +7614,8 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                     frozen = true;
                 if(egf->testFlag(ExternalGeometryExtension::Sync))
                     sync = true;
+                if (egf->testFlag(ExternalGeometryExtension::Intersection))
+                    intersection = true;
             }
         }
         if(frozen && !sync) {
@@ -7316,9 +7652,7 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                 continue;
             }
 
-            switch (refSubShape.ShapeType())
-            {
-            case TopAbs_FACE: {
+            auto importFace = [&](const TopoDS_Shape &refSubShape) {
                 gp_Pln plane;
                 if (Part::TopoShape(refSubShape).findPlane(plane)) {
                     // Check that the plane is perpendicular to the sketch plane
@@ -7340,21 +7674,18 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                     } else {
                         FC_WARN("Skip external reference plane that is not normal to sketch plane in "
                                 << getFullName() << ": " << key);
-                        continue;
                     }
                 } else {
                     FC_WARN("Skip non-planar external reference face in sketch "
                                 << getFullName() << ": " << key);
-                    continue;
                 }
-                break;
-            }
-            case TopAbs_EDGE: {
-                const TopoDS_Edge& edge = TopoDS::Edge(refSubShape);
+            };
+
+            auto importEdge = [&](const TopoDS_Shape &refSubShape) {
+                TopoDS_Edge edge = TopoDS::Edge(refSubShape);
                 BRepAdaptor_Curve curve(edge);
                 Handle(Geom_Curve) origCurve = curve.Curve().Curve();
-                gp_Pnt firstPoint = BRep_Tool::Pnt(TopExp::FirstVertex(edge));
-                gp_Pnt lastPoint = BRep_Tool::Pnt(TopExp::LastVertex(edge));
+                gp_Pnt firstPoint, lastPoint;
 
                 bool done = false;
 
@@ -7362,7 +7693,15 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                     done = true;
                     geos.emplace_back(projectLine(curve, gPlane, invPlm));
                 }
-                else if (curve.GetType() == GeomAbs_Circle) {
+                else {
+                    // TopExp::First/LastVertex() may throw on infinite edge, so
+                    // we don't do it for linear edge, which does not require
+                    // end points for projection
+                    firstPoint = BRep_Tool::Pnt(TopExp::FirstVertex(edge));
+                    lastPoint = BRep_Tool::Pnt(TopExp::LastVertex(edge));
+                }
+
+                if (curve.GetType() == GeomAbs_Circle) {
                     done = true;
                     gp_Dir vec1 = sketchPlane.Axis().Direction();
                     gp_Dir vec2 = curve.Circle().Axis().Direction();
@@ -7583,17 +7922,35 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                     }
                 }
                 if (!done) {
-                    BRepOffsetAPI_NormalProjection mkProj(aProjFace);
-                    mkProj.Add(edge);
-                    mkProj.Build();
-                    const TopoDS_Shape& projShape = mkProj.Projection();
-                    if (projShape.IsNull()) {
-                        FC_ERR("Invalid geometry in sketch " << getFullName() << ": " << key);
-                        continue;
+                    // In some cases, BSpline (or maybe other type of curves)
+                    // silently fails (OCC >= 7.6) projection for some reason,
+                    // or produce incorrect shape (OCC < 7.6). We check if the
+                    // edge is planar and try to manually move the edge to the
+                    // sketch plane.
+                    Part::TopoShape projShape;
+                    gp_Pln pln;
+                    if (Part::TopoShape(edge).findPlane(pln)
+                            && pln.Axis().Direction().IsParallel(
+                                sketchPlane.Axis().Direction(), Precision::Confusion())) {
+                        double d = pln.Distance(sketchPlane);
+                        gp_Trsf trsf;
+                        trsf.SetTranslation(gp_Vec(pln.Axis().Direction()) * d);
+                        projShape.setShape(edge);
+                        // Must copy the edge to make the transformation work
+                        // for some reason.
+                        projShape.transformShape(Part::TopoShape::convert(trsf), /*copy*/true);
+                    } else {
+                        BRepOffsetAPI_NormalProjection mkProj(aProjFace);
+                        mkProj.Add(edge);
+                        mkProj.Build();
+                        projShape.setShape(mkProj.Projection());
+                        if (projShape.isNull() || !projShape.hasSubShape(TopAbs_EDGE)) {
+                            FC_ERR("Invalid geometry in sketch " << getFullName() << ": " << key);
+                            return;
+                        }
                     }
-                    TopExp_Explorer xp;
-                    for (xp.Init(projShape, TopAbs_EDGE); xp.More(); xp.Next()) {
-                        TopoDS_Edge projEdge = TopoDS::Edge(xp.Current());
+                    for (const auto &e : projShape.getSubShapes(TopAbs_EDGE)) {
+                        TopoDS_Edge projEdge = TopoDS::Edge(e);
                         TopLoc_Location loc(mov);
                         projEdge.Location(loc);
 
@@ -7645,6 +8002,18 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                                 geos.emplace_back(arc);
                             }
                         } else if (projCurve.GetType() == GeomAbs_BSplineCurve) {
+                            if (ArcFitTolerance.getValue() >= Precision::Confusion()) {
+                                std::unique_ptr<Part::GeomBSplineCurve> bspline(new Part::GeomBSplineCurve(projCurve.BSpline()));
+                                std::vector<std::unique_ptr<Part::Geometry>> arcs;
+                                for (auto arc : bspline->toBiArcs(ArcFitTolerance.getValue()))
+                                    arcs.emplace_back(arc);
+                                if (auto geo = fitArcs(arcs, P1, P2, ArcFitTolerance.getValue())) {
+                                    geos.emplace_back(geo);
+                                    GeometryFacade::setConstruction(geo, true);
+                                    return;
+                                }
+                            }
+
                             // Unfortunately, a normal projection of a circle can also give a Bspline
                             // Split the spline into arcs
                             GeomConvert_BSplineCurveKnotSplitting bSplineSplitter(projCurve.BSpline(), 2);
@@ -7667,6 +8036,21 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                                 geos.emplace_back(circle);
                             } else {
                                 Part::GeomBSplineCurve* bspline = new Part::GeomBSplineCurve(projCurve.BSpline());
+                                if (int maxDegree = ExternalBSplineMaxDegree.getValue()) {
+                                    if (bspline->getDegree() > maxDegree) {
+                                        std::string err;
+                                        try {
+                                            if (!bspline->approximate(ExternalBSplineTolerance.getValue(), 20,
+                                                                    ExternalBSplineMaxDegree.getValue(), 0))
+                                                err = "not done";
+                                        } catch (Base::Exception &e) {
+                                            err = e.what();
+                                        }
+                                        if (err.size())
+                                            FC_WARN("Failed to simplify external imported bspline "
+                                                    << getFullName() << ": " << key << ", " << err);
+                                    }
+                                }
                                 GeometryFacade::setConstruction(bspline, true);
                                 geos.emplace_back(bspline);
                             }
@@ -7762,13 +8146,12 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                         else {
                             FC_ERR("Not supported projected geometry in sketch " << getFullName() << ": " << key);
                             geos.clear();
-                            break;
                         }
                     }
                 }
-                break;
-            }
-            case TopAbs_VERTEX: {
+            };
+            
+            auto importVertex = [&](const TopoDS_Shape &refSubShape) {
                 gp_Pnt P = BRep_Tool::Pnt(TopoDS::Vertex(refSubShape));
                 GeomAPI_ProjectPointOnSurf proj(P,gPlane);
                 P = proj.NearestPoint();
@@ -7778,12 +8161,61 @@ void SketchObject::rebuildExternalGeometry(bool defining)
                 Part::GeomPoint* point = new Part::GeomPoint(p);
                 GeometryFacade::setConstruction(point, true);
                 geos.emplace_back(point);
+            };
+
+
+            switch (refSubShape.ShapeType())
+            {
+            case TopAbs_FACE:
+                if (!intersection)
+                    importFace(refSubShape);
                 break;
-            }
+            case TopAbs_EDGE:
+                importEdge(refSubShape);
+                break;
+            case TopAbs_VERTEX:
+                importVertex(refSubShape);
+                break;
             default:
                 FC_ERR("Unknown type of geometry in " << getFullName() << ": " << key);
                 break;
             }
+
+            if (intersection && (refSubShape.ShapeType() == TopAbs_EDGE
+                                 || refSubShape.ShapeType() == TopAbs_FACE))
+            {
+                BRepAlgoAPI_Section maker(refSubShape, sketchPlane);
+                maker.Approximation(Standard_True);
+                if (!maker.IsDone())
+                    FC_THROWM(Base::CADKernelError,"Failed to get intersection");
+                Part::TopoShape intersectionShape(maker.Shape());
+                auto edges = intersectionShape.getSubTopoShapes(TopAbs_EDGE);
+                for (const auto &s : edges)
+                    importEdge(s.getShape());
+                // Section of some face (e.g. sphere) produce more than one arcs
+                // from the same circle. So we try to fit the arcs with a single
+                // circle/arc.
+                if (refSubShape.ShapeType() == TopAbs_FACE && geos.size() > 1) {
+                    auto wires = Part::TopoShape().makEWires(edges);
+                    if (wires.countSubShapes(TopAbs_WIRE) == 1) {
+                        TopoDS_Vertex firstVertex, lastVertex;
+                        BRepTools_WireExplorer exp(TopoDS::Wire(wires.getSubShape(TopAbs_WIRE, 1)));
+                        firstVertex = exp.CurrentVertex();
+                        while (!exp.More())
+                            exp.Next();
+                        lastVertex = exp.CurrentVertex();
+                        gp_Pnt P1 = BRep_Tool::Pnt(firstVertex);
+                        gp_Pnt P2 = BRep_Tool::Pnt(lastVertex);
+                        if (auto geo = fitArcs(geos, P1, P2, ArcFitTolerance.getValue())) {
+                            geos.clear();
+                            geos.emplace_back(geo);
+                        }
+                    }
+                }
+                for (const auto &s : intersectionShape.getSubShapes(TopAbs_VERTEX, TopAbs_EDGE))
+                    importVertex(s);
+            }
+
         } catch (Base::Exception &e) {
             FC_ERR("Failed to project external geometry in "
                    << getFullName() << ": " << key << std::endl << e.what());
@@ -7808,7 +8240,13 @@ void SketchObject::rebuildExternalGeometry(bool defining)
             FC_WARN("Duplicated external reference in " << getFullName() << ": " << key);
             continue;
         }
-        if(defining && i+1==(int)Objects.size()) {
+        if (intersection) {
+            for(auto &geo : geos) {
+                auto egf = ExternalGeometryFacade::getFacade(geo.get());
+                egf->setFlag(ExternalGeometryExtension::Intersection);
+                egf->setFlag(ExternalGeometryExtension::Defining, defining);
+            }
+        } else if (defining && i+1==(int)Objects.size()) {
             for(auto &geo : geos)
                 ExternalGeometryFacade::getFacade(geo.get())->setFlag(
                         ExternalGeometryExtension::Defining);
@@ -8765,7 +9203,7 @@ void SketchObject::onChanged(const App::Property* prop)
             }
         }
 
-    } else if ( prop == &ExternalGeo) {
+    } else if ( prop == &ExternalGeo && !prop->testStatus(App::Property::User3) ) {
         if(doc && doc->isPerformingTransaction())
             setStatus(App::PendingTransactionUpdate, true);
 
@@ -8839,7 +9277,8 @@ void SketchObject::onChanged(const App::Property* prop)
                 }
             }
             ExternalGeometry.setValues(objs,subs);
-        }
+        } else
+            signalElementsChanged();
     } else if( prop == &ExternalGeometry ) {
 
         if(doc && doc->isPerformingTransaction())
@@ -8849,6 +9288,7 @@ void SketchObject::onChanged(const App::Property* prop)
             // must wait till onDocumentRestored() when shadow references are
             // fully restored
             updateGeometryRefs();
+            signalElementsChanged();
         }
     } else if (prop == &Placement) {
         if (ExternalGeometry.getSize() > 0)
@@ -8907,11 +9347,8 @@ void SketchObject::updateGeometryRefs() {
 
         legacyMap[key + Data::ComplexGeoData::oldElementName(sub.c_str())] = i;
 
-        if (!obj->getTypeId().isDerivedFrom(Part::Datum::getClassTypeId()) &&
-                obj->getTypeId().isDerivedFrom(Part::Feature::getClassTypeId()))
-        {
+        if (!obj->getTypeId().isDerivedFrom(Part::Datum::getClassTypeId()))
             key += Data::ComplexGeoData::newElementName(sub.c_str());
-        }
         if(originalRefs.size() && originalRefs[i]!=key)
             refMap[originalRefs[i]] = key;
     }
@@ -9421,7 +9858,7 @@ bool SketchObject::AutoLockTangencyAndPerpty(Constraint *cstr, bool bForce, bool
                 if(fabs(angleErr) > M_PI/2 )
                     angleDesire += M_PI;
 
-                cstr->setValue(angleDesire + angleOffset); //external tangency. The angle stored is offset by Pi/2 so that a value of 0.0 is invalid and threated as "undecided".
+                cstr->setValue(angleDesire + angleOffset); //external tangency. The angle stored is offset by Pi/2 so that a value of 0.0 is invalid and treated as "undecided".
             }
         }
     } catch (Base::Exception& e){
@@ -9451,61 +9888,74 @@ App::DocumentObject *SketchObject::getSubObject(
         if(!child)
             return 0;
         return child->getSubObject(dot+1,pyObj,pmat,true,depth+1);
-    } else if (!pyObj || !mapped) {
-        if (!pyObj || Part::TopoShape::shapeTypeAndIndex(subname).second > 0)
-            return Part2DObject::getSubObject(subname,pyObj,pmat,transform,depth);
-    } else {
-        auto subshape = Shape.getShape().getSubTopoShape(subname, true);
-        if (!subshape.isNull())
-            return Part2DObject::getSubObject(subname,pyObj,pmat,transform,depth);
-
-        const char * pos = mapped;
-        for (; *pos; ++pos) {
-            if (!std::isalnum((int)*pos))
-                break;
-        }
-        sub = std::string(subname, pos-subname);
-        subname = sub.c_str();
     }
+
     Data::IndexedName indexedName = checkSubName(subname);
     int index = indexedName.getIndex();
     const char * shapetype = indexedName.getType();
     const Part::Geometry *geo = 0;
+    Part::TopoShape subshape;
     Base::Vector3d point;
-    if (boost::equals(shapetype,"Edge") ||
-        boost::equals(shapetype,"edge")) {
-        geo = getGeometry(index - 1);
-        if (!geo) return 0;
-    } else if (boost::equals(shapetype,"ExternalEdge")) {
-        int GeoId = index - 1;
-        GeoId = -GeoId - 3;
-        geo = getGeometry(GeoId);
-        if(!geo) return 0;
-    } else if (boost::equals(shapetype,"Vertex") ||
-               boost::equals(shapetype,"vertex")) {
-        int VtId = index- 1;
-        int GeoId;
-        PointPos PosId;
-        getGeoVertexIndex(VtId,GeoId,PosId);
-        if (PosId==none) return 0;
-        point = getPoint(GeoId,PosId);
+
+    if (auto realType = convertInternalName(indexedName.getType())) {
+        if (realType[0] == '\0')
+            subshape = InternalShape.getShape();
+        else {
+            auto shapeType = Part::TopoShape::shapeType(realType, true);
+            if (shapeType != TopAbs_SHAPE)
+                subshape = InternalShape.getShape().getSubTopoShape(shapeType, indexedName.getIndex(), true);
+        }
+        if (subshape.isNull())
+            return nullptr;
     }
-    else if (boost::equals(shapetype,"RootPoint"))
-        point = getPoint(Sketcher::GeoEnum::RtPnt,start);
-    else if (boost::equals(shapetype,"H_Axis"))
-        geo = getGeometry(Sketcher::GeoEnum::HAxis);
-    else if (boost::equals(shapetype,"V_Axis"))
-        geo = getGeometry(Sketcher::GeoEnum::VAxis);
-    else if (boost::equals(shapetype,"Constraint")) {
-        int ConstrId = PropertyConstraintList::getIndexFromConstraintName(shapetype);
-        const std::vector< Constraint * > &vals = this->Constraints.getValues();
-        if (ConstrId < 0 || ConstrId >= int(vals.size()))
-            return 0;
-        if(pyObj)
-            *pyObj = vals[ConstrId]->getPyObject();
-        return const_cast<SketchObject*>(this);
-    }else
-        return 0;
+    else if (!pyObj || !mapped) {
+        if (!pyObj || index > 0)
+            return Part2DObject::getSubObject(subname,pyObj,pmat,transform,depth);
+    } else {
+        subshape = Shape.getShape().getSubTopoShape(subname, true);
+        if (!subshape.isNull())
+            return Part2DObject::getSubObject(subname,pyObj,pmat,transform,depth);
+    }
+
+    if (subshape.isNull()) {
+        if (boost::equals(shapetype,"Edge") ||
+            boost::equals(shapetype,"edge")) {
+            geo = getGeometry(index - 1);
+            if (!geo)
+                return nullptr;
+        } else if (boost::equals(shapetype,"ExternalEdge")) {
+            int GeoId = index - 1;
+            GeoId = -GeoId - 3;
+            geo = getGeometry(GeoId);
+            if(!geo)
+                return nullptr;
+        } else if (boost::equals(shapetype,"Vertex") ||
+                boost::equals(shapetype,"vertex")) {
+            int VtId = index- 1;
+            int GeoId;
+            PointPos PosId;
+            getGeoVertexIndex(VtId,GeoId,PosId);
+            if (PosId==none)
+                return nullptr;
+            point = getPoint(GeoId,PosId);
+        }
+        else if (boost::equals(shapetype,"RootPoint"))
+            point = getPoint(Sketcher::GeoEnum::RtPnt,start);
+        else if (boost::equals(shapetype,"H_Axis"))
+            geo = getGeometry(Sketcher::GeoEnum::HAxis);
+        else if (boost::equals(shapetype,"V_Axis"))
+            geo = getGeometry(Sketcher::GeoEnum::VAxis);
+        else if (boost::equals(shapetype,"Constraint")) {
+            int ConstrId = PropertyConstraintList::getIndexFromConstraintName(shapetype);
+            const std::vector< Constraint * > &vals = this->Constraints.getValues();
+            if (ConstrId < 0 || ConstrId >= int(vals.size()))
+                return nullptr;
+            if(pyObj)
+                *pyObj = vals[ConstrId]->getPyObject();
+            return const_cast<SketchObject*>(this);
+        } else
+            return nullptr;
+    }
 
     if (pmat && transform)
         *pmat *= Placement.getValue().toMatrix();
@@ -9517,7 +9967,11 @@ App::DocumentObject *SketchObject::getSubObject(
             shape = getEdge(geo,name.c_str());
             if(pmat && !shape.isNull())
                 shape.transformShape(*pmat,false,true);
-        }else {
+        } else if (!subshape.isNull()) {
+            shape = subshape;
+            if (pmat)
+                shape.transformShape(*pmat,false,true);
+        } else {
             if(pmat)
                 point = (*pmat)*point;
             shape = BRepBuilderAPI_MakeVertex(gp_Pnt(point.x,point.y,point.z)).Vertex();
@@ -9536,7 +9990,7 @@ SketchObject::getHigherElements(const char *element, bool silent) const
 {
     if (testStatus(App::ObjEditing)) {
         std::vector<Data::IndexedName> res;
-        if (boost::starts_with(element, "vertex")) {
+        if (boost::istarts_with(element, "vertex")) {
             int n = 0;
             int index = atoi(element+6);
             for (auto cstr : Constraints.getValues()) {
@@ -9553,7 +10007,22 @@ SketchObject::getHigherElements(const char *element, bool silent) const
         }
         return res;
     }
-    return Part::Part2DObject::getHigherElements(element, silent);
+    bool internal = boost::starts_with(element, internalPrefix());
+    const auto &shape = internal ? InternalShape.getShape() : Shape.getShape();
+    auto res = shape.getHigherElements(element+(internal?internalPrefix().size():0), silent);
+    for (auto it=res.begin(); it!=res.end();) {
+        auto &indexedName = *it;
+        if (boost::equals(indexedName.getType(), "Face")
+                || boost::equals(indexedName.getType(), "Edge")
+                || boost::equals(indexedName.getType(), "Wire")) {
+            if (internal)
+                indexedName = Data::IndexedName((internalPrefix() + indexedName.getType()).c_str(), indexedName.getIndex());
+            ++it;
+        }
+        else
+            it = res.erase(it);
+    }
+    return res;
 }
 
 const std::vector<const char *>& SketchObject::getElementTypes(bool all) const
@@ -9565,10 +10034,26 @@ const std::vector<const char *>& SketchObject::getElementTypes(bool all) const
         res = { Part::TopoShape::shapeName(TopAbs_VERTEX).c_str(),
                 Part::TopoShape::shapeName(TopAbs_EDGE).c_str(),
                 "ExternalEdge",
-                "Constraint"
+                "Constraint",
+                "InternalEdge",
+                "InternalFace",
+                "InternalVertex",
               };
     }
     return res;
+}
+
+const std::string &SketchObject::internalPrefix()
+{
+    static std::string _prefix("Internal");
+    return _prefix;
+}
+
+const char *SketchObject::convertInternalName(const char *name)
+{
+    if (name && boost::starts_with(name, internalPrefix()))
+        return name + internalPrefix().size();
+    return nullptr;
 }
 
 std::pair<std::string,std::string> SketchObject::getElementName(
@@ -9581,30 +10066,56 @@ std::pair<std::string,std::string> SketchObject::getElementName(
         return Part2DObject::getElementName(name,type);
 
     const char *mapped = Data::ComplexGeoData::isMappedElement(name);
+    Data::IndexedName index = checkSubName(name);
+    index.toString(ret.second);
+    if (auto realName = convertInternalName(ret.second.c_str())) {
+        Data::MappedElement mappedElement;
+        if (mapped)
+            mappedElement = InternalShape.getShape().getElementName(name);
+        else if (type == ElementNameType::Export)
+            ret.first = getExportElementName(InternalShape.getShape(), realName).first;
+        else
+            mappedElement = InternalShape.getShape().getElementName(realName);
+
+        if (mapped || type != ElementNameType::Export) {
+            if (mappedElement.index) {
+                ret.second = internalPrefix();
+                mappedElement.index.toString(ret.second);
+            }
+            if (mappedElement.name) {
+                ret.first = Data::ComplexGeoData::elementMapPrefix();
+                mappedElement.name.toString(ret.first);
+            }
+            else if (mapped)
+                ret.first = name;
+        }
+
+        if (ret.first.size()) {
+            if (auto dot = strrchr(ret.first.c_str(), '.'))
+                ret.first.resize(dot+1-ret.first.c_str());
+            else
+                ret.first += ".";
+            ret.first += ret.second;
+        }
+        if (mapped && (!mappedElement.index || !mappedElement.name))
+            ret.second.insert(0, Data::ComplexGeoData::missingPrefix());
+        return ret;
+    }
+
     if(!mapped) {
         auto occindex = Part::TopoShape::shapeTypeAndIndex(name);
         if (occindex.second)
             return Part2DObject::getElementName(name,type);
-
-        Data::IndexedName index = checkSubName(name);
-        ret.first = convertSubName(index, true);
-        if(!Data::ComplexGeoData::isMappedElement(ret.first.c_str()))
-            ret.first.clear();
-        index.toString(ret.second);
-        return ret;
     }
-        
-    Data::IndexedName index = checkSubName(name);
-    if(index) {
-        index.toString(ret.second);
-        ret.first = convertSubName(index, true);
-        if(type==ElementNameType::Export) {
-            if(boost::starts_with(ret.second,"Vertex"))
-                ret.second[0] = 'v';
-            else if(boost::starts_with(ret.second,"Edge"))
-                ret.second[0] = 'e';
-        }
+    else if(index && type==ElementNameType::Export) {
+        if(boost::starts_with(ret.second,"Vertex"))
+            ret.second[0] = 'v';
+        else if(boost::starts_with(ret.second,"Edge"))
+            ret.second[0] = 'e';
     }
+    ret.first = convertSubName(index, true);
+    if(!Data::ComplexGeoData::isMappedElement(ret.first.c_str()))
+        ret.first.clear();
     return ret;
 }
 
@@ -9657,12 +10168,20 @@ Data::IndexedName SketchObject::checkSubName(const char *sub) const{
         "H_Axis",
         "V_Axis",
         "Constraint",
+        "InternalEdge",
+        "InternalFace",
+        "InternalVertex",
     };
 
     if(!sub) return Data::IndexedName();
     const char *subname = Data::ComplexGeoData::isMappedElement(sub);
     if(!subname)  {
-        return Data::IndexedName(sub, types, true);
+        Data::IndexedName res(sub, types, true);
+        if (boost::equals(res.getType(), "edge"))
+            return Data::IndexedName("Edge", res.getIndex());
+        else if (boost::starts_with(res.getType(), "vertex"))
+            return Data::IndexedName("Vertex", res.getIndex());
+        return res;
     }
     if(!subname[0]) {
         FC_ERR("invalid subname " << sub);
@@ -9798,6 +10317,18 @@ std::string SketchObject::convertSubName(const char *subname, bool postfix) cons
 
 std::string SketchObject::convertSubName(const Data::IndexedName & indexedName, bool postfix) const{
     std::ostringstream ss;
+    if (auto realType = convertInternalName(indexedName.getType())) {
+        auto mapped = InternalShape.getShape().getMappedName(
+                Data::IndexedName::fromConst(realType, indexedName.getIndex()));
+        if (!mapped) {
+            if (postfix)
+                ss << indexedName;
+        } else if (postfix)
+            ss << Data::ComplexGeoData::elementMapPrefix() << mapped << '.' << indexedName;
+        else
+            ss << mapped;
+        return ss.str();
+    }
     int geoId;
     PointPos posId;
     if(!geoIdFromShapeType(indexedName,geoId,posId)) {
@@ -10173,13 +10704,13 @@ bool SketchExport::update() {
             throw Base::RuntimeError("Invalid element reference");
         }
         if(!shape.hasSubShape(TopAbs_EDGE))
-            points.push_back(shape.makECopy(TOPOP_SKETCH_EXPORT));
+            points.push_back(shape.makECopy(Part::OpCodes::SketchExport));
         else
             shapes.push_back(shape.makECopy());
     }
     Part::TopoShape res;
     if(shapes.size()) {
-        res.makEWires(shapes,TOPOP_SKETCH_EXPORT);
+        res.makEWires(shapes,Part::OpCodes::SketchExport);
         shapes.clear();
         if(points.size()) {
             // Check if the vertex is already included in the wires

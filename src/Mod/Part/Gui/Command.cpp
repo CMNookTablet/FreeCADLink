@@ -79,6 +79,7 @@
 #include "TaskSweep.h"
 #include "TaskDimension.h"
 #include "TaskCheckGeometry.h"
+#include "TaskAttacher.h"
 #include "BoxSelection.h"
 #include "PartParams.h"
 
@@ -527,10 +528,10 @@ bool CmdPartFuse::isActive(void)
 // Part_CompJoinFeatures (dropdown toolbar button for Connect, Embed and Cutout)
 //===========================================================================
 
-DEF_STD_CMD_ACL(CmdPartCompJoinFeatures)
+DEF_STD_CMD_GC(CmdPartCompJoinFeatures)
 
 CmdPartCompJoinFeatures::CmdPartCompJoinFeatures()
-  : Command("Part_CompJoinFeatures")
+  : inherited("Part_CompJoinFeatures")
 {
     sAppModule      = "Part";
     sGroup          = QT_TR_NOOP("Part");
@@ -540,103 +541,22 @@ CmdPartCompJoinFeatures::CmdPartCompJoinFeatures()
     sStatusTip      = sToolTipText;
 }
 
-void CmdPartCompJoinFeatures::activated(int iMsg)
-{
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-    if (iMsg==0)
-        rcCmdMgr.runCommandByName("Part_JoinConnect");
-    else if (iMsg==1)
-        rcCmdMgr.runCommandByName("Part_JoinEmbed");
-    else if (iMsg==2)
-        rcCmdMgr.runCommandByName("Part_JoinCutout");
-    else
-        return;
-
-    // Since the default icon is reset when enabling/disabling the command we have
-    // to explicitly set the icon of the used command.
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    assert(iMsg < a.size());
-    pcAction->setIcon(a[iMsg]->icon());
-}
-
 Gui::Action * CmdPartCompJoinFeatures::createAction(void)
 {
-    Gui::ActionGroup* pcAction = new Gui::ActionGroup(this, Gui::getMainWindow());
-    pcAction->setDropDownMenu(true);
-    applyCommandData(this->className(), pcAction);
-
-    QAction* cmd0 = pcAction->addAction(QString());
-    cmd0->setIcon(Gui::BitmapFactory().iconFromTheme("Part_JoinConnect"));
-    QAction* cmd1 = pcAction->addAction(QString());
-    cmd1->setIcon(Gui::BitmapFactory().iconFromTheme("Part_JoinEmbed"));
-    QAction* cmd2 = pcAction->addAction(QString());
-    cmd2->setIcon(Gui::BitmapFactory().iconFromTheme("Part_JoinCutout"));
-
-    _pcAction = pcAction;
-    languageChange();
-
-    pcAction->setIcon(cmd0->icon());
-    int defaultId = 0;
-    pcAction->setProperty("defaultAction", QVariant(defaultId));
-
-    return pcAction;
-}
-
-void CmdPartCompJoinFeatures::languageChange()
-{
-    Command::languageChange();
-
-    if (!_pcAction)
-        return;
-
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    Gui::Command* joinConnect = rcCmdMgr.getCommandByName("Part_JoinConnect");
-    if (joinConnect) {
-        QAction* cmd0 = a[0];
-        cmd0->setText(QApplication::translate("Part_JoinFeatures", joinConnect->getMenuText()));
-        cmd0->setToolTip(QApplication::translate("Part_JoinFeatures", joinConnect->getToolTipText()));
-        cmd0->setStatusTip(QApplication::translate("Part_JoinFeatures", joinConnect->getStatusTip()));
-    }
-
-    Gui::Command* joinEmbed = rcCmdMgr.getCommandByName("Part_JoinEmbed");
-    if (joinEmbed) {
-        QAction* cmd1 = a[1];
-        cmd1->setText(QApplication::translate("Part_JoinFeatures", joinEmbed->getMenuText()));
-        cmd1->setToolTip(QApplication::translate("Part_JoinFeatures", joinEmbed->getToolTipText()));
-        cmd1->setStatusTip(QApplication::translate("Part_JoinFeatures", joinEmbed->getStatusTip()));
-    }
-
-    Gui::Command* joinCutout = rcCmdMgr.getCommandByName("Part_JoinCutout");
-    if (joinCutout) {
-        QAction* cmd2 = a[2];
-        cmd2->setText(QApplication::translate("Part_JoinFeatures", joinCutout->getMenuText()));
-        cmd2->setToolTip(QApplication::translate("Part_JoinFeatures", joinCutout->getToolTipText()));
-        cmd2->setStatusTip(QApplication::translate("Part_JoinFeatures", joinCutout->getStatusTip()));
-    }
-}
-
-bool CmdPartCompJoinFeatures::isActive(void)
-{
-    if (getActiveGuiDocument())
-        return true;
-    else
-        return false;
+    addCommand("Part_JoinConnect");
+    addCommand("Part_JoinEmbed");
+    addCommand("Part_JoinCutout");
+    return inherited::createAction();
 }
 
 //===========================================================================
 // Part_CompSplitFeatures (dropdown toolbar button for BooleanFragments, Slice)
 //===========================================================================
 
-DEF_STD_CMD_ACL(CmdPartCompSplitFeatures)
+DEF_STD_CMD_GC(CmdPartCompSplitFeatures)
 
 CmdPartCompSplitFeatures::CmdPartCompSplitFeatures()
-  : Command("Part_CompSplitFeatures")
+  : inherited("Part_CompSplitFeatures")
 {
     sAppModule      = "Part";
     sGroup          = QT_TR_NOOP("Part");
@@ -646,119 +566,23 @@ CmdPartCompSplitFeatures::CmdPartCompSplitFeatures()
     sStatusTip      = sToolTipText;
 }
 
-void CmdPartCompSplitFeatures::activated(int iMsg)
-{
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-    if (iMsg==0)
-        rcCmdMgr.runCommandByName("Part_BooleanFragments");
-    else if (iMsg==1)
-        rcCmdMgr.runCommandByName("Part_SliceApart");
-    else if (iMsg==2)
-        rcCmdMgr.runCommandByName("Part_Slice");
-    else if (iMsg==3)
-        rcCmdMgr.runCommandByName("Part_XOR");
-    else
-        return;
-
-    // Since the default icon is reset when enabling/disabling the command we have
-    // to explicitly set the icon of the used command.
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    assert(iMsg < a.size());
-    pcAction->setIcon(a[iMsg]->icon());
-}
-
 Gui::Action * CmdPartCompSplitFeatures::createAction(void)
 {
-    Gui::ActionGroup* pcAction = new Gui::ActionGroup(this, Gui::getMainWindow());
-    pcAction->setDropDownMenu(true);
-    applyCommandData(this->className(), pcAction);
-
-    QAction* cmd0 = pcAction->addAction(QString());
-    cmd0->setIcon(Gui::BitmapFactory().iconFromTheme("Part_BooleanFragments"));
-    QAction* cmd1 = pcAction->addAction(QString());
-    cmd1->setIcon(Gui::BitmapFactory().iconFromTheme("Part_SliceApart"));
-    QAction* cmd2 = pcAction->addAction(QString());
-    cmd2->setIcon(Gui::BitmapFactory().iconFromTheme("Part_Slice"));
-    QAction* cmd3 = pcAction->addAction(QString());
-    cmd3->setIcon(Gui::BitmapFactory().iconFromTheme("Part_XOR"));
-
-    _pcAction = pcAction;
-    languageChange();
-
-    pcAction->setIcon(cmd0->icon());
-    int defaultId = 0;
-    pcAction->setProperty("defaultAction", QVariant(defaultId));
-
-    return pcAction;
-}
-
-void CmdPartCompSplitFeatures::languageChange()
-{
-    Command::languageChange();
-
-    if (!_pcAction)
-        return;
-
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    Gui::Command* splitBoolFragments = rcCmdMgr.getCommandByName("Part_BooleanFragments");
-    if (splitBoolFragments) {
-        QAction* cmd0 = a[0];
-        cmd0->setText(QApplication::translate("Part_SplitFeatures", splitBoolFragments->getMenuText()));
-        cmd0->setToolTip(QApplication::translate("Part_SplitFeatures", splitBoolFragments->getToolTipText()));
-        cmd0->setStatusTip(QApplication::translate("Part_SplitFeatures", splitBoolFragments->getStatusTip()));
-    }
-
-    Gui::Command* splitSliceApart = rcCmdMgr.getCommandByName("Part_SliceApart");
-    if (splitSliceApart) {
-        QAction* cmd1 = a[1];
-        cmd1->setText(QApplication::translate("Part_SplitFeatures", splitSliceApart->getMenuText()));
-        cmd1->setToolTip(QApplication::translate("Part_SplitFeatures", splitSliceApart->getToolTipText()));
-        cmd1->setStatusTip(QApplication::translate("Part_SplitFeatures", splitSliceApart->getStatusTip()));
-    }
-
-    Gui::Command* splitSlice = rcCmdMgr.getCommandByName("Part_Slice");
-    if (splitSlice) {
-        QAction* cmd1 = a[2];
-        cmd1->setText(QApplication::translate("Part_SplitFeatures", splitSlice->getMenuText()));
-        cmd1->setToolTip(QApplication::translate("Part_SplitFeatures", splitSlice->getToolTipText()));
-        cmd1->setStatusTip(QApplication::translate("Part_SplitFeatures", splitSlice->getStatusTip()));
-    }
-
-    Gui::Command* splitXOR = rcCmdMgr.getCommandByName("Part_XOR");
-    if (splitXOR) {
-        QAction* cmd2 = a[3];
-        cmd2->setText(QApplication::translate("Part_SplitFeatures", splitXOR->getMenuText()));
-        cmd2->setToolTip(QApplication::translate("Part_SplitFeatures", splitXOR->getToolTipText()));
-        cmd2->setStatusTip(QApplication::translate("Part_SplitFeatures", splitXOR->getStatusTip()));
-    }
-}
-
-bool CmdPartCompSplitFeatures::isActive(void)
-{
-    if (getActiveGuiDocument())
-#if OCC_VERSION_HEX < 0x060900
-        return false;
-#else
-        return true;
-#endif
-    else
-        return false;
+    addCommand("Part_BooleanFragments");
+    addCommand("Part_SliceApart");
+    addCommand("Part_Slice");
+    addCommand("Part_XOR");
+    return inherited::createAction();
 }
 
 //===========================================================================
 // Part_CompCompoundTools (dropdown toolbar button for BooleanFragments, Slice)
 //===========================================================================
 
-DEF_STD_CMD_ACL(CmdPartCompCompoundTools)
+DEF_STD_CMD_GC(CmdPartCompCompoundTools)
 
 CmdPartCompCompoundTools::CmdPartCompCompoundTools()
-  : Command("Part_CompCompoundTools")
+  : inherited("Part_CompCompoundTools")
 {
     sAppModule      = "Part";
     sGroup          = QT_TR_NOOP("Part");
@@ -768,96 +592,13 @@ CmdPartCompCompoundTools::CmdPartCompCompoundTools()
     sStatusTip      = sToolTipText;
 }
 
-void CmdPartCompCompoundTools::activated(int iMsg)
-{
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-    if (iMsg==0)
-        rcCmdMgr.runCommandByName("Part_Compound");
-    else if (iMsg==1)
-        rcCmdMgr.runCommandByName("Part_ExplodeCompound");
-    else if (iMsg==2)
-        rcCmdMgr.runCommandByName("Part_CompoundFilter");
-    else
-        return;
-
-    // Since the default icon is reset when enabling/disabling the command we have
-    // to explicitly set the icon of the used command.
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    assert(iMsg < a.size());
-    pcAction->setIcon(a[iMsg]->icon());
-}
-
 Gui::Action * CmdPartCompCompoundTools::createAction(void)
 {
-    Gui::ActionGroup* pcAction = new Gui::ActionGroup(this, Gui::getMainWindow());
-    pcAction->setDropDownMenu(true);
-    applyCommandData(this->className(), pcAction);
-
-    QAction* cmd0 = pcAction->addAction(QString());
-    cmd0->setIcon(Gui::BitmapFactory().iconFromTheme("Part_Compound"));
-    QAction* cmd1 = pcAction->addAction(QString());
-    cmd1->setIcon(Gui::BitmapFactory().iconFromTheme("Part_ExplodeCompound"));
-    QAction* cmd2 = pcAction->addAction(QString());
-    cmd2->setIcon(Gui::BitmapFactory().iconFromTheme("Part_CompoundFilter"));
-
-    _pcAction = pcAction;
-    languageChange();
-
-    pcAction->setIcon(cmd0->icon());
-    int defaultId = 0;
-    pcAction->setProperty("defaultAction", QVariant(defaultId));
-
-    return pcAction;
+    addCommand("Part_Compound");
+    addCommand("Part_ExplodeCompound");
+    addCommand("Part_CompoundFilter");
+    return inherited::createAction();
 }
-
-void CmdPartCompCompoundTools::languageChange()
-{
-    Command::languageChange();
-
-    if (!_pcAction)
-        return;
-
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    Gui::Command* cmdCompound = rcCmdMgr.getCommandByName("Part_Compound");
-    if (cmdCompound) {
-        QAction* cmd0 = a[0];
-        cmd0->setText(QApplication::translate("CmdPartCompound", cmdCompound->getMenuText()));
-        cmd0->setToolTip(QApplication::translate("CmdPartCompound", cmdCompound->getToolTipText()));
-        cmd0->setStatusTip(QApplication::translate("CmdPartCompound", cmdCompound->getStatusTip()));
-    }
-
-    Gui::Command* cmdExplode = rcCmdMgr.getCommandByName("Part_ExplodeCompound");
-    if (cmdExplode) {
-        QAction* cmd1 = a[1];
-        cmd1->setText(QApplication::translate("Part_CompoundTools", cmdExplode->getMenuText()));
-        cmd1->setToolTip(QApplication::translate("Part_CompoundTools", cmdExplode->getToolTipText()));
-        cmd1->setStatusTip(QApplication::translate("Part_CompoundTools", cmdExplode->getStatusTip()));
-    }
-
-    Gui::Command* cmdCompoundFilter = rcCmdMgr.getCommandByName("Part_CompoundFilter");
-    if (cmdCompoundFilter) {
-        QAction* cmd2 = a[2];
-        cmd2->setText(QApplication::translate("Part_CompoundTools", cmdCompoundFilter->getMenuText()));
-        cmd2->setToolTip(QApplication::translate("Part_CompoundTools", cmdCompoundFilter->getToolTipText()));
-        cmd2->setStatusTip(QApplication::translate("Part_CompoundTools", cmdCompoundFilter->getStatusTip()));
-    }
-}
-
-bool CmdPartCompCompoundTools::isActive(void)
-{
-    if (getActiveGuiDocument())
-        return true;
-    else
-        return false;
-}
-
-
 
 //===========================================================================
 // Part_Compound
@@ -1645,7 +1386,7 @@ void CmdPartOffset::activated(int iMsg)
     cmdSetEdit(feat);
 
     //commitCommand();
-    if (PartGui::PartParams::AdjustCameraForNewFeature())
+    if (PartGui::PartParams::getAdjustCameraForNewFeature())
         adjustCameraPosition();
 
     copyVisual(feat, "ShapeColor", shape);
@@ -1699,7 +1440,7 @@ void CmdPartOffset2D::activated(int iMsg)
     cmdSetEdit(feat);
 
     //commitCommand();
-    if (PartGui::PartParams::AdjustCameraForNewFeature())
+    if (PartGui::PartParams::getAdjustCameraForNewFeature())
         adjustCameraPosition();
 
     copyVisual(feat, "ShapeColor", shape);
@@ -1718,10 +1459,10 @@ bool CmdPartOffset2D::isActive(void)
 // Part_CompOffset (dropdown toolbar button for Offset features)
 //===========================================================================
 
-DEF_STD_CMD_ACL(CmdPartCompOffset)
+DEF_STD_CMD_GC(CmdPartCompOffset)
 
 CmdPartCompOffset::CmdPartCompOffset()
-  : Command("Part_CompOffset")
+  : inherited("Part_CompOffset")
 {
     sAppModule      = "Part";
     sGroup          = QT_TR_NOOP("Part");
@@ -1731,80 +1472,11 @@ CmdPartCompOffset::CmdPartCompOffset()
     sStatusTip      = sToolTipText;
 }
 
-void CmdPartCompOffset::activated(int iMsg)
-{
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-    if (iMsg==0)
-        rcCmdMgr.runCommandByName("Part_Offset");
-    else if (iMsg==1)
-        rcCmdMgr.runCommandByName("Part_Offset2D");
-    else
-        return;
-
-    // Since the default icon is reset when enabling/disabling the command we have
-    // to explicitly set the icon of the used command.
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    assert(iMsg < a.size());
-    pcAction->setIcon(a[iMsg]->icon());
-}
-
 Gui::Action * CmdPartCompOffset::createAction(void)
 {
-    Gui::ActionGroup* pcAction = new Gui::ActionGroup(this, Gui::getMainWindow());
-    pcAction->setDropDownMenu(true);
-    applyCommandData(this->className(), pcAction);
-
-    QAction* cmd0 = pcAction->addAction(QString());
-    cmd0->setIcon(Gui::BitmapFactory().iconFromTheme("Part_Offset"));
-    QAction* cmd1 = pcAction->addAction(QString());
-    cmd1->setIcon(Gui::BitmapFactory().iconFromTheme("Part_Offset2D"));
-
-    _pcAction = pcAction;
-    languageChange();
-
-    pcAction->setIcon(cmd0->icon());
-    int defaultId = 0;
-    pcAction->setProperty("defaultAction", QVariant(defaultId));
-
-    return pcAction;
-}
-
-void CmdPartCompOffset::languageChange()
-{
-    Command::languageChange();
-
-    if (!_pcAction)
-        return;
-
-    Gui::CommandManager &rcCmdMgr = Gui::Application::Instance->commandManager();
-
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    Gui::Command* cmdOffset = rcCmdMgr.getCommandByName("Part_Offset");
-    if (cmdOffset) {
-        QAction* cmd0 = a[0];
-        cmd0->setText(QApplication::translate("Part_Offset", cmdOffset->getMenuText()));
-        cmd0->setToolTip(QApplication::translate("Part_Offset", cmdOffset->getToolTipText()));
-        cmd0->setStatusTip(QApplication::translate("Part_Offset", cmdOffset->getStatusTip()));
-    }
-
-    Gui::Command* cmdOffset2D = rcCmdMgr.getCommandByName("Part_Offset2D");
-    if (cmdOffset2D) {
-        QAction* cmd1 = a[1];
-        cmd1->setText(QApplication::translate("Part_Offset", cmdOffset2D->getMenuText()));
-        cmd1->setToolTip(QApplication::translate("Part_Offset", cmdOffset2D->getToolTipText()));
-        cmd1->setStatusTip(QApplication::translate("Part_Offset", cmdOffset2D->getStatusTip()));
-    }
-}
-
-bool CmdPartCompOffset::isActive(void)
-{
-    Base::Type partid = Base::Type::fromName("Part::Feature");
-    bool objectsSelected = Gui::Selection().countObjectsOfType(partid,0,3) == 1;
-    return (objectsSelected && !Gui::Control().activeDialog());
+    addCommand("Part_Offset");
+    addCommand("Part_Offset2D");
+    return inherited::createAction();
 }
 
 //===========================================================================
@@ -1869,7 +1541,7 @@ void CmdPartThickness::activated(int iMsg)
     cmdSetEdit(feat);
 
     //commitCommand();
-    if (PartGui::PartParams::AdjustCameraForNewFeature())
+    if (PartGui::PartParams::getAdjustCameraForNewFeature())
         adjustCameraPosition();
 
     copyVisual(feat, "ShapeColor", shape);
@@ -2791,6 +2463,62 @@ void CmdPartPreselMeasure::activated(int iMsg)
     MacroCommand::activated(iMsg);
 }
 
+//===========================================================================
+// Part_EditAttachment
+//===========================================================================
+
+DEF_STD_CMD_A(CmdPartEditAttachment)
+
+CmdPartEditAttachment::CmdPartEditAttachment()
+  :Command("Part_EditAttachment")
+{
+    sAppModule    = "Part";
+    sGroup        = QT_TR_NOOP("Part");
+    sMenuText     = QT_TRANSLATE_NOOP("AttachmentEditor", "Attachment...");
+    sToolTipText  = QT_TRANSLATE_NOOP("AttachmentEditor","Edit attachment of selected object.");
+    sWhatsThis    = "Part_EditAttachment";
+    sStatusTip    = sToolTipText;
+    sPixmap       = "Part_Attachment";
+}
+
+void CmdPartEditAttachment::activated(int)
+{
+    auto sels = Gui::Selection().getSelection("", 1, true);
+    if (sels.empty())
+        return;
+    try {
+        auto obj = sels[0].pObject;
+        auto vp = Base::freecad_dynamic_cast<Gui::ViewProviderDocumentObject>(
+                Gui::Application::Instance->getViewProvider(obj));
+        if (!vp)
+            return;
+        if (!obj->getExtensionByType<Part::AttachExtension>(true))
+            cmdAppObject(obj, "addExtension('Part::AttachExtensionPython')");
+        
+        std::unique_ptr<PartGui::TaskDlgAttacher> attacher(new PartGui::TaskDlgAttacher(vp));
+        Gui::Control().showDialog(attacher.get());
+        attacher.release();
+    } catch (Base::Exception &e) {
+        e.ReportException();
+    }
+}
+
+bool CmdPartEditAttachment::isActive(void)
+{
+    auto sels = Gui::Selection().getSelection("", 1, true);
+    if (sels.empty())
+        return false;
+    auto obj = sels[0].pObject;
+    if (auto prop = Base::freecad_dynamic_cast<App::PropertyPlacement>(
+            obj->getPropertyByName("Placement")))
+    {
+        return obj->getExtensionByType<Part::AttachExtension>(true)
+            || (!prop->testStatus(App::Property::Hidden)
+                && !prop->testStatus(App::Property::ReadOnly));
+    }
+    return false;
+}
+
 /////////////////////////////////////////////////////////////////////////
 
 void CreatePartCommands(void)
@@ -2846,6 +2574,8 @@ void CreatePartCommands(void)
     rcCmdMgr.addCommand(new CmdPartProjectionOnSurface());
     rcCmdMgr.addCommand(new CmdPartGeometryHistory());
     rcCmdMgr.addCommand(new CmdPartGeometryDerived());
+
+    rcCmdMgr.addCommand(new CmdPartEditAttachment());
 
     rcCmdMgr.addCommand(new CmdPartPreselInfo());
     rcCmdMgr.addCommand(new CmdPartPreselMeasure());

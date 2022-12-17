@@ -69,6 +69,7 @@
 # include <ShapeFix_ShapeTolerance.hxx>
 # include <Standard_Version.hxx>
 #endif
+#include <BRepOffsetAPI_MakeEvolved.hxx>
 
 #include <unordered_set>
 #include <unordered_map>
@@ -184,8 +185,8 @@ int TopoShapePy::PyInit(PyObject* args, PyObject *keywds)
             }
             self = s;
         }else if(shapes.size()) {
-            if(!op) op = TOPOP_FUSE;
-            self.makEShape(op,shapes);
+            if(!op) op = Part::OpCodes::Fuse;
+            self.makEBoolean(op,shapes);
         }
     }_PY_CATCH_OCC(return(-1))
 #else
@@ -768,14 +769,14 @@ static PyObject *makeShape(const char *op,const TopoShape &shape, PyObject *args
         std::vector<TopoShape> shapes;
         shapes.push_back(shape);
         getPyShapes(pcObj,shapes);
-        return Py::new_reference_to(shape2pyshape(TopoShape().makEShape(op,shapes,0,tol)));
+        return Py::new_reference_to(shape2pyshape(TopoShape().makEBoolean(op,shapes,0,tol)));
     } PY_CATCH_OCC
 }
 
 PyObject*  TopoShapePy::fuse(PyObject *args)
 {
 #if !defined(FC_NO_ELEMENT_MAP) && (OCC_VERSION_HEX>=0x060900)
-    return makeShape(TOPOP_FUSE,*getTopoShapePtr(),args);
+    return makeShape(Part::OpCodes::Fuse,*getTopoShapePtr(),args);
 #else
     PyObject *pcObj;
     if (PyArg_ParseTuple(args, "O!", &(TopoShapePy::Type), &pcObj)) {
@@ -827,7 +828,7 @@ PyObject*  TopoShapePy::fuse(PyObject *args)
 PyObject*  TopoShapePy::multiFuse(PyObject *args)
 {
 #if !defined(FC_NO_ELEMENT_MAP) && (OCC_VERSION_HEX>=0x060900)
-    return makeShape(TOPOP_FUSE,*getTopoShapePtr(),args);
+    return makeShape(Part::OpCodes::Fuse,*getTopoShapePtr(),args);
 #else
     double tolerance = 0.0;
     PyObject *pcObj;
@@ -869,7 +870,7 @@ PyObject*  TopoShapePy::oldFuse(PyObject *args)
 PyObject*  TopoShapePy::common(PyObject *args)
 {
 #if !defined(FC_NO_ELEMENT_MAP) && (OCC_VERSION_HEX>=0x060900)
-    return makeShape(TOPOP_COMMON,*getTopoShapePtr(),args);
+    return makeShape(Part::OpCodes::Common,*getTopoShapePtr(),args);
 #else
     PyObject *pcObj;
     if (PyArg_ParseTuple(args, "O!", &(TopoShapePy::Type), &pcObj)) {
@@ -920,7 +921,7 @@ PyObject*  TopoShapePy::common(PyObject *args)
 PyObject*  TopoShapePy::section(PyObject *args)
 {
 #if !defined(FC_NO_ELEMENT_MAP) && (OCC_VERSION_HEX>=0x060900)
-    return makeShape(TOPOP_SECTION,*getTopoShapePtr(),args);
+    return makeShape(Part::OpCodes::Section,*getTopoShapePtr(),args);
 #else
     PyObject *pcObj;
     PyObject *approx = Py_False;
@@ -1011,7 +1012,7 @@ PyObject*  TopoShapePy::slices(PyObject *args)
         for (Py::Sequence::iterator it = list.begin(); it != list.end(); ++it)
             d.push_back((double)Py::Float(*it));
 #if !defined(FC_NO_ELEMENT_MAP)
-        return Py::new_reference_to(shape2pyshape(getTopoShapePtr()->makESlice(vec,d)));
+        return Py::new_reference_to(shape2pyshape(getTopoShapePtr()->makESlices(vec,d)));
 #else
         TopoDS_Compound slice = this->getTopoShapePtr()->slices(vec, d);
         return new TopoShapeCompoundPy(new TopoShape(slice));
@@ -1022,7 +1023,7 @@ PyObject*  TopoShapePy::slices(PyObject *args)
 PyObject*  TopoShapePy::cut(PyObject *args)
 {
 #if !defined(FC_NO_ELEMENT_MAP) && (OCC_VERSION_HEX>=0x060900)
-    return makeShape(TOPOP_CUT,*getTopoShapePtr(),args);
+    return makeShape(Part::OpCodes::Cut,*getTopoShapePtr(),args);
 #else
     PyObject *pcObj;
     if (PyArg_ParseTuple(args, "O!", &(TopoShapePy::Type), &pcObj)) {
@@ -1151,16 +1152,19 @@ PyObject* TopoShapePy::childShapes(PyObject *args)
                                          &(PyBool_Type), &cumLoc))
         return NULL;
 #ifndef FC_NO_ELEMENT_MAP
-    if(PyObject_IsTrue(cumOri) && PyObject_IsTrue(cumLoc)) {
-        Py::List list;
-        PY_TRY {
-            for(auto &s : getTopoShapePtr()->getSubTopoShapes())
-                list.append(shape2pyshape(s));
-            return Py::new_reference_to(list);
-        }PY_CATCH_OCC
-    }
-#endif
-    PY_TRY {
+    TopoShape shape = *getTopoShapePtr();
+    if(!PyObject_IsTrue(cumOri))
+        shape.setShape(shape.getShape().Oriented(TopAbs_FORWARD), false);
+    if (!PyObject_IsTrue(cumLoc))
+        shape.setShape(shape.getShape().Located(TopLoc_Location()), false);
+    Py::List list;
+    try {
+        for(auto &s : shape.getSubTopoShapes())
+            list.append(shape2pyshape(s));
+        return Py::new_reference_to(list);
+    } PY_CATCH_OCC
+#else
+    try {
         const TopoDS_Shape& shape = getTopoShapePtr()->getShape();
         if (shape.IsNull()) {
             PyErr_SetString(PyExc_ValueError, "Shape is null");
@@ -1214,6 +1218,7 @@ PyObject* TopoShapePy::childShapes(PyObject *args)
         }
         return Py::new_reference_to(list);
     } PY_CATCH_OCC
+#endif
 }
 
 namespace Part {
@@ -1665,7 +1670,7 @@ PyObject* TopoShapePy::makeThickness(PyObject *args)
 #ifndef FC_NO_ELEMENT_MAP
         return Py::new_reference_to(shape2pyshape(getTopoShapePtr()->makEThickSolid(
                         getPyShapes(obj),offset,tolerance, PyObject_IsTrue(inter) ? true : false, 
-                        PyObject_IsTrue(self_inter) ? true : false, offsetMode, join)));
+                        PyObject_IsTrue(self_inter) ? true : false, offsetMode, static_cast<TopoShape::JoinType>(join))));
 #else
         TopTools_ListOfShape facesToRemove;
         Py::Sequence list(obj);
@@ -1703,7 +1708,7 @@ PyObject* TopoShapePy::makeOffsetShape(PyObject *args, PyObject *keywds)
 #ifndef FC_NO_ELEMENT_MAP
         return Py::new_reference_to(shape2pyshape(getTopoShapePtr()->makEOffset(
                         offset, tolerance, PyObject_IsTrue(inter) ? true : false,
-                        PyObject_IsTrue(self_inter) ? true : false, offsetMode, join,
+                        PyObject_IsTrue(self_inter) ? true : false, offsetMode, static_cast<TopoShape::JoinType>(join),
                         PyObject_IsTrue(fill) ? true : false)));
 #else
         TopoDS_Shape shape = this->getTopoShapePtr()->makeOffsetShape(offset, tolerance,
@@ -1734,7 +1739,7 @@ PyObject* TopoShapePy::makeOffset2D(PyObject *args, PyObject *keywds)
     try {
 #ifndef FC_NO_ELEMENT_MAP
         return Py::new_reference_to(shape2pyshape(getTopoShapePtr()->makEOffset2D(
-            offset, join, PyObject_IsTrue(fill) ? true : false,
+            offset, static_cast<TopoShape::JoinType>(join), PyObject_IsTrue(fill) ? true : false,
             PyObject_IsTrue(openResult) ? true : false,
             PyObject_IsTrue(inter) ? true : false)));
 #else
@@ -2136,6 +2141,39 @@ PyObject* TopoShapePy::makeShapeFromMesh(PyObject *args)
         if (PyObject_IsTrue(sewShape))
             getTopoShapePtr()->sewShape(tolerance);
         Py_Return;
+    } PY_CATCH_OCC
+}
+
+/*
+import PartEnums
+v = App.Vector
+profile = Part.makePolygon([v(0.,0.,0.), v(-60.,-60.,-100.), v(-60.,-60.,-140.)])
+spine = Part.makePolygon([v(0.,0.,0.), v(100.,0.,0.), v(100.,100.,0.), v(0.,100.,0.), v(0.,0.,0.)])
+evolve = spine.makeEvolved(Profile=profile, Join=PartEnums.JoinType.Arc)
+*/
+PyObject* TopoShapePy::makeEvolved(PyObject *args, PyObject *kwds)
+{
+    PyObject* Profile;
+    PyObject* AxeProf = Py_True;
+    PyObject* Solid = Py_False;
+    PyObject* ProfOnSpine = Py_False;
+    auto JoinType = TopoShape::JoinType::Arc;
+    double Tolerance = 0.0000001;
+
+    static char* kwds_evolve[] = {"Profile", "Join", "AxeProf", "Solid", "ProfOnSpine", "Tolerance", nullptr};
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "O!|iO!O!O!d", kwds_evolve,
+                                     &TopoShapePy::Type, &Profile, &JoinType,
+                                     &PyBool_Type, &AxeProf, &PyBool_Type, &Solid,
+                                     &PyBool_Type, &ProfOnSpine, &Tolerance))
+        return nullptr;
+
+    try {
+        return Py::new_reference_to(shape2pyshape(getTopoShapePtr()->makEEvolve(
+                        *static_cast<TopoShapePy*>(Profile)->getTopoShapePtr(), JoinType,
+                        PyObject_IsTrue(AxeProf) ? true : false,
+                        PyObject_IsTrue(Solid) ? true : false,
+                        PyObject_IsTrue(ProfOnSpine) ? true : false,
+                        Tolerance)));
     } PY_CATCH_OCC
 }
 

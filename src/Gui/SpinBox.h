@@ -26,6 +26,7 @@
 
 #include <QValidator>
 #include <QSpinBox>
+#include <Base/Unit.h>
 #include "ExpressionBinding.h"
 #include "QuantitySpinBox_p.h"
 
@@ -48,6 +49,7 @@ public:
     virtual ~ExpressionSpinBox();
 
     void setExpression(std::shared_ptr<App::Expression> expr);
+    virtual void setUnit(const Base::Unit &unit);
 
 protected:
     void onChange();
@@ -60,6 +62,7 @@ protected:
 protected:
     QLineEdit* lineedit;
     QAbstractSpinBox* spinbox;
+    Base::Unit unit;
 };
 
 /**

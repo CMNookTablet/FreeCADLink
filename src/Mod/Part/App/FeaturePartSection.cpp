@@ -50,7 +50,7 @@ short Section::mustExecute() const
 }
 
 const char *Section::opCode() const {
-    return TOPOP_SECTION;
+    return Part::OpCodes::Section;
 }
 
 BRepAlgoAPI_BooleanOperation* Section::makeOperation(const TopoDS_Shape& base, const TopoDS_Shape& tool) const

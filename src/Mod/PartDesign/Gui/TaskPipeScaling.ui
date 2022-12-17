@@ -60,7 +60,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="constant"/>
      <widget class="QWidget" name="multisection">
@@ -76,80 +76,7 @@
         <height>0</height>
        </size>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QGroupBox" name="groupBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>200</height>
-          </size>
-         </property>
-         <property name="title">
-          <string>Sections</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QPushButton" name="buttonRefAdd">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Add Section</string>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QListWidget" name="listWidgetReferences">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Right click or press 'Del' to delete the selected items.</string>
-            </property>
-            <property name="alternatingRowColors">
-             <bool>false</bool>
-            </property>
-            <property name="selectionMode">
-             <enum>QAbstractItemView::ExtendedSelection</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QVBoxLayout" name="verticalLayout_2"/>
      </widget>
     </widget>
    </item>

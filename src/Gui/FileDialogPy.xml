@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenerateModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="generateMetaModel_Module.xsd">
+  <PythonExport
+      Father="PyObjectBase"
+      Name="FileDialogPy"
+      Twin="FileDialog"
+      TwinPointer="FileDialog"
+      Include="Gui/FileDialog.h"
+      FatherInclude="Base/PyObjectBase.h"
+      Namespace="Gui"
+      FatherNamespace="Base">
+    <Documentation>
+      <Author Licence="LGPL" Name="Zheng, Lei" EMail="realthunder.dev@gmail.com" />
+      <UserDocu>FreeCAD Python wrapper of FileDialog functions</UserDocu>
+    </Documentation>
+    <Methode Name="getOpenFileName" Static='true' Keyword='true'>
+      <Documentation>
+          <UserDocu>This is a convenience static function that returns an existing file selected by the user.</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getOpenFileNames" Static='true' Keyword='true'>
+      <Documentation>
+          <UserDocu>This is a convenience static function that will return one or more existing files selected by the user</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getSaveFileName" Static='true' Keyword='true'>
+      <Documentation>
+          <UserDocu>This is a convenience static function that will return a file name selected by the user</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getExistingDirectory" Static='true' Keyword='true'>
+      <Documentation>
+          <UserDocu>This is a convenience static function that will return an existing directory selected by the user</UserDocu>
+      </Documentation>
+    </Methode>
+  </PythonExport>
+</GenerateModel>

@@ -77,6 +77,11 @@ public:
 
     virtual void Restore(Base::XMLReader & reader) override;
 
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const override;
+
     void copyCells(Base::Writer &writer, const std::vector<App::Range> &ranges) const;
 
     void pasteCells(Base::XMLReader &reader, App::Range dstRange, int type);
@@ -155,6 +160,8 @@ public:
 
     void getSpans(App::CellAddress address, int &rows, int &cols) const;
 
+    bool hasSpan() const;
+
     App::CellAddress getAnchor(App::CellAddress address) const;
 
     bool isMergedCell(App::CellAddress address) const;
@@ -202,7 +209,9 @@ public:
         BindingHiddenRef,
     };
     BindingType getBinding(const App::Range &range,
-            App::ExpressionPtr *pStart=0, App::ExpressionPtr *pEnd=0) const;
+                           App::ExpressionPtr *pStart=nullptr,
+                           App::ExpressionPtr *pEnd=nullptr,
+                           App::ObjectIdentifier *pTarget=nullptr) const;
 
 protected:
     virtual void hasSetValue() override;

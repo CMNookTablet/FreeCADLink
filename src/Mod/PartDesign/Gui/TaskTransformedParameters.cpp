@@ -163,7 +163,7 @@ void TaskTransformedParameters::kickUpdateViewTimer() const
 {
     if (updateViewTimer) {
         PartDesign::Transformed* pcTransformed = getObject();
-        int interval = PartGui::PartParams::EditRecomputeWait();
+        int interval = PartGui::PartParams::getEditRecomputeWait();
         if (pcTransformed && pcTransformed->isRecomputePaused())
             interval /= 3;
         updateViewTimer->start(interval);
@@ -552,10 +552,21 @@ void TaskTransformedParameters::exitSelectionMode()
     }
 }
 
-void TaskTransformedParameters::addReferenceSelectionGate(bool edge, bool face, bool planar, bool whole, bool circle)
+void TaskTransformedParameters::addReferenceSelectionGate(bool edge, bool face)
+{
+    ReferenceSelection::Config conf;
+    conf.edge = edge;
+    conf.plane = face;
+    conf.planar = true;
+    conf.whole = false;
+    conf.circle = false;
+    addReferenceSelectionGate(conf);
+}
+
+void TaskTransformedParameters::addReferenceSelectionGate(const ReferenceSelection::Config &conf)
 {
     std::unique_ptr<Gui::SelectionFilterGate> gateRefPtr(
-            new ReferenceSelection(getBaseObject(), edge, face, planar, false, whole, circle));
+            new ReferenceSelection(getBaseObject(), conf));
     std::unique_ptr<Gui::SelectionFilterGate> gateDepPtr(new NoDependentsSelection(getTopTransformedObject()));
     Gui::Selection().addSelectionGate(new CombineSelectionFilterGates(gateRefPtr, gateDepPtr));
 }
@@ -713,7 +724,7 @@ void ComboLinks::clear()
 
 App::PropertyLinkSub &ComboLinks::getLink(int index) const
 {
-    if (index < 0 || index > (ssize_t) linksInList.size()-1)
+    if (index < 0 || index > (int) linksInList.size()-1)
         throw Base::IndexError("ComboLinks::getLink:Index out of range");
     if (linksInList[index]->getValue() && doc && !(doc->isIn(linksInList[index]->getValue())))
         throw Base::ValueError("Linked object is not in the document; it may have been deleted");

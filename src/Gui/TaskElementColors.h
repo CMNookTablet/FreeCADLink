@@ -23,6 +23,7 @@
 #ifndef GUI_TASKELEMENTCOLORS_H
 #define GUI_TASKELEMENTCOLORS_H
 
+#include <memory>
 #include <QListWidgetItem>
 #include "TaskView/TaskView.h"
 #include "TaskView/TaskDialog.h"
@@ -51,7 +52,6 @@ private Q_SLOTS:
     void on_elementList_itemDoubleClicked(QListWidgetItem *item);
     void on_elementList_itemSelectionChanged();
     void on_elementList_itemEntered(QListWidgetItem *item);
-    void on_recompute_clicked(bool checked);
     void on_onTop_clicked(bool checked);
     void on_hideSelection_clicked();
     void on_boxSelect_clicked();
@@ -62,9 +62,11 @@ protected:
     void leaveEvent(QEvent *);
     void slotDeleteDocument(const Document&);
     void slotDeleteObject(const ViewProvider&);
-private:
+
+public:
     class Private;
-    Private *d;
+private:
+    std::shared_ptr<Private> d;
 };
 
 class GuiExport TaskElementColors : public TaskView::TaskDialog

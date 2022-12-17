@@ -237,6 +237,9 @@ generate_from_xml(ViewProviderLinkPy)
 generate_from_xml(ViewProviderSavedViewPy)
 generate_from_xml(AxisOriginPy)
 generate_from_xml(CommandPy)
+generate_from_xml(FileDialogPy)
+generate_from_xml(MDIViewPy)
+generate_from_xml(View3DInventorPy)
 
 generate_from_py(FreeCADGuiInit GuiInitScript.h)
 
@@ -254,6 +257,9 @@ SET(FreeCADGui_XML_SRCS
     ViewProviderSavedViewPy.xml
     AxisOriginPy.xml
     CommandPy.xml
+    FileDialogPy.xml
+    MDIViewPy.xml
+    View3DInventorPy.xml
 )
 SOURCE_GROUP("XML" FILES ${FreeCADApp_XML_SRCS})
 
@@ -337,7 +343,6 @@ SET(Gui_UIC_SRCS
     DlgSettingsSelection.ui
     DlgSettingsUnits.ui
     DlgSettingsViewColor.ui
-    DlgSettingsDrawStyles.ui
     DlgSettingsColorGradient.ui
     DlgSettingsDocument.ui
     DlgSettingsImage.ui
@@ -400,6 +405,7 @@ SET(Command_CPP_SRCS
     CommandPyImp.cpp
     ShortcutManager.cpp
     CommandCompleter.cpp
+    FileDialogPyImp.cpp
 )
 SET(Command_SRCS
     ${Command_CPP_SRCS}
@@ -623,7 +629,6 @@ SET(Dialog_Settings_SRCS
     DlgSettingsSelection.ui
     DlgSettingsUnits.ui
     DlgSettingsViewColor.ui
-    DlgSettingsDrawStyles.ui
     DlgSettingsColorGradient.ui
     DlgSettingsDocument.ui
     DlgSettingsImage.ui
@@ -871,7 +876,7 @@ SET(View3D_CPP_SRCS
     View3DInventorViewer.cpp
     View3DInventorRiftViewer.cpp
     CoinRiftWidget.cpp
-    View3DPy.cpp
+    View3DInventorPyImp.cpp
     View3DViewerPy.cpp
     NaviCube.cpp
 )
@@ -888,7 +893,6 @@ SET(View3D_SRCS
     View3DInventor.h
     View3DInventorExamples.h
     View3DInventorViewer.h
-    View3DPy.h
     View3DInventorRiftViewer.h
     CoinRiftWidget.h
     View3DViewerPy.h
@@ -962,6 +966,7 @@ SET(Viewprovider_CPP_SRCS
     AxisOriginPyImp.cpp
     AxisOrigin.cpp
     ViewProviderSavedView.cpp
+    ViewProviderDatum.cpp
 )
 SET(Viewprovider_SRCS
     ${Viewprovider_CPP_SRCS}
@@ -993,6 +998,7 @@ SET(Viewprovider_SRCS
     ViewProviderMaterialObject.h
     ViewProviderTextDocument.h
     ViewProviderLink.h
+    ViewProviderDatum.h
     AxisOrigin.h
     ViewProviderSavedView.h
 )
@@ -1100,9 +1106,8 @@ SET(Widget_CPP_SRCS
     WidgetFactory.cpp
     Widgets.cpp
     Window.cpp
-    ViewParams.cpp
-    ExprParams.cpp
 )
+
 SET(Widget_HPP_SRCS
     FileDialog.h
     MainWindow.h
@@ -1119,25 +1124,43 @@ SET(Widget_HPP_SRCS
     WidgetFactory.h
     Widgets.h
     Window.h
-    ViewParams.h
-    ExprParams.h
 )
+
 SET(Widget_SRCS
     ${Widget_CPP_SRCS}
     ${Widget_HPP_SRCS}
 )
 SOURCE_GROUP("Widget" FILES ${Widget_SRCS})
 
+SET(Params_CPP_SRCS
+    ViewParams.cpp
+    ExprParams.cpp
+    ReportViewParams.cpp
+    OverlayParams.cpp
+)
+
+SET(Params_HPP_SRCS
+    ViewParams.h
+    ExprParams.h
+    ReportViewParams.h
+    OverlayParams.h
+)
+
+SET(Params_SRCS
+    ${Params_CPP_SRCS}
+    ${Params_HPP_SRCS}
+)
+SOURCE_GROUP("Params" FILES ${Params_SRCS})
+
 # The view sources
 SET(View_CPP_SRCS
     MDIView.cpp
-    MDIViewPy.cpp
+    MDIViewPyImp.cpp
     GraphvizView.cpp
     ActiveObjectList.cpp
 )
 SET(View_HPP_SRCS
     MDIView.h
-    MDIViewPy.h
     GraphvizView.h
     ActiveObjectList.h
 )
@@ -1278,6 +1301,7 @@ SET(FreeCADGui_SRCS
     ${View3D_SRCS}
     ${Viewprovider_SRCS}
     ${Widget_SRCS}
+    ${Params_SRCS}
     ${View_SRCS}
     ${Workbench_SRCS}
     ${Selection_SRCS}
@@ -1306,6 +1330,7 @@ if(MSVC)
         ${View3D_CPP_SRCS}
         ${Viewprovider_CPP_SRCS}
         ${Widget_CPP_SRCS}
+        ${Params_CPP_SRCS}
         ${Workbench_CPP_SRCS}
         ${FreeCADGui_CPP_SRCS}
     )

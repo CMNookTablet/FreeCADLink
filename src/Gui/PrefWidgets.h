@@ -34,6 +34,7 @@
 #include <QFontComboBox>
 #include <QFont>
 #include <QTimer>
+#include <QVariant>
 #include <Base/Parameter.h>
 #include "Widgets.h"
 #include "Window.h"
@@ -221,7 +222,10 @@ class GuiExport PrefWidgetStates : public QObject
 {
   Q_OBJECT
 public:
-  PrefWidgetStates(QWidget *widget, bool manageSize=true, const char *name = nullptr);
+  PrefWidgetStates(QWidget *widget,
+                   bool manageSize=true,
+                   const char *name = nullptr,
+                   QObject *parent = nullptr);
   virtual ~PrefWidgetStates();
   void addSplitter(QSplitter *, const char *name = nullptr);
 
@@ -322,6 +326,30 @@ private:
 };
 
 /**
+ * The PrefAccelLineEdit class.
+ */
+class GuiExport PrefAccelLineEdit : public AccelLineEdit, public PrefWidget
+{
+  Q_OBJECT
+
+  Q_PROPERTY( QByteArray prefEntry READ entryName     WRITE setEntryName     )
+  Q_PROPERTY( QByteArray prefPath  READ paramGrpPath  WRITE setParamGrpPath  )
+
+public:
+  PrefAccelLineEdit ( QWidget * parent = 0 );
+  virtual ~PrefAccelLineEdit();
+  virtual void setAutoSave(bool enable);
+
+protected:
+  // restore from/save to parameters
+  void restorePreferences();
+  void savePreferences();
+
+private:
+  QString m_Default;
+};
+
+/**
  * The PrefFileChooser class.
  * \author Werner Mayer
  */
@@ -351,7 +379,7 @@ private:
  * \author Werner Mayer
  *
  * The PrefComboBox supports restoring/saving variant type of item data. You
- * can add a property named 'prefType' with the type you want. If not such
+ * can add a property named 'prefType' with the type you want. If no such
  * property is found, the class defaults to restore/save the item index.
  *
  * Note that there is special handling for 'prefType' of QString, which means
@@ -375,11 +403,27 @@ protected:
   // restore from/save to parameters
   void restorePreferences();
   void savePreferences();
+  virtual QVariant::Type getParamType() const;
 
 private:
   QVariant m_Default;
   int m_DefaultIndex;
   QString m_DefaultText;
+};
+
+/**
+ * A ComboBox for selecting line patterns.
+ */
+class GuiExport PrefLinePattern : public PrefComboBox
+{
+  Q_OBJECT
+public:
+  PrefLinePattern ( QWidget * parent = 0 );
+  virtual ~PrefLinePattern();
+protected:
+  void changeEvent(QEvent*);
+  void updateLanguage();
+  virtual QVariant::Type getParamType() const;
 };
 
 /**

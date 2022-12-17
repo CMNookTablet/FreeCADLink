@@ -1379,7 +1379,7 @@ void StdCmdSelectAll::activated(int iMsg)
     SelectionSingleton& rSel = Selection();
     App::Document* doc = App::GetApplication().getActiveDocument();
     std::vector<App::DocumentObject*> objs = doc->getObjectsOfType(App::DocumentObject::getClassTypeId());
-    rSel.setSelection(doc->getName(), objs);
+    rSel.setSelection(objs);
 }
 
 bool StdCmdSelectAll::isActive(void)
@@ -1409,13 +1409,19 @@ void StdCmdDelete::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
 
-    std::set<App::Document*> docs;
+    std::map<App::Document*, std::vector<std::string>> docs;
     try {
         openCommand(QT_TRANSLATE_NOOP("Command", "Delete"));
         if (getGuiApplication()->sendHasMsgToFocusView(getName())) {
             commitCommand();
             return;
         }
+
+        // Some code (e.g. DAGView) assumes any selection changes refers to
+        // existing object, and will crash if not. So must not delay
+        // notification.
+        //
+        // SelectionPauseNotification slock;
 
         App::TransactionLocker tlock;
 
@@ -1429,7 +1435,7 @@ void StdCmdDelete::activated(int iMsg)
                 if(sel.getObject() == vpedit->getObject()) {
                     if (!sel.getSubNames().empty()) {
                         vpedit->onDelete(sel.getSubNames());
-                        docs.insert(editDoc->getDocument());
+                        docs[editDoc->getDocument()];
                     }
                     break;
                 }
@@ -1519,28 +1525,28 @@ void StdCmdDelete::activated(int iMsg)
                     Gui::ViewProvider* vp = Application::Instance->getViewProvider(obj);
                     if (vp) {
                         // ask the ViewProvider if it wants to do some clean up
-                        if (vp->onDelete(sel.getSubNames())) {
-                            FCMD_OBJ_DOC_CMD(obj,"removeObject('" << obj->getNameInDocument() << "')");
-                            docs.insert(obj->getDocument());
-                        }
+                        if (vp->onDelete(sel.getSubNames()))
+                            docs[obj->getDocument()].push_back(obj->getNameInDocument());
                     }
                 }
             }
         }
         if(docs.size()) {
+            for (auto &v : docs)
+                v.first->removeObjects(v.second);
+
             const auto &outList = App::PropertyXLink::getDocumentOutList();
             for(auto it=docs.begin();it!=docs.end();++it) {
-                auto itd = outList.find(*it);
+                auto itd = outList.find(it->first);
                 if(itd!=outList.end()) {
                     for(auto doc : itd->second) {
-                        if(doc != *it)
+                        if(doc != it->first)
                             docs.erase(doc);
                     }
                 }
             }
-            for(auto doc : docs) {
-                FCMD_DOC_CMD(doc,"recompute()");
-            }
+            for(auto &v : docs)
+                v.first->recompute();
         }
     } catch (const Base::Exception& e) {
         QMessageBox::critical(getMainWindow(), QObject::tr("Delete failed"),
@@ -1581,7 +1587,7 @@ StdCmdRefresh::StdCmdRefresh()
     // Make it optional to create a transaction for a recompute.
     // The new default behaviour is quite cumbersome in some cases because when
     // undoing the last transaction the manual recompute will clear the redo stack.
-    if (!App::DocumentParams::TransactionOnRecompute())
+    if (!App::DocumentParams::getTransactionOnRecompute())
         eType = eType | NoTransaction;
 }
 
@@ -1589,7 +1595,7 @@ void StdCmdRefresh::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
     if (getActiveGuiDocument()) {
-        App::AutoTransaction trans(App::DocumentParams::TransactionOnRecompute() ? "Recompute" : nullptr);
+        App::AutoTransaction trans(App::DocumentParams::getTransactionOnRecompute() ? "Recompute" : nullptr);
         try {
             doCommand(Doc,"App.activeDocument().recompute(None,True,True)");
         }
@@ -1608,7 +1614,7 @@ void StdCmdRefresh::activated(int iMsg)
 
 bool StdCmdRefresh::isActive(void)
 {
-    if (App::DocumentParams::TransactionOnRecompute())
+    if (App::DocumentParams::getTransactionOnRecompute())
         eType &= ~NoTransaction;
     else
         eType |= NoTransaction;

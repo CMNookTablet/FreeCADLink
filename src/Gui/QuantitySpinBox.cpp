@@ -587,7 +587,7 @@ Base::Unit QuantitySpinBox::unit() const
 void QuantitySpinBox::setUnit(const Base::Unit &unit)
 {
     Q_D(QuantitySpinBox);
-
+    ExpressionSpinBox::setUnit(unit);
     d->unit = unit;
     d->quantity.setUnit(unit);
     updateText(d->quantity);

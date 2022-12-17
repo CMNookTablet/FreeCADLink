@@ -418,7 +418,7 @@ void StringHasher::saveStream(std::ostream &s) const {
     boost::io::ios_flags_saver ifs(s);
     s << std::hex;
 
-    bool allowRealtive = DocumentParams::RelativeStringID();
+    bool allowRealtive = DocumentParams::getRelativeStringID();
     long anchor = 0;
     const StringID *last = nullptr;
     long lastid = 0;

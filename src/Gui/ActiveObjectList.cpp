@@ -170,9 +170,9 @@ Gui::ActiveObjectList::ObjectInfo Gui::ActiveObjectList::getObjectInfo(App::Docu
             }
 
             if(!info.obj) {
-                if (obj->getDocument()==_Doc->getDocument())
-                    info.obj = obj;
-                return info;
+                if (obj->getDocument()!=_Doc->getDocument())
+                    return info;
+                info.obj = obj;
             }
         }
     }

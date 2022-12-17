@@ -12,6 +12,10 @@ if (BUILD_DILIGENT)
     add_subdirectory(Diligent/DiligentCore)
     add_subdirectory(Diligent/DiligentFX)
     add_subdirectory(Diligent/DiligentTools)
+    if (BUILD_DILIGENT_SAMPLES)
+        add_subdirectory(Diligent/DiligentSamples)
+    endif()
 endif()
 
 add_subdirectory(lazy_loader)
+

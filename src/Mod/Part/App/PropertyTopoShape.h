@@ -28,6 +28,7 @@
 #include <TopAbs_ShapeEnum.hxx>
 #include <App/DocumentObject.h>
 #include <App/PropertyGeo.h>
+#include <boost/signals2/connection.hpp>
 #include <map>
 #include <vector>
 
@@ -99,6 +100,8 @@ public:
 
     virtual std::string getElementMapVersion(bool restored=false) const override;
     void resetElementMapVersion() {_Ver.clear();}
+
+    virtual void afterRestore() override;
 
     friend class Feature;
 
@@ -237,9 +240,10 @@ protected:
     virtual void saveStream(Base::OutputStream &) const override;
 };
 
-
 class PartExport PropertyShapeCache: public App::Property {
+
     TYPESYSTEM_HEADER_WITH_OVERRIDE();
+
 public:
     virtual App::Property *Copy(void) const override;
 

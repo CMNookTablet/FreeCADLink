@@ -108,7 +108,7 @@ protected:
 
 private:
     float x,y,z;
-    std::vector<App::DocumentObject*> searchList;
+    std::vector<App::SubObjectT> searchList;
     bool openedAutomatically;
 };
 

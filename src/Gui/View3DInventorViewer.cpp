@@ -127,6 +127,7 @@
 #include <App/PropertyFile.h>
 #include <App/ComplexGeoDataPy.h>
 
+#include "View3DInventor.h"
 #include "View3DInventorViewer.h"
 #include "ViewProviderDocumentObject.h"
 #include "ViewParams.h"
@@ -354,44 +355,45 @@ public:
 };
 
 template<class PropT, class ValueT, class CallbackT>
-ValueT _shadowParam(App::Document *doc, const char *_name, const char *_docu, const ValueT &def, CallbackT cb) {
-    if(!doc)
-        return def;
-    char name[64];
-    snprintf(name,sizeof(name)-1,"Shadow_%s",_name);
-    auto prop = doc->getPropertyByName(name);
-    if(prop && !prop->isDerivedFrom(PropT::getClassTypeId()))
-        return def;
-    if(!prop) {
-        prop = doc->addDynamicProperty(PropT::getClassTypeId().getName(), name, "Shadow", _docu);
-        static_cast<PropT*>(prop)->setValue(def);
-    }
-    cb(*static_cast<PropT*>(prop));
-    return static_cast<PropT*>(prop)->getValue();
+static ValueT _shadowParam(View3DInventor *view, const char *_name, const char *_docu, const ValueT &def, CallbackT cb) {
+    return view->getProperty<PropT, ValueT>(_name, _docu, "Shadow", def, cb);
 }
 
 template<class PropT, class ValueT>
-ValueT _shadowParam(App::Document *doc, const char *_name, const char *_docu, const ValueT &def) {
+static ValueT _shadowParam(View3DInventor *view, const char *_name, const char *_docu, const ValueT &def) {
     auto cb = [](PropT &){};
-    return _shadowParam<PropT, ValueT>(doc, _name, _docu, def, cb);
+    return view->getProperty<PropT, ValueT>(_name, _docu, "Shadow", def, cb);
 }
 
 template<class PropT, class ValueT>
-void _shadowSetParam(App::Document *doc, const char *_name, const ValueT &def) {
-    _shadowParam<PropT, ValueT>(doc, _name, nullptr, def,
+static void _shadowSetParam(View3DInventor *view, const char *_name, const ValueT &def) {
+    view->getProperty<PropT, ValueT>(_name, nullptr, "Shadow", def, 
         [&def](PropT &prop) {
             Base::ObjectStatusLocker<App::Property::Status,App::Property> guard(App::Property::User3, &prop);
             prop.setValue(def);
         });
 }
 
+template<class PropT, class ValueT, class CallbackT>
+static ValueT _hiddenLineParam(View3DInventor *view, const char *_name, const char *_docu, const ValueT &def, CallbackT cb) {
+    return view->getProperty<PropT, ValueT>(_name, _docu, "HiddenLine", def, cb);
+}
+
+template<class PropT, class ValueT>
+static ValueT _hiddenLineParam(View3DInventor *view, const char *_name, const char *_docu, const ValueT &def) {
+    auto cb = [](PropT &){};
+    return view->getProperty<PropT, ValueT>(_name, _docu, "HiddenLine", def, cb);
+}
+
 struct View3DInventorViewer::Private
 {
+    View3DInventor                    *view;
     View3DInventorViewer              *owner;
 
     CoinPtr<SoGroup>                  pcAuxRoot;
 
     CoinPtr<SoShadowGroup>            pcShadowGroup;
+    CoinPtr<SoShapeHints>             pcShadowShapeHints;
     CoinPtr<SoFCDirectionalLight>     pcShadowDirectionalLight;
     CoinPtr<SoFCSpotLight>            pcShadowSpotLight;
     CoinPtr<SoGroup>                  pcShadowGroundGroup;
@@ -424,14 +426,15 @@ struct View3DInventorViewer::Private
     SoRayPickAction         pickAction;
     SoGetMatrixAction       pickMatrixAction;
 
-    std::unique_ptr<Renderer> renderer;
+    SoFCDisplayModeElement::HiddenLineConfig hiddenLineConfig;
 
-    boost::signals2::scoped_connection connDocChange;
+    std::unique_ptr<Renderer> renderer;
 
     std::set<App::SubObjectT> objectsOnTop;
 
     Private(View3DInventorViewer *owner)
-        :owner(owner)
+        :view(qobject_cast<View3DInventor*>(owner->parent()))
+        ,owner(owner)
         ,tmpPath(new SoTempPath(10))
         ,tmpPath2(new SoTempPath(10))
         ,tmpPath3(new SoTempPath(10))
@@ -439,8 +442,8 @@ struct View3DInventorViewer::Private
         ,pickMatrixAction(SbViewportRegion())
     {}
 
-    void activate();
-    void deactivate();
+    void activateShadow();
+    void deactivateShadow();
     void updateShadowGround(const SbBox3f &box);
     void redraw();
     void onRender();
@@ -466,6 +469,8 @@ struct View3DInventorViewer::Private
                                  const Base::ViewProjMethod &proj,
                                  const Base::Polygon2d &polygon,
                                  App::DocumentObject *prevObj = nullptr);
+
+    void initHiddenLineConfig(bool activate=false);
 };
 
 /** \defgroup View3D 3D Viewer
@@ -949,23 +954,40 @@ void View3DInventorViewer::setDocument(Gui::Document* pcDocument)
             onSelectionChanged(Chng);
         }
 
-        _pimpl->connDocChange = pcDocument->getDocument()->signalChanged.connect(boost::bind(
-                    &View3DInventorViewer::slotChangeDocument, this, bp::_1, bp::_2));
-    } else
-        _pimpl->connDocChange.disconnect();
+        std::vector<App::Property*> props;
+        auto doc = pcDocument->getDocument();
+        doc->getPropertyList(props);
+        for (auto prop : props) {
+            // Migrate shadow property in document to parent view
+            if (prop->getName() && boost::starts_with(prop->getName(), "Shadow_")) {
+                auto myProp = _pimpl->view->addDynamicProperty(prop->getTypeId().getName(),
+                        prop->getName(), prop->getGroup(), prop->getDocumentation());
+                Base::ObjectStatusLocker<App::Property::Status, App::Property> guard(
+                        App::Property::User3, myProp);
+                myProp->Paste(*prop);
+                doc->removeDynamicProperty(prop->getName());
+            }
+        }
+    }
 }
 
-void View3DInventorViewer::slotChangeDocument(const App::Document &, const App::Property &prop)
+void View3DInventorViewer::onViewPropertyChanged(const App::Property &prop)
 {
     if(!prop.getName() || prop.testStatus(App::Property::User3))
         return;
 
-    if(!_applyingOverride
-            && boost::starts_with(prop.getName(),"Shadow")
-            && overrideMode == "Shadow")
-    {
-        Base::StateLocker guard(_applyingOverride);
-        applyOverrideMode();
+    if (&prop == &_pimpl->view->ShowNaviCube) {
+        naviCubeEnabled  = _pimpl->view->ShowNaviCube.getValue();
+        this->getSoRenderManager()->scheduleRedraw();
+    } else if(!_applyingOverride) {
+        if ((boost::starts_with(prop.getName(),"Shadow_")
+                || boost::starts_with(prop.getName(),"HiddenLine_"))
+             && (overrideMode == "Shadow"
+                 || overrideMode == "Hidden Line"))
+        {
+            Base::StateLocker guard(_applyingOverride);
+            applyOverrideMode();
+        }
     }
 }
 
@@ -1112,6 +1134,34 @@ bool View3DInventorViewer::isInGroupOnTop(const App::SubObjectT &_objT, bool alt
     return it!=objectsOnTopSel.end() && (!altOnly || it->second.alt);
 }
 
+void View3DInventorViewer::refreshGroupOnTop()
+{
+    std::vector<App::SubObjectT> objs;
+    for (const auto &v : objectsOnTopPreSel) {
+        if (!v.first.getSubObject())
+            objs.push_back(v.first);
+    }
+    for (const auto &objT : objs)
+        checkGroupOnTop(SelectionChanges(SelectionChanges::RmvPreselect,objT), false);
+
+    objs.clear();
+    for (const auto &v : objectsOnTopSel) {
+        if (!v.first.getSubObject())
+            objs.push_back(v.first);
+    }
+
+    for (const auto &objT : objs)
+        checkGroupOnTop(SelectionChanges(SelectionChanges::RmvSelection,objT), false);
+
+    objs.clear();
+    for (const auto &objT : _pimpl->objectsOnTop) {
+        if (!objT.getSubObject())
+            objs.push_back(objT);
+    }
+    for (const auto &objT : objs)
+        checkGroupOnTop(SelectionChanges(SelectionChanges::RmvSelection,objT), true);
+}
+
 void View3DInventorViewer::checkGroupOnTop(const SelectionChanges &Reason, bool alt) {
     auto manager = selectionRoot->getRenderManager();
     if (manager) {
@@ -1120,9 +1170,9 @@ void View3DInventorViewer::checkGroupOnTop(const SelectionChanges &Reason, bool 
             return;
         switch(Reason.Type) {
         case SelectionChanges::AddSelection: {
-            auto objT = Reason.Object.normalized();
+            auto objT = Reason.Object.normalized(App::SubObjectT::ConvertIndex);
             ViewProvider *vp = Application::Instance->getViewProvider(objT.getObject());
-            if (vp) {
+            if (vp && objT.getSubObject()) {
                 SoDetail *detail = nullptr;
                 SoFullPath * nodePath = _pimpl->tmpPath.get();
                 nodePath->truncate(0);
@@ -1159,7 +1209,7 @@ void View3DInventorViewer::checkGroupOnTop(const SelectionChanges &Reason, bool 
             break;
         }
         case SelectionChanges::RmvSelection: {
-            auto objT = Reason.Object.normalized();
+            auto objT = Reason.Object.normalized(App::SubObjectT::ConvertIndex);
             manager->removeSelection(objT.getSubNameNoElement(true),
                                      objT.getOldElementName(),
                                      true);
@@ -1171,6 +1221,8 @@ void View3DInventorViewer::checkGroupOnTop(const SelectionChanges &Reason, bool 
             break;
         }
         case SelectionChanges::ClrSelection:
+            if(!alt)
+                selectionRoot->setSelectAll(false);
             manager->clearSelection(true);
             if (guiDocument && _pimpl->objectsOnTop.size()) {
                 _pimpl->objectsOnTop.clear();
@@ -1200,7 +1252,7 @@ void View3DInventorViewer::checkGroupOnTop(const SelectionChanges &Reason, bool 
                 return;
             }
             for(auto &sel : sels ) {
-                checkGroupOnTop(SelectionChanges(SelectionChanges::AddSelection,sel));
+                checkGroupOnTop(SelectionChanges(SelectionChanges::AddSelection,sel), alt);
             }
         }
         return;
@@ -1221,7 +1273,7 @@ void View3DInventorViewer::checkGroupOnTop(const SelectionChanges &Reason, bool 
         return;
 
     std::string element = Reason.Object.getOldElementName();
-    auto objT = Reason.Object.normalized(App::SubObjectT::NoElement);
+    auto objT = Reason.Object.normalized(App::SubObjectT::ConvertIndex|App::SubObjectT::NoElement);
     if (alt && Reason.Type == SelectionChanges::RmvSelection) {
         _pimpl->objectsOnTop.erase(objT);
         guiDocument->signalOnTopObject(Reason.Type, objT);
@@ -1897,9 +1949,16 @@ void View3DInventorViewer::setOverrideMode(const std::string& mode)
     if (mode == overrideMode)
         return;
 
-    _pimpl->deactivate();
+    _pimpl->deactivateShadow();
     overrideMode = mode;
     applyOverrideMode();
+
+    if (!_pimpl->view->DrawStyle.testStatus(App::Property::User3)) {
+        Base::ObjectStatusLocker<App::Property::Status, App::Property> guard(
+                App::Property::User3, &_pimpl->view->DrawStyle);
+        _pimpl->view->DrawStyle.setValue(mode.c_str());
+    }
+    Application::Instance->signalViewModeChanged(_pimpl->view);
 }
 
 void View3DInventorViewer::applyOverrideMode()
@@ -1919,14 +1978,10 @@ void View3DInventorViewer::applyOverrideMode()
         this->getSoRenderManager()->setRenderMode(SoRenderManager::HIDDEN_LINE);
     }
     else if (SoFCUnifiedSelection::DisplayModeHiddenLine == mode) {
-        if(ViewParams::getHiddenLineOverrideBackground())
-            this->overrideBGColor = ViewParams::getHiddenLineBackground();
-        this->shading = ViewParams::getHiddenLineShaded();
-        this->selectionRoot->overrideMode = SoFCUnifiedSelection::DisplayModeHiddenLine;
-        this->getSoRenderManager()->setRenderMode(SoRenderManager::AS_IS);
+        _pimpl->initHiddenLineConfig(true);
     }
     else if (overrideMode == "Shadow") {
-        _pimpl->activate();
+        _pimpl->activateShadow();
     }
     else {
         this->shading = true;
@@ -1935,27 +1990,155 @@ void View3DInventorViewer::applyOverrideMode()
     }
 }
 
-void View3DInventorViewer::Private::deactivate()
+const SoFCDisplayModeElement::HiddenLineConfig &
+View3DInventorViewer::getHiddenLineConfig() const
+{
+    return _pimpl->hiddenLineConfig;
+}
+
+void View3DInventorViewer::Private::initHiddenLineConfig(bool activate)
+{
+    auto bgColor = _hiddenLineParam<App::PropertyColor>(
+            view, "Background",
+            ViewParams::docHiddenLineBackground(),
+            App::Color(uint32_t(ViewParams::getHiddenLineBackground()))).getPackedValue();
+    bool overrideBGColor = _hiddenLineParam<App::PropertyBool>(
+                    view, "BackgroundOverride",
+                    ViewParams::docHiddenLineOverrideBackground(),
+                    ViewParams::getHiddenLineOverrideBackground());
+    bool shading = _hiddenLineParam<App::PropertyBool>(
+                view, "Shaded",
+                ViewParams::docHiddenLineShaded(),
+                ViewParams::getHiddenLineShaded());
+    if (activate) {
+        if ((owner->overrideBGColor = overrideBGColor))
+            owner->overrideBGColor = bgColor;
+        owner->shading = shading;
+        owner->selectionRoot->overrideMode = SoFCUnifiedSelection::DisplayModeHiddenLine;
+        owner->getSoRenderManager()->setRenderMode(SoRenderManager::AS_IS);
+    }
+
+    hiddenLineConfig.shaded = owner->shading;
+
+    hiddenLineConfig.outline = _hiddenLineParam<App::PropertyBool>(
+            view, "ShowOutline",
+            ViewParams::docHiddenLineShowOutline(),
+            ViewParams::getHiddenLineShowOutline());
+
+    hiddenLineConfig.perFaceOutline = _hiddenLineParam<App::PropertyBool>(
+            view, "PerFaceOutline",
+            ViewParams::docHiddenLinePerFaceOutline(),
+            ViewParams::getHiddenLinePerFaceOutline());
+
+    hiddenLineConfig.hideVertex = _hiddenLineParam<App::PropertyBool>(
+            view, "HideVertex",
+            ViewParams::docHiddenLineHideVertex(),
+            ViewParams::getHiddenLineHideVertex());
+
+    hiddenLineConfig.hideFace = _hiddenLineParam<App::PropertyBool>(
+            view, "HideFace",
+            ViewParams::docHiddenLineHideFace(),
+            ViewParams::getHiddenLineHideFace());
+
+    hiddenLineConfig.hideSeam = _hiddenLineParam<App::PropertyBool>(
+            view, "HideSeam",
+            ViewParams::docHiddenLineHideSeam(),
+            ViewParams::getHiddenLineHideSeam());
+
+    hiddenLineConfig.sceneOutline = _hiddenLineParam<App::PropertyBool>(
+            view, "SceneOutline",
+            ViewParams::docHiddenLineSceneOutline(),
+            ViewParams::getHiddenLineSceneOutline());
+
+    static const App::PropertyFloatConstraint::Constraints _width_cstr(0.0,100.0,0.5);
+    hiddenLineConfig.outlineWidth = _hiddenLineParam<App::PropertyFloatConstraint>(
+            view, "OutlineWidth",
+            ViewParams::docHiddenLineOutlineWidth(),
+            ViewParams::getHiddenLineOutlineWidth(),
+            [](App::PropertyFloatConstraint &prop) {
+                if(!prop.getConstraints())
+                    prop.setConstraints(&_width_cstr);
+            });
+
+    hiddenLineConfig.hasFaceColor = _hiddenLineParam<App::PropertyBool>(
+            view, "FaceColorOverride",
+            ViewParams::docHiddenLineOverrideFaceColor(),
+            ViewParams::getHiddenLineOverrideFaceColor());
+
+    hiddenLineConfig.faceColor = _hiddenLineParam<App::PropertyColor>(
+            view, "FaceColor",
+            ViewParams::docHiddenLineFaceColor(),
+            App::Color(uint32_t(ViewParams::getHiddenLineFaceColor()))).getPackedValue();
+
+    hiddenLineConfig.hasLineColor = _hiddenLineParam<App::PropertyBool>(
+            view, "LineColorOverride",
+            ViewParams::docHiddenLineOverrideColor(),
+            ViewParams::getHiddenLineOverrideColor());
+
+    hiddenLineConfig.lineColor = _hiddenLineParam<App::PropertyColor>(
+            view, "LineColor",
+            ViewParams::docHiddenLineColor(),
+            App::Color(uint32_t(ViewParams::getHiddenLineColor()))).getPackedValue();
+
+    hiddenLineConfig.hasTransparency = _hiddenLineParam<App::PropertyBool>(
+            view, "TransparencyOverride",
+            ViewParams::docHiddenLineOverrideTransparency(),
+            ViewParams::getHiddenLineOverrideTransparency());
+
+    static const App::PropertyFloatConstraint::Constraints _transp_cstr(0.0,1.0,0.1);
+    hiddenLineConfig.transparency = _hiddenLineParam<App::PropertyFloatConstraint>(
+            view, "Transparency",
+            ViewParams::docHiddenLineTransparency(),
+            ViewParams::getHiddenLineTransparency(),
+            [](App::PropertyFloatConstraint &prop) {
+                if(!prop.getConstraints())
+                    prop.setConstraints(&_transp_cstr);
+            });
+
+    hiddenLineConfig.lineWidth = _hiddenLineParam<App::PropertyFloatConstraint>(
+            view, "LineWidth",
+            ViewParams::docHiddenLineWidth(),
+            ViewParams::getHiddenLineWidth(),
+            [](App::PropertyFloatConstraint &prop) {
+                if(!prop.getConstraints())
+                    prop.setConstraints(&_width_cstr);
+            });
+
+    hiddenLineConfig.pointSize = _hiddenLineParam<App::PropertyFloatConstraint>(
+            view, "PointSize",
+            ViewParams::docHiddenLinePointSize(),
+            ViewParams::getHiddenLinePointSize(),
+            [](App::PropertyFloatConstraint &prop) {
+                if(!prop.getConstraints())
+                    prop.setConstraints(&_width_cstr);
+            });
+}
+
+void View3DInventorViewer::Private::deactivateShadow()
 {
     if(pcShadowGroup) {
         auto superScene = static_cast<SoGroup*>(owner->getSoRenderManager()->getSceneGraph());
         int index = superScene->findChild(pcShadowGroup);
         if(index >= 0)
             superScene->replaceChild(index, owner->pcViewProviderRoot);
+        index = superScene->findChild(pcShadowShapeHints);
+        if (index >= 0)
+            superScene->removeChild(index);
+        pcShadowShapeHints.reset();
         pcShadowGroup.reset();
         pcShadowGroundSwitch->whichChild = -1;
         owner->pcRootPath->truncate(1);
     }
 }
 
-void View3DInventorViewer::Private::activate()
+void View3DInventorViewer::Private::activateShadow()
 {
     owner->shading = true;
 
     App::Document *doc = owner->guiDocument?owner->guiDocument->getDocument():nullptr;
 
-    static const char *_ShadowDisplayMode[] = {"Flat Lines", "Shaded", "As Is", nullptr};
-    int displayMode = _shadowParam<App::PropertyEnumeration>(doc, "DisplayMode",
+    static const char *_ShadowDisplayMode[] = {"Flat Lines", "Shaded", "As Is", "Hidden Line", nullptr};
+    int displayMode = _shadowParam<App::PropertyEnumeration>(view, "DisplayMode",
             ViewParams::docShadowDisplayMode(), ViewParams::getShadowDisplayMode(),
             [](App::PropertyEnumeration &prop) {
                 if (!prop.getEnum().isValid())
@@ -1966,7 +2149,7 @@ void View3DInventorViewer::Private::activate()
             doc->getPropertyByName("FlatLines"));
     if (flatlines) {
         owner->selectionRoot->overrideMode = flatlines->getValue()?"Shaded":"Flat Lines";
-        _shadowSetParam<App::PropertyEnumeration>(doc, "DisplayMode", flatlines->getValue()?0:1);
+        _shadowSetParam<App::PropertyEnumeration>(view, "DisplayMode", flatlines->getValue()?0:1);
         doc->removeDynamicProperty("Shadow_FlatLines");
     } else {
         SbName mode;
@@ -1977,16 +2160,23 @@ void View3DInventorViewer::Private::activate()
         case 1:
             mode = SoFCUnifiedSelection::DisplayModeShaded;
             break;
+        case 3:
+            mode = SoFCUnifiedSelection::DisplayModeHiddenLine;
+            break;
         default:
             mode = SoFCUnifiedSelection::DisplayModeAsIs;
             break;
         }
-        if (owner->selectionRoot->overrideMode.getValue() != mode)
-            owner->selectionRoot->overrideMode = mode;
+        if (owner->selectionRoot->overrideMode.getValue() != mode) {
+            if (mode == SoFCUnifiedSelection::DisplayModeHiddenLine)
+                initHiddenLineConfig(true);
+            else
+                owner->selectionRoot->overrideMode = mode;
+        }
     }
     owner->getSoRenderManager()->setRenderMode(SoRenderManager::AS_IS);
 
-    bool spotlight = _shadowParam<App::PropertyBool>(doc, "SpotLight",
+    bool spotlight = _shadowParam<App::PropertyBool>(view, "SpotLight",
             ViewParams::docShadowSpotLight(), ViewParams::getShadowSpotLight());
 
     if(pcShadowGroup) {
@@ -2110,16 +2300,27 @@ void View3DInventorViewer::Private::activate()
         }
 
         pcShadowGroup->addChild(pcShadowGroundSwitch);
+
+        // SoShadowGroup is currently incapable of supporting per object
+        // lighting model setup. It only checks the setting on toggling shadow
+        // enable/disable. So as a not so good work aournd, we put a shape
+        // hints node before entering SoShadowGroup to provide a default light
+        // model (LIGHT_MODEL_TWO_SIDEDE).
+        pcShadowShapeHints = new SoShapeHints;
+        pcShadowShapeHints->vertexOrdering = ViewParams::getForceSolidSingleSideLighting() ?
+            SoShapeHints::UNKNOWN_ORDERING : SoShapeHints::COUNTERCLOCKWISE;
+        pcShadowShapeHints->shapeType = SoShapeHints::UNKNOWN_SHAPE_TYPE;
+
     }
     static const App::PropertyFloatConstraint::Constraints _precision_cstr(0.0,1.0,0.1);
     // pcShadowGroup->quality = _shadowParam<App::PropertyFloatConstraint>(
-    //         doc, "Quality", 1.0f,
+    //         owner, "Quality", 1.0f,
     //         [](App::PropertyFloatConstraint &prop) {
     //             if(!prop.getConstraints())
     //                 prop.setConstraints(&_precision_cstr);
     //         });
 
-    pcShadowGroup->precision = _shadowParam<App::PropertyFloatConstraint>(doc, "Precision",
+    pcShadowGroup->precision = _shadowParam<App::PropertyFloatConstraint>(view, "Precision",
             ViewParams::docShadowPrecision(), ViewParams::getShadowPrecision(),
             [](App::PropertyFloatConstraint &prop) {
                 if(!prop.getConstraints())
@@ -2128,7 +2329,7 @@ void View3DInventorViewer::Private::activate()
 
     SoLight *light;
     auto _dir = _shadowParam<App::PropertyVector>(
-            doc, "LightDirection", nullptr,
+            view, "LightDirection", nullptr,
             Base::Vector3d(ViewParams::getShadowLightDirectionX(),
                             ViewParams::getShadowLightDirectionY(),
                             ViewParams::getShadowLightDirectionZ()));
@@ -2139,15 +2340,18 @@ void View3DInventorViewer::Private::activate()
     owner->getSceneBoundBox(bbox);
 
     static const App::PropertyPrecision::Constraints _epsilon_cstr(0.0,1000.0,1e-5);
-    pcShadowGroup->epsilon = _shadowParam<App::PropertyPrecision>(doc, "Epsilon",
+    auto epsilon = _shadowParam<App::PropertyPrecision>(view, "Epsilon",
             ViewParams::docShadowEpsilon(), ViewParams::getShadowEpsilon(),
             [](App::PropertyFloatConstraint &prop) {
                 if(prop.getConstraints() != &_epsilon_cstr)
                     prop.setConstraints(&_epsilon_cstr);
             });
+    if (epsilon == 0.0)
+        epsilon = 1e-5;
+    pcShadowGroup->epsilon = epsilon;
 
     static const App::PropertyFloatConstraint::Constraints _threshold_cstr(0.0,1.0,0.1);
-    pcShadowGroup->threshold = _shadowParam<App::PropertyFloatConstraint>(doc, "Threshold",
+    pcShadowGroup->threshold = _shadowParam<App::PropertyFloatConstraint>(view, "Threshold",
             ViewParams::docShadowThreshold(), ViewParams::getShadowThreshold(),
             [](App::PropertyFloatConstraint &prop) {
                 if(prop.getConstraints() != &_threshold_cstr)
@@ -2158,27 +2362,27 @@ void View3DInventorViewer::Private::activate()
         light = pcShadowSpotLight;
         pcShadowSpotLight->direction = dir;
         Base::Vector3d initPos;
-        if(!bbox.isEmpty()) {
+        if(isValidBBox(bbox)) {
             SbVec3f center = bbox.getCenter();
             initPos.x = center[0];
             initPos.y = center[1];
             initPos.z = center[2] + (_dir.z < 0 ? 1.0f : -1.0f) * (bbox.getMax()[2] - bbox.getMin()[2]);
         }
-        auto pos = _shadowParam<App::PropertyVector>(doc, "SpotLightPosition", nullptr, initPos);
+        auto pos = _shadowParam<App::PropertyVector>(view, "SpotLightPosition", nullptr, initPos);
         pcShadowSpotLight->location = SbVec3f(pos.x,pos.y,pos.z);
         static const App::PropertyFloatConstraint::Constraints _drop_cstr(-0.01,1.0,0.01);
         pcShadowSpotLight->dropOffRate =
-            _shadowParam<App::PropertyFloatConstraint>(doc, "SpotLightDropOffRate", nullptr, 0.0,
+            _shadowParam<App::PropertyFloatConstraint>(view, "SpotLightDropOffRate", nullptr, 0.0,
                 [](App::PropertyFloatConstraint &prop) {
                     if(!prop.getConstraints())
                         prop.setConstraints(&_drop_cstr);
                 });
         pcShadowSpotLight->cutOffAngle =
-            M_PI * _shadowParam<App::PropertyAngle>(doc, "SpotLightCutOffAngle", nullptr, 45.0) / 180.0;
+            M_PI * _shadowParam<App::PropertyAngle>(view, "SpotLightCutOffAngle", nullptr, 45.0) / 180.0;
 
         // pcShadowGroup->visibilityFlag = SoShadowGroup::ABSOLUTE_RADIUS;
-        // pcShadowGroup->visibilityNearRadius = _shadowParam<App::PropertyFloat>(doc, "SpotLightRadiusNear", -1.0);
-        // pcShadowGroup->visibilityRadius = _shadowParam<App::PropertyFloat>(doc, "SpotLightRadius", -1.0);
+        // pcShadowGroup->visibilityNearRadius = _shadowParam<App::PropertyFloat>(view, "SpotLightRadiusNear", -1.0);
+        // pcShadowGroup->visibilityRadius = _shadowParam<App::PropertyFloat>(view, "SpotLightRadius", -1.0);
     } else {
         pcShadowDirectionalLight->direction = dir;
 
@@ -2186,7 +2390,7 @@ void View3DInventorViewer::Private::activate()
         if(light->isOfType(SoShadowDirectionalLight::getClassTypeId())) {
             static const App::PropertyFloatConstraint::Constraints _dist_cstr(-1.0,DBL_MAX,10.0);
             static_cast<SoShadowDirectionalLight*>(light)->maxShadowDistance =
-                _shadowParam<App::PropertyFloatConstraint>(doc, "MaxDistance",
+                _shadowParam<App::PropertyFloatConstraint>(view, "MaxDistance",
                     ViewParams::docShadowMaxDistance(), ViewParams::getShadowMaxDistance(),
                     [](App::PropertyFloatConstraint &prop) {
                         if(!prop.getConstraints())
@@ -2196,35 +2400,35 @@ void View3DInventorViewer::Private::activate()
     }
 
     static const App::PropertyFloatConstraint::Constraints _cstr(0.0,1000.0,0.1);
-    light->intensity = _shadowParam<App::PropertyFloatConstraint>(doc, "LightIntensity",
+    light->intensity = _shadowParam<App::PropertyFloatConstraint>(view, "LightIntensity",
             ViewParams::docShadowLightIntensity(), ViewParams::getShadowLightIntensity(),
             [](App::PropertyFloatConstraint &prop) {
                 if(!prop.getConstraints())
                     prop.setConstraints(&_cstr);
             });
 
-    App::Color color = _shadowParam<App::PropertyColor>(doc, "LightColor",
+    App::Color color = _shadowParam<App::PropertyColor>(view, "LightColor",
             ViewParams::docShadowLightColor(), App::Color((uint32_t)ViewParams::getShadowLightColor()));
     SbColor sbColor;
     float f;
     sbColor.setPackedValue(color.getPackedValue(),f);
     light->color = sbColor;
 
-    color = _shadowParam<App::PropertyColor>(doc, "GroundColor",
+    color = _shadowParam<App::PropertyColor>(view, "GroundColor",
             ViewParams::docShadowGroundColor(), App::Color((uint32_t)ViewParams::getShadowGroundColor()));
     sbColor.setPackedValue(color.getPackedValue(),f);
     pcShadowMaterial->diffuseColor = sbColor;
     pcShadowMaterial->specularColor = SbColor(0,0,0);
 
     static const App::PropertyFloatConstraint::Constraints _transp_cstr(0.0,1.0,0.1);
-    double transp = _shadowParam<App::PropertyFloatConstraint>(doc, "GroundTransparency",
+    double transp = _shadowParam<App::PropertyFloatConstraint>(view, "GroundTransparency",
             ViewParams::docShadowGroundTransparency(), ViewParams::getShadowGroundTransparency(),
             [](App::PropertyFloatConstraint &prop) {
                 if(!prop.getConstraints())
                     prop.setConstraints(&_transp_cstr);
             });
 
-    if(_shadowParam<App::PropertyBool>(doc, "GroundBackFaceCull",
+    if(_shadowParam<App::PropertyBool>(view, "GroundBackFaceCull",
             ViewParams::docShadowGroundBackFaceCull(), ViewParams::getShadowGroundBackFaceCull()))
     {
         pcShadowGroundShapeHints->shapeType = SoShapeHints::SOLID;
@@ -2237,19 +2441,19 @@ void View3DInventorViewer::Private::activate()
     pcShadowMaterial->transparency = transp;
     pcShadowGroundStyle->style = (transp == 1.0 ? 0x4 : 0) | SoShadowStyle::SHADOWED;
 
-    if(_shadowParam<App::PropertyBool>(doc, "ShowGround",
+    if(_shadowParam<App::PropertyBool>(view, "ShowGround",
             ViewParams::docShadowShowGround(), ViewParams::getShadowShowGround()))
         pcShadowGroundSwitch->whichChild = 0;
     else
         pcShadowGroundSwitch->whichChild = -1;
 
-    if(!bbox.isEmpty())
+    if(isValidBBox(bbox))
         updateShadowGround(bbox);
 
-    pcShadowGroundTexture->filename = _shadowParam<App::PropertyFileIncluded>(doc, "GroundTexture",
+    pcShadowGroundTexture->filename = _shadowParam<App::PropertyFileIncluded>(view, "GroundTexture",
             ViewParams::docShadowGroundTexture(), ViewParams::getShadowGroundTexture().c_str());
 
-    const char *bumpmap = _shadowParam<App::PropertyFileIncluded>(doc, "GroundBumpMap",
+    const char *bumpmap = _shadowParam<App::PropertyFileIncluded>(view, "GroundBumpMap",
             ViewParams::docShadowGroundBumpMap(), ViewParams::getShadowGroundBumpMap().c_str());
     if(bumpmap && bumpmap[0]) {
         if(!pcShadowGroundBumpMap) {
@@ -2267,14 +2471,14 @@ void View3DInventorViewer::Private::activate()
             pcShadowGroundGroup->removeChild(idx);
     }
 
-    if(_shadowParam<App::PropertyBool>(doc, "GroundShading",
+    if(_shadowParam<App::PropertyBool>(view, "GroundShading",
             ViewParams::docShadowGroundShading(), ViewParams::getShadowGroundShading()))
         pcShadowGroundLightModel->model = SoLightModel::PHONG;
     else
         pcShadowGroundLightModel->model = SoLightModel::BASE_COLOR;
 
     SbBool isActive = TRUE;
-    if (_shadowParam<App::PropertyBool>(doc, "TransparentShadow",
+    if (_shadowParam<App::PropertyBool>(view, "TransparentShadow",
             ViewParams::docShadowTransparentShadow(), ViewParams::getShadowTransparentShadow()))
         isActive |= 2;
     if (pcShadowGroup->isActive.getValue() != isActive)
@@ -2284,6 +2488,7 @@ void View3DInventorViewer::Private::activate()
     int index = superScene->findChild(owner->pcViewProviderRoot);
     if(index >= 0) {
         superScene->replaceChild(index, pcShadowGroup);
+        superScene->insertChild(pcShadowShapeHints, index);
         owner->pcRootPath->append(pcShadowGroup);
     }
 }
@@ -2417,6 +2622,7 @@ void View3DInventorViewer::setRenderCache(int mode)
 void View3DInventorViewer::setEnabledNaviCube(bool on)
 {
     naviCubeEnabled = on;
+    _pimpl->view->ShowNaviCube.setValue(on);
 }
 
 bool View3DInventorViewer::isEnabledNaviCube(void) const
@@ -3190,11 +3396,6 @@ void View3DInventorViewer::imageFromFramebuffer(int width, int height, int sampl
     QtGLFramebufferObjectFormat fboFormat;
     fboFormat.setSamples(samples);
     fboFormat.setAttachment(QtGLFramebufferObject::CombinedDepthStencil);
-    // With enabled alpha a transparent background is supported but
-    // at the same time breaks semi-transparent models. A workaround
-    // is to use a certain background color using GL_RGB as texture
-    // format and in the output image search for the above color and
-    // replaces it with the color requested by the user.
     fboFormat.setInternalTextureFormat(getInternalTextureFormat());
 
     QtGLFramebufferObject fbo(width, height, fboFormat);
@@ -3202,44 +3403,14 @@ void View3DInventorViewer::imageFromFramebuffer(int width, int height, int sampl
     const QColor col = backgroundColor();
     bool on = hasGradientBackground();
 
-    int alpha = 255;
-    QColor bgopaque = bgcolor;
-    if (bgopaque.isValid()) {
-        // force an opaque background color
-        alpha = bgopaque.alpha();
-        if (alpha < 255)
-            bgopaque.setRgb(255,255,255);
-        setBackgroundColor(bgopaque);
+    if (bgcolor.isValid()) {
+        setBackgroundColor(bgcolor);
         setGradientBackground(false);
     }
-
     renderToFramebuffer(&fbo);
     setBackgroundColor(col);
     setGradientBackground(on);
     img = fbo.toImage();
-
-    // if background color isn't opaque manipulate the image
-    if (alpha < 255) {
-        QImage image(img.constBits(), img.width(), img.height(), QImage::Format_ARGB32);
-        img = image.copy();
-        QRgb rgba = bgcolor.rgba();
-        QRgb rgb = bgopaque.rgb();
-        QRgb * bits = (QRgb*) img.bits();
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                if (*bits == rgb)
-                    *bits = rgba;
-                bits++;
-            }
-        }
-    } else if (alpha == 255) {
-        QImage image(img.width(), img.height(), QImage::Format_RGB32);
-        QPainter painter(&image);
-        painter.fillRect(image.rect(),Qt::black);
-        painter.drawImage(0, 0, img);
-        painter.end();
-        img = image;
-    }
 }
 
 void View3DInventorViewer::renderToFramebuffer(QtGLFramebufferObject* fbo)
@@ -3517,12 +3688,10 @@ void View3DInventorViewer::renderScene(void)
         stream.setf(std::ios::fixed | std::ios::showpoint);
         stream << framesPerSecond[0] << " ms / " << framesPerSecond[1] << " fps";
 
-        if (FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG)) {
-            if (auto manager = selectionRoot->getRenderManager()) {
-                auto stats = manager->getRenderStatistics();
-                if (stats)
-                    stream << ". " << stats;
-            }
+        if (auto manager = selectionRoot->getRenderManager()) {
+            auto stats = manager->getRenderStatistics();
+            if (stats)
+                stream << ". " << stats;
         }
 
         draw2DString(stream.str().c_str(), SbVec2s(10,10), SbVec2f(0.1f,0.1f));
@@ -3609,7 +3778,7 @@ void View3DInventorViewer::selectAll()
     }
 
     if (!objs.empty())
-        Gui::Selection().setSelection(objs.front()->getDocument()->getName(), objs);
+        Gui::Selection().setSelection(objs);
 }
 
 bool View3DInventorViewer::processSoEvent(const SoEvent* ev)
@@ -3834,7 +4003,7 @@ void View3DInventorViewer::toggleClippingPlane(int toggle, bool beforeEditing,
         action.apply(this->getSoRenderManager()->getSceneGraph());
         SbBox3f box = action.getBoundingBox();
 
-        if (!box.isEmpty()) {
+        if (isValidBBox(box)) {
             // adjust to overall bounding box of the scene
             clip->setValue(box, SbVec3f(dir.x,dir.y,dir.z), 1.0f);
         }
@@ -4016,7 +4185,7 @@ bool View3DInventorViewer::getSceneBoundBox(Base::BoundBox3d &box) const {
     SbBox3f bbox;
     if (manager && manager->getSceneNodeId() == selectionRoot->getNodeId())
         manager->getBoundingBox(bbox);
-    if (!bbox.isEmpty()) {
+    if (isValidBBox(bbox)) {
         float minx,miny,minz,maxx,maxy,maxz;
         bbox.getBounds(minx, miny, minz, maxx, maxy, maxz);
         box.MinX = minx;
@@ -4033,7 +4202,7 @@ bool View3DInventorViewer::getSceneBoundBox(Base::BoundBox3d &box) const {
                 if(!vp) {
                     action.apply(node);
                     auto bbox = action.getBoundingBox();
-                    if(!bbox.isEmpty()) {
+                    if(isValidBBox(bbox)) {
                         float minx,miny,minz,maxx,maxy,maxz;
                         bbox.getBounds(minx,miny,minz,maxx,maxy,maxz);
                         box.Add(Base::BoundBox3d(minx,miny,minz,maxx,maxy,maxz));
@@ -4049,7 +4218,7 @@ bool View3DInventorViewer::getSceneBoundBox(Base::BoundBox3d &box) const {
         } else {
             action.apply(pcViewProviderRoot);
             auto bbox = action.getBoundingBox();
-            if(!bbox.isEmpty()) {
+            if(isValidBBox(bbox)) {
                 float minx,miny,minz,maxx,maxy,maxz;
                 bbox.getBounds(minx,miny,minz,maxx,maxy,maxz);
                 box.MinX = minx;
@@ -4064,7 +4233,7 @@ bool View3DInventorViewer::getSceneBoundBox(Base::BoundBox3d &box) const {
         if (pcGroupOnTopSwitch) {
             action.apply(pcGroupOnTopSwitch);
             auto bbox = action.getBoundingBox();
-            if(!bbox.isEmpty()) {
+            if(isValidBBox(bbox)) {
                 float minx,miny,minz,maxx,maxy,maxz;
                 bbox.getBounds(minx,miny,minz,maxx,maxy,maxz);
                 box.Add(Base::BoundBox3d(minx,miny,minz,maxx,maxy,maxz));
@@ -4075,14 +4244,32 @@ bool View3DInventorViewer::getSceneBoundBox(Base::BoundBox3d &box) const {
     if (pcEditingRoot) { 
         action.apply(pcEditingRoot);
         auto bbox = action.getBoundingBox();
-        if(!bbox.isEmpty()) {
+        if(isValidBBox(bbox)) {
             float minx,miny,minz,maxx,maxy,maxz;
             bbox.getBounds(minx,miny,minz,maxx,maxy,maxz);
             box.Add(Base::BoundBox3d(minx,miny,minz,maxx,maxy,maxz));
         }
     }
 
-    return box.IsValid();
+    if (!box.IsValid())
+        return false;
+
+    // Coin3D camera seems stuck if zoomed to close because the boundbox is too
+    // small. So, we limit the boundbox size
+    const double minLength = 1e-7;
+    if (std::fabs(box.MinX - box.MaxX) < minLength
+            && std::fabs(box.MinY - box.MaxY) < minLength
+            && std::fabs(box.MinZ - box.MaxZ) < minLength)
+    {
+        const double margin = 0.1;
+        box.MinX -= margin;
+        box.MinY -= margin;
+        box.MinZ -= margin;
+        box.MaxX += margin;
+        box.MaxY += margin;
+        box.MaxZ += margin;
+    }
+    return true;
 }
 
 SoGroup *View3DInventorViewer::getAuxSceneGraph() const
@@ -4097,10 +4284,6 @@ bool View3DInventorViewer::getSceneBoundBox(SbBox3f &box) const {
         return false;
     box.setBounds(fcbox.MinX,fcbox.MinY,fcbox.MinZ,
                   fcbox.MaxX,fcbox.MaxY,fcbox.MaxZ);
-    SbSphere sphere;
-    sphere.circumscribe(box); // why do we need this?
-    if (sphere.getRadius() == 0)
-        return false;
     return true;
 }
 
@@ -4223,7 +4406,7 @@ void View3DInventorViewer::Private::updateShadowGround(const SbBox3f &box)
 
     if(pcShadowDirectionalLight) {
         static const App::PropertyFloatConstraint::Constraints _cstr(1.0,1000.0,0.1);
-        double scale = _shadowParam<App::PropertyFloatConstraint>(doc, "BoundBoxScale",
+        double scale = _shadowParam<App::PropertyFloatConstraint>(view, "BoundBoxScale",
                 ViewParams::docShadowBoundBoxScale(), ViewParams::getShadowBoundBoxScale(),
             [](App::PropertyFloatConstraint &prop) {
                 if(!prop.getConstraints())
@@ -4236,25 +4419,25 @@ void View3DInventorViewer::Private::updateShadowGround(const SbBox3f &box)
     if(pcShadowGroundSwitch && pcShadowGroundSwitch->whichChild.getValue()>=0) {
         float z = size[2];
         float width, length;
-        if(_shadowParam<App::PropertyBool>(doc, "GroundSizeAuto",
+        if(_shadowParam<App::PropertyBool>(view, "GroundSizeAuto",
                     "Auto adjust ground size based on the scene bounding box", true))
         {
-            double scale = _shadowParam<App::PropertyFloat>(doc, "GroundSizeScale",
+            double scale = _shadowParam<App::PropertyFloat>(view, "GroundSizeScale",
                     ViewParams::docShadowGroundScale(), ViewParams::getShadowGroundScale());
             if(scale <= 0.0)
                 scale = 1.0;
             width = length = scale * std::max(std::max(size[0],size[1]),size[2]);
         } else {
-            width = _shadowParam<App::PropertyLength>(doc, "GroundSizeX", "", 100.0);
-            length = _shadowParam<App::PropertyLength>(doc, "GroundSizeY", "", 100.0);
+            width = _shadowParam<App::PropertyLength>(view, "GroundSizeX", "", 100.0);
+            length = _shadowParam<App::PropertyLength>(view, "GroundSizeY", "", 100.0);
         }
 
         Base::Placement pla = _shadowParam<App::PropertyPlacement>(
-                doc, "GroundPlacement",
+                view, "GroundPlacement",
                 "Ground placement. If 'GroundAutoPosition' is on, this specifies an additional offset of the ground",
                 Base::Placement());
 
-        if(!_shadowParam<App::PropertyBool>(doc, "GroundAutoPosition",
+        if(!_shadowParam<App::PropertyBool>(view, "GroundAutoPosition",
                     "Auto place the ground face at the Z bottom of the scene", true))
         {
             center[0] = pla.getPosition().x;
@@ -4278,7 +4461,7 @@ void View3DInventorViewer::Private::updateShadowGround(const SbBox3f &box)
         pcShadowGroundCoords->point.setValues(0, 4, coords);
 
         static const App::PropertyQuantityConstraint::Constraints _texture_cstr = {0,DBL_MAX,10.0};
-        float textureSize = _shadowParam<App::PropertyLength>(doc, "GroundTextureSize",
+        float textureSize = _shadowParam<App::PropertyLength>(view, "GroundTextureSize",
             ViewParams::docShadowGroundTextureSize(), ViewParams::getShadowGroundTextureSize(),
             [](App::PropertyLength &prop) {
                 if(prop.getConstraints() != &_texture_cstr)
@@ -4300,7 +4483,7 @@ void View3DInventorViewer::Private::updateShadowGround(const SbBox3f &box)
     }
 
     static const App::PropertyIntegerConstraint::Constraints _smooth_cstr(0,100,1);
-    double smoothBorder = _shadowParam<App::PropertyIntegerConstraint>(doc, "SmoothBorder",
+    double smoothBorder = _shadowParam<App::PropertyIntegerConstraint>(view, "SmoothBorder",
             ViewParams::docShadowSmoothBorder(), ViewParams::getShadowSmoothBorder(),
             [](App::PropertyIntegerConstraint &prop) {
                 if(prop.getConstraints() != &_smooth_cstr)
@@ -4308,7 +4491,7 @@ void View3DInventorViewer::Private::updateShadowGround(const SbBox3f &box)
             });
 
     static const App::PropertyIntegerConstraint::Constraints _spread_cstr(0,1000000,500);
-    double spread = _shadowParam<App::PropertyIntegerConstraint>(doc, "SpreadSize",
+    double spread = _shadowParam<App::PropertyIntegerConstraint>(view, "SpreadSize",
             ViewParams::docShadowSpreadSize(), ViewParams::getShadowSpreadSize(),
             [](App::PropertyIntegerConstraint &prop) {
                 if(prop.getConstraints() != &_spread_cstr)
@@ -4316,7 +4499,7 @@ void View3DInventorViewer::Private::updateShadowGround(const SbBox3f &box)
             });
 
     static const App::PropertyIntegerConstraint::Constraints _sample_cstr(0,7,1);
-    double sample = _shadowParam<App::PropertyIntegerConstraint>(doc, "SpreadSampleSize",
+    double sample = _shadowParam<App::PropertyIntegerConstraint>(view, "SpreadSampleSize",
             ViewParams::docShadowSpreadSampleSize(), ViewParams::getShadowSpreadSampleSize(),
             [](App::PropertyIntegerConstraint &prop) {
                 if(prop.getConstraints() != &_sample_cstr)
@@ -4527,7 +4710,8 @@ void View3DInventorViewer::viewSelection(bool extend)
         sels.push_back(Gui::Selection().getContext());
         if (sels.back().getDocument() != guiDocument->getDocument())
             return;
-    }
+    } else if (ViewParams::getMaxViewSelections() < (int)sels.size())
+        sels.resize(ViewParams::getMaxViewSelections());
     viewObjects(sels, extend);
 }
 
@@ -5408,13 +5592,13 @@ bool View3DInventorViewer::Private::toggleDragger(int toggle)
             dir = pcShadowSpotLight->direction.getValue();
 
             SbVec3f pos = pcShadowSpotLight->location.getValue();
-            _shadowSetParam<App::PropertyVector>(doc, "SpotLightPosition",
+            _shadowSetParam<App::PropertyVector>(view, "SpotLightPosition",
                     Base::Vector3d(pos[0], pos[1], pos[2]));
 
-            _shadowSetParam<App::PropertyAngle>(doc, "SpotLightCutOffAngle",
+            _shadowSetParam<App::PropertyAngle>(view, "SpotLightCutOffAngle",
                     pcShadowSpotLight->cutOffAngle.getValue() * 180.0 / M_PI);
         }
-        _shadowSetParam<App::PropertyVector>(doc, "LightDirection",
+        _shadowSetParam<App::PropertyVector>(view, "LightDirection",
                 Base::Vector3d(dir[0], dir[1], dir[2]));
 
         App::GetApplication().closeActiveTransaction();
@@ -5426,7 +5610,7 @@ bool View3DInventorViewer::Private::toggleDragger(int toggle)
         showDragger = TRUE;
         owner->getSceneBoundBox(bbox);
         this->getBoundingBox(bbox);
-        if (!bbox.isEmpty())
+        if (isValidBBox(bbox))
             owner->viewBoundBox(bbox);
         return true;
     }
@@ -5729,6 +5913,14 @@ struct HatchTextureFile {
 };
 
 static std::map<QString, HatchTextureFile> _HatchTextures;
+
+void View3DInventorViewer::refreshRenderCache()
+{
+    if (auto manager = selectionRoot->getRenderManager()) {
+        manager->clear();
+        selectionRoot->touch();
+    }
+}
 
 void View3DInventorViewer::updateHatchTexture()
 {

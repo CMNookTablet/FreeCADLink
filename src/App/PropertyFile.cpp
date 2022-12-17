@@ -28,6 +28,8 @@
 # include <sstream>
 #endif
 
+#include <QDir>
+
 /// Here the FreeCAD includes sorted by Base,App,Gui......
 
 #include <Base/Exception.h>
@@ -88,13 +90,11 @@ void PropertyFileIncluded::aboutToSetValue(void)
 std::string PropertyFileIncluded::getDocTransientPath(void) const
 {
     std::string path;
-    PropertyContainer *co = getContainer();
-    if (co->isDerivedFrom(DocumentObject::getClassTypeId())) {
-        path = static_cast<DocumentObject*>(co)->getDocument()->TransientDir.getValue();
-        std::replace(path.begin(), path.end(), '\\', '/');
-    } else if (co->isDerivedFrom(Document::getClassTypeId())) {
-        path = static_cast<Document*>(co)->TransientDir.getValue();
-        std::replace(path.begin(), path.end(), '\\', '/');
+    if (auto container = getContainer()) {
+        if (auto doc = container->getOwnerDocument()) {
+            path = QDir::fromNativeSeparators(QString::fromUtf8(
+                        doc->TransientDir.getValue())).toUtf8().constData();
+        }
     }
     return path;
 }

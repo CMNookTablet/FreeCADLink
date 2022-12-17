@@ -51,6 +51,8 @@ Branding::Branding()
     filter.push_back("BuildRevision");
     filter.push_back("BuildRevisionDate");
 
+    filter.push_back("AboutImage");
+
     filter.push_back("SplashScreen");
     filter.push_back("SplashAlignment");
     filter.push_back("SplashTextColor");
@@ -59,6 +61,9 @@ Branding::Branding()
     filter.push_back("SplashInfoExeName");
     filter.push_back("SplashInfoVersion");
     filter.push_back("SplashInfoFont");
+
+    filter.push_back("SplashGif");
+    filter.push_back("SplashGifAlignment");
 
     filter.push_back("StartWorkbench");
 

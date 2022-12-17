@@ -24,6 +24,7 @@
 #include <App/Application.h>
 #include <App/Document.h>
 #include <App/DocumentObject.h>
+#include <App/DocumentObserver.h>
 #include <Base/Interpreter.h>
 #include <Base/Writer.h>
 #include <Base/Reader.h>
@@ -338,13 +339,14 @@ void PropertyExpressionEngine::Restore(Base::XMLReader &reader)
     if(!count)
         return;
 
+    int cdata = reader.getAttributeAsInteger("cdata","");
     if(reader.hasAttribute("xlink") && reader.getAttributeAsInteger("xlink"))
         PropertyExpressionContainer::Restore(reader);
 
     restoredExpressions.reset(new std::vector<RestoredExpression>);
     restoredExpressions->resize(count);
 
-    if(reader.getAttributeAsInteger("cdata","")) {
+    if(cdata) {
         reader.readElement("Expressions");
         Base::InputStream s(reader.beginCharStream(false),false);
         for(auto &info : *restoredExpressions)
@@ -485,8 +487,8 @@ void PropertyExpressionEngine::afterRestore()
     }
     restoredExpressions.reset();
 
-    if (hasError)
-        throw Base::RuntimeError("Failed to restore some expression");
+    if (hasError && docObj && docObj->getDocument())
+        docObj->getDocument()->setErrorDescription(docObj, "Failed to restore some expression");
 }
 
 void PropertyExpressionEngine::onContainerRestored() {
@@ -1123,4 +1125,47 @@ bool PropertyExpressionEngine::isTouched() const {
     // PropertyExpressionEngine itself to report isTouched().
     
     return false;
+}
+
+void PropertyExpressionEngine::getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                                          App::DocumentObject *obj,
+                                          const char *subname,
+                                          bool all) const
+{
+    Expression::DepOption option = all ? Expression::DepOption::DepAll
+                                       : Expression::DepOption::DepNormal;
+
+    App::SubObjectT objT(obj, subname);
+    auto sobj = objT.getSubObject();
+    auto subElement = objT.getOldElementName();
+
+    for(auto &v : expressions) {
+        const auto &deps = v.second.expression->getDeps(option);
+        auto it = deps.find(obj);
+        if(it==deps.end())
+            continue;
+        for(auto &dep : it->second)  {
+            if (!subname) {
+                identifiers.push_back(v.first);
+                break;
+            }
+            bool found = false;
+            for (const auto &path : dep.second) {
+                if (path.getSubObjectName() == subname) {
+                    identifiers.push_back(v.first);
+                    found = true;
+                    break;
+                }
+                App::SubObjectT sobjT(obj, path.getSubObjectName().c_str());
+                if (sobjT.getSubObject() == sobj
+                        && sobjT.getOldElementName() == subElement) {
+                    identifiers.push_back(v.first);
+                    found = true;
+                    break;
+                }
+            }
+            if (found)
+                break;
+        }
+    }
 }

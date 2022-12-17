@@ -346,7 +346,6 @@ void DlgImportExportStep::saveSettings()
     ui->checkBoxUseAppPart->onSave();
     ui->checkBoxUseBaseName->onSave();
     ui->checkBoxReduceObjects->onSave();
-    ui->checkBoxExpandCompound->onSave();
     ui->checkBoxShowProgress->onSave();
     ui->comboBoxImportMode->onSave();
 }
@@ -389,7 +388,6 @@ void DlgImportExportStep::loadSettings()
     ui->checkBoxUseAppPart->onRestore();
     ui->checkBoxUseBaseName->onRestore();
     ui->checkBoxReduceObjects->onRestore();
-    ui->checkBoxExpandCompound->onRestore();
     ui->checkBoxShowProgress->onRestore();
     ui->comboBoxImportMode->onRestore();
 }

@@ -102,7 +102,7 @@ AuxGroup::GroupType AuxGroup::getGroupType() const
 bool AuxGroup::allowDuplicateLabel() const
 {
     return getGroupType()!=OtherGroup
-        && !Part::PartParams::AuxGroupUniqueLabel();
+        && !Part::PartParams::getAuxGroupUniqueLabel();
 }
 
 bool AuxGroup::isObjectAllowed(const App::DocumentObject *obj) const

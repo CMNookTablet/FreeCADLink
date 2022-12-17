@@ -286,6 +286,30 @@ PyObject*  DocumentPy::removeObject(PyObject *args)
     }
 }
 
+PyObject*  DocumentPy::removeObjects(PyObject *args)
+{
+    PyObject *pyNames;
+    if (!PyArg_ParseTuple(args, "O",&pyNames))     // convert args: Python->C
+        return nullptr;                             // NULL triggers exception
+
+    const char *errmsg = "Expect first argument to be either a sequence of object names";
+    if (!PySequence_Check(pyNames)) {
+        PyErr_SetString(PyExc_TypeError, errmsg);
+        return nullptr;
+    }
+    Py::Sequence seq(pyNames);
+    std::vector<std::string> names;
+    for (Py_ssize_t i=0;i<seq.size();++i) {
+        if (!PyUnicode_Check(seq[i].ptr())) {
+            PyErr_SetString(PyExc_TypeError, errmsg);
+            return nullptr;
+        }
+        names.push_back(PyUnicode_AsUTF8(seq[i].ptr()));
+    }
+    getDocumentPtr()->removeObjects(names);
+    Py_Return;
+}
+
 PyObject*  DocumentPy::copyObject(PyObject *args)
 {
     PyObject *obj, *rec=Py_False, *retAll=Py_False;

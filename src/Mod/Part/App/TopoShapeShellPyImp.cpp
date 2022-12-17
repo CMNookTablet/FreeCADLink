@@ -92,7 +92,7 @@ int TopoShapeShellPy::PyInit(PyObject* args, PyObject* /*kwd*/)
 
 #ifndef FC_NO_ELEMENT_MAP
     PY_TRY {
-        getTopoShapePtr()->makEShape(TOPOP_SHELL,getPyShapes(obj));
+        getTopoShapePtr()->makEBoolean(Part::OpCodes::Shell,getPyShapes(obj));
     } _PY_CATCH_OCC(return(-1))
 #else
     BRep_Builder builder;

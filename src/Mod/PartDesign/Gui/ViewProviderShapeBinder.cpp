@@ -70,7 +70,7 @@ ViewProviderShapeBinder::ViewProviderShapeBinder()
 
     //get the datum coloring scheme
     // set default color for datums (golden yellow with 60% transparency)
-    unsigned long shcol = PartGui::PartParams::DefaultDatumColor();
+    unsigned long shcol = PartGui::PartParams::getDefaultDatumColor();
     App::Color col ( (uint32_t) shcol );
     
     MapFaceColor.setValue(false);
@@ -160,13 +160,13 @@ void ViewProviderShapeBinder::highlightReferences(const bool on, bool /*auxiliar
                 if(e.substr(4) == "Edge") {
                     int idx = std::stoi(e.substr(4)) - 1;
                     assert ( idx>=0 );
-                    if ( idx < (ssize_t) lcolors.size() )
+                    if ( idx < (int) lcolors.size() )
                         lcolors[idx] = App::Color(1.0,0.0,1.0); // magenta
                 }
                 else if(e.substr(4) == "Face")  {
                     int idx = std::stoi(e.substr(4)) - 1;
                     assert ( idx>=0 );
-                    if ( idx < (ssize_t) fcolors.size() )
+                    if ( idx < (int) fcolors.size() )
                         fcolors[idx] = App::Color(1.0,0.0,1.0); // magenta
                 }
             }

@@ -27,17 +27,20 @@
 #include <array>
 #include <Inventor/details/SoSubDetail.h>
 #include <Inventor/details/SoDetail.h>
+#include <Inventor/details/SoFaceDetail.h>
+#include <Inventor/details/SoLineDetail.h>
+#include <Inventor/details/SoPointDetail.h>
 
 class GuiExport SoFCDetail : public SoDetail
 {
   SO_DETAIL_HEADER(SoFCDetail);
 
-  public:
-  SoFCDetail(void);
+public:
+  SoFCDetail();
   virtual ~SoFCDetail();
 
-  static void initClass(void);
-  virtual SoDetail * copy(void) const;
+  static void initClass();
+  virtual SoDetail * copy() const;
 
   enum Type {
     Vertex,
@@ -45,13 +48,55 @@ class GuiExport SoFCDetail : public SoDetail
     Face,
     TypeMax,
   };
-  const std::set<int> &getIndices(Type type) const;
+  const std::set<int> &getIndices(Type type, void **ctx=nullptr) const;
+  void *getContext(Type type) const;
+  void setContext(Type type, void *ctx);
   void setIndices(Type type, std::set<int> &&indices);
   bool addIndex(Type type, int index);
   bool removeIndex(Type type, int index);
 
-  private:
+private:
   std::array<std::set<int>, TypeMax> indexArray;
+  std::array<void*, TypeMax> ctx = {};
+};
+
+class GuiExport SoFCFaceDetail : public SoFaceDetail
+{
+  SO_DETAIL_HEADER(SoFCFaceDetail);
+public:
+  static void initClass();
+  virtual SoDetail * copy() const;
+  void setContext(void* ctx);
+  void* getContext() const {return ctx;}
+
+private:
+  void* ctx = nullptr;
+};
+
+class GuiExport SoFCLineDetail : public SoLineDetail
+{
+  SO_DETAIL_HEADER(SoFCLineDetail);
+public:
+  static void initClass();
+  virtual SoDetail * copy() const;
+  void setContext(void* ctx);
+  void* getContext() const {return ctx;}
+
+private:
+  void* ctx = nullptr;
+};
+
+class GuiExport SoFCPointDetail : public SoPointDetail
+{
+  SO_DETAIL_HEADER(SoFCPointDetail);
+public:
+  static void initClass();
+  virtual SoDetail * copy() const;
+  void setContext(void* ctx);
+  void* getContext() const {return ctx;}
+
+private:
+  void* ctx = nullptr;
 };
 
 #endif // FC_SOFCDETAIL_H

@@ -1,11 +1,35 @@
+# -*- coding: utf-8 -*-
+# ***************************************************************************
+# *   Copyright (c) 2022 Zheng Lei (realthunder) <realthunder.dev@gmail.com>*
+# *                                                                         *
+# *   This program is free software; you can redistribute it and/or modify  *
+# *   it under the terms of the GNU Lesser General Public License (LGPL)    *
+# *   as published by the Free Software Foundation; either version 2 of     *
+# *   the License, or (at your option) any later version.                   *
+# *   for detail see the LICENCE text file.                                 *
+# *                                                                         *
+# *   This program is distributed in the hope that it will be useful,       *
+# *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+# *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+# *   GNU Library General Public License for more details.                  *
+# *                                                                         *
+# *   You should have received a copy of the GNU Library General Public     *
+# *   License along with this program; if not, write to the Free Software   *
+# *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
+# *   USA                                                                   *
+# *                                                                         *
+# ***************************************************************************
+'''Auto code generator for parameters in Preferences/TreeView
+'''
 import sys
 from os import sys, path
 
-# import Base/params_utils.py
-sys.path.append(path.join(path.dirname(path.dirname(path.abspath(__file__))), 'Base'))
+# import Tools/params_utils.py
+sys.path.append(path.join(path.dirname(path.dirname(path.abspath(__file__))), 'Tools'))
 import params_utils
 
-from params_utils import ParamBool, ParamInt, ParamString, ParamUInt, ParamFloat
+from params_utils import ParamBool, ParamInt, ParamString, ParamUInt,\
+                         ParamFloat, ParamSpinBox, ParamColor, ParamHex
 
 NameSpace = 'Gui'
 ClassName = 'TreeParams'
@@ -15,7 +39,7 @@ SourceFile = 'Tree.cpp'
 
 Params = [
     ParamBool('SyncSelection', True, on_change=True),
-    ParamBool('CheckBoxesSelection',False, on_change=True),
+    ParamBool('CheckBoxesSelection',False, on_change=True, title="Show item checkbox"),
     ParamBool('SyncView', True),
     ParamBool('PreSelection', True),
     ParamBool('SyncPlacement', False),
@@ -41,20 +65,21 @@ Params = [
     ParamInt('IconSize', 0, on_change=True),
     ParamInt('FontSize', 0, on_change=True),
     ParamInt('ItemSpacing', 0, on_change=True),
-    ParamUInt('ItemBackground', 0, on_change=True,
+    ParamHex('ItemBackground', 0, on_change=True, title='Item background color', proxy=ParamColor(),
         doc = "Tree view item background. Only effecitve in overlay."),
-    ParamInt('ItemBackgroundPadding', 10, on_change=True,
+    ParamInt('ItemBackgroundPadding', 0, on_change=True, title="Item background padding", proxy=ParamSpinBox(0, 100, 1),
         doc = "Tree view item background padding."),
-    ParamBool('HideColumn', False, on_change=True,
+    ParamBool('HideColumn', False, on_change=True, title="Hide extra column",
         doc = "Hide extra tree view column for item description."),
-    ParamBool('HideScrollBar', True,
+    ParamBool('HideScrollBar', True, title="Hide scroll bar",
         doc = "Hide tree view scroll bar in dock overlay"),
-    ParamBool('HideHeaderView', True,
+    ParamBool('HideHeaderView', True, title="Hide header",
         doc = "Hide tree view header view in dock overlay"),
-    ParamBool('ResizableColumn', False, on_change=True,
+    ParamBool('ResizableColumn', False, on_change=True, title="Resizable columns",
         doc = "Allow tree view columns to be manually resized"),
     ParamInt('ColumnSize1', 0),
     ParamInt('ColumnSize2', 0),
+    ParamBool('TreeToolTipIcon', False, title='Show icon in tool tip'),
 ]
 
 def declare_begin():
@@ -65,3 +90,5 @@ def declare_end():
 
 def define():
     params_utils.define(sys.modules[__name__])
+
+params_utils.init_params(Params, NameSpace, ClassName, ParamPath)

@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<GenerateModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="generateMetaModel_Module.xsd">
+  <PythonExport 
+    Father="MDIViewPy" 
+    Name="View3DInventorPy" 
+    TwinPointer="View3DInventor" 
+    Twin="View3DInventor" 
+    Include="Gui/View3DInventor.h" 
+    Namespace="Gui" 
+    FatherInclude="Gui/MDIViewPy.h" 
+    FatherNamespace="Gui"
+    Initialization="true">
+    <Documentation>
+      <Author Licence="LGPL" Name="Zheng Lei" EMail="realthunder.dev@gmail.com" />
+      <UserDocu>This is the View3DInventor class</UserDocu>
+    </Documentation>
+    <Methode Name="fitAll">
+      <Documentation>
+        <UserDocu>fitAll()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="boxZoom" Keyword="true">
+      <Documentation>
+        <UserDocu>boxZoom()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewBottom">
+      <Documentation>
+        <UserDocu>viewBottom()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewFront">
+      <Documentation>
+        <UserDocu>viewFront()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewLeft">
+      <Documentation>
+        <UserDocu>viewLeft()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewRight">
+      <Documentation>
+        <UserDocu>viewRight()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewRear">
+      <Documentation>
+        <UserDocu>viewRear()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewTop">
+      <Documentation>
+        <UserDocu>viewTop()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewAxometric">
+      <Documentation>
+        <UserDocu>viewAxometric()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewAxonometric">
+      <Documentation>
+        <UserDocu>viewAxonometric()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewIsometric">
+      <Documentation>
+        <UserDocu>viewIsometric()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewDimetric">
+      <Documentation>
+        <UserDocu>viewDimetric()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewTrimetric">
+      <Documentation>
+        <UserDocu>viewTrimetric()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewDefaultOrientation">
+      <Documentation>
+        <UserDocu>
+viewDefaultOrientation(ori_str = '', scale = -1.0)
+
+Sets camera rotation to a predefined one, and camera position and zoom to show
+certain amount of model space. 
+
+ori_str: orientation, can be 'Top', 'Bottom', 'Front', 'Rear', 'Left', 'Right',
+         'Isometric', 'Dimetric', 'Trimetric', 'Custom'. If empty, the value is 
+         fetched from Parameters.
+scale: sets distance from camera to origin, and height of the screen in model
+       space, so that a sphere of diameter 'scale' fits the height of the
+       viewport. If zero, scaling is not done. If negative, the value is fetched
+       from Parameters.
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewRotateLeft">
+      <Documentation>
+        <UserDocu>viewRotateLeft()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewRotateRight">
+      <Documentation>
+        <UserDocu>viewRotateRight()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="zoomIn">
+      <Documentation>
+        <UserDocu>zoomIn()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="zoomOut">
+      <Documentation>
+        <UserDocu>zoomOut()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="viewPosition">
+      <Documentation>
+        <UserDocu>viewPosition()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="startAnimating">
+      <Documentation>
+        <UserDocu>startAnimating()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="stopAnimating">
+      <Documentation>
+        <UserDocu>stopAnimating()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setAnimationEnabled">
+      <Documentation>
+        <UserDocu>setAnimationEnabled()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="isAnimationEnabled">
+      <Documentation>
+        <UserDocu>isAnimationEnabled()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="dump">
+      <Documentation>
+        <UserDocu>dump()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="dumpNode">
+      <Documentation>
+        <UserDocu>dumpNode()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setStereoType">
+      <Documentation>
+        <UserDocu>setStereoType()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getStereoType">
+      <Documentation>
+        <UserDocu>getStereoType()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="listStereoTypes">
+      <Documentation>
+        <UserDocu>listStereoTypes()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="saveImage">
+      <Documentation>
+        <UserDocu>sageImage()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="saveVectorGraphic">
+      <Documentation>
+        <UserDocu>saveVectorGraphic()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getCamera">
+      <Documentation>
+        <UserDocu>getCamera()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getCameraNode">
+      <Documentation>
+        <UserDocu>getCameraNode()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getCameraOrientation">
+      <Documentation>
+        <UserDocu>getCameraOrientation()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getViewDirection">
+      <Documentation>
+        <UserDocu>
+getViewDirection()
+
+Returns the direction vector the view is currently pointing at as tuple with xyz values
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setViewDirection">
+      <Documentation>
+        <UserDocu>
+setViewDirection()
+
+Sets the direction the view is pointing at. The direction must be given as tuple with
+three coordinates xyz
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setCamera">
+      <Documentation>
+        <UserDocu>setCamera()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setCameraOrientation">
+      <Documentation>
+        <UserDocu>setCameraOrientation()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getCameraType">
+      <Documentation>
+        <UserDocu>getCameraType()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setCameraType">
+      <Documentation>
+        <UserDocu>setCameraType()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="listCameraTypes">
+      <Documentation>
+        <UserDocu>listCameraTypes()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getCursorPos">
+      <Documentation>
+        <UserDocu>
+getCursorPos() -> tuple of integers
+
+Return the current cursor position relative to the coordinate system of the
+viewport region.
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getObjectInfo">
+      <Documentation>
+        <UserDocu>
+getObjectInfo(tuple(int,int), [pick_radius]) -> dictionary or None
+
+Return a dictionary with the name of document, object and component. The
+dictionary also contains the coordinates of the appropriate 3d point of
+the underlying geometry in the scenegraph.
+
+If no geometry was found 'None' is returned, instead.
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getObjectsInfo">
+      <Documentation>
+        <UserDocu>
+getObjectsInfo(tuple(int,int), [pick_radius]) -> dictionary or None
+
+Does the same as getObjectInfo() but returns a list of dictionaries or None.
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getSize">
+      <Documentation>
+        <UserDocu>getSize()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getPointOnScreen">
+      <Documentation>
+        <UserDocu>
+getPointOnScreen(3D vector) -> pixel coords (as integer)
+
+Return the projected 3D point (in pixel coordinates).
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getPoint">
+      <Documentation>
+        <UserDocu>
+getPoint(pixel coords (as integer)) -> 3D vector
+
+Return the according 3D point on the focal plane to the given 2D point (in
+pixel coordinates).
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="addEventCallback">
+      <Documentation>
+        <UserDocu>addEventCallback()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="removeEventCallback">
+      <Documentation>
+        <UserDocu>removeEventCallback()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setAnnotation">
+      <Documentation>
+        <UserDocu>setAnnotation()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="removeAnnotation">
+      <Documentation>
+        <UserDocu>removeAnnotation()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getSceneGraph">
+      <Documentation>
+        <UserDocu>getSceneGraph()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getAuxSceneGraph">
+      <Documentation>
+        <UserDocu>getAuxSceneGraph()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getViewer">
+      <Documentation>
+        <UserDocu>getViewer()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="addEventCallbackPivy">
+      <Documentation>
+        <UserDocu>addEventCallbackPivy()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="removeEventCallbackPivy">
+      <Documentation>
+        <UserDocu>removeEventCallbackPivy()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="addEventCallbackSWIG">
+      <Documentation>
+        <UserDocu>addEventCallbackSWIG()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="removeEventCallbackSWIG">
+      <Documentation>
+        <UserDocu>removeEventCallbackSWIG()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="listNavigationTypes">
+      <Documentation>
+        <UserDocu>listNavigationTypes()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getNavigationType">
+      <Documentation>
+        <UserDocu>getNavigationType()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setNavigationType">
+      <Documentation>
+        <UserDocu>setNavigationType()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setAxisCross">
+      <Documentation>
+        <UserDocu>setAxisCross()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="hasAxisCross">
+      <Documentation>
+        <UserDocu>hasAxisCross()</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="addDraggerCallback">
+      <Documentation>
+        <UserDocu>
+addDraggerCallback(SoDragger, String CallbackType, function)
+
+Add a DraggerCalback function to the coin node
+Possibles types : 'addFinishCallback','addStartCallback','addMotionCallback','addValueChangedCallback'
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="removeDraggerCallback">
+      <Documentation>
+        <UserDocu>
+removeDraggerCallback(SoDragger, String CallbackType, function)
+
+Remove the DraggerCalback function from the coin node
+Possibles types : 'addFinishCallback','addStartCallback','addMotionCallback','addValueChangedCallback'
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getViewProvidersOfType">
+      <Documentation>
+        <UserDocu>
+getViewProvidersOfType()
+
+Returns a list of view providers for the given type
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="redraw">
+      <Documentation>
+        <UserDocu>redraw(): reders the scene on screen (useful for animations)</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setName">
+      <Documentation>
+        <UserDocu>
+setName(str): sets a name to this viewer
+
+The name sets the widget's windowTitle and appears on the viewer tab
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getName">
+      <Documentation>
+        <UserDocu>getName() -> string: return the window Title of this view</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="toggleClippingPlane" Keyword="true">
+      <Documentation>
+        <UserDocu>
+toggleClippingPlane(toggle=-1, beforeEditing=False, noManip=True, pla=App.Placement()
+Toggle a global clipping plane
+
+toggle: -1 toggle, 1 show, 0 hide
+beforeEditing: whether to insert the clipping node before or after editing root node
+noManip: whether to create a manipulator
+pla: clipping plane placement
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="hasClippingPlane">
+      <Documentation>
+        <UserDocu>hasClippingPlane(): check whether clipping plane is active</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="addObjectOnTop">
+      <Documentation>
+        <UserDocu>
+addObjectOnTop(obj,subname='')
+
+Force showing an object in group on top
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="removeObjectOnTop">
+      <Documentation>
+        <UserDocu>
+removeObjectOnTop(obj,subname='')
+
+Remove an object (or all objects if none is given) from on top group
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="isObjectOnTop">
+      <Documentation>
+        <UserDocu>
+isObjectOnTop(obj,subname='')
+
+Check if a given object is in group on top
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getObjectsOnTop">
+      <Documentation>
+        <UserDocu>
+getObjectsOnTop(alt=True : Boolean) -> List[Tuple[DocumentObject, String]]
+
+Return the list of objects on top
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="bindCamera">
+      <Documentation>
+        <UserDocu>
+bindCamera(node, sync=False)
+
+Bind a camera node to the camera of this view.
+node: camera Coin3D node. Pass 'None' to unbind.
+sync: determines whether to sync the camera setting up on binding.
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="bindView">
+      <Documentation>
+        <UserDocu>
+bindView(view|view_title)
+
+Bind the camera of the given view to the camera of this view.
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="unbindView">
+      <Documentation>
+        <UserDocu>
+unbindView(view|view_title|None)
+
+Unbind the camera of the given view to the camera of this view.
+Pass 'None' to unbind all views. To function works bi-directionally.
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="boundView">
+      <Documentation>
+        <UserDocu>
+boundView() -> view
+
+Return the bound view. Note that view camera binding is bi-directional.
+But this function only returns the view bound by calling bindView(). To
+obtain all bound views, use boundViews()
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="boundViews">
+      <Documentation>
+        <UserDocu>
+boundViews(recursive=False) -> List[view]
+
+Return all views that are bound to this view.
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="graphicsView">
+      <Documentation>
+        <UserDocu>graphicsView(): Access this view as QGraphicsView</UserDocu>
+      </Documentation>
+    </Methode>
+    <CustomAttributes />
+    <ClassDeclarations>
+private:
+    void setDefaultCameraHeight(float);
+    static void eventCallback(void * ud, SoEventCallback * n);
+    static void eventCallbackPivy(void * ud, SoEventCallback * n);
+    static void eventCallbackPivyEx(void * ud, SoEventCallback * n);
+    static void draggerCallback(void * ud, SoDragger* dragger);
+
+private:
+    std::list&lt;PyObject*&gt; callbacks;
+
+    </ClassDeclarations>
+  </PythonExport>
+</GenerateModel>

@@ -112,9 +112,12 @@
 
 #include <App/Application.h>
 #include <App/Document.h>
+#include <App/DocumentObserver.h>
 #include <App/MappedElement.h>
 
 #include <Gui/Application.h>
+#include <Gui/Command.h>
+#include <Gui/Action.h>
 #include <Gui/SoFCUnifiedSelection.h>
 #include <Gui/SoFCSelectionAction.h>
 #include <Gui/Selection.h>
@@ -178,8 +181,8 @@ ViewProviderPartExt::ViewProviderPartExt()
     static bool _inited;
     if (!_inited) {
         _inited = true;
-        tessRange = {PartParams::MinimumDeviation(),100.0,0.01};
-        angDeflectionRange = {PartParams::MinimumAngularDeflection(),180.0,0.05};
+        tessRange = {PartParams::getMinimumDeviation(),100.0,0.01};
+        angDeflectionRange = {PartParams::getMinimumAngularDeflection(),180.0,0.05};
     }
 
     UpdatingColor = false;
@@ -199,9 +202,9 @@ ViewProviderPartExt::ViewProviderPartExt()
 	
 
 
-    NormalsFromUV = PartParams::NormalsFromUVNodes();
+    NormalsFromUV = PartParams::getNormalsFromUVNodes();
 
-    long twoside = PartParams::TwoSideRendering() ? 1 : 0;
+    long twoside = PartParams::getTwoSideRendering() ? 1 : 0;
 
     static const char *osgroup = "Object Style";
 
@@ -232,12 +235,12 @@ ViewProviderPartExt::ViewProviderPartExt()
     LineWidth.setConstraints(&sizeRange);
     PointSize.setConstraints(&sizeRange);
     ADD_PROPERTY_TYPE(PointSize,(psize), osgroup, App::Prop_None, "Set object point size.");
-    ADD_PROPERTY_TYPE(Deviation,(PartParams::MeshDeviation()), osgroup, App::Prop_None,
+    ADD_PROPERTY_TYPE(Deviation,(PartParams::getMeshDeviation()), osgroup, App::Prop_None,
             "Sets the accuracy of the polygonal representation of the model\n"
             "in the 3D view (tessellation). Lower values indicate better quality.\n"
             "The value is in percent of object's size.");
     Deviation.setConstraints(&tessRange);
-    ADD_PROPERTY_TYPE(AngularDeflection,(PartParams::MeshAngularDeflection()), osgroup, App::Prop_None,
+    ADD_PROPERTY_TYPE(AngularDeflection,(PartParams::getMeshAngularDeflection()), osgroup, App::Prop_None,
             "Specify how finely to generate the mesh for rendering on screen or when exporting.\n"
             "The default value is 28.5 degrees, or 0.5 radians. The smaller the value\n"
             "the smoother the appearance in the 3D view, and the finer the mesh that will be exported.");
@@ -250,10 +253,10 @@ ViewProviderPartExt::ViewProviderPartExt()
     ADD_PROPERTY_TYPE(MappedColors,(),"",
             (App::PropertyType)(App::Prop_Hidden|App::Prop_ReadOnly),"");
 
-    ADD_PROPERTY(MapFaceColor,(PartParams::MapFaceColor()));
-    ADD_PROPERTY(MapLineColor,(PartParams::MapLineColor()));
-    ADD_PROPERTY(MapPointColor,(PartParams::MapPointColor()));
-    ADD_PROPERTY(MapTransparency,(PartParams::MapTransparency()));
+    ADD_PROPERTY(MapFaceColor,(PartParams::getMapFaceColor()));
+    ADD_PROPERTY(MapLineColor,(PartParams::getMapLineColor()));
+    ADD_PROPERTY(MapPointColor,(PartParams::getMapPointColor()));
+    ADD_PROPERTY(MapTransparency,(PartParams::getMapTransparency()));
     ADD_PROPERTY(ForceMapColors,(false));
 
     coords = new SoFCCoordinate3();
@@ -333,6 +336,8 @@ ViewProviderPartExt::~ViewProviderPartExt()
 
 void ViewProviderPartExt::onChanged(const App::Property* prop)
 {
+    Gui::ColorUpdater colorUpdater;
+
     if (prop == &MappedColors ||
         prop == &MapFaceColor ||
         prop == &MapLineColor ||
@@ -340,9 +345,6 @@ void ViewProviderPartExt::onChanged(const App::Property* prop)
         prop == &MapTransparency || 
         prop == &ForceMapColors) 
     {
-        if (Gui::ViewParams::getColorRecompute() && getObject())
-            getObject()->touch(true);
-
         if(!prop->testStatus(App::Property::User3)) {
             if(prop == &MapFaceColor) {
                 if(!MapFaceColor.getValue()) {
@@ -363,11 +365,6 @@ void ViewProviderPartExt::onChanged(const App::Property* prop)
             updateColors();
         }
         return;
-    } else if (Gui::ViewParams::getColorRecompute() && getObject()) {
-        if (prop == &DiffuseColor
-                || prop == &LineColorArray
-                || prop == &PointColorArray)
-            getObject()->touch(true);
     }
     
     if (isRestoring()) {
@@ -408,13 +405,13 @@ void ViewProviderPartExt::onChanged(const App::Property* prop)
         }
     }
     if (prop == &LineWidth) {
-        if (PartParams::RespectSystemDPI())
+        if (PartParams::getRespectSystemDPI())
             pcLineStyle->lineWidth = std::max(1.0, qApp->devicePixelRatio()*LineWidth.getValue());
         else
             pcLineStyle->lineWidth = LineWidth.getValue();
     }
     else if (prop == &PointSize) {
-        if (PartParams::RespectSystemDPI())
+        if (PartParams::getRespectSystemDPI())
             pcPointStyle->pointSize = std::max(1.0, qApp->devicePixelRatio()*PointSize.getValue());
         else
             pcPointStyle->pointSize = PointSize.getValue();
@@ -461,12 +458,15 @@ void ViewProviderPartExt::onChanged(const App::Property* prop)
     }
     else if (prop == &PointColorArray) {
         setHighlightedPoints(PointColorArray.getValues());
+        Gui::ColorUpdater::addObject(getObject());
     }
     else if (prop == &LineColorArray) {
         setHighlightedEdges(LineColorArray.getValues());
+        Gui::ColorUpdater::addObject(getObject());
     }
     else if (prop == &DiffuseColor) {
         setHighlightedFaces(DiffuseColor.getValues());
+        Gui::ColorUpdater::addObject(getObject());
     }
     else if(prop == &ShapeColor) {
         if(!ShapeColor.testStatus(App::Property::User3)) {
@@ -614,9 +614,13 @@ void ViewProviderPartExt::attach(App::DocumentObject *pcFeat)
 
     // putting all together with the switch
     addDisplayMaskMode(pcNormalRoot, "Flat Lines");
+    pFaceEdgeRoot = pcNormalRoot;
     addDisplayMaskMode(pcFlatRoot, "Shaded");
+    pFaceRoot = pcFlatRoot;
     addDisplayMaskMode(pcWireframeRoot, "Wireframe");
-    addDisplayMaskMode(pcPointsRoot, "Point");
+    pEdgeRoot = pcWireframeRoot;
+    addDisplayMaskMode(pcPointsRoot, "Points");
+    pVertexRoot = pcPointsRoot;
 }
 
 void ViewProviderPartExt::setDisplayMode(const char* ModeName)
@@ -628,7 +632,7 @@ void ViewProviderPartExt::setDisplayMode(const char* ModeName)
     else if ( strcmp("Wireframe",ModeName)==0 )
         setDisplayMaskMode("Wireframe");
     else if ( strcmp("Points",ModeName)==0 )
-        setDisplayMaskMode("Point");
+        setDisplayMaskMode("Points");
 
     ViewProviderGeometryObject::setDisplayMode( ModeName );
 }
@@ -736,12 +740,92 @@ bool ViewProviderPartExt::getDetailPath(const char *subname,
                                     bool append,
                                     SoDetail *&det) const
 {
-    auto element = Data::ComplexGeoData::findElementName(subname);
-    if (element && element == subname) {
-        if (Data::ComplexGeoData::hasMissingElement(subname))
-            return false;
+    auto subelement = Data::ComplexGeoData::findElementName(subname);
+    if (!subelement || subelement != subname)
+        return inherited::getDetailPath(subname, pPath, append, det);
+
+    if (Data::ComplexGeoData::hasMissingElement(subname))
+        return false;
+
+    if(pcRoot->findChild(pcModeSwitch) < 0) {
+        // this is possible in case of editing, where the switch node of the
+        // linked view object is temporarily removed from its root. We must
+        // still return true here, to prevent the selection action leaking to
+        // parent and sibling nodes.
+        if(append)
+            pPath->append(pcRoot);
+        return true;
     }
-    return inherited::getDetailPath(subname, pPath, append, det);
+
+    if (append) {
+        pPath->append(pcRoot);
+        pPath->append(pcModeSwitch);
+    }
+
+    const auto &shape = getShape();
+    Data::IndexedName element = shape.getElementName(subelement).index;
+    auto res = shape.shapeTypeAndIndex(element);
+    if(!res.second) {
+        // no SoDetail provided, which cause full selection
+        return true;
+    }
+
+    Part::TopoShape subshape = shape.getSubTopoShape(res.first, res.second, true);
+    if(subshape.isNull())
+        return true;
+
+    switch(res.first) {
+    case TopAbs_FACE:
+        if (!highlightFaceEdges) {
+            auto fdet = new SoFCFaceDetail;
+            det = fdet;
+            fdet->setPartIndex(res.second - 1);
+            fdet->setContext(faceset);
+        } else {
+            auto fdet = new SoFCDetail;
+            det = fdet;
+            fdet->addIndex(SoFCDetail::Face, res.second-1);
+            for(auto &s : subshape.getSubShapes(TopAbs_EDGE)) {
+                int idx = shape.findShape(s);
+                if(idx>0)
+                    fdet->addIndex(SoFCDetail::Edge, idx-1);
+            }
+            fdet->setContext(SoFCDetail::Face, faceset);
+        }
+        break;
+    case TopAbs_EDGE:
+        det = new SoFCLineDetail();
+        static_cast<SoFCLineDetail*>(det)->setLineIndex(res.second - 1);
+        static_cast<SoFCLineDetail*>(det)->setContext(lineset);
+        break;
+    case TopAbs_VERTEX:
+        det = new SoFCPointDetail();
+        static_cast<SoFCPointDetail*>(det)->setCoordinateIndex(res.second + nodeset->startIndex.getValue() - 1);
+        static_cast<SoFCPointDetail*>(det)->setContext(nodeset);
+        break;
+    default: {
+        auto fcDetail = new SoFCDetail;
+        det = fcDetail;
+        for(auto &s : subshape.getSubShapes(TopAbs_FACE)) {
+            int index = shape.findShape(s);
+            if(index>0)
+                fcDetail->addIndex(SoFCDetail::Face, index-1);
+        }
+        fcDetail->setContext(SoFCDetail::Face, faceset);
+        for(auto &s : subshape.getSubShapes(TopAbs_EDGE)) {
+            int index = shape.findShape(s);
+            if(index>0)
+                fcDetail->addIndex(SoFCDetail::Edge, index-1);
+        }
+        fcDetail->setContext(SoFCDetail::Edge, lineset);
+        for(auto &s : subshape.getSubShapes(TopAbs_VERTEX)) {
+            int index = shape.findShape(s);
+            if(index>0)
+                fcDetail->addIndex(SoFCDetail::Vertex, index-1);
+        }
+        fcDetail->setContext(SoFCDetail::Vertex, nodeset);
+    }}
+    return true;
 }
 
 SoDetail* ViewProviderPartExt::getDetail(const char* subelement) const
@@ -860,9 +944,6 @@ std::vector<Base::Vector3d> ViewProviderPartExt::getSelectionShape(const char* /
 
 void ViewProviderPartExt::setHighlightedFaces(const std::vector<App::Color>& colors)
 {
-    if (getObject() && getObject()->testStatus(App::ObjectStatus::TouchOnColorChange))
-        getObject()->touch(true);
-
     Gui::SoUpdateVBOAction action;
     action.apply(this->faceset);
 
@@ -897,6 +978,7 @@ void ViewProviderPartExt::setHighlightedFaces(const std::vector<App::Color>& col
     pcShapeMaterial->diffuseColor.setValue(color.r, color.g, color.b);
     //pcShapeMaterial->transparency = colors[0].a; do not get transparency from DiffuseColor in this case
     pcShapeMaterial->transparency.setValue(ShapeMaterial.getValue().transparency);
+
 }
 
 void ViewProviderPartExt::setHighlightedFaces(const std::vector<App::Material>& colors)
@@ -1044,12 +1126,12 @@ std::map<std::string,App::Color> ViewProviderPartExt::getElementColors(const cha
         }
     } else if (boost::starts_with(element,"Vertex")) {
         auto size = PointColorArray.getSize();
-        if(element[5]=='*') {
+        if(element[6]=='*') {
             auto color = PointColor.getValue();
             bool singleColor = true;
             for(int i=0;i<size;++i) {
                 if(PointColorArray[i]!=color)
-                    ret[std::string(element,5)+std::to_string(i+1)] = PointColorArray[i];
+                    ret[std::string(element,6)+std::to_string(i+1)] = PointColorArray[i];
                 singleColor = singleColor && PointColorArray[0]==PointColorArray[i];
             }
             if(singleColor && size) {
@@ -1058,7 +1140,7 @@ std::map<std::string,App::Color> ViewProviderPartExt::getElementColors(const cha
             }
             ret["Vertex"] = color;
         }else{
-            int idx = atoi(element+5);
+            int idx = atoi(element+6);
             if(idx>0 && idx<=size)
                 ret[element] = PointColorArray[idx-1];
             else
@@ -1124,8 +1206,6 @@ void ViewProviderPartExt::unsetHighlightedFaces()
 
 void ViewProviderPartExt::setHighlightedEdges(const std::vector<App::Color>& colors)
 {
-    if (getObject() && getObject()->testStatus(App::ObjectStatus::TouchOnColorChange))
-        getObject()->touch(true);
     int size = static_cast<int>(colors.size());
     if (size > 1) {
         // Although indexed lineset is used the material binding must be PER_FACE!
@@ -1167,8 +1247,6 @@ void ViewProviderPartExt::unsetHighlightedEdges()
 
 void ViewProviderPartExt::setHighlightedPoints(const std::vector<App::Color>& colors)
 {
-    if (getObject() && getObject()->testStatus(App::ObjectStatus::TouchOnColorChange))
-        getObject()->touch(true);
     int size = static_cast<int>(colors.size());
     if (size > 1) {
         int numpoints = pcoords->point.getNum();
@@ -1184,6 +1262,7 @@ void ViewProviderPartExt::setHighlightedPoints(const std::vector<App::Color>& co
         for (; i < numpoints; ++i)
             ca[i].setValue(color.r, color.g, color.b);
         pcPointMaterial->diffuseColor.finishEditing();
+        return;
     }
 
     const auto &color = size==1?colors[0]:PointColor.getValue();
@@ -1201,7 +1280,7 @@ void ViewProviderPartExt::reload()
     bool update = false;
     double pointsize = PointSize.getValue();
     double linewidth = LineWidth.getValue();
-    if (PartParams::RespectSystemDPI()) {
+    if (PartParams::getRespectSystemDPI()) {
         auto dpi = qApp->devicePixelRatio();
         pointsize = std::max(1.0, pointsize*dpi);
         linewidth = std::max(1.0, linewidth*dpi);
@@ -1213,27 +1292,31 @@ void ViewProviderPartExt::reload()
         pcLineStyle->lineWidth = linewidth;
         update = true;
     }
+    if (NormalsFromUV != PartParams::getNormalsFromUVNodes()) {
+        update = true;
+        NormalsFromUV = !NormalsFromUV;
+    }
 
-    tessRange.LowerBound = PartParams::MinimumDeviation();
-    angDeflectionRange.LowerBound = PartParams::MinimumAngularDeflection();
+    tessRange.LowerBound = PartParams::getMinimumDeviation();
+    angDeflectionRange.LowerBound = PartParams::getMinimumAngularDeflection();
 
-    if (Deviation.getValue() != PartParams::MeshDeviation()
-            || Deviation.getValue() < PartParams::MinimumDeviation()
-            || AngularDeflection.getValue() != PartParams::MeshAngularDeflection()
-            || AngularDeflection.getValue() < PartParams::MinimumAngularDeflection())
+    if (Deviation.getValue() != PartParams::getMeshDeviation()
+            || Deviation.getValue() < PartParams::getMinimumDeviation()
+            || AngularDeflection.getValue() != PartParams::getMeshAngularDeflection()
+            || AngularDeflection.getValue() < PartParams::getMinimumAngularDeflection())
         update = true;
 
     if (!update)
         return;
 
-    if (!PartParams::OverrideTessellation()) {
+    if (!PartParams::getOverrideTessellation()) {
         Base::ObjectStatusLocker<App::Property::Status,App::Property> guard(
                 App::Property::User3, &Deviation);
 
-        Deviation.setValue(PartParams::MeshDeviation());
+        Deviation.setValue(PartParams::getMeshDeviation());
         Base::ObjectStatusLocker<App::Property::Status,App::Property> guard2(
                 App::Property::User3, &AngularDeflection);
-        AngularDeflection.setValue(PartParams::MeshAngularDeflection());
+        AngularDeflection.setValue(PartParams::getMeshAngularDeflection());
     }
     updateVisual();
 }
@@ -1490,6 +1573,15 @@ struct ColorInfo {
         }
     }
 };
+
+void ViewProviderPartExt::checkColorUpdate()
+{
+    if (MapFaceColor.getValue()
+            || MapLineColor.getValue()
+            || MapPointColor.getValue()
+            || MapTransparency.getValue())
+        updateColors();
+}
 
 void ViewProviderPartExt::updateColors(App::Document *sourceDoc, bool forceColorMap) 
 {
@@ -1832,15 +1924,15 @@ void ViewProviderPartExt::updateVisual()
         bounds.Get(xMin, yMin, zMin, xMax, yMax, zMax);
         Standard_Real deflection = std::max(Precision::Confusion(),
             ((xMax-xMin)+(yMax-yMin)+(zMax-zMin))/300.0 *
-                std::max(PartParams::OverrideTessellation() ? PartParams::MeshDeviation() : Deviation.getValue(),
-                     PartParams::MinimumDeviation()));
+                std::max(PartParams::getOverrideTessellation() ? PartParams::getMeshDeviation() : Deviation.getValue(),
+                     PartParams::getMinimumDeviation()));
 
         // create or use the mesh on the data structure
 #if OCC_VERSION_HEX >= 0x060600
         Standard_Real AngDeflectionRads = std::max(Precision::Angular(),
-            std::max((PartParams::OverrideTessellation() ?
-                        PartParams::MeshAngularDeflection() : AngularDeflection.getValue()),
-                      PartParams::MinimumAngularDeflection()) / 180.0 * M_PI);
+            std::max((PartParams::getOverrideTessellation() ?
+                        PartParams::getMeshAngularDeflection() : AngularDeflection.getValue()),
+                      PartParams::getMinimumAngularDeflection()) / 180.0 * M_PI);
         BRepMesh_IncrementalMesh(cShape,deflection,Standard_False,
                 AngDeflectionRads,Standard_True);
 #else

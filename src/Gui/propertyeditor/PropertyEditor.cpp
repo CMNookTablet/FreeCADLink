@@ -56,8 +56,8 @@ FC_LOG_LEVEL_INIT("PropertyView",true,true)
 
 using namespace Gui::PropertyEditor;
 
-PropertyEditor::PropertyEditor(QWidget *parent)
-    : QTreeView(parent)
+PropertyEditor::PropertyEditor(bool isViewEditor)
+    : isViewEditor(isViewEditor)
     , autoexpand(false)
     , autoupdate(false)
     , committing(false)
@@ -721,6 +721,8 @@ void PropertyEditor::contextMenuEvent(QContextMenuEvent *ev) {
         }
     }
 
+    menu.addSeparator();
+
     if(props.size() == 1) {
         auto item = static_cast<PropertyItem*>(contextIndex.internalPointer());
         auto prop = props.begin()->getProperty();
@@ -733,7 +735,6 @@ void PropertyEditor::contextMenuEvent(QContextMenuEvent *ev) {
         {
             contextIndex = propertyModel->buddy(contextIndex);
             setCurrentIndex(contextIndex);
-            menu.addSeparator();
             menu.addAction(tr("Expression..."))->setData(QVariant(MA_Expression));
         }
     }
@@ -787,38 +788,32 @@ void PropertyEditor::contextMenuEvent(QContextMenuEvent *ev) {
         action = menu.addSeparator();
         hiddenActions.push_back(action);
 
-        QString text;
-        bool checked;
-        QCheckBox *checkbox;
-#define _ACTION_SETUP(_name) do {\
-            text = tr(#_name);\
-            checked = (propStatus & (1<<App::Property::_name)) ? true : false;\
-            action = Action::addCheckBox(&menu, text, checked, &checkbox);\
-            action->setData(QVariant(MA_##_name));\
-            hiddenActions.push_back(action);\
-            flags[MA_##_name] = checked;\
-        }while(0)
-#define ACTION_SETUP(_name) do {\
-            _ACTION_SETUP(_name);\
-            if(propType & App::Prop_##_name) {\
-                action->setText(text + QStringLiteral(" *"));\
-                checkbox->setChecked(true);\
-                checkbox->setDisabled(true);\
-                flags.erase(MA_##_name);\
-            }\
-        }while(0)
-
-        ACTION_SETUP(Hidden);
-        ACTION_SETUP(Output);
-        ACTION_SETUP(NoRecompute);
-        ACTION_SETUP(ReadOnly);
-        ACTION_SETUP(Transient);
-        _ACTION_SETUP(Touched);
-        _ACTION_SETUP(EvalOnRestore);
-        _ACTION_SETUP(CopyOnChange);
+        auto setupAction = [&](const char *name, int action_type, int ptype, int prop_type) {
+            QCheckBox *checkbox;
+            QString text = tr({name});
+            bool checked = (propStatus & (1<<ptype)) ? true : false;
+            action = Action::addCheckBox(&menu, text, checked, &checkbox);
+            action->setData(QVariant(action_type));
+            hiddenActions.push_back(action);
+            flags[action_type] = checked;
+            if(propType & prop_type) {
+                action->setText(text + QStringLiteral(" *"));
+                checkbox->setChecked(true);
+                checkbox->setDisabled(true);
+                flags.erase(action_type);
+            }
+        };
+        setupAction("Hidden", MA_Hidden, App::Property::Hidden, App::PropertyType::Prop_Hidden);
+        setupAction("Output", MA_Output, App::Property::Output, App::PropertyType::Prop_Output);
+        setupAction("NoRecompute", MA_NoRecompute, App::Property::NoRecompute, App::PropertyType::Prop_NoRecompute);
+        setupAction("ReadOnly", MA_ReadOnly, App::Property::ReadOnly, App::PropertyType::Prop_ReadOnly);
+        setupAction("Transient", MA_Transient, App::Property::Transient, App::PropertyType::Prop_Transient);
+        setupAction("Touched", MA_Touched, App::Property::Touched, App::PropertyType::Prop_None);
+        setupAction("EvalOnRestore", MA_EvalOnRestore, App::Property::EvalOnRestore, App::PropertyType::Prop_None);
+        setupAction("CopyOnChange", MA_CopyOnChange, App::Property::CopyOnChange, App::PropertyType::Prop_None);
         if (auto prop = props.begin()->getProperty()) {
             if (prop->isDerivedFrom(App::PropertyMaterial::getClassTypeId()))
-                _ACTION_SETUP(MaterialEdit);
+                setupAction("MaterialEdit", MA_MaterialEdit, App::Property::MaterialEdit, App::PropertyType::Prop_None);
         }
     }
 
@@ -854,18 +849,18 @@ void PropertyEditor::contextMenuEvent(QContextMenuEvent *ev) {
         case MA_AddProp: {
             App::AutoTransaction committer("Add property");
             std::unordered_set<App::PropertyContainer*> containers;
-            auto sels = Gui::Selection().getSelection("*");
-            if(sels.size() == 1)
-                containers.insert(sels[0].pObject);
-            else {
-                for(auto &propT : props) {
-                    if (auto prop = propT.getProperty())
-                        containers.insert(prop->getContainer());
-                }
+            for(auto &propT : props) {
+                if (auto prop = propT.getProperty())
+                    containers.insert(prop->getContainer());
             }
-            Gui::Dialog::DlgAddProperty dlg(
-                    Gui::getMainWindow(),std::move(containers));
-            dlg.exec();
+            if (!containers.empty()) {
+                std::vector<Base::Type> filters;
+                if (!Base::freecad_dynamic_cast<App::DocumentObject>(*containers.begin()))
+                    filters.push_back(App::PropertyLinkBase::getClassTypeId());
+                Gui::Dialog::DlgAddProperty dlg(
+                        Gui::getMainWindow(),std::move(containers),filters);
+                dlg.exec();
+            }
             break;
         }
         case MA_EditPropGroup: {

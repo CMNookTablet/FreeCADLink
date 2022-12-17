@@ -965,11 +965,6 @@ void TaskHoleParameters::changedObject(const App::Document&, const App::Property
     }
 }
 
-void TaskHoleParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
-{
-    Q_UNUSED(msg)
-}
-
 bool TaskHoleParameters::getThreaded() const
 {
     return ui->Threaded->isChecked();

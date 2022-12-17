@@ -665,6 +665,7 @@ MenuItem* StdWorkbench::setupMenuBar() const
           << "Std_ViewVR"
 #endif
           << "Separator" << visu
+          << "Std_ToolTipDisable"
           << "Std_ToggleNavigation"
           << "Std_SetAppearance" << "Std_GroupRandomColor" << "Separator"
           << "Std_Workbench" << "Std_ToolBarMenu" << "Std_DockViewMenu";

@@ -306,17 +306,20 @@ Py::Object ParameterGrpPy::getGroup(const Py::Tuple& args)
     if (!PyArg_ParseTuple(args.ptr(), "s", &pstr))
         throw Py::Exception();
 
-    // get the Handle of the wanted group
-    Base::Reference<ParameterGrp> handle = _cParamGrp->GetGroup(pstr);
-    if (handle.isValid()) {
-        // create a python wrapper class
-        ParameterGrpPy *pcParamGrp = new ParameterGrpPy(handle);
-        // increment the ref count
-        return Py::asObject(pcParamGrp);
+    try {
+        // get the Handle of the wanted group
+        Base::Reference<ParameterGrp> handle = _cParamGrp->GetGroup(pstr);
+        if (handle.isValid()) {
+            // create a python wrapper class
+            ParameterGrpPy *pcParamGrp = new ParameterGrpPy(handle);
+            // increment the ref count
+            return Py::asObject(pcParamGrp);
+        }
+        else {
+            throw Py::RuntimeError("GetGroup failed");
+        }
     }
-    else {
-        throw Py::RuntimeError("GetGroup failed");
-    }
+    _PY_CATCH(return Py::None())
 }
 
 Py::Object ParameterGrpPy::getManager(const Py::Tuple& args)

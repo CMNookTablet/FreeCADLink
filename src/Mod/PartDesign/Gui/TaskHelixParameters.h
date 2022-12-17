@@ -81,7 +81,7 @@ private Q_SLOTS:
 
 
 protected:
-    void onSelectionChanged(const Gui::SelectionChanges& msg) override;
+    void _onSelectionChanged(const Gui::SelectionChanges& msg) override;
     void changeEvent(QEvent *e) override;
     void getReferenceAxis(App::DocumentObject *&obj, std::vector<std::string> &sub) const;
 

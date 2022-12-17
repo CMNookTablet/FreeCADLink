@@ -25,13 +25,6 @@
 
 #include <unordered_set>
 #include <boost_signals2.hpp>
-#include <boost/preprocessor/facilities/expand.hpp>
-#include <boost/preprocessor/cat.hpp>
-#include <boost/preprocessor/seq/for_each.hpp>
-#include <boost/preprocessor/seq/elem.hpp>
-#include <boost/preprocessor/seq/cat.hpp>
-#include <boost/preprocessor/tuple/elem.hpp>
-#include <boost/preprocessor/tuple/enum.hpp>
 #include <Base/Parameter.h>
 #include "DocumentObject.h"
 #include "FeaturePython.h"
@@ -39,12 +32,7 @@
 #include "DocumentObjectExtension.h"
 #include "FeaturePython.h"
 #include "GroupExtension.h"
-
-//FIXME: ISO C++11 requires at least one argument for the "..." in a variadic macro
-#if defined(__clang__)
-# pragma clang diagnostic push
-# pragma clang diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
-#endif
+#include "LinkParams.h"
 
 #define LINK_THROW(_type,_msg) do{\
     if(FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG))\
@@ -76,158 +64,6 @@ public:
         LinkModeAutoUnlink,
     };
 
-    /** \name Parameter definition
-     *
-     * Parameter definition (Name, Type, Property Type, Default, Document).
-     * The variadic is here so that the parameter can be extended by adding
-     * extra fields.  See LINK_PARAM_EXT() for an example
-     */
-    //@{
-
-#define LINK_PARAM_LINK_PLACEMENT(...) \
-    (LinkPlacement, Base::Placement, App::PropertyPlacement, Base::Placement(), "Link placement", ##__VA_ARGS__)
-
-#define LINK_PARAM_PLACEMENT(...) \
-    (Placement, Base::Placement, App::PropertyPlacement, Base::Placement(), \
-     "Alias to LinkPlacement to make the link object compatibale with other objects", ##__VA_ARGS__)
-
-#define LINK_PARAM_OBJECT(...) \
-    (LinkedObject, App::DocumentObject*, App::PropertyLink, 0, "Linked object", ##__VA_ARGS__)
-
-#define LINK_PARAM_TRANSFORM(...) \
-    (LinkTransform, bool, App::PropertyBool, false, \
-      "Set to false to override linked object's placement", ##__VA_ARGS__)
-
-#define LINK_PARAM_CLAIM_CHILD(...) \
-    (LinkClaimChild, bool, App::PropertyBool, false, \
-      "Claim the linked object as a child", ##__VA_ARGS__)
-
-#define LINK_PARAM_COPY_ON_CHANGE(...) \
-    (LinkCopyOnChange, long, App::PropertyEnumeration, ((long)0), \
-      "Disabled: disable copy on change\n"\
-      "Enabled: enable copy linked object on change of any of its property marked as CopyOnChange\n"\
-      "Owned: force copy of the linked object (if it has not done so) and take the ownership of the copy\n"\
-      "Tracking: enable copy on change and auto synchronization of changes in the source object.",\
-      ##__VA_ARGS__)
-
-#define LINK_PARAM_COPY_ON_CHANGE_SOURCE(...) \
-    (LinkCopyOnChangeSource, App::DocumentObject*, App::PropertyLink, 0, "The copy on change source object", ##__VA_ARGS__)
-
-#define LINK_PARAM_COPY_ON_CHANGE_GROUP(...) \
-    (LinkCopyOnChangeGroup, App::DocumentObject*, App::PropertyLink, 0, \
-     "Linked to a internal group object for holding on change copies", ##__VA_ARGS__)
-
-#define LINK_PARAM_COPY_ON_CHANGE_TOUCHED(...) \
-    (LinkCopyOnChangeTouched, bool, App::PropertyBool, 0, "Indicating the copy on change source object has been changed", ##__VA_ARGS__)
-
-#define LINK_PARAM_GROUP_VISIBILITY(...) \
-    (SyncGroupVisibility, bool, App::PropertyBool, false, \
-      "Set to false to override (nested) child visibility when linked to a plain group", ##__VA_ARGS__)
-
-#define LINK_PARAM_SCALE(...) \
-    (Scale, double, App::PropertyFloat, 1.0, "Scale factor", ##__VA_ARGS__)
-
-#define LINK_PARAM_SCALE_VECTOR(...) \
-    (ScaleVector, Base::Vector3d, App::PropertyVector, Base::Vector3d(1,1,1), \
-     "Scale vector for non-uniform scaling. Please be aware that the underlying\n" \
-     "geometry may be transformed into BSpline surface due to non-uniform scale.", ##__VA_ARGS__)
-
-#define LINK_PARAM_MATRIX(...) \
-    (Matrix, Base::Matrix4D, App::PropertyMatrix, Base::Matrix4D(), \
-     "Matrix transformation for the linked object. The transformation is applied\n" \
-     "before scale and placement.", ##__VA_ARGS__)
-
-#define LINK_PARAM_PLACEMENTS(...) \
-    (PlacementList, std::vector<Base::Placement>, App::PropertyPlacementList, std::vector<Base::Placement>(),\
-      "The placement for each element in a link array", ##__VA_ARGS__)
-
-#define LINK_PARAM_AUTO_PLACEMENT(...) \
-    (AutoPlacement, bool, App::PropertyBool, false,\
-      "Enable auto placement of newly created array element", ##__VA_ARGS__)
-
-#define LINK_PARAM_SCALES(...) \
-    (ScaleList, std::vector<Base::Vector3d>, App::PropertyVectorList, std::vector<Base::Vector3d>(),\
-      "The scale factors for each element in a link array", ##__VA_ARGS__)
-
-#define LINK_PARAM_MATRICES(...) \
-    (MatrixList, std::vector<Base::Matrix4D>, App::PropertyMatrixList, std::vector<Base::Matrix4D>(),\
-      "Matrix transofmration of each element in a link array.\n" \
-      "The transformation is applied before scale and placement.", ##__VA_ARGS__)
-
-#define LINK_PARAM_VISIBILITIES(...) \
-    (VisibilityList, boost::dynamic_bitset<>, App::PropertyBoolList, boost::dynamic_bitset<>(),\
-      "The visibility state of element in a link arrayement", ##__VA_ARGS__)
-
-#define LINK_PARAM_COUNT(...) \
-    (ElementCount, int, App::PropertyInteger, 0, "Link element count", ##__VA_ARGS__)
-
-#define LINK_PARAM_ELEMENTS(...) \
-    (ElementList, std::vector<App::DocumentObject*>, App::PropertyLinkList, std::vector<App::DocumentObject*>(),\
-      "The link element object list", ##__VA_ARGS__)
-
-#define LINK_PARAM_SHOW_ELEMENT(...) \
-    (ShowElement, bool, App::PropertyBool, true, "Enable link element list", ##__VA_ARGS__)
-
-#define LINK_PARAM_AUTO_LABEL(...) \
-    (AutoLinkLabel, bool, App::PropertyBool, false, "Enable link auto label according to linked object", ##__VA_ARGS__)
-
-#define LINK_PARAM_MODE(...) \
-    (LinkMode, long, App::PropertyEnumeration, ((long)0), "Link group mode", ##__VA_ARGS__)
-
-#define LINK_PARAM_LINK_EXECUTE(...) \
-    (LinkExecute, const char*, App::PropertyString, (""),\
-     "Link execute function. Default to 'appLinkExecute'. 'None' to disable.", ##__VA_ARGS__)
-
-#define LINK_PARAM_COLORED_ELEMENTS(...) \
-    (ColoredElements, App::DocumentObject*, App::PropertyLinkSubHidden, \
-     0, "Link colored elements", ##__VA_ARGS__)
-
-#define LINK_PARAM(_param) (LINK_PARAM_##_param())
-
-#define LINK_PNAME(_param) BOOST_PP_TUPLE_ELEM(0,_param)
-#define LINK_PTYPE(_param) BOOST_PP_TUPLE_ELEM(1,_param)
-#define LINK_PPTYPE(_param) BOOST_PP_TUPLE_ELEM(2,_param)
-#define LINK_PDEF(_param) BOOST_PP_TUPLE_ELEM(3,_param)
-#define LINK_PDOC(_param) BOOST_PP_TUPLE_ELEM(4,_param)
-
-#define LINK_PINDEX(_param) BOOST_PP_CAT(Prop,LINK_PNAME(_param))
-    //@}
-
-#define LINK_PARAMS \
-    LINK_PARAM(PLACEMENT)\
-    LINK_PARAM(LINK_PLACEMENT)\
-    LINK_PARAM(OBJECT)\
-    LINK_PARAM(CLAIM_CHILD)\
-    LINK_PARAM(TRANSFORM)\
-    LINK_PARAM(SCALE)\
-    LINK_PARAM(SCALE_VECTOR)\
-    LINK_PARAM(MATRIX)\
-    LINK_PARAM(PLACEMENTS)\
-    LINK_PARAM(AUTO_PLACEMENT)\
-    LINK_PARAM(SCALES)\
-    LINK_PARAM(MATRICES)\
-    LINK_PARAM(VISIBILITIES)\
-    LINK_PARAM(COUNT)\
-    LINK_PARAM(ELEMENTS)\
-    LINK_PARAM(SHOW_ELEMENT)\
-    LINK_PARAM(AUTO_LABEL)\
-    LINK_PARAM(MODE)\
-    LINK_PARAM(COLORED_ELEMENTS)\
-    LINK_PARAM(COPY_ON_CHANGE)\
-    LINK_PARAM(COPY_ON_CHANGE_SOURCE)\
-    LINK_PARAM(COPY_ON_CHANGE_GROUP)\
-    LINK_PARAM(COPY_ON_CHANGE_TOUCHED)\
-    LINK_PARAM(GROUP_VISIBILITY)\
-    LINK_PARAM(LINK_EXECUTE)\
-
-    enum PropIndex {
-#define LINK_PINDEX_DEFINE(_1,_2,_param) LINK_PINDEX(_param),
-
-        // defines Prop##Name enumeration value
-        BOOST_PP_SEQ_FOR_EACH(LINK_PINDEX_DEFINE,_,LINK_PARAMS)
-        PropMax
-    };
-
     virtual void setProperty(int idx, Property *prop);
     Property *getProperty(int idx);
     Property *getProperty(const char *);
@@ -245,17 +81,6 @@ public:
         PropInfo() : index(0), name(0), doc(0) {}
     };
 
-#define LINK_PROP_INFO(_1,_var,_param) \
-    _var.push_back(PropInfo(BOOST_PP_CAT(Prop,LINK_PNAME(_param)),\
-                            BOOST_PP_STRINGIZE(LINK_PNAME(_param)),\
-                            LINK_PPTYPE(_param)::getClassTypeId(), \
-                            LINK_PDOC(_param)));
-
-    virtual const std::vector<PropInfo> &getPropertyInfo() const;
-
-    typedef std::map<std::string, PropInfo> PropInfoMap;
-    virtual const PropInfoMap &getPropertyInfoMap() const;
-
     enum LinkCopyOnChangeType {
         CopyOnChangeDisabled = 0,
         CopyOnChangeEnabled = 1,
@@ -263,23 +88,448 @@ public:
         CopyOnChangeTracking = 3
     };
 
-#define LINK_PROP_GET(_1,_2,_param) \
-    LINK_PTYPE(_param) BOOST_PP_SEQ_CAT((get)(LINK_PNAME(_param))(Value)) () const {\
-        auto prop = props[LINK_PINDEX(_param)];\
-        if(!prop) return LINK_PDEF(_param);\
-        return static_cast<const LINK_PPTYPE(_param) *>(prop)->getValue();\
-    }\
-    const LINK_PPTYPE(_param) *BOOST_PP_SEQ_CAT((get)(LINK_PNAME(_param))(Property)) () const {\
-        auto prop = props[LINK_PINDEX(_param)];\
-        return static_cast<const LINK_PPTYPE(_param) *>(prop);\
-    }\
-    LINK_PPTYPE(_param) *BOOST_PP_SEQ_CAT((get)(LINK_PNAME(_param))(Property)) () {\
-        auto prop = props[LINK_PINDEX(_param)];\
-        return static_cast<LINK_PPTYPE(_param) *>(prop);\
-    }\
+    /*[[[cog
+    import Link
+    Link.declare_link_base_extension()
+    ]]]*/
 
-    // defines get##Name##Property() and get##Name##Value() accessor
-    BOOST_PP_SEQ_FOR_EACH(LINK_PROP_GET,_,LINK_PARAMS)
+    // Auto generated code (App/Link.py:176)
+    /// Indices for predefined properties
+    enum PropIndex {
+        PropLinkPlacement = 0,
+        PropPlacement = 1,
+        PropLinkedObject = 2,
+        PropLinkTransform = 3,
+        PropLinkClaimChild = 4,
+        PropLinkCopyOnChange = 5,
+        PropLinkCopyOnChangeSource = 6,
+        PropLinkCopyOnChangeGroup = 7,
+        PropLinkCopyOnChangeTouched = 8,
+        PropSyncGroupVisibility = 9,
+        PropScale = 10,
+        PropScaleVector = 11,
+        PropMatrix = 12,
+        PropPlacementList = 13,
+        PropAutoPlacement = 14,
+        PropScaleList = 15,
+        PropMatrixList = 16,
+        PropVisibilityList = 17,
+        PropElementCount = 18,
+        PropElementList = 19,
+        PropShowElement = 20,
+        PropAutoLinkLabel = 21,
+        PropLinkMode = 22,
+        PropLinkExecute = 23,
+        PropColoredElements = 24,
+        PropMax
+    };
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkPlacement
+    Base::Placement getLinkPlacementValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkPlacement])
+            return static_cast<const App::PropertyPlacement *>(prop)->getValue();
+        return Base::Placement{};
+    }
+    const App::PropertyPlacement *getLinkPlacementProperty() const {
+        return static_cast<const App::PropertyPlacement *>(this->props[PropIndex::PropLinkPlacement]);
+    }
+    App::PropertyPlacement *getLinkPlacementProperty() {
+        return static_cast<App::PropertyPlacement *>(this->props[PropIndex::PropLinkPlacement]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property Placement
+    Base::Placement getPlacementValue() const {
+        if (auto prop = this->props[PropIndex::PropPlacement])
+            return static_cast<const App::PropertyPlacement *>(prop)->getValue();
+        return Base::Placement{};
+    }
+    const App::PropertyPlacement *getPlacementProperty() const {
+        return static_cast<const App::PropertyPlacement *>(this->props[PropIndex::PropPlacement]);
+    }
+    App::PropertyPlacement *getPlacementProperty() {
+        return static_cast<App::PropertyPlacement *>(this->props[PropIndex::PropPlacement]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkedObject
+    App::DocumentObject* getLinkedObjectValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkedObject])
+            return static_cast<const App::PropertyLink *>(prop)->getValue();
+        return nullptr;
+    }
+    const App::PropertyLink *getLinkedObjectProperty() const {
+        return static_cast<const App::PropertyLink *>(this->props[PropIndex::PropLinkedObject]);
+    }
+    App::PropertyLink *getLinkedObjectProperty() {
+        return static_cast<App::PropertyLink *>(this->props[PropIndex::PropLinkedObject]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkTransform
+    bool getLinkTransformValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkTransform])
+            return static_cast<const App::PropertyBool *>(prop)->getValue();
+        return false;
+    }
+    const App::PropertyBool *getLinkTransformProperty() const {
+        return static_cast<const App::PropertyBool *>(this->props[PropIndex::PropLinkTransform]);
+    }
+    App::PropertyBool *getLinkTransformProperty() {
+        return static_cast<App::PropertyBool *>(this->props[PropIndex::PropLinkTransform]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkClaimChild
+    bool getLinkClaimChildValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkClaimChild])
+            return static_cast<const App::PropertyBool *>(prop)->getValue();
+        return false;
+    }
+    const App::PropertyBool *getLinkClaimChildProperty() const {
+        return static_cast<const App::PropertyBool *>(this->props[PropIndex::PropLinkClaimChild]);
+    }
+    App::PropertyBool *getLinkClaimChildProperty() {
+        return static_cast<App::PropertyBool *>(this->props[PropIndex::PropLinkClaimChild]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkCopyOnChange
+    long getLinkCopyOnChangeValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkCopyOnChange])
+            return static_cast<const App::PropertyEnumeration *>(prop)->getValue();
+        return long(0);
+    }
+    const App::PropertyEnumeration *getLinkCopyOnChangeProperty() const {
+        return static_cast<const App::PropertyEnumeration *>(this->props[PropIndex::PropLinkCopyOnChange]);
+    }
+    App::PropertyEnumeration *getLinkCopyOnChangeProperty() {
+        return static_cast<App::PropertyEnumeration *>(this->props[PropIndex::PropLinkCopyOnChange]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkCopyOnChangeSource
+    App::DocumentObject* getLinkCopyOnChangeSourceValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkCopyOnChangeSource])
+            return static_cast<const App::PropertyLink *>(prop)->getValue();
+        return nullptr;
+    }
+    const App::PropertyLink *getLinkCopyOnChangeSourceProperty() const {
+        return static_cast<const App::PropertyLink *>(this->props[PropIndex::PropLinkCopyOnChangeSource]);
+    }
+    App::PropertyLink *getLinkCopyOnChangeSourceProperty() {
+        return static_cast<App::PropertyLink *>(this->props[PropIndex::PropLinkCopyOnChangeSource]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkCopyOnChangeGroup
+    App::DocumentObject* getLinkCopyOnChangeGroupValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkCopyOnChangeGroup])
+            return static_cast<const App::PropertyLink *>(prop)->getValue();
+        return nullptr;
+    }
+    const App::PropertyLink *getLinkCopyOnChangeGroupProperty() const {
+        return static_cast<const App::PropertyLink *>(this->props[PropIndex::PropLinkCopyOnChangeGroup]);
+    }
+    App::PropertyLink *getLinkCopyOnChangeGroupProperty() {
+        return static_cast<App::PropertyLink *>(this->props[PropIndex::PropLinkCopyOnChangeGroup]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkCopyOnChangeTouched
+    bool getLinkCopyOnChangeTouchedValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkCopyOnChangeTouched])
+            return static_cast<const App::PropertyBool *>(prop)->getValue();
+        return false;
+    }
+    const App::PropertyBool *getLinkCopyOnChangeTouchedProperty() const {
+        return static_cast<const App::PropertyBool *>(this->props[PropIndex::PropLinkCopyOnChangeTouched]);
+    }
+    App::PropertyBool *getLinkCopyOnChangeTouchedProperty() {
+        return static_cast<App::PropertyBool *>(this->props[PropIndex::PropLinkCopyOnChangeTouched]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property SyncGroupVisibility
+    bool getSyncGroupVisibilityValue() const {
+        if (auto prop = this->props[PropIndex::PropSyncGroupVisibility])
+            return static_cast<const App::PropertyBool *>(prop)->getValue();
+        return false;
+    }
+    const App::PropertyBool *getSyncGroupVisibilityProperty() const {
+        return static_cast<const App::PropertyBool *>(this->props[PropIndex::PropSyncGroupVisibility]);
+    }
+    App::PropertyBool *getSyncGroupVisibilityProperty() {
+        return static_cast<App::PropertyBool *>(this->props[PropIndex::PropSyncGroupVisibility]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property Scale
+    double getScaleValue() const {
+        if (auto prop = this->props[PropIndex::PropScale])
+            return static_cast<const App::PropertyFloat *>(prop)->getValue();
+        return 1.0;
+    }
+    const App::PropertyFloat *getScaleProperty() const {
+        return static_cast<const App::PropertyFloat *>(this->props[PropIndex::PropScale]);
+    }
+    App::PropertyFloat *getScaleProperty() {
+        return static_cast<App::PropertyFloat *>(this->props[PropIndex::PropScale]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property ScaleVector
+    Base::Vector3d getScaleVectorValue() const {
+        if (auto prop = this->props[PropIndex::PropScaleVector])
+            return static_cast<const App::PropertyVector *>(prop)->getValue();
+        return Base::Vector3d(1.0, 1.0 ,1.0);
+    }
+    const App::PropertyVector *getScaleVectorProperty() const {
+        return static_cast<const App::PropertyVector *>(this->props[PropIndex::PropScaleVector]);
+    }
+    App::PropertyVector *getScaleVectorProperty() {
+        return static_cast<App::PropertyVector *>(this->props[PropIndex::PropScaleVector]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property Matrix
+    Base::Matrix4D getMatrixValue() const {
+        if (auto prop = this->props[PropIndex::PropMatrix])
+            return static_cast<const App::PropertyMatrix *>(prop)->getValue();
+        return Base::Matrix4D{};
+    }
+    const App::PropertyMatrix *getMatrixProperty() const {
+        return static_cast<const App::PropertyMatrix *>(this->props[PropIndex::PropMatrix]);
+    }
+    App::PropertyMatrix *getMatrixProperty() {
+        return static_cast<App::PropertyMatrix *>(this->props[PropIndex::PropMatrix]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property PlacementList
+    std::vector<Base::Placement> getPlacementListValue() const {
+        if (auto prop = this->props[PropIndex::PropPlacementList])
+            return static_cast<const App::PropertyPlacementList *>(prop)->getValue();
+        return std::vector<Base::Placement>{};
+    }
+    const App::PropertyPlacementList *getPlacementListProperty() const {
+        return static_cast<const App::PropertyPlacementList *>(this->props[PropIndex::PropPlacementList]);
+    }
+    App::PropertyPlacementList *getPlacementListProperty() {
+        return static_cast<App::PropertyPlacementList *>(this->props[PropIndex::PropPlacementList]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property AutoPlacement
+    bool getAutoPlacementValue() const {
+        if (auto prop = this->props[PropIndex::PropAutoPlacement])
+            return static_cast<const App::PropertyBool *>(prop)->getValue();
+        return true;
+    }
+    const App::PropertyBool *getAutoPlacementProperty() const {
+        return static_cast<const App::PropertyBool *>(this->props[PropIndex::PropAutoPlacement]);
+    }
+    App::PropertyBool *getAutoPlacementProperty() {
+        return static_cast<App::PropertyBool *>(this->props[PropIndex::PropAutoPlacement]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property ScaleList
+    std::vector<Base::Vector3d> getScaleListValue() const {
+        if (auto prop = this->props[PropIndex::PropScaleList])
+            return static_cast<const App::PropertyVectorList *>(prop)->getValue();
+        return std::vector<Base::Vector3d>{};
+    }
+    const App::PropertyVectorList *getScaleListProperty() const {
+        return static_cast<const App::PropertyVectorList *>(this->props[PropIndex::PropScaleList]);
+    }
+    App::PropertyVectorList *getScaleListProperty() {
+        return static_cast<App::PropertyVectorList *>(this->props[PropIndex::PropScaleList]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property MatrixList
+    std::vector<Base::Matrix4D> getMatrixListValue() const {
+        if (auto prop = this->props[PropIndex::PropMatrixList])
+            return static_cast<const App::PropertyMatrixList *>(prop)->getValue();
+        return std::vector<Base::Matrix4D>{};
+    }
+    const App::PropertyMatrixList *getMatrixListProperty() const {
+        return static_cast<const App::PropertyMatrixList *>(this->props[PropIndex::PropMatrixList]);
+    }
+    App::PropertyMatrixList *getMatrixListProperty() {
+        return static_cast<App::PropertyMatrixList *>(this->props[PropIndex::PropMatrixList]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property VisibilityList
+    boost::dynamic_bitset<> getVisibilityListValue() const {
+        if (auto prop = this->props[PropIndex::PropVisibilityList])
+            return static_cast<const App::PropertyBoolList *>(prop)->getValue();
+        return boost::dynamic_bitset<>{};
+    }
+    const App::PropertyBoolList *getVisibilityListProperty() const {
+        return static_cast<const App::PropertyBoolList *>(this->props[PropIndex::PropVisibilityList]);
+    }
+    App::PropertyBoolList *getVisibilityListProperty() {
+        return static_cast<App::PropertyBoolList *>(this->props[PropIndex::PropVisibilityList]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property ElementCount
+    int getElementCountValue() const {
+        if (auto prop = this->props[PropIndex::PropElementCount])
+            return static_cast<const App::PropertyInteger *>(prop)->getValue();
+        return 0;
+    }
+    const App::PropertyInteger *getElementCountProperty() const {
+        return static_cast<const App::PropertyInteger *>(this->props[PropIndex::PropElementCount]);
+    }
+    App::PropertyInteger *getElementCountProperty() {
+        return static_cast<App::PropertyInteger *>(this->props[PropIndex::PropElementCount]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property ElementList
+    std::vector<App::DocumentObject*> getElementListValue() const {
+        if (auto prop = this->props[PropIndex::PropElementList])
+            return static_cast<const App::PropertyLinkList *>(prop)->getValue();
+        return std::vector<App::DocumentObject*>{};
+    }
+    const App::PropertyLinkList *getElementListProperty() const {
+        return static_cast<const App::PropertyLinkList *>(this->props[PropIndex::PropElementList]);
+    }
+    App::PropertyLinkList *getElementListProperty() {
+        return static_cast<App::PropertyLinkList *>(this->props[PropIndex::PropElementList]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property ShowElement
+    bool getShowElementValue() const {
+        if (auto prop = this->props[PropIndex::PropShowElement])
+            return static_cast<const App::PropertyBool *>(prop)->getValue();
+        return true;
+    }
+    const App::PropertyBool *getShowElementProperty() const {
+        return static_cast<const App::PropertyBool *>(this->props[PropIndex::PropShowElement]);
+    }
+    App::PropertyBool *getShowElementProperty() {
+        return static_cast<App::PropertyBool *>(this->props[PropIndex::PropShowElement]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property AutoLinkLabel
+    bool getAutoLinkLabelValue() const {
+        if (auto prop = this->props[PropIndex::PropAutoLinkLabel])
+            return static_cast<const App::PropertyBool *>(prop)->getValue();
+        return false;
+    }
+    const App::PropertyBool *getAutoLinkLabelProperty() const {
+        return static_cast<const App::PropertyBool *>(this->props[PropIndex::PropAutoLinkLabel]);
+    }
+    App::PropertyBool *getAutoLinkLabelProperty() {
+        return static_cast<App::PropertyBool *>(this->props[PropIndex::PropAutoLinkLabel]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkMode
+    long getLinkModeValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkMode])
+            return static_cast<const App::PropertyEnumeration *>(prop)->getValue();
+        return long(0);
+    }
+    const App::PropertyEnumeration *getLinkModeProperty() const {
+        return static_cast<const App::PropertyEnumeration *>(this->props[PropIndex::PropLinkMode]);
+    }
+    App::PropertyEnumeration *getLinkModeProperty() {
+        return static_cast<App::PropertyEnumeration *>(this->props[PropIndex::PropLinkMode]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property LinkExecute
+    const char* getLinkExecuteValue() const {
+        if (auto prop = this->props[PropIndex::PropLinkExecute])
+            return static_cast<const App::PropertyString *>(prop)->getValue();
+        return "";
+    }
+    const App::PropertyString *getLinkExecuteProperty() const {
+        return static_cast<const App::PropertyString *>(this->props[PropIndex::PropLinkExecute]);
+    }
+    App::PropertyString *getLinkExecuteProperty() {
+        return static_cast<App::PropertyString *>(this->props[PropIndex::PropLinkExecute]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:68)
+    //@{
+    /// Accessor for property ColoredElements
+    App::DocumentObject* getColoredElementsValue() const {
+        if (auto prop = this->props[PropIndex::PropColoredElements])
+            return static_cast<const App::PropertyLinkSubHidden *>(prop)->getValue();
+        return nullptr;
+    }
+    const App::PropertyLinkSubHidden *getColoredElementsProperty() const {
+        return static_cast<const App::PropertyLinkSubHidden *>(this->props[PropIndex::PropColoredElements]);
+    }
+    App::PropertyLinkSubHidden *getColoredElementsProperty() {
+        return static_cast<App::PropertyLinkSubHidden *>(this->props[PropIndex::PropColoredElements]);
+    }
+    //@}
+
+    // Auto generated code (App/Link.py:190)
+    static const std::vector<PropInfo> &getPropertyInfo();
+    //[[[end]]]
+
+    typedef std::map<std::string, PropInfo> PropInfoMap;
+    static const PropInfoMap &getPropertyInfoMap();
 
     PropertyLinkList *_getElementListProperty() const;
     const std::vector<App::DocumentObject*> &_getElementListValue() const;
@@ -447,103 +697,26 @@ public:
     LinkExtension();
     virtual ~LinkExtension();
 
-    /** \name Helpers for defining extended parameter
-     *
-     * extended parameter definition
-     * (Name, Type, Property_Type, Default, Document, Property_Name,
-     *  Derived_Property_Type, App_Property_Type, Group)
-     *
-     * This helper simply reuses Name as Property_Name, Property_Type as
-     * Derived_Property_type, Prop_None as App_Propert_Type
-     *
-     * Note: Because PropertyView will merge linked object's properties into
-     * ours, we set the default group name as ' Link' with a leading space to
-     * try to make our group before others
-     */
-    //@{
+    /*[[[cog
+    import Link
+    Link.declare_link_extension()
+    ]]]*/
 
-#define LINK_ENAME(_param) BOOST_PP_TUPLE_ELEM(5,_param)
-#define LINK_ETYPE(_param) BOOST_PP_TUPLE_ELEM(6,_param)
-#define LINK_EPTYPE(_param) BOOST_PP_TUPLE_ELEM(7,_param)
-#define LINK_EGROUP(_param) BOOST_PP_TUPLE_ELEM(8,_param)
+    // Auto generated code (App/Link.py:226)
+    App::PropertyFloat Scale;
+    App::PropertyVector ScaleVector;
+    App::PropertyMatrix Matrix;
+    App::PropertyVectorList ScaleList;
+    App::PropertyMatrixList MatrixList;
+    App::PropertyBoolList VisibilityList;
+    App::PropertyPlacementList PlacementList;
+    App::PropertyBool AutoPlacement;
+    App::PropertyLinkList ElementList;
 
-#define _LINK_PROP_ADD(_add_property, _param) \
-    _add_property(BOOST_PP_STRINGIZE(LINK_ENAME(_param)),LINK_ENAME(_param),\
-            (LINK_PDEF(_param)),LINK_EGROUP(_param),LINK_EPTYPE(_param),LINK_PDOC(_param));\
-    setProperty(LINK_PINDEX(_param),&LINK_ENAME(_param));
-
-#define LINK_PROP_ADD(_1,_2,_param) \
-    _LINK_PROP_ADD(_ADD_PROPERTY_TYPE,_param);
-
-#define LINK_PROP_ADD_EXTENSION(_1,_2,_param) \
-    _LINK_PROP_ADD(_EXTENSION_ADD_PROPERTY_TYPE,_param);
-
-#define LINK_PROPS_ADD(_seq) \
-    BOOST_PP_SEQ_FOR_EACH(LINK_PROP_ADD,_,_seq)
-
-#define LINK_PROPS_ADD_EXTENSION(_seq) \
-    BOOST_PP_SEQ_FOR_EACH(LINK_PROP_ADD_EXTENSION,_,_seq)
-
-#define _LINK_PROP_SET(_1,_2,_param) \
-    setProperty(LINK_PINDEX(_param),&LINK_ENAME(_param));
-
-#define LINK_PROPS_SET(_seq) BOOST_PP_SEQ_FOR_EACH(_LINK_PROP_SET,_,_seq)
-
-    /// Helper for defining default extended parameter
-#define _LINK_PARAM_EXT(_name,_type,_ptype,_def,_doc,...) \
-    ((_name,_type,_ptype,_def,_doc,_name,_ptype,App::Prop_None," Link"))
-
-    /** Define default extended parameter
-     * It simply reuses Name as Property_Name, Property_Type as
-     * Derived_Property_Type, and App::Prop_None as App::PropertyType
-     */
-#define LINK_PARAM_EXT(_param) BOOST_PP_EXPAND(_LINK_PARAM_EXT LINK_PARAM_##_param())
-
-    /// Helper for extended parameter with app property type
-#define _LINK_PARAM_EXT_ATYPE(_name,_type,_ptype,_def,_doc,_atype) \
-    ((_name,_type,_ptype,_def,_doc,_name,_ptype,_atype," Link"))
-
-    /// Define extended parameter with app property type
-#define LINK_PARAM_EXT_ATYPE(_param,_atype) \
-    BOOST_PP_EXPAND(_LINK_PARAM_EXT_ATYPE LINK_PARAM_##_param(_atype))
-
-    /// Helper for extended parameter with derived property type
-#define _LINK_PARAM_EXT_TYPE(_name,_type,_ptype,_def,_doc,_dtype) \
-    ((_name,_type,_ptype,_def,_doc,_name,_dtype,App::Prop_None," Link"))
-
-    /// Define extended parameter with derived property type
-#define LINK_PARAM_EXT_TYPE(_param,_dtype) \
-    BOOST_PP_EXPAND(_LINK_PARAM_EXT_TYPE LINK_PARAM_##_param(_dtype))
-
-    /// Helper for extended parameter with a different property name
-#define _LINK_PARAM_EXT_NAME(_name,_type,_ptype,_def,_doc,_pname) \
-    ((_name,_type,_ptype,_def,_doc,_pname,_ptype,App::Prop_None," Link"))
-
-    /// Define extended parameter with a different property name
-#define LINK_PARAM_EXT_NAME(_param,_pname) BOOST_PP_EXPAND(_LINK_PARAM_EXT_NAME LINK_PARAM_##_param(_pname))
-    //@}
-
-#define LINK_PARAMS_EXT \
-    LINK_PARAM_EXT(SCALE)\
-    LINK_PARAM_EXT(SCALE_VECTOR)\
-    LINK_PARAM_EXT_ATYPE(MATRIX, App::Prop_Hidden)\
-    LINK_PARAM_EXT_ATYPE(SCALES, App::Prop_Hidden)\
-    LINK_PARAM_EXT_ATYPE(MATRICES, App::Prop_Hidden)\
-    LINK_PARAM_EXT(VISIBILITIES)\
-    LINK_PARAM_EXT(PLACEMENTS)\
-    LINK_PARAM_EXT(AUTO_PLACEMENT)\
-    LINK_PARAM_EXT(ELEMENTS)
-
-#define LINK_PROP_DEFINE(_1,_2,_param) LINK_ETYPE(_param) LINK_ENAME(_param);
-#define LINK_PROPS_DEFINE(_seq) BOOST_PP_SEQ_FOR_EACH(LINK_PROP_DEFINE,_,_seq)
-
-    // defines the actual properties
-    LINK_PROPS_DEFINE(LINK_PARAMS_EXT)
-
-    void onExtendedDocumentRestored() override {
-        LINK_PROPS_SET(LINK_PARAMS_EXT);
-        inherited::onExtendedDocumentRestored();
-    }
+    // Auto generated code (App/Link.py:233)
+    void registerProperties();
+    void onExtendedDocumentRestored() override;
+    //[[[end]]]
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -556,36 +729,39 @@ class AppExport Link : public App::DocumentObject, public App::LinkExtension
 {
     PROPERTY_HEADER_WITH_EXTENSIONS(App::Link);
     typedef App::DocumentObject inherited;
+    typedef App::LinkExtension inherited_extension;
 public:
-
-#define LINK_PARAMS_LINK \
-    LINK_PARAM_EXT_TYPE(OBJECT, App::PropertyXLink)\
-    LINK_PARAM_EXT(CLAIM_CHILD)\
-    LINK_PARAM_EXT(TRANSFORM)\
-    LINK_PARAM_EXT(LINK_PLACEMENT)\
-    LINK_PARAM_EXT(PLACEMENT)\
-    LINK_PARAM_EXT(SHOW_ELEMENT)\
-    LINK_PARAM_EXT(GROUP_VISIBILITY)\
-    LINK_PARAM_EXT_TYPE(COUNT,App::PropertyIntegerConstraint)\
-    LINK_PARAM_EXT(LINK_EXECUTE)\
-    LINK_PARAM_EXT_ATYPE(COLORED_ELEMENTS,App::Prop_Hidden)\
-    LINK_PARAM_EXT(COPY_ON_CHANGE)\
-    LINK_PARAM_EXT_TYPE(COPY_ON_CHANGE_SOURCE, App::PropertyXLink)\
-    LINK_PARAM_EXT(COPY_ON_CHANGE_GROUP)\
-    LINK_PARAM_EXT(COPY_ON_CHANGE_TOUCHED)\
-    LINK_PARAM_EXT_ATYPE(AUTO_LABEL,App::Prop_Hidden)\
-
-    LINK_PROPS_DEFINE(LINK_PARAMS_LINK)
-
     Link(void);
+
+    /*[[[cog
+    import Link
+    Link.declare_link()
+    ]]]*/
+
+    // Auto generated code (App/Link.py:269)
+    App::PropertyXLink LinkedObject;
+    App::PropertyBool LinkClaimChild;
+    App::PropertyBool LinkTransform;
+    App::PropertyPlacement LinkPlacement;
+    App::PropertyPlacement Placement;
+    App::PropertyBool ShowElement;
+    App::PropertyBool SyncGroupVisibility;
+    App::PropertyIntegerConstraint ElementCount;
+    App::PropertyString LinkExecute;
+    App::PropertyLinkSubHidden ColoredElements;
+    App::PropertyEnumeration LinkCopyOnChange;
+    App::PropertyXLink LinkCopyOnChangeSource;
+    App::PropertyLink LinkCopyOnChangeGroup;
+    App::PropertyBool LinkCopyOnChangeTouched;
+    App::PropertyBool AutoLinkLabel;
+
+    // Auto generated code (App/Link.py:276)
+    void registerProperties();
+    void onDocumentRestored() override;
+    //[[[end]]]
 
     const char* getViewProviderName(void) const override{
         return "Gui::ViewProviderLink";
-    }
-
-    void onDocumentRestored() override {
-        LINK_PROPS_SET(LINK_PARAMS_LINK);
-        inherited::onDocumentRestored();
     }
 
     void handleChangedPropertyName(Base::XMLReader &reader,
@@ -606,35 +782,37 @@ typedef App::FeaturePythonT<Link> LinkPython;
 class AppExport LinkElement : public App::DocumentObject, public App::LinkBaseExtension {
     PROPERTY_HEADER_WITH_EXTENSIONS(App::LinkElement);
     typedef App::DocumentObject inherited;
+    typedef App::LinkBaseExtension inherited_extension;
 public:
-
-#define LINK_PARAMS_ELEMENT \
-    LINK_PARAM_EXT(SCALE)\
-    LINK_PARAM_EXT(SCALE_VECTOR)\
-    LINK_PARAM_EXT_ATYPE(MATRIX, App::Prop_Hidden)\
-    LINK_PARAM_EXT_TYPE(OBJECT, App::PropertyXLink)\
-    LINK_PARAM_EXT(CLAIM_CHILD)\
-    LINK_PARAM_EXT(TRANSFORM) \
-    LINK_PARAM_EXT(LINK_PLACEMENT)\
-    LINK_PARAM_EXT(PLACEMENT)\
-    LINK_PARAM_EXT(COPY_ON_CHANGE)\
-    LINK_PARAM_EXT_TYPE(COPY_ON_CHANGE_SOURCE, App::PropertyXLink)\
-    LINK_PARAM_EXT(COPY_ON_CHANGE_GROUP)\
-    LINK_PARAM_EXT(COPY_ON_CHANGE_TOUCHED)\
-
-    // defines the actual properties
-    LINK_PROPS_DEFINE(LINK_PARAMS_ELEMENT)
-
     LinkElement();
+
+    /*[[[cog
+    import Link
+    Link.declare_link_element()
+    ]]]*/
+
+    // Auto generated code (App/Link.py:269)
+    App::PropertyFloat Scale;
+    App::PropertyVector ScaleVector;
+    App::PropertyMatrix Matrix;
+    App::PropertyXLink LinkedObject;
+    App::PropertyBool LinkClaimChild;
+    App::PropertyBool LinkTransform;
+    App::PropertyPlacement LinkPlacement;
+    App::PropertyPlacement Placement;
+    App::PropertyEnumeration LinkCopyOnChange;
+    App::PropertyXLink LinkCopyOnChangeSource;
+    App::PropertyLink LinkCopyOnChangeGroup;
+    App::PropertyBool LinkCopyOnChangeTouched;
+
+    // Auto generated code (App/Link.py:276)
+    void registerProperties();
+    void onDocumentRestored() override;
+    //[[[end]]]
+
     const char* getViewProviderName(void) const override{
         return "Gui::ViewProviderLink";
     }
-
-    void onDocumentRestored() override {
-        LINK_PROPS_SET(LINK_PARAMS_ELEMENT);
-        inherited::onDocumentRestored();
-    }
-
     bool canDelete() const;
 
     void handleChangedPropertyName(Base::XMLReader &reader,
@@ -651,126 +829,34 @@ typedef App::FeaturePythonT<LinkElement> LinkElementPython;
 class AppExport LinkGroup : public App::DocumentObject, public App::LinkBaseExtension {
     PROPERTY_HEADER_WITH_EXTENSIONS(App::LinkGroup);
     typedef App::DocumentObject inherited;
+    typedef App::LinkBaseExtension inherited_extension;
 public:
-
-#define LINK_PARAMS_GROUP \
-    LINK_PARAM_EXT(ELEMENTS)\
-    LINK_PARAM_EXT(PLACEMENT)\
-    LINK_PARAM_EXT(VISIBILITIES)\
-    LINK_PARAM_EXT(MODE)\
-    LINK_PARAM_EXT_ATYPE(COLORED_ELEMENTS,App::Prop_Hidden)\
-
-    // defines the actual properties
-    LINK_PROPS_DEFINE(LINK_PARAMS_GROUP)
-
     LinkGroup();
+
+    /*[[[cog
+    import Link
+    Link.declare_link_group()
+    ]]]*/
+
+    // Auto generated code (App/Link.py:269)
+    App::PropertyLinkList ElementList;
+    App::PropertyPlacement Placement;
+    App::PropertyBoolList VisibilityList;
+    App::PropertyEnumeration LinkMode;
+    App::PropertyLinkSubHidden ColoredElements;
+
+    // Auto generated code (App/Link.py:276)
+    void registerProperties();
+    void onDocumentRestored() override;
+    //[[[end]]]
 
     const char* getViewProviderName(void) const override{
         return "Gui::ViewProviderLink";
-    }
-
-    void onDocumentRestored() override {
-        LINK_PROPS_SET(LINK_PARAMS_GROUP);
-        inherited::onDocumentRestored();
     }
 };
 
 typedef App::FeaturePythonT<LinkGroup> LinkGroupPython;
 
 } //namespace App
-
-/*[[[cog
-import LinkParams
-LinkParams.declare()
-]]]*/
-
-namespace App {
-/** Convenient class to obtain App::Link related parameters
-
- * The parameters are under group "User parameter:BaseApp/Preferences/Link"
- *
- * This class is auto generated by LinkParams.py. Modify that file
- * instead of this one, if you want to add any parameter. You need
- * to install Cog Python package for code generation:
- * @code
- *     pip install cogapp
- * @endcode
- *
- * Once modified, you can regenerate the header and the source file,
- * @code
- *     python3 -m cogapp -r LinkParams.h LinkParams.cpp
- * @endcode
- *
- * You can add a new parameter by adding lines in LinkParams.py. Available
- * parameter types are 'Int, UInt, String, Bool, Float'. For example, to add
- * a new Int type parameter,
- * @code
- *     ParamInt(parameter_name, default_value, documentation, on_change=False)
- * @endcode
- *
- * If there is special handling on parameter change, pass in on_change=True.
- * And you need to provide a function implementation in LinkParams.cpp with
- * the following signature.
- * @code
- *     void LinkParams:on<parameter_name>Changed()
- * @endcode
- */
-class AppExport LinkParams {
-public:
-    static ParameterGrp::handle getHandle();
-
-    //@{
-    /// Accessor for parameter HideScaleVector
-    static const bool & getHideScaleVector();
-    static const bool & defaultHideScaleVector();
-    static void removeHideScaleVector();
-    static void setHideScaleVector(const bool &v);
-    static const char *docHideScaleVector();
-    //@}
-
-    //@{
-    /// Accessor for parameter CreateInPlace
-    static const bool & getCreateInPlace();
-    static const bool & defaultCreateInPlace();
-    static void removeCreateInPlace();
-    static void setCreateInPlace(const bool &v);
-    static const char *docCreateInPlace();
-    //@}
-
-    //@{
-    /// Accessor for parameter CreateInContainer
-    static const bool & getCreateInContainer();
-    static const bool & defaultCreateInContainer();
-    static void removeCreateInContainer();
-    static void setCreateInContainer(const bool &v);
-    static const char *docCreateInContainer();
-    //@}
-
-    //@{
-    /// Accessor for parameter ActiveContainerKey
-    static const std::string & getActiveContainerKey();
-    static const std::string & defaultActiveContainerKey();
-    static void removeActiveContainerKey();
-    static void setActiveContainerKey(const std::string &v);
-    static const char *docActiveContainerKey();
-    //@}
-
-    //@{
-    /// Accessor for parameter CopyOnChangeApplyToAll
-    static const bool & getCopyOnChangeApplyToAll();
-    static const bool & defaultCopyOnChangeApplyToAll();
-    static void removeCopyOnChangeApplyToAll();
-    static void setCopyOnChangeApplyToAll(const bool &v);
-    static const char *docCopyOnChangeApplyToAll();
-    //@}
-
-    // Auto generated code. See class document of LinkParams.
-};
-} // namespace App
-//[[[end]]]
-
-#if defined(__clang__)
-# pragma clang diagnostic pop
-#endif
 
 #endif // APP_LINK_H

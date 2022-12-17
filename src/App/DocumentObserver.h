@@ -251,8 +251,10 @@ public:
 
     /** Return the old style sub-element name
      * @param index: if given, then return the element type, and extract the index
+     * @param fallback: if true, then fallback to new style element name if
+     * there is no old style name.
      */
-    std::string getOldElementName(int *index=0) const;
+    std::string getOldElementName(int *index=nullptr, bool fallback=true) const;
 
     /// Return the sub-object
     DocumentObject *getSubObject() const;
@@ -273,7 +275,7 @@ public:
         /// Do not include sub-element reference in the output path
         NoElement    = 0x01,
         /** Do not flatten the output path. If not specified, the output path
-         * will to flatten to exclude intermediate objects that belong to the
+         * will be flatten to exclude intermediate objects that belong to the
          * same geo feature group before resolving. For example,
          *      Part.Fusion.Box. -> Part.Box.
          */
@@ -285,6 +287,8 @@ public:
          * be converted to object internal name, except for integer index.
          */
         KeepSubName  = 0x04,
+        /** Convert integer index in the path to sub-object internal name */
+        ConvertIndex = 0x08,
     };
     Q_DECLARE_FLAGS(NormalizeOptions, NormalizeOption);
 
@@ -312,7 +316,7 @@ private:
 };
 
 /**
- * The PropertyLinkT class is a helper class to create Python statements for proprty links.
+ * The PropertyLinkT class is a helper class to create Python statements for proprtey links.
  */
 class AppExport PropertyLinkT
 {
@@ -600,5 +604,7 @@ private:
 };
 
 } //namespace App
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(App::SubObjectT::NormalizeOptions);
 
 #endif // APP_DOCUMENTOBSERVER_H

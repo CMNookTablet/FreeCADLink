@@ -355,7 +355,7 @@ void ViewProvider2DObjectGrid::updateGridScale(Gui::View3DInventorViewer *viewer
     // float aspectRatio = viewer->getSoRenderManager()->getViewportRegion().getViewportAspectRatio();
     double scale = vv.getDPViewVolume().getWorldToScreenScale(
             SbVec3d(pos.x, pos.y, pos.z), 0.1);
-    if (init || !PartParams::AutoGridScale()) {
+    if (init || !PartParams::getAutoGridScale()) {
         GridScale = scale;
         return;
     }

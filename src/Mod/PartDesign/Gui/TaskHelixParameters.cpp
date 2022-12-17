@@ -320,10 +320,9 @@ void TaskHelixParameters::updateUI()
 
 }
 
-void TaskHelixParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
+void TaskHelixParameters::_onSelectionChanged(const Gui::SelectionChanges& msg)
 {
     if (msg.Type == Gui::SelectionChanges::AddSelection) {
-        exitSelectionMode();
         std::vector<std::string> axis;
         App::DocumentObject* selObj;
         if (getReferencedSelection(vp->getObject(), msg, selObj, axis) && selObj) {
@@ -331,6 +330,7 @@ void TaskHelixParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
             recomputeFeature();
             updateUI();
         }
+        exitSelectionMode();
     }
 }
 
@@ -386,7 +386,10 @@ void TaskHelixParameters::onAxisChanged(int num)
     App::PropertyLinkSub &lnk = *(axesInList[num]);
     if (lnk.getValue() == 0) {
         // enter reference selection mode
-        TaskSketchBasedParameters::onSelectReference(true, true, false, true, true);
+        ReferenceSelection::Config conf;
+        conf.edge = conf.planar = conf.circle = true;
+        conf.plane = false;
+        TaskSketchBasedParameters::onSelectReference(ui->labelAxis, conf);
         return;
     } else {
         if (!pcHelix->getDocument()->isIn(lnk.getValue())){

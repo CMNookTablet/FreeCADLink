@@ -37,12 +37,14 @@
 # include <Inventor/nodes/SoIndexedLineSet.h>
 # include <Inventor/nodes/SoPointSet.h>
 # include <Inventor/nodes/SoShapeHints.h>
+# include <Inventor/nodes/SoPickStyle.h>
 # include <Inventor/details/SoLineDetail.h>
 # include <Inventor/nodes/SoSwitch.h>
 # include <Inventor/nodes/SoAnnotation.h>
 # include <QFile>
 # include <QMenu>
 # include <QAction>
+# include <QApplication>
 #endif
 
 #include <Inventor/SbXfBox3d.h>
@@ -215,6 +217,12 @@ ViewProviderPath::ViewProviderPath()
 
     auto pArrowGroup = new SoFCPathAnnotation;
     pArrowGroup->priority = 2;
+
+    auto pickStyle = new SoPickStyle;
+    pickStyle->style = SoPickStyle::UNPICKABLE;
+    pickStyle->setOverride(true);
+    pArrowGroup->addChild(pickStyle);
+
     pcArrowTransform = new SoTransform();
     pArrowGroup->addChild(pcArrowTransform);
 
@@ -732,11 +740,77 @@ Base::BoundBox3d ViewProviderPath::_getBoundingBox(
     return bbox;
 }
 
+template<class Func>
+static void setupFilter(const char *msg,
+                        Path::Feature *feat,
+                        const std::vector<int> &indices,
+                        Func f)
+{
+    App::AutoTransaction guard(msg);
+    auto edges = feat->CommandFilter.getValues();
+    std::set<int> filter(edges.begin(), edges.end());
+    for (int idx : indices)
+        f(filter, idx);
+    edges.clear();
+    edges.insert(edges.end(), filter.begin(), filter.end());
+    feat->CommandFilter.setValues(std::move(edges));
+    feat->BuildShape.setValue(true);
+    Gui::Command::updateActive();
+}
+
 void ViewProviderPath::setupContextMenu(QMenu* menu, QObject* receiver, const char* member)
 {
+    auto feat = Base::freecad_dynamic_cast<Path::Feature>(getObject());
+    if (!feat)
+        return;
+
     QAction* act = menu->addAction(QObject::tr("Inspect G-Code"), receiver, member);
     act->setData(QVariant((int)Gui::ViewProvider::Default));
-    ViewProviderGeometryObject::setupContextMenu(menu, receiver, member);
+
+    act = menu->addAction(QObject::tr("Toggle build shape"), [feat]() {
+        App::AutoTransaction guard(QT_TRANSLATE_NOOP("ViewProviderPath", "Reset all edges"));
+        feat->BuildShape.setValue(!feat->BuildShape.getValue());
+        Gui::Command::updateActive();
+    });
+    act->setToolTip(QApplication::translate("ViewProviderPath", "Toggle building shape from G-Code"));
+
+    std::vector<int> indices;
+    for (const auto &sel : Gui::Selection().getSelection()) {
+        if (sel.pObject != feat || !sel.SubName)
+            continue;
+        int idx = atoi(sel.SubName);
+        if (idx > 0)
+            indices.push_back(idx);
+    }
+
+    if (indices.size()) {
+        act = menu->addAction(QObject::tr("Toggle selected edge(s)"), [feat, indices]() {
+            setupFilter(QT_TRANSLATE_NOOP("ViewProviderPath", "Reset all edges"), feat, indices,
+                [](std::set<int> &filter, int idx){
+                    auto res = filter.insert(idx);
+                    if (!res.second)
+                        filter.erase(res.first);
+                });
+        });
+        act->setToolTip(QApplication::translate("ViewProviderPath", "Toggle edge(s) of shape from G-Code"));
+
+        act = menu->addAction(QObject::tr("Remove edge(s)"), [feat, indices]() {
+            setupFilter(QT_TRANSLATE_NOOP("ViewProviderPath", "Remove selected edge(s)"), feat, indices,
+                [](std::set<int> &filter, int idx) {
+                    filter.insert(idx);
+                });
+        });
+        act->setToolTip(QApplication::translate("ViewProviderPath", "Remove edge(s) of shape from G-Code"));
+    }
+
+    act = menu->addAction(QObject::tr("Reset all edges"), [feat]() {
+        App::AutoTransaction guard(QT_TRANSLATE_NOOP("ViewProviderPath", "Reset all edges"));
+        feat->CommandFilter.setValues();
+        Gui::Command::updateActive();
+    });
+    act->setToolTip(QApplication::translate("ViewProviderPath", "Clear edge filter"));
+
+    inherited::setupContextMenu(menu, receiver, member);
 }
 
 bool ViewProviderPath::doubleClicked(void)

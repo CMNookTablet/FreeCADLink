@@ -91,6 +91,11 @@ viewType (String): override the view provider type directly, only effective when
         <UserDocu>Remove an object from the document</UserDocu>
       </Documentation>
     </Methode>
+    <Methode Name="removeObjects">
+      <Documentation>
+        <UserDocu>Remove a number of objects from the document</UserDocu>
+      </Documentation>
+    </Methode>
     <Methode Name="copyObject">
       <Documentation>
           <UserDocu>

@@ -59,7 +59,7 @@ FC_LOG_LEVEL_INIT("Gui",true,true)
 using namespace Gui;
 namespace bp = boost::placeholders;
 
-class ElementColors::Private: public Gui::SelectionGate
+class ElementColors::Private
 {
 public:
     typedef boost::signals2::scoped_connection Connection;
@@ -76,7 +76,7 @@ public:
     bool busy;
     bool touched;
     bool restoreOnTop;
-    bool hasEditView = false;
+    std::string editView;
     bool restoreParam;
 
     std::string editDoc;
@@ -87,10 +87,10 @@ public:
     Private(ViewProviderDocumentObject* vp, const char *element="")
         : ui(new Ui_TaskElementColors()), vp(vp),editElement(element)
     {
-        restoreParam = !App::DocumentParams::ViewObjectTransaction();
+        restoreParam = !App::DocumentParams::getViewObjectTransaction();
         if (restoreParam) {
             App::DocumentParams::setViewObjectTransaction(true);
-            connParam = App::DocumentParams::instance()->signalParamChanged.connect(
+            connParam = App::DocumentParams::signalParamChanged().connect(
                 [this](const char *name) {
                     if (boost::equals(name, "ViewObjectTransaction"))
                         restoreParam = false;
@@ -108,10 +108,11 @@ public:
                 editObj = obj->getNameInDocument();
                 editSub = Data::ComplexGeoData::noElementName(editSub.c_str());
                 try {
-                    doCommandT(Command::Gui, "_taskElementColorView = "
-                                            "FreeCADGui.getDocument('%s').EditingView",
-                                            editDoc);
-                    hasEditView = true;
+                    std::ostringstream ss;
+                    ss << "_taskElementColorView" << this;
+                    doCommandT(Command::Gui, "%s = FreeCADGui.getDocument('%s').EditingView",
+                                            ss.str(), editDoc);
+                    editView = ss.str();
                 } catch (Base::Exception &e) {
                     e.ReportException();
                 } catch (...)
@@ -135,14 +136,21 @@ public:
     }
 
     ~Private() {
+        deinit();
+    }
+
+    void deinit() {
         setOnTop(true, true);
-        if (restoreParam)
+        if (restoreParam) {
             App::DocumentParams::setViewObjectTransaction(false);
+            restoreParam = false;
+        }
+        vp = nullptr;
     }
 
     void setOnTop(bool restore = false, bool del = false)
     {
-        if (!hasEditView)
+        if (editView.empty())
             return;
         bool unset = false;
         if (restore && restoreOnTop)
@@ -160,10 +168,14 @@ public:
         }
         restoreOnTop = !unset;
         try {
-            doCommandT(Command::Gui, "_taskElementColorView.%s(FreeCAD.getDocument('%s').getObject('%s'), '%s')",
-                        unset ? "removeObjectOnTop" : "addObjectOnTop", editDoc, editObj, editSub);
-            if (restore && del)
-                doCommandT(Command::Gui, "del(_taskElementColorView)");
+            doCommandT(Command::Gui, "%s.%s(FreeCAD.getDocument('%s').getObject('%s'), '%s')",
+                        editView,
+                        unset ? "removeObjectOnTop" : "addObjectOnTop",
+                        editDoc, editObj, editSub);
+            if (restore && del) {
+                doCommandT(Command::Gui, "del(%s)", editView);
+                editView.clear();
+            }
         } catch (Base::Exception &e) {
             e.ReportException();
         } catch (...)
@@ -171,6 +183,8 @@ public:
     }
 
     bool allow(App::Document *doc, App::DocumentObject *obj, const char *subname) {
+        if (!vp)
+            return true;
         if(editDoc!=doc->getName() ||
            editObj!=obj->getNameInDocument() ||
            !boost::starts_with(subname,editSub))
@@ -186,6 +200,8 @@ public:
     }
 
     void populate() {
+        if (!vp)
+            return;
         int i=0;
         for(auto &v : vp->getElementColors())
             addItem(i++,v.first.c_str());
@@ -194,6 +210,8 @@ public:
     void edit(QWidget *parent, bool elementOnly);
 
     void addItem(int i,const char *sub, bool push=false) {
+        if (!vp)
+            return;
         auto itE = elements.find(sub);
         if(i<0 && itE!=elements.end()) {
             if(push && !ViewProvider::hasHiddenMarker(sub))
@@ -235,6 +253,8 @@ public:
     }
 
     void apply() {
+        if (!vp)
+            return;
         std::map<std::string,App::Color> info;
         int count = ui->elementList->count();
         for(int i=0;i<count;++i) {
@@ -252,36 +272,19 @@ public:
     }
 
     void reset() {
+        if (!vp)
+            return;
         touched = false;
         App::GetApplication().closeActiveTransaction(true);
         Selection().clearSelection();
     }
 
     void accept() {
-        if(touched) {
-            touched = false;
-            if(ui->recompute->isChecked()) {
-                auto obj = vp->getObject();
-                auto objs = obj->getInListRecursive();
-                objs.push_back(obj);
-                for (auto o : objs)
-                    o->enforceRecompute();
-                obj->getDocument()->recompute(objs);
-            } else {
-                for (auto obj : App::Document::getDependencyList(
-                                {vp->getObject()}, App::Document::DepSort))
-                {
-                    auto vp = Application::Instance->getViewProvider(obj);
-                    if (vp)
-                        vp->updateColors();
-                }
-            }
-        }
         App::GetApplication().closeActiveTransaction();
     }
 
     void removeAll() {
-        if(elements.empty())
+        if(!vp || elements.empty())
             return;
 
         auto itFace = elements.find("Face");
@@ -384,7 +387,7 @@ public:
 
     void onSelectionChanged(const SelectionChanges &msg) {
         // no object selected in the combobox or no sub-element was selected
-        if (busy)
+        if (!vp || busy)
             return;
         busy = true;
         switch(msg.Type) {
@@ -410,7 +413,8 @@ public:
     }
 
     void onSelectionChanged() {
-        if(busy) return;
+        if(!vp || busy)
+            return;
         busy = true;
         std::map<std::string,int> sels;
         for(auto &sel : Selection().getSelectionEx(
@@ -440,6 +444,22 @@ public:
         busy = false;
     }
 };
+
+namespace {
+class ElementColorsSelectionGate : public Gui::SelectionGate
+{
+public:
+    ElementColorsSelectionGate(const std::shared_ptr<ElementColors::Private> d)
+        :d(d)
+    {}
+
+    virtual bool allow(App::Document *doc, App::DocumentObject *obj, const char *subname) override {
+        return d->allow(doc, obj, subname);
+    }
+
+    std::shared_ptr<ElementColors::Private> d;
+};
+} // anonymous namespace
 
 /* TRANSLATOR Gui::TaskElementColors */
 
@@ -472,10 +492,9 @@ ElementColors::ElementColors(ViewProviderDocumentObject* vp, bool noHide)
     if(noHide)
         d->ui->hideSelection->setVisible(false);
 
-    d->ui->recompute->setChecked(ViewParams::getColorRecompute());
     d->ui->onTop->setChecked(ViewParams::getColorOnTop());
 
-    Selection().addSelectionGate(d,0);
+    Selection().addSelectionGate(new ElementColorsSelectionGate(d),0);
 
     d->connectDelDoc = Application::Instance->signalDeleteDocument.connect(boost::bind
         (&ElementColors::slotDeleteDocument, this, bp::_1));
@@ -495,10 +514,6 @@ void ElementColors::checkEdit() {
     d->edit(this, true);
 }
 
-void ElementColors::on_recompute_clicked(bool checked) {
-    ViewParams::setColorRecompute(checked);
-}
-
 void ElementColors::on_onTop_clicked(bool checked) {
     ViewParams::setColorOnTop(checked);
     d->setOnTop();
@@ -506,14 +521,18 @@ void ElementColors::on_onTop_clicked(bool checked) {
 
 void ElementColors::slotDeleteDocument(const Document& Doc)
 {
-    if (d->vpDoc==&Doc || d->editDoc==Doc.getDocument()->getName())
+    if (d->vpDoc==&Doc || d->editDoc==Doc.getDocument()->getName()) {
+        d->deinit();
         Control().closeDialog();
+    }
 }
 
 void ElementColors::slotDeleteObject(const ViewProvider& obj)
 {
-    if (d->vp==&obj)
+    if (d->vp==&obj) {
+        d->deinit();
         Control().closeDialog();
+    }
 }
 
 void ElementColors::on_removeSelection_clicked()

@@ -674,7 +674,9 @@ SoFCRenderCacheP::mergeMaterial(const SbMatrix &matrix,
   if (parent.annotation > child.annotation)
     res.annotation = parent.annotation;
 
-  if (res.selectstyle != Material::Box && res.selectstyle != Material::Unpickable)
+  if (res.selectstyle != Material::Box
+      && res.selectstyle != Material::BoxFull
+      && res.selectstyle != Material::Unpickable)
     res.selectstyle = parent.selectstyle;
 
   res.outline |= parent.outline;
@@ -1423,7 +1425,6 @@ SoFCRenderCache::getVertexCaches(bool canmerge, int depth)
   };
 
   for (auto & entry : PRIVATE(this)->caches) {
-    bool identity = entry.identity;
     if (entry.vcache) {
       if (!selfkey && PRIVATE(this)->selnode) {
         selfkey = std::allocate_shared<CacheKey>(SoFCAllocator<CacheKey>());
@@ -1467,7 +1468,7 @@ SoFCRenderCache::getVertexCaches(bool canmerge, int depth)
         }
         vcachemap[material].emplace_back(vcache,
                                          entry.matrix,
-                                         identity,
+                                         entry.identity,
                                          entry.resetmatrix,
                                          selfkey);
         PRIVATE(this)->facecount += vcache->getNumFaceParts();
@@ -1484,7 +1485,7 @@ SoFCRenderCache::getVertexCaches(bool canmerge, int depth)
         }
         vcachemap[material].emplace_back(vcache,
                                          entry.matrix,
-                                         identity,
+                                         entry.identity,
                                          entry.resetmatrix,
                                          selfkey);
       }
@@ -1500,7 +1501,7 @@ SoFCRenderCache::getVertexCaches(bool canmerge, int depth)
         }
         vcachemap[material].emplace_back(vcache,
                                          entry.matrix,
-                                         identity,
+                                         entry.identity,
                                          entry.resetmatrix,
                                          selfkey);
       }
@@ -1509,6 +1510,7 @@ SoFCRenderCache::getVertexCaches(bool canmerge, int depth)
     auto it = vcachemap.end();
     const auto & childvcaches = entry.cache->getVertexCaches(canmerge, depth+1); 
     for (const auto & child : childvcaches) {
+      bool identity = entry.identity;
       Material material = PRIVATE(this)->mergeMaterial(
             entry.matrix, identity, entry.material, child.first);
 
@@ -1709,15 +1711,31 @@ SoFCRenderCache::buildHighlightCache(SbFCMap<int, VertexCachePtr> &sharedcache,
   const SoLineDetail * ld = nullptr;
   const SoFaceDetail * fd = nullptr;
   const SoFCDetail * d = nullptr;
+  void *fctx = nullptr;
+  void *pctx = nullptr;
+  void *lctx = nullptr;
   if (detail) {
-    if (detail->isOfType(SoPointDetail::getClassTypeId()))
+    if (detail->isOfType(SoPointDetail::getClassTypeId())) {
       pd = static_cast<const SoPointDetail*>(detail);
-    else if (detail->isOfType(SoLineDetail::getClassTypeId()))
+      if (pd->isOfType(SoFCPointDetail::getClassTypeId()))
+        pctx = static_cast<const SoFCPointDetail*>(pd)->getContext();
+    }
+    else if (detail->isOfType(SoLineDetail::getClassTypeId())) {
       ld = static_cast<const SoLineDetail*>(detail);
-    else if (detail->isOfType(SoFaceDetail::getClassTypeId()))
+      if (ld->isOfType(SoFCLineDetail::getClassTypeId()))
+        lctx = static_cast<const SoFCLineDetail*>(ld)->getContext();
+    }
+    else if (detail->isOfType(SoFaceDetail::getClassTypeId())) {
       fd = static_cast<const SoFaceDetail*>(detail);
-    else if (detail->isOfType(SoFCDetail::getClassTypeId()))
+      if (fd->isOfType(SoFCFaceDetail::getClassTypeId()))
+        fctx = static_cast<const SoFCFaceDetail*>(fd)->getContext();
+    }
+    else if (detail->isOfType(SoFCDetail::getClassTypeId())) {
       d = static_cast<const SoFCDetail*>(detail);
+      fctx = d->getContext(SoFCDetail::Face);
+      lctx = d->getContext(SoFCDetail::Edge);
+      pctx = d->getContext(SoFCDetail::Vertex);
+    }
 
     // Some shape nodes (e.g. SoBrepFaceSet), support partial highlight on
     // whole object selection. 'checkindices' is used to indicate if we shall
@@ -1768,6 +1786,13 @@ SoFCRenderCache::buildHighlightCache(SbFCMap<int, VertexCachePtr> &sharedcache,
         && child.first.selectstyle != Material::Unpickable;
 
       if (detail) {
+        if (pctx || fctx || lctx) {
+          // If there is detail context, make sure it matches to the node
+          if ((!pctx || pctx != ventry.cache->getNode())
+              && (!lctx || lctx != ventry.cache->getNode())
+              && (!fctx || fctx != ventry.cache->getNode()))
+            continue;
+        }
         if (ventry.mergecount)
           continue;
       } else if (ventry.skipcount)
@@ -1781,6 +1806,7 @@ SoFCRenderCache::buildHighlightCache(SbFCMap<int, VertexCachePtr> &sharedcache,
       material.depthfunc = SoDepthBuffer::LEQUAL;
 
       if (color && (material.selectstyle == Material::Box
+                    || (material.selectstyle == Material::BoxFull && !detail)
                     || (ViewParams::getShowSelectionBoundingBox()
                         && (!detail || !preselect))
                     || (ViewParams::getShowSelectionBoundingBoxThreshold()
@@ -2066,7 +2092,7 @@ SoFCRenderCache::buildHighlightCache(SbFCMap<int, VertexCachePtr> &sharedcache,
         << PRIVATE(this)->facecount << " faces");
 
   // if (!bbox.isEmpty() && res.empty()) {
-  if (!bbox.isEmpty()) {
+  if (isValidBBox(bbox)) {
     SbVec3f unitsize(1.f, 1.f, 1.f);
     auto size = bbox.getSize();
     int cacheid = 0;

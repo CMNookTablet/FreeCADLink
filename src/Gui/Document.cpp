@@ -22,6 +22,7 @@
 
 
 #include "PreCompiled.h"
+#include "Renderer/Renderer.h"
 
 #ifndef _PreComp_
 # include <algorithm>
@@ -73,6 +74,7 @@
 #include "WaitCursor.h"
 #include "Thumbnail.h"
 #include "ViewProviderLink.h"
+#include "ViewParams.h"
 
 FC_LOG_LEVEL_INIT("Gui",true,true)
 
@@ -114,6 +116,7 @@ struct DocumentP
     std::set<const App::DocumentObject*> _editObjs;
 
     std::vector<CameraInfo>     _savedViews;
+    std::map<int, std::string>  _view3DContents;
 
     Application*    _pcAppWnd;
     // the doc/Document
@@ -213,7 +216,7 @@ Document::Document(App::Document* pcDocument,Application * app)
 
     // Setup the connections
     d->connectNewObject = pcDocument->signalNewObject.connect
-        (boost::bind(&Gui::Document::slotNewObject, this, bp::_1));
+        (boost::bind(&Gui::Document::slotNewObject, this, bp::_1), boost::signals2::at_front);
     d->connectDelObject = pcDocument->signalDeletedObject.connect
         (boost::bind(&Gui::Document::slotDeletedObject, this, bp::_1));
     d->connectCngObject = pcDocument->signalChangedObject.connect
@@ -386,7 +389,7 @@ bool Document::setEdit(Gui::ViewProvider* p, int ModNum, const char *subname)
     static bool _Busy;
     if (_Busy) {
         if (FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG))
-            FC_WARN("Ignore recusrive call to Document::setEdit()");
+            FC_WARN("Ignore recursive call to Document::setEdit()");
         return false;
     }
     Base::StateLocker lock(_Busy);
@@ -416,9 +419,11 @@ bool Document::setEdit(Gui::ViewProvider* p, int ModNum, const char *subname)
         // selection in order to obtain the correct transformation matrix below
         App::DocumentObject *parentObj = 0;
         auto ctxobj = Gui::Selection().getContext().getSubObject();
+        bool found = false;
         if (ctxobj && (ctxobj == obj || ctxobj->getLinkedObject(true) == obj)) {
             parentObj = Gui::Selection().getContext().getObject();
             _subname = Gui::Selection().getContext().getSubName();
+            found = true;
         } else {
             auto sels = Gui::Selection().getCompleteSelection(false);
             for(auto &sel : sels) {
@@ -438,7 +443,12 @@ bool Document::setEdit(Gui::ViewProvider* p, int ModNum, const char *subname)
                     break;
                 }
                 _subname = sel.SubName;
+                found = true;
             }
+        }
+        if (!found) {
+            parentObj = obj;
+            Gui::Selection().checkTopParent(parentObj, _subname);
         }
         if(parentObj) {
             FC_LOG("deduced editing reference " << parentObj->getFullName() << '.' << _subname);
@@ -491,7 +501,19 @@ bool Document::setEdit(Gui::ViewProvider* p, int ModNum, const char *subname)
     //         d->_editingTransform = ext->globalGroupPlacement().toMatrix();
     //     }
     // }
-    auto sobj = obj->getSubObject(subname,0,&d->_editingTransform);
+    d->_editSubElement.clear();
+    d->_editSubname.clear();
+    if (subname) {
+        const char *element = Data::ComplexGeoData::findElementName(subname);
+        if (element) {
+            d->_editSubname = std::string(subname,element-subname);
+            d->_editSubElement = element;
+        }
+        else {
+            d->_editSubname = subname;
+        }
+    }
+    auto sobj = obj->getSubObject(d->_editSubname.c_str(),0,&d->_editingTransform);
     if(!sobj || !sobj->getNameInDocument()) {
         FC_ERR("Invalid sub object '" << obj->getFullName()
                 << '.' << (subname?subname:"") << "'");
@@ -518,19 +540,6 @@ bool Document::setEdit(Gui::ViewProvider* p, int ModNum, const char *subname)
     Application::Instance->setEditDocument(this);
 
     d->_editViewProviderParent = vp;
-    d->_editSubElement.clear();
-    d->_editSubname.clear();
-
-    if (subname) {
-        const char *element = Data::ComplexGeoData::findElementName(subname);
-        if (element) {
-            d->_editSubname = std::string(subname,element-subname);
-            d->_editSubElement = element;
-        }
-        else {
-            d->_editSubname = subname;
-        }
-    }
 
     auto sobjs = obj->getSubObjectList(subname);
     d->_editObjs.clear();
@@ -843,9 +852,7 @@ void Document::slotNewObject(const App::DocumentObject& Obj)
         pcProvider->setStatus(Gui::ViewStatus::TouchDocument, d->_changeViewTouchDocument);
 
         try {
-            // if successfully created set the right name and calculate the view
-            //FIXME: Consider to change argument of attach() to const pointer
-            pcProvider->attach(const_cast<App::DocumentObject*>(&Obj));
+            pcProvider->attachDocumentObject(const_cast<App::DocumentObject*>(&Obj));
             pcProvider->updateView();
             pcProvider->setActiveMode();
         }
@@ -976,6 +983,7 @@ void Document::slotChangedObject(const App::DocumentObject& Obj, const App::Prop
                 if(sobj == d->_editingObject && d->_editingTransform!=mat) {
                     d->_editingTransform = mat;
                     d->_editingViewer->setEditingTransform(d->_editingTransform);
+                    signalEditingTransformChanged(*this);
                 }
             }
         }
@@ -1646,6 +1654,7 @@ void Document::RestoreDocFile(Base::Reader &reader)
         int cameraExtra = xmlReader.getAttributeAsInteger("extra", "0");
         int cameraBinding = xmlReader.getAttributeAsInteger("binding", "0");
         int cameraId = xmlReader.getAttributeAsInteger("id", "0");
+        int view3dCount = xmlReader.getAttributeAsInteger("view3d", "0");
 
         cameraSettings.clear();
         if(xmlReader.hasAttribute("settings"))
@@ -1665,6 +1674,13 @@ void Document::RestoreDocFile(Base::Reader &reader)
                 saveCameraSettings(xmlReader.readCharacters().c_str(),&settings);
                 d->_savedViews.emplace_back(id, binding, std::move(settings));
             }
+        }
+
+        d->_view3DContents.clear();
+        for (int i=0; i<view3dCount; ++i) {
+            xmlReader.readElement("View3D");
+            int id = xmlReader.getAttributeAsInteger("id");
+            d->_view3DContents[id] = xmlReader.readCharacters();
         }
     }
 
@@ -1750,6 +1766,16 @@ void Document::slotFinishRestoreDocument(const App::Document& doc)
                     view->getViewer()->checkGroupOnTop(SelectionChanges(
                                 SelectionChanges::AddSelection,
                                 docName, v.first.c_str(), v.second.c_str()), true);
+                }
+            }
+            auto iter = d->_view3DContents.find(info.id);
+            if (iter != d->_view3DContents.end()) {
+                try {
+                    std::istringstream in(iter->second);
+                    Base::XMLReader reader("<memory>", in);
+                    view->Restore(reader);
+                } catch (Base::Exception &e) {
+                    e.ReportException();
                 }
             }
         }
@@ -1853,6 +1879,7 @@ void Document::SaveDocFile (Base::Writer &writer) const
     // save camera settings
     std::list<MDIView*> mdi = getMDIViews();
     std::vector<CameraInfo> cameraInfo;
+    std::vector<View3DInventor*> view3Ds;
     bool first = true;
     for (std::list<MDIView*>::iterator it = mdi.begin(); it != mdi.end(); ++it) {
         auto v = *it;
@@ -1874,13 +1901,15 @@ void Document::SaveDocFile (Base::Writer &writer) const
             auto binding = view->boundView();
             cameraInfo.emplace_back(view->getID(),
                     binding?binding->getID():0, std::move(settings));
+            view3Ds.push_back(view);
         }
     }
 
     writer.Stream() << writer.ind() << "<Camera";
     if(cameraInfo.size())
         writer.Stream() << " extra=\"" << cameraInfo.size()-1 << "\" id=\""
-            << cameraInfo[0].id << "\" binding=\"" << cameraInfo[0].binding << "\"";
+            << cameraInfo[0].id << "\" binding=\"" << cameraInfo[0].binding << "\""
+            << " view3d=\"" << view3Ds.size() << "\"";
     if(writer.getFileVersion() > 1) {
         writer.Stream() << ">\n";
         writer.beginCharStream(false) << '\n' << getCameraSettings();
@@ -1899,6 +1928,15 @@ void Document::SaveDocFile (Base::Writer &writer) const
         }
     }
     d->_savedViews = std::move(cameraInfo);
+
+    Base::StringWriter stringWriter;
+    for (auto view : view3Ds) {
+        writer.Stream() << writer.ind() << "<View3D id=\"" << view->getID() << "\">";
+        stringWriter.clear();
+        view->Save(stringWriter);
+        writer.beginCharStream(false) << '\n' << stringWriter.getString();
+        writer.endCharStream() << '\n' << writer.ind() << "</View3D>\n";
+    }
 
     writer.decInd(); // indentation for camera settings
     writer.Stream() << "</Document>\n";
@@ -2011,31 +2049,45 @@ void Document::slotFinishImportObjects(const std::vector<App::DocumentObject*> &
 }
 
 
-void Document::addRootObjectsToGroup(const std::vector<App::DocumentObject*>& obj, App::DocumentObjectGroup* grp)
+void Document::addRootObjectsToGroup(const std::vector<App::DocumentObject*>& objs, App::DocumentObject* grp)
 {
-    std::map<App::DocumentObject*, bool> rootMap;
-    for (std::vector<App::DocumentObject*>::const_iterator it = obj.begin(); it != obj.end(); ++it) {
-        rootMap[*it] = true;
+    if (!grp)
+        return;
+    auto grpExt = grp->getExtensionByType<App::GroupExtension>(true);
+    if (!grpExt)
+        return;
+
+    auto geoGrp = grp->getExtensionByType<App::GeoFeatureGroupExtension>(true);
+    if (!geoGrp) {
+        if (auto geoGrpObj = App::GeoFeatureGroupExtension::getGroupOfObject(grp))
+            geoGrp = geoGrpObj->getExtensionByType<App::GeoFeatureGroupExtension>(true);
     }
-    // get the view providers and check which objects are children
-    for (std::vector<App::DocumentObject*>::const_iterator it = obj.begin(); it != obj.end(); ++it) {
-        Gui::ViewProvider* vp = getViewProvider(*it);
-        if (vp) {
-            std::vector<App::DocumentObject*> child = vp->claimChildren();
-            for (std::vector<App::DocumentObject*>::iterator jt = child.begin(); jt != child.end(); ++jt) {
-                std::map<App::DocumentObject*, bool>::iterator kt = rootMap.find(*jt);
-                if (kt != rootMap.end()) {
-                    kt->second = false;
-                }
-            }
+
+    std::vector<App::DocumentObject *> geoNewObjects;
+    std::vector<App::DocumentObject *> grpNewObjects;
+    std::set<App::DocumentObject *> objSet;
+
+    for (auto obj : objs) {
+        if (!obj || !objSet.insert(obj).second)
+            continue;
+        if (geoGrp) {
+            if (!App::GeoFeatureGroupExtension::getGroupOfObject(obj))
+                geoNewObjects.push_back(obj);
+        }
+        if (grpExt == geoGrp)
+            continue;
+
+        if (auto vp = Base::freecad_dynamic_cast<ViewProviderDocumentObject>(
+                    Application::Instance->getViewProvider(obj)))
+        {
+            if (vp->claimedBy().empty())
+                grpNewObjects.push_back(obj);
         }
     }
 
-    // all objects that are not children of other objects can be added to the group
-    for (std::map<App::DocumentObject*, bool>::iterator it = rootMap.begin(); it != rootMap.end(); ++it) {
-        if (it->second)
-            grp->addObject(it->first);
-    }
+    if (geoGrp)
+        geoGrp->addObjects(geoNewObjects);
+    grpExt->addObjects(grpNewObjects);
 }
 
 MDIView *Document::createView(const Base::Type& typeId)
@@ -2089,8 +2141,13 @@ MDIView *Document::createView(const Base::Type& typeId)
             const char *ppReturn = 0;
             view3D->onMsg(cameraSettings.c_str(),&ppReturn);
         }
+        else if (ViewParams::getDefaultDrawStyle() != 0) {
+            if (auto mode = drawStyleNameFromIndex(ViewParams::getDefaultDrawStyle()))
+                view3D->getViewer()->setOverrideMode(mode);
+        }
 
         getMainWindow()->addWindow(view3D);
+        setModified(false);
         return view3D;
     }
     return 0;
@@ -2107,7 +2164,6 @@ Gui::MDIView* Document::cloneView(Gui::MDIView* oldview)
         View3DInventor* firstView = static_cast<View3DInventor*>(oldview);
         std::string overrideMode = firstView->getViewer()->getOverrideMode();
         view3D->getViewer()->setOverrideMode(overrideMode);
-        Application::Instance->signalViewModeChanged(view3D);
 
         view3D->getViewer()->setAxisCross(firstView->getViewer()->hasAxisCross());
 
@@ -2177,7 +2233,8 @@ void Document::attachView(Gui::BaseView* pcView, bool bPassiv)
         d->baseViews.push_back(pcView);
     else
         d->passiveViews.push_back(pcView);
-    signalAttachView(pcView, bPassiv);
+    signalAttachView(*pcView, bPassiv);
+    Application::Instance->signalAttachView(*pcView, bPassiv);
 }
 
 void Document::detachView(Gui::BaseView* pcView, bool bPassiv)
@@ -2186,7 +2243,8 @@ void Document::detachView(Gui::BaseView* pcView, bool bPassiv)
         if (find(d->passiveViews.begin(),d->passiveViews.end(),pcView)
             != d->passiveViews.end())
         {
-            signalDetachView(pcView, true);
+            signalDetachView(*pcView, true);
+            Application::Instance->signalDetachView(*pcView, true);
             d->passiveViews.remove(pcView);
         }
     }
@@ -2194,7 +2252,8 @@ void Document::detachView(Gui::BaseView* pcView, bool bPassiv)
         if (find(d->baseViews.begin(),d->baseViews.end(),pcView)
             != d->baseViews.end())
         {
-            signalDetachView(pcView, false);
+            signalDetachView(*pcView, false);
+            Application::Instance->signalDetachView(*pcView, false);
             d->baseViews.remove(pcView);
         }
 

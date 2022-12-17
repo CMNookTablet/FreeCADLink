@@ -28,11 +28,14 @@
 # include <QMessageBox>
 # include <QSplitter>
 # include <QDesktopWidget>
+# include <QPixmap>
+# include <QPainter>
 #endif
 
 #include <QWidgetAction>
 
 #include <cstring>
+#include <array>
 #include <boost/algorithm/string/predicate.hpp>
 
 #include <Base/Console.h>
@@ -43,6 +46,8 @@
 #include "PrefWidgets.h"
 #include "FileDialog.h"
 #include "MainWindow.h"
+
+FC_LOG_LEVEL_INIT("Gui", true, true);
 
 using Base::Console;
 using namespace Gui;
@@ -192,10 +197,10 @@ void PrefWidget::onSave()
     return;
   Base::StateLocker guard(m_Busy);
   savePreferences();
-#ifdef FC_DEBUG
-  if (m_SubEntries.isEmpty() && !getWindowParameter().isValid())
-    qFatal( "No parameter group specified!" );
-#endif
+  if (FC_LOG_INSTANCE.isEnabled(FC_LOGLEVEL_LOG)) {
+    if (m_SubEntries.isEmpty() && !getWindowParameter().isValid())
+      FC_ERR( "No parameter group specified!" );
+  }
 }
 
 static inline ParameterGrp::handle _getEntryParameter() {
@@ -486,8 +491,9 @@ void PrefWidget::failedToRestore(const QString& name) const
 
 // --------------------------------------------------------------------
 
-PrefWidgetStates::PrefWidgetStates(QWidget *widget, bool manageSize, const char *name)
-  : manageSize(manageSize)
+PrefWidgetStates::PrefWidgetStates(QWidget *widget, bool manageSize, const char *name, QObject *parent)
+  : QObject(parent)
+  , manageSize(manageSize)
   , widget(widget)
 {
   if (!name)
@@ -495,7 +501,7 @@ PrefWidgetStates::PrefWidgetStates(QWidget *widget, bool manageSize, const char 
   hParam = App::GetApplication().GetParameterGroupByPath(
       "User parameter:BaseApp/Preferences/General/Widgets")->GetGroup(name);
   widget->installEventFilter(this);
-};
+}
 
 PrefWidgetStates::~PrefWidgetStates()
 {
@@ -783,6 +789,50 @@ void PrefLineEdit::savePreferences()
 
 // --------------------------------------------------------------------
 
+PrefAccelLineEdit::PrefAccelLineEdit ( QWidget * parent )
+  : AccelLineEdit(parent), PrefWidget()
+{
+    LineEditStyle::setup(this);
+    setAutoSave(PrefParam::AutoSave());
+}
+
+PrefAccelLineEdit::~PrefAccelLineEdit()
+{
+}
+
+void PrefAccelLineEdit::setAutoSave(bool enable)
+{
+    autoSave(enable, this, &PrefAccelLineEdit::textChanged);
+}
+
+void PrefAccelLineEdit::restorePreferences()
+{
+  if (getWindowParameter().isNull())
+  {
+    failedToRestore(objectName());
+    return;
+  }
+
+  if (!m_Restored)
+    m_Default = this->text();
+
+  setText(QString::fromUtf8(getWindowParameter()->GetASCII(
+          entryName(), m_Default.toUtf8()).c_str()));
+}
+
+void PrefAccelLineEdit::savePreferences()
+{
+  if (getWindowParameter().isNull())
+  {
+    failedToSave(objectName());
+    return;
+  }
+
+  getWindowParameter()->SetASCII(entryName(), text().toUtf8());
+}
+
+// --------------------------------------------------------------------
+
 PrefFileChooser::PrefFileChooser ( QWidget * parent )
   : FileChooser(parent), PrefWidget()
 {
@@ -840,6 +890,11 @@ void PrefComboBox::setAutoSave(bool enable)
     autoSave(enable, this, QOverload<int>::of(&PrefComboBox::currentIndexChanged));
 }
 
+QVariant::Type PrefComboBox::getParamType() const
+{
+  return property("prefType").type();
+}
+
 void PrefComboBox::restorePreferences()
 {
   if (getWindowParameter().isNull())
@@ -853,11 +908,13 @@ void PrefComboBox::restorePreferences()
     m_DefaultIndex = currentIndex();
   }
   int index = -1;
-  switch(static_cast<int>(property("prefType").type())) {
+  switch(static_cast<int>(getParamType())) {
   case QMetaType::Int:
+  case QMetaType::LongLong:
     index = findData((int)getWindowParameter()->GetInt(entryName(), m_Default.toInt()));
     break;
   case QMetaType::UInt:
+  case QMetaType::ULongLong:
     index = findData((uint)getWindowParameter()->GetUnsigned(entryName(), m_Default.toUInt()));
     break;
   case QMetaType::Bool:
@@ -890,11 +947,13 @@ void PrefComboBox::savePreferences()
     return;
   }
 
-  switch(static_cast<int>(property("prefType").type())) {
+  switch(static_cast<int>(getParamType())) {
   case QMetaType::Int:
+  case QMetaType::LongLong:
     getWindowParameter()->SetInt(entryName(), currentData().toInt());
     break;
   case QMetaType::UInt:
+  case QMetaType::ULongLong:
     getWindowParameter()->SetUnsigned(entryName(), currentData().toUInt());
     break;
   case QMetaType::Bool:
@@ -913,6 +972,83 @@ void PrefComboBox::savePreferences()
     getWindowParameter()->SetInt(entryName(), currentIndex());
     break;
   }
+}
+
+// --------------------------------------------------------------------
+
+namespace {
+  struct LinePattern {
+    Qt::PenStyle style;
+    int value;
+    const char *name;
+
+    LinePattern(Qt::PenStyle s, int v, const char *n)
+      :style(s), value(v), name(n)
+    {}
+  };
+  static const std::array<LinePattern, 5> _LinePatterns {{
+    {Qt::SolidLine, 0, QT_TRANSLATE_NOOP("LinePattern", "No change")},
+    {Qt::SolidLine, 0xffff, QT_TRANSLATE_NOOP("LinePattern", "Solid")},
+    {Qt::DashLine, 0xf0f0, QT_TRANSLATE_NOOP("LinePattern", "Dash")},
+    {Qt::DotLine, 0xaaaa, QT_TRANSLATE_NOOP("LinePattern", "Dot")},
+    {Qt::DashDotLine, 0x33ff, QT_TRANSLATE_NOOP("LinePattern", "Dash Dot")},
+  }};
+} // anonymous namespace
+
+PrefLinePattern::PrefLinePattern ( QWidget * parent )
+  :PrefComboBox(parent)
+{
+  static std::vector<QPixmap> icons;
+  if (icons.empty()) {
+    QSize size = this->iconSize();
+    size.setWidth(size.width()*2);
+    this->setIconSize(size);
+    double mid = size.height() / 2.0;
+    QBrush brush(Qt::black);
+    for(auto &v : _LinePatterns) {
+      QPixmap px(size);
+      px.fill(Qt::white);
+      QPen pen(v.style);
+      pen.setBrush(brush);
+      pen.setWidth(2);
+
+      QPainter painter(&px);
+      painter.setPen(pen);
+      painter.drawLine(0, mid, size.width(), mid);
+      painter.end();
+      icons.push_back(px);
+    }
+  }
+  int i = 0;
+  for (const auto &item : _LinePatterns)
+      this->addItem(icons[i++], QString(), item.value);
+  updateLanguage();
+}
+
+PrefLinePattern::~PrefLinePattern()
+{
+}
+
+void PrefLinePattern::changeEvent(QEvent* event)
+{
+  if (event->type() == QEvent::LanguageChange)
+    updateLanguage();
+  PrefComboBox::changeEvent(event);
+}
+
+void PrefLinePattern::updateLanguage()
+{
+    int i=0;
+    for (const auto &item : _LinePatterns)
+      this->setItemText(i++, QApplication::translate("LinePattern", item.name));
+}
+
+QVariant::Type PrefLinePattern::getParamType() const
+{
+  auto res = property("prefType");
+  if (res.isValid())
+    return res.type();
+  return QVariant::Int;
 }
 
 // --------------------------------------------------------------------

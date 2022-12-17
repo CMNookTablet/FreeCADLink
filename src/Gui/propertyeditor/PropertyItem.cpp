@@ -187,6 +187,17 @@ bool PropertyItem::hasAnyExpression() const
     return false;
 }
 
+bool PropertyItem::hasAnyChildExpression() const
+{
+    if(ExpressionBinding::hasExpression(false))
+        return true;
+    for (auto item : childItems) {
+        if (item->hasAnyChildExpression())
+            return true;
+    }
+    return false;
+}
+
 void PropertyItem::setPropertyData(const std::vector<App::Property*>& items)
 {
     //if we have a single property we can bind it for expression handling
@@ -194,20 +205,10 @@ void PropertyItem::setPropertyData(const std::vector<App::Property*>& items)
         const App::Property& p = *items.front();
 
         try {
-            // Check for 'DocumentObject' as parent because otherwise 'ObjectIdentifier' raises an exception
-            App::DocumentObject * docObj = Base::freecad_dynamic_cast<App::DocumentObject>(p.getContainer());
-
-            // No need to check for readonly here. Context menu 'Expression...'
-            // will check the flag, so that if the user dynamically remove the
-            // 'ReadOnly' bit, the menu can immediately reflect the changes.
-            //
-            // if (docObj && !docObj->isReadOnly(&p) && !p.testStatus(App::Property::ReadOnly))
-            if (docObj) {
-                bind(p);
-            }
+            bind(p);
         }
         //it may happen that setting properties is not possible
-        catch (...) {
+        catch (Base::Exception &) {
         }
     }
 
@@ -344,6 +345,11 @@ void PropertyItem::setReadOnly(bool ro)
 bool PropertyItem::isReadOnly() const
 {
     return readonly;
+}
+
+void PropertyItem::disableEditor(QWidget *editor)
+{
+    editor->setDisabled(true);
 }
 
 void PropertyItem::setLinked(bool l)
@@ -613,6 +619,9 @@ void PropertyItem::setPropertyValue(const QString& value)
             App::Document* doc = obj->getDocument();
             ss << "FreeCADGui.getDocument('" << doc->getName() << "').getObject('"
                << obj->getNameInDocument() << "').";
+        } else if (parent->isDerivedFrom(MDIView::getClassTypeId())) {
+            auto doc = static_cast<MDIView*>(parent)->getAppDocument();
+            ss << "FreeCADGui.getDocument('" << doc->getName() << "').ActiveView.";
         } else
             continue;
         ss << parent->getPropertyPrefix() << prop->getName()
@@ -708,7 +717,7 @@ QVariant PropertyItem::data(int column, int role) const
                 return toString(val);
             } 
             else if (role == Qt::ForegroundRole) {
-                if (hasExpression(false))
+                if (hasAnyChildExpression())
                     return QVariant::fromValue(QApplication::palette().color(QPalette::Link));
                 return QVariant();
             }
@@ -728,7 +737,7 @@ QVariant PropertyItem::data(int column, int role) const
             return toolTip(propertyItems[0]);
         }
         else if( role == Qt::ForegroundRole) {
-            if (hasExpression(false))
+            if (hasAnyChildExpression())
                 return QVariant::fromValue(QApplication::palette().color(QPalette::Link));
             return QVariant();
         }
@@ -4505,6 +4514,12 @@ PropertyLinkItem::PropertyLinkItem()
 {
 }
 
+void PropertyLinkItem::disableEditor(QWidget *editor)
+{
+    if (auto ll = qobject_cast<LinkLabel*>(editor))
+        ll->disableButton(true);
+}
+
 QVariant PropertyLinkItem::toString(const QVariant& prop) const
 {
     QString res;
@@ -4575,7 +4590,7 @@ QWidget* PropertyLinkItem::createEditor(QWidget* parent, const QObject* receiver
         return 0;
     LinkLabel *ll = new LinkLabel(parent, propertyItems.front());
     ll->setAutoFillBackground(true);
-    ll->setDisabled(isReadOnly());
+    ll->disableButton(isReadOnly());
     QObject::connect(ll, SIGNAL(linkChanged(const QVariant&)), receiver, method);
     return ll;
 }

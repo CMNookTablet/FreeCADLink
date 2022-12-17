@@ -72,6 +72,8 @@ class ImportExport ImportOCAF2
 public:
     ImportOCAF2(Handle(TDocStd_Document) h, App::Document* d, const std::string& name);
     virtual ~ImportOCAF2();
+    ImportOCAF2(const ImportOCAF2 &) = delete;
+    ImportOCAF2 & operator=(const ImportOCAF2 &) = delete;
     App::DocumentObject* loadShapes();
     void setMerge(bool enable) { merge=enable;};
     void setUseLegacyImporter(bool enable) { useLegacyImporter=enable; }
@@ -80,7 +82,6 @@ public:
     void setImportHiddenObject(bool enable) {importHidden=enable;}
     void setReduceObjects(bool enable) {reduceObjects=enable;}
     void setShowProgress(bool enable) {showProgress=enable;}
-    void setExpandCompound(bool enable) {expandCompound=enable;}
 
     enum ImportMode {
         SingleDoc = 0,
@@ -121,8 +122,6 @@ private:
     void getSHUOColors(TDF_Label label, std::map<std::string,App::Color> &colors, bool appendFirst);
     void setObjectName(Info &info, TDF_Label label, bool checkExistingName=false);
     std::string getLabelName(TDF_Label label);
-    Part::Feature *expandShape(App::Document *doc, TDF_Label label, 
-            const TopoDS_Shape &shape, ColorInfo &colorInfo);
 
     virtual void applyEdgeColors(Part::Feature*, const std::vector<App::Color>&) {}
     virtual void applyFaceColors(Part::Feature*, const std::vector<App::Color>&) {}
@@ -157,7 +156,6 @@ private:
     bool importHidden;
     bool reduceObjects;
     bool showProgress;
-    bool expandCompound;
 
     int mode;
     std::string filePath;
@@ -165,6 +163,16 @@ private:
     std::unordered_map<TopoDS_Shape, Info, ShapeHasher> myShapes;
     std::unordered_map<TDF_Label, std::string, LabelHasher> myNames;
     std::unordered_map<App::DocumentObject*, App::PropertyPlacement*> myCollapsedObjects;
+
+    struct DocumentInfo {
+        App::Document *doc;
+        std::vector<App::DocumentObject*> &children;
+        DocumentInfo(App::Document *d, std::vector<App::DocumentObject*> &objs)
+            :doc(d), children(objs)
+        {}
+    };
+    std::vector<DocumentInfo> myDocumentStack;
+    std::vector<App::Document*> myNewDocuments;
 
     App::Color defaultFaceColor;
     App::Color defaultEdgeColor;

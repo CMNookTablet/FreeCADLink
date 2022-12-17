@@ -218,15 +218,66 @@ SheetTableView::SheetTableView(QWidget *parent)
     QActionGroup *editGroup = new QActionGroup(this);
     editGroup->setExclusive(true);
 
-#define SHEET_CELL_MODE(_name, _label, _doc) \
-    actionEdit##_name = new QAction(_label, this);\
-    actionEdit##_name->setCheckable(true);\
-    actionEdit##_name->setData(QVariant((int)Cell::Edit##_name));\
-    actionEdit##_name->setToolTip(tr(_doc));\
-    editGroup->addAction(actionEdit##_name);
+    /*[[[cog
+    import SheetParams
+    SheetParams.init_edit_modes_actions()
+    ]]]*/
 
-    SHEET_CELL_MODES
-#undef SHEET_CELL_MODE
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditNormal = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditNormal)), this);
+    actionEditNormal->setData(QVariant((int)Cell::EditNormal));
+    actionEditNormal->setCheckable(true);
+    actionEditNormal->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditNormal)));
+    editGroup->addAction(actionEditNormal);
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditButton = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditButton)), this);
+    actionEditButton->setData(QVariant((int)Cell::EditButton));
+    actionEditButton->setCheckable(true);
+    actionEditButton->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditButton)));
+    editGroup->addAction(actionEditButton);
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditCombo = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditCombo)), this);
+    actionEditCombo->setData(QVariant((int)Cell::EditCombo));
+    actionEditCombo->setCheckable(true);
+    actionEditCombo->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditCombo)));
+    editGroup->addAction(actionEditCombo);
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditLabel = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditLabel)), this);
+    actionEditLabel->setData(QVariant((int)Cell::EditLabel));
+    actionEditLabel->setCheckable(true);
+    actionEditLabel->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditLabel)));
+    editGroup->addAction(actionEditLabel);
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditQuantity = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditQuantity)), this);
+    actionEditQuantity->setData(QVariant((int)Cell::EditQuantity));
+    actionEditQuantity->setCheckable(true);
+    actionEditQuantity->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditQuantity)));
+    editGroup->addAction(actionEditQuantity);
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditCheckBox = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditCheckBox)), this);
+    actionEditCheckBox->setData(QVariant((int)Cell::EditCheckBox));
+    actionEditCheckBox->setCheckable(true);
+    actionEditCheckBox->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditCheckBox)));
+    editGroup->addAction(actionEditCheckBox);
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditAutoAlias = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditAutoAlias)), this);
+    actionEditAutoAlias->setData(QVariant((int)Cell::EditAutoAlias));
+    actionEditAutoAlias->setCheckable(true);
+    actionEditAutoAlias->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditAutoAlias)));
+    editGroup->addAction(actionEditAutoAlias);
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditAutoAliasV = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditAutoAliasV)), this);
+    actionEditAutoAliasV->setData(QVariant((int)Cell::EditAutoAliasV));
+    actionEditAutoAliasV->setCheckable(true);
+    actionEditAutoAliasV->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditAutoAliasV)));
+    editGroup->addAction(actionEditAutoAliasV);
+    // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:188)
+    actionEditColor = new QAction(QApplication::translate("Spreadsheet", Cell::editModeLabel(Cell::EditColor)), this);
+    actionEditColor->setData(QVariant((int)Cell::EditColor));
+    actionEditColor->setCheckable(true);
+    actionEditColor->setToolTip(QApplication::translate("Spreadsheet", Cell::editModeToolTips(Cell::EditColor)));
+    editGroup->addAction(actionEditColor);
+    //[[[end]]]
 
     QMenu *subMenu = new QMenu(tr("Edit mode"),contextMenu);
     subMenu->setToolTipsVisible(true);
@@ -450,28 +501,56 @@ void SheetTableView::cellAlias()
 
 std::vector<Range> SheetTableView::selectedRanges() const
 {
-    QModelIndexList list = selectionModel()->selectedIndexes();
     std::vector<Range> result;
 
-    // Insert selected cells into set. This variable should ideally be a hash_set
-    // but that is not part of standard stl.
-    std::set<std::pair<int, int> > cells;
-    for (QModelIndexList::const_iterator it = list.begin(); it != list.end(); ++it)
-        cells.insert(std::make_pair<int,int>((*it).row(), (*it).column()));
-
-    // Create rectangular cells from the unordered collection of selected cells
-    std::map<std::pair<int, int>, std::pair<int, int> > rectangles;
-    createRectangles(cells, rectangles);
-
-    std::map<std::pair<int, int>, std::pair<int, int> >::const_iterator i = rectangles.begin();
-    for (; i != rectangles.end(); ++i) {
-        std::pair<int, int> ul = (*i).first;
-        std::pair<int, int> size = (*i).second;
-
-        result.emplace_back(ul.first, ul.second,
-                                                   ul.first + size.first - 1, ul.second + size.second - 1);
+    if (!sheet->getCells()->hasSpan()) {
+        for (const auto &sel : selectionModel()->selection())
+            result.emplace_back(sel.top(), sel.left(), sel.bottom(), sel.right());
+    } else {
+        // If there is spanning cell, QItemSelection returned by
+        // QTableView::selection() does not merge selected indices into ranges.
+        // So we have to do it by ourselves. Qt records selection in the order
+        // of column first and then row.
+        //
+        // Note that there will always be ambiguous cases with the available
+        // information, where multiple user selected ranges are merged
+        // together. For example, consecutive single column selections that
+        // form a rectangle will be merged together, but single row selections
+        // will not be merged.
+        for (const auto &sel : selectionModel()->selection()) {
+            if (!result.empty() && sel.bottom() == sel.top() && sel.right() == sel.left()) {
+                auto &last = result.back();
+                if (last.colCount() == 1
+                        && last.from().col() == sel.left()
+                        && sel.top() == last.to().row() + 1)
+                {
+                    // This is the case of rectangle selection. We keep
+                    // accumulating the last column, and try to merge the
+                    // column to previous range whenever possible.
+                    last = Range(last.from(), CellAddress(sel.top(), sel.left()));
+                    if (result.size() > 1) {
+                        auto &secondLast = result[result.size()-2];
+                        if (secondLast.to().col() + 1 == last.to().col()
+                                && secondLast.from().row() == last.from().row()
+                                && secondLast.rowCount() == last.rowCount()) {
+                            secondLast = Range(secondLast.from(), last.to());
+                            result.pop_back();
+                        }
+                    }
+                    continue;
+                }
+                else if (last.rowCount() == 1
+                        && last.from().row() == sel.top()
+                        && last.to().col() + 1 == sel.left())
+                {
+                    // This is the case of single row selection
+                    last = Range(last.from(), CellAddress(sel.top(), sel.left()));
+                    continue;
+                }
+            }
+            result.emplace_back(sel.top(), sel.left(), sel.bottom(), sel.right());
+        }
     }
-
     return result;
 }
 
@@ -1284,17 +1363,45 @@ void SheetTableView::contextMenuEvent(QContextMenuEvent *) {
             auto cell = sheet->getCell(range.address());
             if(!cell) continue;
             persistent = persistent || cell->isPersistentEditMode();
+            /*[[[cog
+            import SheetParams
+            SheetParams.pick_edit_mode_action()
+            ]]]*/
+
+            // Auto generated code (Mod/Spreadsheet/App/SheetParams.py:204)
             switch(cell->getEditMode()) {
-#define SHEET_CELL_MODE(_name, _label, _doc) \
-            case Cell::Edit##_name:\
-                action = actionEdit##_name;\
+            case Cell::EditNormal:
+                action = actionEditNormal;
                 break;
-            SHEET_CELL_MODES
-#undef SHEET_CELL_MODE
+            case Cell::EditButton:
+                action = actionEditButton;
+                break;
+            case Cell::EditCombo:
+                action = actionEditCombo;
+                break;
+            case Cell::EditLabel:
+                action = actionEditLabel;
+                break;
+            case Cell::EditQuantity:
+                action = actionEditQuantity;
+                break;
+            case Cell::EditCheckBox:
+                action = actionEditCheckBox;
+                break;
+            case Cell::EditAutoAlias:
+                action = actionEditAutoAlias;
+                break;
+            case Cell::EditAutoAliasV:
+                action = actionEditAutoAliasV;
+                break;
+            case Cell::EditColor:
+                action = actionEditColor;
+                break;
             default:
                 action = actionEditNormal;
                 break;
             }
+            //[[[end]]]
             break;
         } while (range.next());
         if(action)

@@ -23,6 +23,9 @@
 #ifndef TASKFEATUREPARAMETERS_H_NAHKE2YZ
 #define TASKFEATUREPARAMETERS_H_NAHKE2YZ
 
+#include <QPointer>
+#include <QWidget>
+
 #include <Gui/TaskView/TaskView.h>
 #include <Gui/TaskView/TaskDialog.h>
 #include <Gui/DocumentObserver.h>
@@ -77,15 +80,16 @@ protected Q_SLOTS:
 
 protected:
     virtual void _refresh();
-    void addBlinkEditor(QLineEdit *);
-    void removeBlinkEditor(QLineEdit *);
-    void addBlinkLabel(QLabel *);
-    void removeBlinkLabel(QLabel *);
+
+    void addBlinkWidget(QWidget *, const QString &txt=QString());
+    void removeBlinkWidget(QWidget *);
+
     void timerEvent(QTimerEvent *);
 
 private:
     /** Notifies when the object is about to be removed. */
     virtual void slotDeletedObject(const Gui::ViewProviderDocumentObject& Obj);
+    virtual void slotDeleteDocument(const Gui::Document& Doc);
     /** Notifies on undo */
     virtual void slotUndoDocument(const Gui::Document& Doc);
     /** Notifies on redo */
@@ -103,8 +107,14 @@ protected:
     int transactionID = 0;
     int blinkTimerId = 0;
     bool blink = false;
-    std::map<QLineEdit*, QString> blinkEdits;
-    std::map<QLabel*, QString> blinkLabels;
+
+    struct BlinkInfo {
+        QPointer<QWidget> widget;
+        QString text;
+        QString altText;
+        void setText(const QString &text);
+    };
+    std::unordered_map<void*, BlinkInfo> blinkWidgets;
 };
 
 /// A common base for sketch based, dressup and other solid parameters dialogs

@@ -85,7 +85,7 @@ App::DocumentObjectExecReturn *Offset::execute(void)
     bool inter = Intersection.getValue();
     bool self = SelfIntersection.getValue();
     short mode = (short)Mode.getValue();
-    short join = (short)Join.getValue();
+    auto join = static_cast<TopoShape::JoinType>(Join.getValue());
     bool fill = Fill.getValue();
 #ifdef FC_NO_ELEMENT_MAP
     const TopoShape& shape = Feature::getShape(source);
@@ -144,7 +144,7 @@ App::DocumentObjectExecReturn *Offset2D::execute(void)
         return new App::DocumentObjectExecReturn("No source shape linked.");
     double offset = Value.getValue();
     short mode = (short)Mode.getValue();
-    short join = (short)Join.getValue();
+    auto join = static_cast<TopoShape::JoinType>(Join.getValue());
     bool fill = Fill.getValue();
     bool inter = Intersection.getValue();
     if (mode == 2)

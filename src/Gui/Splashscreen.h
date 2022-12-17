@@ -29,6 +29,8 @@
 #include <QTextBrowser>
 #include <Gui/MDIView.h>
 
+class QLabel;
+
 namespace Gui {
 
 class SplashObserver;

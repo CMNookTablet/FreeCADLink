@@ -33,8 +33,8 @@
 #include "TaskFeatureParameters.h"
 #include "ViewProviderDressUp.h"
 
-class QListWidget;
-class QListWidgetItem;
+class QTreeWidget;
+class QTreeWidgetItem;
 
 namespace Part {
     class Feature;
@@ -57,7 +57,7 @@ public:
 
     void setupTransaction();
 
-    void setup(QLabel *msg, QListWidget *widget, QCheckBox *btnAdd, bool touched=false);
+    void setup(QLabel *msg, QTreeWidget *widget, QCheckBox *btnAdd, bool touched=false);
 
     /// Apply the changes made to the object to it
     virtual void apply() {}
@@ -66,11 +66,11 @@ public:
         return transactionID;
     }
 
-    bool getItemElement(QListWidgetItem *item, std::string &subname);
+    bool getItemElement(QTreeWidgetItem *item, std::string &subname);
 
 protected Q_SLOTS:
     void onButtonRefAdd(const bool checked);
-    void onItemEntered(QListWidgetItem* current);
+    void onItemEntered(QTreeWidgetItem* current, int);
     void onItemSelectionChanged();
     virtual void onTimer();
     virtual void onRefDeleted(void);
@@ -80,11 +80,14 @@ protected:
     App::DocumentObject *getInEdit(std::string &subname, App::DocumentObject *base=nullptr);
     App::SubObjectT getInEdit(App::DocumentObject *base=nullptr, const char *sub=nullptr);
     bool showOnTop(bool enable, std::vector<App::SubObjectT> &&objs = {});
-    bool syncItems(const std::vector<App::SubObjectT> &sels = {}, bool select=false);
+    bool syncItems(const std::vector<App::SubObjectT> &sels = {});
     void recompute();
     bool populate(bool refresh=false);
     virtual void refresh();
     void showMessage(const char *msg=nullptr);
+    virtual void onNewItem(QTreeWidgetItem *) {}
+
+    QTreeWidgetItem *getCurrentItem() const;
 
 protected:
     enum selectionModes { none, refToggle, plane, line };
@@ -107,17 +110,19 @@ protected:
     int transactionID = 0;
 
     QAction* deleteAction = nullptr;
-    QListWidget *listWidget = nullptr;
+    QTreeWidget *treeWidget = nullptr;
     QCheckBox *btnAdd = nullptr;
     QLabel *messageLabel = nullptr;
 
     bool onTopEnabled;
+    bool busy = false;
 
     std::vector<App::SubObjectT> onTopObjs;
 
     boost::signals2::scoped_connection connUndo;
     boost::signals2::scoped_connection connRedo;
     boost::signals2::scoped_connection connDelete;
+    boost::signals2::scoped_connection connDeleteDoc;
 
     QTimer *timer = nullptr;
     QObject *enteredObject = nullptr;

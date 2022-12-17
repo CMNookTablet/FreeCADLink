@@ -22,6 +22,7 @@
 
 
 #include "PreCompiled.h"
+#include "PropertyGeo.h"
 
 #ifndef _PreComp_
 # include <functional>
@@ -36,6 +37,7 @@
 #include "DocumentObserver.h"
 #include "ComplexGeoData.h"
 #include "GeoFeature.h"
+#include "Link.h"
 
 using namespace App;
 namespace sp = std::placeholders;
@@ -198,6 +200,15 @@ void DocumentObjectT::operator=(const Property *prop) {
             property = prop->getName();
             return;
         }
+        std::string fullname = prop->getFullName();
+        auto pos = fullname.find('#');
+        auto dot = fullname.find('.');
+        if (pos != std::string::npos && dot != std::string::npos && dot > pos) {
+            document = fullname.substr(0, pos);
+            object = fullname.substr(pos+1, dot-pos-1);
+            property = fullname.c_str() + dot + 1;
+            return;
+        }
     }
     object.clear();
     label.clear();
@@ -287,7 +298,46 @@ Property *DocumentObjectT::getProperty() const {
         return doc ? doc->getPropertyByName(property.c_str()) : nullptr;
     }
     auto obj = getObject();
-    return obj ? obj->getPropertyByName(property.c_str()) : nullptr;
+    if (!obj)
+        return nullptr;
+
+    const char *prop = property.c_str();
+    const char *dot = strchr(prop, '.');
+    if (!dot)
+        return obj->getPropertyByName(property.c_str());
+
+    App::Property *res = nullptr;
+    Base::PyGILStateLocker lock;
+    try {
+        Py::Object pyobj(obj->getPyObject(), true);
+        std::string _name;
+        for (;;) {
+            const char *name;
+            if (dot) {
+                _name = std::string(prop, dot);
+                name = _name.c_str();
+            }
+            else
+                name = prop;
+            if (PyObject_TypeCheck(pyobj.ptr(), &PropertyContainerPy::Type)) {
+                auto p = static_cast<PropertyContainerPy*>(pyobj.ptr())->getPropertyContainerPtr()->getPropertyByName(name);
+                if (p)
+                    res = p;
+            }
+            if(!dot || !pyobj.hasAttr(name))
+                break;
+            pyobj = pyobj.getAttr(name);
+            prop = dot+1;
+            dot = strchr(prop, '.');
+        }
+
+    } catch (Py::Exception &) {
+        PyErr_Clear();
+        return nullptr;
+    } catch (Base::Exception &) {
+        return nullptr;
+    }
+    return res;
 }
 
 // -----------------------------------------------------------------------------
@@ -439,6 +489,7 @@ bool SubObjectT::normalize(NormalizeOptions options)
     bool noElement = options & NoElement;
     bool flatten = !(options & NoFlatten);
     bool keepSub = options & KeepSubName;
+    bool convertIndex = options & ConvertIndex;
 
     std::ostringstream ss;
     std::vector<int> subs;
@@ -463,7 +514,23 @@ bool SubObjectT::normalize(NormalizeOptions options)
                 break;
             }
         }
-        if (keepSub || std::isdigit(sub[0]))
+        bool _keepSub;
+        if (!std::isdigit(sub[0]))
+            _keepSub = keepSub;
+        else if (!convertIndex)
+            _keepSub = true;
+        else {
+            _keepSub = false;
+            if (auto ext = objs[i-1]->getExtensionByType<App::LinkBaseExtension>(true)) {
+                if (ext->getElementCountValue() && !ext->getShowElementValue()) {
+                    // if the parent is a collapsed link array element, then we
+                    // have to keep the index no matter what, because there is
+                    // no sub-object corresponding to an array element.
+                    _keepSub = true;
+                }
+            }
+        }
+        if (_keepSub)
             ss << std::string(sub, end);
         else
             ss << objs[i]->getNameInDocument() << ".";
@@ -519,32 +586,51 @@ bool SubObjectT::hasSubElement() const {
 }
 
 std::string SubObjectT::getNewElementName(bool fallback) const {
+    const char *elementName = Data::ComplexGeoData::findElementName(subname.c_str());
+    if (!elementName || !elementName[0])
+        return std::string();
+    std::string name = Data::ComplexGeoData::newElementName(elementName);
+    if (name.size())
+        return name;
+
     std::pair<std::string, std::string> element;
     auto obj = getObject();
     if(!obj)
         return std::string();
     GeoFeature::resolveElement(obj,subname.c_str(),element);
-    if (element.first.size() || !fallback)
+    if (!element.first.empty() || !fallback)
         return std::move(element.first);
     return std::move(element.second);
 }
 
-std::string SubObjectT::getOldElementName(int *index) const {
-    std::pair<std::string, std::string> element;
-    auto obj = getObject();
-    if(!obj)
+std::string SubObjectT::getOldElementName(int *index, bool fallback) const {
+    const char *elementName = Data::ComplexGeoData::findElementName(subname.c_str());
+    if (!elementName || !elementName[0])
         return std::string();
-    GeoFeature::resolveElement(obj,subname.c_str(),element);
-    if(!index)
-        return std::move(element.second);
-    std::size_t pos = element.second.find_first_of("0123456789");
-    if(pos == std::string::npos)
-        *index = -1;
-    else {
-        *index = std::atoi(element.second.c_str()+pos);
-        element.second.resize(pos);
+    std::string name = Data::ComplexGeoData::oldElementName(elementName);
+    if (name.empty()) {
+        std::pair<std::string, std::string> element;
+        auto obj = getObject();
+        if(!obj)
+            return std::string();
+        GeoFeature::resolveElement(obj,subname.c_str(),element);
+        if (!element.second.empty())
+            name = std::move(element.second);
+        else if (fallback && !element.first.empty())
+            name = std::move(element.first);
+        else
+            return std::string();
     }
-    return std::move(element.second);
+    if(index) {
+        std::size_t pos = name.find_first_of("0123456789");
+        if(pos == std::string::npos)
+            *index = -1;
+        else {
+            *index = std::atoi(name.c_str()+pos);
+            name.resize(pos);
+        }
+    }
+    return name;
 }
 
 App::DocumentObject *SubObjectT::getSubObject() const {

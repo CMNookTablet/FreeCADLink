@@ -72,14 +72,23 @@ public:
     WaitCursor();
     ~WaitCursor();
 
-    void setWaitCursor();
-    void restoreCursor();
+    static void setWaitCursor();
+    static void restoreCursor();
+
     FilterEventsFlags ignoreEvents() const;
     void setIgnoreEvents(FilterEventsFlags flags = AllEvents);
 
 private:
     FilterEventsFlags filter;
-    static int instances;
+};
+
+/** Helper class for temporary restore wait cursor
+ */
+class GuiExport WaitCursorRestorer
+{
+public:
+    WaitCursorRestorer();
+    ~WaitCursorRestorer();
 };
 
 } // namespace Gui

@@ -46,6 +46,7 @@
 
 #include "FeatureFace.h"
 #include "FaceMaker.h"
+#include "WireJoiner.h"
 #include <Mod/Part/App/Part2DObject.h>
 
 
@@ -59,6 +60,16 @@ Face::Face()
     ADD_PROPERTY(Sources,(0));
     ADD_PROPERTY(FaceMakerClass,("Part::FaceMakerCheese"));//default value here is for legacy documents. Default for new objects is set in setupObject.
     Sources.setSize(0);
+    ADD_PROPERTY_TYPE(SplitEdges, (false), "Wire Construction",  App::Prop_None,
+            "Whether to split edge if it intersects with other edges");
+    ADD_PROPERTY_TYPE(MergeEdges, (true), "Wire Construction",  App::Prop_None,
+            "Merge connected edges without branches into wire before searching for closed wires.");
+    ADD_PROPERTY_TYPE(TightBound, (false), "Wire Construction",  App::Prop_None,
+            "Create only wires that cannot be further splitted into smaller wires");
+    ADD_PROPERTY_TYPE(Outline, (false), "Wire Construction",  App::Prop_None,
+            "Whether to remove any edges that are shared by more than one wire, effectively creating an outline.");
+    ADD_PROPERTY_TYPE(EdgeTolerance, (1e-6), "Wire Construction",  App::Prop_None,
+            "Wire construction tolerance");
 }
 
 short Face::mustExecute() const
@@ -82,24 +93,36 @@ App::DocumentObjectExecReturn *Face::execute(void)
     if (links.empty())
         return new App::DocumentObjectExecReturn("No shapes linked");
 
-    std::unique_ptr<FaceMaker> facemaker = FaceMaker::ConstructFromType(this->FaceMakerClass.getValue());
-    facemaker->MyHasher = getDocument()->getStringHasher();
-
+    std::vector<TopoShape> shapes;
     for (std::vector<App::DocumentObject*>::iterator it = links.begin(); it != links.end(); ++it) {
         auto shape = Feature::getTopoShape(*it);
         if (shape.isNull())
             return new App::DocumentObjectExecReturn("Linked shape object is empty");
+        shapes.push_back(shape);
+    }
 
-        // this is a workaround for an obscure OCC bug which leads to empty tessellations
-        // for some faces. Making an explicit copy of the linked shape seems to fix it.
-        // The error only happens when re-computing the shape.
-        /*if (!this->Shape.getValue().IsNull()) {
-            BRepBuilderAPI_Copy copy(shape);
-            shape = copy.Shape();
-            if (shape.IsNull())
-                return new App::DocumentObjectExecReturn("Linked shape object is empty");
-        }*/
+    if (SplitEdges.getValue() || Outline.getValue()) {
+        WireJoiner joiner;
+        joiner.setTolerance(EdgeTolerance.getValue());
+        joiner.setTightBound(TightBound.getValue());
+        joiner.setOutline(Outline.getValue());
+        joiner.setSplitEdges(SplitEdges.getValue());
+        joiner.addShape(shapes);
+        TopoShape result(0, getDocument()->getStringHasher());
+        joiner.getResultWires(result);
+        shapes.clear();
+        shapes.push_back(result);
+    }
 
+    if (FaceMakerClass.getStrValue() == "None") {
+        Shape.setValue(TopoShape(0, getDocument()->getStringHasher()).makECompound(shapes, nullptr, false));
+        return Part::Feature::execute();
+    }
+
+    std::unique_ptr<FaceMaker> facemaker = FaceMaker::ConstructFromType(this->FaceMakerClass.getValue());
+    facemaker->MyHasher = getDocument()->getStringHasher();
+
+    for (const auto &shape : shapes) {
         if(links.size() == 1 && shape.getShape().ShapeType() == TopAbs_COMPOUND)
             facemaker->useTopoCompound(shape);
         else

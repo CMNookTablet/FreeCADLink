@@ -32,28 +32,38 @@ namespace PartDesignGui {
 
 class ReferenceSelection : public Gui::SelectionFilterGate
 {
+public:
     // TODO Replace this set of bools with bitwice enum (2015-09-04, Fat-Zer)
+    struct Config {
+        // If set to true, allow picking axis line or edges
+        bool edge = false;
+        // If set to true, allow picking axis plane or face
+        bool plane = true;
+        // If set to true, allow only linear edges and planar faces
+        bool planar = false;
+        // If set to true, allow picking datum points or vertex
+        bool point = false;
+        // If set to true, allow picking objects from another body in the same part
+        bool allowOtherBody = true;
+        // Allow whole object selection
+        bool whole = false;
+        // Allow picking circular edges (incl arcs)
+        bool circle = false;
+        // Allow wire selection
+        bool wire = false;
+
+        Config() {}
+    };
+
+private:
     const App::DocumentObject* support;
-    // If set to true, allow picking edges or planes or both
-    bool edge, plane;
-    // If set to true, allow only linear edges and planar faces
-    bool planar;
-    // If set to true, allow picking datum points
-    bool point;
-    // If set to true, allow picking objects from another body in the same part
-    bool allowOtherBody;
-    // Allow whole object selection
-    bool whole;
-    // Allow picking circular edges (incl arcs)
-    bool circle;
+    Config _conf;
 
 public:
-    ReferenceSelection(const App::DocumentObject* support_,
-                       const bool edge_, const bool plane_, const bool planar_,
-                       const bool point_ = false, bool whole_ = false, bool circle_ = false)
-        : Gui::SelectionFilterGate((Gui::SelectionFilter*)0),
-          support(support_), edge(edge_), plane(plane_),
-          planar(planar_), point(point_), allowOtherBody(true), whole(whole_), circle(circle_)
+    ReferenceSelection(const App::DocumentObject* support_, const Config &conf = Config())
+        : Gui::SelectionFilterGate((Gui::SelectionFilter*)0)
+        , support(support_)
+        , _conf(conf)
     {
     }
     /**

@@ -26,11 +26,14 @@
 #include <Gui/TaskView/TaskDialog.h>
 #include <App/DocumentObserver.h>
 
+class QTimer;
+
 namespace Gui
 {
   class QuantitySpinBox;
   class SoFCCSysDragger;
   class ViewProviderDragger;
+  class PrefCheckBox;
 
   class TaskCSysDragger : public Gui::TaskView::TaskDialog
   {
@@ -42,6 +45,8 @@ namespace Gui
         { return QDialogButtonBox::Ok;}
       virtual void open() override;
       virtual bool accept() override;
+      void onEndMove();
+      void recompute(bool finish);
     private Q_SLOTS:
       void onTIncrementSlot(double freshValue);
       void onRIncrementSlot(double freshValue);
@@ -53,6 +58,10 @@ namespace Gui
       QuantitySpinBox *tSpinBox;
       QuantitySpinBox *rSpinBox;
       App::SubObjectT editObj;
+
+      PrefCheckBox *checkBoxShowOnTop = nullptr;
+      PrefCheckBox *checkBoxRecompute = nullptr;
+      QTimer *timer = nullptr;
   };
 }
 

@@ -22,6 +22,7 @@
 
 
 #include "PreCompiled.h"
+#include <algorithm>
 
 #ifndef _PreComp_
 # include <sstream>
@@ -41,6 +42,8 @@
 # include <QTextStream>
 # include <boost_bind_bind.hpp>
 #endif
+
+#include <boost/algorithm/string.hpp>
 
 #include <App/AutoTransaction.h>
 #include <App/Document.h>
@@ -76,6 +79,7 @@
 #include "Tools.h"
 #include "Utilities.h"
 #include "NavigationStyle.h"
+#include "OverlayParams.h"
 #include "OverlayWidgets.h"
 #include "SelectionView.h"
 #include "MouseSelection.h"
@@ -671,28 +675,34 @@ bool StdCmdToggleClipPlane::isActive(void)
 class StdCmdDrawStyleBase : public Command 
 {
 public:
-    StdCmdDrawStyleBase(const char *name, const char *title, 
-                        const char *doc, const char *shortcut, const char *pixmap);
+    StdCmdDrawStyleBase(int idx, const char *title, const char *doc);
 
     virtual const char* className() const;
+
+    static const char *cacheString(const char *prefix, const char *text)
+    {
+        static std::list<std::string> _cache;
+        _cache.push_back(prefix);
+        _cache.back() += text;
+        boost::replace_all(_cache.back(), " ", "");
+        return _cache.back().c_str();
+    }
 
 protected: 
     bool isActive(void);
     virtual void activated(int iMsg);
 };
 
-StdCmdDrawStyleBase::StdCmdDrawStyleBase(const char *name, const char *title, 
-                                         const char *doc, const char *shortcut,
-                                         const char *pixmap)
-    :Command(name)
+StdCmdDrawStyleBase::StdCmdDrawStyleBase(int idx, const char *title, const char *doc)
+    :Command(cacheString("Std_DrawStyle", title))
 {
     sGroup        = "Standard-View";
     sMenuText     = title;
     sToolTipText  = doc;
     sStatusTip    = sToolTipText;
-    sWhatsThis    = name;
-    sPixmap       = pixmap;
-    sAccel        = shortcut;
+    sWhatsThis    = getName();
+    sPixmap       = cacheString("DrawStyle", title);
+    sAccel        = cacheString("V,", std::to_string(idx).c_str());
     eType         = Alter3DView;
 }
 
@@ -721,7 +731,7 @@ void StdCmdDrawStyleBase::activated(int iMsg)
             if (!viewer)
                 return;
             if (!Base::streq(sMenuText, "Shadow")) {
-                viewer->setOverrideMode(sMenuText);
+               viewer->setOverrideMode(sMenuText);
                 return;
             }
             if (viewer->getOverrideMode() == "Shadow")
@@ -747,7 +757,6 @@ class StdCmdDrawStyle : public GroupCommand
 public:
     StdCmdDrawStyle();
     virtual const char* className() const {return "StdCmdDrawStyle";}
-    bool isActive(void);
     void updateIcon(const MDIView *);
     virtual Action * createAction(void) {
         Action * action = GroupCommand::createAction();
@@ -767,29 +776,9 @@ StdCmdDrawStyle::StdCmdDrawStyle()
     eType         = 0;
     bCanLog       = false;
 
-#define DRAW_STYLE_CMD(_name, _title, _doc, _shortcut) \
-    addCommand(new StdCmdDrawStyleBase(\
-        "Std_DrawStyle" #_name, QT_TR_NOOP(_title), QT_TR_NOOP(_doc), _shortcut, "DrawStyle" #_name));
-
-    DRAW_STYLE_CMD(AsIs,"As Is",
-            "Draw style, normal display mode", "V,1")
-    DRAW_STYLE_CMD(Points, "Points",
-            "Draw style, show points only", "V,2")
-    DRAW_STYLE_CMD(WireFrame, "Wireframe",
-            "Draw style, show wire frame only", "V,3")
-    DRAW_STYLE_CMD(HiddenLine, "Hidden Line",
-            "Draw style, show hidden line by display object as transparent", "V,4")
-    DRAW_STYLE_CMD(NoShading, "No Shading",
-            "Draw style, shading forced off", "V,5")
-    DRAW_STYLE_CMD(Shaded, "Shaded",
-            "Draw style, shading force on", "V,6")
-    DRAW_STYLE_CMD(FlatLines, "Flat Lines",
-            "Draw style, show both wire frame and face with shading", "V,7")
-    DRAW_STYLE_CMD(Tessellation, "Tessellation",
-            "Draw style, show tessellation wire frame", "V,8")
-    DRAW_STYLE_CMD(Shadow, "Shadow",
-            "Draw style, drop shadows for the scene.\n"
-            "Click this button while in shadow mode to toggle light manipulator", "V,9");
+    int i = 0;
+    while(const char *title = drawStyleNameFromIndex(i++))
+        addCommand(new StdCmdDrawStyleBase(i, title, drawStyleDocumentation(i-1)));
 
     this->getGuiApplication()->signalActivateView.connect(boost::bind(&StdCmdDrawStyle::updateIcon, this, bp::_1));
     this->getGuiApplication()->signalViewModeChanged.connect(
@@ -813,31 +802,11 @@ void StdCmdDrawStyle::updateIcon(const MDIView *view)
     Gui::ActionGroup *actionGroup = dynamic_cast<Gui::ActionGroup *>(_pcAction);
     if (!actionGroup)
         return;
-
-    int index = 0;
-    if (mode == "Point")
-        index = 1;
-    else if (mode == "Wireframe")
-        index = 2;
-    else if (mode == "Hidden Line")
-        index = 3;
-    else if (mode == "No shading")
-        index = 4;
-    else if (mode == "Shaded")
-        index = 5;
-    else if (mode == "Flat Lines")
-        index = 6;
-    else if (mode == "Tessellation")
-        index = 7;
-    else if (mode == "Shadow")
-        index = 8;
-    _pcAction->setProperty("defaultAction", QVariant(index));
-    setup(_pcAction);
-}
-
-bool StdCmdDrawStyle::isActive(void)
-{
-    return Gui::Application::Instance->activeDocument();
+    int index = drawStyleIndexFromName(mode.c_str());;
+    if (index >= 0) {
+        _pcAction->setProperty("defaultAction", QVariant(index));
+        setup(_pcAction);
+    }
 }
 
 //===========================================================================
@@ -1119,7 +1088,7 @@ void StdCmdSelectVisibleObjects::activated(int iMsg)
     }
 
     SelectionSingleton& rSel = Selection();
-    rSel.setSelection(app->getName(), visible);
+    rSel.setSelection(visible);
 }
 
 bool StdCmdSelectVisibleObjects::isActive(void)
@@ -1262,21 +1231,23 @@ StdCmdSelectDependents::StdCmdSelectDependents()
 void StdCmdSelectDependents::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
-    std::map<App::Document*, std::vector<App::DocumentObject*>> objmap;
-    std::set<App::DocumentObject*> objset;
+    std::vector<App::DocumentObject*> objs;
     auto sels = Gui::Selection().getCompleteSelection();
-    for (const auto &sel : sels)
-        objset.insert(sel.pObject);
     for (const auto &sel : sels) {
         for (auto obj : sel.pObject->getOutList()) {
-            if (objset.insert(obj).second)
-                objmap[obj->getDocument()].push_back(obj);
+            if (objs.empty()) {
+                objs.push_back(obj);
+                continue;
+            }
+            auto it = std::upper_bound(objs.begin(), objs.end(), obj);
+            if (*(it - 1) == obj)
+                continue;
+            objs.insert(it, obj);
         }
     }
     if (QApplication::queryKeyboardModifiers() != Qt::ControlModifier)
         Selection().clearCompleteSelection();
-    for (const auto &v : objmap)
-        Selection().setSelection(v.first->getName(), v.second);
+    Selection().setSelection(objs);
 }
 
 bool StdCmdSelectDependents::isActive(void)
@@ -1304,20 +1275,25 @@ StdCmdSelectDependentsRecursive::StdCmdSelectDependentsRecursive()
 void StdCmdSelectDependentsRecursive::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
-    std::map<App::Document*, std::vector<App::DocumentObject*>> objmap;
-    std::vector<App::DocumentObject*> objs;
+    std::vector<App::DocumentObject*> input;
     auto sels = Gui::Selection().getCompleteSelection();
     for (const auto &sel : sels)
-        objs.push_back(sel.pObject);
-    std::set<App::DocumentObject*> objset(objs.begin(), objs.end());
-    for (auto obj : App::Document::getDependencyList(objs)) {
-        if (objset.insert(obj).second)
-            objmap[obj->getDocument()].push_back(obj);
+        input.push_back(sel.pObject);
+
+    std::vector<App::DocumentObject*> objs;
+    for (auto obj : App::Document::getDependencyList(input)) {
+        if (objs.empty()) {
+            objs.push_back(obj);
+            continue;
+        }
+        auto it = std::upper_bound(objs.begin(), objs.end(), obj);
+        if (*(it - 1) == obj)
+            continue;
+        objs.insert(it, obj);
     }
     if (QApplication::queryKeyboardModifiers() != Qt::ControlModifier)
         Selection().clearCompleteSelection();
-    for (const auto &v : objmap)
-        Selection().setSelection(v.first->getName(), v.second);
+    Selection().setSelection(objs);
 }
 
 bool StdCmdSelectDependentsRecursive::isActive(void)
@@ -3666,7 +3642,6 @@ void StdCmdSelBack::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
     Selection().selStackGoBack();
-    // TreeWidget::scrollItemToTop();
 }
 
 bool StdCmdSelBack::isActive(void)
@@ -3707,7 +3682,6 @@ void StdCmdSelForward::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
     Selection().selStackGoForward();
-    // TreeWidget::scrollItemToTop();
 }
 
 bool StdCmdSelForward::isActive(void)
@@ -3749,8 +3723,11 @@ void StdCmdPickGeometry::activated(int iMsg)
 {
     Q_UNUSED(iMsg); 
 
-    QPoint pos = QCursor::pos();
-    QWidget *widget = qApp->widgetAt(pos);
+    auto widget = OverlayManager::instance()->getLastMouseInterceptWidget();
+    if (!widget) {
+        QPoint pos = QCursor::pos();
+        widget = qApp->widgetAt(pos);
+    }
     if (widget)
         widget = widget->parentWidget();
     auto viewer = qobject_cast<View3DInventorViewer*>(widget);
@@ -4363,8 +4340,6 @@ public:
     virtual const char* className() const {return "StdCmdSelOptions";}
 };
 
-#ifdef FC_HAS_DOCK_OVERLAY
-
 //===========================================================================
 // Std_DockOverlayAll
 //===========================================================================
@@ -4401,7 +4376,7 @@ StdCmdDockOverlayTransparentAll::StdCmdDockOverlayTransparentAll()
   sGroup        = "View";
   sMenuText     = QT_TR_NOOP("Toggle transparent for all");
   sToolTipText  = QT_TR_NOOP("Toggle transparent for all overlay docked window.\n"
-                             "This makes the docked widget stay transparent at al times.");
+                             "This makes the docked widget stay transparent at all times.");
   sWhatsThis    = "Std_DockOverlayTransparentAll";
   sStatusTip    = sToolTipText;
   sAccel        = "SHIFT+F4";
@@ -4450,7 +4425,7 @@ StdCmdDockOverlayToggleTransparent::StdCmdDockOverlayToggleTransparent()
     sGroup        = "Standard-View";
     sMenuText     = QT_TR_NOOP("Toggle transparent");
     sToolTipText  = QT_TR_NOOP("Toggle transparent mode for the docked widget under cursor.\n"
-                               "This makes the docked widget stay transparent at al times.");
+                               "This makes the docked widget stay transparent at all times.");
     sWhatsThis    = "Std_DockOverlayToggleTransparent";
     sStatusTip    = sToolTipText;
     sAccel        = "SHIFT+F3";
@@ -4464,125 +4439,103 @@ void StdCmdDockOverlayToggleTransparent::activated(int iMsg)
 }
 
 //===========================================================================
-// Std_DockOverlayIncrease
+// Std_DockOverlayToggleLeft
 //===========================================================================
 
-DEF_STD_CMD(StdCmdDockOverlayIncrease)
+DEF_STD_CMD(StdCmdDockOverlayToggleLeft)
 
-StdCmdDockOverlayIncrease::StdCmdDockOverlayIncrease()
-  :Command("Std_DockOverlayIncrease")
+StdCmdDockOverlayToggleLeft::StdCmdDockOverlayToggleLeft()
+  :Command("Std_DockOverlayToggleLeft")
 {
-  sGroup        = "View";
-  sMenuText     = QT_TR_NOOP("Increase overlay size");
-  sToolTipText  = QT_TR_NOOP("Increase the overlayed widget size under cursor");
-  sWhatsThis    = "Std_DockOverlayIncrease";
-  sStatusTip    = sToolTipText;
-  sAccel        = "ALT+F3";
-  eType         = 0;
+    sGroup        = "Standard-View";
+    sMenuText     = QT_TR_NOOP("Toggle left");
+    sToolTipText  = QT_TR_NOOP("Show/hide left overlay panel");
+    sWhatsThis    = "Std_DockOverlayToggleLeft";
+    sStatusTip    = sToolTipText;
+    sAccel        = "SHIFT+Left";
+    sPixmap       = "qss:overlay/close.svg";
+    eType         = 0;
 }
 
-void StdCmdDockOverlayIncrease::activated(int iMsg)
+void StdCmdDockOverlayToggleLeft::activated(int iMsg)
 {
     Q_UNUSED(iMsg); 
-    OverlayManager::instance()->changeOverlaySize(5);
+    OverlayManager::instance()->setOverlayMode(OverlayManager::ToggleLeft);
 }
 
 //===========================================================================
-// Std_DockOverlayDecrease
+// Std_DockOverlayToggleRight
 //===========================================================================
 
-DEF_STD_CMD(StdCmdDockOverlayDecrease)
+DEF_STD_CMD(StdCmdDockOverlayToggleRight)
 
-StdCmdDockOverlayDecrease::StdCmdDockOverlayDecrease()
-  :Command("Std_DockOverlayDecrease")
+StdCmdDockOverlayToggleRight::StdCmdDockOverlayToggleRight()
+  :Command("Std_DockOverlayToggleRight")
 {
-  sGroup        = "View";
-  sMenuText     = QT_TR_NOOP("Decrease overlay size");
-  sToolTipText  = QT_TR_NOOP("Decrease the overlayed widget size under cursor");
-  sWhatsThis    = "Std_DockOverlayDecrease";
-  sStatusTip    = sToolTipText;
-  sAccel        = "ALT+F2";
-  eType         = 0;
+    sGroup        = "Standard-View";
+    sMenuText     = QT_TR_NOOP("Toggle right");
+    sToolTipText  = QT_TR_NOOP("Show/hide right overlay panel");
+    sWhatsThis    = "Std_DockOverlayToggleRight";
+    sStatusTip    = sToolTipText;
+    sAccel        = "SHIFT+Right";
+    sPixmap       = "qss:overlay/close.svg";
+    eType         = 0;
 }
 
-void StdCmdDockOverlayDecrease::activated(int iMsg)
+void StdCmdDockOverlayToggleRight::activated(int iMsg)
 {
     Q_UNUSED(iMsg); 
-    OverlayManager::instance()->changeOverlaySize(-5);
+    OverlayManager::instance()->setOverlayMode(OverlayManager::ToggleRight);
 }
 
 //===========================================================================
-// Std_DockOverlayAutoView
+// Std_DockOverlayToggleTop
 //===========================================================================
 
-VIEW_CMD_DEF(DockOverlayAutoView, DockOverlayAutoView)
+DEF_STD_CMD(StdCmdDockOverlayToggleTop)
+
+StdCmdDockOverlayToggleTop::StdCmdDockOverlayToggleTop()
+  :Command("Std_DockOverlayToggleTop")
 {
     sGroup        = "Standard-View";
-    sMenuText     = QT_TR_NOOP("Auto hide non 3D view");
-    sToolTipText  = QT_TR_NOOP("Activate auto hide for non 3D view");
-    sWhatsThis    = "Std_DockOverlayAutoView";
+    sMenuText     = QT_TR_NOOP("Toggle top");
+    sToolTipText  = QT_TR_NOOP("Show/hide top overlay panel");
+    sWhatsThis    = "Std_DockOverlayToggleTop";
     sStatusTip    = sToolTipText;
+    sAccel        = "SHIFT+Up";
+    sPixmap       = "qss:overlay/close.svg";
     eType         = 0;
 }
 
-//===========================================================================
-// Std_DockOverlayExtraState
-//===========================================================================
-
-VIEW_CMD_DEF(DockOverlayExtraState, DockOverlayExtraState)
+void StdCmdDockOverlayToggleTop::activated(int iMsg)
 {
-    sGroup        = "Standard-View";
-    sMenuText     = QT_TR_NOOP("More hiding in overlay");
-    sToolTipText  = QT_TR_NOOP("Hide more widgets when in overlay mode");
-    sWhatsThis    = "Std_DockOverlayExtraState";
-    sStatusTip    = sToolTipText;
-    eType         = 0;
+    Q_UNUSED(iMsg); 
+    OverlayManager::instance()->setOverlayMode(OverlayManager::ToggleTop);
 }
 
 //===========================================================================
-// Std_DockOverlayActivateOnHover
+// Std_DockOverlayToggleBottom
 //===========================================================================
 
-VIEW_CMD_DEF(DockOverlayActivateOnHover, DockOverlayActivateOnHover)
+DEF_STD_CMD(StdCmdDockOverlayToggleBottom)
+
+StdCmdDockOverlayToggleBottom::StdCmdDockOverlayToggleBottom()
+  :Command("Std_DockOverlayToggleBottom")
 {
     sGroup        = "Standard-View";
-    sMenuText     = QT_TR_NOOP("Activate on hover");
-    sToolTipText  = QT_TR_NOOP("Activate auto hidden overlay on mouse hover.\n"
-                               "If disabled, then activate on mouse click");
-    sWhatsThis    = "Std_DockOverlayActivateOnHover";
+    sMenuText     = QT_TR_NOOP("Toggle bottom");
+    sToolTipText  = QT_TR_NOOP("Show/hide bottom overlay panel");
+    sWhatsThis    = "Std_DockOverlayToggleBottom";
     sStatusTip    = sToolTipText;
+    sAccel        = "SHIFT+Down";
+    sPixmap       = "qss:overlay/close.svg";
     eType         = 0;
 }
 
-//===========================================================================
-// Std_DockOverlayAutoMouseThrough
-//===========================================================================
-
-VIEW_CMD_DEF(DockOverlayAutoMouseThrough, DockOverlayAutoMouseThrough)
+void StdCmdDockOverlayToggleBottom::activated(int iMsg)
 {
-    sGroup        = "Standard-View";
-    sMenuText     = QT_TR_NOOP("Auto mouse event pass through");
-    sToolTipText  = QT_TR_NOOP("Auto pass through mouse event on completely transparent background");
-    sWhatsThis    = "Std_DockOverlayAutoMouseThrough";
-    sStatusTip    = sToolTipText;
-    eType         = 0;
-}
-
-//===========================================================================
-// Std_DockOverlayCheckNaviCube
-//===========================================================================
-
-VIEW_CMD_DEF(DockOverlayCheckNaviCube, DockOverlayCheckNaviCube)
-{
-    sGroup        = "Standard-View";
-    sMenuText     = QT_TR_NOOP("Make space for NaviCube");
-    sToolTipText  = QT_TR_NOOP("Adjust overlay size to make space for Navigation Cube\n"
-                               "Note that it only respects the cube position setting in\n"
-                               "the preference dialog, and will not work for custom\n"
-                               "position obtained through dragging the cube.");
-    sWhatsThis    = "Std_DockOverlayCheckNaviCube";
-    sStatusTip    = sToolTipText;
-    eType         = 0;
+    Q_UNUSED(iMsg); 
+    OverlayManager::instance()->setOverlayMode(OverlayManager::ToggleBottom);
 }
 
 //===========================================================================
@@ -4628,6 +4581,7 @@ bool StdCmdDockOverlayMouseTransparent::isActive() {
     return true;
 }
 
+
 // ============================================================================
 
 class StdCmdDockOverlay : public GroupCommand
@@ -4650,20 +4604,15 @@ public:
         addCommand(new StdCmdDockOverlayToggle());
         addCommand(new StdCmdDockOverlayToggleTransparent());
         addCommand();
-        addCommand(new StdCmdDockOverlayIncrease());
-        addCommand(new StdCmdDockOverlayDecrease());
-        addCommand();
-        addCommand(new StdCmdDockOverlayAutoView());
-        addCommand(new StdCmdDockOverlayExtraState());
-        addCommand(new StdCmdDockOverlayActivateOnHover());
-        addCommand(new StdCmdDockOverlayAutoMouseThrough());
-        addCommand(new StdCmdDockOverlayCheckNaviCube());
-        addCommand();
         addCommand(new StdCmdDockOverlayMouseTransparent());
+        addCommand();
+        addCommand(new StdCmdDockOverlayToggleLeft());
+        addCommand(new StdCmdDockOverlayToggleRight());
+        addCommand(new StdCmdDockOverlayToggleTop());
+        addCommand(new StdCmdDockOverlayToggleBottom());
     };
     virtual const char* className() const {return "StdCmdDockOverlay";}
 };
-#endif // FC_HAS_DOCK_OVERLAY
 
 //===========================================================================
 // Std_BindViewCamera
@@ -4739,6 +4688,21 @@ void StdCmdCloseLinkedView::activated(int iMsg)
 bool StdCmdCloseLinkedView::isActive(void)
 {
   return App::GetApplication().getActiveDocument() != nullptr;
+}
+
+//===========================================================================
+// Std_ToolTipDisable
+//===========================================================================
+
+VIEW_CMD_DEF(ToolTipDisable, ToolTipDisable)
+{
+    sGroup        = "View";
+    sMenuText     = QT_TR_NOOP("Disable tool tip");
+    sToolTipText  = QT_TR_NOOP("Disable showing tool tips for all widgets.");
+    sWhatsThis    = "Std_ToolTipDisable";
+    sStatusTip    = sToolTipText;
+    eType         = 0;
+    sAccel        = "D, T";
 }
 
 //===========================================================================
@@ -4824,10 +4788,9 @@ void CreateViewStdCommands(void)
     rcCmdMgr.addCommand(new StdCmdPickGeometry());
     rcCmdMgr.addCommand(new StdCmdCloseLinkedView());
     rcCmdMgr.addCommand(new StdCmdItemMenu());
+    rcCmdMgr.addCommand(new StdCmdToolTipDisable());
 
-#ifdef FC_HAS_DOCK_OVERLAY
     rcCmdMgr.addCommand(new StdCmdDockOverlay());
-#endif
 
     auto hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/View");
     if(hGrp->GetASCII("GestureRollFwdCommand").empty())

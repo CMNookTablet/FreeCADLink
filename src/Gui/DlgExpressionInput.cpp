@@ -91,7 +91,7 @@ DlgExpressionInput::DlgExpressionInput(const App::ObjectIdentifier & _path,
     // There are some platforms where setting no system background causes a black
     // rectangle to appear. To avoid this the 'NoSystemBackground' parameter can be
     // set to false. Then a normal non-modal dialog will be shown instead (#0002440).
-    this->noBackground = ExprParams::NoSystemBackground();
+    this->noBackground = ExprParams::getNoSystemBackground();
     if (this->noBackground) {
         // Both OSX and Windows will pass through mouse event on complete
         // transparent top level widgets. So we use an almost transparent child
@@ -114,7 +114,7 @@ DlgExpressionInput::DlgExpressionInput(const App::ObjectIdentifier & _path,
     ui->splitter->setStretchFactor(0, 0);
     ui->splitter->setStretchFactor(1, 2);
 
-    bool wantreturn = ExprParams::AllowReturn() || ui->expression->document()->blockCount()>1;
+    bool wantreturn = ExprParams::getAllowReturn() || ui->expression->document()->blockCount()>1;
     ui->checkBoxWantReturn->setChecked(wantreturn);
     adjustingExpressionSize = true;
     timer.start(100);
@@ -405,7 +405,7 @@ void DlgExpressionInput::hideEvent(QHideEvent* ev)
 void DlgExpressionInput::showEvent(QShowEvent* ev)
 {
     QDialog::showEvent(ev);
-    this->exprFuncDisabler.setActive(!ExprParams::EvalFuncOnEdit());
+    this->exprFuncDisabler.setActive(!ExprParams::getEvalFuncOnEdit());
 
 #if 0//defined(Q_OS_WIN)
     // This way we can fetch click events outside modal dialogs
@@ -462,15 +462,27 @@ bool DlgExpressionInput::eventFilter(QObject *obj, QEvent *ev)
         // Intercept 'Return' key if not allowed
         auto ke = static_cast<QKeyEvent*>(ev);
         bool on = ui->expression->completerActive();
-        if (!on && !ExprParams::AllowReturn()
+        if (!on && !ExprParams::getAllowReturn()
                 && ke->key() == Qt::Key_Return
                 && ke->modifiers() == Qt::NoModifier) {
-            accept();
+            if (ui->okBtn->isEnabled())
+                accept();
             return true;
         }
     }
 
     return false;
+}
+
+void DlgExpressionInput::accept()
+{
+    if (timer.isActive()) {
+        timer.stop();
+        onTimer();
+    }
+    if (!ui->okBtn->isEnabled())
+        return;
+    QDialog::accept();
 }
 
 void DlgExpressionInput::adjustPosition()
@@ -541,8 +553,8 @@ void DlgExpressionInput::adjustExpressionSize()
             + margins.top () + margins.bottom ();
     }
 
-    if (height < ExprParams::EditDialogTextHeight())
-        height = ExprParams::EditDialogTextHeight();
+    if (height < ExprParams::getEditDialogTextHeight())
+        height = ExprParams::getEditDialogTextHeight();
     if (height < ui->expression->minimumHeight())
         height = ui->expression->minimumHeight();
 
@@ -557,12 +569,12 @@ void DlgExpressionInput::adjustExpressionSize()
             doResize = true;
         }
     }
-    if (s.height() < ExprParams::EditDialogHeight()) {
-        s.setHeight(ExprParams::EditDialogHeight());
+    if (s.height() < ExprParams::getEditDialogHeight()) {
+        s.setHeight(ExprParams::getEditDialogHeight());
         doResize = true;
     }
-    if (s.width() < ExprParams::EditDialogWidth()) {
-        s.setWidth(ExprParams::EditDialogWidth());
+    if (s.width() < ExprParams::getEditDialogWidth()) {
+        s.setWidth(ExprParams::getEditDialogWidth());
         doResize = true;
     }
     if (doResize)
@@ -576,7 +588,7 @@ void DlgExpressionInput::adjustExpressionSize()
 void ProxyWidget::paintEvent(QPaintEvent *)
 {
     QColor backgroundColor(master->backgroundColor);
-    backgroundColor.setAlpha(ExprParams::EditDialogBGAlpha());
+    backgroundColor.setAlpha(ExprParams::getEditDialogBGAlpha());
     QPainter painter(this);
     QBrush brush(backgroundColor);
     painter.setBrush(brush);
@@ -736,7 +748,7 @@ void DlgExpressionInput::setupColors()
     wrapStylesheet(this->warningColorStyle);
     wrapStylesheet(this->errorColorStyle);
 
-    //Sets the intial styles on launch and without bound data
+    //Sets the initial styles on launch and without bound data
     this->ui->msg->setStyleSheet(this->textColorStyle);
     this->ui->expression->setStyleSheet(this->textColorStyle);
 }

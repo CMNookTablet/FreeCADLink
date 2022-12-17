@@ -170,6 +170,11 @@ public:
     virtual void afterRestore() override;
     virtual void onContainerRestored() override;
 
+    virtual void getLinksTo(std::vector<App::ObjectIdentifier> &identifiers,
+                            App::DocumentObject *obj,
+                            const char *subname=nullptr,
+                            bool all=false) const override;
+
     /* Python interface */
     PyObject *getPyObject(void) override;
     void setPyObject(PyObject *) override;

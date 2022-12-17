@@ -155,7 +155,7 @@ void FillingEdgePanel::setEditedObject(Surface::Filling* fea)
     auto count = objects.size();
 
     // fill up faces if wrong size
-    auto faces = editedObject->UnboundFaces.getValues();
+    auto faces = editedObject->UnboundFaces.getSubValues();
     if (faces.size() != edges.size()) {
         faces.resize(edges.size());
         std::fill(faces.begin(), faces.end(), std::string());
@@ -400,10 +400,10 @@ void FillingEdgePanel::onSelectionChanged(const Gui::SelectionChanges& msg)
             editedObject->UnboundEdges.setValues(objects, element);
 
             // extend faces and continuities lists if needed
-            auto faces = editedObject->UnboundFaces.getValues();
+            auto faces = editedObject->UnboundFaces.getSubValues();
             if (count == faces.size()) {
                 faces.emplace_back();
-                editedObject->UnboundFaces.setValues(faces);
+                editedObject->UnboundFaces.setValues(objects, faces);
             }
             auto conts = editedObject->UnboundOrder.getValues();
             if (count == conts.size()) {
@@ -450,10 +450,10 @@ void FillingEdgePanel::onSelectionChanged(const Gui::SelectionChanges& msg)
                     editedObject->UnboundEdges.setValues(objects, element);
 
                     // try to remove the item also from the faces
-                    auto faces = editedObject->UnboundFaces.getValues();
+                    auto faces = editedObject->UnboundFaces.getSubValues();
                     if (index < faces.size()) {
                         faces.erase(faces.begin() + index);
-                        editedObject->UnboundFaces.setValues(faces);
+                        editedObject->UnboundFaces.setValues(objects, faces);
                     }
 
                     // try to remove the item also from the orders
@@ -503,10 +503,10 @@ void FillingEdgePanel::onDeleteUnboundEdge()
                 editedObject->UnboundEdges.setValues(objects, element);
 
                 // try to remove the item also from the faces
-                auto faces = editedObject->UnboundFaces.getValues();
+                auto faces = editedObject->UnboundFaces.getSubValues();
                 if (index < faces.size()) {
                     faces.erase(faces.begin() + index);
-                    editedObject->UnboundFaces.setValues(faces);
+                    editedObject->UnboundFaces.setValues(objects, faces);
                 }
 
                 // try to remove the item also from the orders
@@ -548,10 +548,11 @@ void FillingEdgePanel::on_buttonUnboundAccept_clicked()
         std::size_t index = ui->listUnbound->row(item);
 
         // try to set the item of the faces
-        auto faces = editedObject->UnboundFaces.getValues();
+        auto faces = editedObject->UnboundFaces.getSubValues();
         if (index < faces.size()) {
             faces[index] = face.toByteArray().data();
-            editedObject->UnboundFaces.setValues(faces);
+            auto objects = editedObject->UnboundFaces.getValues();
+            editedObject->UnboundFaces.setValues(objects, faces);
         }
 
         // try to set the item of the orders

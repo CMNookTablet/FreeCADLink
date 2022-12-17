@@ -26,7 +26,7 @@
 # include <QPointer>
 # include <QMessageBox>
 # include <QCheckBox>
-# include <QListWidget>
+# include <QTreeWidget>
 # include <Precision.hxx>
 # include <gp_Pln.hxx>
 # include <functional>
@@ -527,7 +527,7 @@ bool isFeatureMovable(App::DocumentObject* const feat)
         auto prim = static_cast<PartDesign::ProfileBased*>(feat);
         auto sk = prim->getVerifiedSketch(true);
 
-        if (!isFeatureMovable(sk))
+        if (sk && !isFeatureMovable(sk))
             return false;
 
         if (auto prop = static_cast<App::PropertyLinkList*>(prim->getPropertyByName("Sections"))) {
@@ -557,7 +557,7 @@ bool isFeatureMovable(App::DocumentObject* const feat)
 
     if (feat->hasExtension(Part::AttachExtension::getExtensionClassTypeId())) {
         auto attachable = feat->getExtensionByType<Part::AttachExtension>();
-        App::DocumentObject* support = attachable->Support.getValue();
+        App::DocumentObject* support = attachable->AttachmentSupport.getValue();
         if (support && !support->getTypeId().isDerivedFrom(App::OriginFeature::getClassTypeId()))
             return false;
     }
@@ -616,12 +616,12 @@ void relinkToOrigin(App::DocumentObject* feat, PartDesign::Body* targetbody)
 {
     if (feat->hasExtension(Part::AttachExtension::getExtensionClassTypeId())) {
         auto attachable = feat->getExtensionByType<Part::AttachExtension>();
-        App::DocumentObject* support = attachable->Support.getValue();
+        App::DocumentObject* support = attachable->AttachmentSupport.getValue();
         if (support && support->getTypeId().isDerivedFrom(App::OriginFeature::getClassTypeId())) {
             auto originfeat = static_cast<App::OriginFeature*>(support);
             App::OriginFeature* targetOriginFeature = targetbody->getOrigin()->getOriginFeature(originfeat->Role.getValue());
             if (targetOriginFeature) {
-                attachable->Support.setValue(static_cast<App::DocumentObject*>(targetOriginFeature), "");
+                attachable->AttachmentSupport.setValue(static_cast<App::DocumentObject*>(targetOriginFeature), "");
             }
         }
     }
@@ -642,7 +642,7 @@ void relinkToOrigin(App::DocumentObject* feat, PartDesign::Body* targetbody)
 
 PartDesign::Body *queryCommandOverride()
 {
-    if (Part::PartParams::CommandOverride() == 0)
+    if (Part::PartParams::getCommandOverride() == 0)
         return nullptr;
 
     PartDesign::Body * body = nullptr;
@@ -656,7 +656,7 @@ PartDesign::Body *queryCommandOverride()
                 break;
         }
     }
-    if (!body || Part::PartParams::CommandOverride() == 1)
+    if (!body || Part::PartParams::getCommandOverride() == 1)
         return body;
 
     QMessageBox box(Gui::getMainWindow());
@@ -682,7 +682,7 @@ PartDesign::Body *queryCommandOverride()
         QMessageBox::information(Gui::getMainWindow(),
                 QObject::tr("PartDesign Command override"),
                 QObject::tr("You can change your choice in 'Part design' preference page."));
-        Part::PartParams::set_CommandOverride(res == QMessageBox::Yes ? 1 : 0);
+        Part::PartParams::setCommandOverride(res == QMessageBox::Yes ? 1 : 0);
     }
     return res == QMessageBox::Yes ? body : nullptr;
 }
@@ -857,10 +857,10 @@ public:
                                     [this](const App::Property &) {
                                         if (!this->editPreview)
                                             this->editTimer.start(
-                                                    PartGui::PartParams::EditRecomputeWait());
+                                                    PartGui::PartParams::getEditRecomputeWait());
                                     });
                     }
-                    if (PartGui::PartParams::PreviewOnEdit()) {
+                    if (PartGui::PartParams::getPreviewOnEdit()) {
                         auto vp = Base::freecad_dynamic_cast<ViewProviderAddSub>(
                                 Gui::Application::Instance->getViewProvider(editObj));
                         if (vp) {
@@ -872,7 +872,7 @@ public:
                         }
                     } else if (editObj)
                         editObj->Visibility.setValue(true);
-                    if (PartGui::PartParams::EditOnTop())
+                    if (PartGui::PartParams::getEditOnTop())
                         showEditOnTop(true);
                     else {
                         App::DocumentObject *parent = *objs.begin();
@@ -899,7 +899,7 @@ public:
 
     void slotVisibilityChanged(const std::deque<App::DocumentObject*> &siblings)
     {
-        if (!PartGui::PartParams::EditOnTop())
+        if (!PartGui::PartParams::getEditOnTop())
             return;
         auto feat = editObjT.getObject();
         if (!feat)
@@ -1047,7 +1047,7 @@ public:
                            const App::DocumentObject &object,
                            const App::Property &prop)
     {
-        if (Part::PartParams::EnableWrapFeature() == 0)
+        if (Part::PartParams::getEnableWrapFeature() == 0)
             return;
         if (!activeBody|| activeBody->getDocument() != object.getDocument()
                        || !prop.isDerivedFrom(App::PropertyLinkBase::getClassTypeId()))
@@ -1087,7 +1087,7 @@ public:
                 return;
         }
 
-        if (Part::PartParams::EnableWrapFeature() > 1) {
+        if (Part::PartParams::getEnableWrapFeature() > 1) {
             QMessageBox box(Gui::getMainWindow());
             box.setIcon(QMessageBox::Question);
             box.setWindowTitle(QObject::tr("PartDesign feature wrap"));
@@ -1106,7 +1106,7 @@ public:
                 QMessageBox::information(Gui::getMainWindow(),
                         QObject::tr("PartDesign feature wrap"),
                         QObject::tr("You can change your choice in 'Part design' preference page."));
-                Part::PartParams::set_EnableWrapFeature(res == QMessageBox::Yes ? 1 : 0);
+                Part::PartParams::setEnableWrapFeature(res == QMessageBox::Yes ? 1 : 0);
             }
             if (res != QMessageBox::Yes)
                 return;
@@ -1119,6 +1119,18 @@ public:
                                             false));
             wrap->Label.setValue(object.Label.getValue());
             wrap->WrapFeature.setValue(const_cast<App::DocumentObject*>(&object));
+
+            Gui::Selection().clearSelection();
+            auto it = conns.find(App::GetApplication().getActiveDocument());
+            if (it != conns.end()) {
+                auto body = Base::freecad_dynamic_cast<PartDesign::Body>(
+                        it->second.activeBodyT.getSubObject());
+                if (body == activeBody) {
+                    Gui::Selection().addSelection(it->second.activeBodyT.getChild(wrap));
+                    return;
+                }
+            }
+            Gui::Selection().addSelection(App::SubObjectT(wrap, ""));
         } catch (Base::Exception &e) {
             e.ReportException();
         }
@@ -1266,6 +1278,148 @@ public:
         }
     }
 
+    bool importExternalObjects(App::PropertyLinkSub &prop,
+                               std::vector<App::SubObjectT> _sobjs,
+                               bool report)
+    {
+        try {
+            if (!prop.getName() || !prop.getName()[0])
+                FC_THROWM(Base::RuntimeError, "Invalid property");
+            auto editObj = Base::freecad_dynamic_cast<App::DocumentObject>(prop.getContainer());
+            if (!editObj)
+                FC_THROWM(Base::RuntimeError, "Editing object not found");
+            auto body = PartDesign::Body::findBodyOf(editObj);
+            if (!body)
+                FC_THROWM(Base::RuntimeError, "No body for editing object: " << editObj->getNameInDocument());
+            std::map<App::DocumentObject*, std::vector<std::string>> links;
+            std::vector<App::SubObjectT> sobjs;
+            auto docName = editObj->getDocument()->getName();
+            auto inList = editObj->getInListEx(true);
+            for (auto sobjT : _sobjs) {
+                auto sobj = sobjT.getSubObject();
+                if (sobj == editObj)
+                    continue;
+                if (!sobj)
+                    FC_THROWM(Base::RuntimeError, "Object not found: " << sobjT.getSubObjectFullName(docName));
+                if (inList.count(sobj))
+                    FC_THROWM(Base::RuntimeError, "Cyclic dependency on object " << sobjT.getSubObjectFullName(docName));
+                sobjT.normalized();
+                // Make sure that if a subelement is chosen for some object,
+                // we exclude whole object reference for that object.
+                auto &subs = links[sobj];
+                std::string element = sobjT.getOldElementName();
+                if (element.size()) {
+                    if (subs.size() == 1 && subs.front().empty()) {
+                        for (auto it=sobjs.begin(); it!=sobjs.end();) {
+                            if (it->getSubObject() == sobj) {
+                                sobjs.erase(it);
+                                break;
+                            }
+                        }
+                    }
+                } else if (subs.size() > 0)
+                    continue;
+                subs.push_back(std::move(element));
+                sobjs.push_back(sobjT);
+            }
+
+            int import = 0;
+            App::DocumentObject *obj = nullptr;
+            std::vector<std::string> subs;
+            for (const auto &sobjT : sobjs) {
+                auto sobj = sobjT.getSubObject();
+                if (PartDesign::Body::findBodyOf(sobj) != body) {
+                    import = 1;
+                    break;
+                }
+                if (!obj)
+                    obj = sobj;
+                else if (obj != sobj) {
+                    if (!import)
+                        import = -1;
+                    break;
+                }
+                subs.push_back(sobjT.getOldElementName());
+            }
+            if (!import) {
+                if (subs.empty())
+                    subs.emplace_back();
+                if (obj == prop.getValue() && prop.getSubValues() == subs)
+                    return false;
+                prop.setValue(obj, std::move(subs));
+                return true;
+            }
+
+            Part::SubShapeBinder *binder = nullptr;
+            std::string binderName(editObj->getNameInDocument());
+            binderName += "_";
+            binderName += prop.getName();
+            // Try to get the binder that is specifically created for the given property
+            for (auto obj : body->Group.getValues()) {
+                if (auto bd = Base::freecad_dynamic_cast<Part::SubShapeBinder>(obj)) {
+                    if (boost::starts_with(bd->getNameInDocument(), binderName)) {
+                        binder = bd;
+                        break;
+                    }
+                }
+            }
+            if (!binder) {
+                auto res = QMessageBox::Yes;
+                if (report && import < 0)
+                    res = QMessageBox::question(Gui::getMainWindow(),
+                            QObject::tr("Shape Binding"),
+                            QObject::tr("You are referencing shape elements from multiple objects.\n\n"
+                                "Do you want to create a shape binder to merge these shape elements?\n\n"
+                                "Say 'No' to clear the reference before using the current selection."),
+                            QMessageBox::Yes|QMessageBox::No|QMessageBox::Abort);
+                if (res == QMessageBox::Abort)
+                    return false;
+                if (res == QMessageBox::Yes) {
+                    binder = Base::freecad_dynamic_cast<Part::SubShapeBinder>(
+                            body->getDocument()->addObject("PartDesign::SubShapeBinder", binderName.c_str()));
+                    body->addObject(binder);
+                } else {
+                    App::DocumentObject *linkObj = nullptr;
+                    std::vector<std::string> subs;
+                    for (const auto &sobjT : sobjs) {
+                        auto obj = sobjT.getSubObject();
+                        if (!obj)
+                            FC_THROWM(Base::RuntimeError, "Object not found: " << sobjT.getSubObjectFullName(docName));
+                        if (linkObj == obj || (!linkObj && obj != prop.getValue())) {
+                            linkObj = obj;
+                            subs.push_back(sobjT.getOldElementName());
+                        }
+                    }
+                    if (linkObj) {
+                        prop.setValue(linkObj, std::move(subs));
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            links.clear();
+            for (const auto &sobjT : sobjs) {
+                auto obj = sobjT.getSubObject();
+                if (!obj)
+                    FC_THROWM(Base::RuntimeError, "Object not found: " << sobjT.getSubObjectFullName(docName));
+                if (obj == binder)
+                    FC_THROWM(Base::RuntimeError, "Please select the original bound shape");
+                links[obj].push_back(sobjT.getSubName());
+            }
+            binder->setLinks(std::move(links), true);
+            prop.setValue(binder);
+            return true;
+        } catch (Base::Exception & e) {
+            if (!report)
+                throw;
+            QMessageBox::critical(Gui::getMainWindow(),
+                    QObject::tr("Failed to import external object"),
+                    QString::fromUtf8(e.what()));
+            return false;
+        }
+    }
+
 public:
     std::map<const App::Document*, Connections> conns;
     boost::signals2::scoped_connection connDeleteDocument;
@@ -1314,21 +1468,21 @@ QGridLayout *MonitorProxy::addCheckBox(QWidget * widget, int index)
     checkbox = new QCheckBox(widget);
     checkbox->setText(tr("Show preview"));
     checkbox->setToolTip(tr("Show base feature with preview shape"));
-    checkbox->setChecked(PartGui::PartParams::PreviewOnEdit());
+    checkbox->setChecked(PartGui::PartParams::getPreviewOnEdit());
     connect(checkbox, SIGNAL(toggled(bool)), this, SLOT(onPreview(bool)));
     grid->addWidget(checkbox, 0, 0);
 
     checkbox = new QCheckBox(widget);
     checkbox->setText(tr("Transparent preview"));
     checkbox->setToolTip(tr("Show preview shape with transarency"));
-    checkbox->setChecked(PartGui::PartParams::PreviewWithTransparency());
+    checkbox->setChecked(PartGui::PartParams::getPreviewWithTransparency());
     connect(checkbox, SIGNAL(toggled(bool)), this, SLOT(onPreviewTransparency(bool)));
     grid->addWidget(checkbox, 0, 1);
 
     checkbox = new QCheckBox(widget);
     checkbox->setText(tr("Show on top"));
     checkbox->setToolTip(tr("Show the editing feature always on top"));
-    checkbox->setChecked(PartGui::PartParams::EditOnTop());
+    checkbox->setChecked(PartGui::PartParams::getEditOnTop());
     connect(checkbox, SIGNAL(toggled(bool)), this, SLOT(onShowOnTop(bool)));
     grid->addWidget(checkbox, 1, 0);
 
@@ -1338,7 +1492,7 @@ QGridLayout *MonitorProxy::addCheckBox(QWidget * widget, int index)
 
 void MonitorProxy::onPreview(bool checked)
 {
-    PartGui::PartParams::set_PreviewOnEdit(checked);
+    PartGui::PartParams::setPreviewOnEdit(checked);
     if (!_MonitorInstance)
         return;
 
@@ -1363,8 +1517,8 @@ void MonitorProxy::onPreview(bool checked)
 
 void MonitorProxy::onPreviewTransparency(bool checked)
 {
-    PartGui::PartParams::set_PreviewWithTransparency(checked);
-    if (PartGui::PartParams::PreviewOnEdit()) {
+    PartGui::PartParams::setPreviewWithTransparency(checked);
+    if (PartGui::PartParams::getPreviewOnEdit()) {
         auto editObj = _MonitorInstance->editObjT.getObject();
         auto vp = Base::freecad_dynamic_cast<ViewProviderAddSub>(
                 Gui::Application::Instance->getViewProvider(editObj));
@@ -1375,7 +1529,7 @@ void MonitorProxy::onPreviewTransparency(bool checked)
 
 void MonitorProxy::onShowOnTop(bool checked)
 {
-    PartGui::PartParams::set_EditOnTop(checked);
+    PartGui::PartParams::setEditOnTop(checked);
     if (!_MonitorInstance)
         return;
 
@@ -1438,20 +1592,32 @@ App::SubObjectT importExternalObject(const App::SubObjectT &feature,
     return _MonitorInstance->importExternalObject(feature, report, wholeObject, noSubElement);
 }
 
-App::SubObjectT importExternalElement(App::SubObjectT feature, bool report) {
+App::SubObjectT importExternalElement(App::SubObjectT feature, bool report)
+{
     initMonitor();
     auto element = feature.getOldElementName();
-    if (element.size() && !boost::starts_with(element, "Face") && !boost::starts_with(element, "Wire"))  {
+    if (boost::starts_with(element, "Edge"))  {
         auto sobj = feature.getSubObject();
-        if (sobj && sobj->isDerivedFrom(Part::Part2DObject::getClassTypeId()))
-            feature.setSubName(feature.getSubNameNoElement());
+        if (sobj && sobj->isDerivedFrom(Part::Part2DObject::getClassTypeId())) {
+            auto subShape = Part::Feature::getTopoShape(sobj, element.c_str());
+            if (!subShape.isClosed())
+                feature.setSubName(feature.getSubNameNoElement());
+        }
     }
     return _MonitorInstance->importExternalObject(feature, report, false, true);
 }
 
-bool populateGeometryReferences(QListWidget *listWidget, App::PropertyLinkSub &prop, bool refresh)
+bool importExternalElements(App::PropertyLinkSub &prop,
+                            const std::vector<App::SubObjectT> &sobjs,
+                            bool report)
 {
-    listWidget->clear();
+    initMonitor();
+    return _MonitorInstance->importExternalObjects(prop, sobjs, report);
+}
+
+bool populateGeometryReferences(QTreeWidget *treeWidget, App::PropertyLinkSub &prop, bool refresh)
+{
+    treeWidget->clear();
     auto base = prop.getValue();
     const auto &baseShape = Part::Feature::getTopoShape(base);
     const auto &subs = prop.getShadowSubs();
@@ -1465,7 +1631,9 @@ bool populateGeometryReferences(QListWidget *listWidget, App::PropertyLinkSub &p
     for(auto &sub : subs) {
         refs.push_back(sub.second);
         if(refresh || sub.first.empty() || baseShape.isNull()) {
-            listWidget->addItem(QString::fromStdString(sub.second));
+            auto item = new QTreeWidgetItem(treeWidget);
+            item->setText(0, QString::fromStdString(sub.second)), 
+            setGeometryItemText(item, sub.second);
             continue;
         }
         const auto &ref = sub.first;
@@ -1474,7 +1642,9 @@ bool populateGeometryReferences(QListWidget *listWidget, App::PropertyLinkSub &p
             element = baseShape.getSubShape(ref.c_str());
         }catch(...) {}
         if(!element.isNull())  {
-            listWidget->addItem(QString::fromStdString(sub.second));
+            auto item = new QTreeWidgetItem(treeWidget);
+            item->setText(0, QString::fromStdString(sub.second));
+            setGeometryItemText(item, sub.second);
             continue;
         }
         FC_WARN("missing element reference in " << prop.getFullName() << ": " << ref);
@@ -1489,7 +1659,9 @@ bool populateGeometryReferences(QListWidget *listWidget, App::PropertyLinkSub &p
             if (!subSet.insert(indexedName).second)
                 continue;
             FC_WARN("guess element reference in " << prop.getFullName() << ": " << ref << " -> " << element.name);
-            listWidget->addItem(QString::fromStdString(indexedName));
+            auto item = new QTreeWidgetItem(treeWidget);
+            item->setText(0, QString::fromStdString(indexedName));
+            setGeometryItemText(item, indexedName);
             if(!popped) {
                 refs.pop_back();
                 touched = true;
@@ -1501,12 +1673,12 @@ bool populateGeometryReferences(QListWidget *listWidget, App::PropertyLinkSub &p
             std::string missingSub = refs.back();
             if(!boost::starts_with(missingSub,Data::ComplexGeoData::missingPrefix()))
                 missingSub = Data::ComplexGeoData::missingPrefix()+missingSub;
-            auto item = new QListWidgetItem(listWidget);
-            item->setText(QString::fromStdString(missingSub));
+            auto item = new QTreeWidgetItem(treeWidget);
+            item->setText(0, QString::fromStdString(missingSub));
 
-            item->setData(Qt::UserRole,
-                    QByteArray(Data::ComplexGeoData::newElementName(ref.c_str()).c_str()));
-            item->setForeground(Qt::red);
+            setGeometryItemText(item, sub.second);
+            setGeometryItemReference(item, Data::ComplexGeoData::newElementName(ref.c_str()));
+            item->setForeground(0, Qt::red);
             refs.back() = ref; // use new style name for future guessing
         }
     }
@@ -1514,6 +1686,27 @@ bool populateGeometryReferences(QListWidget *listWidget, App::PropertyLinkSub &p
     if(touched)
         prop.setValue(base, refs);
     return touched;
+}
+
+void setGeometryItemText(QTreeWidgetItem *item, const std::string &text)
+{
+    item->setData(0, Qt::UserRole+1, QByteArray(text.c_str()));
+    item->setExpanded(true);
+}
+
+QByteArray getGeometryItemText(QTreeWidgetItem *item)
+{
+    return item->data(0, Qt::UserRole+1).toByteArray().constData();
+}
+
+void setGeometryItemReference(QTreeWidgetItem *item, const std::string &ref)
+{
+    item->setData(0, Qt::UserRole, QByteArray(ref.c_str()));
+}
+
+QByteArray getGeometryItemReference(QTreeWidgetItem *item)
+{
+    return item->data(0, Qt::UserRole).toByteArray();
 }
 
 void toggleShowOnTop(Gui::ViewProviderDocumentObject *vp,

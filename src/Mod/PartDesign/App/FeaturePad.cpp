@@ -89,8 +89,11 @@ Pad::Pad()
 
     ADD_PROPERTY_TYPE(TaperAngle,(0.0), "Pad", App::Prop_None, "Sets the angle of slope (draft) to apply to the sides. The angle is for outward taper; negative value yields inward tapering.");
     ADD_PROPERTY_TYPE(TaperAngleRev,(0.0), "Pad", App::Prop_None, "Taper angle of reverse part of padding.");
-    ADD_PROPERTY_TYPE(InnerTaperAngle,(0.0), "Pad", App::Prop_None, "Taper angle of inner holes.");
-    ADD_PROPERTY_TYPE(InnerTaperAngleRev,(0.0), "Pad", App::Prop_None, "Taper angle of the reverse part for inner holes.");
+    ADD_PROPERTY_TYPE(TaperInnerAngle,(0.0), "Pad", App::Prop_None, "Taper angle of inner holes.");
+    ADD_PROPERTY_TYPE(TaperInnerAngleRev,(0.0), "Pad", App::Prop_None, "Taper angle of the reverse part for inner holes.");
+    ADD_PROPERTY_TYPE(AutoTaperInnerAngle,(true), "Pad", App::Prop_None,
+            "Automatically set inner taper angle to the negative of (outer) taper angle.\n"
+            "If false, then inner taper angle can be set independent of taper angle.");
 
     ADD_PROPERTY_TYPE(UsePipeForDraft,(false), "Pad", App::Prop_None, "Use pipe (i.e. sweep) operation to create draft angles.");
     ADD_PROPERTY_TYPE(CheckUpToFaceLimits,(true), "Pad", App::Prop_None,
@@ -124,7 +127,7 @@ App::DocumentObjectExecReturn *Pad::execute(void)
 void Pad::setupObject()
 {
     ProfileBased::setupObject();
-    UsePipeForDraft.setValue(Part::PartParams::UsePipeForExtrusionDraft());
+    UsePipeForDraft.setValue(Part::PartParams::getUsePipeForExtrusionDraft());
 }
 
 App::DocumentObjectExecReturn *Pad::_execute(bool makeface, bool fuse)
@@ -195,8 +198,7 @@ App::DocumentObjectExecReturn *Pad::_execute(bool makeface, bool fuse)
     Base::Vector3d SketchVector = getProfileNormal();
 
     try {
-        this->positionByPrevious();
-        TopLoc_Location invObjLoc = this->getLocation().Inverted();
+        auto invObjLoc = this->positionByPrevious();
         auto invTrsf = invObjLoc.Transformation();
 
         base.move(invObjLoc);
@@ -310,7 +312,7 @@ App::DocumentObjectExecReturn *Pad::_execute(bool makeface, bool fuse)
             if (!supportface.hasSubShape(TopAbs_WIRE))
                 supportface = TopoShape();
             auto mode = TopoShape::PrismMode::None;
-            prism.makEPrism(base, sketchshape, supportface,
+            prism.makEPrismUntil(base, sketchshape, supportface,
                     upToFace, dir, mode, CheckUpToFaceLimits.getValue());
         } else {
             Part::Extrusion::ExtrusionParameters params;
@@ -318,8 +320,8 @@ App::DocumentObjectExecReturn *Pad::_execute(bool makeface, bool fuse)
             params.solid = makeface;
             params.taperAngleFwd = this->TaperAngle.getValue() * M_PI / 180.0;
             params.taperAngleRev = this->TaperAngleRev.getValue() * M_PI / 180.0;
-            params.innerTaperAngleFwd = this->InnerTaperAngle.getValue() * M_PI / 180.0;
-            params.innerTaperAngleRev = this->InnerTaperAngleRev.getValue() * M_PI / 180.0;
+            params.innerTaperAngleFwd = this->TaperInnerAngle.getValue() * M_PI / 180.0;
+            params.innerTaperAngleRev = this->TaperInnerAngleRev.getValue() * M_PI / 180.0;
             params.linearize = this->Linearize.getValue();
             if (L2 == 0.0 && Midplane.getValue()) {
                 params.lengthFwd = L/2;
@@ -373,15 +375,15 @@ App::DocumentObjectExecReturn *Pad::_execute(bool makeface, bool fuse)
                 const char *maker;
                 switch (getAddSubType()) {
                 case Subtractive:
-                    maker = TOPOP_CUT;
+                    maker = Part::OpCodes::Cut;
                     break;
                 case Intersecting:
-                    maker = TOPOP_COMMON;
+                    maker = Part::OpCodes::Common;
                     break;
                 default:
-                    maker = TOPOP_FUSE;
+                    maker = Part::OpCodes::Fuse;
                 }
-                result.makEShape(maker, {base,prism});
+                result.makEBoolean(maker, {base,prism});
             }catch(Standard_Failure &){
                 return new App::DocumentObjectExecReturn("Fusion with base feature failed");
             }
@@ -394,9 +396,14 @@ App::DocumentObjectExecReturn *Pad::_execute(bool makeface, bool fuse)
             solRes = refineShapeIfActive(solRes);
             this->Shape.setValue(getSolid(solRes));
         } else if (prism.hasSubShape(TopAbs_SOLID)) {
-           this->Shape.setValue(getSolid(prism));
-        } else
-           this->Shape.setValue(prism);
+            if (prism.countSubShapes(TopAbs_SOLID) > 1)
+                prism.makEFuse(prism.getSubTopoShapes(TopAbs_SOLID));
+            prism = refineShapeIfActive(prism);
+            this->Shape.setValue(getSolid(prism));
+        } else {
+            prism = refineShapeIfActive(prism);
+            this->Shape.setValue(prism);
+        }
 
         return App::DocumentObject::StdReturn;
     }
@@ -412,3 +419,40 @@ App::DocumentObjectExecReturn *Pad::_execute(bool makeface, bool fuse)
         return new App::DocumentObjectExecReturn(e.what());
     }
 }
+
+void Pad::handleChangedPropertyName(Base::XMLReader &reader, const char * TypeName, const char *Name)
+{
+    if (strcmp(TypeName, App::PropertyAngle::getClassTypeId().getName()) == 0) {
+        // Deliberately change 'InnerTaperAngle' to TaperAngleInner to identify
+        // document from Link branch
+        if (strcmp(Name, "InnerTaperAngle")) {
+            AutoTaperInnerAngle.setValue(false);
+            TaperInnerAngle.Restore(reader);
+        } else if (strcmp(Name, "InnerTaperAngleRev")) {
+            AutoTaperInnerAngle.setValue(false);
+            TaperInnerAngleRev.Restore(reader);
+        }
+    }
+    ProfileBased::handleChangedPropertyName(reader, TypeName, Name);
+}
+
+void Pad::onChanged(const App::Property *prop)
+{
+    if (prop == &TaperAngle
+            || prop == &TaperAngleRev
+            || prop == &AutoTaperInnerAngle)
+    {
+        if (AutoTaperInnerAngle.getValue()) {
+            TaperAngleRev.setStatus(App::Property::ReadOnly, true);
+            TaperAngle.setStatus(App::Property::ReadOnly, true);
+            TaperInnerAngle.setValue(-TaperAngle.getValue());
+            TaperInnerAngleRev.setValue(-TaperAngleRev.getValue());
+        }
+        else {
+            TaperAngleRev.setStatus(App::Property::ReadOnly, false);
+            TaperAngle.setStatus(App::Property::ReadOnly, false);
+        }
+    }
+    ProfileBased::onChanged(prop);
+}
+

@@ -467,13 +467,15 @@ private:
                         throw Py::Exception(PyExc_IOError, "cannot read STEP file");
                     }
 
-#if OCC_VERSION_HEX < 0x070500
                     Handle(Message_ProgressIndicator) pi = new Part::ProgressIndicator(100);
+#if OCC_VERSION_HEX < 0x070500
                     aReader.Reader().WS()->MapReader()->SetProgress(pi);
                     pi->NewScope(100, "Reading STEP file...");
                     pi->Show();
-#endif
                     aReader.Transfer(hDoc);
+#else
+                    aReader.Transfer(hDoc, pi->Start());
+#endif
 #if OCC_VERSION_HEX < 0x070500
                     pi->EndScope();
 #endif
@@ -503,13 +505,15 @@ private:
                         throw Py::Exception(Base::BaseExceptionFreeCADError, "cannot read IGES file");
                     }
 
-#if OCC_VERSION_HEX < 0x070500
                     Handle(Message_ProgressIndicator) pi = new Part::ProgressIndicator(100);
+#if OCC_VERSION_HEX < 0x070500
                     aReader.WS()->MapReader()->SetProgress(pi);
                     pi->NewScope(100, "Reading IGES file...");
                     pi->Show();
-#endif
                     aReader.Transfer(hDoc);
+#else
+                    aReader.Transfer(hDoc, pi->Start());
+#endif
 #if OCC_VERSION_HEX < 0x070500
                     pi->EndScope();
 #endif
@@ -745,13 +749,15 @@ private:
                     throw Py::Exception(PyExc_IOError, "cannot read STEP file");
                 }
 
-#if OCC_VERSION_HEX < 0x070500
                 Handle(Message_ProgressIndicator) pi = new Part::ProgressIndicator(100);
+#if OCC_VERSION_HEX < 0x070500
                 aReader.Reader().WS()->MapReader()->SetProgress(pi);
                 pi->NewScope(100, "Reading STEP file...");
                 pi->Show();
-#endif
                 aReader.Transfer(hDoc);
+#else
+                aReader.Transfer(hDoc, pi->Start());
+#endif
 #if OCC_VERSION_HEX < 0x070500
                 pi->EndScope();
 #endif
@@ -771,13 +777,15 @@ private:
                     throw Py::Exception(PyExc_IOError, "cannot read IGES file");
                 }
 
-#if OCC_VERSION_HEX < 0x070500
                 Handle(Message_ProgressIndicator) pi = new Part::ProgressIndicator(100);
+#if OCC_VERSION_HEX < 0x070500
                 aReader.WS()->MapReader()->SetProgress(pi);
                 pi->NewScope(100, "Reading IGES file...");
                 pi->Show();
-#endif
                 aReader.Transfer(hDoc);
+#else
+                aReader.Transfer(hDoc, pi->Start());
+#endif
 #if OCC_VERSION_HEX < 0x070500
                 pi->EndScope();
 #endif

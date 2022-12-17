@@ -44,6 +44,7 @@ public:
 
 class PartGuiExport ViewProviderPart : public ViewProviderPartExt
 {
+    typedef ViewProviderPartExt inherited;
     PROPERTY_HEADER_WITH_OVERRIDE(PartGui::ViewProviderPart);
 
 public:
@@ -58,6 +59,21 @@ public:
     virtual bool canReplaceObject(App::DocumentObject *oldObj, App::DocumentObject *newObj) override;
     virtual bool reorderObjects(const std::vector<App::DocumentObject *> &objs, App::DocumentObject *before) override;
     virtual bool canReorderObject(App::DocumentObject *obj, App::DocumentObject *before) override;
+    virtual bool canDropObjects() const override;
+    virtual bool canDropObject(App::DocumentObject*) const override;
+    virtual void dropObject(App::DocumentObject*) override;
+    virtual bool canDragObjects() const override;
+    virtual bool canDragObject(App::DocumentObject*) const override;
+    virtual void dragObject(App::DocumentObject*) override;
+
+    virtual void getExtraIcons(std::vector<std::pair<QByteArray, QPixmap> > &) const override;
+    virtual QString getToolTip(const QByteArray &iconTag) const override;
+    virtual std::vector<App::DocumentObject*> claimChildren(void) const override;
+    virtual bool iconMouseEvent(QMouseEvent *ev, const QByteArray &iconTag) override;
+
+    virtual void setupContextMenu(QMenu*, QObject*, const char*) override;
+
+    virtual void updateData(const App::Property *) override;
 
 protected:
     void applyColor(const Part::ShapeHistory& hist,

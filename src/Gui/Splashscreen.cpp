@@ -37,10 +37,16 @@
 # include <QSysInfo>
 # include <QTextStream>
 # include <QWaitCondition>
+# include <QLabel>
+# include <QFileInfo>
+# include <QDir>
 # include <Inventor/C/basic.h>
 #endif
 
+#include <boost/algorithm/string/predicate.hpp>
+
 #include <QScreen>
+# include <QMovie>
 
 #include <LibraryVersions.h>
 #include <zlib.h>
@@ -57,6 +63,25 @@
 using namespace Gui;
 using namespace Gui::Dialog;
 
+static inline int parseAlignment(const std::string &text)
+{
+    int align=0;
+    if (boost::starts_with(text, "VCenter"))
+        align = Qt::AlignVCenter;
+    else if (boost::starts_with(text, "Top"))
+        align = Qt::AlignTop;
+    else if (boost::starts_with(text, "Bottom"))
+        align = Qt::AlignBottom;
+
+    if (boost::starts_with(text, "HCenter"))
+        align += Qt::AlignHCenter;
+    else if (boost::starts_with(text, "Right"))
+        align += Qt::AlignRight;
+    else if (boost::starts_with(text, "Left"))
+        align += Qt::AlignLeft;
+    return align;
+}
+
 namespace Gui {
 /** Displays all messages at startup inside the splash screen.
  * \author Werner Mayer
@@ -72,24 +97,10 @@ public:
         // allow to customize text position and color
         const std::map<std::string,std::string>& cfg = App::GetApplication().Config();
         std::map<std::string,std::string>::const_iterator al = cfg.find("SplashAlignment");
+
         if (al != cfg.end()) {
-            QString alt = QString::fromUtf8(al->second.c_str());
-            int align=0;
-            if (alt.startsWith(QStringLiteral("VCenter")))
-                align = Qt::AlignVCenter;
-            else if (alt.startsWith(QStringLiteral("Top")))
-                align = Qt::AlignTop;
-            else
-                align = Qt::AlignBottom;
-
-            if (alt.endsWith(QStringLiteral("HCenter")))
-                align += Qt::AlignHCenter;
-            else if (alt.endsWith(QStringLiteral("Right")))
-                align += Qt::AlignRight;
-            else
-                align += Qt::AlignLeft;
-
-            alignment = align;
+            if (int align = parseAlignment(al->second))
+                alignment = align;
         }
 
         // choose text color
@@ -152,6 +163,95 @@ private:
 
 // ------------------------------------------------------------------------------
 
+namespace {
+
+class GifLabel: public QLabel
+{
+public:
+    GifLabel(QWidget *parent)
+        :QLabel(parent)
+    {
+        parent->installEventFilter(this);
+    }
+
+    bool eventFilter(QObject *o, QEvent *e)
+    {
+        if (e->type() == QEvent::Resize) {
+            auto parentSize = static_cast<QResizeEvent*>(e)->size();
+            if (auto label = qobject_cast<QLabel*>(o)) {
+                QSize imageSize;
+                if (auto pixmap = label->pixmap())
+                    imageSize = pixmap->size();
+                else if (auto movie = label->movie())
+                    imageSize = movie->frameRect().size();
+                if (!label->hasScaledContents()
+                        && imageSize.height()
+                        && imageSize.width()
+                        && parentSize.height())
+                {
+                    double ar = double(imageSize.width()) / imageSize.height();
+                    double arParent = double(parentSize.width()) / parentSize.height();
+                    if (arParent > ar) {
+                        imageSize.setWidth(imageSize.width() * parentSize.height() / imageSize.height());
+                        imageSize.setHeight(parentSize.height());
+                    } else {
+                        imageSize.setHeight(imageSize.height() * parentSize.width() / imageSize.width());
+                        imageSize.setWidth(parentSize.width());
+                    }
+
+                    QPoint pos;
+                    auto align = label->alignment();
+                    if (align & Qt::AlignRight)
+                        pos.setX(parentSize.width() - imageSize.width());
+                    else if (align & Qt::AlignHCenter)
+                        pos.setX((parentSize.width() - imageSize.width())/2);
+                    if (align & Qt::AlignBottom)
+                        pos.setY(parentSize.height() - imageSize.height());
+                    else if (align & Qt::AlignVCenter)
+                        pos.setY((parentSize.height() - imageSize.height())/2);
+                    move(pos);
+                    parentSize = imageSize;
+                }
+            }
+            resize(parentSize);
+        }
+        return QLabel::eventFilter(o, e);
+    }
+};
+
+QLabel *loadSplashGif(QWidget *parent, const char *key, const char *alignmentKey)
+{
+    const auto& cfg = App::GetApplication().Config();
+    auto itGif = cfg.find(key);
+    if (itGif == cfg.end())
+        return nullptr;
+    QString path = QString::fromUtf8(itGif->second.c_str());
+    if (QDir(path).isRelative()) {
+        QString home = QString::fromUtf8(App::GetApplication().getHomePath());
+        path = QFileInfo(QDir(home), path).absoluteFilePath();
+    }
+    auto movie =  new QMovie(parent);
+    movie->setFileName(path);
+    if (!movie->isValid()) {
+        delete movie;
+        return nullptr;
+    }
+    auto gifLabel = new GifLabel(parent);
+    gifLabel->setMovie(movie);
+    movie->start();
+    auto itAlignment = cfg.find(alignmentKey);
+    int align = 0;
+    if (itAlignment != cfg.end())
+        align = parseAlignment(itAlignment->second);
+    if (align)
+        gifLabel->setAlignment(Qt::AlignmentFlag(align));
+    else
+        gifLabel->setAlignment(Qt::AlignTop | Qt::AlignRight);
+    gifLabel->setAttribute(Qt::WA_TranslucentBackground, true);
+    return gifLabel;
+}
+} // anonymous namespace
+
 /**
  * Constructs a splash screen that will display the pixmap.
  */
@@ -160,6 +260,7 @@ SplashScreen::SplashScreen(  const QPixmap & pixmap , Qt::WindowFlags f )
 {
     // write the messages to splasher
     messages = new SplashObserver(this);
+    loadSplashGif(this, "SplashGif", "SplashGifAlignment");
 }
 
 /** Destruction. */
@@ -227,6 +328,8 @@ AboutDialog::AboutDialog(bool showLic, QWidget* parent)
     setModal(true);
     ui->setupUi(this);
     QRect rect = QApplication::desktop()->availableGeometry(getMainWindow());
+
+    loadSplashGif(ui->labelSplashPicture, "SplashGif", "SplashGifAlignment");
 
     // See if we have a custom About screen image set
     QPixmap image = getMainWindow()->aboutImage();

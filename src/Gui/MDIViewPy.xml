@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<GenerateModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="generateMetaModel_Module.xsd">
+  <PythonExport 
+    Father="PropertyContainerPy" 
+    Name="MDIViewPy" 
+    TwinPointer="MDIView" 
+    Twin="MDIView" 
+    Include="Gui/MDIView.h" 
+    Namespace="Gui" 
+    FatherInclude="App/PropertyContainerPy.h" 
+    FatherNamespace="App">
+    <Documentation>
+      <Author Licence="LGPL" Name="Zheng Lei" EMail="realthunder.dev@gmail.com" />
+      <UserDocu>This is the MDIView base class</UserDocu>
+    </Documentation>
+    <Methode Name="message">
+      <Documentation>
+        <UserDocu>Send message to this view</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="fitAll">
+      <Documentation>
+        <UserDocu>Fit all content to the current view</UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="setActiveObject">
+      <Documentation>
+        <UserDocu>
+setActiveObject(name,object,subname=None)
+
+Add or set a new active object
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <Methode Name="getActiveObject">
+      <Documentation>
+        <UserDocu>
+getActiveObject(name,resolve=True)
+
+Returns the active object for the given type
+        </UserDocu>
+      </Documentation>
+    </Methode>
+    <CustomAttributes />
+  </PythonExport>
+</GenerateModel>

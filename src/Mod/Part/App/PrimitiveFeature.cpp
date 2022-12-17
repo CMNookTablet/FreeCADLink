@@ -450,7 +450,7 @@ short Ellipsoid::mustExecute() const
 
 void Ellipsoid::setupObject()
 {
-    Split.setValue(PartParams::SplitEllipsoid());
+    Split.setValue(PartParams::getSplitEllipsoid());
     Primitive::setupObject();
 }
 

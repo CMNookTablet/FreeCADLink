@@ -1698,10 +1698,10 @@ bool CmdSketcherMove::isActive(void)
 
 // ================================================================================
 
-DEF_STD_CMD_ACL(CmdSketcherCompCopy)
+DEF_STD_CMD_GC(CmdSketcherCompCopy)
 
 CmdSketcherCompCopy::CmdSketcherCompCopy()
-    : Command("Sketcher_CompCopy")
+    : inherited("Sketcher_CompCopy")
 {
     sAppModule      = "Sketcher";
     sGroup          = "Sketcher";
@@ -1713,87 +1713,12 @@ CmdSketcherCompCopy::CmdSketcherCompCopy()
     eType           = ForEdit;
 }
 
-void CmdSketcherCompCopy::activated(int iMsg)
-{
-    if (iMsg<0 || iMsg>2)
-        return;
-
-    // Since the default icon is reset when enabling/disabling the command we have
-    // to explicitly set the icon of the used command.
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    assert(iMsg < a.size());
-    pcAction->setIcon(a[iMsg]->icon());
-
-    if (iMsg == 0){
-        CmdSketcherClone sc;
-        sc.activate();
-        pcAction->setShortcut(QString::fromUtf8(this->getAccel()));
-    }
-    else if (iMsg == 1) {
-        CmdSketcherCopy sc;
-        sc.activate();
-        pcAction->setShortcut(QString::fromUtf8(this->getAccel()));
-    }
-    else if (iMsg == 2) {
-        CmdSketcherMove sc;
-        sc.activate();
-        pcAction->setShortcut(QStringLiteral(""));
-    }
-}
-
 Gui::Action * CmdSketcherCompCopy::createAction(void)
 {
-    Gui::ActionGroup* pcAction = new Gui::ActionGroup(this, Gui::getMainWindow());
-    pcAction->setDropDownMenu(true);
-    applyCommandData(this->className(), pcAction);
-
-    QAction* clone = pcAction->addAction(QString());
-    clone->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_Clone"));
-    QAction* copy = pcAction->addAction(QString());
-    copy->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_Copy"));
-    QAction* move = pcAction->addAction(QString());
-    move->setIcon(Gui::BitmapFactory().iconFromTheme("Sketcher_Move"));
-
-    _pcAction = pcAction;
-    languageChange();
-
-    pcAction->setIcon(clone->icon());
-    int defaultId = 0;
-    pcAction->setProperty("defaultAction", QVariant(defaultId));
-
-    pcAction->setShortcut(QString::fromUtf8(getAccel()));
-
-    return pcAction;
-}
-
-void CmdSketcherCompCopy::languageChange()
-{
-    Command::languageChange();
-
-    if (!_pcAction)
-        return;
-    Gui::ActionGroup* pcAction = qobject_cast<Gui::ActionGroup*>(_pcAction);
-    QList<QAction*> a = pcAction->actions();
-
-    QAction* clone = a[0];
-    clone->setText(QApplication::translate("Sketcher_CompCopy","Clone"));
-    clone->setToolTip(QApplication::translate("Sketcher_Clone","Creates a clone of the geometry taking as reference the last selected point"));
-    clone->setStatusTip(QApplication::translate("Sketcher_Clone","Creates a clone of the geometry taking as reference the last selected point"));
-    QAction* copy = a[1];
-    copy->setText(QApplication::translate("Sketcher_CompCopy","Copy"));
-    copy->setToolTip(QApplication::translate("Sketcher_Copy","Creates a simple copy of the geometry taking as reference the last selected point"));
-    copy->setStatusTip(QApplication::translate("Sketcher_Copy","Creates a simple copy of the geometry taking as reference the last selected point"));
-    QAction* move = a[2];
-    move->setText(QApplication::translate("Sketcher_CompCopy","Move"));
-    move->setToolTip(QApplication::translate("Sketcher_Move","Moves the geometry taking as reference the last selected point"));
-    move->setStatusTip(QApplication::translate("Sketcher_Move","Moves the geometry taking as reference the last selected point"));
-}
-
-bool CmdSketcherCompCopy::isActive(void)
-{
-    return isSketcherAcceleratorActive( getActiveGuiDocument(), true );
+    addCommand("Sketcher_Clone");
+    addCommand("Sketcher_Copy");
+    addCommand("Sketcher_Move");
+    return inherited::createAction();
 }
 
 // ================================================================================

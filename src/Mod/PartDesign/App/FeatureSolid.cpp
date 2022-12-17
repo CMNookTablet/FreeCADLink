@@ -39,6 +39,7 @@ Solid::Solid()
 {
     ADD_PROPERTY_TYPE(Active,(false),0,App::Prop_None,"Make this solid active in the parent split feature");
     ADD_PROPERTY_TYPE(Parent,(0),0,(App::PropertyType)(App::Prop_Hidden|App::Prop_ReadOnly),0);
+    Parent.setScope(App::LinkScope::Hidden);
     Placement.setStatus(App::Property::Hidden,true);
     Placement.setStatus(App::Property::Immutable,true);
 }

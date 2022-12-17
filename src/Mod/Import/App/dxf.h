@@ -306,7 +306,8 @@ public:
     virtual void OnReadSpline(struct SplineData& /*sd*/){}
     virtual void OnReadInsert(const double* /*point*/, const double* /*scale*/, const char* /*name*/, double /*rotation*/){}
     virtual void OnReadDimension(const double* /*s*/, const double* /*e*/, const double* /*point*/, double /*rotation*/){}
-    virtual void AddGraphics() const { }
+    virtual void AddGraphics() { }
+    virtual void OnPolyLineStart() {}
 
     std::string LayerName() const;
 

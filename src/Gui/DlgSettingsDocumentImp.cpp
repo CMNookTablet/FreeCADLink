@@ -100,11 +100,11 @@ void DlgSettingsDocumentImp::saveSettings()
     ui->prefAutoSaveTimeout->onSave();
     ui->prefNoNativeDialog->onSave();
 
-    DocumentParams::set_CanAbortRecompute(ui->prefCanAbortRecompute->isChecked());
-    DocumentParams::set_WarnRecomputeOnRestore(ui->prefRecomputeOnRestore->isChecked());
-    DocumentParams::set_TransactionOnRecompute(ui->prefTransactionOnRecompute->isChecked());
-    DocumentParams::set_ThumbnailNoBackground(ui->prefThumbnailNoBackground->isChecked());
-    DocumentParams::set_ThumbnailSampleSize(ui->prefThumbnailSampleSize->value());
+    DocumentParams::setCanAbortRecompute(ui->prefCanAbortRecompute->isChecked());
+    DocumentParams::setWarnRecomputeOnRestore(ui->prefRecomputeOnRestore->isChecked());
+    DocumentParams::setTransactionOnRecompute(ui->prefTransactionOnRecompute->isChecked());
+    DocumentParams::setThumbnailNoBackground(ui->prefThumbnailNoBackground->isChecked());
+    DocumentParams::setThumbnailSampleSize(ui->prefThumbnailSampleSize->value());
 
     int timeout = ui->prefAutoSaveTimeout->value();
     if (!ui->prefAutoSaveEnabled->isChecked())
@@ -140,11 +140,11 @@ void DlgSettingsDocumentImp::loadSettings()
     ui->prefAutoSaveTimeout->onRestore();
     ui->prefNoNativeDialog->onRestore();
 
-    ui->prefCanAbortRecompute->setChecked(DocumentParams::CanAbortRecompute());
-    ui->prefRecomputeOnRestore->setChecked(DocumentParams::WarnRecomputeOnRestore());
-    ui->prefTransactionOnRecompute->setChecked(DocumentParams::TransactionOnRecompute());
-    ui->prefThumbnailNoBackground->setChecked(DocumentParams::ThumbnailNoBackground());
-    ui->prefThumbnailSampleSize->setValue(DocumentParams::ThumbnailSampleSize());
+    ui->prefCanAbortRecompute->setChecked(DocumentParams::getCanAbortRecompute());
+    ui->prefRecomputeOnRestore->setChecked(DocumentParams::getWarnRecomputeOnRestore());
+    ui->prefTransactionOnRecompute->setChecked(DocumentParams::getTransactionOnRecompute());
+    ui->prefThumbnailNoBackground->setChecked(DocumentParams::getThumbnailNoBackground());
+    ui->prefThumbnailSampleSize->setValue(DocumentParams::getThumbnailSampleSize());
 }
 
 /**

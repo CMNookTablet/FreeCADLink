@@ -45,9 +45,11 @@
 #include <App/Application.h>
 
 #include "FileDialog.h"
-#include "MainWindow.h"
 #include "BitmapFactory.h"
+#include "MainWindow.h"
+#include "PrefWidgets.h"
 #include "Tools.h"
+#include "WaitCursor.h"
 
 using namespace Gui;
 
@@ -108,6 +110,7 @@ FileDialog::FileDialog(QWidget * parent)
 {
     connect(this, SIGNAL(filterSelected(const QString&)),
             this, SLOT(onSelectedFilter(const QString&)));
+    new PrefWidgetStates(this, true, "FileDialog", this);
 }
 
 FileDialog::~FileDialog()
@@ -211,6 +214,8 @@ void FileDialog::accept()
 QString FileDialog::getSaveFileName (QWidget * parent, const QString & caption, const QString & dir,
                                      QString filter, QString * selectedFilter, Options options, FileMode fileMode)
 {
+    WaitCursorRestorer waitCursorRestore;
+
     bool noNativeDialog = (options&QFileDialog::DontUseNativeDialog)
                           || dontUseNativeDialog();
 
@@ -274,6 +279,7 @@ QString FileDialog::getSaveFileName (QWidget * parent, const QString & caption, 
         urls << QUrl::fromLocalFile(QDir::currentPath());
 
         FileDialog dlg(parent);
+        dlg.setOptions(options);
         dlg.setWindowTitle(windowTitle);
         dlg.setSidebarUrls(urls);
         auto iconprov = std::make_unique<FileIconProvider>();
@@ -283,7 +289,6 @@ QString FileDialog::getSaveFileName (QWidget * parent, const QString & caption, 
         dlg.setDirectory(dirName);
         if (hasFilename)
             dlg.selectFile(dirName);
-        dlg.setOptions(options);
         dlg.setNameFilters(filter.split(QStringLiteral(";;")));
         if (selectedFilter && !selectedFilter->isEmpty())
             dlg.selectNameFilter(*selectedFilter);
@@ -297,15 +302,29 @@ QString FileDialog::getSaveFileName (QWidget * parent, const QString & caption, 
         }
     }
     else if (fileMode & QFileDialog::Directory) {
-        return getExistingDirectory(parent, windowTitle, dirName, options | QFileDialog::ShowDirsOnly);
-        file = QDir::fromNativeSeparators(file);
+        file = getExistingDirectory(parent, windowTitle, dirName, options | QFileDialog::ShowDirsOnly);
+        return QDir::fromNativeSeparators(file);
     }
     else {
-        file = QFileDialog::getSaveFileName(parent, windowTitle, dirName, filter, selectedFilter, options);
-        file = QDir::fromNativeSeparators(file);
+        QFileDialog dialog(parent, windowTitle, dirName, filter);
+        new PrefWidgetStates(&dialog, true, "FileDialog", &dialog);
+        dialog.setFileMode(QFileDialog::AnyFile);
+        dialog.setOptions(options);
+        if (hasFilename)
+            dialog.selectFile(dirName);
+        dialog.setSupportedSchemes(QStringList(QStringLiteral("file")));
+        dialog.setAcceptMode(QFileDialog::AcceptSave);
+        if (selectedFilter && !selectedFilter->isEmpty())
+            dialog.selectNameFilter(*selectedFilter);
+        if (dialog.exec() == QDialog::Accepted) {
+            if (selectedFilter)
+                *selectedFilter = dialog.selectedNameFilter();
+            file = dialog.selectedFiles().front();
+        }
     }
 
     if (!file.isEmpty()) {
+        file = QDir::fromNativeSeparators(file);
         setWorkingDirectory(checkDocumentXML(file));
         return file;
     } else {
@@ -318,13 +337,23 @@ QString FileDialog::getSaveFileName (QWidget * parent, const QString & caption, 
  */
 QString FileDialog::getExistingDirectory( QWidget * parent, const QString & caption, const QString & dir, Options options )
 {
-    QString path = QFileDialog::getExistingDirectory(parent, caption, dir, options);
-    // valid path was selected
-    if ( !path.isEmpty() ) {
-        QDir d(path);
-        path = d.path(); // get path in Qt manner
-    }
+    WaitCursorRestorer waitCursorRestore;
+    if (dontUseNativeDialog())
+        options |= QFileDialog::DontUseNativeDialog;
 
+    QFileDialog dialog(parent, caption, dir);
+    new PrefWidgetStates(&dialog, true, "FileDialog", &dialog);
+    dialog.setFileMode((options & ShowDirsOnly) ? DirectoryOnly : Directory);
+    dialog.setOptions(options);
+    dialog.setSupportedSchemes(QStringList(QStringLiteral("file")));
+    QString path;
+    if (dialog.exec() == QDialog::Accepted) {
+        path = dialog.selectedFiles().front();
+        if ( !path.isEmpty() ) {
+            QDir d(path);
+            path = d.path(); // get path in Qt manner
+        }
+    }
     return path;
 }
 
@@ -335,6 +364,7 @@ QString FileDialog::getExistingDirectory( QWidget * parent, const QString & capt
 QString FileDialog::getOpenFileName(QWidget * parent, const QString & caption, const QString & dir,
                                     QString filter, QString * selectedFilter, Options options, FileMode fileMode)
 {
+    WaitCursorRestorer waitCursorRestore;
     checkFilter(filter);
 
     QString dirName = dir;
@@ -362,13 +392,14 @@ QString FileDialog::getOpenFileName(QWidget * parent, const QString & caption, c
         urls << QUrl::fromLocalFile(QDir::currentPath());
 
         FileDialog dlg(parent);
+        dlg.setOptions(options);
         dlg.setWindowTitle(windowTitle);
         dlg.setSidebarUrls(urls);
-        dlg.setIconProvider(new FileIconProvider());
+        auto iconprov = std::make_unique<FileIconProvider>();
+        dlg.setIconProvider(iconprov.get());
         dlg.setFileMode(fileMode);
         dlg.setAcceptMode(QFileDialog::AcceptOpen);
         dlg.setDirectory(dirName);
-        dlg.setOptions(options);
         dlg.setNameFilters(filter.split(QStringLiteral(";;")));
         dlg.setOption(QFileDialog::HideNameFilterDetails, false);
         if (selectedFilter && !selectedFilter->isEmpty())
@@ -381,13 +412,25 @@ QString FileDialog::getOpenFileName(QWidget * parent, const QString & caption, c
     }
     else if (fileMode & QFileDialog::Directory) {
         file = getExistingDirectory(parent, windowTitle, dirName, options | QFileDialog::ShowDirsOnly);
+        return QDir::fromNativeSeparators(file);
     }
     else {
-        file = QFileDialog::getOpenFileName(parent, windowTitle, dirName, filter, selectedFilter, options);
-        file = QDir::fromNativeSeparators(file);
+        QFileDialog dialog(parent, windowTitle, dirName, filter);
+        new PrefWidgetStates(&dialog, true, "FileDialog", &dialog);
+        dialog.setFileMode(QFileDialog::ExistingFile);
+        dialog.setOptions(options);
+        dialog.setSupportedSchemes(QStringList(QStringLiteral("file")));
+        if (selectedFilter && !selectedFilter->isEmpty())
+            dialog.selectNameFilter(*selectedFilter);
+        if (dialog.exec() == QDialog::Accepted) {
+            if (selectedFilter)
+                *selectedFilter = dialog.selectedNameFilter();
+            file = dialog.selectedFiles().front();
+        }
     }
 
     if (!file.isEmpty()) {
+        file = QDir::fromNativeSeparators(file);
         setWorkingDirectory(checkDocumentXML(file));
         return file;
     } else {
@@ -401,6 +444,7 @@ QString FileDialog::getOpenFileName(QWidget * parent, const QString & caption, c
 QStringList FileDialog::getOpenFileNames (QWidget * parent, const QString & caption, const QString & dir,
                                           QString filter, QString * selectedFilter, Options options, FileMode fileMode)
 {
+    WaitCursorRestorer waitCursorRestore;
     checkFilter(filter);
 
     QString dirName = dir;
@@ -428,13 +472,14 @@ QStringList FileDialog::getOpenFileNames (QWidget * parent, const QString & capt
         urls << QUrl::fromLocalFile(QDir::currentPath());
 
         FileDialog dlg(parent);
+        dlg.setOptions(options);
         dlg.setWindowTitle(windowTitle);
         dlg.setSidebarUrls(urls);
-        dlg.setIconProvider(new FileIconProvider());
+        auto iconprov = std::make_unique<FileIconProvider>();
+        dlg.setIconProvider(iconprov.get());
         dlg.setFileMode(fileMode);
         dlg.setAcceptMode(QFileDialog::AcceptOpen);
         dlg.setDirectory(dirName);
-        dlg.setOptions(options);
         dlg.setNameFilters(filter.split(QStringLiteral(";;")));
         dlg.setOption(QFileDialog::HideNameFilterDetails, false);
         if (selectedFilter && !selectedFilter->isEmpty())
@@ -446,14 +491,24 @@ QStringList FileDialog::getOpenFileNames (QWidget * parent, const QString & capt
         }
     }
     else {
-        files = QFileDialog::getOpenFileNames(parent, windowTitle, dirName, filter, selectedFilter, options);
-        for (QStringList::iterator it = files.begin(); it != files.end(); ++it) {
-            *it = QDir::fromNativeSeparators(*it);
+        QFileDialog dialog(parent, windowTitle, dirName, filter);
+        new PrefWidgetStates(&dialog, true, "FileDialog", &dialog);
+        dialog.setFileMode(QFileDialog::ExistingFiles);
+        dialog.setOptions(options);
+        dialog.setSupportedSchemes(QStringList(QStringLiteral("file")));
+        if (selectedFilter && !selectedFilter->isEmpty())
+            dialog.selectNameFilter(*selectedFilter);
+        if (dialog.exec() == QDialog::Accepted) {
+            if (selectedFilter)
+                *selectedFilter = dialog.selectedNameFilter();
+            files = dialog.selectedFiles();
         }
     }
 
-    for(auto &f : files)
+    for(auto &f : files) {
+        f = QDir::fromNativeSeparators(f);
         checkDocumentXML(f);
+    }
 
     if (!files.isEmpty()) {
         setWorkingDirectory(files.front());
@@ -786,6 +841,12 @@ void FileChooser::setFileName( const QString& s )
 {
     lineEdit->setText( s );
 }
+
+void FileChooser::setFileNameStd( const std::string& s )
+{
+    lineEdit->setText( QString::fromUtf8(s.c_str()) );
+}
+
 
 /**
  * Opens a FileDialog to choose either a file or a directory in dependency of the

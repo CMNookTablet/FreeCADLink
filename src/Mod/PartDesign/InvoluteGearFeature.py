@@ -252,5 +252,5 @@ class _InvoluteGearTaskPanel:
         FreeCAD.ActiveDocument.abortTransaction()
 
 
-if FreeCAD.GuiUp:
+if FreeCAD.GuiUp and not FreeCADGui.Command.get('PartDesign_InvoluteGear'):
     FreeCADGui.addCommand('PartDesign_InvoluteGear',_CommandInvoluteGear())

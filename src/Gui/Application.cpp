@@ -75,7 +75,7 @@
 #include "Document.h"
 #include "DocumentPy.h"
 #include "View.h"
-#include "View3DPy.h"
+#include "View3DInventorPy.h"
 #include "UiLoader.h"
 #include "WidgetFactory.h"
 #include "Command.h"
@@ -94,7 +94,6 @@
 #include "PythonConsolePy.h"
 #include "PythonDebugger.h"
 #include "MDIViewPy.h"
-#include "View3DPy.h"
 #include "DlgOnlineHelpImp.h"
 #include "SpaceballEvent.h"
 #include "Control.h"
@@ -136,8 +135,10 @@
 #include "LinkViewPy.h"
 #include "ViewProviderSavedView.h"
 #include "ViewProviderSavedViewPy.h"
+#include "ViewProviderDatum.h"
 #include "AxisOriginPy.h"
 #include "CommandPy.h"
+#include "FileDialogPy.h"
 
 #include "Language/Translator.h"
 #include "TaskView/TaskView.h"
@@ -177,12 +178,22 @@ struct ApplicationP
 
         // Create the Theme Manager
         prefPackManager = new PreferencePackManager();
+        timer.setSingleShot(true);
+        QObject::connect(&timer, &QTimer::timeout, [this](){onTimer();});
     }
 
     ~ApplicationP()
     {
         delete macroMngr;
         delete prefPackManager;
+    }
+
+    void onTimer() {
+        for (const auto &v : documents) {
+            v.second->foreachView<View3DInventor>([](View3DInventor *view) {
+                view->getViewer()->refreshGroupOnTop();
+            });
+        }
     }
 
     /// list of all handled documents
@@ -200,6 +211,7 @@ struct ApplicationP
     CommandManager commandManager;
     std::string initWorkbench;
     std::unordered_map<const App::DocumentObject *, ViewProvider *> viewproviderMap;
+    QTimer timer;
 };
 
 static PyObject *
@@ -346,7 +358,7 @@ Application::Application(bool GUIenabled)
                     doc->setStatus(App::Document::RecomputeOnRestore, false);
                 }
             }
-            if(docs.empty() || !App::DocumentParams::WarnRecomputeOnRestore())
+            if(docs.empty() || !App::DocumentParams::getWarnRecomputeOnRestore())
                 return;
             WaitCursor wc;
             wc.restoreCursor();
@@ -477,6 +489,7 @@ Application::Application(bool GUIenabled)
         Base::Interpreter().addType(&LinkViewPy::Type,module,"LinkView");
         Base::Interpreter().addType(&AxisOriginPy::Type,module,"AxisOrigin");
         Base::Interpreter().addType(&CommandPy::Type,module, "Command");
+        Base::Interpreter().addType(&FileDialogPy::Type,module, "FileDialog");
         Base::Interpreter().addType(&DocumentPy::Type, module, "Document");
         Base::Interpreter().addType(&ViewProviderPy::Type, module, "ViewProvider");
         Base::Interpreter().addType(&ViewProviderDocumentObjectPy::Type, module, "ViewProviderDocumentObject");
@@ -505,8 +518,6 @@ Application::Application(bool GUIenabled)
     OutputStdout                ::init_type();
     OutputStderr                ::init_type();
     PythonStdin                 ::init_type();
-    MDIViewPy                   ::init_type();
-    View3DInventorPy            ::init_type();
     View3DInventorViewerPy      ::init_type();
     AbstractSplitViewPy         ::init_type();
 
@@ -975,8 +986,10 @@ void Application::slotDeletedObject(const ViewProvider& vp)
 {
     this->signalDeletedObject(vp);
     auto vpd = Base::freecad_dynamic_cast<ViewProviderDocumentObject>(const_cast<ViewProvider*>(&vp));
-    if (vpd && vpd->getObject())
+    if (vpd && vpd->getObject()) {
         d->viewproviderMap.erase(vpd->getObject());
+        d->timer.start(100);
+    }
 }
 
 void Application::slotChangedObject(const ViewProvider& vp, const App::Property& prop)
@@ -1616,7 +1629,7 @@ bool Application::activateWorkbench(const char* name)
     return ok;
 }
 
-QPixmap Application::workbenchIcon(const QString& wb) const
+QPixmap Application::workbenchIcon(const QString& wb, QString *iconPath) const
 {
     Base::PyGILStateLocker lock;
     // get the python workbench object from the dictionary
@@ -1628,8 +1641,16 @@ QPixmap Application::workbenchIcon(const QString& wb) const
         str << "Icon_" << wb.toUtf8().constData();
         std::string iconName = str.str();
         QPixmap icon;
-        if (BitmapFactory().findPixmapInCache(iconName.c_str(), icon))
+        std::string path;
+        if (BitmapFactory().findPixmapInCache(iconName.c_str(),
+                                              icon,
+                                              nullptr,
+                                              iconPath ? &path : nullptr))
+        {
+            if (iconPath)
+                *iconPath = QString::fromUtf8(path.c_str());
             return icon;
+        }
 
         // get its Icon member if possible
         try {
@@ -1638,14 +1659,11 @@ QPixmap Application::workbenchIcon(const QString& wb) const
                 Py::Object member = handler.getAttr(std::string("Icon"));
                 Py::String data(member);
                 std::string content = data.as_std_string("utf-8");
+                std::string path;
 
                 // test if in XPM format
-                QByteArray ary;
-                int strlen = (int)content.size();
-                ary.resize(strlen);
-                for (int j=0; j<strlen; j++)
-                    ary[j]=content[j];
-                if (ary.indexOf("/* XPM */") > 0) {
+                if (strstr(content.c_str(), "/* XPM */") != nullptr) {
+                    QByteArray ary(content.c_str());
                     // Make sure to remove crap around the XPM data
                     QList<QByteArray> lines = ary.split('\n');
                     QByteArray buffer;
@@ -1665,12 +1683,15 @@ QPixmap Application::workbenchIcon(const QString& wb) const
                     icon.load(file);
                     if (icon.isNull()) {
                         // ... or the name of another icon?
-                        icon = BitmapFactory().pixmap(file.toUtf8());
-                    }
+                        icon = BitmapFactory().pixmap(file.toUtf8(), false, nullptr, &path);
+                    } else
+                        path = content;
                 }
 
                 if (!icon.isNull()) {
-                    BitmapFactory().addPixmapToCache(iconName.c_str(), icon);
+                    BitmapFactory().addPixmapToCache(iconName.c_str(), icon, path.c_str());
+                    if (iconPath)
+                        *iconPath = QString::fromUtf8(path.c_str());
                 }
 
                 return icon;
@@ -2001,6 +2022,7 @@ void Application::initTypes(void)
     Gui::ViewProviderLinkPython                 ::init();
     Gui::AxisOrigin                             ::init();
     Gui::ViewProviderSavedView                  ::init();
+    Gui::ViewProviderDatum                      ::init();
 
     // Workbench
     Gui::Workbench                              ::init();
@@ -2630,21 +2652,8 @@ void Application::setStyleSheet(const QString& qssFile, bool tiledBackground)
 
     auto hGrp = App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/MainWindow");
     QString iconSet = QString::fromUtf8(hGrp->GetASCII("IconSet").c_str());
-    if (!iconSet.isEmpty()) {
-        QString prefix(QStringLiteral("iconset:"));
-        QFile f;
-        if (QFile::exists(iconSet)) {
-            f.setFileName(iconSet);
-        }
-        else if (QFile::exists(prefix + iconSet)) {
-            f.setFileName(prefix + iconSet);
-        }
-
-        if (!f.fileName().isEmpty() && f.open(QFile::ReadOnly | QFile::Text)) {
-            QTextStream str(&f);
-            getMainWindow()->setOverrideExtraIcons(str.readAll());
-        }
-    }
+    if (!iconSet.isEmpty())
+        getMainWindow()->setOverrideExtraIcons(iconSet);
 
     // Icon set change is also triggered by style change, so we'll set
     // stylesheet regardless of changes

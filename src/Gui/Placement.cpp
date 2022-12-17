@@ -665,13 +665,15 @@ void Placement::bindObject(App::PropertyPlacement * prop)
     if (!obj)
         return;
 
-    ui->xPos->bind(App::ObjectIdentifier::parse(obj, propertyName + std::string(".Base.x")));
-    ui->yPos->bind(App::ObjectIdentifier::parse(obj, propertyName + std::string(".Base.y")));
-    ui->zPos->bind(App::ObjectIdentifier::parse(obj, propertyName + std::string(".Base.z")));
+    std::string localName(".");
+    localName += propertyName;
+    ui->xPos->bind(App::ObjectIdentifier::parse(obj, localName + std::string(".Base.x")));
+    ui->yPos->bind(App::ObjectIdentifier::parse(obj, localName + std::string(".Base.y")));
+    ui->zPos->bind(App::ObjectIdentifier::parse(obj, localName + std::string(".Base.z")));
 
-    ui->yawAngle  ->bind(App::ObjectIdentifier::parse(obj, propertyName + std::string(".Rotation.Yaw")));
-    ui->pitchAngle->bind(App::ObjectIdentifier::parse(obj, propertyName + std::string(".Rotation.Pitch")));
-    ui->rollAngle ->bind(App::ObjectIdentifier::parse(obj, propertyName + std::string(".Rotation.Roll")));
+    ui->yawAngle  ->bind(App::ObjectIdentifier::parse(obj, localName + std::string(".Rotation.Yaw")));
+    ui->pitchAngle->bind(App::ObjectIdentifier::parse(obj, localName + std::string(".Rotation.Pitch")));
+    ui->rollAngle ->bind(App::ObjectIdentifier::parse(obj, localName + std::string(".Rotation.Roll")));
 
     if (prop) {
         // Clearing the propertyName to bypass applyPlacement(), and let caller

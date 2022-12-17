@@ -30,6 +30,11 @@ typename: string. The following are accepted so far:
 'Attacher::AttachEnginePoint'</UserDocu>
       </Documentation>
     </Methode>
+    <Methode Name="initBaseProperties">
+      <Documentation>
+          <UserDocu>Initialize base attachment properties</UserDocu>
+      </Documentation>
+    </Methode>
 
     <Attribute Name="Attacher" ReadOnly="true">
       <Documentation>

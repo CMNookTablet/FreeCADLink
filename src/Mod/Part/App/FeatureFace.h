@@ -39,6 +39,12 @@ public:
     App::PropertyLinkList   Sources;
     App::PropertyString FaceMakerClass;
 
+    App::PropertyPrecision EdgeTolerance;
+    App::PropertyBool Outline;
+    App::PropertyBool SplitEdges;
+    App::PropertyBool MergeEdges;
+    App::PropertyBool TightBound;
+
     /** @name methods override feature */
     //@{
     /// recalculate the feature

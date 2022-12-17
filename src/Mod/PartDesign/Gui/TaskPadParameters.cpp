@@ -80,16 +80,11 @@ void TaskPadParameters::setupUI(bool newObj)
     ui->setupUi(proxy);
     if (useElement) {
         ui->buttonFace->setText(tr("Element"));
-#if QT_VERSION >= 0x040700
         ui->lineFaceName->setPlaceholderText(tr("No element selected"));
-#endif
     }
-    else {
-#if QT_VERSION >= 0x040700
+    else
         ui->lineFaceName->setPlaceholderText(tr("No face selected"));
-#endif
-    }
-    addBlinkEditor(ui->lineFaceName);
+    addBlinkWidget(ui->lineFaceName);
 
     ui->lineFaceName->installEventFilter(this);
     ui->lineFaceName->setMouseTracking(true);
@@ -118,21 +113,23 @@ void TaskPadParameters::setupUI(bool newObj)
     ui->taperAngleEdit2->setToolTip(QApplication::translate(
                 "Property", pcPad->TaperAngleRev.getDocumentation()));
     ui->innerTaperAngleEdit->setToolTip(QApplication::translate(
-                "Property", pcPad->InnerTaperAngle.getDocumentation()));
+                "Property", pcPad->TaperInnerAngle.getDocumentation()));
     ui->innerTaperAngleEdit2->setToolTip(QApplication::translate(
-                "Property", pcPad->InnerTaperAngleRev.getDocumentation()));
+                "Property", pcPad->TaperInnerAngleRev.getDocumentation()));
+    ui->autoInnerTaperAngle->setToolTip(QApplication::translate(
+                "Property", pcPad->AutoTaperInnerAngle.getDocumentation()));
 
     // Bind input fields to properties
     ui->lengthEdit->bind(pcPad->Length);
     ui->lengthEdit2->bind(pcPad->Length2);
     ui->taperAngleEdit->bind(pcPad->TaperAngle);
     ui->taperAngleEdit2->bind(pcPad->TaperAngleRev);
-    ui->innerTaperAngleEdit->bind(pcPad->InnerTaperAngle);
-    ui->innerTaperAngleEdit2->bind(pcPad->InnerTaperAngleRev);
+    ui->innerTaperAngleEdit->bind(pcPad->TaperInnerAngle);
+    ui->innerTaperAngleEdit2->bind(pcPad->TaperInnerAngleRev);
 
-    ui->XDirectionEdit->bind(App::ObjectIdentifier::parse(pcPad, std::string("Direction.x")));
-    ui->YDirectionEdit->bind(App::ObjectIdentifier::parse(pcPad, std::string("Direction.y")));
-    ui->ZDirectionEdit->bind(App::ObjectIdentifier::parse(pcPad, std::string("Direction.z")));
+    ui->XDirectionEdit->bind(App::ObjectIdentifier::parse(pcPad, std::string(".Direction.x")));
+    ui->YDirectionEdit->bind(App::ObjectIdentifier::parse(pcPad, std::string(".Direction.y")));
+    ui->ZDirectionEdit->bind(App::ObjectIdentifier::parse(pcPad, std::string(".Direction.z")));
 
     ui->offsetEdit->bind(pcPad->Offset);
 
@@ -201,6 +198,13 @@ void TaskPadParameters::setupUI(bool newObj)
             this, SLOT(onFaceName(QString)));
     this->propReferenceAxis = &(pcPad->ReferenceAxis);
 
+    QObject::connect(ui->autoInnerTaperAngle, &QCheckBox::toggled, [this](bool checked) {
+        PartDesign::Pad* pcPad = static_cast<PartDesign::Pad*>(vp->getObject());
+        pcPad->AutoTaperInnerAngle.setValue(checked);
+        ui->innerTaperAngleEdit->setDisabled(checked);
+        ui->innerTaperAngleEdit2->setDisabled(checked);
+        recomputeFeature();
+    });
     refresh();
 
     // if it is a newly created object use the last value of the history
@@ -245,8 +249,8 @@ void TaskPadParameters::refresh()
     int index = pcPad->Type.getValue(); // must extract value here, clear() kills it!
     double angle = pcPad->TaperAngle.getValue();
     double angle2 = pcPad->TaperAngleRev.getValue();
-    double innerAngle = pcPad->InnerTaperAngle.getValue();
-    double innerAngle2 = pcPad->InnerTaperAngleRev.getValue();
+    double innerAngle = pcPad->TaperInnerAngle.getValue();
+    double innerAngle2 = pcPad->TaperInnerAngleRev.getValue();
 
     // Temporarily prevent unnecessary feature recomputes
     for (QWidget* child : proxy->findChildren<QWidget*>())
@@ -299,6 +303,8 @@ void TaskPadParameters::refresh()
     ui->changeMode->setCurrentIndex(index);
 
     ui->checkFaceLimits->setChecked(pcPad->CheckUpToFaceLimits.getValue());
+
+    ui->autoInnerTaperAngle->setChecked(pcPad->AutoTaperInnerAngle.getValue());
 
     // Temporarily prevent unnecessary feature recomputes
     for (QWidget* child : proxy->findChildren<QWidget*>())
@@ -396,47 +402,42 @@ void TaskPadParameters::updateUI(int index)
     }
 }
 
-void TaskPadParameters::onSelectionChanged(const Gui::SelectionChanges& msg)
+void TaskPadParameters::_onSelectionChanged(const Gui::SelectionChanges& msg)
 {
     if (msg.Type == Gui::SelectionChanges::AddSelection) {
         // if we have an edge selection for the pad direction
-        if (!selectionFace) {
-            removeBlinkLabel(ui->labelEdge);
+        if (getSelectionMode() == SelectionMode::refAxis) {
             std::vector<std::string> edge;
             App::DocumentObject* selObj;
             if (getReferencedSelection(vp->getObject(), msg, selObj, edge) && selObj) {
-                exitSelectionMode();
                 propReferenceAxis->setValue(selObj, edge);
                 recomputeFeature();
                 // update direction combobox
                 fillDirectionCombo();
+                exitSelectionMode();
             }
         }
-        else {
-            QString refText = onAddSelection(msg);
+        else if (getSelectionMode() == SelectionMode::refAdd) {
+            QString refText = onSelectUpToFace(msg);
+            QSignalBlocker guard(ui->lineFaceName);
             if (refText.length() > 0) {
-                ui->lineFaceName->blockSignals(true);
                 ui->lineFaceName->setText(refText);
                 QStringList list(refText.split(QLatin1Char(':')));
                 ui->lineFaceName->setProperty("FeatureName", list[0].toUtf8());
                 ui->lineFaceName->setProperty("FaceName", list.size()>1 ? list[1].toUtf8() : QByteArray());
-                ui->lineFaceName->blockSignals(false);
                 // Turn off reference selection mode
                 onButtonFace(false);
             } else {
-                ui->lineFaceName->blockSignals(true);
                 ui->lineFaceName->clear();
                 ui->lineFaceName->setProperty("FeatureName", QVariant());
                 ui->lineFaceName->setProperty("FaceName", QVariant());
-                ui->lineFaceName->blockSignals(false);
             }
         }
     } else if (msg.Type == Gui::SelectionChanges::ClrSelection) {
-        ui->lineFaceName->blockSignals(true);
+        QSignalBlocker guard(ui->lineFaceName);
         ui->lineFaceName->clear();
         ui->lineFaceName->setProperty("FeatureName", QVariant());
         ui->lineFaceName->setProperty("FaceName", QVariant());
-        ui->lineFaceName->blockSignals(false);
     }
 }
 
@@ -543,14 +544,14 @@ void TaskPadParameters::onAngle2Changed(double angle)
 void TaskPadParameters::onInnerAngleChanged(double angle)
 {
     PartDesign::Pad* pcPad = static_cast<PartDesign::Pad*>(vp->getObject());
-    pcPad->InnerTaperAngle.setValue(angle);
+    pcPad->TaperInnerAngle.setValue(angle);
     recomputeFeature();
 }
 
 void TaskPadParameters::onInnerAngle2Changed(double angle)
 {
     PartDesign::Pad* pcPad = static_cast<PartDesign::Pad*>(vp->getObject());
-    pcPad->InnerTaperAngleRev.setValue(angle);
+    pcPad->TaperInnerAngleRev.setValue(angle);
     recomputeFeature();
 }
 
@@ -561,17 +562,12 @@ void TaskPadParameters::onDirectionCBChanged(int num)
     if (axesInList.empty() || !pcPad)
         return;
 
-    removeBlinkLabel(ui->labelEdge);
-
     if (num == 0 || num == 2)
         propReferenceAxis->setValue(nullptr);
     else if (num == 1) {
-        addBlinkLabel(ui->labelEdge);
         // enter reference selection mode
-        this->blockConnection(false);
         // to distinguish that this is the direction selection
-        selectionFace = false;
-        TaskSketchBasedParameters::onSelectReference(true, true, true, true, true);
+        TaskSketchBasedParameters::onSelectReference(ui->labelEdge, SelectionMode::refAxis);
         return;
     }
     else {
@@ -716,27 +712,27 @@ void TaskPadParameters::onModeChanged(int index)
 
 void TaskPadParameters::onButtonFace(const bool pressed)
 {
-    this->blockConnection(!pressed);
+    if (!pressed) {
+        exitSelectionMode();
+        return;
+    }
 
-    // to distinguish that this is the direction selection
-    selectionFace = true;
-
+    ReferenceSelection::Config conf;
     if (vp && vp->getObject()
            && vp->getObject()->isDerivedFrom(PartDesign::Extrusion::getClassTypeId()))
-    {
-        if (pressed) {
-            Gui::Selection().clearSelection();
-            Gui::Selection().addSelectionGate(
-                    new ReferenceSelection(vp->getObject(), true, true, false, true));
-        }
-        else
-            Gui::Selection().rmvSelectionGate();
-    }
+        conf.point = true;
     else
-        TaskSketchBasedParameters::onSelectReference(pressed, false, true, false);
+        conf.edge = false;
+    TaskSketchBasedParameters::onSelectReference(ui->buttonFace, conf);
+}
 
-    // Update button if onButtonFace() is called explicitly
-    ui->buttonFace->setChecked(pressed);
+void TaskPadParameters::onSelectionModeChanged(SelectionMode)
+{
+    if (getSelectionMode() == SelectionMode::refAdd) {
+        ui->buttonFace->setChecked(true);
+    } else {
+        ui->buttonFace->setChecked(false);
+    }
 }
 
 void TaskPadParameters::onFaceName(const QString& text)
@@ -895,17 +891,12 @@ void TaskPadParameters::changeEvent(QEvent *e)
 
         if (useElement) {
             ui->buttonFace->setText(tr("Element"));
-#if QT_VERSION >= 0x040700
             ui->lineFaceName->setPlaceholderText(tr("No element selected"));
-#endif
         }
         else {
-#if QT_VERSION >= 0x040700
             ui->lineFaceName->setPlaceholderText(tr("No face selected"));
-#endif
         }
-        addBlinkEditor(ui->lineFaceName);
-
+        addBlinkWidget(ui->lineFaceName);
         ui->lengthEdit->blockSignals(false);
         ui->lengthEdit2->blockSignals(false);
         ui->XDirectionEdit->blockSignals(false);

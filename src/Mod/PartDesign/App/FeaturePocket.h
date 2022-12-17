@@ -43,8 +43,9 @@ public:
     App::PropertyLength         Offset;
     App::PropertyAngle          TaperAngle;
     App::PropertyAngle          TaperAngleRev;
-    App::PropertyAngle          InnerTaperAngle;
-    App::PropertyAngle          InnerTaperAngleRev;
+    App::PropertyAngle          TaperInnerAngle;
+    App::PropertyAngle          TaperInnerAngleRev;
+    App::PropertyBool           AutoTaperInnerAngle;
     App::PropertyBool           UsePipeForDraft;
     App::PropertyBool           CheckUpToFaceLimits;
     App::PropertyInteger        _Version;
@@ -68,6 +69,8 @@ public:
     const char* getViewProviderName(void) const {
         return "PartDesignGui::ViewProviderPocket";
     }
+    void handleChangedPropertyName(Base::XMLReader &reader, const char * TypeName, const char *Name);
+    void onChanged(const App::Property *);
     //@}
 
     virtual void setPauseRecompute(bool enable);

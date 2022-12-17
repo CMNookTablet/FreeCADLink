@@ -69,7 +69,7 @@ using namespace PartDesign;
 PROPERTY_SOURCE(PartDesign::Body, Part::BodyBase)
 
 Body::Body() {
-    ADD_PROPERTY_TYPE(SingleSolid,(Part::PartParams::SingleSolid()),
+    ADD_PROPERTY_TYPE(SingleSolid,(Part::PartParams::getSingleSolid()),
             "Base",(App::PropertyType)(App::Prop_None),
             "Enforce single solid on each feature");
     _GroupTouched.setStatus(App::Property::Output,true);
@@ -618,7 +618,7 @@ void Body::onChanged (const App::Property* prop) {
 
 void Body::setupObject () {
     Part::BodyBase::setupObject ();
-    AutoGroupSolids.setValue(Part::PartParams::AutoGroupSolids());
+    AutoGroupSolids.setValue(Part::PartParams::getAutoGroupSolids());
 
     // make sure the origins are created
     getOrigin()->getX();

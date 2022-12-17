@@ -116,14 +116,14 @@ void ViewProviderSavedView::prepareMenu(QMenu *menu)
     addOption(obj->SaveCamera);
     addOption(obj->SaveVisibilities);
     addOption(obj->SaveShowOnTop);
-    addOption(obj->SaveShadowSettings);
+    addOption(obj->SaveDrawStyleSettings);
 
     submenu = menu->addMenu(QObject::tr("Partial capture"));
     submenu->addAction(QObject::tr("Clipping settings"), [this]() {capture(CaptureOption::Clippings);});
     submenu->addAction(QObject::tr("Camera settings"), [this]() {capture(CaptureOption::Camera);});
     submenu->addAction(QObject::tr("Visibilities"), [this]() {capture(CaptureOption::Visibilities);});
     submenu->addAction(QObject::tr("Show on top"), [this]() {capture(CaptureOption::ShowOnTop);});
-    submenu->addAction(QObject::tr("Shadow settings"), [this]() {capture(CaptureOption::Shadow);});
+    submenu->addAction(QObject::tr("DrawStyle settings"), [this]() {capture(CaptureOption::DrawStyle);});
 
     menu->addAction(QObject::tr("Capture all"), [this]() {capture(CaptureOption::All);});
 
@@ -136,7 +136,7 @@ void ViewProviderSavedView::prepareMenu(QMenu *menu)
     submenu->addAction(QObject::tr("Camera settings"), [this]() {apply(CaptureOption::Camera);});
     submenu->addAction(QObject::tr("Visibilities"), [this]() {apply(CaptureOption::Visibilities);});
     submenu->addAction(QObject::tr("Show on top"), [this]() {apply(CaptureOption::ShowOnTop);});
-    submenu->addAction(QObject::tr("Shadow settings"), [this]() {apply(CaptureOption::Shadow);});
+    submenu->addAction(QObject::tr("DrawStyle settings"), [this]() {apply(CaptureOption::DrawStyle);});
 
     menu->addAction(QObject::tr("Restore all"), [this]() {apply(CaptureOption::All);});
 }
@@ -276,27 +276,26 @@ void ViewProviderSavedView::apply(CaptureOptions options)
             }
         }
 
-        if (options & CaptureOption::Shadow) {
-            App::Document *doc = obj->getDocument();
+        if (options & CaptureOption::DrawStyle) {
             int count = 0;
             for (const auto &name : obj->getDynamicPropertyNames()) {
-                if (!boost::starts_with(name, "Shadow_"))
+                if (!boost::equals(name, "DrawStyle")
+                        && !boost::starts_with(name, "Shadow_")
+                        && !boost::starts_with(name, "HiddenLine_"))
                     continue;
                 if (auto prop = obj->getPropertyByName(name.c_str())) {
-                    auto p = doc->getPropertyByName(name.c_str());
+                    auto p = view->getPropertyByName(name.c_str());
                     if (!p)
-                        p = doc->addDynamicProperty(prop->getTypeId().getName(),
-                                                    prop->getName(),
-                                                    prop->getGroup(),
-                                                    prop->getDocumentation());
+                        p = view->addDynamicProperty(prop->getTypeId().getName(),
+                                                     prop->getName(),
+                                                     prop->getGroup(),
+                                                     prop->getDocumentation());
                     if (!p || p->getTypeId() != prop->getTypeId())
                         continue;
                     p->Paste(*prop);
                     ++count;
                 }
             }
-            if (!(options & CaptureOption::Camera))
-                view->getViewer()->setOverrideMode("Shadow");
         }
 
         if (options & CaptureOption::Visibilities) {
@@ -359,8 +358,8 @@ void ViewProviderSavedView::checkOptions(App::SavedView *obj, CaptureOptions &op
             options |= CaptureOption::Camera;
         if (obj->SaveVisibilities.getValue())
             options |= CaptureOption::Visibilities;
-        if (obj->SaveShadowSettings.getValue())
-            options |= CaptureOption::Shadow;
+        if (obj->SaveDrawStyleSettings.getValue())
+            options |= CaptureOption::DrawStyle;
         if (obj->SaveShowOnTop.getValue())
             options |= CaptureOption::ShowOnTop;
     }
@@ -425,14 +424,16 @@ void ViewProviderSavedView::capture(CaptureOptions options)
             }
         }
 
-        if (options & CaptureOption::Shadow) {
-            obj->SaveShadowSettings.setValue(true);
-            auto doc = obj->getDocument();
-            for (const auto &name : doc->getDynamicPropertyNames()) {
-                if (!boost::starts_with(name, "Shadow_"))
+        if (options & CaptureOption::DrawStyle) {
+            obj->SaveDrawStyleSettings.setValue(true);
+            std::vector<App::Property*> props;
+            view->getPropertyList(props);
+            for (auto prop : props) {
+                if (!prop->getName())
                     continue;
-                auto prop = doc->getPropertyByName(name.c_str());
-                if (!prop)
+                if (!boost::equals(prop->getName(), "DrawStyle")
+                        && !boost::starts_with(prop->getName(), "Shadow_")
+                        && !boost::starts_with(prop->getName(), "HiddenLine_"))
                     continue;
                 auto p = obj->getProperty(prop->getTypeId(), prop->getName(), prop->getGroup(), true);
                 p->Paste(*prop);

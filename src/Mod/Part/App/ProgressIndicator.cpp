@@ -54,17 +54,19 @@ using namespace Part;
   \endcode
  */
 
-#if OCC_VERSION_HEX < 0x070500
 ProgressIndicator::ProgressIndicator (int theMaxVal)
   : myProgress(new Base::SequencerLauncher("", theMaxVal))
 {
+#if OCC_VERSION_HEX < 0x070500
     SetScale (0, theMaxVal, 1);
+#endif
 }
 
 ProgressIndicator::~ProgressIndicator ()
 {
 }
 
+#if OCC_VERSION_HEX < 0x070500
 Standard_Boolean ProgressIndicator::Show (const Standard_Boolean theForce)
 {
     if (theForce) {
@@ -79,9 +81,25 @@ Standard_Boolean ProgressIndicator::Show (const Standard_Boolean theForce)
 
     return Standard_True;
 }
+#else
+
+void ProgressIndicator::Show (const Message_ProgressScope& theScope, const Standard_Boolean theForce)
+{
+    (void)theForce;
+    auto aName = theScope.Name();
+    if (prevText != aName) {
+        prevText = aName;
+        myProgress->setText (aName);
+    }
+
+    Standard_Real aPc = GetPosition(); //always within [0,1]
+    int aVal = (int)(aPc * myProgress->numberOfSteps());
+    myProgress->setProgress (aVal);
+}
+#endif
 
 Standard_Boolean ProgressIndicator::UserBreak()
 {
-    return myProgress->wasCanceled();
+    Base::SequencerBase::Instance().checkAbort();
+    return Base::SequencerBase::Instance().wasCanceled();
 }
-#endif

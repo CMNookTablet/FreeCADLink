@@ -87,8 +87,8 @@ int Part::ImportIgesParts(App::Document *pcDoc, const char* FileName)
 
 #if 1
         std::string aName = fi.fileNamePure();
-#if OCC_VERSION_HEX < 0x070500
         Handle(Message_ProgressIndicator) pi = new ProgressIndicator(100);
+#if OCC_VERSION_HEX < 0x070500
         pi->NewScope(100, "Reading IGES file...");
         pi->Show();
         aReader.WS()->MapReader()->SetProgress(pi);
@@ -97,9 +97,11 @@ int Part::ImportIgesParts(App::Document *pcDoc, const char* FileName)
         // make model
         aReader.ClearShapes();
         //Standard_Integer nbRootsForTransfer = aReader.NbRootsForTransfer();
-        aReader.TransferRoots();
 #if OCC_VERSION_HEX < 0x070500
+        aReader.TransferRoots();
         pi->EndScope();
+#else
+        aReader.TransferRoots(pi->Start());
 #endif
 
         // put all other free-flying shapes into a single compound

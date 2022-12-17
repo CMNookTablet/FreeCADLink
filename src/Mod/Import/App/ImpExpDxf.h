@@ -47,10 +47,11 @@ namespace Import
         void OnReadSpline(struct SplineData& sd);
         void OnReadInsert(const double* point, const double* scale, const char* name, double rotation);
         void OnReadDimension(const double* s, const double* e, const double* point, double rotation);
-        void AddGraphics() const;
+        void AddGraphics();
+        void OnPolyLineStart();
     
         // FreeCAD-specific functions
-        void AddObject(Part::TopoShape *shape); //Called by OnRead functions to add Part objects
+        void AddObject(const TopoDS_Shape &shape); //Called by OnRead functions to add Part objects
         std::string Deformat(const char* text); // Removes DXF formatting from texts
 
         std::string getOptionSource() { return m_optionSource; }
@@ -64,8 +65,14 @@ namespace Import
         App::Document *document;
         bool optionGroupLayers;
         bool optionImportAnnotations;
+        bool optionConnectEdges;
         double optionScaling;
-        std::map <std::string, std::vector <Part::TopoShape*> > layers;
+        struct LayerInfo {
+            std::vector<Part::TopoShape> shapes;
+            std::vector<Part::TopoShape> edges;
+            void flushPolyLine();
+        };
+        std::map <std::string, LayerInfo> layers;
         std::string m_optionSource;
     };
 

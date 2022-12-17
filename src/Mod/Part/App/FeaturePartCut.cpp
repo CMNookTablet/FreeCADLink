@@ -41,7 +41,7 @@ Cut::Cut(void)
 }
 
 const char *Cut::opCode() const {
-    return TOPOP_CUT;
+    return Part::OpCodes::Cut;
 }
 
 BRepAlgoAPI_BooleanOperation* Cut::makeOperation(const TopoDS_Shape& base, const TopoDS_Shape& tool) const

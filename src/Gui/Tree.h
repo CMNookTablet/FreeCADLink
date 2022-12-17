@@ -127,6 +127,7 @@ public:
         TreeSubName = 0x04,
     };
     Q_DECLARE_FLAGS(FindItemOptions, FindItemOption);
+
     static QTreeWidgetItem *findItem(const App::SubObjectT &objT,
                                      QTreeWidgetItem *context = nullptr,
                                      App::SubObjectT *resT = nullptr,
@@ -374,5 +375,7 @@ public:
 };
 
 }
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Gui::TreeWidget::FindItemOptions);
 
 #endif // GUI_TREE_H

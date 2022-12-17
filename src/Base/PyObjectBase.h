@@ -205,6 +205,9 @@ protected:
     void setTwinPointer(void* ptr) {
         _pcTwinPointer = ptr;
     }
+    void *getTwinPointer() const {
+        return _pcTwinPointer;
+    }
 
 public:
     /** Constructor

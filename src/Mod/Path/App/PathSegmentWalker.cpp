@@ -218,6 +218,8 @@ void PathSegmentWalker::walk(PathSegmentVisitor &cb, const Base::Vector3d &start
             center0.*pz = 0.0;
             //double radius = (last - center).Length();
             double angle = (next0 - center0).GetAngle(last0 - center0);
+            if (std::isnan(angle))
+                angle = 0;
             // GetAngle will always return the minor angle. Switch if needed
             Base::Vector3d anorm = (last0 - center0) % (next0 - center0);
             if (anorm.*pz < 0) {

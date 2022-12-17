@@ -164,6 +164,8 @@ public:
 
     virtual void updateColors(App::Document *sourceDoc=0, bool forceColorMap=false) override;
 
+    virtual void checkColorUpdate() override;
+
     static std::vector<App::Color> getShapeColors(const Part::TopoShape &shape, App::Color &defColor,
             App::Document *sourceDoc=0, bool linkOnly=false);
 
@@ -216,6 +218,11 @@ protected:
     SoNormalBinding   * normb;
     SoBrepEdgeSet     * lineset;
     SoBrepPointSet    * nodeset;
+    
+    Gui::CoinPtr<SoGroup>  pFaceRoot;
+    Gui::CoinPtr<SoGroup>  pFaceEdgeRoot;
+    Gui::CoinPtr<SoGroup>  pEdgeRoot;
+    Gui::CoinPtr<SoGroup>  pVertexRoot;
 
     bool VisualTouched;
     bool NormalsFromUV;
