@@ -19,12 +19,12 @@
     <message>
       <location filename="../../addonmanager_workers.py" line="172"/>
       <source>Workbenches list was updated.</source>
-      <translation type="unfinished">Workbenches list was updated.</translation>
+      <translation>Список рабочих окружений обновлен.</translation>
     </message>
     <message>
       <location filename="../../addonmanager_workers.py" line="736"/>
       <source>Outdated GitPython detected, consider upgrading with pip.</source>
-      <translation type="unfinished">Outdated GitPython detected, consider upgrading with pip.</translation>
+      <translation>Обнаружен устаревший GitPython, рассмотрите обновление с помощью pip.</translation>
     </message>
     <message>
       <location filename="../../addonmanager_workers.py" line="296"/>
@@ -99,12 +99,12 @@
     <message>
       <location filename="../../addonmanager_workers.py" line="653"/>
       <source>Retrieving info from git</source>
-      <translation type="unfinished">Retrieving info from git</translation>
+      <translation>Получение информации из git</translation>
     </message>
     <message>
       <location filename="../../addonmanager_workers.py" line="656"/>
       <source>Retrieving info from wiki</source>
-      <translation type="unfinished">Retrieving info from wiki</translation>
+      <translation>Получение информации из вики</translation>
     </message>
     <message>
       <location filename="../../addonmanager_workers.py" line="663"/>
@@ -129,7 +129,7 @@
     <message>
       <location filename="../../addonmanager_workers.py" line="760"/>
       <source>Workbench successfully updated. Please restart FreeCAD to apply the changes.</source>
-      <translation type="unfinished">Workbench successfully updated. Please restart FreeCAD to apply the changes.</translation>
+      <translation>Верстак успешно обновлен. Перезапустите FreeCAD, чтобы применить изменения.</translation>
     </message>
     <message>
       <location filename="../../addonmanager_workers.py" line="768"/>
@@ -139,12 +139,12 @@
     <message>
       <location filename="../../addonmanager_workers.py" line="782"/>
       <source>Workbench successfully installed. Please restart FreeCAD to apply the changes.</source>
-      <translation type="unfinished">Workbench successfully installed. Please restart FreeCAD to apply the changes.</translation>
+      <translation>Рабочее окружение успешно установлено. Пожалуйста, перезапустите FreeCAD для применения изменений.</translation>
     </message>
     <message>
       <location filename="../../addonmanager_workers.py" line="796"/>
       <source>A macro has been installed and is available under Macro -&gt; Macros menu</source>
-      <translation type="unfinished">A macro has been installed and is available under Macro -&gt; Macros menu</translation>
+      <translation>Макрос установлен и доступен меню Макросы -&gt; макрос</translation>
     </message>
     <message>
       <location filename="../../addonmanager_workers.py" line="835"/>
@@ -189,7 +189,7 @@
     <message>
       <location filename="../../addonmanager_macro.py" line="157"/>
       <source>Unable to fetch the code of this macro.</source>
-      <translation type="unfinished">Unable to fetch the code of this macro.</translation>
+      <translation>Не удается получить код этого макроса.</translation>
     </message>
     <message>
       <location filename="../../addonmanager_macro.py" line="163"/>
@@ -199,12 +199,12 @@
     <message>
       <location filename="../../AddonManager.py" line="80"/>
       <source>The addons that can be installed here are not officially part of FreeCAD, and are not reviewed by the FreeCAD team. Make sure you know what you are installing!</source>
-      <translation type="unfinished">The addons that can be installed here are not officially part of FreeCAD, and are not reviewed by the FreeCAD team. Make sure you know what you are installing!</translation>
+      <translation>Дополнения, которые могут быть установлены отсюда, официально не являются частью FreeCAD и не проверяются командой FreeCAD. Убедитесь, что вы знаете, что устанавливаете!</translation>
     </message>
     <message>
       <location filename="../../AddonManager.py" line="199"/>
       <source>Addon manager</source>
-      <translation type="unfinished">Addon manager</translation>
+      <translation>Менеджер дополнений</translation>
     </message>
     <message>
       <location filename="../../AddonManager.py" line="201"/>
@@ -224,12 +224,12 @@
     <message>
       <location filename="../../AddonManager.py" line="246"/>
       <source>Checking for updates...</source>
-      <translation type="unfinished">Checking for updates...</translation>
+      <translation>Проверка обновлений...</translation>
     </message>
     <message>
       <location filename="../../AddonManager.py" line="264"/>
       <source>Apply</source>
-      <translation type="unfinished">Apply</translation>
+      <translation>Применить</translation>
     </message>
     <message>
       <location filename="../../AddonManager.py" line="264"/>
@@ -244,12 +244,12 @@
     <message>
       <location filename="../../AddonManager.py" line="567"/>
       <source>Installed</source>
-      <translation type="unfinished">Installed</translation>
+      <translation>Установлен</translation>
     </message>
     <message>
       <location filename="../../AddonManager.py" line="434"/>
       <source>Macro successfully installed. The macro is now available from the Macros dialog.</source>
-      <translation type="unfinished">Macro successfully installed. The macro is now available from the Macros dialog.</translation>
+      <translation>Макрос успешно установлен. Макрос теперь доступен в диалоге Макросы.</translation>
     </message>
     <message>
       <location filename="../../AddonManager.py" line="438"/>
@@ -279,7 +279,7 @@
     <message>
       <location filename="../../AddonManager.py" line="589"/>
       <source>Update available</source>
-      <translation type="unfinished">Update available</translation>
+      <translation>Доступно обновление</translation>
     </message>
     <message>
       <location filename="../../AddonManager.py" line="545"/>
@@ -292,7 +292,7 @@
     <message>
       <location filename="../../AddonManager.py" line="68"/>
       <source>&amp;Addon manager</source>
-      <translation type="unfinished">&amp;Addon manager</translation>
+      <translation>&amp;Менеджер дополнений</translation>
     </message>
     <message>
       <location filename="../../AddonManager.py" line="69"/>
@@ -305,17 +305,17 @@
     <message>
       <location filename="../../AddonManager.ui" line="14"/>
       <source>Addon Manager</source>
-      <translation type="unfinished">Addon Manager</translation>
+      <translation>Менеджер дополнений</translation>
     </message>
     <message>
       <location filename="../../AddonManager.ui" line="37"/>
       <source>Workbenches</source>
-      <translation type="unfinished">Workbenches</translation>
+      <translation>Рабочие окружения</translation>
     </message>
     <message>
       <location filename="../../AddonManager.ui" line="47"/>
       <source>Macros</source>
-      <translation type="unfinished">Macros</translation>
+      <translation>Макрос</translation>
     </message>
     <message>
       <location filename="../../AddonManager.ui" line="56"/>
@@ -325,7 +325,7 @@
     <message>
       <location filename="../../AddonManager.ui" line="59"/>
       <source>Execute</source>
-      <translation type="unfinished">Execute</translation>
+      <translation>Выполнить</translation>
     </message>
     <message>
       <location filename="../../AddonManager.ui" line="89"/>
@@ -340,12 +340,12 @@
     <message>
       <location filename="../../AddonManager.ui" line="113"/>
       <source>Downloading info...</source>
-      <translation type="unfinished">Downloading info...</translation>
+      <translation>Загрузка информации...</translation>
     </message>
     <message>
       <location filename="../../AddonManager.ui" line="127"/>
       <source>Uninstalls a selected macro or workbench</source>
-      <translation type="unfinished">Uninstalls a selected macro or workbench</translation>
+      <translation>Удаление выбранного макроса или рабочего окружения</translation>
     </message>
     <message>
       <location filename="../../AddonManager.ui" line="130"/>
@@ -365,7 +365,7 @@
     <message>
       <location filename="../../AddonManager.ui" line="147"/>
       <source>Download and apply all available updates</source>
-      <translation type="unfinished">Download and apply all available updates</translation>
+      <translation>Скачать и применить все доступные обновления</translation>
     </message>
     <message>
       <location filename="../../AddonManager.ui" line="150"/>
@@ -375,7 +375,7 @@
     <message>
       <location filename="../../AddonManager.ui" line="157"/>
       <source>Close the Addon Manager</source>
-      <translation type="unfinished">Close the Addon Manager</translation>
+      <translation>Закрыть Менеджер дополнений</translation>
     </message>
     <message>
       <location filename="../../AddonManager.ui" line="160"/>
@@ -385,26 +385,24 @@
     <message>
       <location filename="../../AddonManagerOptions.ui" line="14"/>
       <source>Addon manager options</source>
-      <translation type="unfinished">Addon manager options</translation>
+      <translation>Настройки менеджера дополнений</translation>
     </message>
     <message>
       <location filename="../../AddonManagerOptions.ui" line="20"/>
       <source>If this option is selected, when launching the Addon Manager,
 installed addons will be checked for available updates
 (this requires the GitPython package installed on your system)</source>
-      <translation type="unfinished">If this option is selected, when launching the Addon Manager,
-installed addons will be checked for available updates
-(this requires the GitPython package installed on your system)</translation>
+      <translation>Если эта опция выбрана, при запуске менеджера дополнений, установленные дополнения будут проверены на наличие доступных обновлений (требуется пакет GitPython, установленный в вашей системе)</translation>
     </message>
     <message>
       <location filename="../../AddonManagerOptions.ui" line="25"/>
       <source>Automatically check for updates at start (requires GitPython)</source>
-      <translation type="unfinished">Automatically check for updates at start (requires GitPython)</translation>
+      <translation>Автоматически проверять обновления при запуске (требуется GitPython)</translation>
     </message>
     <message>
       <location filename="../../AddonManagerOptions.ui" line="35"/>
       <source>Custom repositories (one per line):</source>
-      <translation type="unfinished">Custom repositories (one per line):</translation>
+      <translation>Дополнительные репозитории (один в строке):</translation>
     </message>
     <message>
       <location filename="../../AddonManagerOptions.ui" line="42"/>
@@ -421,12 +419,12 @@ to be scanned for available addons</source>
     <message>
       <location filename="../../AddonManagerOptions.ui" line="64"/>
       <source>No proxy</source>
-      <translation type="unfinished">No proxy</translation>
+      <translation>Нет</translation>
     </message>
     <message>
       <location filename="../../AddonManagerOptions.ui" line="71"/>
       <source>User system proxy</source>
-      <translation type="unfinished">User system proxy</translation>
+      <translation>Системный прокси-сервер пользователя</translation>
     </message>
     <message>
       <location filename="../../AddonManagerOptions.ui" line="78"/>
