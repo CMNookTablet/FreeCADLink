@@ -4,14 +4,18 @@
 <context>
     <name>CmdMeshAddFacet</name>
     <message>
+        <location filename="../../Command.cpp" line="847"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="848"/>
         <source>Add triangle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="849"/>
+        <location filename="../../Command.cpp" line="851"/>
         <source>Add triangle manually to a mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19,14 +23,18 @@
 <context>
     <name>CmdMeshBoundingBox</name>
     <message>
+        <location filename="../../Command.cpp" line="1562"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1563"/>
         <source>Boundings info...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1564"/>
+        <location filename="../../Command.cpp" line="1566"/>
         <source>Shows the boundings of the selected mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -34,14 +42,18 @@
 <context>
     <name>CmdMeshBuildRegularSolid</name>
     <message>
+        <location filename="../../Command.cpp" line="1604"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1605"/>
         <source>Regular solid...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1606"/>
+        <location filename="../../Command.cpp" line="1608"/>
         <source>Builds a regular solid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49,14 +61,18 @@
 <context>
     <name>CmdMeshCrossSections</name>
     <message>
+        <location filename="../../Command.cpp" line="1074"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1075"/>
         <source>Cross-sections...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1076"/>
+        <location filename="../../Command.cpp" line="1077"/>
         <source>Cross-sections</source>
         <translation type="unfinished"></translation>
     </message>
@@ -64,14 +80,19 @@
 <context>
     <name>CmdMeshDecimating</name>
     <message>
+        <location filename="../../Command.cpp" line="1463"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1464"/>
         <source>Decimation...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1465"/>
+        <location filename="../../Command.cpp" line="1466"/>
+        <location filename="../../Command.cpp" line="1467"/>
         <source>Decimates a mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -79,10 +100,12 @@
 <context>
     <name>CmdMeshDemolding</name>
     <message>
+        <location filename="../../Command.cpp" line="133"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="134"/>
         <source>Interactive demolding direction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -90,10 +113,12 @@
 <context>
     <name>CmdMeshDifference</name>
     <message>
+        <location filename="../../Command.cpp" line="298"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="299"/>
         <source>Difference</source>
         <translation type="unfinished"></translation>
     </message>
@@ -101,14 +126,18 @@
 <context>
     <name>CmdMeshEvaluateFacet</name>
     <message>
+        <location filename="../../Command.cpp" line="1197"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1198"/>
         <source>Face info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1199"/>
+        <location filename="../../Command.cpp" line="1201"/>
         <source>Information about face</source>
         <translation type="unfinished"></translation>
     </message>
@@ -116,14 +145,18 @@
 <context>
     <name>CmdMeshEvaluateSolid</name>
     <message>
+        <location filename="../../Command.cpp" line="1362"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1363"/>
         <source>Check solid mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1364"/>
+        <location filename="../../Command.cpp" line="1366"/>
         <source>Checks whether the mesh is a solid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -131,14 +164,18 @@
 <context>
     <name>CmdMeshEvaluation</name>
     <message>
+        <location filename="../../Command.cpp" line="1154"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1156"/>
         <source>Evaluate and repair mesh...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1157"/>
+        <location filename="../../Command.cpp" line="1159"/>
         <source>Opens a dialog to analyze and repair a mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -146,14 +183,18 @@
 <context>
     <name>CmdMeshExport</name>
     <message>
+        <location filename="../../Command.cpp" line="490"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="491"/>
         <source>Export mesh...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="492"/>
+        <location filename="../../Command.cpp" line="494"/>
         <source>Exports a mesh to file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -161,14 +202,18 @@
 <context>
     <name>CmdMeshFillInteractiveHole</name>
     <message>
+        <location filename="../../Command.cpp" line="1673"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1674"/>
         <source>Close hole</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1675"/>
+        <location filename="../../Command.cpp" line="1677"/>
         <source>Close holes interactively</source>
         <translation type="unfinished"></translation>
     </message>
@@ -176,14 +221,18 @@
 <context>
     <name>CmdMeshFillupHoles</name>
     <message>
+        <location filename="../../Command.cpp" line="1635"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1636"/>
         <source>Fill holes...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1637"/>
+        <location filename="../../Command.cpp" line="1639"/>
         <source>Fill holes of the mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -191,14 +240,18 @@
 <context>
     <name>CmdMeshFlipNormals</name>
     <message>
+        <location filename="../../Command.cpp" line="1528"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1529"/>
         <source>Flip normals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1530"/>
+        <location filename="../../Command.cpp" line="1532"/>
         <source>Flips the normals of the mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -206,14 +259,18 @@
 <context>
     <name>CmdMeshFromGeometry</name>
     <message>
+        <location filename="../../Command.cpp" line="565"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="566"/>
         <source>Create mesh from geometry...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="567"/>
+        <location filename="../../Command.cpp" line="569"/>
         <source>Create mesh from the selected geometry</source>
         <translation type="unfinished"></translation>
     </message>
@@ -221,14 +278,17 @@
 <context>
     <name>CmdMeshFromPartShape</name>
     <message>
+        <location filename="../../Command.cpp" line="623"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="624"/>
         <source>Create mesh from shape...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="625"/>
         <source>Tessellate shape</source>
         <translation type="unfinished"></translation>
     </message>
@@ -236,14 +296,18 @@
 <context>
     <name>CmdMeshHarmonizeNormals</name>
     <message>
+        <location filename="../../Command.cpp" line="1494"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1495"/>
         <source>Harmonize normals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1496"/>
+        <location filename="../../Command.cpp" line="1498"/>
         <source>Harmonizes the normals of the mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -251,14 +315,18 @@
 <context>
     <name>CmdMeshImport</name>
     <message>
+        <location filename="../../Command.cpp" line="440"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="441"/>
         <source>Import mesh...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="442"/>
+        <location filename="../../Command.cpp" line="444"/>
         <source>Imports a mesh from file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -266,10 +334,12 @@
 <context>
     <name>CmdMeshIntersection</name>
     <message>
+        <location filename="../../Command.cpp" line="369"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="370"/>
         <source>Intersection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -277,14 +347,17 @@
 <context>
     <name>CmdMeshMerge</name>
     <message>
+        <location filename="../../Command.cpp" line="1787"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1788"/>
         <source>Merge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1789"/>
         <source>Merges selected meshes into one</source>
         <translation type="unfinished"></translation>
     </message>
@@ -292,14 +365,18 @@
 <context>
     <name>CmdMeshPolyCut</name>
     <message>
+        <location filename="../../Command.cpp" line="894"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="895"/>
         <source>Cut mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="896"/>
+        <location filename="../../Command.cpp" line="898"/>
         <source>Cuts a mesh with a picked polygon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -307,14 +384,18 @@
 <context>
     <name>CmdMeshPolySegm</name>
     <message>
+        <location filename="../../Command.cpp" line="738"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="739"/>
         <source>Make segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="740"/>
+        <location filename="../../Command.cpp" line="742"/>
         <source>Creates a mesh segment</source>
         <translation type="unfinished"></translation>
     </message>
@@ -322,14 +403,18 @@
 <context>
     <name>CmdMeshPolySelect</name>
     <message>
+        <location filename="../../Command.cpp" line="794"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="795"/>
         <source>Select mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="796"/>
+        <location filename="../../Command.cpp" line="798"/>
         <source>Select an area of the mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -337,14 +422,18 @@
 <context>
     <name>CmdMeshPolySplit</name>
     <message>
+        <location filename="../../Command.cpp" line="1100"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1101"/>
         <source>Split mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1102"/>
+        <location filename="../../Command.cpp" line="1104"/>
         <source>Splits a mesh into two meshes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -352,14 +441,18 @@
 <context>
     <name>CmdMeshPolyTrim</name>
     <message>
+        <location filename="../../Command.cpp" line="955"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="956"/>
         <source>Trim mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="957"/>
+        <location filename="../../Command.cpp" line="959"/>
         <source>Trims a mesh with a picked polygon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -367,14 +460,18 @@
 <context>
     <name>CmdMeshRemeshGmsh</name>
     <message>
+        <location filename="../../Command.cpp" line="1285"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1286"/>
         <source>Refinement...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1287"/>
+        <location filename="../../Command.cpp" line="1288"/>
         <source>Refine existing mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -382,14 +479,18 @@
 <context>
     <name>CmdMeshRemoveCompByHand</name>
     <message>
+        <location filename="../../Command.cpp" line="1318"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1319"/>
         <source>Remove components by hand...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1320"/>
+        <location filename="../../Command.cpp" line="1322"/>
         <source>Mark a component to remove it from the mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -397,14 +498,18 @@
 <context>
     <name>CmdMeshRemoveComponents</name>
     <message>
+        <location filename="../../Command.cpp" line="1240"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1241"/>
         <source>Remove components...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1242"/>
+        <location filename="../../Command.cpp" line="1244"/>
         <source>Remove topologic independent components from the mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -412,14 +517,17 @@
 <context>
     <name>CmdMeshScale</name>
     <message>
+        <location filename="../../Command.cpp" line="1876"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1877"/>
         <source>Scale...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1878"/>
         <source>Scale selected meshes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -427,14 +535,18 @@
 <context>
     <name>CmdMeshSectionByPlane</name>
     <message>
+        <location filename="../../Command.cpp" line="1045"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1046"/>
         <source>Create section from mesh and plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1047"/>
+        <location filename="../../Command.cpp" line="1048"/>
         <source>Section from mesh and plane</source>
         <translation type="unfinished"></translation>
     </message>
@@ -442,14 +554,18 @@
 <context>
     <name>CmdMeshSegmentation</name>
     <message>
+        <location filename="../../Command.cpp" line="1715"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1716"/>
         <source>Create mesh segments...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1717"/>
+        <location filename="../../Command.cpp" line="1719"/>
         <source>Create mesh segments</source>
         <translation type="unfinished"></translation>
     </message>
@@ -457,14 +573,18 @@
 <context>
     <name>CmdMeshSegmentationBestFit</name>
     <message>
+        <location filename="../../Command.cpp" line="1751"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1752"/>
         <source>Create mesh segments from best-fit surfaces...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1753"/>
+        <location filename="../../Command.cpp" line="1755"/>
         <source>Create mesh segments from best-fit surfaces</source>
         <translation type="unfinished"></translation>
     </message>
@@ -472,14 +592,18 @@
 <context>
     <name>CmdMeshSmoothing</name>
     <message>
+        <location filename="../../Command.cpp" line="1400"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1401"/>
         <source>Smooth...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1402"/>
+        <location filename="../../Command.cpp" line="1404"/>
         <source>Smooth the selected meshes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -487,14 +611,17 @@
 <context>
     <name>CmdMeshSplitComponents</name>
     <message>
+        <location filename="../../Command.cpp" line="1830"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1831"/>
         <source>Split by components</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1832"/>
         <source>Split selected mesh into its components</source>
         <translation type="unfinished"></translation>
     </message>
@@ -502,14 +629,18 @@
 <context>
     <name>CmdMeshToolMesh</name>
     <message>
+        <location filename="../../Command.cpp" line="172"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="173"/>
         <source>Segment by tool mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="174"/>
+        <location filename="../../Command.cpp" line="176"/>
         <source>Creates a segment from a given tool mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -517,14 +648,18 @@
 <context>
     <name>CmdMeshTransform</name>
     <message>
+        <location filename="../../Command.cpp" line="94"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="95"/>
         <source>Transform mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="96"/>
+        <location filename="../../Command.cpp" line="98"/>
         <source>Rotate or move a mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -532,14 +667,18 @@
 <context>
     <name>CmdMeshTrimByPlane</name>
     <message>
+        <location filename="../../Command.cpp" line="1016"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1017"/>
         <source>Trim mesh with a plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1018"/>
+        <location filename="../../Command.cpp" line="1019"/>
         <source>Trims a mesh with a plane</source>
         <translation type="unfinished"></translation>
     </message>
@@ -547,10 +686,12 @@
 <context>
     <name>CmdMeshUnion</name>
     <message>
+        <location filename="../../Command.cpp" line="227"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="228"/>
         <source>Union</source>
         <translation type="unfinished"></translation>
     </message>
@@ -558,14 +699,18 @@
 <context>
     <name>CmdMeshVertexCurvature</name>
     <message>
+        <location filename="../../Command.cpp" line="649"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="650"/>
         <source>Curvature plot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="651"/>
+        <location filename="../../Command.cpp" line="653"/>
         <source>Calculates the curvature of the vertices of a mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -573,14 +718,18 @@
 <context>
     <name>CmdMeshVertexCurvatureInfo</name>
     <message>
+        <location filename="../../Command.cpp" line="692"/>
         <source>Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="693"/>
         <source>Curvature info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="694"/>
+        <location filename="../../Command.cpp" line="696"/>
         <source>Information about curvature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -588,126 +737,161 @@
 <context>
     <name>Command</name>
     <message>
+        <location filename="../../Command.cpp" line="110"/>
+        <location filename="../../Command.cpp" line="149"/>
         <source>Mesh Create</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="188"/>
         <source>Segment by tool mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="243"/>
         <source>Mesh union</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="312"/>
         <source>Mesh difference</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="383"/>
         <source>Mesh intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="468"/>
         <source>Import Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="665"/>
         <source>Mesh VertexCurvature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.cpp" line="178"/>
+        <location filename="../../Command.cpp" line="1414"/>
         <source>Mesh Smoothing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1505"/>
         <source>Harmonize mesh normals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1539"/>
         <source>Flip mesh normals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1650"/>
         <source>Fill up holes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1801"/>
         <source>Mesh merge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1844"/>
         <source>Mesh split</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1896"/>
         <source>Mesh scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgDecimating.cpp" line="147"/>
         <source>Mesh Decimating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="484"/>
         <source>Harmonize normals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="587"/>
         <source>Remove non-manifolds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="686"/>
         <source>Fix indices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="752"/>
         <source>Remove degenerated faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="819"/>
         <source>Remove duplicated faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="884"/>
         <source>Remove duplicated points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="968"/>
         <source>Fix self-intersections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="1055"/>
         <source>Remove folds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="1095"/>
         <source>Repair mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.cpp" line="130"/>
         <source>Delete selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="890"/>
+        <location filename="../../ViewProvider.cpp" line="945"/>
         <source>Cut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="899"/>
+        <location filename="../../ViewProvider.cpp" line="1006"/>
         <source>Trim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1083"/>
         <source>Split</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1147"/>
         <source>Segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1742"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1849"/>
         <source>Fill hole</source>
         <translation type="unfinished"></translation>
     </message>
@@ -715,30 +899,38 @@
 <context>
     <name>MeshGui::DlgDecimating</name>
     <message>
+        <location filename="../../DlgDecimating.ui" line="14"/>
         <source>Decimating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgDecimating.ui" line="20"/>
         <source>Reduction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgDecimating.ui" line="28"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgDecimating.ui" line="57"/>
         <source>Full</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgDecimating.ui" line="66"/>
+        <location filename="../../DlgDecimating.cpp" line="91"/>
         <source>Absolute number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgDecimating.ui" line="102"/>
         <source>Tolerance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgDecimating.cpp" line="85"/>
         <source>Absolute number (Maximum: %1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -746,78 +938,123 @@
 <context>
     <name>MeshGui::DlgEvaluateMesh</name>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="14"/>
         <source>Evaluate &amp; Repair Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="23"/>
         <source>Mesh information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="43"/>
         <source>Number of points:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="50"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="67"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="116"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="211"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="291"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="371"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="451"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="531"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="611"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="691"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="753"/>
         <source>No information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="60"/>
         <source>Number of faces:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="77"/>
         <source>Number of edges:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="160"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="187"/>
         <source>Orientation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="234"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="314"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="394"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="474"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="554"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="634"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="714"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="773"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="853"/>
         <source>Analyze</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="244"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="324"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="404"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="484"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="564"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="644"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="724"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="783"/>
+        <location filename="../../DlgEvaluateMesh.ui" line="863"/>
         <source>Repair</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="267"/>
         <source>Duplicated faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="347"/>
         <source>Duplicated points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="427"/>
         <source>Non-manifolds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="507"/>
         <source>Degenerated faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="587"/>
         <source>Face indices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="667"/>
         <source>Self-intersections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="735"/>
         <source>Folds on surface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="806"/>
         <source>All above tests together</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMesh.ui" line="830"/>
         <source>Repetitive repair</source>
         <translation type="unfinished"></translation>
     </message>
@@ -825,131 +1062,179 @@
 <context>
     <name>MeshGui::DlgEvaluateMeshImp</name>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="151"/>
         <source>Settings...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="187"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="348"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="375"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="376"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="377"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="378"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="379"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="380"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="381"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="382"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="383"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="384"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="385"/>
         <source>No information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="447"/>
         <source>Flipped normals found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="451"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="491"/>
         <source>Orientation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="452"/>
         <source>Check failed due to folds on the surface.
 Please run the command to repair folds first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="460"/>
         <source>No flipped normals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="466"/>
         <source>%1 flipped normals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="546"/>
         <source>No non-manifolds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="553"/>
         <source>%1 non-manifolds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="600"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="603"/>
         <source>Non-manifolds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="603"/>
         <source>Cannot remove non-manifolds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="641"/>
         <source>Invalid face indices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="648"/>
         <source>Invalid point indices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="655"/>
         <source>Multiple point indices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="662"/>
         <source>Invalid neighbour indices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="669"/>
         <source>No invalid indices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="693"/>
         <source>Indices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="728"/>
         <source>No degenerations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="734"/>
         <source>%1 degenerated faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="759"/>
         <source>Degenerations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="794"/>
         <source>No duplicated faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="800"/>
         <source>%1 duplicated faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="826"/>
         <source>Duplicated faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="860"/>
         <source>No duplicated points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="866"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="891"/>
         <source>Duplicated points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="932"/>
         <source>No self-intersections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="938"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="976"/>
         <source>Self-intersections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="1020"/>
         <source>No folds on surface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="1036"/>
         <source>%1 folds on surface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="1062"/>
         <source>Folds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="1194"/>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="1197"/>
         <source>Mesh repair</source>
         <translation type="unfinished"></translation>
     </message>
@@ -957,22 +1242,27 @@ Please run the command to repair folds first</source>
 <context>
     <name>MeshGui::DlgEvaluateSettings</name>
     <message>
+        <location filename="../../DlgEvaluateSettings.ui" line="14"/>
         <source>Evaluation settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateSettings.ui" line="20"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateSettings.ui" line="26"/>
         <source>Check for non-manifold points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateSettings.ui" line="33"/>
         <source>Enable check for folds on surface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgEvaluateSettings.ui" line="40"/>
         <source>Only consider zero area faces as degenerated</source>
         <translation type="unfinished"></translation>
     </message>
@@ -980,86 +1270,120 @@ Please run the command to repair folds first</source>
 <context>
     <name>MeshGui::DlgRegularSolid</name>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="14"/>
         <source>Regular Solid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="53"/>
         <source>&amp;Create</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="56"/>
         <source>Alt+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="69"/>
         <source>Cl&amp;ose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="72"/>
         <source>Alt+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="84"/>
         <source>Solid:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="97"/>
         <source>Cube</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="106"/>
         <source>Cylinder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="115"/>
         <source>Cone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="124"/>
         <source>Sphere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="133"/>
         <source>Ellipsoid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="142"/>
         <source>Torus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="175"/>
         <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="211"/>
+        <location filename="../../DlgRegularSolid.ui" line="301"/>
+        <location filename="../../DlgRegularSolid.ui" line="418"/>
         <source>Length:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="231"/>
         <source>Width:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="274"/>
+        <location filename="../../DlgRegularSolid.ui" line="556"/>
         <source>Radius:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="328"/>
+        <location filename="../../DlgRegularSolid.ui" line="496"/>
         <source>Closed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="345"/>
+        <location filename="../../DlgRegularSolid.ui" line="489"/>
+        <location filename="../../DlgRegularSolid.ui" line="593"/>
+        <location filename="../../DlgRegularSolid.ui" line="697"/>
+        <location filename="../../DlgRegularSolid.ui" line="801"/>
         <source>Sampling:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="352"/>
+        <location filename="../../DlgRegularSolid.ui" line="513"/>
         <source>Edge length:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="435"/>
+        <location filename="../../DlgRegularSolid.ui" line="670"/>
+        <location filename="../../DlgRegularSolid.ui" line="754"/>
         <source>Radius 1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolid.ui" line="442"/>
+        <location filename="../../DlgRegularSolid.ui" line="653"/>
+        <location filename="../../DlgRegularSolid.ui" line="747"/>
         <source>Radius 2:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1067,10 +1391,14 @@ Please run the command to repair folds first</source>
 <context>
     <name>MeshGui::DlgRegularSolidImp</name>
     <message>
+        <location filename="../../DlgRegularSolidImp.cpp" line="127"/>
+        <location filename="../../DlgRegularSolidImp.cpp" line="212"/>
+        <location filename="../../DlgRegularSolidImp.cpp" line="220"/>
         <source>Create %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgRegularSolidImp.cpp" line="127"/>
         <source>No active document</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1078,46 +1406,57 @@ Please run the command to repair folds first</source>
 <context>
     <name>MeshGui::DlgSettingsImportExport</name>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="14"/>
         <source>Mesh Formats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="20"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="28"/>
         <source>Maximal deviation between mesh and object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="50"/>
         <source>Deviation of tessellation to the actual surface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="53"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Tessellation&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Defines the maximum deviation of the tessellated mesh to the surface. The smaller the value is the slower the render speed which results in increased detail/resolution.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="56"/>
         <source>Maximum mesh deviation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="63"/>
         <source>ZIP compression is used when writing a mesh file in AMF format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="66"/>
         <source>Export AMF files using compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="95"/>
         <source>Width:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExport.ui" line="119"/>
         <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsImportExportImp.cpp" line="37"/>
         <source>This parameter indicates whether ZIP compression
 is used when writing a file in AMF format</source>
         <translation type="unfinished"></translation>
@@ -1126,46 +1465,58 @@ is used when writing a file in AMF format</source>
 <context>
     <name>MeshGui::DlgSettingsMeshView</name>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="14"/>
         <source>Mesh view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="35"/>
         <source>Default appearance for new meshes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="193"/>
         <source>Default line color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="236"/>
         <source>Mesh transparency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="216"/>
         <source>Default color for new meshes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="200"/>
+        <location filename="../../DlgSettingsMeshView.ui" line="250"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="266"/>
         <source>Default mesh color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="89"/>
         <source>A bounding box will be displayed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="92"/>
         <source>Show bounding-box for highlighted or selected meshes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="108"/>
         <source>Default line color for new meshes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="128"/>
         <source>The bottom side of surface will be rendered the same way than top side.
 If not checked, it depends on the option &quot;Enable backlight color&quot;
 (preferences section Display -&gt; 3D View). Either the backlight color
@@ -1173,30 +1524,70 @@ will be used or black.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="134"/>
         <source>Two-side rendering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="243"/>
         <source>Line transparency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="150"/>
         <source>Backface color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="273"/>
+        <source>Shape type hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="296"/>
+        <source>Specify the default shape type hint of a newly created mesh object.
+You can later on change the view object property of any mesh object.
+Note that the section filling function when using clip plane only works
+for &apos;Solid&apos; shape type.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="302"/>
+        <source>Mod/Mesh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="305"/>
+        <source>DefaultShapeType</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="309"/>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="314"/>
+        <source>Solid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="343"/>
         <source>Smoothing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="364"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;This is the smallest angle between two faces where normals get calculated to do flat shading.&lt;/p&gt;&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;If the angle between the normals of two neighbouring faces is less than the crease angle, the faces will be smoothshaded around their common edge.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="367"/>
         <source>Crease angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="374"/>
         <source>If this option is set Phong shading is used, otherwise flat shading.
 Shading defines the appearance of surfaces.
 
@@ -1207,10 +1598,12 @@ to a smoother appearance.
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="383"/>
         <source>Define normal per vertex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="412"/>
         <source>Crease angle is a threshold angle between two faces.
 
  If face angle ≥ crease angle, facet shading is used
@@ -1218,10 +1611,12 @@ to a smoother appearance.
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="418"/>
         <source> °</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSettingsMeshView.ui" line="434"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Hint&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;Defining the normals per vertex is also called &lt;span style=&quot; font-style:italic;&quot;&gt;Phong shading&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-style:italic;&quot;&gt;&lt;span style=&quot; font-style:normal;&quot;&gt;while defining the normals per face is called &lt;/span&gt;Flat shading&lt;span style=&quot; font-style:normal;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1229,38 +1624,47 @@ to a smoother appearance.
 <context>
     <name>MeshGui::DlgSmoothing</name>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="14"/>
         <source>Smoothing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="23"/>
         <source>Method</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="29"/>
         <source>Taubin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="39"/>
         <source>Laplace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="49"/>
         <source>Parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="55"/>
         <source>Iterations:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="72"/>
         <source>Lambda:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="95"/>
         <source>Mu:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../DlgSmoothing.ui" line="118"/>
         <source>Only selection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1268,38 +1672,48 @@ to a smoother appearance.
 <context>
     <name>MeshGui::GmshWidget</name>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="107"/>
         <source>Automatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="108"/>
         <source>Adaptive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="110"/>
         <source>Frontal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="112"/>
         <source>Frontal Quad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="113"/>
         <source>Parallelograms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="184"/>
+        <location filename="../../RemeshGmsh.cpp" line="240"/>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="229"/>
         <source>Running gmsh...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="251"/>
         <source>Failed to start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.cpp" line="258"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1307,18 +1721,22 @@ to a smoother appearance.
 <context>
     <name>MeshGui::MeshFaceAddition</name>
     <message>
+        <location filename="../../MeshEditor.cpp" line="379"/>
         <source>Add triangle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../MeshEditor.cpp" line="380"/>
         <source>Flip normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../MeshEditor.cpp" line="381"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../MeshEditor.cpp" line="396"/>
         <source>Finish</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1326,6 +1744,7 @@ to a smoother appearance.
 <context>
     <name>MeshGui::MeshFillHole</name>
     <message>
+        <location filename="../../MeshEditor.cpp" line="729"/>
         <source>Finish</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1333,38 +1752,47 @@ to a smoother appearance.
 <context>
     <name>MeshGui::ParametersDialog</name>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="159"/>
         <source>Surface fit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="166"/>
         <source>Parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="171"/>
         <source>Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="179"/>
         <source>Region</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="185"/>
         <source>Triangle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="191"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="197"/>
         <source>Compute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="285"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="285"/>
         <source>Before fitting the surface select an area.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1372,46 +1800,57 @@ to a smoother appearance.
 <context>
     <name>MeshGui::RemeshGmsh</name>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="14"/>
         <source>Remesh by gmsh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="26"/>
         <source>Remeshing Parameter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="32"/>
         <source>Meshing:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="42"/>
         <source>Max element size (0.0 = Auto):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="68"/>
         <source>Min element size (0.0 = Auto):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="94"/>
         <source>Angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="126"/>
         <source>Gmsh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="134"/>
         <source>Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="154"/>
         <source>Kill</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="181"/>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemeshGmsh.ui" line="188"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1419,58 +1858,76 @@ to a smoother appearance.
 <context>
     <name>MeshGui::RemoveComponents</name>
     <message>
+        <location filename="../../RemoveComponents.ui" line="14"/>
         <source>Remove components</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="20"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="32"/>
         <source>Select whole component</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="39"/>
+        <location filename="../../RemoveComponents.ui" line="125"/>
         <source>Pick triangle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="49"/>
         <source>&lt; faces than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="56"/>
+        <location filename="../../RemoveComponents.ui" line="155"/>
         <source>Region</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="63"/>
+        <location filename="../../RemoveComponents.ui" line="182"/>
         <source>Components</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="83"/>
+        <location filename="../../RemoveComponents.ui" line="175"/>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="106"/>
         <source>Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="118"/>
         <source>Deselect whole component</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="135"/>
         <source>&gt; faces than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="192"/>
         <source>Region options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="198"/>
         <source>Respect only visible triangles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.ui" line="208"/>
         <source>Respect only triangles with normals facing screen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1478,54 +1935,74 @@ to a smoother appearance.
 <context>
     <name>MeshGui::Segmentation</name>
     <message>
+        <location filename="../../Segmentation.ui" line="14"/>
         <source>Mesh segmentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="20"/>
         <source>Smooth mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="37"/>
         <source>Plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="46"/>
+        <location filename="../../Segmentation.ui" line="189"/>
+        <location filename="../../Segmentation.ui" line="252"/>
+        <location filename="../../Segmentation.ui" line="286"/>
         <source>Tolerance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="63"/>
+        <location filename="../../Segmentation.ui" line="143"/>
+        <location filename="../../Segmentation.ui" line="206"/>
+        <location filename="../../Segmentation.ui" line="303"/>
         <source>Minimum number of faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="83"/>
         <source>Cylinder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="92"/>
+        <location filename="../../Segmentation.ui" line="172"/>
         <source>Curvature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="109"/>
         <source>Tolerance (Flat)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="126"/>
         <source>Tolerance (Curved)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="163"/>
         <source>Sphere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="226"/>
         <source>Freeform</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="235"/>
         <source>Max. Curvature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Segmentation.ui" line="269"/>
         <source>Min. Curvature</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1533,50 +2010,70 @@ to a smoother appearance.
 <context>
     <name>MeshGui::SegmentationBestFit</name>
     <message>
+        <location filename="../../SegmentationBestFit.ui" line="14"/>
         <source>Mesh segmentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.ui" line="20"/>
         <source>Sphere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.ui" line="29"/>
+        <location filename="../../SegmentationBestFit.ui" line="82"/>
+        <location filename="../../SegmentationBestFit.ui" line="135"/>
         <source>Tolerance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.ui" line="46"/>
+        <location filename="../../SegmentationBestFit.ui" line="99"/>
+        <location filename="../../SegmentationBestFit.ui" line="152"/>
         <source>Minimum number of faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.ui" line="63"/>
+        <location filename="../../SegmentationBestFit.ui" line="116"/>
+        <location filename="../../SegmentationBestFit.ui" line="169"/>
         <source>Parameters...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.ui" line="73"/>
         <source>Plane</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.ui" line="126"/>
         <source>Cylinder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="337"/>
+        <location filename="../../SegmentationBestFit.cpp" line="363"/>
         <source>Base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="338"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="364"/>
         <source>Axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="365"/>
+        <location filename="../../SegmentationBestFit.cpp" line="392"/>
         <source>Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../SegmentationBestFit.cpp" line="391"/>
         <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1584,30 +2081,38 @@ to a smoother appearance.
 <context>
     <name>MeshGui::Selection</name>
     <message>
+        <location filename="../../Selection.ui" line="14"/>
+        <location filename="../../Selection.ui" line="20"/>
         <source>Selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Selection.ui" line="39"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Selection.ui" line="46"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Selection.ui" line="53"/>
         <source>Respect only visible triangles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Selection.ui" line="63"/>
         <source>Respect only triangles with normals facing screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Selection.cpp" line="72"/>
         <source>Use a brush tool to select the area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Selection.cpp" line="75"/>
         <source>Clears completely the selected area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1615,10 +2120,14 @@ to a smoother appearance.
 <context>
     <name>MeshGui::TaskRemoveComponents</name>
     <message>
+        <location filename="../../RemoveComponents.cpp" line="174"/>
+        <location filename="../../RemoveComponents.cpp" line="231"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../RemoveComponents.cpp" line="175"/>
+        <location filename="../../RemoveComponents.cpp" line="232"/>
         <source>Invert</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1626,6 +2135,7 @@ to a smoother appearance.
 <context>
     <name>Mesh_BoundingBox</name>
     <message>
+        <location filename="../../Command.cpp" line="1580"/>
         <source>Boundings of %1:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1633,14 +2143,26 @@ to a smoother appearance.
 <context>
     <name>Mesh_Union</name>
     <message>
+        <location filename="../../Command.cpp" line="273"/>
+        <location filename="../../Command.cpp" line="278"/>
+        <location filename="../../Command.cpp" line="344"/>
+        <location filename="../../Command.cpp" line="349"/>
+        <location filename="../../Command.cpp" line="415"/>
+        <location filename="../../Command.cpp" line="420"/>
         <source>OpenSCAD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="274"/>
+        <location filename="../../Command.cpp" line="345"/>
+        <location filename="../../Command.cpp" line="416"/>
         <source>Unknown error occurred while running OpenSCAD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="279"/>
+        <location filename="../../Command.cpp" line="350"/>
+        <location filename="../../Command.cpp" line="421"/>
         <source>OpenSCAD cannot be found on your system.
 Please visit http://www.openscad.org/index.html to install it.</source>
         <translation type="unfinished"></translation>
@@ -1649,6 +2171,7 @@ Please visit http://www.openscad.org/index.html to install it.</source>
 <context>
     <name>QDockWidget</name>
     <message>
+        <location filename="../../DlgEvaluateMeshImp.cpp" line="1240"/>
         <source>Evaluate &amp; Repair Mesh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1656,174 +2179,231 @@ Please visit http://www.openscad.org/index.html to install it.</source>
 <context>
     <name>QObject</name>
     <message>
+        <location filename="../../AppMeshGui.cpp" line="160"/>
         <source>Import-Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="452"/>
         <source>All Mesh Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="453"/>
+        <location filename="../../Command.cpp" line="509"/>
         <source>Binary STL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="454"/>
+        <location filename="../../Command.cpp" line="510"/>
+        <location filename="../../Command.cpp" line="511"/>
         <source>ASCII STL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="455"/>
+        <location filename="../../Command.cpp" line="512"/>
         <source>Binary Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="456"/>
+        <location filename="../../Command.cpp" line="513"/>
         <source>Alias Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="457"/>
+        <location filename="../../Command.cpp" line="515"/>
         <source>Object File Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="458"/>
         <source>Inventor V2.1 ASCII</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="459"/>
+        <location filename="../../Command.cpp" line="520"/>
         <source>Stanford Polygon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="460"/>
         <source>NASTRAN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="461"/>
+        <location filename="../../Command.cpp" line="527"/>
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="465"/>
         <source>Import mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="514"/>
         <source>Simple Model Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="516"/>
         <source>Inventor V2.1 ascii</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="517"/>
         <source>X3D Extensible 3D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="518"/>
         <source>Compressed X3D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="519"/>
         <source>WebGL/X3D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="521"/>
         <source>VRML V2.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="522"/>
         <source>Compressed VRML 2.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="523"/>
         <source>Nastran</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="524"/>
         <source>Python module def</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="525"/>
         <source>Asymptote Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="526"/>
+        <source>3D Manufacturing Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../Command.cpp" line="534"/>
         <source>Export mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="575"/>
         <source>Meshing Tolerance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="576"/>
         <source>Enter tolerance for meshing geometry:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1377"/>
         <source>The mesh &apos;%1&apos; is not a solid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1380"/>
         <source>The mesh &apos;%1&apos; is a solid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1382"/>
         <source>Solid Mesh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1585"/>
         <source>Boundings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1647"/>
         <source>Fill holes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1648"/>
         <source>Fill holes with maximum number of edges:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1891"/>
         <source>Scaling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Command.cpp" line="1892"/>
         <source>Enter scaling factor:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../PropertyEditorMesh.cpp" line="77"/>
         <source>[Points: %1, Edges: %2, Faces: %3]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="756"/>
         <source>Display components</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="762"/>
         <source>Display segments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1593"/>
+        <location filename="../../ViewProviderCurvature.cpp" line="488"/>
         <source>Leave info mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1652"/>
         <source>Index: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1675"/>
         <source>Leave hole-filling mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1721"/>
         <source>Leave removal mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1722"/>
         <source>Delete selected faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProvider.cpp" line="1723"/>
         <source>Clear selected faces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../ViewProviderCurvature.cpp" line="485"/>
         <source>Annotation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1831,18 +2411,22 @@ Please visit http://www.openscad.org/index.html to install it.</source>
 <context>
     <name>Workbench</name>
     <message>
+        <location filename="../../Workbench.cpp" line="45"/>
         <source>Analyze</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Workbench.cpp" line="46"/>
         <source>Boolean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Workbench.cpp" line="47"/>
         <source>&amp;Meshes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../Workbench.cpp" line="48"/>
         <source>Mesh tools</source>
         <translation type="unfinished"></translation>
     </message>

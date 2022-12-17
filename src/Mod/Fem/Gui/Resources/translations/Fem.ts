@@ -4,12 +4,12 @@
 <context>
     <name>BoundarySelector</name>
     <message>
-        <location filename="selection_widgets.py" line="132"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="132"/>
         <source>Select Faces/Edges/Vertexes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="136"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="136"/>
         <source>To add references: select them in the 3D view  and click &quot;Add&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,47 +17,53 @@
 <context>
     <name>ControlWidget</name>
     <message>
-        <location filename="solver_taskpanel.py" line="215"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="215"/>
         <source>Solver Control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="226"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="226"/>
         <source>Working Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="303"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="230"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="303"/>
         <source>Write</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="312"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="231"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="304"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="308"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="312"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="245"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="245"/>
         <source>Elapsed Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="309"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="305"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="309"/>
         <source>Run</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="311"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="307"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="311"/>
         <source>Re-write</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="313"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="313"/>
         <source>Re-run</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="solver_taskpanel.py" line="315"/>
+        <location filename="../../../femsolver/solver_taskpanel.py" line="315"/>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
@@ -65,32 +71,32 @@
 <context>
     <name>GeometryElementsSelection</name>
     <message>
-        <location filename="selection_widgets.py" line="273"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="273"/>
         <source>Geometry reference selector for a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="276"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="276"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="283"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="283"/>
         <source>Click on &quot;Add&quot; and select geometric elements to add them to the list.{}The following geometry elements are allowed to select: {}{}{}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="286"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="286"/>
         <source>{}If no geometry is added to the list, all remaining ones are used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="300"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="300"/>
         <source>Selection mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="302"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="302"/>
         <source>Solid</source>
         <translation type="unfinished"></translation>
     </message>
@@ -98,12 +104,12 @@
 <context>
     <name>SolidSelector</name>
     <message>
-        <location filename="selection_widgets.py" line="151"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="151"/>
         <source>Select Solids</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="155"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="155"/>
         <source>Select elements part of the solid that shall be added to the list. To add the solid click &quot;Add&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,12 +117,12 @@
 <context>
     <name>_Selector</name>
     <message>
-        <location filename="selection_widgets.py" line="52"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="52"/>
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selection_widgets.py" line="53"/>
+        <location filename="../../../femguiutils/selection_widgets.py" line="53"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -784,9 +790,9 @@
 <context>
     <name>Dialog</name>
     <message>
-        <location filename="../ui/MeshGroupXDMFExport.ui" line="14"/>
-        <location filename="../../TaskPanelConstraintTemperature.ui" line="14"/>
         <location filename="../../TaskPanelInitialTemperature.ui" line="14"/>
+        <location filename="../../TaskPanelConstraintTemperature.ui" line="14"/>
+        <location filename="../ui/MeshGroupXDMFExport.ui" line="14"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -826,20 +832,20 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPanelConstraintTemperature.ui" line="39"/>
         <location filename="../../TaskPanelInitialTemperature.ui" line="43"/>
+        <location filename="../../TaskPanelConstraintTemperature.ui" line="39"/>
         <source>Temperature:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPanelConstraintTemperature.ui" line="52"/>
         <location filename="../../TaskPanelInitialTemperature.ui" line="56"/>
+        <location filename="../../TaskPanelConstraintTemperature.ui" line="52"/>
         <source>25</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../TaskPanelConstraintTemperature.ui" line="68"/>
         <location filename="../../TaskPanelInitialTemperature.ui" line="72"/>
+        <location filename="../../TaskPanelConstraintTemperature.ui" line="68"/>
         <source>ºC</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2376,15 +2382,15 @@ exported from FreeCAD.</source>
 <context>
     <name>FemMaterial</name>
     <message>
-        <location filename="../ui/Material.ui" line="14"/>
         <location filename="../ui/MaterialReinforcement.ui" line="14"/>
+        <location filename="../ui/Material.ui" line="14"/>
         <source>FEM material</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/Material.ui" line="26"/>
         <location filename="../ui/MaterialReinforcement.ui" line="46"/>
         <location filename="../ui/MaterialReinforcement.ui" line="119"/>
+        <location filename="../ui/Material.ui" line="26"/>
         <source>Material</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2409,9 +2415,9 @@ exported from FreeCAD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/Material.ui" line="71"/>
         <location filename="../ui/MaterialReinforcement.ui" line="60"/>
         <location filename="../ui/MaterialReinforcement.ui" line="133"/>
+        <location filename="../ui/Material.ui" line="71"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2787,10 +2793,10 @@ exported from FreeCAD.</source>
     </message>
     <message>
         <location filename="../ui/ConstraintCentrif.ui" line="26"/>
-        <location filename="../ui/ConstraintTie.ui" line="26"/>
-        <location filename="../ui/ElementGeometry2D.ui" line="26"/>
-        <location filename="../ui/MeshBoundaryLayer.ui" line="26"/>
         <location filename="../ui/MeshRegion.ui" line="26"/>
+        <location filename="../ui/ConstraintTie.ui" line="26"/>
+        <location filename="../ui/MeshBoundaryLayer.ui" line="26"/>
+        <location filename="../ui/ElementGeometry2D.ui" line="26"/>
         <source>Parameter</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2806,15 +2812,15 @@ exported from FreeCAD.</source>
     </message>
     <message>
         <location filename="../ui/ConstraintCentrif.ui" line="80"/>
+        <location filename="../ui/MeshRegion.ui" line="56"/>
         <location filename="../ui/ConstraintTie.ui" line="52"/>
+        <location filename="../ui/ElementRotation1D.ui" line="52"/>
         <location filename="../ui/ElementGeometry1D.ui" line="72"/>
         <location filename="../ui/ElementGeometry1D.ui" line="116"/>
         <location filename="../ui/ElementGeometry1D.ui" line="173"/>
         <location filename="../ui/ElementGeometry1D.ui" line="235"/>
         <location filename="../ui/ElementGeometry1D.ui" line="279"/>
         <location filename="../ui/ElementGeometry2D.ui" line="52"/>
-        <location filename="../ui/ElementRotation1D.ui" line="52"/>
-        <location filename="../ui/MeshRegion.ui" line="56"/>
         <source>0.0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2839,8 +2845,8 @@ exported from FreeCAD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/ElectrostaticPotential.ui" line="14"/>
         <location filename="../ui/FlowVelocity.ui" line="14"/>
+        <location filename="../ui/ElectrostaticPotential.ui" line="14"/>
         <location filename="../ui/InitialFlowVelocity.ui" line="14"/>
         <source>Constraint Properties</source>
         <translation type="unfinished"></translation>
@@ -2861,11 +2867,11 @@ exported from FreeCAD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/ElectrostaticPotential.ui" line="49"/>
-        <location filename="../ui/ElectrostaticPotential.ui" line="104"/>
         <location filename="../ui/FlowVelocity.ui" line="56"/>
         <location filename="../ui/FlowVelocity.ui" line="83"/>
         <location filename="../ui/FlowVelocity.ui" line="110"/>
+        <location filename="../ui/ElectrostaticPotential.ui" line="49"/>
+        <location filename="../ui/ElectrostaticPotential.ui" line="104"/>
         <location filename="../ui/InitialFlowVelocity.ui" line="45"/>
         <location filename="../ui/InitialFlowVelocity.ui" line="79"/>
         <location filename="../ui/InitialFlowVelocity.ui" line="113"/>
@@ -2894,8 +2900,8 @@ exported from FreeCAD.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/ElementGeometry1D.ui" line="20"/>
         <location filename="../ui/ElementRotation1D.ui" line="20"/>
+        <location filename="../ui/ElementGeometry1D.ui" line="20"/>
         <source>Cross section parameter</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3126,30 +3132,6 @@ exported from FreeCAD.</source>
     <message>
         <location filename="../../ViewProviderFemConstraint.cpp" line="148"/>
         <source>Edit constraint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderFemConstraintBearing.cpp" line="77"/>
-        <location filename="../../ViewProviderFemConstraintFixed.cpp" line="77"/>
-        <location filename="../../ViewProviderFemConstraintFluidBoundary.cpp" line="75"/>
-        <location filename="../../ViewProviderFemConstraintForce.cpp" line="76"/>
-        <location filename="../../ViewProviderFemConstraintGear.cpp" line="76"/>
-        <location filename="../../ViewProviderFemConstraintPulley.cpp" line="75"/>
-        <location filename="../../ViewProviderFemPostFunction.cpp" line="277"/>
-        <location filename="../../ViewProviderFemPostObject.cpp" line="579"/>
-        <source>A dialog is already open in the task panel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ViewProviderFemConstraintBearing.cpp" line="78"/>
-        <location filename="../../ViewProviderFemConstraintFixed.cpp" line="78"/>
-        <location filename="../../ViewProviderFemConstraintFluidBoundary.cpp" line="76"/>
-        <location filename="../../ViewProviderFemConstraintForce.cpp" line="77"/>
-        <location filename="../../ViewProviderFemConstraintGear.cpp" line="77"/>
-        <location filename="../../ViewProviderFemConstraintPulley.cpp" line="76"/>
-        <location filename="../../ViewProviderFemPostFunction.cpp" line="278"/>
-        <location filename="../../ViewProviderFemPostObject.cpp" line="580"/>
-        <source>Do you want to close this dialog?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
