@@ -509,12 +509,12 @@ The resulting shape standalone and not merged into tip.</translation>
     <message>
       <location filename="../../Command.cpp" line="562"/>
       <source>Create sketch</source>
-      <translation type="unfinished">Create sketch</translation>
+      <translation>Создать эскиз</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="563"/>
       <source>Create a new sketch</source>
-      <translation type="unfinished">Create a new sketch</translation>
+      <translation>Создать новый эскиз</translation>
     </message>
   </context>
   <context>
@@ -1148,7 +1148,7 @@ Please select a body from below, or create a new body.</translation>
       <location filename="../../TaskPrimitiveParameters.ui" line="62"/>
       <location filename="../../TaskPrimitiveParameters.ui" line="153"/>
       <source>Length:</source>
-      <translation type="unfinished">Length:</translation>
+      <translation>Длина:</translation>
     </message>
     <message>
       <location filename="../../TaskPrimitiveParameters.ui" line="82"/>
@@ -1172,7 +1172,7 @@ Please select a body from below, or create a new body.</translation>
       <location filename="../../TaskPrimitiveParameters.ui" line="1749"/>
       <location filename="../../TaskPrimitiveParameters.ui" line="1805"/>
       <source>Radius:</source>
-      <translation type="unfinished">Radius:</translation>
+      <translation>Радиус:</translation>
     </message>
     <message>
       <location filename="../../TaskPrimitiveParameters.ui" line="307"/>
@@ -1221,7 +1221,7 @@ Please select a body from below, or create a new body.</translation>
       <location filename="../../TaskPrimitiveParameters.ui" line="551"/>
       <location filename="../../TaskPrimitiveParameters.ui" line="1620"/>
       <source>Angle:</source>
-      <translation type="unfinished">Angle:</translation>
+      <translation>Угол:</translation>
     </message>
     <message>
       <location filename="../../TaskPrimitiveParameters.ui" line="674"/>
@@ -1408,7 +1408,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../DlgReference.ui" line="14"/>
       <source>Reference</source>
-      <translation type="unfinished">Reference</translation>
+      <translation>Ссылка</translation>
     </message>
     <message>
       <location filename="../../DlgReference.ui" line="20"/>
@@ -1469,7 +1469,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../ReferenceSelection.cpp" line="197"/>
       <source>Selecting this will cause circular dependency.</source>
-      <translation type="unfinished">Selecting this will cause circular dependency.</translation>
+      <translation>Выбор этого вызовет циклическую зависимость.</translation>
     </message>
   </context>
   <context>
@@ -1477,7 +1477,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskBooleanParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskBooleanParameters.ui" line="20"/>
@@ -1518,7 +1518,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskBooleanParameters.ui" line="92"/>
       <source>Cut</source>
-      <translation type="unfinished">Cut</translation>
+      <translation>Обрезать</translation>
     </message>
     <message>
       <location filename="../../TaskBooleanParameters.ui" line="97"/>
@@ -1633,7 +1633,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskChamferParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskChamferParameters.ui" line="29"/>
@@ -1648,7 +1648,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskChamferParameters.ui" line="51"/>
       <source>Type</source>
-      <translation type="unfinished">Type</translation>
+      <translation>Тип</translation>
     </message>
     <message>
       <location filename="../../TaskChamferParameters.ui" line="59"/>
@@ -1683,7 +1683,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskChamferParameters.ui" line="175"/>
       <source>Angle</source>
-      <translation type="unfinished">Angle</translation>
+      <translation>Угол</translation>
     </message>
   </context>
   <context>
@@ -1765,7 +1765,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskDraftParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskDraftParameters.ui" line="29"/>
@@ -1861,7 +1861,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskFeaturePick.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskFeaturePick.ui" line="23"/>
@@ -1954,7 +1954,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskFilletParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskFilletParameters.ui" line="29"/>
@@ -1969,7 +1969,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskFilletParameters.ui" line="49"/>
       <source>Radius:</source>
-      <translation type="unfinished">Radius:</translation>
+      <translation>Радиус:</translation>
     </message>
   </context>
   <context>
@@ -2005,7 +2005,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskHelixParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskHelixParameters.ui" line="22"/>
@@ -2059,7 +2059,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskHelixParameters.ui" line="85"/>
       <source>Mode:</source>
-      <translation type="unfinished">Mode:</translation>
+      <translation>Режим:</translation>
     </message>
     <message>
       <location filename="../../TaskHelixParameters.ui" line="93"/>
@@ -2162,7 +2162,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskHoleParameters.cpp" line="70"/>
       <source>None</source>
-      <translation type="unfinished">None</translation>
+      <translation>Ничего</translation>
     </message>
     <message>
       <location filename="../../TaskHoleParameters.cpp" line="71"/>
@@ -2195,7 +2195,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="20"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="28"/>
@@ -2205,7 +2205,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="40"/>
       <source>Reverse direction</source>
-      <translation type="unfinished">Reverse direction</translation>
+      <translation>Развернуть направление</translation>
     </message>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="49"/>
@@ -2225,12 +2225,12 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskLinearPatternParameters.ui" line="93"/>
       <source>Update view</source>
-      <translation type="unfinished">Update view</translation>
+      <translation>Обновить</translation>
     </message>
     <message>
       <location filename="../../TaskLinearPatternParameters.cpp" line="261"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Ошибки</translation>
     </message>
   </context>
   <context>
@@ -2238,7 +2238,7 @@ If zero, it is equal to Radius2</translation>
     <message>
       <location filename="../../TaskLoftParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskLoftParameters.ui" line="20"/>
@@ -2298,7 +2298,7 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskMirroredParameters.ui" line="20"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskMirroredParameters.ui" line="28"/>
@@ -2313,12 +2313,12 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskMirroredParameters.ui" line="51"/>
       <source>Update view</source>
-      <translation type="unfinished">Update view</translation>
+      <translation>Обновить</translation>
     </message>
     <message>
       <location filename="../../TaskMirroredParameters.cpp" line="193"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Ошибки</translation>
     </message>
   </context>
   <context>
@@ -2326,7 +2326,7 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskMultiTransformParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskMultiTransformParameters.ui" line="20"/>
@@ -2336,7 +2336,7 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskMultiTransformParameters.ui" line="37"/>
       <source>Update view</source>
-      <translation type="unfinished">Update view</translation>
+      <translation>Обновить</translation>
     </message>
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="80"/>
@@ -2346,7 +2346,7 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="84"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Удалить</translation>
     </message>
     <message>
       <location filename="../../TaskMultiTransformParameters.cpp" line="88"/>
@@ -2389,7 +2389,7 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskPadParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskPadParameters.ui" line="22"/>
@@ -2426,7 +2426,7 @@ Right click or press &apos;Del&apos; to delete the selected items.</translation>
     <message>
       <location filename="../../TaskPadParameters.ui" line="95"/>
       <source>Type</source>
-      <translation type="unfinished">Type</translation>
+      <translation>Тип</translation>
     </message>
     <message>
       <location filename="../../TaskPadParameters.ui" line="102"/>
@@ -2643,7 +2643,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPipeOrientation.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskPipeOrientation.ui" line="22"/>
@@ -2736,7 +2736,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPipeParameters.ui" line="20"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskPipeParameters.ui" line="26"/>
@@ -2800,7 +2800,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPipeScaling.ui" line="26"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskPipeScaling.ui" line="34"/>
@@ -2848,12 +2848,12 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPocketParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskPocketParameters.ui" line="35"/>
       <source>Type</source>
-      <translation type="unfinished">Type</translation>
+      <translation>Тип</translation>
     </message>
     <message>
       <location filename="../../TaskPocketParameters.ui" line="42"/>
@@ -2980,7 +2980,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="20"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="28"/>
@@ -2990,12 +2990,12 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="40"/>
       <source>Reverse direction</source>
-      <translation type="unfinished">Reverse direction</translation>
+      <translation>Развернуть направление</translation>
     </message>
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="49"/>
       <source>Angle</source>
-      <translation type="unfinished">Angle</translation>
+      <translation>Угол</translation>
     </message>
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="76"/>
@@ -3010,12 +3010,12 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskPolarPatternParameters.ui" line="99"/>
       <source>Update view</source>
-      <translation type="unfinished">Update view</translation>
+      <translation>Обновить</translation>
     </message>
     <message>
       <location filename="../../TaskPolarPatternParameters.cpp" line="250"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Ошибки</translation>
     </message>
   </context>
   <context>
@@ -3031,7 +3031,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskRevolutionParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskRevolutionParameters.ui" line="22"/>
@@ -3075,7 +3075,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskRevolutionParameters.ui" line="67"/>
       <source>Angle:</source>
-      <translation type="unfinished">Angle:</translation>
+      <translation>Угол:</translation>
     </message>
     <message>
       <location filename="../../TaskRevolutionParameters.ui" line="101"/>
@@ -3098,7 +3098,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskScaledParameters.ui" line="20"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskScaledParameters.ui" line="28"/>
@@ -3118,7 +3118,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskScaledParameters.ui" line="65"/>
       <source>Update view</source>
-      <translation type="unfinished">Update view</translation>
+      <translation>Обновить</translation>
     </message>
   </context>
   <context>
@@ -3126,7 +3126,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskShapeBinder.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskShapeBinder.ui" line="22"/>
@@ -3182,7 +3182,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskThicknessParameters.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskThicknessParameters.ui" line="29"/>
@@ -3227,7 +3227,7 @@ unnecessary use of BSplineSurface for planar faces in the resulting shape.</tran
     <message>
       <location filename="../../TaskThicknessParameters.ui" line="112"/>
       <source>Arc</source>
-      <translation type="unfinished">Arc</translation>
+      <translation>Дуга</translation>
     </message>
     <message>
       <location filename="../../TaskThicknessParameters.ui" line="117"/>
@@ -3633,7 +3633,7 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
       <location filename="../../Command.cpp" line="266"/>
       <location filename="../../Command.cpp" line="268"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Ошибки</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="424"/>
@@ -3696,7 +3696,7 @@ overlap. Uncheck this option to perform operation in sequence.</translation>
       <location filename="../../Command.cpp" line="1817"/>
       <location filename="../../Command.cpp" line="1829"/>
       <source>Wrong selection</source>
-      <translation type="unfinished">Wrong selection</translation>
+      <translation>Неправильный выбор</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="1784"/>
@@ -3980,7 +3980,7 @@ If you have a legacy document with PartDesign objects without Body, use the migr
     <message>
       <location filename="../../Utils.cpp" line="239"/>
       <source>Active Body Required</source>
-      <translation type="unfinished">Active Body Required</translation>
+      <translation>Требуется активное тело</translation>
     </message>
     <message>
       <location filename="../../Utils.cpp" line="240"/>
@@ -4148,13 +4148,13 @@ New feature will be inserted after it.</translation>
       <location filename="../../ViewProviderDatum.cpp" line="129"/>
       <location filename="../../ViewProviderDatum.cpp" line="213"/>
       <source>Line</source>
-      <translation type="unfinished">Line</translation>
+      <translation>Линия</translation>
     </message>
     <message>
       <location filename="../../ViewProviderDatum.cpp" line="133"/>
       <location filename="../../ViewProviderDatum.cpp" line="221"/>
       <source>Point</source>
-      <translation type="unfinished">Point</translation>
+      <translation>Точка</translation>
     </message>
     <message>
       <location filename="../../ViewProviderDatum.cpp" line="137"/>
@@ -4524,7 +4524,7 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
     <message>
       <location filename="../../../FeatureHole/TaskHole.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../../FeatureHole/TaskHole.ui" line="24"/>
@@ -4540,18 +4540,18 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
       <location filename="../../../FeatureHole/TaskHole.ui" line="49"/>
       <location filename="../../../FeatureHole/TaskHole.ui" line="87"/>
       <source>Edge</source>
-      <translation type="unfinished">Edge</translation>
+      <translation>Ребро</translation>
     </message>
     <message>
       <location filename="../../../FeatureHole/TaskHole.ui" line="63"/>
       <location filename="../../../FeatureHole/TaskHole.ui" line="101"/>
       <source>Distance</source>
-      <translation type="unfinished">Distance</translation>
+      <translation>Расстояние</translation>
     </message>
     <message>
       <location filename="../../../FeatureHole/TaskHole.ui" line="137"/>
       <source>Type</source>
-      <translation type="unfinished">Type</translation>
+      <translation>Тип</translation>
     </message>
     <message>
       <location filename="../../../FeatureHole/TaskHole.ui" line="145"/>
@@ -4599,7 +4599,7 @@ Although you will be able to migrate any moment later with &apos;Part Design -&g
       <location filename="../../../FeatureHole/TaskHole.ui" line="368"/>
       <location filename="../../../FeatureHole/TaskHole.ui" line="474"/>
       <source>Diameter</source>
-      <translation type="unfinished">Diameter</translation>
+      <translation>Диаметр</translation>
     </message>
     <message>
       <location filename="../../../FeatureHole/TaskHole.ui" line="280"/>
@@ -4777,7 +4777,7 @@ Only available for holes without thread</source>
       <location filename="../../TaskHoleParameters.ui" line="372"/>
       <location filename="../../TaskHoleParameters.ui" line="459"/>
       <source>Diameter</source>
-      <translation type="unfinished">Diameter</translation>
+      <translation>Диаметр</translation>
     </message>
     <message>
       <location filename="../../TaskHoleParameters.ui" line="385"/>
@@ -4822,7 +4822,7 @@ Only available for holes without thread</source>
     <message>
       <location filename="../../TaskHoleParameters.ui" line="591"/>
       <source>Type</source>
-      <translation type="unfinished">Type</translation>
+      <translation>Тип</translation>
     </message>
     <message>
       <location filename="../../TaskHoleParameters.ui" line="604"/>
@@ -4900,7 +4900,7 @@ over 90: larger hole radius at the bottom</translation>
     <message>
       <location filename="../../TaskHoleParameters.cpp" line="615"/>
       <source>Normal</source>
-      <translation type="unfinished">Normal</translation>
+      <translation>Обычные</translation>
     </message>
     <message>
       <location filename="../../TaskHoleParameters.cpp" line="617"/>
@@ -4913,7 +4913,7 @@ over 90: larger hole radius at the bottom</translation>
     <message>
       <location filename="../../TaskTransformedMessages.ui" line="14"/>
       <source>Form</source>
-      <translation type="unfinished">Form</translation>
+      <translation>Форма</translation>
     </message>
     <message>
       <location filename="../../TaskTransformedMessages.ui" line="25"/>
