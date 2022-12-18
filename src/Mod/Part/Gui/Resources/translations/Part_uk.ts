@@ -4820,7 +4820,7 @@ the size of the resulting STEP file.</translation>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="127"/>
       <source>%</source>
-      <translation type="unfinished">%</translation>
+      <translation>%</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="146"/>
