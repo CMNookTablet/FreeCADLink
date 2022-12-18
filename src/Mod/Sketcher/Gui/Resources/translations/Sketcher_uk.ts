@@ -3110,8 +3110,8 @@ Accepted combinations: two curves; an endpoint and a curve; two endpoints; two c
       <location filename="../../CommandSketcherTools.cpp" line="2236"/>
       <source>Select any geometry element(s) from the sketch to export.
 You can select an existing export to modify.</source>
-      <translation type="unfinished">Select any geometry element(s) from the sketch to export.
-You can select an existing export to modify.</translation>
+      <translation>Виберіть будь-які елемент(и) геометрії з ескізу для експорту.
+Ви можете вибрати наявний експорт для редагування.</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2498"/>
@@ -4487,8 +4487,8 @@ You can temporarily disable snapping by holding the &apos;Shift&apos; key.</sour
       <location filename="../../TaskSketcherGeneral.ui" line="154"/>
       <source>The tolerance multiplying the grid width defines a distance within which the pointer will snap
 to the nearest grid point.</source>
-      <translation type="unfinished">The tolerance multiplying the grid width defines a distance within which the pointer will snap
-to the nearest grid point.</translation>
+      <translation>Допуск помножений на розмір сітки визначає відстань, з якої курсор мишки прилипне
+до найближчої точки сітки.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="179"/>
@@ -4509,8 +4509,8 @@ to the nearest grid point.</translation>
       <location filename="../../TaskSketcherGeneral.ui" line="211"/>
       <source>Auto make pre-selected shape transparent for picking
 hidden edges and points on picking external objects.</source>
-      <translation type="unfinished">Auto make pre-selected shape transparent for picking
-hidden edges and points on picking external objects.</translation>
+      <translation>Автоматично робить попередньо вибрану фігуру прозорою 
+для вибору прихованих ребер і точок при виборі зовнішніх об'єктів.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="215"/>
@@ -5753,8 +5753,9 @@ Eigen Dense QR — щільна матриця QR з повним поворот
       <location filename="../../CommandCreateGeo.cpp" line="6799"/>
       <source>Import an external geometry as defining geometry that can be use for extrusion.
 Or toggle the defining status of an already imported external geometry.</source>
-      <translation type="unfinished">Import an external geometry as defining geometry that can be use for extrusion.
-Or toggle the defining status of an already imported external geometry.</translation>
+      <translation>Імпортує зовнішню геометрію як визначену геометрію, яка може бути 
+використана для видавлювання. Або перемикає статус визначення 
+вже імпортованої зовнішньої геометрії.</translation>
     </message>
   </context>
   <context>
@@ -5762,14 +5763,14 @@ Or toggle the defining status of an already imported external geometry.</transla
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6860"/>
       <source>Add/toggle intersection geometry</source>
-      <translation type="unfinished">Add/toggle intersection geometry</translation>
+      <translation>Додавання/перемикання геометрії перетину</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6861"/>
       <source>Import an external geometry with intersection to the sketch plane.
 Or toggle the intersection of an already imported external geometry.</source>
-      <translation type="unfinished">Import an external geometry with intersection to the sketch plane.
-Or toggle the intersection of an already imported external geometry.</translation>
+      <translation>Імпортує зовнішню геометрію з перетином на площину ескізу.
+Або перемикає перетин вже імпортованої зовнішньої геометрії.</translation>
     </message>
   </context>
   <context>
@@ -5777,14 +5778,14 @@ Or toggle the intersection of an already imported external geometry.</translatio
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6898"/>
       <source>Add/toggle intersection defining</source>
-      <translation type="unfinished">Add/toggle intersection defining</translation>
+      <translation>Додавання/перемикання визначення перетину</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6899"/>
       <source>Import as an defining external geometry with intersection to the sketch plane.
 Or toggle the intersection of an already imported external geometry and make it defining.</source>
-      <translation type="unfinished">Import as an defining external geometry with intersection to the sketch plane.
-Or toggle the intersection of an already imported external geometry and make it defining.</translation>
+      <translation>Імпортує як визначену зовнішню геометрію з перетином на площину ескізу.
+Або включає перетин вже імпортованої зовнішньої геометрії та робить її визначеною.</translation>
     </message>
   </context>
   <context>
@@ -5802,7 +5803,7 @@ Or toggle the intersection of an already imported external geometry and make it 
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6937"/>
       <source>Attach a missing or detached geometry to a new external geometry element</source>
-      <translation type="unfinished">Attach a missing or detached geometry to a new external geometry element</translation>
+      <translation>Приєднує відсутню або відокремлену геометрію до нового елементу зовнішньої геометрії</translation>
     </message>
   </context>
   <context>
