@@ -74,12 +74,12 @@
     <message>
       <location filename="../ViewProviderOrigin.cpp" line="72"/>
       <source>The displayed size of the origin</source>
-      <translation>Відображається розмір оригінала</translation>
+      <translation>Розмір початку координат, що відображується на екрані</translation>
     </message>
     <message>
       <location filename="../ViewProviderOrigin.cpp" line="76"/>
       <source>Margin to be added to the calculated size of the origin</source>
-      <translation type="unfinished">Margin to be added to the calculated size of the origin</translation>
+      <translation>Припуск, що додається до розрахованого розміру початку координат</translation>
     </message>
     <message>
       <location filename="../ViewProviderOriginFeature.cpp" line="57"/>
@@ -111,7 +111,7 @@
     <message>
       <location filename="../propertyeditor/PropertyItem.cpp" line="2889"/>
       <source>Enum</source>
-      <translation type="unfinished">Enum</translation>
+      <translation>Перелік</translation>
     </message>
     <message>
       <location filename="../propertyeditor/PropertyModel.cpp" line="271"/>
@@ -126,7 +126,7 @@
       <location filename="../CommandTest.cpp" line="715"/>
       <location filename="../CommandTest.cpp" line="716"/>
       <source>Test console output</source>
-      <translation>Вивід тестової консолі</translation>
+      <translation>Тест виводу консолі</translation>
     </message>
   </context>
   <context>
@@ -157,7 +157,7 @@
     <message>
       <location filename="../ViewProviderDocumentObject.cpp" line="1145"/>
       <source>Toggle export </source>
-      <translation type="unfinished">Toggle export </translation>
+      <translation>Ввімкнення експорту </translation>
     </message>
     <message>
       <location filename="../Application.cpp" line="686"/>
@@ -217,7 +217,7 @@
     <message>
       <location filename="../ManualAlignment.cpp" line="999"/>
       <source>Align</source>
-      <translation>Вирівнювати</translation>
+      <translation>Вирівняти</translation>
     </message>
     <message>
       <location filename="../Placement.cpp" line="281"/>
@@ -250,7 +250,7 @@
     <message>
       <location filename="../ViewProviderSavedView.cpp" line="109"/>
       <source>Change saved view</source>
-      <translation type="unfinished">Change saved view</translation>
+      <translation>Змінити збережений вид</translation>
     </message>
     <message>
       <location filename="../CommandView.cpp" line="2103"/>
@@ -260,7 +260,7 @@
     <message>
       <location filename="../CommandView.cpp" line="4006"/>
       <source>Toggle tree item</source>
-      <translation type="unfinished">Toggle tree item</translation>
+      <translation>Переключити елемент дерева</translation>
     </message>
   </context>
   <context>
@@ -283,7 +283,7 @@
     <message>
       <location filename="../DlgCustomizeSpNavSettings.ui" line="72"/>
       <source>Enable Translations</source>
-      <translation>Ввімкнути переміщення</translation>
+      <translation>Ввімкнути перетворення</translation>
     </message>
     <message>
       <location filename="../DlgCustomizeSpNavSettings.ui" line="82"/>
@@ -342,8 +342,8 @@
       <location filename="../DlgExpressionInput.ui" line="121"/>
       <source>Disable line wrapping in edit box, and allow &apos;Return&apos; key
 to create multi-line expressions.</source>
-      <translation type="unfinished">Disable line wrapping in edit box, and allow &apos;Return&apos; key
-to create multi-line expressions.</translation>
+      <translation>Вимкніть перенос рядка у вікні редагування та дозвольте 
+клавішу &quot;Return для створення багаторядкових виразів.</translation>
     </message>
     <message>
       <location filename="../DlgExpressionInput.ui" line="125"/>
@@ -358,7 +358,7 @@ cause unexpected changes to objects.</source>
       <translation>Автоматично обчислювати виклики функцій у виразі та 
 показувати попередній перегляд. Майте на увазі, що 
 деякі виклики функцій можуть мати побічні ефекти та
-викликати неочікувані зміни в об'єктах.</translation>
+викликати неочікувані зміни в об&apos;єктах.</translation>
     </message>
     <message>
       <location filename="../DlgExpressionInput.ui" line="137"/>
@@ -391,7 +391,7 @@ cause unexpected changes to objects.</source>
     <message>
       <location filename="../DownloadItem.ui" line="44"/>
       <source>Filename</source>
-      <translation>Ім'я файлу</translation>
+      <translation>Ім&apos;я файлу</translation>
     </message>
   </context>
   <context>
@@ -409,7 +409,7 @@ cause unexpected changes to objects.</source>
     <message>
       <location filename="../Application.h" line="271"/>
       <source>Cutting</source>
-      <translation>Перерізання</translation>
+      <translation>Переріз</translation>
     </message>
     <message>
       <location filename="../Application.h" line="272"/>
@@ -570,7 +570,7 @@ while doing a left or right click and move the mouse up or down</source>
     <message>
       <location filename="../WidgetFactory.cpp" line="372"/>
       <source>&amp;Cancel</source>
-      <translation>&amp;Скасування</translation>
+      <translation>&amp;Скасувати</translation>
     </message>
   </context>
   <context>
@@ -649,7 +649,7 @@ while doing a left or right click and move the mouse up or down</source>
     <message>
       <location filename="../AboutApplication.ui" line="165"/>
       <source>Word size</source>
-      <translation>Розмір слова</translation>
+      <translation>Розрядність</translation>
     </message>
     <message>
       <location filename="../AboutApplication.ui" line="291"/>
@@ -3010,7 +3010,7 @@ This will overwrite the current configuration.</translation>
     <message>
       <location filename="../DlgParameter.ui" line="153"/>
       <source>Merge</source>
-      <translation>Об'єднання</translation>
+      <translation>Об&apos;єднання</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="160"/>
@@ -3269,7 +3269,7 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1449"/>
       <source>Merge</source>
-      <translation>Об'єднання</translation>
+      <translation>Об&apos;єднання</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1449"/>
@@ -3543,7 +3543,7 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgPropertyLink.cpp" line="441"/>
       <source>Object</source>
-      <translation>Об'єкт</translation>
+      <translation>Об&apos;єкт</translation>
     </message>
     <message>
       <location filename="../DlgPropertyLink.cpp" line="442"/>
@@ -4105,7 +4105,7 @@ Changing this option requires a restart of the application.</source>
     <message>
       <location filename="../DlgSettings3DView.ui" line="119"/>
       <source>Use software OpenGL</source>
-      <translation>Використати "програмний" OpenGL</translation>
+      <translation>Використати &quot;програмний&quot; OpenGL</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="278"/>
@@ -10689,7 +10689,7 @@ Alt + click to toggle show on top.</translation>
     <message>
       <location filename="../DlgSettingsObjects.cpp" line="190"/>
       <source>Objects</source>
-      <translation>Об'єкти</translation>
+      <translation>Об&apos;єкти</translation>
     </message>
     <message>
       <location filename="../DlgSettingsObjects.cpp" line="191"/>
