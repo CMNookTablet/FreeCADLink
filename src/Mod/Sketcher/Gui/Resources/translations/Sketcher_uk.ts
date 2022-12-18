@@ -162,7 +162,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="2418"/>
       <source>Actions for Creating an arc in the sketcher</source>
-      <translation type="unfinished">Actions for Creating an arc in the sketcher</translation>
+      <translation>Дії для створення дуги в ескізі</translation>
     </message>
   </context>
   <context>
@@ -201,7 +201,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="4553"/>
       <source>Actions for Creating a conic in the sketch</source>
-      <translation type="unfinished">Actions for Creating a conic in the sketch</translation>
+      <translation>Дії для створення конуса в ескізі</translation>
     </message>
   </context>
   <context>
@@ -214,7 +214,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="5818"/>
       <source>Actions for creating fillets</source>
-      <translation type="unfinished">Actions for creating fillets</translation>
+      <translation>Дії для створення фасок</translation>
     </message>
   </context>
   <context>
@@ -227,7 +227,7 @@
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="1125"/>
       <source>Actions for Creating a rectangle in the sketch</source>
-      <translation type="unfinished">Actions for Creating a rectangle in the sketch</translation>
+      <translation>Дії для створення прямокутника в ескізі</translation>
     </message>
   </context>
   <context>
@@ -845,8 +845,8 @@ with respect to a line or a third point</source>
       <location filename="../../CommandCreateGeo.cpp" line="1815"/>
       <source>Create a polyline in the sketch.
 Pressed the button (or shortcut) to cycle behaviour</source>
-      <translation type="unfinished">Create a polyline in the sketch.
-Pressed the button (or shortcut) to cycle behaviour</translation>
+      <translation>Створює полілінію в ескізі.
+Натисніть кнопку (або комбінацію клавіш) для зміни поведінки</translation>
     </message>
   </context>
   <context>
@@ -1881,7 +1881,7 @@ invalid constraints, degenerated geometry, etc.</source>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6703"/>
       <source>Attach external geometry</source>
-      <translation type="unfinished">Attach external geometry</translation>
+      <translation>Приєднати зовнішню геометрію</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6718"/>
@@ -1961,7 +1961,7 @@ invalid constraints, degenerated geometry, etc.</source>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2379"/>
       <source>Swap geometry ID</source>
-      <translation type="unfinished">Swap geometry ID</translation>
+      <translation>Поміняти ID геометрії</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2510"/>
@@ -3383,7 +3383,7 @@ You can select an existing export to modify.</translation>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6439"/>
       <source>Face picking disabled in the task panel. </source>
-      <translation type="unfinished">Face picking disabled in the task panel. </translation>
+      <translation>Вибір граней вимкнено на панелі завдань. </translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6447"/>
@@ -3859,32 +3859,32 @@ Requires to re-enter edit mode to take effect.</source>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="270"/>
       <source>Frozen external geometry</source>
-      <translation type="unfinished">Frozen external geometry</translation>
+      <translation>Заморожена зовнішня геометрія</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="538"/>
       <source>The color of a frozen external geometry in edit mode</source>
-      <translation type="unfinished">The color of a frozen external geometry in edit mode</translation>
+      <translation>Колір замороженої зовнішньої геометрії в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="617"/>
       <source>Detached external geometry</source>
-      <translation type="unfinished">Detached external geometry</translation>
+      <translation>Відділена зовнішня геометрія</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="630"/>
       <source>The color of a detached external geometry in edit mode</source>
-      <translation type="unfinished">The color of a detached external geometry in edit mode</translation>
+      <translation>Колір відділеної зовнішньої геометрії в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="650"/>
       <source>Missing external geometry</source>
-      <translation type="unfinished">Missing external geometry</translation>
+      <translation>Відсутня зовнішня геометрія</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="663"/>
       <source>The color of a missing external geometry in edit mode</source>
-      <translation type="unfinished">The color of a missing external geometry in edit mode</translation>
+      <translation>Колір відсутньої зовнішньої геометрії в режимі редагування</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsColors.ui" line="688"/>
@@ -4127,7 +4127,7 @@ Defaults to: %N = %V
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="369"/>
       <source>Auto adjust camera on editing</source>
-      <translation type="unfinished">Auto adjust camera on editing</translation>
+      <translation>Автоматичне налаштування камери при редагуванні</translation>
     </message>
     <message>
       <location filename="../../SketcherSettingsDisplay.ui" line="385"/>
@@ -4447,12 +4447,12 @@ However, no constraints linking to the endpoints were found.</source>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="44"/>
       <source>Auto change grid size depending on the zoom level of the current view.</source>
-      <translation type="unfinished">Auto change grid size depending on the zoom level of the current view.</translation>
+      <translation>Автоматично змінює розмір сітки в залежності від масштабу поточного виду.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="47"/>
       <source>Grid auto scale</source>
-      <translation type="unfinished">Grid auto scale</translation>
+      <translation>Автомасштабування сітки</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="60"/>
@@ -4469,9 +4469,9 @@ However, no constraints linking to the endpoints were found.</source>
       <source>New points will snap to the nearest grid line.
 
 You can temporarily disable snapping by holding the &apos;Shift&apos; key.</source>
-      <translation type="unfinished">New points will snap to the nearest grid line.
+      <translation>Нові точки прилипнуть до найближчої лінії сітки.
 
-You can temporarily disable snapping by holding the &apos;Shift&apos; key.</translation>
+Ви можете тимчасово вимкнути прив'язку, утримуючи &apos;Shift&apos;.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="122"/>
@@ -4481,7 +4481,7 @@ You can temporarily disable snapping by holding the &apos;Shift&apos; key.</tran
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="141"/>
       <source>Snap tolerance:</source>
-      <translation type="unfinished">Snap tolerance:</translation>
+      <translation>Точність прив'язки:</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="154"/>
@@ -4493,17 +4493,17 @@ to the nearest grid point.</translation>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="179"/>
       <source>Do not change color for invalid or fully constrained sketch.</source>
-      <translation type="unfinished">Do not change color for invalid or fully constrained sketch.</translation>
+      <translation>Не змінює колір для некоректного або повністю обмеженого ескізу.</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="182"/>
       <source>Show original color</source>
-      <translation type="unfinished">Show original color</translation>
+      <translation>Показувати оригінальний колір</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="195"/>
       <source>Enable face external geometry picking</source>
-      <translation type="unfinished">Enable face external geometry picking</translation>
+      <translation>Увімкнути вибір грані зовнішньої геометрії</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="211"/>
@@ -4515,7 +4515,7 @@ hidden edges and points on picking external objects.</translation>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="215"/>
       <source>Auto transparent on picking</source>
-      <translation type="unfinished">Auto transparent on picking</translation>
+      <translation>Автопрозорість при виборі</translation>
     </message>
     <message>
       <location filename="../../TaskSketcherGeneral.ui" line="231"/>
@@ -5659,12 +5659,12 @@ Eigen Dense QR — щільна матриця QR з повним поворот
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2179"/>
       <source>Export Single Geometry</source>
-      <translation type="unfinished">Export Single Geometry</translation>
+      <translation>Експортувати Окрему Геометрію</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2180"/>
       <source>Export selected geometries as separate child objects</source>
-      <translation type="unfinished">Export selected geometries as separate child objects</translation>
+      <translation>Експорт виділених геометрій як окремі дочірні об'єкти</translation>
     </message>
   </context>
   <context>
@@ -5677,12 +5677,12 @@ Eigen Dense QR — щільна матриця QR з повним поворот
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2318"/>
       <source>Export Multiple Geometries</source>
-      <translation type="unfinished">Export Multiple Geometries</translation>
+      <translation>Експорт Множини Геометрій</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2319"/>
       <source>Export selected geometries as one single child objects</source>
-      <translation type="unfinished">Export selected geometries as one single child objects</translation>
+      <translation>Експорт виділених геометрій як один дочірній об’єкт</translation>
     </message>
   </context>
   <context>
@@ -5695,12 +5695,12 @@ Eigen Dense QR — щільна матриця QR з повним поворот
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2346"/>
       <source>Swap Geometry ID</source>
-      <translation type="unfinished">Swap Geometry ID</translation>
+      <translation>Поміняти ID геометрії</translation>
     </message>
     <message>
       <location filename="../../CommandSketcherTools.cpp" line="2347"/>
       <source>Swap the IDs of two selected geometies</source>
-      <translation type="unfinished">Swap the IDs of two selected geometies</translation>
+      <translation>Поміняти ID двох виділених геометрій</translation>
     </message>
   </context>
   <context>
@@ -5708,7 +5708,7 @@ Eigen Dense QR — щільна матриця QR з повним поворот
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="864"/>
       <source>Add constraint</source>
-      <translation type="unfinished">Add constraint</translation>
+      <translation>Додати обмеження</translation>
     </message>
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="867"/>
@@ -5718,7 +5718,7 @@ Eigen Dense QR — щільна матриця QR з повним поворот
     <message>
       <location filename="../../ViewProviderSketch.cpp" line="876"/>
       <source>BSpline tools</source>
-      <translation type="unfinished">BSpline tools</translation>
+      <translation>Інструменти BSpline</translation>
     </message>
   </context>
   <context>
@@ -5747,7 +5747,7 @@ Eigen Dense QR — щільна матриця QR з повним поворот
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6798"/>
       <source>Add/toggle defining geometry</source>
-      <translation type="unfinished">Add/toggle defining geometry</translation>
+      <translation>Додати/приховати визначення геометрії</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6799"/>
@@ -5820,7 +5820,7 @@ Or toggle the intersection of an already imported external geometry and make it 
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="6968"/>
       <source>Detach an external geometry</source>
-      <translation type="unfinished">Detach an external geometry</translation>
+      <translation>Від’єднати зовнішню геометрію</translation>
     </message>
   </context>
   <context>
@@ -5833,12 +5833,12 @@ Or toggle the intersection of an already imported external geometry and make it 
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7007"/>
       <source>Toggle freeze</source>
-      <translation type="unfinished">Toggle freeze</translation>
+      <translation>Перемкнути заморожування</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7008"/>
       <source>Toggle freeze of an external geometry</source>
-      <translation type="unfinished">Toggle freeze of an external geometry</translation>
+      <translation>Перемикає заморожування зовнішньої геометрії</translation>
     </message>
   </context>
   <context>
@@ -5851,7 +5851,7 @@ Or toggle the intersection of an already imported external geometry and make it 
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7045"/>
       <source>Sync geometry</source>
-      <translation type="unfinished">Sync geometry</translation>
+      <translation>Синхронізація геометрії</translation>
     </message>
     <message>
       <location filename="../../CommandCreateGeo.cpp" line="7046"/>
