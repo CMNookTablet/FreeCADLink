@@ -108,7 +108,7 @@
     <message>
       <location filename="../../../App/Cell.cpp" line="1206"/>
       <source>Reset edit mode</source>
-      <translation type="unfinished">Reset edit mode</translation>
+      <translation>Скинути режим редагування</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.cpp" line="1209"/>
