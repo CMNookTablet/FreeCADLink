@@ -11,17 +11,17 @@
     <message>
       <location filename="../DlgLocationAngle.ui" line="22"/>
       <source>A:</source>
-      <translation type="unfinished">A:</translation>
+      <translation>A:</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="43"/>
       <source>B:</source>
-      <translation type="unfinished">B:</translation>
+      <translation>B:</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="64"/>
       <source>C:</source>
-      <translation type="unfinished">C:</translation>
+      <translation>C:</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="86"/>
@@ -31,42 +31,42 @@
     <message>
       <location filename="../DlgLocationAngle.ui" line="97"/>
       <source>1 °</source>
-      <translation type="unfinished">1 °</translation>
+      <translation>1 °</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="102"/>
       <source>2 °</source>
-      <translation type="unfinished">2 °</translation>
+      <translation>2 °</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="107"/>
       <source>5 °</source>
-      <translation type="unfinished">5 °</translation>
+      <translation>5 °</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="112"/>
       <source>10 °</source>
-      <translation type="unfinished">10 °</translation>
+      <translation>10 °</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="117"/>
       <source>20 °</source>
-      <translation type="unfinished">20 °</translation>
+      <translation>20 °</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="122"/>
       <source>45 °</source>
-      <translation type="unfinished">45 °</translation>
+      <translation>45 °</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="127"/>
       <source>90 °</source>
-      <translation type="unfinished">90 °</translation>
+      <translation>90 °</translation>
     </message>
     <message>
       <location filename="../DlgLocationAngle.ui" line="132"/>
       <source>180 °</source>
-      <translation type="unfinished">180 °</translation>
+      <translation>180 °</translation>
     </message>
   </context>
   <context>
@@ -255,7 +255,7 @@
     <message>
       <location filename="../CommandView.cpp" line="2103"/>
       <source>Save view</source>
-      <translation type="unfinished">Save view</translation>
+      <translation>Зберегти вид</translation>
     </message>
     <message>
       <location filename="../CommandView.cpp" line="4006"/>
@@ -336,7 +336,7 @@
     <message>
       <location filename="../DlgExpressionInput.ui" line="56"/>
       <source>&amp;Ok</source>
-      <translation type="unfinished">&amp;Ok</translation>
+      <translation>&amp;Гаразд</translation>
     </message>
     <message>
       <location filename="../DlgExpressionInput.ui" line="121"/>
@@ -348,21 +348,22 @@ to create multi-line expressions.</translation>
     <message>
       <location filename="../DlgExpressionInput.ui" line="125"/>
       <source>No wrap</source>
-      <translation type="unfinished">No wrap</translation>
+      <translation>Без перенесення</translation>
     </message>
     <message>
       <location filename="../DlgExpressionInput.ui" line="132"/>
       <source>Auto evaluate function calls in expression and show preview.
 Be aware that some function call may have side effects and
 cause unexpected changes to objects.</source>
-      <translation type="unfinished">Auto evaluate function calls in expression and show preview.
-Be aware that some function call may have side effects and
-cause unexpected changes to objects.</translation>
+      <translation>Автоматично обчислювати виклики функцій у виразі та 
+показувати попередній перегляд. Майте на увазі, що 
+деякі виклики функцій можуть мати побічні ефекти та
+викликати неочікувані зміни в об'єктах.</translation>
     </message>
     <message>
       <location filename="../DlgExpressionInput.ui" line="137"/>
       <source>Evaluate function</source>
-      <translation type="unfinished">Evaluate function</translation>
+      <translation>Обчислити функцію</translation>
     </message>
     <message>
       <location filename="../DlgExpressionInput.ui" line="72"/>
@@ -719,7 +720,7 @@ while doing a left or right click and move the mouse up or down</source>
     <message>
       <location filename="../DlgCustomizeSpaceball.cpp" line="284"/>
       <source> &quot;</source>
-      <translation type="unfinished"> &quot;</translation>
+      <translation> &quot;</translation>
     </message>
     <message>
       <location filename="../DlgCustomizeSpaceball.cpp" line="284"/>
@@ -742,22 +743,22 @@ while doing a left or right click and move the mouse up or down</source>
     <message>
       <location filename="../DlgSettingsNavigation.cpp" line="274"/>
       <source>Q0</source>
-      <translation type="unfinished">Q0</translation>
+      <translation>Q0</translation>
     </message>
     <message>
       <location filename="../DlgSettingsNavigation.cpp" line="284"/>
       <source>Q1</source>
-      <translation type="unfinished">Q1</translation>
+      <translation>Q1</translation>
     </message>
     <message>
       <location filename="../DlgSettingsNavigation.cpp" line="294"/>
       <source>Q2</source>
-      <translation type="unfinished">Q2</translation>
+      <translation>Q2</translation>
     </message>
     <message>
       <location filename="../DlgSettingsNavigation.cpp" line="304"/>
       <source>Q3</source>
-      <translation type="unfinished">Q3</translation>
+      <translation>Q3</translation>
     </message>
     <message>
       <location filename="../DlgSettingsNavigation.cpp" line="314"/>
@@ -776,22 +777,22 @@ while doing a left or right click and move the mouse up or down</source>
     <message>
       <location filename="../Clipping.ui" line="37"/>
       <source>Invert fill color</source>
-      <translation type="unfinished">Invert fill color</translation>
+      <translation>Інвертувати колір заливки</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="50"/>
       <source>Translation increment:</source>
-      <translation type="unfinished">Translation increment:</translation>
+      <translation>Крок переміщення:</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="57"/>
       <source>Rotation increment</source>
-      <translation type="unfinished">Rotation increment</translation>
+      <translation>Крок обертання</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="64"/>
       <source>Fill clip plane</source>
-      <translation type="unfinished">Fill clip plane</translation>
+      <translation>Залити площину обрізання</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="71"/>
@@ -996,12 +997,12 @@ Do you want to enable it?</translation>
     <message>
       <location filename="../DemoMode.ui" line="148"/>
       <source>90°</source>
-      <translation type="unfinished">90°</translation>
+      <translation>90°</translation>
     </message>
     <message>
       <location filename="../DemoMode.ui" line="155"/>
       <source>-90°</source>
-      <translation type="unfinished">-90°</translation>
+      <translation>-90°</translation>
     </message>
     <message>
       <location filename="../DemoMode.ui" line="189"/>
@@ -1195,7 +1196,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     <message>
       <location filename="../DlgActions.ui" line="170"/>
       <source>What&apos;s this:</source>
-      <translation type="unfinished">What&apos;s this:</translation>
+      <translation>Що це:</translation>
     </message>
     <message>
       <location filename="../DlgActions.ui" line="137"/>
@@ -1263,7 +1264,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     <message>
       <location filename="../DlgActionsImp.cpp" line="210"/>
       <source>Sorry, couldn&apos;t find macro file &apos;%1&apos;.</source>
-      <translation type="unfinished">Sorry, couldn&apos;t find macro file &apos;%1&apos;.</translation>
+      <translation>Вибачте, не вдалося знайти файл макросу &apos;%1&apos;.</translation>
     </message>
     <message>
       <location filename="../DlgActionsImp.cpp" line="237"/>
@@ -1363,7 +1364,7 @@ be treated as shorctcut key sequence &apos;F, F&apos;.</translation>
     <message>
       <location filename="../DlgKeyboard.ui" line="183"/>
       <source>&amp;New shortcut:</source>
-      <translation type="unfinished">&amp;New shortcut:</translation>
+      <translation>&amp;Нова комбінація клавіш:</translation>
     </message>
     <message>
       <location filename="../DlgKeyboard.ui" line="204"/>
@@ -1377,7 +1378,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgKeyboard.ui" line="209"/>
       <source>Shortcut priority list:</source>
-      <translation type="unfinished">Shortcut priority list:</translation>
+      <translation>Список пріоритетів комбінацій клавіш:</translation>
     </message>
     <message>
       <location filename="../DlgKeyboard.ui" line="235"/>
@@ -1387,7 +1388,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgKeyboard.ui" line="238"/>
       <source>Alt+A</source>
-      <translation type="unfinished">Alt+A</translation>
+      <translation>Alt+A</translation>
     </message>
     <message>
       <location filename="../DlgKeyboard.ui" line="252"/>
@@ -1397,7 +1398,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgKeyboard.ui" line="255"/>
       <source>Alt+R</source>
-      <translation type="unfinished">Alt+R</translation>
+      <translation>Alt+R</translation>
     </message>
     <message>
       <location filename="../DlgKeyboard.ui" line="262"/>
@@ -1407,7 +1408,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgKeyboard.ui" line="265"/>
       <source>Alt+S</source>
-      <translation type="unfinished">Alt+S</translation>
+      <translation>Alt+S</translation>
     </message>
     <message>
       <location filename="../DlgKeyboard.ui" line="291"/>
@@ -1434,7 +1435,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgKeyboardImp.cpp" line="120"/>
       <source>Type to search...</source>
-      <translation type="unfinished">Type to search...</translation>
+      <translation>Введіть текст для пошуку...</translation>
     </message>
     <message>
       <location filename="../DlgKeyboardImp.cpp" line="194"/>
@@ -1449,7 +1450,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgKeyboardImp.cpp" line="194"/>
       <source>Shortcut</source>
-      <translation type="unfinished">Shortcut</translation>
+      <translation>Комбінація клавіш</translation>
     </message>
     <message>
       <location filename="../DlgKeyboardImp.cpp" line="194"/>
@@ -1510,7 +1511,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbars.ui" line="430"/>
       <source>Shortcut priority list:</source>
-      <translation type="unfinished">Shortcut priority list:</translation>
+      <translation>Список пріоритетів комбінацій клавіш:</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="440"/>
@@ -1525,7 +1526,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbars.ui" line="471"/>
       <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt; The changes become active the next time you load the appropriate workbench&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note:&lt;/span&gt; The changes become active the next time you load the appropriate workbench&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:7.8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Примітка:&lt;/span&gt; Зміни стають активними при наступному завантаженні відповідного робочого середовища&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="116"/>
@@ -1535,7 +1536,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbars.ui" line="51"/>
       <source>Category:</source>
-      <translation type="unfinished">Category:</translation>
+      <translation>Категорія:</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="119"/>
@@ -1575,17 +1576,17 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbars.ui" line="269"/>
       <source>Create a new toolbar containing recently used commands.</source>
-      <translation type="unfinished">Create a new toolbar containing recently used commands.</translation>
+      <translation>Створити нову панель інструментів, що містить нещодавно використані команди.</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="272"/>
       <source>Recent</source>
-      <translation type="unfinished">Recent</translation>
+      <translation>Нещодавні</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="292"/>
       <source>Workbench:</source>
-      <translation type="unfinished">Workbench:</translation>
+      <translation>Робоче середовище:</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="306"/>
@@ -1641,7 +1642,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbarsImp.cpp" line="121"/>
       <source>Shortcut</source>
-      <translation type="unfinished">Shortcut</translation>
+      <translation>Комбінація клавіш</translation>
     </message>
     <message>
       <location filename="../DlgToolbarsImp.cpp" line="121"/>
@@ -2860,7 +2861,7 @@ Note: your changes will be applied when you next switch workbenches
     <message>
       <location filename="../DlgMaterialProperties.ui" line="111"/>
       <source>%</source>
-      <translation type="unfinished">%</translation>
+      <translation>%</translation>
     </message>
     <message>
       <location filename="../DlgMaterialProperties.ui" line="52"/>
@@ -3052,7 +3053,7 @@ You can then selectively export only the changed ones.</translation>
       <location filename="../DlgParameter.ui" line="269"/>
       <location filename="../DlgParameter.ui" line="285"/>
       <source>Alt+C</source>
-      <translation type="unfinished">Alt+C</translation>
+      <translation>Alt+C</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="282"/>
@@ -3836,17 +3837,17 @@ from Python console to Report view panel</source>
     <message>
       <location filename="../DlgSettings3DView.ui" line="298"/>
       <source>MSAA 2x</source>
-      <translation type="unfinished">MSAA 2x</translation>
+      <translation>MSAA 2x</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="303"/>
       <source>MSAA 4x</source>
-      <translation type="unfinished">MSAA 4x</translation>
+      <translation>MSAA 4x</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="308"/>
       <source>MSAA 8x</source>
-      <translation type="unfinished">MSAA 8x</translation>
+      <translation>MSAA 8x</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="546"/>
@@ -4204,7 +4205,7 @@ bounding box size of the 3D object that is currently displayed.</source>
     <message>
       <location filename="../DlgSettingsColorGradient.ui" line="154"/>
       <source>Alt+R</source>
-      <translation type="unfinished">Alt+R</translation>
+      <translation>Alt+R</translation>
     </message>
     <message>
       <location filename="../DlgSettingsColorGradient.ui" line="161"/>
@@ -4214,7 +4215,7 @@ bounding box size of the 3D object that is currently displayed.</source>
     <message>
       <location filename="../DlgSettingsColorGradient.ui" line="164"/>
       <source>Alt+I</source>
-      <translation type="unfinished">Alt+I</translation>
+      <translation>Alt+I</translation>
     </message>
     <message>
       <location filename="../DlgSettingsColorGradient.ui" line="101"/>
@@ -4229,7 +4230,7 @@ bounding box size of the 3D object that is currently displayed.</source>
     <message>
       <location filename="../DlgSettingsColorGradient.ui" line="116"/>
       <source>Alt+Z</source>
-      <translation type="unfinished">Alt+Z</translation>
+      <translation>Alt+Z</translation>
     </message>
     <message>
       <location filename="../DlgSettingsColorGradient.ui" line="123"/>
@@ -4239,7 +4240,7 @@ bounding box size of the 3D object that is currently displayed.</source>
     <message>
       <location filename="../DlgSettingsColorGradient.ui" line="126"/>
       <source>Alt+F</source>
-      <translation type="unfinished">Alt+F</translation>
+      <translation>Alt+F</translation>
     </message>
     <message>
       <location filename="../DlgSettingsColorGradient.ui" line="174"/>
@@ -4826,37 +4827,37 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     <message>
       <location filename="../DlgSettingsImage.ui" line="282"/>
       <source>Alt+S</source>
-      <translation type="unfinished">Alt+S</translation>
+      <translation>Alt+S</translation>
     </message>
     <message>
       <location filename="../DlgSettingsImage.ui" line="289"/>
       <source>&amp;4:3</source>
-      <translation type="unfinished">&amp;4:3</translation>
+      <translation>&amp;4:3</translation>
     </message>
     <message>
       <location filename="../DlgSettingsImage.ui" line="292"/>
       <source>Alt+4</source>
-      <translation type="unfinished">Alt+4</translation>
+      <translation>Alt+4</translation>
     </message>
     <message>
       <location filename="../DlgSettingsImage.ui" line="299"/>
       <source>1&amp;6:9</source>
-      <translation type="unfinished">1&amp;6:9</translation>
+      <translation>1&amp;6:9</translation>
     </message>
     <message>
       <location filename="../DlgSettingsImage.ui" line="302"/>
       <source>Alt+6</source>
-      <translation type="unfinished">Alt+6</translation>
+      <translation>Alt+6</translation>
     </message>
     <message>
       <location filename="../DlgSettingsImage.ui" line="309"/>
       <source>&amp;1:1</source>
-      <translation type="unfinished">&amp;1:1</translation>
+      <translation>&amp;1:1</translation>
     </message>
     <message>
       <location filename="../DlgSettingsImage.ui" line="312"/>
       <source>Alt+1</source>
-      <translation type="unfinished">Alt+1</translation>
+      <translation>Alt+1</translation>
     </message>
     <message>
       <location filename="../DlgSettingsImage.ui" line="395"/>
@@ -5008,7 +5009,7 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     <message>
       <location filename="../DlgSettingsMacro.ui" line="122"/>
       <source>FullScript.FCScript</source>
-      <translation type="unfinished">FullScript.FCScript</translation>
+      <translation>FullScript.FCScript</translation>
     </message>
     <message>
       <location filename="../DlgSettingsMacro.ui" line="138"/>
@@ -5117,12 +5118,12 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     <message>
       <location filename="../DlgSettingsNavigation.ui" line="29"/>
       <source>Colors...</source>
-      <translation type="unfinished">Colors...</translation>
+      <translation>Кольори...</translation>
     </message>
     <message>
       <location filename="../DlgSettingsNavigation.ui" line="36"/>
       <source>Labels...</source>
-      <translation type="unfinished">Labels...</translation>
+      <translation>Мітки...</translation>
     </message>
     <message>
       <location filename="../DlgSettingsNavigation.ui" line="43"/>
@@ -5634,32 +5635,32 @@ select hidden face at various depth.</translation>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="122"/>
       <source>1/4&quot;</source>
-      <translation type="unfinished">1/4&quot;</translation>
+      <translation>1/4&quot;</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="127"/>
       <source>1/8&quot;</source>
-      <translation type="unfinished">1/8&quot;</translation>
+      <translation>1/8&quot;</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="132"/>
       <source>1/16&quot;</source>
-      <translation type="unfinished">1/16&quot;</translation>
+      <translation>1/16&quot;</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="137"/>
       <source>1/32&quot;</source>
-      <translation type="unfinished">1/32&quot;</translation>
+      <translation>1/32&quot;</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="142"/>
       <source>1/64&quot;</source>
-      <translation type="unfinished">1/64&quot;</translation>
+      <translation>1/64&quot;</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="147"/>
       <source>1/128&quot;</source>
-      <translation type="unfinished">1/128&quot;</translation>
+      <translation>1/128&quot;</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="79"/>
@@ -5847,7 +5848,7 @@ Set to -1 to use the same setting of the above &apos;Number of decimals&apos;.</
     <message>
       <location filename="../DlgUnitsCalculator.ui" line="58"/>
       <source>=&gt;</source>
-      <translation type="unfinished">=&gt;</translation>
+      <translation>=&gt;</translation>
     </message>
     <message>
       <location filename="../DlgUnitsCalculator.ui" line="100"/>
@@ -6193,7 +6194,7 @@ The &apos;Status&apos; column shows whether the document could be recovered.</tr
     <message>
       <location filename="../DownloadItem.cpp" line="564"/>
       <source>?</source>
-      <translation type="unfinished">?</translation>
+      <translation>?</translation>
     </message>
     <message>
       <location filename="../DownloadItem.cpp" line="571"/>
@@ -9590,7 +9591,7 @@ Please check report view for more details.</translation>
     <message>
       <location filename="../Application.cpp" line="1626"/>
       <source>%1</source>
-      <translation type="unfinished">%1</translation>
+      <translation>%1</translation>
     </message>
     <message>
       <location filename="../Command.cpp" line="552"/>
@@ -10728,7 +10729,7 @@ Alt + click to toggle show on top.</translation>
     <message>
       <location filename="../DlgSettingsObjects.cpp" line="206"/>
       <source>App::Link</source>
-      <translation type="unfinished">App::Link</translation>
+      <translation>App::Link</translation>
     </message>
     <message>
       <location filename="../DlgSettingsObjects.cpp" line="208"/>
@@ -10813,7 +10814,7 @@ Alt + click to toggle show on top.</translation>
     <message>
       <location filename="../NaviCube.cpp" line="2098"/>
       <source>Colors...</source>
-      <translation type="unfinished">Colors...</translation>
+      <translation>Кольори...</translation>
     </message>
     <message>
       <location filename="../NaviCube.cpp" line="2099"/>
@@ -10823,7 +10824,7 @@ Alt + click to toggle show on top.</translation>
     <message>
       <location filename="../NaviCube.cpp" line="2104"/>
       <source>Labels...</source>
-      <translation type="unfinished">Labels...</translation>
+      <translation>Мітки...</translation>
     </message>
     <message>
       <location filename="../NaviCube.cpp" line="2105"/>
@@ -14000,7 +14001,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../iisTaskPanel/tests/styles/styles.ui" line="73"/>
       <source>Windows XP</source>
-      <translation type="unfinished">Windows XP</translation>
+      <translation>Windows XP</translation>
     </message>
   </context>
   <context>
@@ -15279,7 +15280,7 @@ This is used as a debug help for output command from external libraries</transla
     <message>
       <location filename="../CommandView.cpp" line="2089"/>
       <source>Save view</source>
-      <translation type="unfinished">Save view</translation>
+      <translation>Зберегти вид</translation>
     </message>
     <message>
       <location filename="../CommandView.cpp" line="2090"/>
@@ -15967,7 +15968,7 @@ Ctrl + Click to revert to default.</translation>
     <message>
       <location filename="../PrefWidgets.cpp" line="994"/>
       <source>Dash Dot</source>
-      <translation type="unfinished">Dash Dot</translation>
+      <translation>Штрих-пунктир</translation>
     </message>
   </context>
   <context>
@@ -16031,7 +16032,7 @@ Ctrl + Click to revert to default.</translation>
       <location filename="Translator.cpp" line="256"/>
       <source>QT_LAYOUT_DIRECTION</source>
       <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
-      <translation type="unfinished">QT_LAYOUT_DIRECTION</translation>
+      <translation>LTR</translation>
     </message>
   </context>
 </TS>
