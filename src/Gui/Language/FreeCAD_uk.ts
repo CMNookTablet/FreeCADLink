@@ -797,61 +797,61 @@ while doing a left or right click and move the mouse up or down</source>
     <message>
       <location filename="../Clipping.ui" line="71"/>
       <source>Hatch scale</source>
-      <translation type="unfinished">Hatch scale</translation>
+      <translation>Масштаб штрихування</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="78"/>
       <source>Hatch texture</source>
-      <translation type="unfinished">Hatch texture</translation>
+      <translation>Текстура штрихування</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="91"/>
       <source>No clipping on top</source>
-      <translation type="unfinished">No clipping on top</translation>
+      <translation>Без обрізки зверху</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="104"/>
       <source>Back face light</source>
-      <translation type="unfinished">Back face light</translation>
+      <translation>Підсвічування задньої стінки</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="136"/>
       <source>Show clip plane</source>
-      <translation type="unfinished">Show clip plane</translation>
+      <translation>Показати площину обрізання</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="164"/>
       <source>Intensity of the back fac light</source>
-      <translation type="unfinished">Intensity of the back fac light</translation>
+      <translation>Інтенсивність підсвічування задньої стінки</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="201"/>
       <source>Clip plane visual size</source>
-      <translation type="unfinished">Clip plane visual size</translation>
+      <translation>Візуальний розмір площини обрізання</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="232"/>
       <source>Concave section</source>
-      <translation type="unfinished">Concave section</translation>
+      <translation>Увігнутий переріз</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="257"/>
       <source>Back face light color</source>
-      <translation type="unfinished">Back face light color</translation>
+      <translation>Колір підсвічування задньої стінки</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="318"/>
       <source>Render clip section fill of objects with similar materials
 so that the intersecting objects effectively become a
 boolean substraction operation.</source>
-      <translation type="unfinished">Render clip section fill of objects with similar materials
-so that the intersecting objects effectively become a
-boolean substraction operation.</translation>
+      <translation>Відтворити заливку перетину об'єктів схожими матеріалами
+так, щоб об'єкти послідовно перетворювались на булеву 
+операцію віднімання.</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="323"/>
       <source>Grouped rendering</source>
-      <translation type="unfinished">Grouped rendering</translation>
+      <translation>Груповий рендеринг</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="341"/>
@@ -891,17 +891,17 @@ boolean substraction operation.</translation>
     <message>
       <location filename="../Clipping.ui" line="543"/>
       <source>Angles</source>
-      <translation type="unfinished">Angles</translation>
+      <translation>Кути</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="549"/>
       <source>Intrinsic Euler angle about local Y axis</source>
-      <translation type="unfinished">Intrinsic Euler angle about local Y axis</translation>
+      <translation>Внутрішній кут Ейлера відносно локальної осі Y</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="556"/>
       <source>Intrinsic Euler angle about X axis</source>
-      <translation type="unfinished">Intrinsic Euler angle about X axis</translation>
+      <translation>Внутрішній кут Ейлера відносно локальної осі X</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="586"/>
@@ -939,9 +939,9 @@ selecting it before clicking &apos;Save/SaveAll&apos;.</translation>
       <source>Cross section fill only works with &apos;Experiemental&apos; render cache (Preferences -&gt; Display -&gt; Render cache).
 
 Do you want to enable it?</source>
-      <translation type="unfinished">Cross section fill only works with &apos;Experiemental&apos; render cache (Preferences -&gt; Display -&gt; Render cache).
+      <translation>Заливка перерізу працює тільки з &apos;Експериментальним&apos; кешем рендерингу (Налаштування -&gt; Показ -&gt; Кеш рендерингу).
 
-Do you want to enable it?</translation>
+Бажаєте його увімкнути?</translation>
     </message>
   </context>
   <context>
@@ -1086,11 +1086,11 @@ In this case the prefix will be automatically trimmed when shown in the property
 However, the property is still used in a script with the full name, like &apos;obj.Group_Name&apos;.
 
 If this is not ticked, then the property must be uniquely named, and it is accessed like &apos;obj.Name&apos;.</source>
-      <translation type="unfinished">Prefix the property name with the group name in the form &apos;Group_Name&apos; to avoid conflicts with an existing property.
-In this case the prefix will be automatically trimmed when shown in the property editor.
-However, the property is still used in a script with the full name, like &apos;obj.Group_Name&apos;.
+      <translation>Префіксувати назву властивості із назвою групи у вигляді &apos;Group_Name&apos; для уникнення конфліктів з наявною властивістю.
+У цьому випадку префікс буде автоматично обрізаний у редакторі властивостей.
+Однак властивість все ще використовується в скрипті з повним іменем, наприклад, &apos;obj.Group_Name&apos;.
 
-If this is not ticked, then the property must be uniquely named, and it is accessed like &apos;obj.Name&apos;.</translation>
+Якщо цей параметр не відмічено, то властивість повинна бути унікальною і доступна як &apos;obj.Name&apos;.</translation>
     </message>
     <message>
       <location filename="../DlgAddProperty.ui" line="74"/>
@@ -1606,7 +1606,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbars.ui" line="319"/>
       <source>Assign</source>
-      <translation type="unfinished">Assign</translation>
+      <translation>Призначити</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="326"/>
@@ -1673,7 +1673,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbarsImp.cpp" line="592"/>
       <source>The toolbar name &apos;%1&apos; is already used</source>
-      <translation type="unfinished">The toolbar name &apos;%1&apos; is already used</translation>
+      <translation>Назва панелі інструментів &apos;%1&apos; вже використовується</translation>
     </message>
     <message>
       <location filename="../DlgToolbarsImp.cpp" line="584"/>
@@ -1963,12 +1963,12 @@ uniform color for all vertices.</translation>
     <message>
       <location filename="../DlgDisplayPropertiesImp.cpp" line="557"/>
       <source>Neon GNC</source>
-      <translation type="unfinished">Neon GNC</translation>
+      <translation>Neon GNC</translation>
     </message>
     <message>
       <location filename="../DlgDisplayPropertiesImp.cpp" line="558"/>
       <source>Neon PHC</source>
-      <translation type="unfinished">Neon PHC</translation>
+      <translation>Neon PHC</translation>
     </message>
     <message>
       <location filename="../DlgDisplayPropertiesImp.cpp" line="559"/>
@@ -2158,7 +2158,7 @@ uniform color for all vertices.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="44"/>
       <source>Auto apply</source>
-      <translation type="unfinished">Auto apply</translation>
+      <translation>Автоматичне застосування</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="60"/>
@@ -2193,7 +2193,7 @@ uniform color for all vertices.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="167"/>
       <source>Icon size:</source>
-      <translation type="unfinished">Icon size:</translation>
+      <translation>Розмір іконки:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="174"/>
@@ -2329,7 +2329,7 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="680"/>
       <source>Size of tool tip icon:</source>
-      <translation type="unfinished">Size of tool tip icon:</translation>
+      <translation>Розмір іконки в тексті підказки:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="711"/>
@@ -2344,7 +2344,7 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="295"/>
       <source>Language of the application&apos;s user interface</source>
-      <translation type="unfinished">Language of the application&apos;s user interface</translation>
+      <translation>Мова інтерфейсу користувача програми</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="366"/>
@@ -2392,11 +2392,11 @@ this according to your screen size or personal taste</source>
 &apos;ComboView&apos;: combine tree view and property view into one panel.
 &apos;TreeView and PropertyView&apos;: split tree view and property view into separate panel.
 &apos;Both&apos;: keep all three panels, and you can have two sets of tree view and property view.</source>
-      <translation type="unfinished">Customize how tree view is shown in the panel (restart required).
+      <translation>Налаштовує, як ієрархія документа буде зображатись в панелі (вимагає перезапуску).
 
-&apos;ComboView&apos;: combine tree view and property view into one panel.
-&apos;TreeView and PropertyView&apos;: split tree view and property view into separate panel.
-&apos;Both&apos;: keep all three panels, and you can have two sets of tree view and property view.</translation>
+&apos;Комбінований&apos;: комбінує Вид Ієрархії та Вид Властивостей в одній панелі.
+&apos;Вид Ієрархіі та Властивостей&apos;: розділення Виду Ієрархії та Виду Властивостей на окремі панелі.
+&apos;Перше та Друге&apos;: показує всі три панелі. Ви отримаєте два набори Ієрархії та Вид Властивостей.</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="103"/>
@@ -2417,8 +2417,8 @@ after FreeCAD launches</source>
       <location filename="../DlgGeneral.ui" line="732"/>
       <source>Words will be wrapped when they exceed available
 horizontal space in Python console</source>
-      <translation type="unfinished">Words will be wrapped when they exceed available
-horizontal space in Python console</translation>
+      <translation>Слова будуть перенесені при перевищенні максимального розміру
+строки в консолі Python</translation>
     </message>
   </context>
   <context>
@@ -2520,7 +2520,7 @@ horizontal space in Python console</translation>
     <message>
       <location filename="../SceneInspector.cpp" line="467"/>
       <source>count: %1</source>
-      <translation type="unfinished">count: %1</translation>
+      <translation>кількість: %1</translation>
     </message>
   </context>
   <context>
@@ -2625,8 +2625,8 @@ horizontal space in Python console</translation>
       <location filename="../DlgMacroExecuteImp.cpp" line="377"/>
       <source>&apos;%1&apos;.
 This file already exists.</source>
-      <translation type="unfinished">&apos;%1&apos;.
-This file already exists.</translation>
+      <translation>&apos;%1&apos;.
+Цей файл вже існує.</translation>
     </message>
     <message>
       <location filename="../DlgMacroExecuteImp.cpp" line="417"/>
@@ -2636,7 +2636,7 @@ This file already exists.</translation>
     <message>
       <location filename="../DlgMacroExecuteImp.cpp" line="418"/>
       <source>Do you really want to delete the macro &apos;%1&apos;?</source>
-      <translation type="unfinished">Do you really want to delete the macro &apos;%1&apos;?</translation>
+      <translation>Ви дійсно бажаєте видалити макрос &apos;%1&apos;?</translation>
     </message>
     <message>
       <location filename="../DlgMacroExecuteImp.cpp" line="383"/>
@@ -2646,7 +2646,7 @@ This file already exists.</translation>
     <message>
       <location filename="../DlgMacroExecuteImp.cpp" line="384"/>
       <source>Creation of file &apos;%1&apos; failed.</source>
-      <translation type="unfinished">Creation of file &apos;%1&apos; failed.</translation>
+      <translation>Помилка створення файлу &apos;%1&apos;.</translation>
     </message>
     <message>
       <location filename="../DlgMacroExecuteImp.cpp" line="343"/>
@@ -2669,8 +2669,8 @@ This file already exists.</translation>
       <location filename="../DlgMacroExecuteImp.cpp" line="841"/>
       <source>&apos;%1&apos;
  already exists.</source>
-      <translation type="unfinished">&apos;%1&apos;
- already exists.</translation>
+      <translation>&apos;%1&apos;
+ вже існує.</translation>
     </message>
     <message>
       <location filename="../DlgMacroExecuteImp.cpp" line="711"/>
@@ -2681,8 +2681,8 @@ This file already exists.</translation>
       <location filename="../DlgMacroExecuteImp.cpp" line="712"/>
       <source>Failed to rename to &apos;%1&apos;.
 Perhaps a file permission error?</source>
-      <translation type="unfinished">Failed to rename to &apos;%1&apos;.
-Perhaps a file permission error?</translation>
+      <translation>Помилка перейменування &apos;%1&apos;.
+Можливо помилка доступу до файлу?</translation>
     </message>
     <message>
       <location filename="../DlgMacroExecuteImp.cpp" line="826"/>
@@ -2698,8 +2698,8 @@ Perhaps a file permission error?</translation>
       <location filename="../DlgMacroExecuteImp.cpp" line="845"/>
       <source>Failed to duplicate to &apos;%1&apos;.
 Perhaps a file permission error?</source>
-      <translation type="unfinished">Failed to duplicate to &apos;%1&apos;.
-Perhaps a file permission error?</translation>
+      <translation>Помилка дублювання &apos;%1&apos;.
+Можливо помилка доступу до файлу?</translation>
     </message>
     <message>
       <location filename="../DlgMacroExecuteImp.cpp" line="448"/>
@@ -2813,12 +2813,12 @@ Note: your changes will be applied when you next switch workbenches
     <message>
       <location filename="../DlgMacroRecordImp.cpp" line="106"/>
       <source>The macro &apos;%1&apos; already exists. Do you want to overwrite?</source>
-      <translation type="unfinished">The macro &apos;%1&apos; already exists. Do you want to overwrite?</translation>
+      <translation>Макрос &apos;%1&apos; вже існує. Бажаєте перезаписати?</translation>
     </message>
     <message>
       <location filename="../DlgMacroRecordImp.cpp" line="96"/>
       <source>The macro directory doesn&apos;t exist. Please, choose another one.</source>
-      <translation type="unfinished">The macro directory doesn&apos;t exist. Please, choose another one.</translation>
+      <translation>Тека макросів не існує. Виберіть іншу.</translation>
     </message>
     <message>
       <location filename="../DlgMacroRecordImp.cpp" line="154"/>
@@ -2908,9 +2908,9 @@ Note: your changes will be applied when you next switch workbenches
       <source>Access denied to &apos;%1&apos;
 
 Specify another directory, please.</source>
-      <translation type="unfinished">Access denied to &apos;%1&apos;
+      <translation>Немає доступу до &apos;%1&apos;
 
-Specify another directory, please.</translation>
+Будь ласка, вкажіть іншу теку.</translation>
     </message>
     <message>
       <location filename="../DlgOnlineHelpImp.cpp" line="54"/>
@@ -3136,7 +3136,7 @@ You can then selectively export only the changed ones.</translation>
     <message>
       <location filename="../DlgParameterFind.cpp" line="278"/>
       <source>Can&apos;t find the text: %1</source>
-      <translation type="unfinished">Can&apos;t find the text: %1</translation>
+      <translation>Не вдається знайти текст: %1</translation>
     </message>
   </context>
   <context>
@@ -3206,7 +3206,7 @@ Do you want to make a backup?</translation>
       <location filename="../DlgParameterImp.cpp" line="631"/>
       <location filename="../DlgParameterImp.cpp" line="1411"/>
       <source>Import parameter from file</source>
-      <translation type="unfinished">Import parameter from file</translation>
+      <translation>Імпорт параметрів з файлу</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="632"/>
@@ -3244,12 +3244,12 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1214"/>
       <source>Invalid key name &apos;%1&apos;</source>
-      <translation type="unfinished">Invalid key name &apos;%1&apos;</translation>
+      <translation>Невірне імʼя ключа &apos;%1&apos;</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1385"/>
       <source>Export parameter to file</source>
-      <translation type="unfinished">Export parameter to file</translation>
+      <translation>Експорт параметрів до файлу</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1393"/>
@@ -3284,7 +3284,7 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1463"/>
       <source>Reading from &apos;%1&apos; failed.</source>
-      <translation type="unfinished">Reading from &apos;%1&apos; failed.</translation>
+      <translation>Не вдалося прочитати з &apos;%1&apos;.</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="121"/>
@@ -3406,7 +3406,7 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgProjectInformation.ui" line="87"/>
       <source>UUID:</source>
-      <translation type="unfinished">UUID:</translation>
+      <translation>UUID:</translation>
     </message>
     <message>
       <location filename="../DlgProjectInformation.ui" line="254"/>
@@ -3970,7 +3970,7 @@ but slower response to any scene changes.
     <message>
       <location filename="../DlgSettings3DView.ui" line="448"/>
       <source>Experimental</source>
-      <translation type="unfinished">Experimental</translation>
+      <translation>Експериментальний</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="489"/>
@@ -3980,7 +3980,7 @@ but slower response to any scene changes.
     <message>
       <location filename="../DlgSettings3DView.ui" line="496"/>
       <source>Renderer</source>
-      <translation type="unfinished">Renderer</translation>
+      <translation>Візуалізатор</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="503"/>
@@ -3990,7 +3990,7 @@ but slower response to any scene changes.
     <message>
       <location filename="../DlgSettings3DView.ui" line="700"/>
       <source>Apply to existing views</source>
-      <translation type="unfinished">Apply to existing views</translation>
+      <translation>Застосувати до наявних видів</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="433"/>
@@ -4397,7 +4397,7 @@ bounding box size of the 3D object that is currently displayed.</source>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="774"/>
       <source>FreeArt</source>
-      <translation type="unfinished">FreeArt</translation>
+      <translation>FreeArt</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="779"/>
@@ -4499,8 +4499,8 @@ Common sizes are 128, 256 and 512</source>
       <location filename="../DlgSettingsDocument.ui" line="261"/>
       <source>Backup files will get extension &apos;.FCbak&apos; and file names
 get date suffix according to the specified format</source>
-      <translation type="unfinished">Backup files will get extension &apos;.FCbak&apos; and file names
-get date suffix according to the specified format</translation>
+      <translation>Файли резервних копій отримають розширення &apos;.FCbak&apos; 
+і суфікс з датою відповідно до вказаного формату</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="166"/>
@@ -4582,7 +4582,7 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="675"/>
       <source>The field &apos;Last modified by&apos; will be set to specified author when saving the file</source>
-      <translation type="unfinished">The field &apos;Last modified by&apos; will be set to specified author when saving the file</translation>
+      <translation>Під час збереження файлу поле &apos;Востаннє модифіковано&apos; буде заповнене зазначеним автором</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="698"/>
@@ -4597,32 +4597,32 @@ You can also use the form: John Doe &lt;john@doe.com&gt;</source>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="739"/>
       <source>Creative Commons Attribution</source>
-      <translation type="unfinished">Creative Commons Attribution</translation>
+      <translation>Creative Commons Attribution</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="744"/>
       <source>Creative Commons Attribution-ShareAlike</source>
-      <translation type="unfinished">Creative Commons Attribution-ShareAlike</translation>
+      <translation>Creative Commons Attribution-ShareAlike</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="749"/>
       <source>Creative Commons Attribution-NoDerivatives</source>
-      <translation type="unfinished">Creative Commons Attribution-NoDerivatives</translation>
+      <translation>Creative Commons Attribution-NoDerivatives</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="754"/>
       <source>Creative Commons Attribution-NonCommercial</source>
-      <translation type="unfinished">Creative Commons Attribution-NonCommercial</translation>
+      <translation>Creative Commons Attribution-NonCommercial</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="759"/>
       <source>Creative Commons Attribution-NonCommercial-ShareAlike</source>
-      <translation type="unfinished">Creative Commons Attribution-NonCommercial-ShareAlike</translation>
+      <translation>Creative Commons Attribution-NonCommercial-ShareAlike</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="764"/>
       <source>Creative Commons Attribution-NonCommercial-NoDerivatives</source>
-      <translation type="unfinished">Creative Commons Attribution-NonCommercial-NoDerivatives</translation>
+      <translation>Creative Commons Attribution-NonCommercial-NoDerivatives</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDocument.ui" line="794"/>
@@ -5410,8 +5410,8 @@ Mouse tilting is not disabled by this setting.</source>
       <location filename="../DlgSettingsNavigation.ui" line="223"/>
       <source>How much will be zoomed.
 Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</source>
-      <translation type="unfinished">How much will be zoomed.
-Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</translation>
+      <translation>Визначає коефіцієнт збільшення.
+Крок масштабування &apos;1&apos; дорівнює коефіцієнту збільшення 7,5.</translation>
     </message>
   </context>
   <context>
@@ -5630,7 +5630,7 @@ select hidden face at various depth.</translation>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="117"/>
       <source>1/2&quot;</source>
-      <translation type="unfinished">1/2&quot;</translation>
+      <translation>1/2&quot;</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUnits.ui" line="122"/>
@@ -5968,7 +5968,7 @@ The preference system is the one set in the general preferences.</source>
     <message>
       <location filename="../DlgWorkbenches.ui" line="110"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected item down.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved down&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected item down.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved down&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Перемістіть виділений елемент вниз.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Елемент буде переміщено вниз&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../DlgWorkbenches.ui" line="136"/>
@@ -5979,7 +5979,7 @@ The preference system is the one set in the general preferences.</source>
       <location filename="../DlgWorkbenches.ui" line="139"/>
       <location filename="../DlgWorkbenches.ui" line="259"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remove the selected workbench from enabled workbenches&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Remove the selected workbench from enabled workbenches&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Видалити виділене робоче середовище зі списку активованих&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../DlgWorkbenches.ui" line="168"/>
@@ -5989,7 +5989,7 @@ The preference system is the one set in the general preferences.</source>
     <message>
       <location filename="../DlgWorkbenches.ui" line="171"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected workbench to enabled workbenches.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected workbench to enabled workbenches.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Додати виділене робоче середовище до списку активованих&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../DlgWorkbenches.ui" line="194"/>
@@ -6004,7 +6004,7 @@ The preference system is the one set in the general preferences.</source>
     <message>
       <location filename="../DlgWorkbenches.ui" line="226"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected item up.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Move the selected item up.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The item will be moved up.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Перемістіть виділений елемент вгору.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Елемент буде переміщено вгору&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../DlgWorkbenches.ui" line="256"/>
@@ -6019,7 +6019,7 @@ The preference system is the one set in the general preferences.</source>
     <message>
       <location filename="../DlgWorkbenches.ui" line="240"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600;&quot;&gt;Note:&lt;/span&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt; The changes become active the next time you start the application&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600;&quot;&gt;Note:&lt;/span&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt; The changes become active the next time you start the application&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt; font-weight:600;&quot;&gt;Примітка:&lt;/span&gt;&lt;span style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8pt;&quot;&gt; Зміни будуть активовані при наступному запуску&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
   </context>
   <context>
@@ -6107,7 +6107,7 @@ The preference system is the one set in the general preferences.</source>
     <message>
       <location filename="../DocumentRecovery.cpp" line="518"/>
       <source>When deleting the selected transient directory you won&apos;t be able to recover any files afterwards.</source>
-      <translation type="unfinished">When deleting the selected transient directory you won&apos;t be able to recover any files afterwards.</translation>
+      <translation>При видаленні виділених тимчасових тек, ви не зможете відновити після цього будь-які файли.</translation>
     </message>
     <message>
       <location filename="../DocumentRecovery.cpp" line="549"/>
@@ -6129,14 +6129,14 @@ The preference system is the one set in the general preferences.</source>
       <source>Press &apos;Start Recovery&apos; to start the recovery process of the document listed below.
 
 The &apos;Status&apos; column shows whether the document could be recovered.</source>
-      <translation type="unfinished">Press &apos;Start Recovery&apos; to start the recovery process of the document listed below.
+      <translation>Натисніть ʼПочати відновленняʼ щоб почати процес відновлення документів, що перелічені нижче.
 
-The &apos;Status&apos; column shows whether the document could be recovered.</translation>
+Колонка ʼСтатусʼ показує чи можливе відновлення документів.</translation>
     </message>
     <message>
       <location filename="../DocumentRecovery.cpp" line="550"/>
       <source>When deleting all transient directories you won&apos;t be able to recover any files afterwards.</source>
-      <translation type="unfinished">When deleting all transient directories you won&apos;t be able to recover any files afterwards.</translation>
+      <translation>При видаленні всіх тимчасових тек, ви не зможете відновити після цього будь-які файли.</translation>
     </message>
   </context>
   <context>
@@ -6411,7 +6411,7 @@ Only an empty group is allowed to accept import.</translation>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1365"/>
       <source>The sub-group &apos;%1&apos; already exists.</source>
-      <translation type="unfinished">The sub-group &apos;%1&apos; already exists.</translation>
+      <translation>Підгрупа &apos;%1&apos; вже існує.</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1317"/>
@@ -6497,7 +6497,7 @@ Only an empty group is allowed to accept import.</translation>
       <location filename="../DlgParameterImp.cpp" line="1790"/>
       <location filename="../DlgParameterImp.cpp" line="1819"/>
       <source>The item &apos;%1&apos; already exists.</source>
-      <translation type="unfinished">The item &apos;%1&apos; already exists.</translation>
+      <translation>Елемент &apos;%1&apos; вже існує.</translation>
     </message>
   </context>
   <context>
@@ -6653,7 +6653,7 @@ Only an empty group is allowed to accept import.</translation>
     <message>
       <location filename="../Placement.ui" line="372"/>
       <source>Euler angles (zy&apos;x&apos;&apos;)</source>
-      <translation type="unfinished">Euler angles (zy&apos;x&apos;&apos;)</translation>
+      <translation>Кути Ейлера (zy&apos;x&apos;&apos;)</translation>
     </message>
   </context>
   <context>
@@ -6679,7 +6679,7 @@ Only an empty group is allowed to accept import.</translation>
     <message>
       <location filename="../RemoteDebugger.ui" line="24"/>
       <source>winpdb</source>
-      <translation type="unfinished">winpdb</translation>
+      <translation>winpdb</translation>
     </message>
     <message>
       <location filename="../RemoteDebugger.ui" line="30"/>
@@ -6689,7 +6689,7 @@ Only an empty group is allowed to accept import.</translation>
     <message>
       <location filename="../RemoteDebugger.ui" line="58"/>
       <source>VS Code</source>
-      <translation type="unfinished">VS Code</translation>
+      <translation>VS Code</translation>
     </message>
     <message>
       <location filename="../RemoteDebugger.ui" line="64"/>
@@ -7352,7 +7352,7 @@ Do you want to save your changes?</source>
     <message>
       <location filename="../GraphvizView.cpp" line="322"/>
       <source>Graphviz couldn&apos;t be found on your system.</source>
-      <translation type="unfinished">Graphviz couldn&apos;t be found on your system.</translation>
+      <translation>Пакет Graphviz не знайдено у вашій системі.</translation>
     </message>
     <message>
       <location filename="../GraphvizView.cpp" line="323"/>
@@ -7362,7 +7362,7 @@ Do you want to save your changes?</source>
     <message>
       <location filename="../GraphvizView.cpp" line="324"/>
       <source>Do you want to specify its installation path if it&apos;s already installed?</source>
-      <translation type="unfinished">Do you want to specify its installation path if it&apos;s already installed?</translation>
+      <translation>Бажаєте вказати шлях до його інсталяції, якщо його вже інстальовано?</translation>
     </message>
     <message>
       <location filename="../GraphvizView.cpp" line="331"/>
@@ -7525,12 +7525,12 @@ Do you want to save your changes?</source>
     <message>
       <location filename="../Command.cpp" line="1347"/>
       <source>Macro file doesn&apos;t exist</source>
-      <translation type="unfinished">Macro file doesn&apos;t exist</translation>
+      <translation>Файл макросу не існує</translation>
     </message>
     <message>
       <location filename="../Command.cpp" line="1348"/>
       <source>No such macro file: &apos;%1&apos;</source>
-      <translation type="unfinished">No such macro file: &apos;%1&apos;</translation>
+      <translation>Немає такого макросу: &apos;%1&apos;</translation>
     </message>
   </context>
   <context>
@@ -8074,7 +8074,7 @@ Do you want to exit without saving your data?</source>
     <message>
       <location filename="../Action.cpp" line="1572"/>
       <source>The file &apos;%1&apos; cannot be opened.</source>
-      <translation type="unfinished">The file &apos;%1&apos; cannot be opened.</translation>
+      <translation>Файл &apos;%1&apos; не вдалося відкрити.</translation>
     </message>
   </context>
   <context>
@@ -8092,7 +8092,7 @@ Do you want to exit without saving your data?</source>
     <message>
       <location filename="../Action.cpp" line="1735"/>
       <source>The file &apos;%1&apos; cannot be opened.</source>
-      <translation type="unfinished">The file &apos;%1&apos; cannot be opened.</translation>
+      <translation>Файл &apos;%1&apos; не вдалося відкрити.</translation>
     </message>
   </context>
   <context>
@@ -8161,7 +8161,7 @@ Do you want to exit without saving your data?</source>
       <location filename="../NetworkRetriever.cpp" line="392"/>
       <location filename="../NetworkRetriever.cpp" line="394"/>
       <source>Download %1&apos;s online help</source>
-      <translation type="unfinished">Download %1&apos;s online help</translation>
+      <translation>Завантажити онлайн допомогу %1&apos;</translation>
     </message>
     <message>
       <location filename="../NetworkRetriever.cpp" line="495"/>
@@ -8173,9 +8173,9 @@ Do you want to exit without saving your data?</source>
       <source>The directory &apos;%1&apos; does not exist.
 
 Do you want to specify an existing directory?</source>
-      <translation type="unfinished">The directory &apos;%1&apos; does not exist.
+      <translation>Тека &apos;%1&apos; не існує.
 
-Do you want to specify an existing directory?</translation>
+Хочете вказати іншу теку?</translation>
     </message>
     <message>
       <location filename="../NetworkRetriever.cpp" line="513"/>
@@ -8187,9 +8187,9 @@ Do you want to specify an existing directory?</translation>
       <source>You don&apos;t have write permission to &apos;%1&apos;
 
 Do you want to specify another directory?</source>
-      <translation type="unfinished">You don&apos;t have write permission to &apos;%1&apos;
+      <translation>Ви не маєте дозвіл на запис в &apos;%1&apos;
 
-Do you want to specify another directory?</translation>
+Хочете вказати іншу теку?</translation>
     </message>
     <message>
       <location filename="../NetworkRetriever.cpp" line="540"/>
@@ -8532,7 +8532,7 @@ any children, i.e. no explicit shape history.</translation>
     <message>
       <location filename="../TextDocumentEditorView.cpp" line="241"/>
       <source>If you don&apos;t save, your changes will be lost.</source>
-      <translation type="unfinished">If you don&apos;t save, your changes will be lost.</translation>
+      <translation>Якщо ви не збережете, зміни будуть втрачено.</translation>
     </message>
     <message>
       <location filename="../TextDocumentEditorView.cpp" line="295"/>
@@ -8875,7 +8875,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../Tree.cpp" line="4123"/>
       <source>Error!</source>
-      <translation type="unfinished">Error!</translation>
+      <translation>Помилка!</translation>
     </message>
     <message>
       <location filename="../Tree.cpp" line="6057"/>
@@ -8950,7 +8950,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../Tree.cpp" line="6089"/>
       <source>Enable or disable recomputating editing object when &apos;skip recomputation&apos; is enabled</source>
-      <translation type="unfinished">Enable or disable recomputating editing object when &apos;skip recomputation&apos; is enabled</translation>
+      <translation>Ввімкнути або вимкнути переобчислення обʼєктів, коли &apos;пропустити переобчислення&apos; активовано</translation>
     </message>
     <message>
       <location filename="../Tree.cpp" line="6094"/>
@@ -9004,7 +9004,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../View3DInventor.cpp" line="572"/>
       <source>Can&apos;t open file &apos;%1&apos; for writing.</source>
-      <translation type="unfinished">Can&apos;t open file &apos;%1&apos; for writing.</translation>
+      <translation>Не можу відкрити файл &apos;%1&apos; для запису.</translation>
     </message>
   </context>
   <context>
@@ -9037,7 +9037,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../Action.cpp" line="1332"/>
       <source>Select the &apos;%1&apos; workbench</source>
-      <translation type="unfinished">Select the &apos;%1&apos; workbench</translation>
+      <translation>Оберіть робоче середовище &apos;%1&apos;</translation>
     </message>
   </context>
   <context>
@@ -9083,12 +9083,12 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../DownloadItem.cpp" line="188"/>
       <source>&lt;qt&gt;Enter username and password for &quot;%1&quot; at %2&lt;/qt&gt;</source>
-      <translation type="unfinished">&lt;qt&gt;Enter username and password for &quot;%1&quot; at %2&lt;/qt&gt;</translation>
+      <translation>&lt;qt&gt;Введіть імʼя користувача та пароль для &quot;%1&quot; на %2&lt;/qt&gt;</translation>
     </message>
     <message>
       <location filename="../DownloadItem.cpp" line="210"/>
       <source>&lt;qt&gt;Connect to proxy &quot;%1&quot; using:&lt;/qt&gt;</source>
-      <translation type="unfinished">&lt;qt&gt;Connect to proxy &quot;%1&quot; using:&lt;/qt&gt;</translation>
+      <translation>&lt;qt&gt;Підʼєднатися до проксі-сервера &quot;%1&quot; використовуючи:&lt;/qt&gt;</translation>
     </message>
   </context>
   <context>
@@ -9361,7 +9361,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="768"/>
       <source>Icon size</source>
-      <translation type="unfinished">Icon size</translation>
+      <translation>Розмір іконки</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="771"/>
@@ -9705,7 +9705,7 @@ Do you want to continue?</source>
     <message>
       <location filename="../CommandView.cpp" line="479"/>
       <source>Cannot open file &apos;%1&apos;.</source>
-      <translation type="unfinished">Cannot open file &apos;%1&apos;.</translation>
+      <translation>Не вдалося відкрити файл &apos;%1&apos;.</translation>
     </message>
     <message>
       <location filename="../CommandView.cpp" line="2162"/>
@@ -9791,7 +9791,7 @@ Do you want to continue?</source>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1889"/>
       <source>The group &apos;%1&apos; cannot be renamed.</source>
-      <translation type="unfinished">The group &apos;%1&apos; cannot be renamed.</translation>
+      <translation>Не можна перейменувати групу &apos;%1&apos;.</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1894"/>
@@ -9801,7 +9801,7 @@ Do you want to continue?</source>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1895"/>
       <source>The group &apos;%1&apos; already exists.</source>
-      <translation type="unfinished">The group &apos;%1&apos; already exists.</translation>
+      <translation>Група &apos;%1&apos; вже існує.</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1977"/>
@@ -10016,7 +10016,7 @@ Be aware the point where you click matters.</source>
     <message>
       <location filename="../ViewProviderLink.cpp" line="2878"/>
       <source>Select which object to copy or exclude when configuration changes.All external linked object are excluded by default.</source>
-      <translation type="unfinished">Select which object to copy or exclude when configuration changes.All external linked object are excluded by default.</translation>
+      <translation>Виберіть, який об’єкт копіювати чи пропустити при зміні конфігурації. Усі зовнішні зв’язані об’єкти пропускаються за замовчуванням.</translation>
     </message>
     <message>
       <location filename="../ViewProviderLink.cpp" line="2893"/>
@@ -10074,7 +10074,7 @@ Also auto redo the copy if the original linked object is changed.
     <message>
       <location filename="../ViewProviderLink.cpp" line="2983"/>
       <source>Rerefresh configurable object</source>
-      <translation type="unfinished">Rerefresh configurable object</translation>
+      <translation>Оновлення конфігурованого обʼєкта</translation>
     </message>
     <message>
       <location filename="../ViewProviderLink.cpp" line="2984"/>
@@ -10143,7 +10143,7 @@ ALT + click this icon to select the source object</translation>
     <message>
       <location filename="../MainWindow.cpp" line="688"/>
       <source>Toggles this toolbar</source>
-      <translation type="unfinished">Toggles this toolbar</translation>
+      <translation>Переключення цієї панелі</translation>
     </message>
     <message>
       <location filename="../MainWindow.cpp" line="689"/>
@@ -10180,7 +10180,7 @@ ALT + click this icon to select the source object</translation>
     <message>
       <location filename="../MainWindow.cpp" line="778"/>
       <source>Toggles this dockable window</source>
-      <translation type="unfinished">Toggles this dockable window</translation>
+      <translation>Переключення цього закріплюваного вікна</translation>
     </message>
     <message>
       <location filename="../MainWindow.cpp" line="783"/>
@@ -10190,12 +10190,12 @@ ALT + click this icon to select the source object</translation>
     <message>
       <location filename="../MainWindow.cpp" line="915"/>
       <source>Do you want to save your changes to document &apos;%1&apos; before closing?</source>
-      <translation type="unfinished">Do you want to save your changes to document &apos;%1&apos; before closing?</translation>
+      <translation>Бажаєте зберегти внесені зміни в документ &apos;%1&apos; перед його закриттям?</translation>
     </message>
     <message>
       <location filename="../MainWindow.cpp" line="920"/>
       <source>If you don&apos;t save, your changes will be lost.</source>
-      <translation type="unfinished">If you don&apos;t save, your changes will be lost.</translation>
+      <translation>Якщо ви не збережете, зміни будуть втрачено.</translation>
     </message>
     <message>
       <location filename="../Document.cpp" line="1512"/>
@@ -10288,7 +10288,7 @@ Ctrl + click to toggle all children visibility</translation>
     <message>
       <location filename="../DlgIconBrowser.cpp" line="352"/>
       <source>Failed</source>
-      <translation type="unfinished">Failed</translation>
+      <translation>Невдало</translation>
     </message>
     <message>
       <location filename="../DlgIconBrowser.cpp" line="353"/>
@@ -10441,7 +10441,7 @@ underscore, and must not start with a digit.</source>
     <message>
       <location filename="../DlgAddProperty.cpp" line="134"/>
       <source>The property &apos;%1&apos; already exists in &apos;%2&apos;</source>
-      <translation type="unfinished">The property &apos;%1&apos; already exists in &apos;%2&apos;</translation>
+      <translation>Властивість &apos;%1&apos; вже існує в &apos;%2&apos;</translation>
     </message>
     <message>
       <location filename="../DlgAddProperty.cpp" line="157"/>
@@ -10451,7 +10451,7 @@ underscore, and must not start with a digit.</source>
     <message>
       <location filename="../DlgAddProperty.cpp" line="158"/>
       <source>Failed to add property to &apos;%1&apos;: %2</source>
-      <translation type="unfinished">Failed to add property to &apos;%1&apos;: %2</translation>
+      <translation>Не вдалося додати властивість до &apos;%1&apos;: %2</translation>
     </message>
     <message>
       <location filename="../Document.cpp" line="1349"/>
@@ -10494,9 +10494,9 @@ underscore, and must not start with a digit.</source>
       <source>Choose &apos;Yes&apos; to roll back all preceding transactions.
 Choose &apos;No&apos; to roll back in the active document only.
 Choose &apos;Abort&apos; to abort</source>
-      <translation type="unfinished">Choose &apos;Yes&apos; to roll back all preceding transactions.
-Choose &apos;No&apos; to roll back in the active document only.
-Choose &apos;Abort&apos; to abort</translation>
+      <translation>Виберіть &apos;Так&apos; для повернення всіх попередніх транзакцій.
+Виберіть &apos;Ні&apos; щоб повернути транзакції тільки в активному документі.
+Виберіть &apos;Скасувати&apos; для скасування</translation>
     </message>
     <message>
       <location filename="../MainWindow.cpp" line="918"/>
@@ -10630,11 +10630,11 @@ Physical path: </translation>
 &quot;%1&quot;
 
 Would you like to save the file with a different name?</source>
-      <translation type="unfinished">There was an issue trying to save the file. This may be because some of the parent folders do not exist, or you do not have sufficient permissions, or for other reasons. Error details:
+      <translation>При спробі зберегти файл виникла проблема. Це може бути повʼязано з тим, що відсутні деякі батьківські теки, або у вас немає достатніх прав доступу, або з інших причин. Подробиці помилки:
 
 &quot;%1&quot;
 
-Would you like to save the file with a different name?</translation>
+Хочете зберегти файл з іншим імʼям?</translation>
     </message>
     <message>
       <location filename="../Document.cpp" line="2368"/>
@@ -10784,7 +10784,7 @@ Alt + click to toggle show on top.</translation>
     <message>
       <location filename="../NaviCube.cpp" line="2056"/>
       <source>Cube size</source>
-      <translation type="unfinished">Cube size</translation>
+      <translation>Розмір куба</translation>
     </message>
     <message>
       <location filename="../NaviCube.cpp" line="2057"/>
@@ -10804,7 +10804,7 @@ Alt + click to toggle show on top.</translation>
     <message>
       <location filename="../NaviCube.cpp" line="2079"/>
       <source>Border width</source>
-      <translation type="unfinished">Border width</translation>
+      <translation>Ширина контуру</translation>
     </message>
     <message>
       <location filename="../NaviCube.cpp" line="2080"/>
@@ -10967,7 +10967,7 @@ by right click and choose menu action &apos;Toggle export&apos;.</translation>
     <message>
       <location filename="../ViewProviderDocumentObject.cpp" line="1232"/>
       <source>Toggle export</source>
-      <translation type="unfinished">Toggle export</translation>
+      <translation>Ввімкнення експорту</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDrawStyles.cpp" line="686"/>
@@ -11046,7 +11046,7 @@ by right click and choose menu action &apos;Toggle export&apos;.</translation>
       <location filename="../DlgSettingsDrawStyles.cpp" line="704"/>
       <location filename="../DlgSettingsDrawStyles.cpp" line="812"/>
       <source>Flat Lines</source>
-      <translation type="unfinished">Flat Lines</translation>
+      <translation>Прямі лінії</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDrawStyles.cpp" line="705"/>
@@ -11194,7 +11194,7 @@ Click this button while in shadow mode to toggle light manipulator</translation>
     <message>
       <location filename="../DlgSettingsDrawStyles.cpp" line="771"/>
       <source>Point size</source>
-      <translation type="unfinished">Point size</translation>
+      <translation>Розмір пункту</translation>
     </message>
     <message>
       <location filename="../DlgSettingsDrawStyles.cpp" line="775"/>
@@ -11344,7 +11344,7 @@ CTRL + Shift + right click to list derived geometries.</translation>
     <message>
       <location filename="../ExpressionCompleter.cpp" line="510"/>
       <source>Object not found!</source>
-      <translation type="unfinished">Object not found!</translation>
+      <translation>Обʼєкт не знайдено!</translation>
     </message>
     <message>
       <location filename="../ExpressionCompleter.cpp" line="513"/>
@@ -11845,12 +11845,12 @@ Do you want to replace it?</translation>
     <message>
       <location filename="../CommandDoc.cpp" line="1798"/>
       <source>Toggles the selected object&apos;s edit mode</source>
-      <translation type="unfinished">Toggles the selected object&apos;s edit mode</translation>
+      <translation>Змінити режим редагування виділеного обʼєкта</translation>
     </message>
     <message>
       <location filename="../CommandDoc.cpp" line="1800"/>
       <source>Activates or Deactivates the selected object&apos;s edit mode</source>
-      <translation type="unfinished">Activates or Deactivates the selected object&apos;s edit mode</translation>
+      <translation>Активує або деактивує для виділених обʼєктів режим редагування</translation>
     </message>
   </context>
   <context>
@@ -13509,7 +13509,7 @@ setting, not all faces may be assigned the color</translation>
     <message>
       <location filename="../CommandView.cpp" line="2061"/>
       <source>FreeCAD-VR</source>
-      <translation type="unfinished">FreeCAD-VR</translation>
+      <translation>FreeCAD-VR</translation>
     </message>
     <message>
       <location filename="../CommandView.cpp" line="2062"/>
@@ -13523,13 +13523,13 @@ setting, not all faces may be assigned the color</translation>
     <message>
       <location filename="../CommandStd.cpp" line="335"/>
       <source>&amp;What&apos;s This?</source>
-      <translation type="unfinished">&amp;What&apos;s This?</translation>
+      <translation>&amp;Що це?</translation>
     </message>
     <message>
       <location filename="../CommandStd.cpp" line="336"/>
       <location filename="../CommandStd.cpp" line="338"/>
       <source>What&apos;s This</source>
-      <translation type="unfinished">What&apos;s This</translation>
+      <translation>Що Це</translation>
     </message>
   </context>
   <context>
@@ -13806,7 +13806,7 @@ Are you sure you want to continue?
     <message>
       <location filename="../CommandDoc.cpp" line="1509"/>
       <source>These items are selected for deletion, but are not in the active document.</source>
-      <translation type="unfinished">These items are selected for deletion, but are not in the active document.</translation>
+      <translation>Ці елементи виділені для видалення, але вони знаходяться не в активному документі.</translation>
     </message>
   </context>
   <context>
@@ -14029,7 +14029,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../DlgIconBrowser.ui" line="55"/>
       <source>Icon size</source>
-      <translation type="unfinished">Icon size</translation>
+      <translation>Розмір іконки</translation>
     </message>
     <message>
       <location filename="../DlgIconBrowser.ui" line="78"/>
@@ -14211,7 +14211,7 @@ TreeItemInvisible, iconset:MyIcons/TreeItemInvisible.svg, 128x64</translation>
     <message>
       <location filename="../ViewParams.cpp" line="1751"/>
       <source>Show selection bounding box</source>
-      <translation type="unfinished">Show selection bounding box</translation>
+      <translation>Показує обмежувальну рамку при виділенні</translation>
     </message>
     <message>
       <location filename="../ViewParams.cpp" line="1779"/>
@@ -14682,12 +14682,12 @@ Intersecting objects will act as boolean cut operation</translation>
     <message>
       <location filename="../ViewParams.cpp" line="4994"/>
       <source>Show clip plane</source>
-      <translation type="unfinished">Show clip plane</translation>
+      <translation>Показати площину обрізання</translation>
     </message>
     <message>
       <location filename="../ViewParams.cpp" line="5022"/>
       <source>Clip plane visual size</source>
-      <translation type="unfinished">Clip plane visual size</translation>
+      <translation>Візуальний розмір площини обрізання</translation>
     </message>
     <message>
       <location filename="../ViewParams.cpp" line="5050"/>
@@ -14802,7 +14802,7 @@ the tooltip by setting this option to zero.</translation>
     <message>
       <location filename="../ViewParams.cpp" line="5687"/>
       <source>Flat Lines</source>
-      <translation type="unfinished">Flat Lines</translation>
+      <translation>Прямі лінії</translation>
     </message>
     <message>
       <location filename="../ViewParams.cpp" line="5688"/>
@@ -15755,7 +15755,7 @@ The linked documents stayed open.</translation>
     <message>
       <location filename="../ExpressionCompleter.cpp" line="2615"/>
       <source>Exact match</source>
-      <translation type="unfinished">Exact match</translation>
+      <translation>Точний збіг</translation>
     </message>
     <message>
       <location filename="../ExpressionCompleter.cpp" line="2623"/>
@@ -15884,7 +15884,7 @@ Hold CTRL + SHIFT key to move the window in the other direction.</translation>
     <message>
       <location filename="../Action.cpp" line="2157"/>
       <source>&lt;None&gt;</source>
-      <translation type="unfinished">&lt;None&gt;</translation>
+      <translation>&lt;None&gt;</translation>
     </message>
   </context>
   <context>
@@ -15928,7 +15928,7 @@ for the current workbench.</translation>
     <message>
       <location filename="../Action.cpp" line="3020"/>
       <source>Revert </source>
-      <translation type="unfinished">Revert </translation>
+      <translation>Відновити </translation>
     </message>
     <message>
       <location filename="../Action.cpp" line="3056"/>
