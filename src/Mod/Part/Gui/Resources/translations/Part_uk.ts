@@ -40,7 +40,7 @@ for collision or distance filtering.</source>
     <message>
       <location filename="../../../CompoundTools/_CommandExplodeCompound.py" line="56"/>
       <source>Explode compound</source>
-      <translation type="unfinished">Explode compound</translation>
+      <translation>Відкрити обʼєднане</translation>
     </message>
     <message>
       <location filename="../../../CompoundTools/_CommandExplodeCompound.py" line="62"/>
@@ -1096,7 +1096,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="227"/>
       <source>Line tangent to an edge. Optional vertex link defines where.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation type="unfinished">Line tangent to an edge. Optional vertex link defines where.</translation>
+      <translation>Лінія дотична до ребра. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="229"/>
@@ -1108,7 +1108,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="230"/>
       <source>Align to N vector of Frenet-Serret coordinate system of curved edge. Optional vertex link defines where.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation type="unfinished">Align to N vector of Frenet-Serret coordinate system of curved edge. Optional vertex link defines where.</translation>
+      <translation>Вирівняти по вектору N координатної системи тригранника Френе цієї кривій. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="232"/>
@@ -1120,7 +1120,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="233"/>
       <source>Align to B vector of Frenet-Serret coordinate system of curved edge. Optional vertex link defines where.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation type="unfinished">Align to B vector of Frenet-Serret coordinate system of curved edge. Optional vertex link defines where.</translation>
+      <translation>Вирівняти по вектору координатної системи тригранника Френе цієї кривої. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="235"/>
@@ -1133,7 +1133,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="239"/>
       <source>Tangent to surface, along U parameter. Vertex link defines where.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation type="unfinished">Tangent to surface, along U parameter. Vertex link defines where.</translation>
+      <translation>Дотична до поверхні, вздовж параметра U. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="238"/>
@@ -1175,7 +1175,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="248"/>
       <source>Line that spans the shortest distance between shapes.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation type="unfinished">Line that spans the shortest distance between shapes.</translation>
+      <translation>Лінія, що охоплює найкоротшу відстань між фігурами.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="250"/>
@@ -1187,7 +1187,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="251"/>
       <source>Line follows first principal axis of inertia.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation type="unfinished">Line follows first principal axis of inertia.</translation>
+      <translation>Лінія відповідає першій основній осі інерції.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="253"/>
@@ -1199,7 +1199,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="254"/>
       <source>Line follows second principal axis of inertia.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation type="unfinished">Line follows second principal axis of inertia.</translation>
+      <translation>Лінія відповідає другій основній осі інерції.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="256"/>
@@ -1211,7 +1211,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="257"/>
       <source>Line follows third principal axis of inertia.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation type="unfinished">Line follows third principal axis of inertia.</translation>
+      <translation>Лінія відповідає третій основній осі інерції.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="259"/>
@@ -1238,7 +1238,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="125"/>
       <source>Attachment is disabled. Object can be moved by editing Placement property.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Attachment is disabled. Object can be moved by editing Placement property.</translation>
+      <translation>Приєднання вимкнено. Обʼєкт може бути переміщений редагуванням властивості Розташування (Placement).</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="127"/>
@@ -1250,7 +1250,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="128"/>
       <source>Origin is aligned to match Vertex. Orientation is controlled by Placement property.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Origin is aligned to match Vertex. Orientation is controlled by Placement property.</translation>
+      <translation>Нульова координата вирівнюється відповідно до вершини. Орієнтація контролюється Placement властивістю.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="130"/>
@@ -1298,7 +1298,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="140"/>
       <source>Plane is aligned to coincide planar face.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Plane is aligned to coincide planar face.</translation>
+      <translation>Площина вирівнюється для збігу з плоскою гранню.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="142"/>
@@ -1310,7 +1310,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="143"/>
       <source>Plane is made tangent to surface at vertex.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Plane is made tangent to surface at vertex.</translation>
+      <translation>Площина робиться дотичною до поверхні у вершині.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="145"/>
@@ -1322,7 +1322,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="146"/>
       <source>Plane is made tangent to edge. Optional vertex link defines where.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Plane is made tangent to edge. Optional vertex link defines where.</translation>
+      <translation>Площина робиться дотичною до кривої. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="148"/>
@@ -1336,7 +1336,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="155"/>
       <source>Align to Frenet-Serret coordinate system of curved edge. Optional vertex link defines where.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Align to Frenet-Serret coordinate system of curved edge. Optional vertex link defines where.</translation>
+      <translation>Вирівняти за координатною системою тригранника Френе цією кривою. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="151"/>
@@ -1360,7 +1360,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="158"/>
       <source>Align to plane to osculating circle of an edge. Origin is aligned to point of curvature. Optional vertex link defines where.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Align to plane to osculating circle of an edge. Origin is aligned to point of curvature. Optional vertex link defines where.</translation>
+      <translation>Вирівняти по площині заданим колом, що дотична з кривою. Нульова координата вирівнюється за точкою кривизни. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="160"/>
@@ -1372,7 +1372,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="161"/>
       <source>Plane is perpendicular to edge, and Y axis is matched with axis of osculating circle. Optional vertex link defines where.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Plane is perpendicular to edge, and Y axis is matched with axis of osculating circle. Optional vertex link defines where.</translation>
+      <translation>Площина перпендикулярна кривій і вісь Y збігається з віссю дотичного кола. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="163"/>
@@ -1384,7 +1384,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="164"/>
       <source>Align plane to pass through three vertices.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation type="unfinished">Align plane to pass through three vertices.</translation>
+      <translation>Вирівняти площину за трьома вершинами.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="166"/>
@@ -1435,7 +1435,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="50"/>
       <source>Attachment is disabled. Object can be moved by editing Placement property.</source>
       <comment>Attachment3D mode tooltip</comment>
-      <translation type="unfinished">Attachment is disabled. Object can be moved by editing Placement property.</translation>
+      <translation>Приєднання вимкнено. Обʼєкт може бути переміщений редагуванням властивості Розташування (Placement).</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="52"/>
@@ -1447,7 +1447,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="53"/>
       <source>Origin is aligned to match Vertex. Orientation is controlled by Placement property.</source>
       <comment>Attachment3D mode tooltip</comment>
-      <translation type="unfinished">Origin is aligned to match Vertex. Orientation is controlled by Placement property.</translation>
+      <translation>Нульова координата вирівнюється відповідно до вершини. Орієнтація контролюється Placement властивістю.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="55"/>
@@ -1533,7 +1533,7 @@ Alt + Click this icon to re-attach</translation>
       <location filename="../../AttacherTexts.cpp" line="80"/>
       <source>Align to Frenet-Serret coordinate system of curved edge. Optional vertex link defines where.</source>
       <comment>Attachment3D mode tooltip</comment>
-      <translation type="unfinished">Align to Frenet-Serret coordinate system of curved edge. Optional vertex link defines where.</translation>
+      <translation>Вирівняти за координатною системою тригранника Френе цією кривою. Додаткове посилання на вершину визначає точку дотику.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="76"/>
@@ -3128,17 +3128,17 @@ of projection.</translation>
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="101"/>
       <source>Attachment mode:</source>
-      <translation type="unfinished">Attachment mode:</translation>
+      <translation>Режим приєднання:</translation>
     </message>
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="124"/>
       <source>Attachment Offset (in local coordinates):</source>
-      <translation type="unfinished">Attachment Offset (in local coordinates):</translation>
+      <translation>Зсув прикріплення (в локальних координатах):</translation>
     </message>
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="136"/>
       <source>In x-direction:</source>
-      <translation type="unfinished">In x-direction:</translation>
+      <translation>У напрямку осі X:</translation>
     </message>
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="152"/>
@@ -3196,7 +3196,7 @@ Note: The placement is expressed in local space of object being attached.</trans
     <message>
       <location filename="../../../AttachmentEditor/TaskAttachmentEditor.ui" line="367"/>
       <source>Flip sides</source>
-      <translation type="unfinished">Flip sides</translation>
+      <translation>Перевернути сторони</translation>
     </message>
   </context>
   <context>
@@ -4566,7 +4566,7 @@ the size of the resulting STEP file.</translation>
     <message>
       <location filename="../../DlgProjectionOnSurface.ui" line="14"/>
       <source>Projection on surface</source>
-      <translation type="unfinished">Projection on surface</translation>
+      <translation>Проекція на поверхню</translation>
     </message>
     <message>
       <location filename="../../DlgProjectionOnSurface.ui" line="20"/>
@@ -4596,7 +4596,7 @@ the size of the resulting STEP file.</translation>
     <message>
       <location filename="../../DlgProjectionOnSurface.ui" line="66"/>
       <source>Show faces</source>
-      <translation type="unfinished">Show faces</translation>
+      <translation>Показати поверхні</translation>
     </message>
     <message>
       <location filename="../../DlgProjectionOnSurface.ui" line="76"/>
@@ -5107,12 +5107,12 @@ the object into PartDesign body using a wrap feature.</translation>
     <message>
       <location filename="../../DlgSettingsObjectColor.ui" line="14"/>
       <source>Shape appearance</source>
-      <translation type="unfinished">Shape appearance</translation>
+      <translation>Зовнішній вигляд фігури</translation>
     </message>
     <message>
       <location filename="../../DlgSettingsObjectColor.ui" line="20"/>
       <source>Default Shape view properties</source>
-      <translation type="unfinished">Default Shape view properties</translation>
+      <translation>Властивості вигляду фігур за замовчуванням</translation>
     </message>
     <message>
       <location filename="../../DlgSettingsObjectColor.ui" line="220"/>
@@ -5301,7 +5301,7 @@ will be used or black.</translation>
     <message>
       <location filename="../../Location.ui" line="90"/>
       <source>3D view</source>
-      <translation type="unfinished">3D view</translation>
+      <translation>3D вигляд</translation>
     </message>
     <message>
       <location filename="../../Location.ui" line="106"/>
@@ -5676,18 +5676,18 @@ on its placement.</translation>
     <message>
       <location filename="../../TaskAttacher.ui" line="120"/>
       <source>Attachment mode:</source>
-      <translation type="unfinished">Attachment mode:</translation>
+      <translation>Режим приєднання:</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.ui" line="143"/>
       <location filename="../../TaskAttacher.cpp" line="500"/>
       <source>Attachment Offset (in local coordinates):</source>
-      <translation type="unfinished">Attachment Offset (in local coordinates):</translation>
+      <translation>Зсув прикріплення (в локальних координатах):</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.ui" line="155"/>
       <source>In x-direction:</source>
-      <translation type="unfinished">In x-direction:</translation>
+      <translation>У напрямку осі X:</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.ui" line="171"/>
@@ -5758,7 +5758,7 @@ of object being attached.</translation>
     <message>
       <location filename="../../TaskAttacher.ui" line="386"/>
       <source>Flip sides</source>
-      <translation type="unfinished">Flip sides</translation>
+      <translation>Перевернути сторони</translation>
     </message>
     <message>
       <location filename="../../TaskAttacher.cpp" line="173"/>
@@ -6076,7 +6076,7 @@ Individual BOP Checks:</translation>
     <message>
       <location filename="../../TaskFaceColors.ui" line="20"/>
       <source>Click on the faces in the 3D view to select them</source>
-      <translation type="unfinished">Click on the faces in the 3D view to select them</translation>
+      <translation>Клацніть на грані у 3D-виді, щоб виділити їх</translation>
     </message>
     <message>
       <location filename="../../TaskFaceColors.ui" line="39"/>
@@ -6293,12 +6293,12 @@ in the 3D view for the sweep path.</translation>
     <message>
       <location filename="../../../BasicShapes/TaskTube.ui" line="14"/>
       <source>Tube</source>
-      <translation type="unfinished">Tube</translation>
+      <translation>Труба</translation>
     </message>
     <message>
       <location filename="../../../BasicShapes/TaskTube.ui" line="23"/>
       <source>Parameter</source>
-      <translation type="unfinished">Parameter</translation>
+      <translation>Параметр</translation>
     </message>
     <message>
       <location filename="../../../BasicShapes/TaskTube.ui" line="78"/>
@@ -6462,7 +6462,7 @@ in the 3D view for the sweep path.</translation>
     <message>
       <location filename="../../ShapeFromMesh.ui" line="32"/>
       <source>Enter tolerance for sewing shape:</source>
-      <translation type="unfinished">Enter tolerance for sewing shape:</translation>
+      <translation>Введіть припуск на зшивання фігур:</translation>
     </message>
   </context>
   <context>
