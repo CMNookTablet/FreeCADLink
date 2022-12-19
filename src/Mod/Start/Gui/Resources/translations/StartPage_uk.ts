@@ -6,7 +6,7 @@
     <message>
       <location filename="TranslationTexts.py" line="42"/>
       <source>Start</source>
-      <translation>Початок</translation>
+      <translation>Пуск</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="43"/>
@@ -86,7 +86,7 @@
     <message>
       <location filename="TranslationTexts.py" line="58"/>
       <source>The FreeCAD manual is another, more linear way to present the information contained in this wiki. It is made to be read like a book, and will gently introduce you to many other pages from the hubs above. &lt;a href=&quot;https://www.gitbook.com/book/yorikvanhavre/a-freecad-manual/details&quot;&gt;e-book versions&lt;/a&gt; are also available.</source>
-      <translation type="unfinished">The FreeCAD manual is another, more linear way to present the information contained in this wiki. It is made to be read like a book, and will gently introduce you to many other pages from the hubs above. &lt;a href=&quot;https://www.gitbook.com/book/yorikvanhavre/a-freecad-manual/details&quot;&gt;e-book versions&lt;/a&gt; are also available.</translation>
+      <translation>Посібник із FreeCAD - це інший, більш лінійний спосіб представлення інформації з вікі. Він створений для читання як книга, та поступово знайомить вас з багатьма іншими сторінками з вищезгаданих розділів. Також доступний у форматі &lt;a href=&quot;https://www.gitbook.com/book/yorikvanhavre/a-freecad-manual/details&quot;&gt;електронної книги&lt;/a&gt;.</translation>
     </message>
     <message>
       <location filename="TranslationTexts.py" line="59"/>
@@ -437,7 +437,7 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="538"/>
       <source>Arial,Helvetica,sans</source>
-      <translation type="unfinished">Arial,Helvetica,sans</translation>
+      <translation>Arial,Helvetica,sans</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="551"/>
@@ -457,7 +457,7 @@ By using &quot;;;&quot; to separate paths, you can add several folders here</tra
     <message>
       <location filename="../../DlgStartPreferences.ui" line="579"/>
       <source>If this is selected, the &apos;New File&apos; icon shows a gradient icon instead of the normal icon</source>
-      <translation type="unfinished">If this is selected, the &apos;New File&apos; icon shows a gradient icon instead of the normal icon</translation>
+      <translation>Якщо ця опція вибрана, то замість звичайної іконки &apos;Новий Файл&apos; показує іконку з градієнтом</translation>
     </message>
     <message>
       <location filename="../../DlgStartPreferences.ui" line="601"/>
