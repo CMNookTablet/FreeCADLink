@@ -4882,14 +4882,14 @@ the size of the resulting STEP file.</translation>
       <source>Mapping face color from derived shape if possible.
 You may want to disable this if you want to set a
 uniform color for all faces.</source>
-      <translation type="unfinished">Mapping face color from derived shape if possible.
-You may want to disable this if you want to set a
-uniform color for all faces.</translation>
+      <translation>Брати колір грані з похідної фігури, якщо це можливо.
+Ви можете вимкнути цей параметр, якщо хочете 
+встановити однорідний колір для всіх граней.</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="258"/>
       <source>Map face colors</source>
-      <translation type="unfinished">Map face colors</translation>
+      <translation>Взяти кольори граней</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="271"/>
