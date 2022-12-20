@@ -4870,26 +4870,26 @@ the size of the resulting STEP file.</translation>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="244"/>
       <source>Specifies how to map color from child objects to parent</source>
-      <translation type="unfinished">Specifies how to map color from child objects to parent</translation>
+      <translation>Вказує спосіб відображення кольору від дочірніх об'єктів до батьківських</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="247"/>
       <source>Color Mapping</source>
-      <translation type="unfinished">Color Mapping</translation>
+      <translation>Відображення Кольору</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="253"/>
       <source>Mapping face color from derived shape if possible.
 You may want to disable this if you want to set a
 uniform color for all faces.</source>
-      <translation>Брати колір грані з похідної фігури, якщо це можливо.
+      <translation>Відобразити колір грані з похідної фігури, якщо це можливо.
 Ви можете вимкнути цей параметр, якщо хочете 
 встановити однорідний колір для всіх граней.</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="258"/>
       <source>Map face colors</source>
-      <translation>Взяти кольори граней</translation>
+      <translation>Відобразити кольори граней</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="271"/>
@@ -4936,7 +4936,7 @@ transparency for all faces.</translation>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="328"/>
       <source>Touch object for recompute on color change</source>
-      <translation type="unfinished">Touch object for recompute on color change</translation>
+      <translation>Натисніть на об'єкт для переобчислення зміни кольору</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="156"/>
