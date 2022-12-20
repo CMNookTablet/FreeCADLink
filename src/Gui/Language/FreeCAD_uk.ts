@@ -1231,7 +1231,7 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     <message>
       <location filename="../DlgActions.ui" line="261"/>
       <source>Invoke on 3D view pre-selection</source>
-      <translation type="unfinished">Invoke on 3D view pre-selection</translation>
+      <translation>Викликати попередній вибір у 3D-виді</translation>
     </message>
   </context>
   <context>
@@ -1350,16 +1350,15 @@ If this is not ticked, then the property must be uniquely named, and it is acces
     <message>
       <location filename="../DlgKeyboard.ui" line="103"/>
       <source>Multi-key sequence delay: </source>
-      <translation type="unfinished">Multi-key sequence delay: </translation>
+      <translation>Затримка послідовності з мультиклавішами: </translation>
     </message>
     <message>
       <location filename="../DlgKeyboard.ui" line="129"/>
       <source>Time in milliseconds to wait for the next key stroke of the current key sequence.
 For example, pressing &apos;F&apos; twice in less than the time delay setting here will be
 be treated as shorctcut key sequence &apos;F, F&apos;.</source>
-      <translation type="unfinished">Time in milliseconds to wait for the next key stroke of the current key sequence.
-For example, pressing &apos;F&apos; twice in less than the time delay setting here will be
-be treated as shorctcut key sequence &apos;F, F&apos;.</translation>
+      <translation>Час очікування в мілісекундах наступного натискання клавіші поточної послідовності клавіш.
+Наприклад, натискання &apos;F&apos; двічі за час, менший за встановлену тут затримку, буде розцінюватиметься як скорочена послідовність клавіш &apos;F, F&apos;.</translation>
     </message>
     <message>
       <location filename="../DlgKeyboard.ui" line="183"/>
@@ -1371,9 +1370,7 @@ be treated as shorctcut key sequence &apos;F, F&apos;.</translation>
       <source>This list shows commands having the same shortcut in the priority from high
 to low. If more than one command with the same shortcut are active at the
 same time. The one with the highest priority will be triggered.</source>
-      <translation type="unfinished">This list shows commands having the same shortcut in the priority from high
-to low. If more than one command with the same shortcut are active at the
-same time. The one with the highest priority will be triggered.</translation>
+      <translation>У цьому списку показані команди, що мають однакову комбінацію клавіш з пріоритетом від високого до низького. Якщо декілька команд з однаковою комбінацією будуть активні одночасно, то спрацює та, що має найвищий пріоритет.</translation>
     </message>
     <message>
       <location filename="../DlgKeyboard.ui" line="209"/>
@@ -1492,7 +1489,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbars.ui" line="350"/>
       <source>Reset toolbar pie menu shortcut</source>
-      <translation type="unfinished">Reset toolbar pie menu shortcut</translation>
+      <translation>Скинути комбінацію клавіш для меню Pie</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="353"/>
@@ -1504,9 +1501,7 @@ same time. The one with the highest priority will be triggered.</translation>
       <source>This list shows commands having the same shortcut in the priority from high
 to low. If more than one command with the same shortcut are active at the
 same time. The one with the highest priority will be triggered.</source>
-      <translation type="unfinished">This list shows commands having the same shortcut in the priority from high
-to low. If more than one command with the same shortcut are active at the
-same time. The one with the highest priority will be triggered.</translation>
+      <translation>У цьому списку показані команди, що мають однакову комбінацію клавіш з пріоритетом від високого до низького. Якщо декілька команд з однаковою комбінацією будуть активні одночасно, то спрацює та, що має найвищий пріоритет.</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="430"/>
@@ -1596,12 +1591,12 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbars.ui" line="309"/>
       <source>Pie menu shortcut:</source>
-      <translation type="unfinished">Pie menu shortcut:</translation>
+      <translation>Комбінація клавіш меню Pie:</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="316"/>
       <source>Assign toolbar pie menu shortcut</source>
-      <translation type="unfinished">Assign toolbar pie menu shortcut</translation>
+      <translation>Призначити комбінацію клавіш меню Pie</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="319"/>
@@ -1611,7 +1606,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbars.ui" line="326"/>
       <source>Keyboard shortcut to bring up the corresponding pie menu of a toolbar</source>
-      <translation type="unfinished">Keyboard shortcut to bring up the corresponding pie menu of a toolbar</translation>
+      <translation>Комбінація клавіш виклику відповідного Pie меню панелі інструментів</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="333"/>
@@ -1647,12 +1642,12 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgToolbarsImp.cpp" line="121"/>
       <source>Pie Menu</source>
-      <translation type="unfinished">Pie Menu</translation>
+      <translation>Меню Pie</translation>
     </message>
     <message>
       <location filename="../DlgToolbarsImp.cpp" line="316"/>
       <source>%1:%2 (command not found)</source>
-      <translation type="unfinished">%1:%2 (command not found)</translation>
+      <translation>%1:%2 (команду не знайдено)</translation>
     </message>
     <message>
       <location filename="../DlgToolbarsImp.cpp" line="533"/>
@@ -1784,7 +1779,7 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="232"/>
       <source>Touch object for recompute on color change</source>
-      <translation type="unfinished">Touch object for recompute on color change</translation>
+      <translation>Натисніть на об'єкт для переобчислення зміни кольору</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="245"/>
@@ -1800,31 +1795,31 @@ same time. The one with the highest priority will be triggered.</translation>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="332"/>
       <source>Point color:</source>
-      <translation type="unfinished">Point color:</translation>
+      <translation>Колір точки:</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="354"/>
       <source>Specifies how to map color from child objects to parent</source>
-      <translation type="unfinished">Specifies how to map color from child objects to parent</translation>
+      <translation>Вказує спосіб відображення кольору від дочірніх об'єктів до батьківських</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="357"/>
       <source>Color Mapping</source>
-      <translation type="unfinished">Color Mapping</translation>
+      <translation>Відображення Кольору</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="363"/>
       <source>Mapping face color from derived shape if possible.
 You may want to disable this if you want to set a
 uniform color for all faces.</source>
-      <translation>Брати колір грані з похідної фігури, якщо це можливо.
+      <translation>Відобразити колір грані з похідної фігури, якщо це можливо.
 Ви можете вимкнути цей параметр, якщо хочете 
 встановити однорідний колір для всіх граней.</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="368"/>
       <source>Map face colors</source>
-      <translation>Взяти кольори граней</translation>
+      <translation>Відобразити кольори граней</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="375"/>
@@ -5454,7 +5449,7 @@ Zoom step of &apos;1&apos; means a factor of 7.5 for every zoom step.</source>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="90"/>
       <source>Show pre-selected face always on top</source>
-      <translation type="unfinished">Show pre-selected face always on top</translation>
+      <translation>Завжди показувати попередньо вибрану грань попереду</translation>
     </message>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="97"/>
@@ -14226,7 +14221,7 @@ TreeItemInvisible, iconset:MyIcons/TreeItemInvisible.svg, 128x64</translation>
     <message>
       <location filename="../ViewParams.cpp" line="1889"/>
       <source>Show pre-selected face always on top</source>
-      <translation type="unfinished">Show pre-selected face always on top</translation>
+      <translation>Завжди показувати попередньо вибрану грань попереду</translation>
     </message>
     <message>
       <location filename="../ViewParams.cpp" line="1917"/>
