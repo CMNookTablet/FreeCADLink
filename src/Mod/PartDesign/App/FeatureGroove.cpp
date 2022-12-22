@@ -182,6 +182,7 @@ App::DocumentObjectExecReturn *Groove::execute(void)
             default:
                 maker = Part::OpCodes::Cut;
             }
+            this->fixShape(result);
             boolOp.makEBoolean(maker, {base,result});
         }catch(Standard_Failure &) {
             return new App::DocumentObjectExecReturn("Failed to cut base feature");

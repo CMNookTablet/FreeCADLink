@@ -105,6 +105,9 @@ public:
 
     friend class Feature;
 
+protected:
+    void validateShape(App::DocumentObject *);
+
 private:
     TopoShape _Shape;
     std::string _Ver;

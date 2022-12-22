@@ -230,6 +230,26 @@ public:
 
     // Auto generated code (Tools/params_utils.py:122)
     //@{
+    /// Accessor for parameter ValidateShape
+    static const bool & getValidateShape();
+    static const bool & defaultValidateShape();
+    static void removeValidateShape();
+    static void setValidateShape(const bool &v);
+    static const char *docValidateShape();
+    //@}
+
+    // Auto generated code (Tools/params_utils.py:122)
+    //@{
+    /// Accessor for parameter FixShape
+    static const bool & getFixShape();
+    static const bool & defaultFixShape();
+    static void removeFixShape();
+    static void setFixShape(const bool &v);
+    static const char *docFixShape();
+    //@}
+
+    // Auto generated code (Tools/params_utils.py:122)
+    //@{
     /// Accessor for parameter MinimumDeviation
     static const double & getMinimumDeviation();
     static const double & defaultMinimumDeviation();

@@ -205,10 +205,13 @@ void ViewProviderPart::dragObject(App::DocumentObject *obj)
 void ViewProviderPart::updateData(const App::Property *prop)
 {
     if (auto feat = Base::freecad_dynamic_cast<Part::Feature>(getObject())) {
-        if (prop == feat->getShapeContentSuppressedProperty()
+        if (prop == &feat->InvalidShape
+                || prop == feat->getShapeContentSuppressedProperty()
                 || prop == feat->getShapeContentReplacementProperty()
                 || prop == feat->getShapeContentReplacementSuppressedProperty())
+        {
             signalChangeIcon();
+        }
     }
     inherited::updateData(prop);
 }
@@ -216,10 +219,14 @@ void ViewProviderPart::updateData(const App::Property *prop)
 static QByteArray _SuppressedTag("Part::Suppressed");
 static QByteArray _ReplacementTag("Part::Replacement");
 static QByteArray _DetachedTag("Part::Detached");
+static QByteArray _InvalidTag("Part::Invalid");
 
 void ViewProviderPart::getExtraIcons(std::vector<std::pair<QByteArray, QPixmap> > &icons) const
 {
     if (auto feat = Base::freecad_dynamic_cast<Part::Feature>(getObject())) {
+        if (feat->InvalidShape.getValue()) {
+            icons.emplace_back(_InvalidTag, Gui::BitmapFactory().pixmap("Part_InvalidShape.svg"));
+        }
         if (auto prop = feat->getShapeContentSuppressedProperty()) {
             if (prop->getValue())
                 icons.emplace_back(_SuppressedTag, Gui::BitmapFactory().pixmap("Part_Suppressed.svg"));
@@ -247,13 +254,48 @@ QString ViewProviderPart::getToolTip(const QByteArray &iconTag) const
         return QObject::tr("Shape content detached so that is won't be deleted if the parent is deleted.\nAlt + Click this icon to re-attach");
     else if (iconTag == _ReplacementTag)
         return QObject::tr("Shape content replacement. Alt + Click this icon to toggle the replacement");
+    else if (iconTag == _InvalidTag) {
+        if (auto feat = Base::freecad_dynamic_cast<Part::Feature>(getObject())) {
+            if (feat->FixShape.getValue()!=2)  {
+                return QObject::tr("Shape is invalid.\n\n"
+                                   "Alt + Click to try fixing the shape.\n"
+                                   "Alt + Shift + Click to check geometry for more details.");
+            }
+        }
+        return QObject::tr("Shape is invalid");
+    }
     return inherited::getToolTip(iconTag);
 }
 
 bool ViewProviderPart::iconMouseEvent(QMouseEvent *ev, const QByteArray &iconTag)
 {
     if (ev->type() == QEvent::MouseButtonPress) {
-        if (iconTag == _SuppressedTag) {
+        if (iconTag == _InvalidTag) {
+            if (auto feat = Base::freecad_dynamic_cast<Part::Feature>(getObject())) {
+                if (ev->modifiers() & Qt::ShiftModifier) {
+                    auto sobjT = Gui::Selection().getContext();
+                    if (sobjT.getSubObject() != getObject())
+                        sobjT = App::SubObjectT(getObject(),"");
+                    Gui::Selection().clearSelection();
+                    Gui::Selection().addSelection(sobjT);
+                    Gui::Application::Instance->commandManager().runCommandByName("Part_CheckGeometry");
+                    return true;
+                }
+                static const char *title = QT_TR_NOOP("Fix shape");
+                App::AutoTransaction guard(title);
+                try {
+                    if (feat->FixShape.getValue() == 0)
+                        feat->FixShape.setValue(1);
+                    else
+                        feat->FixShape.setValue(2);
+                    Gui::Command::updateActive();
+                } catch (Base::Exception &e) {
+                    e.ReportException();
+                }
+            }
+            return true;
+        }
+        else if (iconTag == _SuppressedTag) {
             if (auto feat = Base::freecad_dynamic_cast<Part::Feature>(getObject())) {
                 if (auto prop = feat->getShapeContentSuppressedProperty()) {
                     try {

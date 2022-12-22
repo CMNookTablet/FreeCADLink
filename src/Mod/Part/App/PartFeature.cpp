@@ -97,12 +97,31 @@ PROPERTY_SOURCE(Part::Feature, App::GeoFeature)
 Feature::Feature(void)
 {
     ADD_PROPERTY(Shape, (TopoDS_Shape()));
+    ADD_PROPERTY_TYPE(ValidateShape, (PartParams::getValidateShape()), "", App::Prop_None,
+            "Validate shape content and warn about invalid shape");
+    ADD_PROPERTY_TYPE(InvalidShape, (false), "", App::Prop_Hidden,
+            "Indicate the shape is invalid");
+    ADD_PROPERTY_TYPE(FixShape, (PartParams::getFixShape()?1l:0l), "", App::Prop_None,
+            "Fix shape content.\n"
+            "Disabled: no fix.\n"
+            "Enabled: validate shape and only fix invalid one.\n"
+            "Always: always try to fix shape without validating first.\n");
+    static const char *FixShapeEnum[] = {"Disabled", "Enabled", "Always", nullptr};
+    FixShape.setEnums(FixShapeEnum);
     ADD_PROPERTY_TYPE(ColoredElements, (0), "",
             (App::PropertyType)(App::Prop_Hidden|App::Prop_ReadOnly|App::Prop_Output),"");
 }
 
 Feature::~Feature()
 {
+}
+
+void Feature::fixShape(TopoShape &s) const
+{
+    if (FixShape.getValue()) {
+        if (FixShape.getValue() == 2 || !s.isValid())
+            s.fix();
+    }
 }
 
 short Feature::mustExecute(void) const

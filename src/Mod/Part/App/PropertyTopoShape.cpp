@@ -59,6 +59,7 @@
 #include <Base/Exception.h>
 #include <Base/FileInfo.h>
 #include <Base/Stream.h>
+#include <Base/Tools.h>
 #include <Base/QuantityPy.h>
 #include <App/Application.h>
 #include <App/Document.h>
@@ -96,6 +97,32 @@ PropertyPartShape::~PropertyPartShape()
 {
 }
 
+void PropertyPartShape::validateShape(App::DocumentObject *obj)
+{
+    if (!obj || !obj->getDocument()
+             || obj->getDocument()->testStatus(App::Document::Restoring))
+        return;
+    if (auto feat = Base::freecad_dynamic_cast<Part::Feature>(obj)) {
+        if (_Shape.isNull()) {
+            feat->InvalidShape.setValue(false);
+            return;
+        }
+        if (feat->FixShape.getValue() != 0) {
+            if (feat->FixShape.getValue() == 1) {
+                if (_Shape.isValid()) {
+                    feat->InvalidShape.setValue(false);
+                    return;
+                }
+            }
+            _Shape.fix();
+        }
+        if (feat->ValidateShape.getValue() && !_Shape.isValid())
+            feat->InvalidShape.setValue(true);
+        else
+            feat->InvalidShape.setValue(false);
+    }
+}
+
 void PropertyPartShape::setValue(const TopoShape& sh)
 {
     aboutToSetValue();
@@ -112,6 +139,7 @@ void PropertyPartShape::setValue(const TopoShape& sh)
             _Shape.Hasher = obj->getDocument()->getStringHasher();
             _Shape.hashChildMaps();
         }
+        validateShape(obj);
     }
     hasSetValue();
     _Ver.clear();
@@ -124,6 +152,7 @@ void PropertyPartShape::setValue(const TopoDS_Shape& sh, bool resetElementMap)
     if(obj)
         _Shape.Tag = obj->getID();
     _Shape.setShape(sh,resetElementMap);
+    validateShape(obj);
     hasSetValue();
     _Ver.clear();
 }
@@ -425,9 +454,7 @@ void PropertyPartShape::Restore(Base::XMLReader &reader)
     }
 
     if (!sh.IsNull() || !_Shape.isNull()) {
-        aboutToSetValue();
-        _Shape.setShape(sh,false);
-        hasSetValue();
+        setValue(sh, false);
     }
 }
 

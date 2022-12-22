@@ -556,7 +556,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
                         result = support;
                         hasSupport = true;
                     }
-
+                    this->fixShape(result);
                 } catch (Standard_Failure& e) {
                     std::string msg("Boolean operation failed");
                     if (e.GetMessageString() != NULL)
@@ -705,6 +705,7 @@ App::DocumentObjectExecReturn *Transformed::execute(void)
                     return new App::DocumentObjectExecReturn("Unknown operation type");
                 }
                 result.makEBoolean(maker, {support, shapeCopy});
+                this->fixShape(result);
 
                 // Do not call getSolid() as we need the compound to hide the
                 // placement

@@ -588,6 +588,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
         joiner.addShape(result);
         joiner.getResultWires(result);
         makeWire = false;
+        this->fixShape(result);
     }
 
     if(MakeFace.getValue() && !result.hasSubShape(TopAbs_FACE)) {
@@ -621,9 +622,12 @@ void SubShapeBinder::buildShape(TopoShape &result)
                     edges.push_back(edge);
                 }
                 result.makEWires(edges);
+                this->fixShape(result);
             }
-            else if (makeWire && result.hasSubShape(TopAbs_EDGE))
+            else if (makeWire && result.hasSubShape(TopAbs_EDGE)) {
                 result = result.makEWires();
+                this->fixShape(result);
+            }
         } catch(Base::Exception & e) {
             FC_LOG(getFullName() << " Failed to make wire: " << e.what());
         } catch(Standard_Failure & e) {
@@ -653,6 +657,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
                         try {
                             result = result.makEBSplineFace(
                                     static_cast<Part::TopoShape::FillingStyle>(FillStyle.getValue()));
+                            this->fixShape(result);
                             done = true;
                         } catch(Base::Exception & e) {
                             FC_LOG(getFullName() << " Failed to make bspline face: " << e.what());
@@ -670,6 +675,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
                         if (filledFace.hasSubShape(TopAbs_FACE)) {
                             done = true;
                             result = filledFace;
+                            this->fixShape(result);
                         }
                     } catch(Base::Exception & e) {
                         FC_LOG(getFullName() << " Failed to make filled face: " << e.what());
@@ -683,6 +689,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
             if (!done) {
                 try {
                     result = result.makEFace(nullptr, FaceMaker.getValue());
+                    this->fixShape(result);
                     done = true;
                 } catch(Base::Exception & e) {
                     FC_LOG(getFullName() << " Failed to make face: " << e.what());
@@ -695,6 +702,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
                 if (!done && _Version.getValue() > 7) {
                     try {
                         result = result.makERuledSurface(result.getSubTopoShapes(TopAbs_WIRE));
+                        this->fixShape(result);
                     } catch(Base::Exception & e) {
                         FC_LOG(getFullName() << " Failed to make ruled face: " << e.what());
                     } catch(Standard_Failure & e) {
@@ -717,6 +725,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
                 if (!tmp.hasSubShape(TopAbs_SHELL)) {
                     try {
                         tmp = tmp.makEShell();
+                        this->fixShape(tmp);
                         if (!tmp.isClosed() || !tmp.isValid())
                             tmp = TopoShape();
                     } catch(Base::Exception & e) {
@@ -731,6 +740,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
                 if (tmp.hasSubShape(TopAbs_SHELL) && tmp.isClosed()) {
                     try {
                         tmp = tmp.makESolid();
+                        this->fixShape(tmp);
                         if (!tmp.isClosed() || !tmp.isValid())
                             tmp = TopoShape();
                         result = tmp;
@@ -750,6 +760,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
                 if(solids.size() > 1) {
                     try {
                         result.makEFuse(solids);
+                        this->fixShape(result);
                     } catch(Base::Exception & e) {
                         FC_LOG(getFullName() << " Failed to fuse: " << e.what());
                     } catch(Standard_Failure & e) {
@@ -764,8 +775,10 @@ void SubShapeBinder::buildShape(TopoShape &result)
                 }
             }
         } 
-        if (Refine.getValue())
+        if (Refine.getValue()) {
             result = result.makERefine();
+            this->fixShape(result);
+        }
     };
     
     doFuse();
@@ -788,6 +801,7 @@ void SubShapeBinder::buildShape(TopoShape &result)
                                                     OffsetOpenResult.getValue() ? 0 : 1,
                                                     static_cast<TopoShape::JoinType>(OffsetJoinType.getValue()),
                                                     OffsetFill.getValue()));
+                this->fixShape(results.back());
             };
             for (const auto &s : result.getSubTopoShapes(TopAbs_SOLID))
                 makeOffset(s, false);

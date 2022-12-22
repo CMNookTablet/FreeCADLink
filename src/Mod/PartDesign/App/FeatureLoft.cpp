@@ -228,6 +228,7 @@ App::DocumentObjectExecReturn *Loft::execute(void)
                     s.setShape(s.getShape().Reversed(),false);
                 if (Linearize.getValue())
                     s.linearize(true, false);
+                this->fixShape(s);
             }
         }
 

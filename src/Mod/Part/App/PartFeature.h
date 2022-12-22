@@ -69,6 +69,9 @@ public:
 
     PropertyPartShape Shape;
     App::PropertyLinkSubHidden ColoredElements;
+    App::PropertyBool ValidateShape;
+    App::PropertyBool InvalidShape;
+    App::PropertyEnumeration FixShape;
 
     /** @name methods override feature */
     //@{
@@ -187,6 +190,8 @@ public:
     static Feature *create(const TopoShape &s,
                            const char *name = nullptr,
                            App::Document *doc = nullptr);
+
+    void fixShape(TopoShape &s) const;
 
 protected:
     /// recompute only this object

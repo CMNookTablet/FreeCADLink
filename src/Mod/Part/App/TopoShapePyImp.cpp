@@ -1930,9 +1930,13 @@ PyObject*  TopoShapePy::findPlane(PyObject *args)
 PyObject*  TopoShapePy::fix(PyObject *args)
 {
     double prec, mintol, maxtol;
-    if (!PyArg_ParseTuple(args, "ddd", &prec, &mintol, &maxtol))
-        return NULL;
     PY_TRY {
+        if (PyArg_ParseTuple(args, "")) {
+            return Py_BuildValue("O", (getTopoShapePtr()->fix() ? Py_True : Py_False));
+        }
+        PyErr_Clear();
+        if (!PyArg_ParseTuple(args, "ddd", &prec, &mintol, &maxtol))
+            return NULL;
         return Py_BuildValue("O", (getTopoShapePtr()->fix(prec, mintol, maxtol) ? Py_True : Py_False));
     } PY_CATCH_OCC
 }

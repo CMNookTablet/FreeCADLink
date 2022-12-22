@@ -102,6 +102,7 @@
         <file>icons/Part_Replacement.svg</file>
         <file>icons/Part_ReplacementSuppressed.svg</file>
         <file>icons/Part_ContentDetached.svg</file>
+        <file>icons/Part_InvalidShape.svg</file>
     </qresource>
     <qresource>
         <file>translations/Part_af.qm</file>

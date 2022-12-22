@@ -383,6 +383,7 @@ App::DocumentObjectExecReturn *Pipe::_execute(ProfileBased *feat,
             return new App::DocumentObjectExecReturn("Unknown operation type");
         }
         try {
+            feat->fixShape(result);
             boolOp.makEBoolean(maker, {base,result});
         }catch(Standard_Failure &e) {
             FC_ERR(feat->getFullName() << ": " << e.GetMessageString());

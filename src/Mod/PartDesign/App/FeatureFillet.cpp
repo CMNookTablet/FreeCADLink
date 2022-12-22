@@ -120,9 +120,12 @@ App::DocumentObjectExecReturn *Fillet::execute(void)
         if (!BRepAlgo::IsValid(aLarg, shape.getShape(), Standard_False, Standard_False)) {
             ShapeFix_ShapeTolerance aSFT;
             aSFT.LimitTolerance(shape.getShape(), Precision::Confusion(), Precision::Confusion(), TopAbs_SHAPE);
-            shape.fix();
-            if (!BRepAlgo::IsValid(aLarg, shape.getShape(), Standard_False, Standard_False))
-                failed = true;
+            // For backward compatibility
+            if (FixShape.getValue() == 0) {
+                shape.fix();
+                if (!BRepAlgo::IsValid(aLarg, shape.getShape(), Standard_False, Standard_False))
+                    failed = true;
+            }
         }
 
         if (!failed) {

@@ -20,28 +20,72 @@
       <string>Model settings</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="3" column="0">
-       <widget class="Gui::PrefCheckBox" name="checkLinearize">
-        <property name="toolTip">
-         <string>Try to replace flat BSpline face with simple planar face.
-Currently only applies to Loft, Sweep, drafted Extrusion
-in Part workbench, and equivalent features in PartDesign.</string>
-        </property>
+      <item row="5" column="0">
+       <widget class="Gui::PrefCheckBox" name="checkSingleSolid">
         <property name="text">
-         <string>Linearize flat BSpline face when possible</string>
+         <string>Enforce single solid in Body</string>
         </property>
-        <property name="checked">
-         <bool>true</bool>
+        <property name="prefEntry" stdset="0">
+         <cstring>SingleSolid</cstring>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/Part</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="Gui::PrefCheckBox" name="checkAutoGroupSolids">
+        <property name="text">
+         <string>Auto group solids in Body</string>
         </property>
         <property name="prefPath" stdset="0">
          <cstring>Mod/Part</cstring>
         </property>
         <property name="prefEntry" stdset="0">
-         <cstring>LinearizeExtrusionDraft</cstring>
+         <cstring>AutoGroupSolids</cstring>
         </property>
        </widget>
       </item>
-      <item row="7" column="0">
+      <item row="2" column="0" colspan="2">
+       <widget class="Gui::PrefCheckBox" name="checkSketchBaseRefine">
+        <property name="text">
+         <string>Automatically refine model shape of features in PartDesign workbench</string>
+        </property>
+        <property name="prefEntry" stdset="0">
+         <cstring>RefineModel</cstring>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/PartDesign</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="Gui::PrefCheckBox" name="checkBooleanRefine">
+        <property name="text">
+         <string>Automatically refine model shape of features in Part workbench</string>
+        </property>
+        <property name="prefEntry" stdset="0">
+         <cstring>RefineModel</cstring>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/Part/Boolean</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="Gui::PrefCheckBox" name="checkBooleanCheck">
+        <property name="text">
+         <string>Automatically check model after boolean operation</string>
+        </property>
+        <property name="prefEntry" stdset="0">
+         <cstring>CheckModel</cstring>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/Part/Boolean</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="Gui::PrefCheckBox" name="checkBoxAuxGroup">
@@ -78,72 +122,28 @@ it only applies to auto created group with their original labels.</string>
         </item>
        </layout>
       </item>
-      <item row="6" column="0">
-       <widget class="Gui::PrefCheckBox" name="checkAutoGroupSolids">
+      <item row="3" column="0">
+       <widget class="Gui::PrefCheckBox" name="checkLinearize">
+        <property name="toolTip">
+         <string>Try to replace flat BSpline face with simple planar face.
+Currently only applies to Loft, Sweep, drafted Extrusion
+in Part workbench, and equivalent features in PartDesign.</string>
+        </property>
         <property name="text">
-         <string>Auto group solids in Body</string>
+         <string>Linearize flat BSpline face when possible</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
         <property name="prefPath" stdset="0">
          <cstring>Mod/Part</cstring>
         </property>
         <property name="prefEntry" stdset="0">
-         <cstring>AutoGroupSolids</cstring>
+         <cstring>LinearizeExtrusionDraft</cstring>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="Gui::PrefCheckBox" name="checkBooleanRefine">
-        <property name="text">
-         <string>Automatically refine model shape of features in Part workbench</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>RefineModel</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/Part/Boolean</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="Gui::PrefCheckBox" name="checkSketchBaseRefine">
-        <property name="text">
-         <string>Automatically refine model shape of features in PartDesign workbench</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>RefineModel</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/PartDesign</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="Gui::PrefCheckBox" name="checkBooleanCheck">
-        <property name="text">
-         <string>Automatically check model after boolean operation</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>CheckModel</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/Part/Boolean</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="Gui::PrefCheckBox" name="checkSingleSolid">
-        <property name="text">
-         <string>Enforce single solid in Body</string>
-        </property>
-        <property name="prefEntry" stdset="0">
-         <cstring>SingleSolid</cstring>
-        </property>
-        <property name="prefPath" stdset="0">
-         <cstring>Mod/Part</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
+      <item row="3" column="1">
        <widget class="Gui::PrefCheckBox" name="checkSplitEllipsoid">
         <property name="text">
          <string>Split ellipsoid</string>
@@ -156,6 +156,49 @@ it only applies to auto created group with their original labels.</string>
         </property>
         <property name="prefEntry" stdset="0">
          <cstring>SplitEllipsoid</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="Gui::PrefCheckBox" name="checkBoxValidateShape">
+        <property name="toolTip">
+         <string>Validate on changing shape. If the shape is invalid, a warning icon
+will appear in the corresponding tree view item.
+
+Note, this option only applies to newly created object. For existing
+object, you can manually change its 'ValidShape' property.</string>
+        </property>
+        <property name="text">
+         <string>Validate shape</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="prefEntry" stdset="0">
+         <cstring>FixShape</cstring>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/Part</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="Gui::PrefCheckBox" name="checkBoxFixShape">
+        <property name="toolTip">
+         <string>Try to fix invalid shape on changing. Note, this option only applies to
+newly created object.</string>
+        </property>
+        <property name="text">
+         <string>Fix invalid shape</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="prefEntry" stdset="0">
+         <cstring>ValidateShape</cstring>
+        </property>
+        <property name="prefPath" stdset="0">
+         <cstring>Mod/Part</cstring>
         </property>
        </widget>
       </item>

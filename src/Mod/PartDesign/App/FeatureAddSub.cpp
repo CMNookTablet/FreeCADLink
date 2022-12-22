@@ -105,8 +105,11 @@ short FeatureAddSub::mustExecute() const
 
 TopoShape FeatureAddSub::refineShapeIfActive(const TopoShape& oldShape) const
 {
-    if (this->Refine.getValue())
-        return oldShape.makERefine();
+    if (this->Refine.getValue()) {
+        TopoShape shape(oldShape);
+        this->fixShape(shape);
+        return shape.makERefine();
+    }
     return oldShape;
 }
 

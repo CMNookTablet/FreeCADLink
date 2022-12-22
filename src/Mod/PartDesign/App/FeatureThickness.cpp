@@ -124,6 +124,7 @@ App::DocumentObjectExecReturn *Thickness::execute(void)
                         baseShape.getSubTopoShape(TopAbs_SOLID,it->first), 
                         it->second, thickness, tol, intersection, false, mode,
                         static_cast<Part::TopoShape::JoinType>(join));
+                this->fixShape(shapes.back());
             }catch(Standard_Failure &e) {
                 FC_ERR("Exception on making thick solid: " << e.GetMessageString());
                 return new App::DocumentObjectExecReturn("Failed to make thick solid");
@@ -134,8 +135,7 @@ App::DocumentObjectExecReturn *Thickness::execute(void)
     TopoShape result(0,getDocument()->getStringHasher());
     if(shapes.size()>1) {
         result.makEFuse(shapes);
-        if(Refine.getValue())
-            result = result.makERefine();
+        result = refineShapeIfActive(result);
     }else if (shapes.empty())
         result = baseShape;
     else

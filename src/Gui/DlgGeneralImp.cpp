@@ -210,6 +210,8 @@ void DlgGeneralImp::populateStylesheets(const char *key,
         }
     }
 
+    combo->clear();
+
     // now add all unique items
     combo->addItem(tr(def), QStringLiteral(""));
     for (QMap<QString, QString>::iterator it = cssFiles.begin(); it != cssFiles.end(); ++it) {
