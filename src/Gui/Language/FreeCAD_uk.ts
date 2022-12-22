@@ -2419,66 +2419,66 @@ horizontal space in Python console</source>
   <context>
     <name>Gui::Dialog::DlgGeneralImp</name>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="252"/>
+      <location filename="../DlgGeneralImp.cpp" line="254"/>
       <source>Small (%1px)</source>
       <translation>Малий (%1пікс)</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="253"/>
+      <location filename="../DlgGeneralImp.cpp" line="255"/>
       <source>Medium (%1px)</source>
       <translation>Середній (%1пікс)</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="254"/>
+      <location filename="../DlgGeneralImp.cpp" line="256"/>
       <source>Large (%1px)</source>
       <translation>Великий (%1пікс)</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="255"/>
+      <location filename="../DlgGeneralImp.cpp" line="257"/>
       <source>Extra large (%1px)</source>
       <translation>Дуже великий (%1пікс)</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="257"/>
+      <location filename="../DlgGeneralImp.cpp" line="259"/>
       <source>Custom (%1px)</source>
       <translation>Власний (%1пікс)</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="303"/>
+      <location filename="../DlgGeneralImp.cpp" line="305"/>
       <source>Combo View</source>
       <translation>Комбінований вид</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="304"/>
+      <location filename="../DlgGeneralImp.cpp" line="306"/>
       <source>TreeView and PropertyView</source>
       <translation>Вид Ієрархії та Властивостей</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="305"/>
+      <location filename="../DlgGeneralImp.cpp" line="307"/>
       <source>Both</source>
       <translation>Обидві</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="324"/>
-      <location filename="../DlgGeneralImp.cpp" line="329"/>
+      <location filename="../DlgGeneralImp.cpp" line="326"/>
+      <location filename="../DlgGeneralImp.cpp" line="331"/>
       <source>Top</source>
       <translation>Згори</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="325"/>
-      <location filename="../DlgGeneralImp.cpp" line="330"/>
+      <location filename="../DlgGeneralImp.cpp" line="327"/>
+      <location filename="../DlgGeneralImp.cpp" line="332"/>
       <source>Left</source>
       <translation>Ліворуч</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="326"/>
-      <location filename="../DlgGeneralImp.cpp" line="331"/>
+      <location filename="../DlgGeneralImp.cpp" line="328"/>
+      <location filename="../DlgGeneralImp.cpp" line="333"/>
       <source>Right</source>
       <translation>Направо</translation>
     </message>
     <message>
-      <location filename="../DlgGeneralImp.cpp" line="327"/>
-      <location filename="../DlgGeneralImp.cpp" line="332"/>
+      <location filename="../DlgGeneralImp.cpp" line="329"/>
+      <location filename="../DlgGeneralImp.cpp" line="334"/>
       <source>Bottom</source>
       <translation>Внизу</translation>
     </message>
