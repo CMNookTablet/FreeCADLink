@@ -626,23 +626,36 @@ ALT + click this icon to edit the attachment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="245"/>
+        <location filename="../../ViewProvider.cpp" line="252"/>
         <source>Shape content suppressed. Alt + Click this icon to enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="247"/>
+        <location filename="../../ViewProvider.cpp" line="254"/>
         <source>Shape content detached so that is won&apos;t be deleted if the parent is deleted.
 Alt + Click this icon to re-attach</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="249"/>
+        <location filename="../../ViewProvider.cpp" line="256"/>
         <source>Shape content replacement. Alt + Click this icon to toggle the replacement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="414"/>
+        <location filename="../../ViewProvider.cpp" line="260"/>
+        <source>Shape is invalid.
+
+Alt + Click to try fixing the shape.
+Alt + Shift + Click to check geometry for more details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="265"/>
+        <source>Shape is invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="456"/>
         <source>Detach the shape content if you want to keep it after its parent is removed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3992,7 +4005,7 @@ it inside the Placement property.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.cpp" line="279"/>
+        <location filename="../../DlgSettingsGeneral.cpp" line="283"/>
         <source>This parameter indicates whether parametric curves (curves in parametric space of surface)
 should be written into the STEP file. This parameter can be set to off in order to minimize
 the size of the resulting STEP file.</source>
@@ -4914,19 +4927,19 @@ transparency for all faces.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="26"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="128"/>
         <source>Try to replace flat BSpline face with simple planar face.
 Currently only applies to Loft, Sweep, drafted Extrusion
 in Part workbench, and equivalent features in PartDesign.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="31"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="133"/>
         <source>Linearize flat BSpline face when possible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="49"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="93"/>
         <source>Disable this option to not enforce unique label in auxiliary groups.
 So instead of having &apos;Datums001&apos; etc., all datum group can be
 labeled as &apos;Datums&apos;.
@@ -4937,43 +4950,43 @@ existing auxiliary groups.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="58"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="102"/>
         <source>Use unique label for auxiliary groups in Body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="71"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="115"/>
         <source>Apply the &apos;fixed name&apos; option to existing auxiliary groups.
 it only applies to auto created group with their original labels.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="75"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="119"/>
         <source>Apply to existing groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="84"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="39"/>
         <source>Auto group solids in Body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="97"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="65"/>
         <source>Automatically refine model shape of features in Part workbench</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="110"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="52"/>
         <source>Automatically refine model shape of features in PartDesign workbench</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="123"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="78"/>
         <source>Automatically check model after boolean operation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="136"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="26"/>
         <source>Enforce single solid in Body</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4983,57 +4996,82 @@ it only applies to auto created group with their original labels.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="193"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="165"/>
+        <source>Validate on changing shape. If the shape is invalid, a warning icon
+will appear in the corresponding tree view item.
+
+Note, this option only applies to newly created object. For existing
+object, you can manually change its &apos;ValidShape&apos; property.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsGeneral.ui" line="172"/>
+        <source>Validate shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsGeneral.ui" line="188"/>
+        <source>Try to fix invalid shape on changing. Note, this option only applies to
+newly created object.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsGeneral.ui" line="192"/>
+        <source>Fix invalid shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../DlgSettingsGeneral.ui" line="236"/>
         <source>Design behavior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="202"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="245"/>
         <source>Override commands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="209"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="252"/>
         <source>Override non-PartDesign command with an equivalent PartDesign
 command when operate on PartDesign feature.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="223"/>
-        <location filename="../../DlgSettingsGeneral.ui" line="262"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="266"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="305"/>
         <source>Disable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="228"/>
-        <location filename="../../DlgSettingsGeneral.ui" line="267"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="271"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="310"/>
         <source>Enable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="233"/>
-        <location filename="../../DlgSettingsGeneral.ui" line="272"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="276"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="315"/>
         <source>Always ask</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="241"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="284"/>
         <source>Auto wrap feature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="248"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="291"/>
         <source>If a non-PartDesign object references a PartDesign feature, incorporate
 the object into PartDesign body using a wrap feature.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="171"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="214"/>
         <source>Object naming</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../DlgSettingsGeneral.ui" line="177"/>
+        <location filename="../../DlgSettingsGeneral.ui" line="220"/>
         <source>Add name of base object</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6381,39 +6419,44 @@ in the 3D view for the sweep path.</source>
 <context>
     <name>PartGui::ViewProviderPart</name>
     <message>
-        <location filename="../../ViewProvider.cpp" line="260"/>
-        <location filename="../../ViewProvider.cpp" line="381"/>
+        <location filename="../../ViewProvider.cpp" line="284"/>
+        <source>Fix shape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ViewProvider.cpp" line="302"/>
+        <location filename="../../ViewProvider.cpp" line="423"/>
         <source>Toggle shape suppress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="275"/>
+        <location filename="../../ViewProvider.cpp" line="317"/>
         <source>Attach shape content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="291"/>
-        <location filename="../../ViewProvider.cpp" line="418"/>
+        <location filename="../../ViewProvider.cpp" line="333"/>
+        <location filename="../../ViewProvider.cpp" line="460"/>
         <source>Toggle shape replacement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="351"/>
+        <location filename="../../ViewProvider.cpp" line="393"/>
         <source>Expand shape contents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="366"/>
+        <location filename="../../ViewProvider.cpp" line="408"/>
         <source>Collapse shape contents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="400"/>
+        <location filename="../../ViewProvider.cpp" line="442"/>
         <source>Re-attach shape content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ViewProvider.cpp" line="401"/>
+        <location filename="../../ViewProvider.cpp" line="443"/>
         <source>Detach shape content</source>
         <translation type="unfinished"></translation>
     </message>

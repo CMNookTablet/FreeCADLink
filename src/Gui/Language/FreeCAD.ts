@@ -2380,66 +2380,66 @@ horizontal space in Python console</source>
 <context>
     <name>Gui::Dialog::DlgGeneralImp</name>
     <message>
-        <location filename="../DlgGeneralImp.cpp" line="252"/>
+        <location filename="../DlgGeneralImp.cpp" line="254"/>
         <source>Small (%1px)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DlgGeneralImp.cpp" line="253"/>
+        <location filename="../DlgGeneralImp.cpp" line="255"/>
         <source>Medium (%1px)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DlgGeneralImp.cpp" line="254"/>
+        <location filename="../DlgGeneralImp.cpp" line="256"/>
         <source>Large (%1px)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DlgGeneralImp.cpp" line="255"/>
+        <location filename="../DlgGeneralImp.cpp" line="257"/>
         <source>Extra large (%1px)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DlgGeneralImp.cpp" line="257"/>
+        <location filename="../DlgGeneralImp.cpp" line="259"/>
         <source>Custom (%1px)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DlgGeneralImp.cpp" line="303"/>
+        <location filename="../DlgGeneralImp.cpp" line="305"/>
         <source>Combo View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DlgGeneralImp.cpp" line="304"/>
+        <location filename="../DlgGeneralImp.cpp" line="306"/>
         <source>TreeView and PropertyView</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DlgGeneralImp.cpp" line="305"/>
+        <location filename="../DlgGeneralImp.cpp" line="307"/>
         <source>Both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../DlgGeneralImp.cpp" line="324"/>
-        <location filename="../DlgGeneralImp.cpp" line="329"/>
-        <source>Top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../DlgGeneralImp.cpp" line="325"/>
-        <location filename="../DlgGeneralImp.cpp" line="330"/>
-        <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../DlgGeneralImp.cpp" line="326"/>
         <location filename="../DlgGeneralImp.cpp" line="331"/>
-        <source>Right</source>
+        <source>Top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../DlgGeneralImp.cpp" line="327"/>
         <location filename="../DlgGeneralImp.cpp" line="332"/>
+        <source>Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../DlgGeneralImp.cpp" line="328"/>
+        <location filename="../DlgGeneralImp.cpp" line="333"/>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../DlgGeneralImp.cpp" line="329"/>
+        <location filename="../DlgGeneralImp.cpp" line="334"/>
         <source>Bottom</source>
         <translation type="unfinished"></translation>
     </message>
