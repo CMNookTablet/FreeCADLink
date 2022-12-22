@@ -98,7 +98,7 @@ def find_tools(noobsolete=True):
     print(Usage + "\nFirst, lets find all necessary tools on your system")
     global QMAKE, LUPDATE, PYLUPDATE, LCONVERT, QT_VERSION_MAJOR
     
-    p = subprocess.run(["/home/qtembed/Qt/6.5.0/gcc_64/bin/lupdate","-version"],check=True,stdout=subprocess.PIPE)
+    p = subprocess.run(["lupdate","-version"],check=True,stdout=subprocess.PIPE)
     lupdate_version = p.stdout.decode()
     result = re.search(r'.* ([456])\.([\d]+)\.([\d]+)', lupdate_version)
     if not result:
@@ -111,7 +111,7 @@ def find_tools(noobsolete=True):
 
     if QT_VERSION_MAJOR < 6:
         if (os.system("lupdate -version") == 0):
-            LUPDATE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/lupdate"
+            LUPDATE = "lupdate"
             # TODO: we suppose lupdate is a symlink to lupdate-qt4 for now
             if noobsolete:
                 LUPDATE += " -no-obsolete"
@@ -122,39 +122,39 @@ def find_tools(noobsolete=True):
         else:
             raise Exception("Cannot find lupdate")
     else:
-        LUPDATE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/lupdate"
+        LUPDATE = "lupdate"
     
     if QT_VERSION_MAJOR < 6:
         if (os.system("qmake -version") == 0):
-            QMAKE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/qmake"
+            QMAKE = "qmake"
         elif (os.system("qmake-qt5 -version") == 0):
-            QMAKE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/qmake-qt5"
+            QMAKE = "qmake-qt5"
         else:
             raise Exception("Cannot find qmake")
         if (os.system("pylupdate -version") == 0):
-            PYLUPDATE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/pylupdate"
+            PYLUPDATE = "pylupdate"
         elif (os.system("pylupdate6 --version") == 0):
-            PYLUPDATE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/pylupdate6"
+            PYLUPDATE = "pylupdate6"
+            if noobsolete:
+                PYLUPDATE += " -no-obsolete"
+        elif (os.system("pylupdate5 -version") == 0):
+            PYLUPDATE = "pylupdate5"
             if noobsolete:
                 PYLUPDATE += " -noobsolete"
-        elif (os.system("/home/qtembed/Qt/6.5.0/gcc_64/bin/pylupdate5 -version") == 0):
-            PYLUPDATE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/pylupdate5"
+        elif (os.system("pylupdate4 -version") == 0):
+            PYLUPDATE = "pylupdate4"
             if noobsolete:
                 PYLUPDATE += " -noobsolete"
-        elif (os.system("/home/qtembed/Qt/6.5.0/gcc_64/bin/pylupdate4 -version") == 0):
-            PYLUPDATE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/pylupdate4"
-            if noobsolete:
-                PYLUPDATE += " -noobsolete"
-        elif (os.system("/home/qtembed/Qt/6.5.0/gcc_64/bin/pyside2-lupdate -version") == 0):
-            PYLUPDATE = "/home/qtembed/Qt/6.5.0/gcc_64/bin/pyside2-lupdate"
-            raise Exception("Please do not use pyside2-lupdate at the moment, as it shows encoding problems. Please use pylupdate5 instead.")
+        elif (os.system("pyside2-lupdate -version") == 0):
+            PYLUPDATE = "pyside2-lupdate"
+            raise Exception("Please do not use pyside2-lupdate at the moment, as it shows encoding problems. Please use pylupdate5 or 6 instead.")
         else:
             raise Exception("Cannot find pylupdate")
     else:
         QMAKE = "(qmake not needed for Qt 6 and later)"
         PYLUPDATE = "(pylupdate not needed for Qt 6 and later)"
-    if (os.system("/home/qtembed/Qt/6.5.0/gcc_64/bin/lconvert -h") == 0):
-        LCONVERT = "/home/qtembed/Qt/6.5.0/gcc_64/bin/lconvert"
+    if (os.system("lconvert -h") == 0):
+        LCONVERT = "lconvert"
         if noobsolete and QT_VERSION_MAJOR < 6:
             LCONVERT += " -no-obsolete"
     else:
@@ -182,11 +182,12 @@ def update_translation(entry):
         print ("=============================================",flush=True)
         execline = []
         execline.append (f"touch dummy_cpp_file_for_lupdate.cpp") #lupdate 5.x requires at least one source file to process the UI files
+        execline.append (f"touch {tsBasename}py.ts")
+        execline.append (f"{PYLUPDATE} `find ./ -name \"*.py\"` -ts {tsBasename}py.ts {log_redirect}")
         execline.append (f"{QMAKE} -project -o {project_filename} -r")
         execline.append (f"{LUPDATE} {project_filename} -ts {tsBasename}.ts {log_redirect}")
         execline.append (f"sed 's/<translation.*>.*<\/translation>/<translation type=\"unfinished\"><\/translation>/g' {tsBasename}.ts > {tsBasename}.ts.temp")
         execline.append (f"mv {tsBasename}.ts.temp {tsBasename}.ts")
-        execline.append (f"{PYLUPDATE} `find ./ -name \"*.py\"` -ts {tsBasename}py.ts {log_redirect}")
         execline.append (f"{LCONVERT} -i {tsBasename}py.ts {tsBasename}.ts -o {tsBasename}.ts {log_redirect}")
         execline.append (f"rm {tsBasename}py.ts")
         execline.append (f"rm dummy_cpp_file_for_lupdate.cpp")
