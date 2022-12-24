@@ -2193,7 +2193,7 @@ uniform color for all vertices.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="174"/>
       <source>Item spacing:</source>
-      <translation type="unfinished">Item spacing:</translation>
+      <translation>Відстань між елементами:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="181"/>
@@ -2212,7 +2212,7 @@ to use the system default size.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="209"/>
       <source>Font size:</source>
-      <translation type="unfinished">Font size:</translation>
+      <translation>Розмір шрифту:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="229"/>
@@ -2237,7 +2237,7 @@ to use the system default size.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="339"/>
       <source>Command history size:</source>
-      <translation type="unfinished">Command history size:</translation>
+      <translation>Розмір історії команд:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="359"/>
@@ -2269,12 +2269,12 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="487"/>
       <source>Default font size</source>
-      <translation type="unfinished">Default font size</translation>
+      <translation>Стандартний розмір шрифту</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="494"/>
       <source>Icon set:</source>
-      <translation type="unfinished">Icon set:</translation>
+      <translation>Набір іконок:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="501"/>
@@ -2928,7 +2928,7 @@ Specify another directory, please.</source>
     <message>
       <location filename="../DlgParameter.ui" line="47"/>
       <source>Presets</source>
-      <translation type="unfinished">Presets</translation>
+      <translation>Шаблони</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="54"/>
@@ -2943,12 +2943,12 @@ Specify another directory, please.</source>
     <message>
       <location filename="../DlgParameter.ui" line="68"/>
       <source>ToolTip</source>
-      <translation type="unfinished">ToolTip</translation>
+      <translation>Підказка</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="99"/>
       <source>Add a new preset configuration from file.</source>
-      <translation type="unfinished">Add a new preset configuration from file.</translation>
+      <translation>Додати нову конфігурацію шаблону з файлу.</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="102"/>
@@ -3025,7 +3025,7 @@ This will overwrite the current configuration.</translation>
     <message>
       <location filename="../DlgParameter.ui" line="173"/>
       <source>Restart</source>
-      <translation type="unfinished">Restart</translation>
+      <translation>Перезавантажити</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="229"/>
@@ -3037,7 +3037,7 @@ You can then selectively export only the changed ones.</translation>
     <message>
       <location filename="../DlgParameter.ui" line="233"/>
       <source>Monitor</source>
-      <translation type="unfinished">Monitor</translation>
+      <translation>Монітор</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="266"/>
@@ -3168,7 +3168,7 @@ You can then selectively export only the changed ones.</translation>
     <message>
       <location filename="../DlgParameterImp.cpp" line="152"/>
       <source>From file...</source>
-      <translation type="unfinished">From file...</translation>
+      <translation>З файлу...</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="599"/>
@@ -3319,12 +3319,12 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgPreferencesImp.cpp" line="298"/>
       <source>Revert changes</source>
-      <translation type="unfinished">Revert changes</translation>
+      <translation>Скасувати зміни</translation>
     </message>
     <message>
       <location filename="../DlgPreferencesImp.cpp" line="299"/>
       <source>Do you want to revert back to previous settings before exit?</source>
-      <translation type="unfinished">Do you want to revert back to previous settings before exit?</translation>
+      <translation>Хочете повернутися до попередніх налаштувань перед виходом?</translation>
     </message>
     <message>
       <location filename="../DlgPreferencesImp.cpp" line="330"/>
@@ -3543,7 +3543,7 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgPropertyLink.cpp" line="442"/>
       <source>Element</source>
-      <translation type="unfinished">Element</translation>
+      <translation>Елемент</translation>
     </message>
     <message>
       <location filename="../DlgPropertyLink.ui" line="66"/>
@@ -5502,7 +5502,7 @@ select hidden face at various depth.</translation>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="208"/>
       <source>Offset X</source>
-      <translation type="unfinished">Offset X</translation>
+      <translation>Зсув X</translation>
     </message>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="234"/>
@@ -5512,27 +5512,27 @@ select hidden face at various depth.</translation>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="241"/>
       <source>Offset Y</source>
-      <translation type="unfinished">Offset Y</translation>
+      <translation>Зсув Y</translation>
     </message>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="269"/>
       <source>Top Left</source>
-      <translation type="unfinished">Top Left</translation>
+      <translation>Зверху ліворуч</translation>
     </message>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="274"/>
       <source>Top Right</source>
-      <translation type="unfinished">Top Right</translation>
+      <translation>Зверху праворуч</translation>
     </message>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="279"/>
       <source>Bottom Left</source>
-      <translation type="unfinished">Bottom Left</translation>
+      <translation>Знизу ліворуч</translation>
     </message>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="284"/>
       <source>Bottom Right</source>
-      <translation type="unfinished">Bottom Right</translation>
+      <translation>Знизу праворуч</translation>
     </message>
     <message>
       <location filename="../DlgSettingsSelection.ui" line="292"/>
@@ -7032,7 +7032,7 @@ originally selected prior to opening this dialog</source>
       <location filename="../SelectionView.cpp" line="110"/>
       <location filename="../SelectionView.cpp" line="126"/>
       <source>Element</source>
-      <translation type="unfinished">Element</translation>
+      <translation>Елемент</translation>
     </message>
     <message>
       <location filename="../SelectionView.cpp" line="111"/>
@@ -9007,12 +9007,12 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../Action.cpp" line="1219"/>
       <source>Hide text</source>
-      <translation type="unfinished">Hide text</translation>
+      <translation>Приховати текст</translation>
     </message>
     <message>
       <location filename="../Action.cpp" line="1219"/>
       <source>Show text</source>
-      <translation type="unfinished">Show text</translation>
+      <translation>Показати текст</translation>
     </message>
     <message>
       <location filename="../Action.cpp" line="1220"/>
@@ -9229,7 +9229,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../MainWindow.cpp" line="626"/>
       <source>Task List</source>
-      <translation type="unfinished">Task List</translation>
+      <translation>Список задач</translation>
     </message>
     <message>
       <location filename="../MainWindow.cpp" line="424"/>
@@ -9257,7 +9257,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="731"/>
       <source>UI</source>
-      <translation type="unfinished">UI</translation>
+      <translation>Інтерфейс користувача</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="732"/>
@@ -9326,7 +9326,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="755"/>
       <source>Expression</source>
-      <translation type="unfinished">Expression</translation>
+      <translation>Вираз</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="757"/>
@@ -9351,7 +9351,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="766"/>
       <source>Pie menu</source>
-      <translation type="unfinished">Pie menu</translation>
+      <translation>Меню Pie</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="768"/>
@@ -15106,7 +15106,7 @@ This is used as a debug help for output command from external libraries</transla
     <message>
       <location filename="../CommandStd.cpp" line="510"/>
       <source>Restart</source>
-      <translation type="unfinished">Restart</translation>
+      <translation>Перезавантажити</translation>
     </message>
     <message>
       <location filename="../CommandStd.cpp" line="511"/>
