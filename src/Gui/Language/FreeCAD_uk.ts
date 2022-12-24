@@ -911,12 +911,12 @@ SaveAll: save all current view settings to a &apos;SavedView&apos; object.
 
 You can store the setting to an existing &apos;SavedView&apos; object before by
 selecting it before clicking &apos;Save/SaveAll&apos;.</source>
-      <translation type="unfinished">Close: deactivate clip planes
-Save: save the current setting of the clip planes to a &apos;SavedView&apos; object.
-SaveAll: save all current view settings to a &apos;SavedView&apos; object.
+      <translation>Закрити - деактивувати площини обрізання
+Зберегти - зберегти поточні налаштування площин обрізання в об'єкті &apos;SavedView&apos;.
+ЗберігтиВсе- зберегти всі поточні налаштування виду в об'єкті &apos;SavedView&apos;.
 
-You can store the setting to an existing &apos;SavedView&apos; object before by
-selecting it before clicking &apos;Save/SaveAll&apos;.</translation>
+Зберегти налаштування в існуючий об'єкт &apos;SavedView&apos; можна і раніше, якщо
+вибрати його перед натисканням кнопки &apos;Зберегти/ЗберегтиВсе&apos;.</translation>
     </message>
     <message>
       <location filename="../Clipping.ui" line="332"/>
@@ -1586,7 +1586,7 @@ same time. The one with the highest priority will be triggered.</source>
     <message>
       <location filename="../DlgToolbars.ui" line="306"/>
       <source>Assign shortcut to a toolbar to create a popup menu.</source>
-      <translation type="unfinished">Assign shortcut to a toolbar to create a popup menu.</translation>
+      <translation>Призначити комбінацію клавіш панелі інструментів для створення спливаючого меню.</translation>
     </message>
     <message>
       <location filename="../DlgToolbars.ui" line="309"/>
@@ -1826,42 +1826,42 @@ uniform color for all faces.</source>
       <source>Mapping edge color from base shape if possible.
 You may want to disable this if you want to set a
 uniform color for all edges.</source>
-      <translation type="unfinished">Mapping edge color from base shape if possible.
-You may want to disable this if you want to set a
-uniform color for all edges.</translation>
+      <translation>Відображує колір ребра базової фігури, якщо це можливо.
+Ви можете вимкнути цей параметр, якщо хочете встановити
+однорідний колір для всіх ребер.</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="380"/>
       <source>Map edge colors</source>
-      <translation type="unfinished">Map edge colors</translation>
+      <translation>Відобразити кольори ребра</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="387"/>
       <source>Mapping face transparency from derived shape if possible.
 You may want to disable this if you want to set a uniform
 transparency for all faces.</source>
-      <translation type="unfinished">Mapping face transparency from derived shape if possible.
-You may want to disable this if you want to set a uniform
-transparency for all faces.</translation>
+      <translation>Відображує прозорість грані базової фігури, якщо це можливо.
+Ви можете вимкнути цей параметр, якщо хочете встановити однакову
+прозорість для всіх граней.</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="392"/>
       <source>Map transparencies</source>
-      <translation type="unfinished">Map transparencies</translation>
+      <translation>Відобразити прозорість</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="399"/>
       <source>Mapping vertex color from derived shape if possible.
 You may want to disable this if you want to set a
 uniform color for all vertices.</source>
-      <translation type="unfinished">Mapping vertex color from derived shape if possible.
-You may want to disable this if you want to set a
-uniform color for all vertices.</translation>
+      <translation>Відображує кольори вершини базової фігури, якщо це можливо.
+Ви можете вимкнути цей параметр, якщо хочете встановити 
+однорідний колір для всіх вершин.</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="404"/>
       <source>Map vertex colors</source>
-      <translation type="unfinished">Map vertex colors</translation>
+      <translation>Відобразити кольори вершин</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="427"/>
@@ -2148,7 +2148,7 @@ uniform color for all vertices.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="41"/>
       <source>Auto apply preference options immediately after change.</source>
-      <translation type="unfinished">Auto apply preference options immediately after change.</translation>
+      <translation>Автоматично застосувати налаштування після змін.</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="44"/>
@@ -2158,12 +2158,12 @@ uniform color for all vertices.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="60"/>
       <source>Save preference settings to file up on closing this dialog.</source>
-      <translation type="unfinished">Save preference settings to file up on closing this dialog.</translation>
+      <translation>Зберегти налаштування в файл під час закриття цього діалогового вікна.</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="63"/>
       <source>Save settings to file</source>
-      <translation type="unfinished">Save settings to file</translation>
+      <translation>Зберегти налаштування у файл</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="82"/>
@@ -2207,7 +2207,7 @@ to use the system default size.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="196"/>
       <source>Set tree view label font size</source>
-      <translation type="unfinished">Set tree view label font size</translation>
+      <translation>Розмір шрифту для позначень в ієрархії документа</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="209"/>
@@ -2299,7 +2299,7 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="587"/>
       <source>Workbench tab icon size:</source>
-      <translation type="unfinished">Workbench tab icon size:</translation>
+      <translation>Розмір іконок для робочого середовища:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="607"/>
@@ -2309,17 +2309,17 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="614"/>
       <source>Workbench toolbar area</source>
-      <translation type="unfinished">Workbench toolbar area</translation>
+      <translation>Область панелі інструментів робочого середовища</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="621"/>
       <source>Set the default application font size</source>
-      <translation type="unfinished">Set the default application font size</translation>
+      <translation>Встановити типовий розмір шрифту програми</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="647"/>
       <source>Global toolbar area</source>
-      <translation type="unfinished">Global toolbar area</translation>
+      <translation>Глобальна область панелі інструментів</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="680"/>
@@ -3175,15 +3175,15 @@ You can then selectively export only the changed ones.</translation>
       <source>The application will restart after resetting the configuration.
 
 Do you want to make a backup?</source>
-      <translation type="unfinished">The application will restart after resetting the configuration.
+      <translation>Після скидання конфігурації програма перезавантажиться.
 
-Do you want to make a backup?</translation>
+Бажаєте зробити резервну копію?</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="602"/>
       <source>Do you want to make a backup before resetting the configuration?
 </source>
-      <translation type="unfinished">Do you want to make a backup before resetting the configuration?
+      <translation>Бажаєте зробити резервну копію перед скиданням конфігурації?
 </translation>
     </message>
     <message>
@@ -3195,7 +3195,7 @@ Do you want to make a backup?</translation>
     <message>
       <location filename="../DlgParameterImp.cpp" line="622"/>
       <source>Failed to reset configuration.</source>
-      <translation type="unfinished">Failed to reset configuration.</translation>
+      <translation>Не вдалося скинути конфігурацію.</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="631"/>
@@ -3207,13 +3207,13 @@ Do you want to make a backup?</translation>
       <location filename="../DlgParameterImp.cpp" line="632"/>
       <source>This will overwrite the current settings.
 Do you want to continue?</source>
-      <translation type="unfinished">This will overwrite the current settings.
-Do you want to continue?</translation>
+      <translation>Буде перезаписано поточні параметри.
+Продовжити?</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="701"/>
       <source>Add Configuration</source>
-      <translation type="unfinished">Add Configuration</translation>
+      <translation>Додати конфігурацію</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="702"/>
@@ -3224,7 +3224,7 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgParameterImp.cpp" line="749"/>
       <source>&lt;Application Settings&gt;</source>
-      <translation type="unfinished">&lt;Application Settings&gt;</translation>
+      <translation>&lt;Налаштування Програми&gt;</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="824"/>
@@ -3314,7 +3314,7 @@ Do you want to continue?</translation>
     <message>
       <location filename="../DlgPreferencesImp.cpp" line="329"/>
       <source>Clear user settings</source>
-      <translation>Очищення настроюань користувача</translation>
+      <translation>Скинути налаштування користувача</translation>
     </message>
     <message>
       <location filename="../DlgPreferencesImp.cpp" line="298"/>
@@ -3847,7 +3847,7 @@ from Python console to Report view panel</source>
     <message>
       <location filename="../DlgSettings3DView.ui" line="546"/>
       <source>Pre-selection delay (second):</source>
-      <translation type="unfinished">Pre-selection delay (second):</translation>
+      <translation>Затримка попереднього вибору (секунд):</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="684"/>
@@ -6474,7 +6474,7 @@ Only an empty group is allowed to accept import.</translation>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1636"/>
       <source>The current configuration settings is read only. You can copy it and then make changes.</source>
-      <translation type="unfinished">The current configuration settings is read only. You can copy it and then make changes.</translation>
+      <translation>Поточні налаштування доступні тільки для читання. Ви можете скопіювати їх і внести зміни.</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1694"/>
@@ -9537,16 +9537,16 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../Application.cpp" line="365"/>
       <source>Recompution required</source>
-      <translation type="unfinished">Recompution required</translation>
+      <translation>Необхідне переобчислення</translation>
     </message>
     <message>
       <location filename="../Application.cpp" line="366"/>
       <source>Some document(s) require recomputation for migration purpose. It is highly recommended to perform a recomputation before any modification to avoid compatibility problem.
 
 Do you want to recompute now?</source>
-      <translation type="unfinished">Some document(s) require recomputation for migration purpose. It is highly recommended to perform a recomputation before any modification to avoid compatibility problem.
+      <translation>Деякі документи потребують переобчислення для міграції. Наполегливо рекомендується виконати переобчислення перед будь-якими змінами, щоб уникнути проблеми сумісності.
 
-Do you want to recompute now?</translation>
+Бажаєте переобчислити зараз?</translation>
     </message>
     <message>
       <location filename="../Application.cpp" line="383"/>
@@ -10895,7 +10895,7 @@ If disabled, then use the selected font point size.
       <location filename="../ViewProviderSavedView.cpp" line="122"/>
       <location filename="../ViewProviderSavedView.cpp" line="135"/>
       <source>Clipping settings</source>
-      <translation type="unfinished">Clipping settings</translation>
+      <translation>Налаштування відсікання</translation>
     </message>
     <message>
       <location filename="../ViewProviderSavedView.cpp" line="123"/>
