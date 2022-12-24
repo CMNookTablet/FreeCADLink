@@ -4912,42 +4912,42 @@ uniform color for all faces.</source>
       <source>Mapping vertex color from derived shape if possible.
 You may want to disable this if you want to set a
 uniform color for all vertices.</source>
-      <translation type="unfinished">Mapping vertex color from derived shape if possible.
-You may want to disable this if you want to set a
-uniform color for all vertices.</translation>
+      <translation>Відображує кольори вершини базової фігури, якщо це можливо.
+Ви можете вимкнути цей параметр, якщо хочете встановити 
+однорідний колір для всіх вершин.</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="276"/>
       <source>Map vertex colors</source>
-      <translation type="unfinished">Map vertex colors</translation>
+      <translation>Відобразити кольори вершин</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="289"/>
       <source>Mapping edge color from base shape if possible.
 You may want to disable this if you want to set a
 uniform color for all edges.</source>
-      <translation type="unfinished">Mapping edge color from base shape if possible.
-You may want to disable this if you want to set a
-uniform color for all edges.</translation>
+      <translation>Відображує колір ребра базової фігури, якщо це можливо.
+Ви можете вимкнути цей параметр, якщо хочете встановити
+однорідний колір для всіх ребер.</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="294"/>
       <source>Map edge colors</source>
-      <translation type="unfinished">Map edge colors</translation>
+      <translation>Відобразити кольори ребра</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="307"/>
       <source>Mapping face transparency from derived shape if possible.
 You may want to disable this if you want to set a uniform
 transparency for all faces.</source>
-      <translation type="unfinished">Mapping face transparency from derived shape if possible.
-You may want to disable this if you want to set a uniform
-transparency for all faces.</translation>
+      <translation>Відображує прозорість грані базової фігури, якщо це можливо.
+Ви можете вимкнути цей параметр, якщо хочете встановити однакову
+прозорість для всіх граней.</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="312"/>
       <source>Map transparencies</source>
-      <translation type="unfinished">Map transparencies</translation>
+      <translation>Відобразити прозорість</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="328"/>
