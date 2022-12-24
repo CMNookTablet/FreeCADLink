@@ -2259,7 +2259,7 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="455"/>
       <source>User defined icon set</source>
-      <translation type="unfinished">User defined icon set</translation>
+      <translation>Набір іконок, визначений користувачем</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="471"/>
@@ -14019,7 +14019,7 @@ p, li { white-space: pre-wrap; }
     <message>
       <location filename="../DlgIconBrowser.ui" line="39"/>
       <source>User defined icon set</source>
-      <translation type="unfinished">User defined icon set</translation>
+      <translation>Набір іконок, визначений користувачем</translation>
     </message>
     <message>
       <location filename="../DlgIconBrowser.ui" line="55"/>
