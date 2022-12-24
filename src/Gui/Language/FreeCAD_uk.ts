@@ -9311,7 +9311,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="750"/>
       <source>Hide scroll bar</source>
-      <translation type="unfinished">Hide scroll bar</translation>
+      <translation>Приховувати панель прокрутки</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="752"/>
@@ -9321,7 +9321,7 @@ including link, reorder, or replace depending on dropping site.</translation>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="754"/>
       <source>Show icon in tool tip</source>
-      <translation type="unfinished">Show icon in tool tip</translation>
+      <translation>Показувати іконку в підказці</translation>
     </message>
     <message>
       <location filename="../DlgSettingsUI.cpp" line="755"/>
