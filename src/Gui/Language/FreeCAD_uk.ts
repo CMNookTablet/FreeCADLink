@@ -844,8 +844,8 @@ while doing a left or right click and move the mouse up or down</source>
       <source>Render clip section fill of objects with similar materials
 so that the intersecting objects effectively become a
 boolean substraction operation.</source>
-      <translation>Відтворити заливку перетину об'єктів схожими матеріалами
-так, щоб об'єкти послідовно перетворювались на булеву 
+      <translation>Відтворити заливку перетину об&apos;єктів схожими матеріалами
+так, щоб об&apos;єкти послідовно перетворювались на булеву 
 операцію віднімання.</translation>
     </message>
     <message>
@@ -912,10 +912,10 @@ SaveAll: save all current view settings to a &apos;SavedView&apos; object.
 You can store the setting to an existing &apos;SavedView&apos; object before by
 selecting it before clicking &apos;Save/SaveAll&apos;.</source>
       <translation>Закрити - деактивувати площини обрізання
-Зберегти - зберегти поточні налаштування площин обрізання в об'єкті &apos;SavedView&apos;.
-ЗберігтиВсе- зберегти всі поточні налаштування виду в об'єкті &apos;SavedView&apos;.
+Зберегти - зберегти поточні налаштування площин обрізання в об&apos;єкті &apos;SavedView&apos;.
+ЗберігтиВсе- зберегти всі поточні налаштування виду в об&apos;єкті &apos;SavedView&apos;.
 
-Зберегти налаштування в існуючий об'єкт &apos;SavedView&apos; можна і раніше, якщо
+Зберегти налаштування в існуючий об&apos;єкт &apos;SavedView&apos; можна і раніше, якщо
 вибрати його перед натисканням кнопки &apos;Зберегти/ЗберегтиВсе&apos;.</translation>
     </message>
     <message>
@@ -1779,7 +1779,7 @@ same time. The one with the highest priority will be triggered.</source>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="232"/>
       <source>Touch object for recompute on color change</source>
-      <translation>Натисніть на об'єкт для переобчислення зміни кольору</translation>
+      <translation>Натисніть на об&apos;єкт для переобчислення зміни кольору</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="245"/>
@@ -1800,7 +1800,7 @@ same time. The one with the highest priority will be triggered.</source>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="354"/>
       <source>Specifies how to map color from child objects to parent</source>
-      <translation>Вказує спосіб відображення кольору від дочірніх об'єктів до батьківських</translation>
+      <translation>Вказує спосіб відображення кольору від дочірніх об&apos;єктів до батьківських</translation>
     </message>
     <message>
       <location filename="../DlgDisplayProperties.ui" line="357"/>
@@ -3000,7 +3000,7 @@ This will overwrite the current configuration.</source>
     <message>
       <location filename="../DlgParameter.ui" line="150"/>
       <source>Merge an existing configuration with the current one.</source>
-      <translation>Об'єднати наявну конфігурацію з поточною.</translation>
+      <translation>Об&apos;єднати наявну конфігурацію з поточною.</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="153"/>
@@ -3259,7 +3259,7 @@ Do you want to continue?</source>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1411"/>
       <source>Merge parameter from file</source>
-      <translation>Об'єднати параметр з файлу</translation>
+      <translation>Об&apos;єднати параметр з файлу</translation>
     </message>
     <message>
       <location filename="../DlgParameterImp.cpp" line="1449"/>
@@ -12986,7 +12986,7 @@ setting, not all faces may be assigned the color</translation>
     <message>
       <location filename="../CommandWindow.cpp" line="338"/>
       <source>Tool&amp;bars</source>
-      <translation>Панелі інструментів</translation>
+      <translation>П&amp;анелі інструментів</translation>
     </message>
     <message>
       <location filename="../CommandWindow.cpp" line="339"/>
@@ -14198,7 +14198,7 @@ TreeItemInvisible, iconset:MyIcons/TreeItemInvisible.svg, 128x64</translation>
     <message>
       <location filename="../DlgSettingsObjects.cpp" line="201"/>
       <source>Apply to existing objects</source>
-      <translation type="unfinished">Apply to existing objects</translation>
+      <translation>Застосувати до наявних обʼєктів</translation>
     </message>
   </context>
   <context>
@@ -14996,8 +14996,8 @@ the region are non-opaque.</translation>
       <location filename="../ReportViewParams.cpp" line="321"/>
       <source>Prefix for marking python command in message to be redirected to Python console
 This is used as a debug help for output command from external libraries</source>
-      <translation type="unfinished">Prefix for marking python command in message to be redirected to Python console
-This is used as a debug help for output command from external libraries</translation>
+      <translation>Префікс для позначення python-команди в перенаправленому на консоль Python повідомленні
+Використовується як полегшення налагодження для виводу команд із зовнішніх бібліотек</translation>
     </message>
   </context>
   <context>
@@ -15145,12 +15145,12 @@ This is used as a debug help for output command from external libraries</transla
     <message>
       <location filename="../CommandStd.cpp" line="953"/>
       <source>Toolbar menus</source>
-      <translation type="unfinished">Toolbar menus</translation>
+      <translation>Меню панелі інструментів</translation>
     </message>
     <message>
       <location filename="../CommandStd.cpp" line="954"/>
       <source>Collection of user defined toolbars</source>
-      <translation type="unfinished">Collection of user defined toolbars</translation>
+      <translation>Колекція користувацьких панелей інструментів</translation>
     </message>
   </context>
   <context>
@@ -15158,12 +15158,12 @@ This is used as a debug help for output command from external libraries</transla
     <message>
       <location filename="../CommandStd.cpp" line="988"/>
       <source>Preset Configurations</source>
-      <translation type="unfinished">Preset Configurations</translation>
+      <translation>Попередньо задані конфігурації</translation>
     </message>
     <message>
       <location filename="../CommandStd.cpp" line="989"/>
       <source>List of preset configurations</source>
-      <translation type="unfinished">List of preset configurations</translation>
+      <translation>Показує список попередньо заданих конфігурацій</translation>
     </message>
   </context>
   <context>
@@ -15290,7 +15290,7 @@ This is used as a debug help for output command from external libraries</transla
       <location filename="../CommandView.cpp" line="3189"/>
       <location filename="../CommandView.cpp" line="3191"/>
       <source>Lasso element selection</source>
-      <translation type="unfinished">Lasso element selection</translation>
+      <translation>Вибір елемента ласо</translation>
     </message>
   </context>
   <context>
@@ -15533,8 +15533,8 @@ This makes the docked widget stay transparent at all times.</translation>
       <location filename="../CommandView.cpp" line="4666"/>
       <source>Close all views of the linked documents.
 The linked documents stayed open.</source>
-      <translation>Закрити всі види пов'язаних документів.
-Пов'язані документи залишаться відкритими.</translation>
+      <translation>Закрити всі види пов&apos;язаних документів.
+Пов&apos;язані документи залишаться відкритими.</translation>
     </message>
   </context>
   <context>
@@ -15626,7 +15626,7 @@ The linked documents stayed open.</source>
     <message>
       <location filename="../QuantitySpinBox_p.h" line="113"/>
       <source>Press = to bring up the expression editor.</source>
-      <translation type="unfinished">Press = to bring up the expression editor.</translation>
+      <translation>Натисніть =, щоб відкрити редактор виразів.</translation>
     </message>
   </context>
   <context>
@@ -15660,12 +15660,12 @@ The linked documents stayed open.</source>
     <message>
       <location filename="../CommandFeat.cpp" line="246"/>
       <source>Rename new object</source>
-      <translation>Перейменувати новий об'єкт</translation>
+      <translation>Перейменувати новий об&apos;єкт</translation>
     </message>
     <message>
       <location filename="../CommandFeat.cpp" line="247"/>
       <source>Rename the newly created object</source>
-      <translation>Перейменовує нещодавно створений об'єкт</translation>
+      <translation>Перейменовує нещодавно створений об&apos;єкт</translation>
     </message>
   </context>
   <context>
@@ -15673,7 +15673,7 @@ The linked documents stayed open.</source>
     <message>
       <location filename="../DlgExpressionInput.cpp" line="224"/>
       <source>Function evaluation and attribute writing are disabled while editing. You can enable it by checking &apos;Evaluate function&apos; here. Be aware that invoking function may cause unexpected change to various objects.</source>
-      <translation type="unfinished">Function evaluation and attribute writing are disabled while editing. You can enable it by checking &apos;Evaluate function&apos; here. Be aware that invoking function may cause unexpected change to various objects.</translation>
+      <translation>Під час редагування обчислення функції та запис атрибутів відключені. Ви можете ввімкнути це, встановивши прапорець &quot;Обчислювати функцію&quot; тут. Майте на увазі, що виклик функції може призвести до неочікуваних змін у різних об&apos;єктах.</translation>
     </message>
   </context>
   <context>
@@ -15858,7 +15858,7 @@ Hold CTRL + SHIFT key to move the window in the other direction.</translation>
     <message>
       <location filename="../OverlayWidgets.cpp" line="1991"/>
       <source>Mouse pass through, ESC to stop</source>
-      <translation type="unfinished">Mouse pass through, ESC to stop</translation>
+      <translation>Миша проходить, ESC для зупинки</translation>
     </message>
   </context>
   <context>
@@ -15992,7 +15992,7 @@ Ctrl + Click to revert to default.</translation>
     <message>
       <location filename="../ToolBarManager.cpp" line="1046"/>
       <source>Undock toolbars</source>
-      <translation type="unfinished">Undock toolbars</translation>
+      <translation>Розблокувати панелі інструментів</translation>
     </message>
   </context>
   <context>
