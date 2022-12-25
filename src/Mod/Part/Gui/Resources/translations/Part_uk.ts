@@ -4886,7 +4886,7 @@ the size of the resulting STEP file.</translation>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="244"/>
       <source>Specifies how to map color from child objects to parent</source>
-      <translation>Вказує спосіб відображення кольору від дочірніх об'єктів до батьківських</translation>
+      <translation>Вказує спосіб відображення кольору від дочірніх об&apos;єктів до батьківських</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="247"/>
@@ -4952,7 +4952,7 @@ transparency for all faces.</source>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="328"/>
       <source>Touch object for recompute on color change</source>
-      <translation>Натисніть на об'єкт для переобчислення зміни кольору</translation>
+      <translation>Натисніть на об&apos;єкт для переобчислення зміни кольору</translation>
     </message>
     <message>
       <location filename="../../DlgSettings3DViewPart.ui" line="156"/>
