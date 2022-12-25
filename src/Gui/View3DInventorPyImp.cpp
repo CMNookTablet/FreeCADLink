@@ -1659,7 +1659,8 @@ PyObject* View3DInventorPy::addEventCallback(PyObject *args)
 
         getView3DInventorPtr()->getViewer()->addEventCallback(eventId, eventCallback, method);
         callbacks.push_back(method);
-        Py_INCREF(method);
+        Py_INCREF(method); // reference to keep method in callbacks
+        Py_INCREF(method); // reference for return
         return method;
     } PY_CATCH
 }
@@ -1867,13 +1868,13 @@ PyObject* View3DInventorPy::removeEventCallbackPivy(PyObject *args)
             throw Py::TypeError(s_out.str());
         }
 
-        if (PyCallable_Check(method) == 0) {
-            throw Py::TypeError("object is not callable");
-        }
+        auto it = std::find(callbacks.begin(), callbacks.end(), method);
+        if (it == callbacks.end())
+            throw Py::RuntimeError("callback not found");
 
         SoEventCallbackCB* callback = (ex == 1 ?  eventCallbackPivyEx : eventCallbackPivy);
         getView3DInventorPtr()->getViewer()->removeEventCallback(*eventId, callback, method);
-        callbacks.remove(method);
+        callbacks.erase(it);
         Py_DECREF(method);
         Py_Return;
     } PY_CATCH
@@ -1959,7 +1960,8 @@ PyObject* View3DInventorPy::addDraggerCallback(PyObject *args)
         }
 
         callbacks.push_back(method);
-        Py_INCREF(method);
+        Py_INCREF(method); // reference to keep method in callbacks
+        Py_INCREF(method); // reference for return
         return method;
     } PY_CATCH
 }
@@ -1982,6 +1984,10 @@ PyObject* View3DInventorPy::removeDraggerCallback(PyObject *args)
             throw Py::TypeError("The first argument must be of type SoDragger");
         }
 
+        auto it = std::find(callbacks.begin(), callbacks.end(), method);
+        if (it == callbacks.end())
+            throw Py::RuntimeError("callback not found");
+
         SoDragger* drag = reinterpret_cast<SoDragger*>(ptr);
         if (strcmp(type, "addFinishCallback") == 0) {
             drag->removeFinishCallback(draggerCallback, method);
@@ -2002,7 +2008,7 @@ PyObject* View3DInventorPy::removeDraggerCallback(PyObject *args)
             throw Py::TypeError(s_out.str());
         }
 
-        callbacks.remove(method);
+        callbacks.erase(it);
         Py_DECREF(method);
         Py_Return;
     } PY_CATCH
