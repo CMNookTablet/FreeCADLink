@@ -4217,7 +4217,7 @@ If it is necessary to set the FinalDepth manually please select a different oper
     <message>
       <location filename="../panels/DlgToolCopy.ui" line="29"/>
       <source>Destination</source>
-      <translation>Тека Призначення</translation>
+      <translation>У теку</translation>
     </message>
   </context>
   <context>
