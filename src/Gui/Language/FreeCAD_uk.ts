@@ -2500,7 +2500,7 @@ horizontal space in Python console</source>
     <message>
       <location filename="../SceneInspector.cpp" line="264"/>
       <source>Get node in console</source>
-      <translation type="unfinished">Get node in console</translation>
+      <translation>Отримати вузол в консолі</translation>
     </message>
     <message>
       <location filename="../SceneInspector.cpp" line="349"/>
@@ -2510,7 +2510,7 @@ horizontal space in Python console</source>
     <message>
       <location filename="../SceneInspector.cpp" line="466"/>
       <source>Children Nodes</source>
-      <translation type="unfinished">Children Nodes</translation>
+      <translation>Дочірні вузли</translation>
     </message>
     <message>
       <location filename="../SceneInspector.cpp" line="467"/>
@@ -2923,7 +2923,7 @@ Specify another directory, please.</source>
     <message>
       <location filename="../DlgParameter.ui" line="44"/>
       <source>Enable this to expose the setting as preset in &apos;Tools -&gt; Presets&apos;</source>
-      <translation type="unfinished">Enable this to expose the setting as preset in &apos;Tools -&gt; Presets&apos;</translation>
+      <translation>Ввімкніть цю опцію, щоб застосувати налаштування аналогічні &quot;Інструменти -&gt; Шаблони&quot;</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="47"/>
@@ -2983,7 +2983,7 @@ Specify another directory, please.</source>
     <message>
       <location filename="../DlgParameter.ui" line="132"/>
       <source>Export</source>
-      <translation>Експорт</translation>
+      <translation>Експортувати</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="139"/>
@@ -3005,7 +3005,7 @@ This will overwrite the current configuration.</source>
     <message>
       <location filename="../DlgParameter.ui" line="153"/>
       <source>Merge</source>
-      <translation>Об&apos;єднання</translation>
+      <translation>Об&apos;єднати</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="160"/>
@@ -3031,13 +3031,13 @@ This will overwrite the current configuration.</source>
       <location filename="../DlgParameter.ui" line="229"/>
       <source>Enable this to auto select any parameter that have changed.
 You can then selectively export only the changed ones.</source>
-      <translation type="unfinished">Enable this to auto select any parameter that have changed.
-You can then selectively export only the changed ones.</translation>
+      <translation>Ввімкніть цю опцію для автоматичного вибору будь-якого параметра, який було змінено.
+Потім ви можете вибірково експортувати тільки змінені параметри.</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="233"/>
       <source>Monitor</source>
-      <translation>Монітор</translation>
+      <translation>Слідкувати</translation>
     </message>
     <message>
       <location filename="../DlgParameter.ui" line="266"/>
@@ -3357,12 +3357,12 @@ Do you want to continue?</source>
     <message>
       <location filename="../DlgProjectInformation.ui" line="38"/>
       <source>&amp;Name:</source>
-      <translation>Назва:</translation>
+      <translation>&amp;Назва:</translation>
     </message>
     <message>
       <location filename="../DlgProjectInformation.ui" line="291"/>
       <source>Commen&amp;t:</source>
-      <translation>Коментар:</translation>
+      <translation>Комента&amp;р:</translation>
     </message>
     <message>
       <location filename="../DlgProjectInformation.ui" line="64"/>
@@ -3372,27 +3372,27 @@ Do you want to continue?</source>
     <message>
       <location filename="../DlgProjectInformation.ui" line="182"/>
       <source>&amp;Last modified by:</source>
-      <translation>І останні зміни внесені:</translation>
+      <translation>&amp;Останні зміни внесені:</translation>
     </message>
     <message>
       <location filename="../DlgProjectInformation.ui" line="133"/>
       <source>Created &amp;by:</source>
-      <translation>Створено:</translation>
+      <translation>Створен&amp;ий:</translation>
     </message>
     <message>
       <location filename="../DlgProjectInformation.ui" line="231"/>
       <source>Com&amp;pany:</source>
-      <translation>Компанія:</translation>
+      <translation>Комп&amp;анія:</translation>
     </message>
     <message>
       <location filename="../DlgProjectInformation.ui" line="205"/>
       <source>Last &amp;modification date:</source>
-      <translation>Дата останньої зміни:</translation>
+      <translation>Дата ре&amp;дагування:</translation>
     </message>
     <message>
       <location filename="../DlgProjectInformation.ui" line="156"/>
       <source>Creation &amp;date:</source>
-      <translation>Дата створення:</translation>
+      <translation>Дата ств&amp;орення:</translation>
     </message>
     <message>
       <source/>
@@ -3429,7 +3429,7 @@ Do you want to continue?</source>
     <message>
       <location filename="../DlgProjectUtility.ui" line="14"/>
       <source>Project utility</source>
-      <translation>Утиліта проєкту</translation>
+      <translation>Утиліта роботи з проєктом</translation>
     </message>
     <message>
       <location filename="../DlgProjectUtility.ui" line="22"/>
@@ -3440,13 +3440,13 @@ Do you want to continue?</source>
       <location filename="../DlgProjectUtility.ui" line="28"/>
       <location filename="../DlgProjectUtility.ui" line="78"/>
       <source>Source</source>
-      <translation>Вихідний файл</translation>
+      <translation>З файлу</translation>
     </message>
     <message>
       <location filename="../DlgProjectUtility.ui" line="42"/>
       <location filename="../DlgProjectUtility.ui" line="92"/>
       <source>Destination</source>
-      <translation>Тека Призначення</translation>
+      <translation>У теку</translation>
     </message>
     <message>
       <location filename="../DlgProjectUtility.ui" line="65"/>
@@ -3472,13 +3472,13 @@ Do you want to continue?</source>
       <location filename="../DlgProjectUtility.cpp" line="133"/>
       <location filename="../DlgProjectUtility.cpp" line="153"/>
       <source>Empty source</source>
-      <translation>Порожній вихідний файл</translation>
+      <translation>Файл не заданий</translation>
     </message>
     <message>
       <location filename="../DlgProjectUtility.cpp" line="133"/>
       <location filename="../DlgProjectUtility.cpp" line="153"/>
       <source>No source is defined.</source>
-      <translation>Немає визначеного джерела.</translation>
+      <translation>Файл не заданий.</translation>
     </message>
     <message>
       <location filename="../DlgProjectUtility.cpp" line="137"/>
@@ -3490,7 +3490,7 @@ Do you want to continue?</source>
       <location filename="../DlgProjectUtility.cpp" line="137"/>
       <location filename="../DlgProjectUtility.cpp" line="157"/>
       <source>No destination is defined.</source>
-      <translation>Не визначено теки призначення.</translation>
+      <translation>Тека призначення відсутня.</translation>
     </message>
     <message>
       <location filename="../DlgProjectUtility.cpp" line="116"/>
@@ -3523,7 +3523,7 @@ Do you want to continue?</source>
     <message>
       <location filename="../DlgPropertyLink.ui" line="69"/>
       <source>Sync sub-object selection</source>
-      <translation>Синхронізувати вибір субоб’єкту</translation>
+      <translation>Синхронізувати вибір підоб’єкту</translation>
     </message>
     <message>
       <location filename="../DlgPropertyLink.cpp" line="137"/>
@@ -3822,12 +3822,12 @@ from Python console to Report view panel</source>
     <message>
       <location filename="../DlgSettings3DView.ui" line="288"/>
       <source>None</source>
-      <translation>Немає</translation>
+      <translation>Відсутне</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="293"/>
       <source>Line Smoothing</source>
-      <translation>Згладжування лінії</translation>
+      <translation>Згладжування ліній</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="298"/>
@@ -3852,12 +3852,12 @@ from Python console to Report view panel</source>
     <message>
       <location filename="../DlgSettings3DView.ui" line="684"/>
       <source>Or&amp;thographic rendering</source>
-      <translation>Ор&amp;тогональна візуалізація</translation>
+      <translation>Ор&amp;тогональна проєкція</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="668"/>
       <source>Perspective renderin&amp;g</source>
-      <translation>Пе&amp;рспективна візуалізація</translation>
+      <translation>Пе&amp;рспективна проєкція</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="482"/>
@@ -3924,24 +3924,24 @@ VBO є функцією OpenGL, яка забезпечує методи зав�
     <message>
       <location filename="../DlgSettings3DView.ui" line="144"/>
       <source>Use OpenGL VBO (Vertex Buffer Object)</source>
-      <translation>Використовувати OpenGL VBO (Vertex Buffer Object)</translation>
+      <translation>Використати OpenGL VBO (Vertex Buffer Object)</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="255"/>
       <source>Enable 3D picking acceleration. The effect is only noticable for very complex
 geometry shape, and may cause some initial lag due to bufferring.</source>
-      <translation type="unfinished">Enable 3D picking acceleration. The effect is only noticable for very complex
-geometry shape, and may cause some initial lag due to bufferring.</translation>
+      <translation>Вмикає прискорення 3D-вибору. Ефект помітний лише для дуже складної 
+геометричної форми, і може викликати деяку початкову затримку через буферизацію.</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="259"/>
       <source>Pick acceleration</source>
-      <translation type="unfinished">Pick acceleration</translation>
+      <translation>Прискорювати вибір</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="335"/>
       <source>Maximum cache merge</source>
-      <translation type="unfinished">Maximum cache merge</translation>
+      <translation>Максимальне злиття кешу</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="413"/>
@@ -3970,7 +3970,7 @@ but slower response to any scene changes.
     <message>
       <location filename="../DlgSettings3DView.ui" line="489"/>
       <source>Cache merge threshold</source>
-      <translation type="unfinished">Cache merge threshold</translation>
+      <translation>Поріг злиття кешу</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="496"/>
@@ -4005,7 +4005,7 @@ but slower response to any scene changes.
     <message>
       <location filename="../DlgSettings3DView.ui" line="570"/>
       <source>Transparent objects:</source>
-      <translation>Прозорі обʼєкти:</translation>
+      <translation>Обчислення прозорості об&apos;єктів:</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="210"/>
@@ -4067,7 +4067,7 @@ but slower response to any scene changes.
       <location filename="../DlgSettings3DView.ui" line="49"/>
       <source>Axis cross will be shown by default at file
 opening or creation</source>
-      <translation>Під час відкриття або створення файлу за замовчуванням буде зображатися перетин осей</translation>
+      <translation>Під час відкриття або створення файлу за замовчуванням буде зображено перетин осей</translation>
     </message>
     <message>
       <location filename="../DlgSettings3DView.ui" line="53"/>
