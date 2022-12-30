@@ -2200,9 +2200,9 @@ uniform color for all vertices.</source>
       <source>Choose your preference for tree view icon size in pixel.
 The tree view row height will set to icon size + 2. Set 0
 to use the system default size.</source>
-      <translation type="unfinished">Choose your preference for tree view icon size in pixel.
-The tree view row height will set to icon size + 2. Set 0
-to use the system default size.</translation>
+      <translation>Виберіть бажаний розмір іконок в їєрархії документа в пікселях.
+Висота рядка буде дорівнювати розміру іконки + 2. 
+Встановіть 0 щоб використовувати розмір за замовчуванням.</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="196"/>
@@ -2217,7 +2217,7 @@ to use the system default size.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="229"/>
       <source>Document expansion mode:</source>
-      <translation type="unfinished">Document expansion mode:</translation>
+      <translation>Режим відображення документу:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="250"/>
@@ -2248,8 +2248,8 @@ to use the system default size.</translation>
       <location filename="../DlgGeneral.ui" line="434"/>
       <source>Enable this option to make sure pop up windows (e.g. Preference dialog)
 are shown on the same screen as the main window.</source>
-      <translation type="unfinished">Enable this option to make sure pop up windows (e.g. Preference dialog)
-are shown on the same screen as the main window.</translation>
+      <translation>Ввімкніть цю опцію, щоб спливаючі вікна (наприклад, діалогове 
+вікно налаштувань) показувало на тому ж екрані, що й головне вікно.</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="438"/>
@@ -2264,7 +2264,7 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="471"/>
       <source>Choose default docking area for workbench toolbars</source>
-      <translation type="unfinished">Choose default docking area for workbench toolbars</translation>
+      <translation>Задає область розташування панелей інструментів робочих середовищ</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="487"/>
@@ -2279,7 +2279,7 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="501"/>
       <source>Choose default docking area for global toolbars</source>
-      <translation type="unfinished">Choose default docking area for global toolbars</translation>
+      <translation>Задає область розташування глобальних панелей інструментів</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="533"/>
@@ -2304,7 +2304,7 @@ are shown on the same screen as the main window.</translation>
     <message>
       <location filename="../DlgGeneral.ui" line="607"/>
       <source>Overlay style sheet:</source>
-      <translation type="unfinished">Overlay style sheet:</translation>
+      <translation>Таблиця стилів:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="614"/>
@@ -2361,17 +2361,17 @@ See the FreeCAD Wiki for details about the image.</source>
     <message>
       <location filename="../DlgGeneral.ui" line="540"/>
       <source>View menu style sheet:</source>
-      <translation type="unfinished">View menu style sheet:</translation>
+      <translation>Стиль меню:</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="547"/>
       <source>Separate task list into its own dockable widget</source>
-      <translation type="unfinished">Separate task list into its own dockable widget</translation>
+      <translation>Відокремлює список завдань у власний віджет</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="550"/>
       <source>Separate task list from task view</source>
-      <translation type="unfinished">Separate task list from task view</translation>
+      <translation>Відокремити списку завдань від Виду Завдань</translation>
     </message>
     <message>
       <location filename="../DlgGeneral.ui" line="570"/>
