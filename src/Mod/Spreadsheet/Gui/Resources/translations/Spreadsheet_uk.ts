@@ -108,7 +108,7 @@
     <message>
       <location filename="../../../App/Cell.cpp" line="1206"/>
       <source>Reset edit mode</source>
-      <translation type="unfinished">Reset edit mode</translation>
+      <translation>Скинути режим редагування</translation>
     </message>
     <message>
       <location filename="../../../App/Cell.cpp" line="1209"/>
@@ -426,12 +426,12 @@ a tuple of three or four floating numbers</translation>
     <message>
       <location filename="../../Command.cpp" line="71"/>
       <source>Merge cells</source>
-      <translation>Об'єднати комірки</translation>
+      <translation>Об’єднати комірки</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="72"/>
       <source>Merge selected cells</source>
-      <translation>Об'єднує виділені комірки</translation>
+      <translation>Об’єднує виділені комірки</translation>
     </message>
   </context>
   <context>
@@ -462,12 +462,12 @@ a tuple of three or four floating numbers</translation>
     <message>
       <location filename="../../Command.cpp" line="124"/>
       <source>Split cell</source>
-      <translation>Роз'єднати комірку</translation>
+      <translation>Роз’єднати комірку</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="125"/>
       <source>Split previously merged cells</source>
-      <translation>Роз'єднує раніше обʼєднані комірки</translation>
+      <translation>Роз’єднує раніше обʼєднані комірки</translation>
     </message>
   </context>
   <context>
@@ -537,12 +537,12 @@ a tuple of three or four floating numbers</translation>
     <message>
       <location filename="../../Command.cpp" line="91"/>
       <source>Merge cells</source>
-      <translation>Об'єднати комірки</translation>
+      <translation>Об’єднати комірки</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="144"/>
       <source>Split cell</source>
-      <translation>Роз'єднати комірку</translation>
+      <translation>Роз’єднати комірку</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="312"/>
@@ -857,7 +857,7 @@ a tuple of three or four floating numbers</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="1101"/>
       <source>Copy &amp; Paste failed</source>
-      <translation>Копіювання і вставка завершилась невдачею</translation>
+      <translation>Копіювання і вставлення провалено</translation>
     </message>
     <message>
       <location filename="../../SpreadsheetView.cpp" line="374"/>
@@ -1038,7 +1038,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../DlgSettings.ui" line="77"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Escape character, typically the backslash (\), used to indicate special unprintable characters, e.g. \t = tab. Must be a single character.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Символ "Escape", як правило, зворотний слеш (\), який використовується для позначення спеціальних символів, які не друкуються, напр. \t = вкладка. Має бути один символ.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Символ &quot;Escape&quot;, як правило, зворотний слеш (\), який використовується для позначення спеціальних символів, які не друкуються, напр. \t = вкладка. Має бути один символ.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="80"/>
@@ -1048,7 +1048,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../DlgSettings.ui" line="38"/>
       <source>Escape Character: </source>
-      <translation>Символ "Escape": </translation>
+      <translation>Символ &quot;Escape&quot;: </translation>
     </message>
     <message>
       <location filename="../../DlgSettings.ui" line="106"/>
@@ -1089,7 +1089,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
       <translation>
         <numerusform>Вставити %n рядок(ів) вище</numerusform>
         <numerusform>Вставити %n рядків вище</numerusform>
-        <numerusform>Вставити %n рядок(ків) вище</numerusform>
+        <numerusform>Вставити %n рядків вище</numerusform>
         <numerusform>Вставити %n рядок(ків) вище</numerusform>
       </translation>
     </message>
@@ -1106,7 +1106,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
     <message>
       <location filename="../../SheetTableView.cpp" line="131"/>
       <source>Bind...</source>
-      <translation>Привʼязати...</translation>
+      <translation>Прив’язати...</translation>
     </message>
     <message numerus="yes">
       <location filename="../../SheetTableView.cpp" line="147"/>
@@ -1114,7 +1114,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
       <translation>
         <numerusform>Вставити %n рядок нижче</numerusform>
         <numerusform>Вставити %n рядків нижче</numerusform>
-        <numerusform>Вставити %n рядок(ків) нижче</numerusform>
+        <numerusform>Вставити %n рядків нижче</numerusform>
         <numerusform>Вставити %n рядок(ків) нижче</numerusform>
       </translation>
     </message>
@@ -1124,7 +1124,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
       <translation>
         <numerusform>Вставити %n несуміжний рядок</numerusform>
         <numerusform>Вставити %n несуміжних рядків</numerusform>
-        <numerusform>Вставити %n несуміжний(х) рядок(ів)</numerusform>
+        <numerusform>Вставити %n несуміжних рядків</numerusform>
         <numerusform>Вставити %n несуміжний(х) рядок(ів)</numerusform>
       </translation>
     </message>
@@ -1169,7 +1169,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
       <translation>
         <numerusform>Вставити %n несуміжний стовпець</numerusform>
         <numerusform>Вставити %n несуміжних стовпців</numerusform>
-        <numerusform>Вставити %n несуміжний(х) стовпець(ів)</numerusform>
+        <numerusform>Вставити %n несуміжних стовпців</numerusform>
         <numerusform>Вставити %n несуміжний(х) стовпець(ів)</numerusform>
       </translation>
     </message>
@@ -1179,7 +1179,7 @@ Spreadsheet.my_alias_name замість Spreadsheet.B1</translation>
       <translation>
         <numerusform>Видалити стовпець</numerusform>
         <numerusform>Видалити стовпці</numerusform>
-        <numerusform>Видалити стовпець(і)</numerusform>
+        <numerusform>Видалити стовпці</numerusform>
         <numerusform>Видалити стовпець(і)</numerusform>
       </translation>
     </message>
@@ -1240,12 +1240,12 @@ may affect cells dependency coherence. Use with care!</source>
     <message>
       <location filename="../../SheetTableView.cpp" line="317"/>
       <source>Merge cells</source>
-      <translation>Об'єднати комірки</translation>
+      <translation>Об’єднати комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="319"/>
       <source>Split cells</source>
-      <translation>Розʼєднати комірки</translation>
+      <translation>Роз’єднати комірки</translation>
     </message>
     <message>
       <location filename="../../SheetTableView.cpp" line="322"/>
@@ -1313,7 +1313,7 @@ may affect cells dependency coherence. Use with care!</source>
     <message>
       <location filename="../../Workbench.cpp" line="52"/>
       <source>&amp;Styles</source>
-      <translation>&amp;Стилі(v2) for test</translation>
+      <translation>&amp;Стилі</translation>
     </message>
   </context>
   <context>
@@ -1321,7 +1321,7 @@ may affect cells dependency coherence. Use with care!</source>
     <message>
       <location filename="../../DlgBindSheet.ui" line="14"/>
       <source>Bind Spreadsheet Cells</source>
-      <translation>Звʼязування комірок таблиці</translation>
+      <translation>Зв’язування комірок таблиці</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="20"/>
@@ -1377,17 +1377,17 @@ The expression must evaluates to a string of some cell address.</source>
     <message>
       <location filename="../../DlgBindSheet.ui" line="84"/>
       <source>Unbind</source>
-      <translation>Відвʼязати</translation>
+      <translation>Відв’язати</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="91"/>
       <source>Cancel</source>
-      <translation>Скасувати</translation>
+      <translation>Відмінити</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="98"/>
       <source>OK</source>
-      <translation>Підтвердити</translation>
+      <translation>Зв’язати</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.ui" line="110"/>
@@ -1421,10 +1421,10 @@ by that property.
       <translation>Кінцева адреса комірки.
 
 Передбачається, що перший стовпець діапазону містить список імен конфігурації,
-які будуть використовуватися для створення списку рядків та привʼязки до цієї 
+які будуть використовуватися для створення списку рядків та прив’язки до цієї 
 властивості, щоб користувач міг динамічно перемикати конфігурації.
 
-Перший рядок діапазону буде привʼязаний до будь-якого рядка (непрямо), 
+Перший рядок діапазону буде прив’язаний до будь-якого рядка (непрямо), 
 обраного за допомогою цієї властивості.
 </translation>
     </message>
@@ -1447,10 +1447,10 @@ by that property.
       <translation>Початкова адреса комірки.
 
 Передбачається, що перший стовпець діапазону містить список імен конфігурації,
-які будуть використовуватися для створення списку рядків та привʼязки до цієї 
+які будуть використовуватися для створення списку рядків та прив’язки до цієї 
 властивості, щоб користувач міг динамічно перемикати конфігурації.
 
-Перший рядок діапазону буде привʼязаний до будь-якого рядка (непрямо), 
+Перший рядок діапазону буде прив’язаний до будь-якого рядка (непрямо), 
 обраного за допомогою цієї властивості.
 </translation>
     </message>
@@ -1458,13 +1458,13 @@ by that property.
       <location filename="../../DlgSheetConf.ui" line="64"/>
       <source>Type in an expression to specify the object and property name to dynamically
 switch the design configuration. The property will be created if not exist.</source>
-      <translation>Введіть вираз, щоб вказати назву обʼєкта та властивості, щоб динамічно 
-змінювати конфігурацію проєкту. Якщо властивість не існує, вона буде створена.</translation>
+      <translation>Введіть вираз, щоб вказати назву об’єкта та властивості, щоб динамічно 
+змінювати конфігурацію проекту. Якщо властивість не існує, вона буде створена.</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="72"/>
       <source>Optional property group name.</source>
-      <translation>Не обовʼязкова назва групи властивостей.</translation>
+      <translation>Не обов’язкова назва групи властивостей.</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="79"/>
@@ -1479,12 +1479,12 @@ switch the design configuration. The property will be created if not exist.</sou
     <message>
       <location filename="../../DlgSheetConf.ui" line="95"/>
       <source>Cancel</source>
-      <translation>Скасувати</translation>
+      <translation>Відмінити</translation>
     </message>
     <message>
       <location filename="../../DlgSheetConf.ui" line="102"/>
       <source>OK</source>
-      <translation>Підтвердити</translation>
+      <translation>Створити</translation>
     </message>
   </context>
   <context>
@@ -1537,7 +1537,7 @@ switch the design configuration. The property will be created if not exist.</sou
       <location filename="../../DlgBindSheet.cpp" line="192"/>
       <location filename="../../DlgBindSheet.cpp" line="220"/>
       <source>Bind cells</source>
-      <translation>Звʼязати комірки</translation>
+      <translation>Зв’язати комірки</translation>
     </message>
     <message>
       <location filename="../../DlgBindSheet.cpp" line="193"/>
@@ -1551,7 +1551,7 @@ Do you want to continue?</source>
     <message>
       <location filename="../../DlgBindSheet.cpp" line="238"/>
       <source>Unbind cells</source>
-      <translation>Відвʼязати комірки</translation>
+      <translation>Відв’язати комірки</translation>
     </message>
   </context>
   <context>
